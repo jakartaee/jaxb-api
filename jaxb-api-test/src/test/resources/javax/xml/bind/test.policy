@@ -1,0 +1,15 @@
+grant {
+      // security manager
+      permission java.lang.RuntimePermission "setSecurityManager";
+
+      permission java.lang.RuntimePermission "accessDeclaredMembers";
+
+      // writing configuration files
+      permission java.io.FilePermission "${classesDir}/-", "read, write, delete";
+
+      permission java.util.PropertyPermission "*", "read";
+      permission java.lang.RuntimePermission "*";
+
+      // reading / modifying jdk/conf/jaxm.properties
+      permission java.io.FilePermission "${java.home}${/}-", "read, write, delete";
+};
