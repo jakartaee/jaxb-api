@@ -21,7 +21,7 @@
         <version>1.0.1</version>
     </parent>
 
-    <groupId>javax.xml.bind</groupId>
+    <groupId>jakarta.xml.bind</groupId>
     <artifactId>jaxb-api-parent</artifactId>
     <version>2.3.2-SNAPSHOT</version>
     <packaging>pom</packaging>

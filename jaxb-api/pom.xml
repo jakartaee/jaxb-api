@@ -14,7 +14,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>jaxb-api-parent</artifactId>
-        <groupId>javax.xml.bind</groupId>
+        <groupId>jakarta.xml.bind</groupId>
         <version>2.3.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -48,8 +48,8 @@
                     <configuration>
                         <stagingRepos>
                             <stagingRepo>
-                                <ref>javax.xml.bind:jaxb-api:${project.version}:jar</ref>
-                                <profile>javax.xml.bind</profile>
+                                <ref>jakarta.xml.bind:jaxb-api:${project.version}:jar</ref>
+                                <profile>jakarta.xml.bind</profile>
                             </stagingRepo>
                         </stagingRepos>
                         <promotionProfile>metro</promotionProfile>
