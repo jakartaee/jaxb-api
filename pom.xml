@@ -191,7 +191,7 @@
 
    <profiles>
       <profile>
-            <id>jvnet-release</id>
+            <id>release</id>
             <build>
                 <plugins>
                     <plugin>
@@ -202,6 +202,25 @@
                                 <additionalJOption>-Xdoclint:none</additionalJOption>
                             </additionalJOptions>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
