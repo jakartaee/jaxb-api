@@ -23,7 +23,7 @@
  * <h2>Package Specification</h2>
  * <p>
  * <ul>
- * <li><a href="https://jaxb.java.net/">JAXB Specification</a>
+ * <li><a href="http://jcp.org/en/jsr/detail?id=222">JAXB Specification</a>
  * </ul>
  * <p>
  * <h2>Related Standards</h2>

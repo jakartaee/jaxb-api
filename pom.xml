@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.4</version>
     </parent>
 
     <groupId>jakarta.xml.bind</groupId>
@@ -52,11 +52,6 @@
         </developer>
     </developers>
 
-    <organization>
-        <name>Oracle Corporation</name>
-        <url>http://www.oracle.com/</url>
-    </organization>
-
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/jaxb-api/issues</url>
@@ -73,7 +68,7 @@
     </mailingLists>
 
     <properties>
-        <release.spec.feedback>javaee-spec@javaee.groups.io</release.spec.feedback>
+        <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
         <release.spec.date>Jul 2017</release.spec.date>
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
@@ -82,8 +77,9 @@
         <extension.name>javax.xml.bind</extension.name>
         <spec.version>2.3</spec.version>
         <impl.version>0</impl.version>
-        <activation.version>1.2.0</activation.version>
+        <activation.version>1.2.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
+        <vendor.name>Eclipse Project for JAXB</vendor.name>
     </properties>
 
     <modules>
@@ -94,8 +90,8 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>javax.activation-api</artifactId>
+                <groupId>jakarta.activation</groupId>
+                <artifactId>jakarta.activation-api</artifactId>
                 <version>${activation.version}</version>
             </dependency>
         </dependencies>
@@ -132,6 +128,10 @@
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
