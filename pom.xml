@@ -79,7 +79,6 @@
         <impl.version>0</impl.version>
         <activation.version>1.2.0</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
-        <legal.doc.source>${project.basedir}</legal.doc.source>
     </properties>
 
     <modules>

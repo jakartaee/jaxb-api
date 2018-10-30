@@ -25,7 +25,6 @@
     <properties>
         <config.dir>${project.basedir}/../etc/config</config.dir>
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
-        <activation.lib>${javax.activation:javax.activation-api:jar}</activation.lib>
         <java9.build.outputDirectory>${project.build.directory}/classes-java9</java9.build.outputDirectory>
     </properties>
 
