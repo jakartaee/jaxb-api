@@ -138,7 +138,8 @@
                             <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                         </archive>
                         <instructions>
-                            <Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version>=1.8))"</Require-Capability>
+                            <_noee>true</_noee>
+                            <!--Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version>=1.7))"</Require-Capability-->
                             <Bundle-Version>${project.version}</Bundle-Version>  <!-- 2.2.99.bnull -->
                             <Extension-Name>${extension.name}</Extension-Name>
                             <Implementation-Version>${spec.version}.${impl.version}</Implementation-Version>
