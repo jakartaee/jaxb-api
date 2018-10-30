@@ -24,6 +24,9 @@
 
     <properties>
         <config.dir>${project.basedir}/../etc/config</config.dir>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
+        <activation.lib>${javax.activation:javax.activation-api:jar}</activation.lib>
+        <java9.build.outputDirectory>${project.build.directory}/classes-java9</java9.build.outputDirectory>
     </properties>
 
     <dependencies>
@@ -37,10 +40,6 @@
 
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
                 <plugin>
                     <groupId>org.glassfish.build</groupId>
                     <artifactId>gfnexus-maven-plugin</artifactId>
@@ -101,10 +100,6 @@
                         <!-- check that year is correct -->
                         <ignoreYear>false</ignoreYear>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -293,6 +288,7 @@ href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>copy-sources</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -302,6 +298,36 @@ href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/src/main/mr-jar</directory>
+                                </resource>
+                                <resource>
+                                    <targetPath>${project.build.outputDirectory}/META-INF</targetPath>
+                                    <directory>${legal.doc.source}</directory>
+                                    <includes>
+                                        <include>LICENSE.md</include>
+                                        <include>NOTICE.md</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-classes</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/9</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${java9.build.outputDirectory}</directory>
+                                </resource>
+                                <!-- Copy module-info.class to java >= 9 classes directory. Source file will be deleted later with ant. -->
+                                <resource>
+                                    <directory>${project.build.outputDirectory}</directory>
+                                    <includes>
+                                        <include>module-info.class</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -327,6 +353,22 @@ href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
                         <goals>
                             <goal>properties</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>copy</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax.activation</groupId>
+                                    <artifactId>javax.activation-api</artifactId>
+                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -356,18 +398,34 @@ href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.8</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant</artifactId>
+                        <version>1.10.5</version>
+                        <scope>compile</scope>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>compile-java9</id>
                         <phase>compile</phase>
                         <configuration>
                             <tasks>
-                                <mkdir dir="${project.build.outputDirectory}/META-INF/versions/9" />
-                                <javac srcdir="${mrjar.sourceDirectory}" destdir="${project.build.outputDirectory}/META-INF/versions/9" classpath="${project.build.outputDirectory}" includeantruntime="false" source="9" target="9" />
+                                <echo>${ant.version}</echo>
+                                <!-- Build Java 9+classes -->
+                                <mkdir dir="${java9.build.outputDirectory}"/>
+                                <javac srcdir="${mrjar.sourceDirectory}"
+                                       destdir="${java9.build.outputDirectory}"
+                                       classpath="${project.build.outputDirectory}"
+                                       modulepath="${project.build.directory}/modules"
+                                       includeantruntime="false" source="9" target="9">
+                                    <compilerarg value="--add-modules"/>
+                                    <compilerarg value="java.activation"/>
+                                </javac>
                             </tasks>
                         </configuration>
                         <goals>
@@ -382,6 +440,19 @@ href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
                                 <jar destfile="${project.build.directory}/jaxb-api-${project.version}-sources.jar" update="true">
                                     <fileset dir="${project.build.directory}/mr-jar/" />
                                 </jar>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <!-- Delete module-info.class from java < 9 classes directory. -->
+                    <execution>
+                        <id>update-target-classes</id>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <tasks>
+                                <delete file="${project.build.outputDirectory}/module-info.class"/>
                             </tasks>
                         </configuration>
                         <goals>

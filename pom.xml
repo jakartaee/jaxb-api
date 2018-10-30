@@ -52,11 +52,6 @@
         </developer>
     </developers>
 
-    <organization>
-        <name>Oracle Corporation</name>
-        <url>http://www.oracle.com/</url>
-    </organization>
-
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/jaxb-api/issues</url>
@@ -84,6 +79,7 @@
         <impl.version>0</impl.version>
         <activation.version>1.2.0</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
+        <legal.doc.source>${project.basedir}</legal.doc.source>
     </properties>
 
     <modules>
@@ -132,6 +128,10 @@
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
