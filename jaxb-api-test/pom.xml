@@ -50,7 +50,7 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>9</release>
+                    <release>11</release>
                     <compilerArgs>
                         <arg>-verbose</arg>
                     </compilerArgs>

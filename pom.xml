@@ -79,6 +79,7 @@
         <impl.version>0</impl.version>
         <activation.version>1.2.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
+        <vendor.name>Eclipse Project for JAXB</vendor.name>
     </properties>
 
     <modules>
