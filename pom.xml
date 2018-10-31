@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
 
     <groupId>jakarta.xml.bind</groupId>
@@ -77,7 +77,7 @@
         <extension.name>javax.xml.bind</extension.name>
         <spec.version>2.3</spec.version>
         <impl.version>0</impl.version>
-        <activation.version>1.2.0</activation.version>
+        <activation.version>1.2.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
     </properties>
 
@@ -89,8 +89,8 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>javax.activation-api</artifactId>
+                <groupId>jakarta.activation</groupId>
+                <artifactId>jakarta.activation-api</artifactId>
                 <version>${activation.version}</version>
             </dependency>
         </dependencies>

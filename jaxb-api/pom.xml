@@ -30,8 +30,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-api</artifactId>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
         </dependency>
     </dependencies>
 
@@ -362,8 +362,8 @@ href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>javax.activation</groupId>
-                                    <artifactId>javax.activation-api</artifactId>
+                                    <groupId>jakarta.activation</groupId>
+                                    <artifactId>jakarta.activation-api</artifactId>
                                     <outputDirectory>${project.build.directory}/modules</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
@@ -422,8 +422,6 @@ href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
                                        classpath="${project.build.outputDirectory}"
                                        modulepath="${project.build.directory}/modules"
                                        includeantruntime="false" source="9" target="9">
-                                    <compilerarg value="--add-modules"/>
-                                    <compilerarg value="java.activation"/>
                                 </javac>
                             </tasks>
                         </configuration>
