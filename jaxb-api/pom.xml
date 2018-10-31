@@ -169,8 +169,6 @@
                             <Bundle-SymbolicName>jaxb-api</Bundle-SymbolicName>
                             <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
                             <Specification-Vendor>${vendor.name}</Specification-Vendor>
-                            <Implementation-Vendor>${vendor.name}</Implementation-Vendor>
-                            <Implementation-Vendor-Id>org.glassfish</Implementation-Vendor-Id>
                         </instructions>
                     </configuration>
                 </plugin>
