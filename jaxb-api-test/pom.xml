@@ -51,9 +51,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>11</release>
-                    <compilerArgs>
-                        <arg>-verbose</arg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
