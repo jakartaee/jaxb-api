@@ -212,12 +212,10 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         </doctitle>
                         <header><![CDATA[JAXB<br>v${project.version}]]>
                         </header>
-                        <bottom><![CDATA[<font size=-1>
-<br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
-<br>More information at: <a target='_top'
-href='https://projects.eclipse.org/projects/ee4j.jaxb'><i>https://projects.eclipse.org/projects/ee4j.jaxb</i></a>
-</font>]]>
-                        </bottom>
+                    <bottom>
+                        <![CDATA[<br>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}.
+                        All rights reserved.<br>Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.]]>
+                    </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
                         <offlineLinks>
                             <offlineLink>
