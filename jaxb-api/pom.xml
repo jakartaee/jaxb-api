@@ -216,7 +216,7 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
 <br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
 <br>More information at: <a target='_top'
 href='https://projects.eclipse.org/projects/ee4j.jaxb'><i>https://projects.eclipse.org/projects/ee4j.jaxb</i></a>
-<p>Copyright &copy; 2004-2017 Oracle </font>]]>
+</font>]]>
                         </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
                         <offlineLinks>
