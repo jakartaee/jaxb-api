@@ -206,7 +206,7 @@ JAXB ${project.version} Runtime Library</h2>
 ${project.name} specification, ${release.spec.date}<br>
 Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
 More information at: <i><a target='_top'
-href='http://jaxb.java.net'>http://jaxb.java.net</a></i><br>
+href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.org/projects/ee4j.jaxb</a></i><br>
 &nbsp;<br>&nbsp;<br><hr width='65%'><h1>${project.name}</h1><hr width='75%'>
 <br>&nbsp;<br>]]>
                         </doctitle>
@@ -215,7 +215,7 @@ href='http://jaxb.java.net'>http://jaxb.java.net</a></i><br>
                         <bottom><![CDATA[<font size=-1>
 <br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
 <br>More information at: <a target='_top'
-href='http://jaxb.java.net'><i>http://jaxb.java.net</i></a>
+href='https://projects.eclipse.org/projects/ee4j.jaxb'><i>https://projects.eclipse.org/projects/ee4j.jaxb</i></a>
 <p>Copyright &copy; 2004-2017 Oracle </font>]]>
                         </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>

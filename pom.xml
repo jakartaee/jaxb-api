@@ -68,7 +68,7 @@
     </mailingLists>
 
     <properties>
-        <release.spec.feedback>javaee-spec@javaee.groups.io</release.spec.feedback>
+        <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
         <release.spec.date>Jul 2017</release.spec.date>
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
