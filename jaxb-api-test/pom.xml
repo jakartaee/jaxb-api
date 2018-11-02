@@ -24,6 +24,7 @@
 
     <properties>
         <config.dir>${project.basedir}/../etc/config</config.dir>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
     </properties>
 
     <dependencies>
@@ -39,8 +40,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-api</artifactId>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
         </dependency>
     </dependencies>
 
@@ -49,7 +50,7 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>9</release>
+                    <release>11</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -75,7 +76,7 @@
                 <executions>
                     <execution>
                         <id>copy</id>
-                        <phase>test-compile</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>copy</goal>
                         </goals>
@@ -86,14 +87,14 @@
                                     <artifactId>jaxb-api</artifactId>
                                     <version>${project.version}</version>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/mods</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>javax.activation</groupId>
-                                    <artifactId>javax.activation-api</artifactId>
+                                    <groupId>jakarta.activation</groupId>
+                                    <artifactId>jakarta.activation-api</artifactId>
                                     <version>${activation.version}</version>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/mods</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -101,12 +102,36 @@
                 </executions>
             </plugin>
             <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes/META-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${legal.doc.source}</directory>
+                                    <includes>
+                                        <include>LICENSE.md</include>
+                                        <include>NOTICE.md</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <!--module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar -->
                     <argLine>
                         --add-modules java.xml.bind
-                        --upgrade-module-path ${project.build.directory}/mods/jaxb-api-${project.version}.jar
-                        --module-path ${project.build.directory}/mods/javax.activation-api-${activation.version}.jar
+                        --upgrade-module-path ${project.build.directory}/modules/jaxb-api-${project.version}.jar
+                        --module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar
                         --add-reads java.xml.bind=ALL-UNNAMED
                     </argLine>
                     <systemPropertyVariables>

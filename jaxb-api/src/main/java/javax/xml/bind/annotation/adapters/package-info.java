@@ -23,9 +23,9 @@
  * For overviews, tutorials, examples, guides, and tool documentation,
  * please see:
  * <ul>
- * <li>The <a href="http://jaxb.java.net">JAXB Website</a>
+ * <li>The <a href="https://projects.eclipse.org/projects/ee4j.jaxb">JAXB Website</a>
  * </ul>
  *
- * @see <a href="http://jaxb.java.net">JAXB Website</a>
+ * @see <a href="https://projects.eclipse.org/projects/ee4j.jaxb">JAXB Website</a>
  */
 package javax.xml.bind.annotation.adapters;
