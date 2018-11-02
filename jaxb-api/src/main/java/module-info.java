@@ -9,7 +9,7 @@
  */
 
 module java.xml.bind {
-    requires transitive java.activation;
+    requires transitive jakarta.activation;
     requires transitive java.xml;
     requires java.logging;
     requires java.desktop;

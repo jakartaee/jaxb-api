@@ -19,7 +19,7 @@
  * <h2>Package Specification</h2>
  *
  * <ul>
- * <li><a href="https://jaxb.java.net/">JAXB Specification</a>
+ * <li><a href="http://jcp.org/en/jsr/detail?id=222">JAXB Specification</a>
  * </ul>
  *
  * <h2>Related Documentation</h2>
@@ -27,9 +27,9 @@
  * For overviews, tutorials, examples, guides, and tool documentation,
  * please see:
  * <ul>
- * <li>The <a href="https://jaxb.java.net/">JAXB Website</a>
+ * <li>The <a href="https://projects.eclipse.org/projects/ee4j.jaxb">JAXB Website</a>
  * </ul>
  *
- * @see <a href="https://jaxb.java.net/">JAXB Website</a>
+ * @see <a href="https://projects.eclipse.org/projects/ee4j.jaxb">JAXB Website</a>
  */
 package javax.xml.bind.helpers;
