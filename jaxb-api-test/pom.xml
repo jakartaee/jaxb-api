@@ -13,13 +13,13 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>jaxb-api-parent</artifactId>
+        <artifactId>jakarta.xml.bind-api-parent</artifactId>
         <groupId>jakarta.xml.bind</groupId>
         <version>2.4.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jaxb-api-test</artifactId>
+    <artifactId>jakarta.xml.bind-api-test</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -84,7 +84,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>jakarta.xml.bind</groupId>
-                                    <artifactId>jaxb-api</artifactId>
+                                    <artifactId>jakarta.xml.bind-api</artifactId>
                                     <version>${project.version}</version>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/modules</outputDirectory>
@@ -130,7 +130,7 @@
                     <!--module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar -->
                     <argLine>
                         --add-modules java.xml.bind
-                        --upgrade-module-path ${project.build.directory}/modules/jaxb-api-${project.version}.jar
+                        --upgrade-module-path ${project.build.directory}/modules/jakarta.xml.bind-api-${project.version}.jar
                         --module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar
                         --add-reads java.xml.bind=ALL-UNNAMED
                     </argLine>
