@@ -84,7 +84,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>jakarta.xml.bind</groupId>
-                                    <artifactId>jaxb-api</artifactId>
+                                    <artifactId>jakarta.xml.bind-api</artifactId>
                                     <version>${project.version}</version>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/modules</outputDirectory>
@@ -130,7 +130,7 @@
                     <!--module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar -->
                     <argLine>
                         --add-modules java.xml.bind
-                        --upgrade-module-path ${project.build.directory}/modules/jaxb-api-${project.version}.jar
+                        --upgrade-module-path ${project.build.directory}/modules/jakarta.xml.bind-api-${project.version}.jar
                         --module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar
                         --add-reads java.xml.bind=ALL-UNNAMED
                     </argLine>

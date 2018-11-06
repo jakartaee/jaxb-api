@@ -46,7 +46,7 @@
                     <configuration>
                         <stagingRepos>
                             <stagingRepo>
-                                <ref>jakarta.xml.bind:jaxb-api:${project.version}:jar</ref>
+                                <ref>jakarta.xml.bind:jakarta.xml.bind-api:${project.version}:jar</ref>
                                 <profile>jakarta.xml.bind</profile>
                             </stagingRepo>
                         </stagingRepos>
@@ -166,7 +166,7 @@
                                 org.xml.sax.ext,
                                 org.xml.sax.helpers
                             </Import-Package>
-                            <Bundle-SymbolicName>jaxb-api</Bundle-SymbolicName>
+                            <Bundle-SymbolicName>jakarta.xml.bind-api</Bundle-SymbolicName>
                             <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
                             <Specification-Vendor>${vendor.name}</Specification-Vendor>
                         </instructions>
@@ -425,7 +425,7 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         <phase>verify</phase>
                         <configuration>
                             <target>
-                                <jar destfile="${project.build.directory}/jaxb-api-${project.version}-sources.jar" update="true">
+                                <jar destfile="${project.build.directory}/jakarta.xml.bind-api-${project.version}-sources.jar" update="true">
                                     <fileset dir="${project.build.directory}/mr-jar/" />
                                 </jar>
                             </target>
