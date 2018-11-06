@@ -13,13 +13,13 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>jaxb-api-parent</artifactId>
+        <artifactId>jakarta.xml.bind-api-parent</artifactId>
         <groupId>jakarta.xml.bind</groupId>
         <version>2.3.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jaxb-api-test</artifactId>
+    <artifactId>jakarta.xml.bind-api-test</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

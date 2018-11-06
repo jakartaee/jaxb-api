@@ -13,13 +13,13 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>jaxb-api-parent</artifactId>
+        <artifactId>jakarta.xml.bind-api-parent</artifactId>
         <groupId>jakarta.xml.bind</groupId>
         <version>2.3.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jaxb-api</artifactId>
+    <artifactId>jakarta.xml.bind-api</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -168,7 +168,7 @@
                             </Import-Package>
                             <Bundle-SymbolicName>jaxb-api</Bundle-SymbolicName>
                             <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
-                            <Specification-Vendor>Oracle Corporation</Specification-Vendor>
+                            <Specification-Vendor>${vendor.name}</Specification-Vendor>
                         </instructions>
                     </configuration>
                 </plugin>
@@ -197,6 +197,7 @@
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <configuration>
+                        <doclint>none</doclint>
                         <nodeprecated>false</nodeprecated>
                         <use>false</use>
                         <author>true</author>
@@ -217,12 +218,6 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         All rights reserved.<br>Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.]]>
                     </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
-                        <offlineLinks>
-                            <offlineLink>
-                                <url>http://download.oracle.com/javase/8/docs/api/</url>
-                                <location>${basedir}/offline-javadoc</location>
-                            </offlineLink>
-                        </offlineLinks>
                         <tags>
                             <tag>
                                 <name>apiNote</name>
@@ -409,7 +404,7 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         <id>compile-java9</id>
                         <phase>compile</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <echo>${ant.version}</echo>
                                 <!-- Build Java 9+classes -->
                                 <mkdir dir="${java9.build.outputDirectory}"/>
@@ -419,7 +414,7 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                                        modulepath="${project.build.directory}/modules"
                                        includeantruntime="false" source="9" target="9">
                                 </javac>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
@@ -429,11 +424,11 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         <id>update-source-jar</id>
                         <phase>verify</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <jar destfile="${project.build.directory}/jaxb-api-${project.version}-sources.jar" update="true">
                                     <fileset dir="${project.build.directory}/mr-jar/" />
                                 </jar>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
@@ -444,9 +439,9 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         <id>update-target-classes</id>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <delete file="${project.build.outputDirectory}/module-info.class"/>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

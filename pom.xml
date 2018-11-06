@@ -22,7 +22,7 @@
     </parent>
 
     <groupId>jakarta.xml.bind</groupId>
-    <artifactId>jaxb-api-parent</artifactId>
+    <artifactId>jakarta.xml.bind-api-parent</artifactId>
     <version>2.3.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Java Architecture for XML Binding</name>
@@ -79,7 +79,7 @@
         <impl.version>0</impl.version>
         <activation.version>1.2.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
-        <vendor.name>Eclipse Project for JAXB</vendor.name>
+        <vendor.name>Oracle Corporation</vendor.name>
     </properties>
 
     <modules>
