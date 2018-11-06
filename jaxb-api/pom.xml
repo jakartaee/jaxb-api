@@ -168,7 +168,7 @@
                             </Import-Package>
                             <Bundle-SymbolicName>jaxb-api</Bundle-SymbolicName>
                             <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
-                            <Specification-Vendor>${vendor.name}</Specification-Vendor>
+                            <Specification-Vendor>Oracle Corporation</Specification-Vendor>
                         </instructions>
                     </configuration>
                 </plugin>
@@ -213,7 +213,7 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         <header><![CDATA[JAXB<br>v${project.version}]]>
                         </header>
                     <bottom>
-                        <![CDATA[<br>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}.
+                        <![CDATA[<br>Copyright &#169; {inceptionYear}&#x2013;{currentYear} Oracle and/or its affiliates.
                         All rights reserved.<br>Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.]]>
                     </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
