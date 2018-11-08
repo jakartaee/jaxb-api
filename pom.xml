@@ -74,8 +74,9 @@
         <findbugs.threshold>Low</findbugs.threshold>
         <mrjar.sourceDirectory>${project.basedir}/src/main/mr-jar</mrjar.sourceDirectory>
         <mrjar.build.outputDirectory>${project.build.directory}/classes-mrjar</mrjar.build.outputDirectory>
-        <extension.name>javax.xml.bind</extension.name>
-        <spec.version>2.3</spec.version>
+        <api.package>javax.xml.bind</api.package>
+        <extension.name>jakarta.xml.bind</extension.name>
+        <spec.version>2.4</spec.version>
         <impl.version>0</impl.version>
         <activation.version>1.2.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
