@@ -106,14 +106,6 @@
                     <configuration>
                         <archive>
                             <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                            <manifestEntries>
-                                <Extension-Name>javax.xml.bind</Extension-Name>
-                                <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
-                                <Multi-Release>true</Multi-Release>
-                            </manifestEntries>
-                            <manifest>
-                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                            </manifest>
                         </archive>
                     </configuration>
                 </plugin>
@@ -142,8 +134,8 @@
                             <Bundle-Version>${project.version}</Bundle-Version>  <!-- 2.2.99.bnull -->
                             <Extension-Name>${extension.name}</Extension-Name>
                             <Implementation-Version>${spec.version}.${impl.version}</Implementation-Version>
-                            <Specification-Version>${project.version}</Specification-Version>
-                            <Export-Package>${extension.name}.*; version=${spec.version}</Export-Package>
+                            <Specification-Version>${spec.version}</Specification-Version>
+                            <Export-Package>${api.package}.*; version=${spec.version}</Export-Package>
                             <Import-Package>
                                 javax.activation;version=!,
                                 javax.xml.bind;version="[${spec.version},3)",
@@ -166,9 +158,11 @@
                                 org.xml.sax.ext,
                                 org.xml.sax.helpers
                             </Import-Package>
-                            <Bundle-SymbolicName>jakarta.xml.bind-api</Bundle-SymbolicName>
+                            <Bundle-SymbolicName>${extension.name}-api</Bundle-SymbolicName>
                             <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
                             <Specification-Vendor>${vendor.name}</Specification-Vendor>
+                            <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                            <Multi-Release>true</Multi-Release>
                         </instructions>
                     </configuration>
                 </plugin>
@@ -203,7 +197,7 @@
                         <author>true</author>
                         <version>true</version>
                         <doctitle><![CDATA[<br>
-JAXB ${project.version} Runtime Library</h2>
+JAXB ${project.version} API Library</h2>
 ${project.name} specification, ${release.spec.date}<br>
 Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
 More information at: <i><a target='_top'
@@ -257,7 +251,6 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         </execution>
                         <execution>
                             <id>module-info-compile</id>
-                            <phase>test-compile</phase><!--Avoid JavaSE9 capability added by bundle-plugin-->
                             <goals>
                                 <goal>compile</goal>
                             </goals>
@@ -311,13 +304,6 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                             <resources>
                                 <resource>
                                     <directory>${java9.build.outputDirectory}</directory>
-                                </resource>
-                                <!-- Copy module-info.class to java >= 9 classes directory. Source file will be deleted later with ant. -->
-                                <resource>
-                                    <directory>${project.build.outputDirectory}</directory>
-                                    <includes>
-                                        <include>module-info.class</include>
-                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -428,19 +414,6 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                                 <jar destfile="${project.build.directory}/jakarta.xml.bind-api-${project.version}-sources.jar" update="true">
                                     <fileset dir="${project.build.directory}/mr-jar/" />
                                 </jar>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <!-- Delete module-info.class from java < 9 classes directory. -->
-                    <execution>
-                        <id>update-target-classes</id>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <target>
-                                <delete file="${project.build.outputDirectory}/module-info.class"/>
                             </target>
                         </configuration>
                         <goals>
