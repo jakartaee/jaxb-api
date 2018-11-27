@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </parent>
 
     <groupId>jakarta.xml.bind</groupId>
@@ -72,8 +72,6 @@
         <release.spec.date>Jul 2017</release.spec.date>
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
-        <mrjar.sourceDirectory>${project.basedir}/src/main/mr-jar</mrjar.sourceDirectory>
-        <mrjar.build.outputDirectory>${project.build.directory}/classes-mrjar</mrjar.build.outputDirectory>
         <api.package>javax.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>2.4</spec.version>
@@ -102,6 +100,11 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                 </plugin>
@@ -113,10 +116,6 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.20</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -141,10 +140,6 @@
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.1.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
                 </plugin>
             </plugins>
         </pluginManagement>
