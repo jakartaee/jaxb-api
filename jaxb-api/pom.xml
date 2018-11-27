@@ -25,7 +25,6 @@
     <properties>
         <config.dir>${project.basedir}/../etc/config</config.dir>
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
-        <java9.build.outputDirectory>${project.build.directory}/classes-java9</java9.build.outputDirectory>
     </properties>
 
     <dependencies>
@@ -39,21 +38,6 @@
 
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.glassfish.build</groupId>
-                    <artifactId>gfnexus-maven-plugin</artifactId>
-                    <version>0.20</version>
-                    <configuration>
-                        <stagingRepos>
-                            <stagingRepo>
-                                <ref>jakarta.xml.bind:jakarta.xml.bind-api:${project.version}:jar</ref>
-                                <profile>jakarta.xml.bind</profile>
-                            </stagingRepo>
-                        </stagingRepos>
-                        <promotionProfile>metro</promotionProfile>
-                        <message>JAXB_API-${project.version}</message>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <configuration>
@@ -86,7 +70,6 @@
                 <plugin>
                     <groupId>org.glassfish.copyright</groupId>
                     <artifactId>glassfish-copyright-maven-plugin</artifactId>
-                    <version>1.49</version>
                     <configuration>
                         <templateFile>${project.basedir}/copyright.txt</templateFile>
                         <excludeFile>${project.basedir}/copyright-exclude</excludeFile>
@@ -116,14 +99,13 @@
                     <configuration>
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                         <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
-                        <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+                        <shortRevisionLength>7</shortRevisionLength>
                         <revisionOnScmFailure>false</revisionOnScmFailure>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <extensions>true</extensions>
                     <version>3.5.1</version>
                     <configuration>
                         <archive>
@@ -135,7 +117,7 @@
                             <Extension-Name>${extension.name}</Extension-Name>
                             <Implementation-Version>${spec.version}.${impl.version}</Implementation-Version>
                             <Specification-Version>${spec.version}</Specification-Version>
-                            <Export-Package>${api.package}.*; version=${spec.version}</Export-Package>
+                            <Export-Package>${api.package}.*; version=${spec.version}.${impl.version}</Export-Package>
                             <Import-Package>
                                 javax.activation;version=!,
                                 javax.xml.bind;version="[${spec.version},3)",
@@ -207,10 +189,10 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         </doctitle>
                         <header><![CDATA[JAXB<br>v${project.version}]]>
                         </header>
-                    <bottom>
+                        <bottom>
                         <![CDATA[<br>Copyright &#169; {inceptionYear}&#x2013;{currentYear} Oracle and/or its affiliates.
                         All rights reserved.<br>Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.]]>
-                    </bottom>
+                        </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
                         <tags>
                             <tag>
@@ -234,76 +216,44 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         </tags>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>default-compile</id>
-                            <configuration>
-                                <release>8</release>
-                                <excludes>
-                                    <exclude>module-info.java</exclude>
-                                </excludes>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>module-info-compile</id>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                            <configuration>
-                                <release>9</release>
-                                <includes>
-                                    <include>module-info.java</include>
-                                </includes>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
             <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-sources</id>
-                        <phase>generate-sources</phase>
+                        <id>add-legal-resource</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>copy-resources</goal>
+                            <goal>add-resource</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/mr-jar/META-INF/versions/9</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/mr-jar</directory>
-                                </resource>
-                                <resource>
-                                    <targetPath>${project.build.outputDirectory}/META-INF</targetPath>
                                     <directory>${legal.doc.source}</directory>
                                     <includes>
-                                        <include>LICENSE.md</include>
                                         <include>NOTICE.md</include>
+                                        <include>LICENSE.md</include>
                                     </includes>
+                                    <targetPath>META-INF</targetPath>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-classes</id>
+                        <id>add-mr-resource</id>
                         <phase>prepare-package</phase>
                         <goals>
-                            <goal>copy-resources</goal>
+                            <goal>add-resource</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/9</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${java9.build.outputDirectory}</directory>
+                                    <directory>${project.basedir}/src/main/mr-jar</directory>
+                                    <targetPath>META-INF/versions/9</targetPath>
                                 </resource>
                             </resources>
                         </configuration>
@@ -322,33 +272,6 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>initialize</id>
-                        <goals>
-                            <goal>properties</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>copy</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>jakarta.activation</groupId>
-                                    <artifactId>jakarta.activation-api</artifactId>
-                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
                 <executions>
@@ -358,6 +281,45 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                         <goals>
                             <goal>create</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <release>8</release>
+                            <excludes>
+                                <exclude>module-info.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>module-info-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <release>9</release>
+                            <includes>
+                                <include>module-info.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-compile-mr</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <release>9</release>
+                            <compileSourceRoots>
+                                <compileSourceRoot>${project.basedir}/src/main/mr-jar</compileSourceRoot>
+                            </compileSourceRoots>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/9</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -374,58 +336,6 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.ant</groupId>
-                        <artifactId>ant</artifactId>
-                        <version>1.10.5</version>
-                        <scope>compile</scope>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>compile-java9</id>
-                        <phase>compile</phase>
-                        <configuration>
-                            <target>
-                                <echo>${ant.version}</echo>
-                                <!-- Build Java 9+classes -->
-                                <mkdir dir="${java9.build.outputDirectory}"/>
-                                <javac srcdir="${mrjar.sourceDirectory}"
-                                       destdir="${java9.build.outputDirectory}"
-                                       classpath="${project.build.outputDirectory}"
-                                       modulepath="${project.build.directory}/modules"
-                                       includeantruntime="false" source="9" target="9">
-                                </javac>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>update-source-jar</id>
-                        <phase>verify</phase>
-                        <configuration>
-                            <target>
-                                <jar destfile="${project.build.directory}/jakarta.xml.bind-api-${project.version}-sources.jar" update="true">
-                                    <fileset dir="${project.build.directory}/mr-jar/" />
-                                </jar>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
-
     </build>
-
-
-
 </project>
