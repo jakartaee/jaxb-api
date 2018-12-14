@@ -21,6 +21,21 @@ import java.io.IOException;
 class ModuleUtil {
 
     /**
+     * When JAXB is in J2SE, rt.jar has to have a JAXB implementation.
+     * However, rt.jar cannot have META-INF/services/javax.xml.bind.JAXBContext
+     * because if it has, it will take precedence over any file that applications have
+     * in their jar files.
+     *
+     * <p>
+     * When the user bundles his own JAXB implementation, we'd like to use it, and we
+     * want the platform default to be used only when there's no other JAXB provider.
+     *
+     * <p>
+     * For this reason, we have to hard-code the class name into the API.
+     */
+    static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.internal.bind.v2.ContextFactory";
+
+    /**
      * Resolves classes from context path.
      * Only one class per package is needed to access its {@link java.lang.Module}
      */
