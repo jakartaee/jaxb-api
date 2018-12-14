@@ -30,6 +30,11 @@ class ModuleUtil {
     private static Logger logger = Logger.getLogger("javax.xml.bind");
 
     /**
+     * JAXB-RI default context factory.
+     */
+    static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.bind.v2.ContextFactory";
+
+    /**
      * Resolves classes from context path.
      * Only one class per package is needed to access its {@link java.lang.Module}
      */
