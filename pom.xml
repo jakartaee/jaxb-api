@@ -23,7 +23,7 @@
 
     <groupId>jakarta.xml.bind</groupId>
     <artifactId>jakarta.xml.bind-api-parent</artifactId>
-    <version>2.3.2-SNAPSHOT</version>
+    <version>2.3.2</version>
     <packaging>pom</packaging>
     <name>Java Architecture for XML Binding</name>
     <description>JAXB (JSR 222) API</description>
