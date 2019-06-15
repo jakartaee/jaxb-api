@@ -32,7 +32,8 @@ class ModuleUtil {
     /**
      * JAXB-RI default context factory.
      */
-    static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.bind.v2.ContextFactory";
+    // NOTICE: .toString() is used to prevent constant inlining by Java Compiler
+    static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.bind.v2.ContextFactory".toString();
 
     /**
      * Resolves classes from context path.

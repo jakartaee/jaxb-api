@@ -33,7 +33,8 @@ class ModuleUtil {
      * <p>
      * For this reason, we have to hard-code the class name into the API.
      */
-    static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.internal.bind.v2.ContextFactory";
+    // NOTICE: .toString() is used to prevent constant inlining by Java Compiler
+    static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.internal.bind.v2.ContextFactory".toString();
 
     /**
      * Resolves classes from context path.
