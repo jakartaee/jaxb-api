@@ -1,10 +1,10 @@
-# Contributing to Eclipse Project for JAXB
+# Contributing to Jakarta XML Binding
 
 Thanks for your interest in this project.
 
 ## Project description
 
-The Java??? Architecture for XML Binding (JAXB) provides an API and tools that
+The Jakarta XML Binding (JAXB) provides an API and tools that
 automate the mapping between XML documents and Java objects.
 
 * https://projects.eclipse.org/projects/ee4j.jaxb
@@ -19,6 +19,7 @@ more.
 The project maintains the following source code repositories
 
 * https://github.com/eclipse-ee4j/jaxb-api
+* https://github.com/eclipse-ee4j/jaxb-tck
 
 ## Eclipse Contributor Agreement
 
