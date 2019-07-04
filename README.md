@@ -1,11 +1,11 @@
-# Java Architecture for XML Binding (JAXB) API
+# Jakarta XML Binding API
 
-This project contains JAXB API based on JSR-222 specification.
+This project contains Jakarta XML Binding API and specification.
 
 ### Licensing and Governance
 
-JAXB API is licensed under a license - [EDL 1.0](LICENSE.md).
+This project is licensed under [EDL 1.0](LICENSE.md) license.
 
 ### More Info
 
-JSR-222 specification documents are available on [jcp.org](https://jcp.org/en/jsr/detail?id=222).
+[Eclipse project](https://projects.eclipse.org/projects/ee4j.jaxb).
