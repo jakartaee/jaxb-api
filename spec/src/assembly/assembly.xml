@@ -14,13 +14,13 @@
 <assembly>
     <id>spec</id>
     <formats>
-	<format>zip</format>
+        <format>zip</format>
     </formats>
     <baseDirectory>jakarta.xml.bind-spec</baseDirectory>
     <fileSets>
-	<fileSet>
-	    <directory>target/generated-docs</directory>
-	    <outputDirectory></outputDirectory>
-	</fileSet>
+        <fileSet>
+            <directory>target/generated-docs</directory>
+            <outputDirectory></outputDirectory>
+        </fileSet>
     </fileSets>
 </assembly>
