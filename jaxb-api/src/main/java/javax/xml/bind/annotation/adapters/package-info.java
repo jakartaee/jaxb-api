@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,12 +10,15 @@
 
 /**
  * {@link javax.xml.bind.annotation.adapters.XmlAdapter} and its spec-defined
- * sub-classes to allow arbitrary Java classes to be used with JAXB.
+ * sub-classes to allow arbitrary Java classes to be used with Jakarta XML Binding.
  * 
+ * <p>
+ * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
+ *
  * <h2>Package Specification</h2>
  * 
  * <ul>
- * <li><a href="http://jcp.org/en/jsr/detail?id=222">JAXB Specification</a>
+ * <li><a href="https://projects.eclipse.org/projects/ee4j.jaxb">Jakarta XML Binding Specification project</a>
  * </ul>
  * 
  * <h2>Related Documentation</h2>
@@ -23,9 +26,9 @@
  * For overviews, tutorials, examples, guides, and tool documentation,
  * please see:
  * <ul>
- * <li>The <a href="https://projects.eclipse.org/projects/ee4j.jaxb">JAXB Website</a>
+ * <li>The <a href="https://projects.eclipse.org/projects/ee4j.jaxb">Jakarta XML Binding Website</a>
  * </ul>
  *
- * @see <a href="https://projects.eclipse.org/projects/ee4j.jaxb">JAXB Website</a>
+ * @see <a href="https://projects.eclipse.org/projects/ee4j.jaxb">Jakarta XML Binding Website</a>
  */
 package javax.xml.bind.annotation.adapters;

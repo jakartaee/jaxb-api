@@ -7,7 +7,9 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-
+/**
+ * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
+ */
 module java.xml.bind {
     requires transitive jakarta.activation;
     requires transitive java.xml;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -11,6 +11,8 @@
 /**
  * Defines annotations for customizing Java program elements to XML Schema mapping.
  * <p>
+ * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
+ *
  * <h2>Package Specification</h2>
  * <p>The following table shows the JAXB mapping annotations
  * that can be associated with each program element. </p>
