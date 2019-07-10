@@ -1,4 +1,1 @@
-/target/
-/jaxb-api/target/
-/jaxb-api-test/target/
-/spec/target/
+target/
