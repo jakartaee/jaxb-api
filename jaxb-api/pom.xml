@@ -141,7 +141,7 @@
                         <author>true</author>
                         <version>true</version>
                         <doctitle><![CDATA[<br>
-JAXB ${project.version} API Library</h2>
+Jakarta XML Binding ${project.version} API Library</h2>
 ${project.name} specification, ${release.spec.date}<br>
 Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
 More information at: <i><a target='_top'
@@ -149,11 +149,13 @@ href='https://projects.eclipse.org/projects/ee4j.jaxb'>https://projects.eclipse.
 &nbsp;<br>&nbsp;<br><hr width='65%'><h1>${project.name}</h1><hr width='75%'>
 <br>&nbsp;<br>]]>
                         </doctitle>
-                        <header><![CDATA[JAXB<br>v${project.version}]]>
+                        <header><![CDATA[Jakarta XML Binding<br>v${project.version}]]>
                         </header>
                         <bottom>
-                        <![CDATA[<br>Copyright &#169; {inceptionYear}&#x2013;{currentYear} Oracle and/or its affiliates.
-                        All rights reserved.<br>Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.]]>
+                        <![CDATA[
+Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.<br>
+Copyright &#169; {inceptionYear}&#x2013;{currentYear} Oracle and/or its affiliates. All rights reserved.<br>
+Use is subject to <a href="{@docRoot}/doc-files/EFSL.html" target="_top">license terms</a>.]]>
                         </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
                         <tags>

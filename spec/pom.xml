@@ -22,7 +22,7 @@
     <groupId>jakarta.xml.bind</groupId>
     <artifactId>jakarta.xml.bind-spec</artifactId>
     <packaging>pom</packaging>
-    <version>2.3.2-SNAPSHOT</version>
+    <version>2.3-SNAPSHOT</version>
     <name>Jakarta XML Binding Specification</name>
 
     <properties>
@@ -68,7 +68,7 @@
                             <rules>
                                 <requireJavaVersion>
                                     <version>(,1.9),[11,)</version>
-                                    <message>You need JDK8 or lower</message>
+                                    <message>You need JDK8 or newer</message>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
