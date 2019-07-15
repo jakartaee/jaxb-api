@@ -8,7 +8,10 @@ pipeline {
   }
 
   environment {
+    REPO='git@github.com:eclipse-ee4j/jaxb-api.git'
+    CREDENTIALS_ID='jaxb-bot'
   }
+
   stages {
 
     stage('Check Environment') {
