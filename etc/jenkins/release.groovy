@@ -58,6 +58,8 @@ pipeline {
                             targetLocation: '/home/jenkins/.m2/'
                         )]) {
                     sh '''
+                        pwd
+                        ls -l etc
                         . etc/scripst/mvn.sh
                         read_version 'SPEC' "${SPEC_DIR}"
                         read_version 'API' "${API_DIR}/jaxb-api"
