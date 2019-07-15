@@ -1,3 +1,7 @@
+# Maven plugins
+VERSIONS_PLUGIN='org.codehaus.mojo:versions-maven-plugin:2.7'
+HELP_PLUGIN='org.apache.maven.plugins:maven-help-plugin:3.2.0'
+
 # Compute version strings for next development cycle.
 # Version strings are set as new shell variables with provided prefix.
 # Arguments:
