@@ -12,7 +12,6 @@ HELP_PLUGIN='org.apache.maven.plugins:maven-help-plugin:3.2.0'
 #  "${1}_NEXT_SNAPSHOT" - Next snapshot string: Next version string with '-SNAPSHOT' suffix
 next_version() {
   set -f
-  local RELEASE_VERSION="${2}"
   local NEXT_COMPONENTS=(${2//\./ })
   local LAST_INDEX=$((${#NEXT_COMPONENTS[@]} - 1))
   local NEXT_COMPONENTS[${LAST_INDEX}]=$((${NEXT_COMPONENTS[${LAST_INDEX}]} + 1))
