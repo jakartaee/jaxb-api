@@ -11,6 +11,8 @@ NEXT_SPEC_VERSION="${2}"
 API_VERSION="${3}"
 NEXT_API_VERSION="${4}"
 
+env | sort
+
 pwd
 ls -l etc
 . etc/scripts/mvn.sh
