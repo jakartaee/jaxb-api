@@ -58,7 +58,7 @@ pipeline {
                             targetLocation: '/home/jenkins/.m2/'
                         )]) {
                     sh '''
-                        etc/jenkins/release_version.sh
+                        etc/jenkins/release_version.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" "${API_VERSION}" "${NEXT_API_VERSION}"
                     '''
                 }
             }
