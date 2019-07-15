@@ -10,13 +10,13 @@ pipeline {
     environment {
         GIT_REPO='git@github.com:eclipse-ee4j/jaxb-api.git'
         GIT_CREDENTIALS_ID='github-bot-ssh'
-        API_DIR="${WORKSPACE}"
         SPEC_DIR="${WORKSPACE}/spec"
+        API_DIR="${WORKSPACE}"
     }
 
     stages {
 
-        stage('Initialization') {
+        stage('Init') {
             steps {
                 git branch: BRANCH, credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO
                 // GPG initialization
@@ -37,7 +37,7 @@ pipeline {
             }
         }
         
-        stage('Release Version') {
+        stage('Release') {
             steps {
                 configFileProvider([
                         configFile(
@@ -49,10 +49,9 @@ pipeline {
                             targetLocation: '/home/jenkins/.m2/'
                         )]) {
                     sh '''
-                        etc/jenkins/release_version.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
-                                                       "${API_VERSION}" "${NEXT_API_VERSION}" \
-                                                       "${DRY_RUN}" "${OVERWRITE}"
-                         env | sort
+                        etc/jenkins/release.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
+                                               "${API_VERSION}" "${NEXT_API_VERSION}" \
+                                               "${DRY_RUN}" "${OVERWRITE}"
                     '''
                 }
             }

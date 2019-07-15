@@ -19,7 +19,7 @@ OVERWRITE="${6}"
 . etc/scripts/nexus.sh
 
 read_version 'SPEC' "${SPEC_DIR}"
-read_version 'API' "${API_DIR}/jaxb-api"
+read_version 'API' "${API_DIR}"
 
 if [ -z "${API_RELEASE_VERSION}" ]; then
   echo '-[ Missing required API release version number! ]-------------------------------'
@@ -71,7 +71,7 @@ git tag --delete "${RELEASE_TAG}" && true
 
 # Read Maven identifiers
 read_mvn_id 'SPEC' "${SPEC_DIR}"
-read_mvn_id 'API' "${API_DIR}"
+read_mvn_id 'API' "${API_DIR}/jaxb-api"
 
 # Set Nexus identifiers
 SPEC_STAGING_DESC="${SPEC_GROUP_ID}:${SPEC_ARTIFACT_ID}:${SPEC_RELEASE_VERSION}"
@@ -88,8 +88,32 @@ set_version 'API' "${API_DIR}" "${API_RELEASE_VERSION}" "${API_GROUP_ID}" "${API
 drop_artifacts "${SPEC_STAGING_KEY}" "${SPEC_DIR}"
 drop_artifacts "${API_STAGING_KEY}" "${API_DIR}"
 
-# Pass variables to upper shell
-export RELEASE_BRANCH RELEASE_TAG MVN_DEPLOY_ARGS
-export SPEC_STAGING_DESC API_STAGING_DESC
-export SPEC_GROUP_ID SPEC_ARTIFACT_ID SPEC_NEXT_SNAPSHOT
-export API_GROUP_ID API_ARTIFACT_ID API_NEXT_SNAPSHOT
+echo '-[ Deploy artifacts to staging repository ]-----------------------------'
+# Verify, sign and deploy release
+(cd ${SPEC_DIR} && \
+  mvn -U -C \
+      -Poss-release,staging -DskipTests \
+      -DstagingDescription="${SPEC_STAGING_DESC}" \
+      clean ${MVN_DEPLOY_ARGS})
+(cd ${API_DIR} && \
+  mvn -U -C \
+      -Poss-release,staging -DskipTests \
+      -DstagingDescription="${API_STAGING_DESC}" \
+      clean ${MVN_DEPLOY_ARGS})
+
+echo '-[ Tag release ]----------------------------------------------------------------'
+git tag "${RELEASE_TAG}" -m "JSON-B Specification and API release"
+
+# Set next release cycle snapshot version
+echo '-[ SPEC next snapshot version ]-------------------------------------------------'
+set_version 'SPEC' "${SPEC_DIR}" "${SPEC_NEXT_SNAPSHOT}" "${SPEC_GROUP_ID}" "${SPEC_ARTIFACT_ID}" ''
+echo '-[ API next snapshot version ]--------------------------------------------------'
+set_version 'API' "${API_DIR}" "${API_NEXT_SNAPSHOT}" "${API_GROUP_ID}" "${API_ARTIFACT_ID}" ''
+
+if [ ${DRY_RUN} = 'true' ]; then
+  echo '-[ Skipping GitHub update ]-----------------------------------------------------'
+else
+  echo '-[ Push branch and tag to GitHub ]----------------------------------------------'
+#  git push origin "${RELEASE_BRANCH}"
+#  git push origin "${RELEASE_TAG}"
+fi
