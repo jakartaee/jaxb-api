@@ -16,6 +16,7 @@ DRY_RUN="${5}"
 OVERWRITE="${6}"
 
 . etc/scripts/mvn.sh
+. etc/scripts/nexus.sh
 
 read_version 'SPEC' "${SPEC_DIR}"
 read_version 'API' "${API_DIR}/jaxb-api"
@@ -83,3 +84,12 @@ echo '-[ SPEC release version ]-------------------------------------------------
 set_version 'SPEC' "${SPEC_DIR}" "${SPEC_RELEASE_VERSION}" "${SPEC_GROUP_ID}" "${SPEC_ARTIFACT_ID}" ''
 echo '-[ API release version ]--------------------------------------------------------'
 set_version 'API' "${API_DIR}" "${API_RELEASE_VERSION}" "${API_GROUP_ID}" "${API_ARTIFACT_ID}" ''
+
+drop_artifacts "${SPEC_STAGING_KEY}" "${SPEC_DIR}"
+drop_artifacts "${API_STAGING_KEY}" "${API_DIR}"
+
+# Pass variables to upper shell
+export RELEASE_BRANCH RELEASE_TAG MVN_DEPLOY_ARGS
+export SPEC_STAGING_DESC API_STAGING_DESC
+export SPEC_GROUP_ID SPEC_ARTIFACT_ID SPEC_NEXT_SNAPSHOT
+export API_GROUP_ID API_ARTIFACT_ID API_NEXT_SNAPSHOT

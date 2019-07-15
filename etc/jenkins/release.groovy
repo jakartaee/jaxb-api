@@ -16,15 +16,6 @@ pipeline {
 
     stages {
 
-        stage('Check Environment') {
-            steps {
-                sh '''
-          env | sort
-          pwd
-          ls -la
-        '''
-            }
-        }
         stage('Initialization') {
             steps {
                 git branch: BRANCH, credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO
@@ -61,6 +52,7 @@ pipeline {
                         etc/jenkins/release_version.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
                                                        "${API_VERSION}" "${NEXT_API_VERSION}" \
                                                        "${DRY_RUN}" "${OVERWRITE}"
+                         env | sort
                     '''
                 }
             }
