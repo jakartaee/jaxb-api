@@ -8,8 +8,8 @@ pipeline {
   }
 
   environment {
-    REPO='git@github.com:eclipse-ee4j/jaxb-api.git'
-    CREDENTIALS_ID='jaxb-bot'
+    GIT_REPO='git@github.com:eclipse-ee4j/jaxb-api.git'
+    GIT_CREDENTIALS_ID='github-bot-ssh'
   }
 
   stages {
@@ -23,7 +23,12 @@ pipeline {
         '''
       }
     }
-    
+    stage('Git Checkout') {
+        steps {
+            git branch: BRANCH, credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO
+        }
+    }
+        
   }
 
 }
