@@ -12,11 +12,13 @@ pipeline {
   stages {
 
     stage('Check Environment') {
-      sh '''
-        env | sort
-        pwd
-        ls -la
-      '''
+      steps {
+        sh '''
+          env | sort
+          pwd
+          ls -la
+        '''
+      }
     }
     
   }
