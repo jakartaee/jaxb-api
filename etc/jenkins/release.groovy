@@ -2,6 +2,8 @@ pipeline {
 
     agent any
 
+    def GIT_CREDENTIALS_ID
+
     tools {
         jdk 'openjdk-jdk11-latest'
         maven 'apache-maven-latest'
@@ -17,6 +19,9 @@ pipeline {
 
         stage('Init') {
             steps {
+                script {
+                    GIT_CREDENTIALS_ID="${GIT_CREDENTIALS_ID}"
+                }
                 git branch: BRANCH, credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO
                 // GPG initialization
                 withCredentials([file(credentialsId: GPG_CREDENTIALS_ID, variable: 'KEYRING')]) {
