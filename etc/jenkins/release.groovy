@@ -26,7 +26,6 @@ pipeline {
     }
 
     environment {
-        GIT_REPO='git@github.com:eclipse-ee4j/jaxb-api.git'
         SPEC_DIR="${WORKSPACE}/spec"
         API_DIR="${WORKSPACE}"
     }
@@ -35,7 +34,7 @@ pipeline {
         // Initialize build environment
         stage('Init') {
             steps {
-                git branch: BRANCH, credentialsId: SSH_CREDENTIALS_ID, url: GIT_REPO
+                git branch: BRANCH, credentialsId: SSH_CREDENTIALS_ID, url: GIT_URL
                 // GPG initialization
                 withCredentials([file(credentialsId: GPG_CREDENTIALS_ID, variable: 'KEYRING')]) {
                     sh '''
