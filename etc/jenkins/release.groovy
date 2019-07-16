@@ -16,7 +16,6 @@
 //   SETTINGS_SEC_XML_ID - Jenkins ID of settings-security.xml file
 
 pipeline {
-
     
     agent any
 
