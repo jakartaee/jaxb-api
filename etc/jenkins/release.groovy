@@ -17,7 +17,7 @@ pipeline {
 
         stage('Init') {
             steps {
-                git branch: BRANCH, credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO
+                git branch: BRANCH, credentialsId: SSH_CREDENTIALS_ID, url: GIT_REPO
                 // GPG initialization
                 withCredentials([file(credentialsId: GPG_CREDENTIALS_ID, variable: 'KEYRING')]) {
                     sh '''
@@ -47,7 +47,7 @@ pipeline {
                             fileId: SETTINGS_SEC_XML_ID, 
                             targetLocation: '/home/jenkins/.m2/'
                         )]) {
-                    sshagent(['github-bot-ssh']) {
+                    sshagent([SSH_CREDENTIALS_ID]) {
                         sh '''
                             etc/jenkins/release.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
                                                    "${API_VERSION}" "${NEXT_API_VERSION}" \
