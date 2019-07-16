@@ -2,6 +2,34 @@ pipeline {
 
     agent any
 
+    properties(
+        [
+            [$class: 'GithubProjectProperty',
+                displayName: '',
+                projectUrlStr: 'https://github.com/eclipse-ee4j/jaxb-api/'
+            ],
+            [$class: 'RebuildSettings',
+                autoRebuild: false,
+                rebuildDisabled: false
+            ], 
+            parameters([
+                    string(defaultValue: '', description: '''Specification version to release.
+Default value is from POM snapshot.''', name: 'SPEC_VERSION', trim: true),
+                    string(defaultValue: '', description: '''Next specification snapshot version to set (e.g. 1.2.4-SNAPSHOT).
+Default value is from POM snapshot with last component incremented by 1.''', name: 'NEXT_SPEC_VERSION', trim: true),
+                    string(defaultValue: '', description: '''API version to release.
+Default value is from POM snapshot.''', name: 'API_VERSION', trim: true),
+                    string(defaultValue: '', description: '''Next API snapshot version to set (e.g. 1.2.4-SNAPSHOT).
+Default value is from POM snapshot with last component incremented by 1.''', name: 'NEXT_API_VERSION', trim: true),
+                    string(defaultValue: 'release_job', description: '''Branch to release.
+Default value is master.''', name: 'BRANCH', trim: true),
+                    booleanParam(defaultValue: false, description: 'Do not publish artifacts to OSSRH and code changes to GitHub.', name: 'DRY_RUN'),
+                    booleanParam(defaultValue: false, description: 'Allows to overwrite existing version in git and OSSRH staging repositories.', name: 'OVERWRITE')
+                ]),
+            buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '20'))
+        ]
+    )
+
     tools {
         jdk 'openjdk-jdk11-latest'
         maven 'apache-maven-latest'
