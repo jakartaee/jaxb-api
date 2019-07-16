@@ -67,7 +67,6 @@ pipeline {
                         )]) {
                     sshagent([SSH_CREDENTIALS_ID]) {
                         sh '''
-                            env | sort && exit 1
                             etc/jenkins/release.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
                                                    "${API_VERSION}" "${NEXT_API_VERSION}" \
                                                    "${DRY_RUN}" "${OVERWRITE}"

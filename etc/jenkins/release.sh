@@ -30,8 +30,8 @@ if [ -z "${SPEC_RELEASE_VERSION}" ]; then
   exit 1
 fi
 
-RELEASE_BRANCH="${SPEC_RELEASE_VERSION}-${API_RELEASE_VERSION}"
-RELEASE_TAG="${RELEASE_BRANCH}-RELEASE"
+RELEASE_TAG="${SPEC_RELEASE_VERSION}-${API_RELEASE_VERSION}"
+RELEASE_BRANCH="${SPEC_RELEASE_VERSION}-${API_RELEASE_VERSION}-RELEASE"
 
 if [ ${DRY_RUN} = 'true' ]; then
   echo '-[ Dry run turned on ]----------------------------------------------------------'
