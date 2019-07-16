@@ -114,6 +114,6 @@ if [ ${DRY_RUN} = 'true' ]; then
   echo '-[ Skipping GitHub update ]-----------------------------------------------------'
 else
   echo '-[ Push branch and tag to GitHub ]----------------------------------------------'
-#  git push origin "${RELEASE_BRANCH}"
-#  git push origin "${RELEASE_TAG}"
+  git push origin "${RELEASE_BRANCH}"
+  git push origin "${RELEASE_TAG}"
 fi

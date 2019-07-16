@@ -9,7 +9,6 @@ pipeline {
 
     environment {
         GIT_REPO='git@github.com:eclipse-ee4j/jaxb-api.git'
-        GIT_CREDENTIALS_ID='github-bot-ssh'
         SPEC_DIR="${WORKSPACE}/spec"
         API_DIR="${WORKSPACE}"
     }
@@ -20,7 +19,7 @@ pipeline {
             steps {
                 git branch: BRANCH, credentialsId: GIT_CREDENTIALS_ID, url: GIT_REPO
                 // GPG initialization
-                withCredentials([file(credentialsId: 'b538a336-774c-4ca6-88ed-46ab067cbe41', variable: 'KEYRING')]) {
+                withCredentials([file(credentialsId: GPG_CREDENTIALS_ID, variable: 'KEYRING')]) {
                     sh '''
                         gpg --batch --import ${KEYRING}
                         for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
@@ -41,18 +40,20 @@ pipeline {
             steps {
                 configFileProvider([
                         configFile(
-                            fileId: '99777a39-41e1-432a-acbc-9be9f32fbf0b',
+                            fileId: SETTINGS_XML_ID,
                             targetLocation: '/home/jenkins/.m2/settings.xml'
                         ), 
                         configFile(
-                            fileId: '33aba566-675c-4604-8e9a-369338d78c20', 
+                            fileId: SETTINGS_SEC_XML_ID, 
                             targetLocation: '/home/jenkins/.m2/'
                         )]) {
-                    sh '''
-                        etc/jenkins/release.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
-                                               "${API_VERSION}" "${NEXT_API_VERSION}" \
-                                               "${DRY_RUN}" "${OVERWRITE}"
-                    '''
+                    sshagent(['github-bot-ssh']) {
+                        sh '''
+                            etc/jenkins/release.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
+                                                   "${API_VERSION}" "${NEXT_API_VERSION}" \
+                                                   "${DRY_RUN}" "${OVERWRITE}"
+                        '''
+                    }
                 }
             }
         }
