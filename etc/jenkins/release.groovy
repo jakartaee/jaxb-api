@@ -2,7 +2,7 @@ pipeline {
 
     agent any
 
-    properties(
+    options (
         [
             [$class: 'GithubProjectProperty',
                 displayName: '',
