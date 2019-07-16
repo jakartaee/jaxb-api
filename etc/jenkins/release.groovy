@@ -11,7 +11,6 @@ pipeline {
         GIT_REPO='git@github.com:eclipse-ee4j/jaxb-api.git'
         SPEC_DIR="${WORKSPACE}/spec"
         API_DIR="${WORKSPACE}"
-        GIT_CREDENTIALS_ID="${GIT_CREDENTIALS_ID}"
     }
 
     stages {
