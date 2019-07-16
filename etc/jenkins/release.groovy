@@ -1,5 +1,23 @@
+// Job input parameters:
+//   SPEC_VERSION      - Specification version to release
+//   NEXT_SPEC_VERSION - Next specification snapshot version to set (e.g. 1.2.4-SNAPSHOT)
+//   API_VERSION       - API version to release
+//   NEXT_API_VERSION  - Next API snapshot version to set (e.g. 1.2.4-SNAPSHOT)
+//   BRANCH            - Branch to release
+//   DRY_RUN           - Do not publish artifacts to OSSRH and code changes to GitHub
+//   OVERWRITE         - Allows to overwrite existing version in git and OSSRH staging repositories
+
+// Job internal argumets:
+//   GIT_USER_NAME       - Git user name (for commits)
+//   GIT_USER_EMAIL      - Git user e-mail (for commits)
+//   SSH_CREDENTIALS_ID  - Jenkins ID of SSH credentials
+//   GPG_CREDENTIALS_ID  - Jenkins ID of GPG credentials (stored as KEYRING variable)
+//   SETTINGS_XML_ID     - Jenkins ID of settings.xml file
+//   SETTINGS_SEC_XML_ID - Jenkins ID of settings-security.xml file
+
 pipeline {
 
+    
     agent any
 
     tools {
@@ -14,7 +32,7 @@ pipeline {
     }
 
     stages {
-
+        // Initialize build environment
         stage('Init') {
             steps {
                 git branch: BRANCH, credentialsId: SSH_CREDENTIALS_ID, url: GIT_REPO
@@ -28,14 +46,15 @@ pipeline {
                         done
 
                     '''
-                }    
+                }
+                // Git configuration
                 sh '''
-                    git config --global user.email "jsonb-bot@eclipse.org"
-                    git config --global user.name "Eclipse JSON-B Bot"
+                    git config --global user.name "${GIT_USER_NAME}"
+                    git config --global user.email "${GIT_USER_EMAIL}"
                 '''
             }
         }
-        
+        // Perform release
         stage('Release') {
             steps {
                 configFileProvider([
@@ -49,6 +68,7 @@ pipeline {
                         )]) {
                     sshagent([SSH_CREDENTIALS_ID]) {
                         sh '''
+                            env | sort && exit 1
                             etc/jenkins/release.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
                                                    "${API_VERSION}" "${NEXT_API_VERSION}" \
                                                    "${DRY_RUN}" "${OVERWRITE}"
