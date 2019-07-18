@@ -38,4 +38,13 @@
         <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS"/>
     </Match>
 
+    <!--
+      https://github.com/eclipse-ee4j/jaxb-api/issues/78
+    -->
+    <Match>
+        <Class name="javax.xml.bind.ModuleUtil"/>
+        <Bug pattern="DM_STRING_TOSTRING"/>
+    </Match>
+
+
 </FindBugsFilter>
