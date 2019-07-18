@@ -154,7 +154,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                         <groups>
                             <group>
                                 <title>Jakarta XML Binding API Packages</title>
-                                <packages>javax.xml.bind.*</packages>
+                                <packages>javax.xml.bind*</packages>
                             </group>
                         </groups>
                         <tags>
