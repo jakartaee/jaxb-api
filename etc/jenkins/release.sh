@@ -80,7 +80,7 @@ git tag --delete "${RELEASE_TAG}" && true
 
 # Read Maven identifiers
 read_mvn_id 'SPEC' "${SPEC_DIR}"
-read_mvn_id 'API' "${API_DIR}"
+read_mvn_id 'API' "${API_DIR}/jaxb-api"
 
 # Set Nexus identifiers
 SPEC_STAGING_DESC="${SPEC_GROUP_ID}:${SPEC_ARTIFACT_ID}:${SPEC_RELEASE_VERSION}"

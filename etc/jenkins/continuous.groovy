@@ -34,7 +34,7 @@ pipeline {
 
     environment {
         SPEC_DIR="${WORKSPACE}/spec"
-        API_DIR="${WORKSPACE}/api"
+        API_DIR="${WORKSPACE}"
     }
 
     stages {
