@@ -84,6 +84,9 @@
                         <instructions>
                             <_noee>true</_noee>
                             <Bundle-Version>${project.version}</Bundle-Version>  <!-- 2.2.99.bnull -->
+                            <Bundle-Description>
+                                Jakarta XML Binding API ${spec.version} Design Specification
+                            </Bundle-Description>
                             <Extension-Name>${extension.name}</Extension-Name>
                             <Implementation-Version>${spec.version}.${impl.version}</Implementation-Version>
                             <Specification-Version>${spec.version}</Specification-Version>
@@ -121,9 +124,7 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>${spotbugs.version}</version>
                     <configuration>
-                        <skip>${spotbugs.skip}</skip>
                         <threshold>${spotbugs.threshold}</threshold>
                         <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                         <excludeFilterFile>
@@ -156,7 +157,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                         <groups>
                             <group>
                                 <title>Jakarta XML Binding API Packages</title>
-                                <packages>javax.xml.bind</packages>
+                                <packages>javax.xml.bind*</packages>
                             </group>
                         </groups>
                         <tags>
