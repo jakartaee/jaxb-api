@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -64,7 +64,7 @@ import java.util.Properties;
  * invocations of the marshal and unmarshal methods.  This is necessary to
  * configure the datatype converter that will be used during these operations.</i>
  *
- * <a name="Unmarshalling"></a>
+ * <a id="Unmarshalling"></a>
  * <h3>Unmarshalling</h3>
  * <p>
  * The {@link Unmarshaller} class provides the client application the ability

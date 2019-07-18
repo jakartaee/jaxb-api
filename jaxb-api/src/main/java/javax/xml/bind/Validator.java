@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -17,7 +17,7 @@ package javax.xml.bind;
  * of content trees during runtime.
  *
  * <p>
- * <a name="validationtypes"></a>
+ * <a id="validationtypes"></a>
  * <b>Three Forms of Validation</b><br>
  * <blockquote>
  *    <dl>
@@ -62,7 +62,7 @@ package javax.xml.bind;
  * {@code ValidationEventHandler} registered on it.
  *
  * <p>
- * <a name="defaulthandler"></a>
+ * <a id="defaulthandler"></a>
  * <b>Using the Default EventHandler</b><br>
  * <blockquote>
  *   If the client application does not set an event handler on their
@@ -75,7 +75,7 @@ package javax.xml.bind;
  * </blockquote>
  *
  * <p>
- * <a name="handlingevents"></a>
+ * <a id="handlingevents"></a>
  * <b>Handling Validation Events</b><br>
  * <blockquote>
  *   There are three ways to handle events encountered during the unmarshal,
@@ -123,7 +123,7 @@ package javax.xml.bind;
  * </blockquote>
  *
  * <p>
- * <a name="supportedProps"></a>
+ * <a id="supportedProps"></a>
  * <b>Supported Properties</b><br>
  * <blockquote>
  * <p>

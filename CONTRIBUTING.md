@@ -4,7 +4,7 @@ Thanks for your interest in this project.
 
 ## Project description
 
-The Jakarta XML Binding (JAXB) provides an API and tools that
+The Jakarta XML Binding provides an API and tools that
 automate the mapping between XML documents and Java objects.
 
 * https://projects.eclipse.org/projects/ee4j.jaxb

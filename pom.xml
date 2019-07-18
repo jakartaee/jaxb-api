@@ -82,8 +82,8 @@
         <release.spec.date>Jul 2017</release.spec.date>
         <api.package>javax.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
-        <spec.version>2.4</spec.version>
-        <impl.version>0</impl.version>
+        <spec.version>2.3</spec.version>
+        <impl.version>2</impl.version>
         <activation.version>1.2.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Oracle Corporation</vendor.name>
@@ -181,7 +181,7 @@
                     <execution>
                         <phase>validate</phase>
                         <goals>
-                            <goal>copyright</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>

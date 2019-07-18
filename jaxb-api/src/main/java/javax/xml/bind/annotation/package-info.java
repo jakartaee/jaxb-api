@@ -17,7 +17,8 @@
  * <p>The following table shows the JAXB mapping annotations
  * that can be associated with each program element. </p>
  * <p>
- * <table class="striped" summary="Annotations for customizing Java program elements to XML Schema mapping">
+ * <table class="striped">
+ *   <caption>Annotations for customizing Java program elements to XML Schema mapping</caption>
  *   <thead>
  *     <tr>
  *       <th scope="col">Program Element</th>
@@ -143,7 +144,8 @@
  * <p>The following namespace prefixes are used in the XML Schema
  * fragments in this package.
  * <p>
- * <table class="striped" summary="XML Schema fragments namespace prefixes">
+ * <table class="striped">
+ *   <caption>XML Schema fragments namespace prefixes</caption>
  *   <thead>
  *     <tr>
  *       <th scope="col">Prefix</th>
