@@ -29,6 +29,7 @@
 www
 site
 etc/config/copyright-exclude
+jaxb-api/src/main/javadoc/doc-files/speclicense.html
 jaxb-api-test/src/test/resources/logging.properties
 jaxb-api-test/src/test/resources/javax/xml/bind/test.policy
 jaxb-api-test/src/test/resources/jaxb/test/usr/jaxb.index
