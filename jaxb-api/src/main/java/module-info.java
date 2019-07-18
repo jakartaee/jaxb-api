@@ -7,7 +7,11 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
+
 /**
+ * Jakarta XML Binding API.
+ *
+ * <p>
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
  */
 module java.xml.bind {
