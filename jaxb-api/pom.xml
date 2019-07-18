@@ -121,9 +121,7 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>${spotbugs.version}</version>
                     <configuration>
-                        <skip>${spotbugs.skip}</skip>
                         <threshold>${spotbugs.threshold}</threshold>
                         <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                         <excludeFilterFile>
