@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -104,7 +104,8 @@ import java.lang.annotation.Target;
  *   <li> X     : don't care
  * </ul>
  * <blockquote>
- *   <table class="striped" summary="Mapping class to XML Schema simple type">
+ *   <table class="striped">
+ *     <caption>Mapping class to XML Schema simple type</caption>
  *     <thead>
  *       <tr>
  *         <th scope="col">Target</th>
