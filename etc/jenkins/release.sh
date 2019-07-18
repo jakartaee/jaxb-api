@@ -1,5 +1,14 @@
 #!/bin/bash -ex
 #
+# Copyright (c) 2019 Oracle and/or its affiliates. All rights reserved.
+#
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Distribution License v. 1.0, which is available at
+# http://www.eclipse.org/org/documents/edl-v10.php.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+#
 # Arguments:
 #  $1 - SPEC_VERSION
 #  $2 - NEXT_SPEC_VERSION
@@ -15,8 +24,8 @@ NEXT_API_VERSION="${4}"
 DRY_RUN="${5}"
 OVERWRITE="${6}"
 
-. etc/scripts/mvn.sh
-. etc/scripts/nexus.sh
+. etc/scripts/maven.incl.sh
+. etc/scripts/nexus.incl.sh
 
 read_version 'SPEC' "${SPEC_DIR}"
 read_version 'API' "${API_DIR}"
@@ -71,7 +80,7 @@ git tag --delete "${RELEASE_TAG}" && true
 
 # Read Maven identifiers
 read_mvn_id 'SPEC' "${SPEC_DIR}"
-read_mvn_id 'API' "${API_DIR}/jaxb-api"
+read_mvn_id 'API' "${API_DIR}"
 
 # Set Nexus identifiers
 SPEC_STAGING_DESC="${SPEC_GROUP_ID}:${SPEC_ARTIFACT_ID}:${SPEC_RELEASE_VERSION}"
