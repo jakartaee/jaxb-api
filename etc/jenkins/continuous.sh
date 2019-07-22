@@ -13,6 +13,6 @@
 #  N/A
 
 echo '-[ Jakarta XML Binding Specification Build ]------------------------------------'
-(cd spec && mvn -U -C -Psnapshots,oss-release clean install deploy)
+(cd spec && mvn -U -C -Psnapshots,oss-release -Dstatus='DRAFT' clean install deploy)
 echo '-[ Jakarta XML Binding API Build ]----------------------------------------------'
 mvn -U -C -Psnapshots,oss-release clean install spotbugs:spotbugs deploy

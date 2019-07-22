@@ -102,6 +102,7 @@ echo '-[ Deploy artifacts to staging repository ]-----------------------------'
 (cd ${SPEC_DIR} && \
   mvn -U -C \
       -Poss-release,staging -DskipTests \
+      -Dstatus='Final Release' \
       -DstagingDescription="${SPEC_STAGING_DESC}" \
       clean ${MVN_DEPLOY_ARGS})
 (cd ${API_DIR} && \
