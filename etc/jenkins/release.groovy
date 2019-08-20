@@ -7,8 +7,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 // Job input parameters:
-//   SPEC_VERSION      - Specification version to release
-//   NEXT_SPEC_VERSION - Next specification snapshot version to set (e.g. 1.2.4-SNAPSHOT)
 //   API_VERSION       - API version to release
 //   NEXT_API_VERSION  - Next API snapshot version to set (e.g. 1.2.4-SNAPSHOT)
 //   BRANCH            - Branch to release
@@ -33,7 +31,6 @@ pipeline {
     }
 
     environment {
-        SPEC_DIR="${WORKSPACE}/spec"
         API_DIR="${WORKSPACE}"
     }
 
@@ -74,8 +71,7 @@ pipeline {
                         )]) {
                     sshagent([SSH_CREDENTIALS_ID]) {
                         sh '''
-                            etc/jenkins/release.sh "${SPEC_VERSION}" "${NEXT_SPEC_VERSION}" \
-                                                   "${API_VERSION}" "${NEXT_API_VERSION}" \
+                            etc/jenkins/release.sh "${API_VERSION}" "${NEXT_API_VERSION}" \
                                                    "${DRY_RUN}" "${OVERWRITE}"
                         '''
                     }
