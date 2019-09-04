@@ -51,7 +51,7 @@ class ServiceLoaderUtil {
     static Object lookupUsingOSGiServiceLoader(String factoryId, Logger logger) {
 
         try {
-            // Use reflection to avoid having any dependendcy on ServiceLoader class
+            // Use reflection to avoid having any dependency on ServiceLoader class
             Class serviceClass = Class.forName(factoryId);
             Class target = Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
             Method m = target.getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class);
