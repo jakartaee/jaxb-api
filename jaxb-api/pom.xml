@@ -55,7 +55,6 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.0</version>
                     <configuration>
                         <archive>
                             <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
@@ -76,13 +75,12 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>4.2.0</version>
+                    <version>4.2.1</version>
                     <configuration>
                         <archive>
                             <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                         </archive>
                         <instructions>
-                            <_noee>true</_noee>
                             <Bundle-Version>${project.version}</Bundle-Version>  <!-- 2.2.99.bnull -->
                             <Bundle-Description>
                                 Jakarta XML Binding API ${spec.version} Design Specification
@@ -256,7 +254,6 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                     <execution>
                         <id>default-compile</id>
                         <configuration>
-                            <release>8</release>
                             <excludes>
                                 <exclude>module-info.java</exclude>
                             </excludes>
