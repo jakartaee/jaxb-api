@@ -85,7 +85,7 @@ drop_artifacts "${API_STAGING_KEY}" "${API_DIR}"
 echo '-[ Deploy artifacts to staging repository ]-----------------------------'
 # Verify, sign and deploy release
 (cd ${API_DIR} && \
-  mvn -U -C \
+  mvn -U -C -B -V \
       -Poss-release,staging -DskipTests \
       -DstagingDescription="${API_STAGING_DESC}" \
       clean ${MVN_DEPLOY_ARGS})
