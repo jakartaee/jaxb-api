@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2018, 2019 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2018, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -65,59 +65,10 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
-                    <version>1.4</version>
                     <configuration>
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-                        <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
                         <shortRevisionLength>7</shortRevisionLength>
                         <revisionOnScmFailure>false</revisionOnScmFailure>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>maven-bundle-plugin</artifactId>
-                    <version>4.2.1</version>
-                    <configuration>
-                        <archive>
-                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        </archive>
-                        <instructions>
-                            <Bundle-Version>${project.version}</Bundle-Version>  <!-- 2.2.99.bnull -->
-                            <Bundle-Description>
-                                Jakarta XML Binding API ${spec.version} Design Specification
-                            </Bundle-Description>
-                            <Extension-Name>${extension.name}</Extension-Name>
-                            <Implementation-Version>${spec.version}.${impl.version}</Implementation-Version>
-                            <Specification-Version>${spec.version}</Specification-Version>
-                            <Export-Package>${api.package}.*; version=${spec.version}.${impl.version}</Export-Package>
-                            <Import-Package>
-                                javax.activation;version=!,
-                                javax.xml.bind;version="[${spec.version},3)",
-                                javax.xml.bind.annotation;version="[${spec.version},3)",
-                                javax.xml.bind.annotation.adapters;version="[${spec.version},3)",
-                                javax.xml.bind.attachment;version="[${spec.version},3)",
-                                javax.xml.bind.helpers;version="[${spec.version},3)",
-                                javax.xml.bind.util;version="[${spec.version},3)",
-                                javax.xml.datatype,
-                                javax.xml.namespace,
-                                javax.xml.parsers,
-                                javax.xml.stream,
-                                javax.xml.transform,
-                                javax.xml.transform.dom,
-                                javax.xml.transform.sax,
-                                javax.xml.transform.stream,
-                                javax.xml.validation,
-                                org.w3c.dom,
-                                org.xml.sax,
-                                org.xml.sax.ext,
-                                org.xml.sax.helpers
-                            </Import-Package>
-                            <Bundle-SymbolicName>${extension.name}-api</Bundle-SymbolicName>
-                            <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
-                            <Specification-Vendor>${vendor.name}</Specification-Vendor>
-                            <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
-                            <Multi-Release>true</Multi-Release>
-                        </instructions>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -137,6 +88,7 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <configuration>
                         <nodeprecated>false</nodeprecated>
+                        <notimestamp>true</notimestamp>
                         <use>false</use>
                         <author>true</author>
                         <version>true</version>
@@ -148,7 +100,7 @@
                         <bottom>
                         <![CDATA[
 Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.<br>
-Copyright &#169; 2019 Eclipse Foundation. All rights reserved.<br>
+Copyright &#169; 2019, 2020 Eclipse Foundation. All rights reserved.<br>
 Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">license terms</a>.]]>
                         </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
@@ -250,28 +202,16 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
+                </configuration>
                 <executions>
-                    <execution>
-                        <id>default-compile</id>
-                        <configuration>
-                            <excludes>
-                                <exclude>module-info.java</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>module-info-compile</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <release>9</release>
-                            <includes>
-                                <include>module-info.java</include>
-                            </includes>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>default-compile-mr</id>
                         <goals>
@@ -283,6 +223,18 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                                 <compileSourceRoot>${project.basedir}/src/main/mr-jar</compileSourceRoot>
                             </compileSourceRoots>
                             <outputDirectory>${project.build.outputDirectory}/META-INF/versions/9</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>base-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <release>8</release>
+                            <excludes>
+                                <exclude>module-info.java</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                 </executions>
@@ -297,6 +249,32 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                         <goals>
                             <goal>manifest</goal>
                         </goals>
+                    <configuration>
+                        <archive>
+                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        </archive>
+                        <instructions>
+                            <_removeheaders>Bnd-LastModified,Built-By,Include-Resource,Private-Package</_removeheaders>
+                            <Bundle-Version>${project.version}</Bundle-Version>  <!-- 2.2.99.bnull -->
+                            <Bundle-Description>
+                                Jakarta XML Binding API ${spec.version} Design Specification
+                            </Bundle-Description>
+                            <Extension-Name>${extension.name}</Extension-Name>
+                            <Implementation-Version>${spec.version}.${impl.version}</Implementation-Version>
+                            <Specification-Version>${spec.version}</Specification-Version>
+                            <Export-Package>${api.package}.*; version=${spec.version}.${impl.version}</Export-Package>
+                            <Import-Package>
+                                !org.glassfish.hk2.osgiresourcelocator,
+                                javax.activation;version=!,
+                                *
+                            </Import-Package>
+                            <Bundle-SymbolicName>${extension.name}-api</Bundle-SymbolicName>
+                            <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
+                            <Specification-Vendor>${vendor.name}</Specification-Vendor>
+                            <Implementation-Build-Id>${scmBranch}-${buildNumber}</Implementation-Build-Id>
+                            <Multi-Release>true</Multi-Release>
+                        </instructions>
+                    </configuration>
                     </execution>
                 </executions>
             </plugin>
