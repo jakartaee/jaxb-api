@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2018, 2019 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2018, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -92,12 +92,12 @@
                             <Export-Package>${api.package}.*; version=${spec.version}.${impl.version}</Export-Package>
                             <Import-Package>
                                 javax.activation;version=!,
-                                javax.xml.bind;version="[${spec.version},3)",
-                                javax.xml.bind.annotation;version="[${spec.version},3)",
-                                javax.xml.bind.annotation.adapters;version="[${spec.version},3)",
-                                javax.xml.bind.attachment;version="[${spec.version},3)",
-                                javax.xml.bind.helpers;version="[${spec.version},3)",
-                                javax.xml.bind.util;version="[${spec.version},3)",
+                                jakarta.xml.bind;version="[${spec.version},3)",
+                                jakarta.xml.bind.annotation;version="[${spec.version},3)",
+                                jakarta.xml.bind.annotation.adapters;version="[${spec.version},3)",
+                                jakarta.xml.bind.attachment;version="[${spec.version},3)",
+                                jakarta.xml.bind.helpers;version="[${spec.version},3)",
+                                jakarta.xml.bind.util;version="[${spec.version},3)",
                                 javax.xml.datatype,
                                 javax.xml.namespace,
                                 javax.xml.parsers,
@@ -148,7 +148,7 @@
                         <bottom>
                         <![CDATA[
 Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.<br>
-Copyright &#169; 2019 Eclipse Foundation. All rights reserved.<br>
+Copyright &#169; 2020 Eclipse Foundation. All rights reserved.<br>
 Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">license terms</a>.]]>
                         </bottom>
                         <detectJavaApiLink>false</detectJavaApiLink>
@@ -156,7 +156,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                         <groups>
                             <group>
                                 <title>Jakarta XML Binding API Packages</title>
-                                <packages>javax.xml.bind*</packages>
+                                <packages>jakarta.xml.bind*</packages>
                             </group>
                         </groups>
                         <tags>

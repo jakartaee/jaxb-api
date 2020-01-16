@@ -11,8 +11,8 @@
 /**
  * Tests for jaxb API.
  */
-module java.xml.bind.tests {
-    requires java.xml.bind;
+module jakarta.xml.bind.tests {
+    requires jakarta.xml.bind;
     requires java.logging;
     requires junit;
 }
