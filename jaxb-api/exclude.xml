@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 2013, 2019 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2013, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -16,7 +16,7 @@
     As designed.
     -->
     <Match>
-        <Class name="javax.xml.bind.util.JAXBSource$1"/>
+        <Class name="jakarta.xml.bind.util.JAXBSource$1"/>
         <Bug pattern="XFB_XML_FACTORY_BYPASS"/>
     </Match>
 
@@ -25,7 +25,7 @@
     As designed, impossible to change, maybe with MR.
     -->
     <Match>
-        <Class name="javax.xml.bind.DatatypeConverterImpl"/>
+        <Class name="jakarta.xml.bind.DatatypeConverterImpl"/>
         <Bug pattern="NP_BOOLEAN_RETURN_NULL"/>
     </Match>
 
@@ -34,7 +34,7 @@
     As designed, impossible to change, maybe with MR?
     -->
     <Match>
-        <Class name="javax.xml.bind.annotation.adapters.HexBinaryAdapter"/>
+        <Class name="jakarta.xml.bind.annotation.adapters.HexBinaryAdapter"/>
         <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS"/>
     </Match>
 
@@ -42,7 +42,7 @@
       https://github.com/eclipse-ee4j/jaxb-api/issues/78
     -->
     <Match>
-        <Class name="javax.xml.bind.ModuleUtil"/>
+        <Class name="jakarta.xml.bind.ModuleUtil"/>
         <Bug pattern="DM_STRING_TOSTRING"/>
     </Match>
 

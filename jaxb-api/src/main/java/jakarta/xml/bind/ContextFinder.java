@@ -157,7 +157,7 @@ class ContextFinder {
             /*
              * jakarta.xml.bind.context.factory points to a class which has a
              * static method called 'createContext' that
-             * returns a javax.xml.JAXBContext.
+             * returns a jakarta.xml.bind.JAXBContext.
              */
 
             Object context = null;
