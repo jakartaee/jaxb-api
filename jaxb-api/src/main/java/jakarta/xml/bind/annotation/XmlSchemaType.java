@@ -65,7 +65,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <pre>
  *     package foo;
  *     &#64;jakarta.xml.bind.annotation.XmlSchemaType(
- *          name="date", type=jakarta.xml.datatype.XMLGregorianCalendar.class)
+ *          name="date", type=javax.xml.datatype.XMLGregorianCalendar.class)
  *     }
  * </pre>
  * 
