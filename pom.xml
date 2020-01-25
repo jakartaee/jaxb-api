@@ -19,6 +19,7 @@
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.6</version>
+        <relativePath/>
     </parent>
 
     <groupId>jakarta.xml.bind</groupId>
@@ -84,7 +85,7 @@
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>2.3</spec.version>
         <impl.version>3</impl.version>
-        <activation.version>1.2.1</activation.version>
+        <activation.version>1.2.2</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>

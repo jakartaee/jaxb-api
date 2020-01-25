@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -31,7 +31,7 @@ public interface JAXBContextFactory {
      * @param classesToBeBound
      *      List of java classes to be recognized by the new {@link JAXBContext}.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@linkplain java.lang.Module#isOpen open} to at least the {@code java.xml.bind} module.
+     *      that is {@code open} to at least the {@code java.xml.bind} module.
      *      Can be empty, in which case a {@link JAXBContext} that only knows about
      *      spec-defined classes will be returned.
      * @param properties
@@ -76,7 +76,7 @@ public interface JAXBContextFactory {
      * @param contextPath
      *      List of java package names that contain schema derived classes.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@linkplain java.lang.Module#isOpen open} to at least the {@code java.xml.bind} module.
+     *      that is {@code open} to at least the {@code java.xml.bind} module.
      * @param classLoader
      *      This class loader will be used to locate the implementation classes.
      * @param properties
