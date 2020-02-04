@@ -19,7 +19,7 @@ import static java.lang.annotation.ElementType.TYPE;
 
 import javax.xml.transform.Source;
 import jakarta.xml.bind.attachment.AttachmentMarshaller;
-import javax.activation.DataHandler;
+import jakarta.activation.DataHandler;
 
 /**
  * Disable consideration of XOP encoding for datatypes that are bound to 

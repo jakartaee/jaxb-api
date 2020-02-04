@@ -12,7 +12,7 @@
  * Tests for jaxb API.
  */
 module jakarta.xml.bind.tests {
-    requires java.xml.bind;
+    requires jakarta.xml.bind;
     requires java.logging;
     requires junit;
 }

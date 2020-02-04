@@ -81,11 +81,11 @@
 
         <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
         <release.spec.date>Jul 2017</release.spec.date>
-        <api.package>javax.xml.bind</api.package>
+        <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
-        <spec.version>2.3</spec.version>
-        <impl.version>3</impl.version>
-        <activation.version>1.2.2</activation.version>
+        <spec.version>3.0</spec.version>
+        <impl.version>0</impl.version>
+        <activation.version>2.0.0-rc1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>

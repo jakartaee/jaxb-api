@@ -95,12 +95,8 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <!--module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar -->
                     <argLine>
-                        --add-modules java.xml.bind
-                        --upgrade-module-path ${project.build.directory}/modules/jakarta.xml.bind-api-${project.version}.jar
-                        --module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar
-                        --add-reads java.xml.bind=ALL-UNNAMED
+                        --module-path ${project.build.directory}/modules/jakarta.activation-api-${activation.version}.jar:${project.build.directory}/modules/jakarta.xml.bind-api-${project.version}.jar
                     </argLine>
                     <systemPropertyVariables>
                         <java.util.logging.config.file>
@@ -124,7 +120,7 @@
                     <bottom>
                     <![CDATA[
 Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.<br>
-Copyright &#169; 2019 Eclipse Foundation. All rights reserved.<br>
+Copyright &#169; 2020 Eclipse Foundation. All rights reserved.<br>
 Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">license terms</a>.]]>
                     </bottom>
                     <detectJavaApiLink>false</detectJavaApiLink>

@@ -10,7 +10,7 @@
 
 package jakarta.xml.bind.attachment;
 
-import javax.activation.DataHandler;
+import jakarta.activation.DataHandler;
 
 /**
  * <p>Enables JAXB unmarshalling of a root document containing optimized binary data formats.</p>

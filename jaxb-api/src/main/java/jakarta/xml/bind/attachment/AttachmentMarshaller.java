@@ -10,7 +10,7 @@
 
 package jakarta.xml.bind.attachment;
 
-import javax.activation.DataHandler;
+import jakarta.activation.DataHandler;
 import jakarta.xml.bind.Marshaller;
 
 /**
