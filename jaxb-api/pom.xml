@@ -116,7 +116,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                         <groups>
                             <group>
                                 <title>Jakarta XML Binding API Packages</title>
-                                <packages>javax.xml.bind*</packages>
+                                <packages>jakarta.xml.bind*</packages>
                             </group>
                         </groups>
                         <tags>
@@ -273,7 +273,6 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                             <Export-Package>${api.package}.*; version=${spec.version}.${impl.version}</Export-Package>
                             <Import-Package>
                                 !org.glassfish.hk2.osgiresourcelocator,
-                                javax.activation;version=!,
                                 *
                             </Import-Package>
                             <Bundle-SymbolicName>${extension.name}-api</Bundle-SymbolicName>
