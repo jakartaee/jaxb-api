@@ -14,7 +14,7 @@
  * <p>
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
  */
-module jakarta.xml.bind {
+module java.xml.bind {
     requires transitive jakarta.activation;
     requires transitive java.xml;
     requires java.logging;
