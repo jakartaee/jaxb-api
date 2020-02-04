@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -20,12 +20,12 @@ module java.xml.bind {
     requires java.logging;
     requires java.desktop;
 
-    exports javax.xml.bind;
-    exports javax.xml.bind.annotation;
-    exports javax.xml.bind.annotation.adapters;
-    exports javax.xml.bind.attachment;
-    exports javax.xml.bind.helpers;
-    exports javax.xml.bind.util;
+    exports jakarta.xml.bind;
+    exports jakarta.xml.bind.annotation;
+    exports jakarta.xml.bind.annotation.adapters;
+    exports jakarta.xml.bind.attachment;
+    exports jakarta.xml.bind.helpers;
+    exports jakarta.xml.bind.util;
 
-    uses javax.xml.bind.JAXBContextFactory;
+    uses jakarta.xml.bind.JAXBContextFactory;
 }
