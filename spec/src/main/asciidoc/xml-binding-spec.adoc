@@ -26,3 +26,4 @@ include::license-efsl.adoc[]
 // == Jakarta XML Binding
 :sectnums:
 include::xml-binding.adoc[]
+include::XMLBinding.adoc[]
