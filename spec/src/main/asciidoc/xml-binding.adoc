@@ -1,7 +1,7 @@
 //
 // Copyright (c) 2017, 2020 Contributors to the Eclipse Foundation
 //
-== Introduction
+== Scope
 
 The Jakarta XML Binding provides an API and tools that automate the mapping
 between XML documents and Java objects.
