@@ -18,7 +18,6 @@ module jakarta.xml.bind {
     requires transitive jakarta.activation;
     requires transitive java.xml;
     requires java.logging;
-    requires java.desktop;
 
     exports jakarta.xml.bind;
     exports jakarta.xml.bind.annotation;
