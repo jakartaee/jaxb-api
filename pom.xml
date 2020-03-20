@@ -77,7 +77,7 @@
         <spotbugs.exclude>${project.basedir}/exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>3.1.12.1</spotbugs.version>
+        <spotbugs.version>3.1.12.2</spotbugs.version>
 
         <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
         <release.spec.date>Jul 2017</release.spec.date>
@@ -85,7 +85,7 @@
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>3.0</spec.version>
         <impl.version>0</impl.version>
-        <activation.version>2.0.0-rc1</activation.version>
+        <activation.version>2.0.0-RC2</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
@@ -218,7 +218,7 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}</Implementation-Build-Id>
+                            <Implementation-Build-Id>${project.version} - ${buildNumber}</Implementation-Build-Id>
                         </manifestEntries>
                     </archive>
                 </configuration>

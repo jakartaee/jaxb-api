@@ -278,7 +278,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                             <Bundle-SymbolicName>${extension.name}-api</Bundle-SymbolicName>
                             <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
                             <Specification-Vendor>${vendor.name}</Specification-Vendor>
-                            <Implementation-Build-Id>${scmBranch}-${buildNumber}</Implementation-Build-Id>
+                            <Implementation-Build-Id>${buildNumber}</Implementation-Build-Id>
                             <Multi-Release>true</Multi-Release>
                         </instructions>
                     </configuration>
