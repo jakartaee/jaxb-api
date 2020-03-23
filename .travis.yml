@@ -13,8 +13,7 @@ dist: bionic
 
 jdk:
   - oraclejdk11
-# jdk 14 does not provide JDK 8 compatible javadoc, disabled for now
-#  - oraclejdk14
+  - oraclejdk14
 
 cache:
   directories:
