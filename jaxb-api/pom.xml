@@ -45,21 +45,13 @@
                     <configuration>
                         <rules>
                             <requireJavaVersion>
-                                <version>[1.8,)</version>
+                                <version>[11,)</version>
                             </requireJavaVersion>
                             <requireMavenVersion>
-                                <version>[3.0.3,)</version>
+                                <version>[3.6.0,)</version>
                             </requireMavenVersion>
                             <DependencyConvergence />
                         </rules>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        </archive>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -81,7 +73,6 @@
                             ${spotbugs.exclude}
                         </excludeFilterFile>
                         <fork>true</fork>
-                        <jvmArgs>-Xms64m -Xmx256m</jvmArgs>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -258,11 +249,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                             <goal>manifest</goal>
                         </goals>
                     <configuration>
-                        <archive>
-                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        </archive>
                         <instructions>
-                            <_removeheaders>Bnd-LastModified,Built-By,Include-Resource,Private-Package</_removeheaders>
                             <Bundle-Version>${project.version}</Bundle-Version>  <!-- 2.2.99.bnull -->
                             <Bundle-Description>
                                 Jakarta XML Binding API ${spec.version} Design Specification
@@ -284,6 +271,17 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                     </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultEntries>false</addDefaultEntries>
+                        </manifest>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
