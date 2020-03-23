@@ -21,12 +21,12 @@ import static java.lang.annotation.RetentionPolicy.*;
 /**
  * <p> Controls the ordering of fields and properties in a class. </p>
  *
- * <h3>Usage </h3>
+ * <h2>Usage </h2>
  *
  * <p> {@code @XmlAccessorOrder} annotation can be used with the following
- * program elements:</p> 
- * 
- * <ul> 
+ * program elements:</p>
+ *
+ * <ul>
  *   <li> package</li>
  *   <li> a top level class </li>
  * </ul>
@@ -49,8 +49,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  * </ul>
  *
  * <p>This annotation can be used with the following annotations:
- *    {@link XmlType}, {@link XmlRootElement}, {@link XmlAccessorType}, 
- *    {@link XmlSchema}, {@link XmlSchemaType}, {@link XmlSchemaTypes}, 
+ *    {@link XmlType}, {@link XmlRootElement}, {@link XmlAccessorType},
+ *    {@link XmlSchema}, {@link XmlSchemaType}, {@link XmlSchemaTypes},
  *    , {@link XmlJavaTypeAdapter}. It can also be used with the
  *    following annotations at the package level: {@link XmlJavaTypeAdapter}.
  *
