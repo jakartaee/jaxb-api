@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
  *
- * <h3> Mapping a Class </h3> 
+ * <h2> Mapping a Class </h2>
  * <p>
  * A class maps to a XML Schema type. A class is a data container for
  * values represented by properties and fields. A schema type is a
@@ -45,7 +45,7 @@ import java.lang.annotation.Target;
  * factory method overrides the no-arg constructor.
  * <p>
  * A class maps to either a XML Schema complex type or a XML Schema simple
- * type. The XML Schema type is derived based on the 
+ * type. The XML Schema type is derived based on the
  * mapping of JavaBean properties and fields contained within the
  * class. The schema type to which the class is mapped can either be
  * named or anonymous. A class can be mapped to an anonymous schema
@@ -56,12 +56,12 @@ import java.lang.annotation.Target;
  * <ul>
  *   <li><b>global element: </b> A global element of an anonymous
  *      type can be derived by annotating the class with @{@link
- *      XmlRootElement}. See Example 3 below. </li> 
+ *      XmlRootElement}. See Example 3 below. </li>
  *
  *   <li><b>local element: </b> A JavaBean property that references
  *      a class annotated with @XmlType(name="") and is mapped to the
  *      element associated with the anonymous type. See Example 4
- *      below.</li> 
+ *      below.</li>
  *
  *   <li><b>attribute: </b> A JavaBean property that references
  *      a class annotated with @XmlType(name="") and is mapped to the
@@ -72,7 +72,7 @@ import java.lang.annotation.Target;
  *   <li>If class is annotated with {@code @XmlType(name="") }, it
  *   is mapped to an anonymous type otherwise, the class name maps
  *   to a complex type name. The {@code XmlName()} annotation element
- *   can be used to customize the name.</li>  
+ *   can be used to customize the name.</li>
  *
  *   <li> Properties and fields that are mapped to elements are mapped to a
  *   content model within a complex type. The annotation element
@@ -115,7 +115,7 @@ import java.lang.annotation.Target;
  *         <th scope="col">SimpleType</th>
  *       </tr>
  *     </thead>
- * 
+ *
  *     <tbody>
  *       <tr>
  *         <td>Class</td>
@@ -124,7 +124,7 @@ import java.lang.annotation.Target;
  *         <td>complexcontent<br>xs:all</td>
  *         <td> </td>
  *       </tr>
- * 
+ *
  *       <tr>
  *         <td>Class</td>
  *         <td>non empty</td>
@@ -132,7 +132,7 @@ import java.lang.annotation.Target;
  *         <td>complexcontent<br>xs:sequence</td>
  *         <td> </td>
  *       </tr>
- * 
+ *
  *       <tr>
  *         <td>Class</td>
  *         <td>X</td>
@@ -140,7 +140,7 @@ import java.lang.annotation.Target;
  *         <td>complexcontent<br>empty sequence</td>
  *         <td> </td>
  *       </tr>
- * 
+ *
  *       <tr>
  *         <td>Class</td>
  *         <td>X</td>
@@ -148,7 +148,7 @@ import java.lang.annotation.Target;
  *         <td>simplecontent</td>
  *         <td> </td>
  *       </tr>
- * 
+ *
  *       <tr>
  *         <td>Class</td>
  *         <td>X</td>
@@ -159,23 +159,23 @@ import java.lang.annotation.Target;
  *     </tbody>
  *   </table>
  * </blockquote>
- * 
+ *
  * <h3> Mapping an enum type </h3>
- * 
+ *
  * An enum type maps to a XML schema simple type with enumeration
  * facets. The following annotation elements are ignored since they
  * are not meaningful: {@code propOrder()} , {@code factoryMethod()} ,
  * {@code factoryClass()} .
  *
  *  <h3> Usage with other annotations </h3>
- * <p> This annotation can be used with the following annotations: 
+ * <p> This annotation can be used with the following annotations:
  * {@link XmlRootElement}, {@link XmlAccessorOrder}, {@link XmlAccessorType},
  * {@link XmlEnum}. However, {@link
  * XmlAccessorOrder} and {@link XmlAccessorType} are ignored when this
  * annotation is used on an enum type.
- * 
+ *
  * <p> <b> Example 1: </b> Map a class to a complex type with
- *   xs:sequence with a customized ordering of JavaBean properties. 
+ *   xs:sequence with a customized ordering of JavaBean properties.
  * </p>
  *
  * <pre>
@@ -183,13 +183,13 @@ import java.lang.annotation.Target;
  *   public class USAddress {
  *     String getName() {..};
  *     void setName(String) {..};
- * 
+ *
  *     String getStreet() {..};
  *     void setStreet(String) {..};
  *
- *     String getCity() {..}; 
+ *     String getCity() {..};
  *     void setCity(String) {..};
- * 
+ *
  *     String getState() {..};
  *     void setState(String) {..};
  *
@@ -197,7 +197,7 @@ import java.lang.annotation.Target;
  *     void setZip(java.math.BigDecimal) {..};
  *   }
  * {@code
- * 
+ *
  *   <!-- XML Schema mapping for USAddress -->
  *   <xs:complexType name="USAddress">
  *     <xs:sequence>
@@ -215,7 +215,7 @@ import java.lang.annotation.Target;
  * &#64;XmlType(propOrder={})
  * public class USAddress { ...}
  * {@code
- * 
+ *
  * <!-- XML Schema mapping for USAddress -->
  * <xs:complexType name="USAddress">
  *   <xs:all>
@@ -228,14 +228,14 @@ import java.lang.annotation.Target;
  * </xs:complexType>
  *}</pre>
  * <p> <b> Example 3: </b> Map a class to a global element with an
- * anonymous type. 
+ * anonymous type.
  * </p>
  * <pre>
  *   &#64;XmlRootElement
  *   &#64;XmlType(name="")
  *   public class USAddress { ...}
  * {@code
- * 
+ *
  *   <!-- XML Schema mapping for USAddress -->
  *   <xs:element name="USAddress">
  *     <xs:complexType>
@@ -261,9 +261,9 @@ import java.lang.annotation.Target;
  *
  *   &#64;XmlType(name="")
  *   public class USAddress { ... }
- *   } 
+ *   }
  * {@code
- * 
+ *
  *   <!-- XML Schema mapping for USAddress -->
  *   <xs:complexType name="Invoice">
  *     <xs:sequence>
@@ -282,24 +282,24 @@ import java.lang.annotation.Target;
  *
  * <p> <b> Example 5: </b> Map a property to an attribute with
  * anonymous type.
- * 
+ *
  * <pre>
  *
  *     //Example: Code fragment
  *     public class Item {
  *         public String name;
- *         &#64;XmlAttribute 
+ *         &#64;XmlAttribute
  *         public USPrice price;
  *     }
- *    
- *     // map class to anonymous simple type. 
+ *
+ *     // map class to anonymous simple type.
  *     &#64;XmlType(name="")
- *     public class USPrice { 
+ *     public class USPrice {
  *         &#64;XmlValue
  *         public java.math.BigDecimal price;
  *     }
  * {@code
- * 
+ *
  *     <!-- Example: XML Schema fragment -->
  *     <xs:complexType name="Item">
  *       <xs:sequence>
@@ -315,7 +315,7 @@ import java.lang.annotation.Target;
  *
  *  <p> <b> Example 6: </b> Define a factoryClass and factoryMethod
  *
- * <pre> 
+ * <pre>
  *      &#64;XmlType(name="USAddressType", factoryClass=USAddressFactory.class,
  *      factoryMethod="getUSAddress")
  *      public class USAddress {
@@ -326,7 +326,7 @@ import java.lang.annotation.Target;
  *          private String street;
  *          private int    zip;
  *
- *      public USAddress(String name, String street, String city, 
+ *      public USAddress(String name, String street, String city,
  *          String state, int zip) {
  *          this.name = name;
  *          this.street = street;
@@ -338,14 +338,14 @@ import java.lang.annotation.Target;
  *
  *  public class USAddressFactory {
  *      public static USAddress getUSAddress(){
- *       return new USAddress("Mark Baker", "23 Elm St", 
+ *       return new USAddress("Mark Baker", "23 Elm St",
  *          "Dayton", "OH", 90952);
  *  }
  *
  * </pre>
  *
  *  <p> <b> Example 7: </b> Define factoryMethod and use the default factoryClass
- * 
+ *
  * <pre>
  *      &#64;XmlType(name="USAddressType", factoryMethod="getNewInstance")
  *      public class USAddress {
@@ -378,25 +378,25 @@ public @interface XmlType {
      * Name of the XML Schema type which the class is mapped.
      */
     String name() default "##default" ;
- 
+
     /**
      * Specifies the order for XML Schema elements when class is
      * mapped to a XML Schema complex type.
-     * 
+     *
      * <p> Refer to the table for how the propOrder affects the
      * mapping of class </p>
-     * 
+     *
      * <p> The propOrder is a list of names of JavaBean properties in
      *     the class. Each name in the list is the name of a Java
      *     identifier of the JavaBean property. The order in which
      *     JavaBean properties are listed is the order of XML Schema
      *     elements to which the JavaBean properties are mapped. </p>
      * <p> All of the JavaBean properties being mapped to XML Schema elements
-     *     must be listed. 
+     *     must be listed.
      * <p> A JavaBean property or field listed in propOrder must not
      *     be transient or annotated with {@code @XmlTransient}.
      * <p> The default ordering of JavaBean properties is determined
-     *     by @{@link XmlAccessorOrder}. 
+     *     by @{@link XmlAccessorOrder}.
      */
     String[] propOrder() default {""};
 
@@ -406,19 +406,19 @@ public @interface XmlType {
      * containing the class is mapped.
      */
     String namespace() default "##default" ;
-   
+
     /**
      * Class containing a no-arg factory method for creating an
      * instance of this class. The default is this class.
-     * 
+     *
      * <p>If {@code factoryClass} is DEFAULT.class and
      * {@code factoryMethod} is "", then there is no static factory
      * method.
-     * 
+     *
      * <p>If {@code factoryClass} is DEFAULT.class and
-     * {@code factoryMethod} is not "", then 
+     * {@code factoryMethod} is not "", then
      * {@code factoryMethod} is the name of a static factory method
-     * in this class. 
+     * in this class.
      *
      * <p>If {@code factoryClass} is not DEFAULT.class, then
      * {@code factoryMethod} must not be "" and must be the name of
@@ -429,14 +429,14 @@ public @interface XmlType {
     /**
      * Used in {@link XmlType#factoryClass()} to
      * signal that either factory mehod is not used or
-     * that it's in the class with this {@link XmlType} itself. 
+     * that it's in the class with this {@link XmlType} itself.
      */
     static final class DEFAULT {}
 
     /**
      * Name of a no-arg factory method in the class specified in
      * {@code factoryClass} factoryClass().
-     * 
+     *
      */
     String factoryMethod() default "";
 }

@@ -65,7 +65,7 @@ import java.util.Properties;
  * configure the datatype converter that will be used during these operations.</i>
  *
  * <a id="Unmarshalling"></a>
- * <h3>Unmarshalling</h3>
+ * <h2>Unmarshalling</h2>
  * <p>
  * The {@link Unmarshaller} class provides the client application the ability
  * to convert XML data into a tree of Java content objects.

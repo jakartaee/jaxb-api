@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 
-/** 
+/**
  * <p>
  * Maps a JavaBean property to a XML element derived from property's type.
  * <p>
@@ -34,10 +34,10 @@ import static java.lang.annotation.ElementType.METHOD;
  * XML element name is derived from the instance of the type of the
  * JavaBean property at runtime.
  *
- * <h3> XML Schema substitution group support </h3>
+ * <h2> XML Schema substitution group support </h2>
  * XML Schema allows a XML document author to use XML element names
  * that were not statically specified in the content model of a
- * schema using substitution groups. Schema derived code provides 
+ * schema using substitution groups. Schema derived code provides
  * support for substitution groups using an <i>element property</i>,
  * (section 5.5.5, "Element Property" of JAXB 2.0 specification). An
  * element property method signature is of the form:
@@ -52,7 +52,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * element property indicates that the element name from {@code JAXBElement}
  * instance be used instead of deriving an XML element name from the
  * JavaBean property name.
- * 
+ *
  * <p>
  * The usage is subject to the following constraints:
  * <ul>
@@ -88,8 +88,8 @@ import static java.lang.annotation.ElementType.METHOD;
  *     &#64;XmlRootElement(name="target")
  *     class Target {
  *         // The presence of &#64;XmlElementRef indicates that the XML
- *         // element name will be derived from the &#64;XmlRootElement 
- *         // annotation on the type (for e.g. "jar" for JarTask). 
+ *         // element name will be derived from the &#64;XmlRootElement
+ *         // annotation on the type (for e.g. "jar" for JarTask).
  *         &#64;XmlElementRef
  *         List&lt;Task&gt; tasks;
  *     }
@@ -107,7 +107,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *         ...
  *     }
  * {@code
- * 
+ *
  *     <!-- XML Schema fragment -->
  *     <xs:element name="target" type="Target">
  *     <xs:complexType name="Target">
@@ -148,15 +148,15 @@ import static java.lang.annotation.ElementType.METHOD;
  * <p> The following example shows the annotations for XML Schema
  * substitution groups.  The annotations and the ObjectFactory are
  * derived from the schema.
- * 
+ *
  * <pre>
  *     &#64;XmlElement
  *     class Math {
- *         //  The value of {@link #type()}is 
+ *         //  The value of {@link #type()}is
  *         //  JAXBElement.class , which indicates the XML
  *         //  element name ObjectFactory - in general a class marked
  *         //  with &#64;XmlRegistry. (See ObjectFactory below)
- *         //  
+ *         //
  *         //  The {@link #name()} is "operator", a pointer to a
  *         // factory method annotated with a
  *         //  {@link XmlElementDecl} with the name "operator". Since
@@ -166,7 +166,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *         //  elements "add" or "sub". At runtime, JAXBElement
  *         //  instance contains the element name that has been
  *         //  substituted in the XML document.
- *         // 
+ *         //
  *         &#64;XmlElementRef(type=JAXBElement.class,name="operator")
  *         JAXBElement&lt;? extends Operator&gt; term;
  *     }
@@ -199,7 +199,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *     </math>
  * }</pre>
  *
- * 
+ *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems,Inc. </li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElementRefs
  * @since 1.6, JAXB 2.0
@@ -235,7 +235,7 @@ public @interface XmlElementRef {
      * an {@link XmlElementDecl}, then it is an error.
      *
      * <p> If {@code type()} is not {@code JAXBElement.class}, then
-     * this value must be "". 
+     * this value must be "".
      *
      */
     String namespace() default "";
