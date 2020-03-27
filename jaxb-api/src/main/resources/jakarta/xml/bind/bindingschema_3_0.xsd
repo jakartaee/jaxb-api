@@ -12,8 +12,8 @@
 -->
 
 <xs:schema
-   targetNamespace = "http://jakarta.ee/xml/ns/jaxb"
-   xmlns:jaxb = "http://jakarta.ee/xml/ns/jaxb"
+   targetNamespace = "https://jakarta.ee/xml/ns/jaxb"
+   xmlns:jaxb = "https://jakarta.ee/xml/ns/jaxb"
    xmlns:xs = "http://www.w3.org/2001/XMLSchema"
    elementFormDefault = "qualified"
    attributeFormDefault = "unqualified">
@@ -24,15 +24,15 @@
       All binding customization descriptors must indicate
       the descriptor schema by using the Jakarta XML Binding namespace:
 
-      http://jakarta.ee/xml/ns/jaxb
+      https://jakarta.ee/xml/ns/jaxb
 
       and by indicating the version of the schema by
       using the version element as shown below:
 
-        <bindings xmlns="http://jakarta.ee/xml/ns/jaxb"
+        <bindings xmlns="https://jakarta.ee/xml/ns/jaxb"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://jakarta.ee/xml/ns/jaxb
-              http://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd"
+          xsi:schemaLocation="https://jakarta.ee/xml/ns/jaxb
+              https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd"
           version="3.0">
           ...
         </bindings>
@@ -41,7 +41,7 @@
       the schema using the xsi:schemaLocation attribute for Jakarta XML Binding
       namespace with the following location:
 
-      http://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd
+      https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd
     </xs:documentation>
   </xs:annotation>
   <xs:group name = "declaration">
