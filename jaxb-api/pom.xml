@@ -78,6 +78,10 @@
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <configuration>
+                        <additionalOptions>
+                            <additionalOptions>--add-modules</additionalOptions>
+                            <additionalOptions>java.desktop</additionalOptions>
+                        </additionalOptions>
                         <release>11</release>
                         <nodeprecated>false</nodeprecated>
                         <notimestamp>true</notimestamp>

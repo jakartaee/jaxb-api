@@ -85,7 +85,7 @@
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>3.0</spec.version>
         <impl.version>0</impl.version>
-        <activation.version>2.0.0-RC2</activation.version>
+        <activation.version>2.0.0-RC3</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
