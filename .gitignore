@@ -2,3 +2,10 @@ target/
 **/.classpath
 **/.project
 .settings/
+
+# IntelliJ #
+.idea/
+*.iml
+
+ # OS Files #
+.DS_Store
