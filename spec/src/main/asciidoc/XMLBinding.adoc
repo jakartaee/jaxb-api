@@ -788,7 +788,7 @@ associated with the source schema.
 image:xmlb-4.png[image]
 
 Note that the application accesses only the
-schema-derived interfaces, factory methods and _javax.xml.bind_ APIs
+schema-derived interfaces, factory methods and _jakarta.xml.bind_ APIs
 directly. This convention is necessary to enable switching between JAXB
 implementations.
 
@@ -1259,12 +1259,12 @@ The Binding Framework
 access unmarshalling, validation and marshalling operations for
 manipulating XML data and JAXB mapped objects. The framework is
 presented here in overview; its full specification is available in the
-javadoc for the package _javax.xml.bind_ .
+javadoc for the package _jakarta.xml.bind_ .
 
 The binding framework resides in two main
-packages. The _javax.xml.bind_ package defines abstract classes and
+packages. The _jakarta.xml.bind_ package defines abstract classes and
 interfaces that are used directly with content classes. The
-_javax.xml.bindlink:#a5355[4]_ package defines the
+_jakarta.xml.bindlink:#a5355[4]_ package defines the
 _Unmarshaller, Marshaller_ and _Binder_ classes, which are auxiliary
 objects for providing their respective operations.
 
@@ -1272,12 +1272,12 @@ The _JAXBContext_ class is the entry point
 for a Java application into the JAXB framework. A _JAXBContext_ instance
 manages the binding relationship between XML element names to Java value
 class for a JAXB implementation to be used by the unmarshal, marshal and
-binder operations. The _javax.xml.bind.helper_ package provides partial
-default implementations for some of the _javax.xml.bind_ interfaces.
+binder operations. The _jakarta.xml.bind.helper_ package provides partial
+default implementations for some of the _jakarta.xml.bind_ interfaces.
 Implementations of JAXB technology can extend these classes and
 implement the abstract methods. These APIs are not intended to be used
 directly by applications using the JAXB architecture. A third package,
-_javax.xml.bind.util_ , contains utility classes that may be used
+_jakarta.xml.bind.util_ , contains utility classes that may be used
 directly by client applications.
 
 The binding framework defines a hierarchy of
@@ -1320,7 +1320,7 @@ XML/Java binding information necessary to implement the JAXB binding
 framework operations: unmarshal and marshal.
 
 The following summarizes the _JAXBContext_
-class defined in package _javax.xml.bind_ .
+class defined in package _jakarta.xml.bind_ .
 
 public abstract class JAXBContext \{
 
@@ -1424,7 +1424,7 @@ This form of validation enables a client
 application to be notified of validation errors and warnings detected
 while unmarshalling XML data into a Java content tree and is completely
 orthogonal to the other types of validation. See
-javax.xml.bind.Unmarshaller javadoc for a description on how to enable
+jakarta.xml.bind.Unmarshaller javadoc for a description on how to enable
 this feature.
 
 *  _On-demand validation_
@@ -1602,7 +1602,7 @@ processing of unmarshal events in one callback method rather than by
 type event callbacks. The 'class defined' and external listener event
 callback methods are independent of each other, both can be called for
 one event. The invocation ordering when both listener callback methods
-exist is defined in _javax.xml.bind.Unmarshaller.Listener_ javadoc.
+exist is defined in _jakarta.xml.bind.Unmarshaller.Listener_ javadoc.
 
 Event callback methods should be written with
 following considerations. Each event callback invocation contributes to
@@ -1813,7 +1813,7 @@ the first parameter is not a JAXB element, as determined by
 _JAXBIntrospector.isElement()_ method, the marshal operation must throw
 a _MarshalException_ . There exist two mechanisms to enable marshalling
 an instance that is not a JAXB element. One method is to wrap the
-instance as the value of a _javax.xml.bind.JAXBElement_ instance, and
+instance as the value of a _jakarta.xml.bind.JAXBElement_ instance, and
 pass the wrapper element as the first parameter to a _marshal_ method.
 For java to schema binding, it is also possible to simply annotate the
 instance's class with the appropriate program annotation,
@@ -1848,7 +1848,7 @@ application specific code placed in JAXB mapped classes is triggered
 during marshalling. External listeners allow for centralized processing
 of marshal events in one callback method rather than by type event
 callbacks. The invocation ordering when both listener callback methods
-exist is defined in _javax.xml.bind.Marshaller.Listener_ javadoc.
+exist is defined in _jakarta.xml.bind.Marshaller.Listener_ javadoc.
 
 Event callback methods should be written with
 following considerations. Each event callback invocation contributes to
@@ -1948,7 +1948,7 @@ XML element. One can get the xml element tag name associated with a JAXB
 element using _JAXBIntrospector.getElementName_ method.One can an xml
 element’s value using getValue method. The getValue method normalizes
 access of JAXB element, hiding whether the JAXB element is an instance
-of javax.xml.bind.JAXBElement or if it is an JAXB element via an
+of jakarta.xml.bind.JAXBElement or if it is an JAXB element via an
 @XmlRootElement class annotation.
 
 === Validation Handling
@@ -2032,9 +2032,9 @@ document and JAXB representation, one can use JAXP 1.3 XPATH on the XML
 infoset view and use the binder’s associative mapping to get from the
 infoset node to JAXB representation.
 
-=== javax.xml.bind.Binder
+=== jakarta.xml.bind.Binder
 
-The class _javax.xml.bind.Binder_ associates
+The class _jakarta.xml.bind.Binder_ associates
 an infoset preserving representation of the entire XML document with a
 potentially partial binding to a Java representation. The binder
 provides operations to synchronize between the two views that it is
@@ -2185,7 +2185,7 @@ targetNamespace="http://www.example.com/PO1"> +
 
 Default derived Java code:
 
-import javax.xml.bind.JAXBElement; +
+import jakarta.xml.bind.JAXBElement; +
 package com.example.PO1; +
 public class PurchaseOrderType \{ .... }; +
 public Comment \{ String getValue()\{...} void setValue(String)\{...}
@@ -2773,7 +2773,7 @@ public _JAXBElement_ <? extends _Type_ > get _Id_ ();
 
 where _Id_ and _Type_ are defined as they
 were for simple and collection property. The fully qualified Java name
-for _JAXBElement_ _<T>_ is _javax.xml.bind.JAXBElement<T>_ . The generic
+for _JAXBElement_ _<T>_ is _jakarta.xml.bind.JAXBElement<T>_ . The generic
 types in the method signatures are expressed as a bounded wildcard to
 support element substitution group, see details in
 link:jaxb.html#a1023[See Element Declaration]”.
@@ -2803,7 +2803,7 @@ value is set or not.
 Based on rationale and criteria described in
 link:jaxb.html#a1023[See Element Declaration], the schema
 compiler binds an element declaration to a Java instance that implements
-_javax.xml.bind.JAXBElement<T>_ . _JAXBElement<T>_ class provides access
+_jakarta.xml.bind.JAXBElement<T>_ . _JAXBElement<T>_ class provides access
 to the basic properties of an XML element: its name, the value of the
 element’s datatype, and whether the element’s content model is set to
 nil, i.e. _xsi:nil=”true”_ . Optional properties for an Xml element that
@@ -2831,7 +2831,7 @@ package _elementDeclarationTargetNamespace_ ;
 
 class ObjectFactory \{
 
- javax.xml.bind.JAXBElement< _ElementType_ >
+ jakarta.xml.bind.JAXBElement< _ElementType_ >
 
 create _ElementName_ ( _ElementType_ __
 value);
@@ -2881,7 +2881,7 @@ link:jaxb.html#a1582[See Usage], disables the generation of
 schema-derived nested classes and all classes are generated as toplevel
 classes.
 * Each generated Element class must extend
-the Java class _javax.xml.bind.JAXBElement<T>_ . The type T of the
+the Java class _jakarta.xml.bind.JAXBElement<T>_ . The type T of the
 _JAXBElement<T>_ is derived from the element declaration’s type.
 Anonymous type definition binding is a special case that is specified in
 link:jaxb.html#a1084[See Binding of an anonymous complex type
@@ -2937,7 +2937,7 @@ Its Java representation:
 
 public value class AComplexType \{ +
 public class ASimpleElement extends +
-javax.xml.bind.JAXBElement<Integer> \{ +
+jakarta.xml.bind.JAXBElement<Integer> \{ +
 } +
 ... +
 }; +
@@ -2971,7 +2971,7 @@ image:xmlb-11.png[image]
 While a JAXB v1.0 Element interface
 implemented its type’s interface, a JAXB v2.0 Element instance has a
 composition relationship to the value of the element declaration’s type,
-accessible via the _javax.xml.bind.JAXBElement<T>_ property _Value_ .
+accessible via the _jakarta.xml.bind.JAXBElement<T>_ property _Value_ .
 This change reflects the relationship that type substitution allows an
 element declaration to be associated with many different datatypes, not
 just the datatype that was defined statically within the schema.
@@ -4248,7 +4248,7 @@ binding of its \{type definition}
 _\{nillable}_
 
 Typically, an instance of
-_javax.xml.bind.JAXBElement<T>_ , returned by an element factory method,
+_jakarta.xml.bind.JAXBElement<T>_ , returned by an element factory method,
 __ represents an element declaration’s key components. An instance of a
 Java value class or content interface represents only the value of an
 element. Commonly in JAXB binding, the Java representation of XML
@@ -4327,7 +4327,7 @@ as follows:
 into the _ObjectFactory_ class in the Java package that represents the
 binding of the element declaration’s \{target namespace}.
 * The element factory method returns an
-instance of _javax.xml.bind.JAXBElement<T>_ , where _T_ is the Java
+instance of _jakarta.xml.bind.JAXBElement<T>_ , where _T_ is the Java
 value class representing the _\{type definition}_ of the element
 declaration. The factory method sets the element name of the returned
 instance to the element declaration’s fully qualified name.
@@ -4433,7 +4433,7 @@ Declaration Schema Component] as follows:
 class is derived from the element declaration \{name} using the XML Name
 to Java identifier mapping algorithm for class names.
 * Each generated Element class must extend
-the Java value class _javax.xml.bind.JAXBElement_ <T>. The next bullet
+the Java value class _jakarta.xml.bind.JAXBElement_ <T>. The next bullet
 specifies the schema-derived Java class name to use for generic
 parameter _T_ .
 * If the element declaration’s \{type
@@ -5106,7 +5106,7 @@ property bindings defined in link:jaxb.html#a630[See Element
 Property].link:#a5373[22] This property enables the overriding
 of the schema-specified element name bound to a JAXB property by setting
 and getting the JAXB element representation,
-_javax.xml.bind.JAXBElement<T>_ . The name property of the JAXBElement
+_jakarta.xml.bind.JAXBElement<T>_ . The name property of the JAXBElement
 _<T>_ instance overrides the schema specified element declaration name.
 To enable the passing of any element that could be part of the element
 substitution group, it is necessary to accept any JAXBElement derivation
@@ -5137,7 +5137,7 @@ as follows:
 |@XmlElementRef element
 |@XmlElementRef value
 |value
-|javax.xml.bind.JAXBElement.class
+|jakarta.xml.bind.JAXBElement.class
 
 |namespace
 |referenced element declaration _\{target
@@ -5553,7 +5553,7 @@ using this binding.
 </xs:schema> +
  +
 package org.a; +
-importjavax.xml.namespace.QName; +
+import javax.xml.namespace.QName; +
 import java.util.Map; +
 public class _Widget_ \{ +
 String getColor()\{...} +
@@ -5564,7 +5564,7 @@ void setColor(String value)\{...} +
 === Dynamic access to wildcard attribute and attribute use
 
  +
-import javax.xml.bind.DatatypeConverter; +
+import jakarta.xml.bind.DatatypeConverter; +
 Widget w = ...; +
 Map attrs = w.getOtherAttributes(); +
  +
@@ -5989,14 +5989,14 @@ Wildcard content is represented as one of the
 following:
 
 . JAXB element +
-Either an instance of _javax.xml.bind.JAXBElement<T>_ or a JAXB class
+Either an instance of _jakarta.xml.bind.JAXBElement<T>_ or a JAXB class
 annotated with _@XmlRootElement. +
 _ Corresponds to a recognized global element tag name registered with
-the instance _javax.xml.bind.JAXBContext_ , meaning the schema(s)
+the instance _jakarta.xml.bind.JAXBContext_ , meaning the schema(s)
 describing the element content is registered with the _JAXBContext_
 instance, see link:jaxb.html#a298[See JAXBContext] on how
 bindings are registered with a _JAXBContext_ instance.,
-. instance of _javax.xml.bind.JAXBElement. +
+. instance of _jakarta.xml.bind.JAXBElement. +
 _ Corresponds to an unknown element name but a recognized type
 definition specified by _@xsi:type_ on the element. JAXBElement
 _declaredType_ is set to _java.lang.Object_ since the unknown element
@@ -6040,7 +6040,7 @@ else if _\{process contents}_ is _skip_ , set _@XmlAnyElement.lax()_ to
 _false_ .
 
 |value |
-_javax.xml.bind.annotation. +
+_jakarta.xml.bind.annotation. +
 W3CDomHandler.class_
 |===
 
@@ -6362,7 +6362,7 @@ Java value class:
 * A named simple type definition with a
 basetype that derives from “ _xs:NCName_ ” and has enumeration facets.
 * Bind the following XML Schema components to
-an element instance factory that returns _javax.xml.bind.JAXBElement<T>_
+an element instance factory that returns _jakarta.xml.bind.JAXBElement<T>_
 * A global element declaration with a named
 type definition.
 * Local element declaration with a named type
@@ -7465,7 +7465,7 @@ _ </xs:element> +
 
 Customized code:
 
-import javax.xml.bind.JAXBElement; +
+import jakarta.xml.bind.JAXBElement; +
 public class ObjectFactory \{ +
 // element instance factories only +
 // JAXBElement<String> createBaseA(String value); //default code +
@@ -7606,7 +7606,7 @@ The schema-derived JAXB property is annotated
 with _@XmlJavaTypeAdapter_ specified in Section 8.
 _@XmlJavaTypeAdapter.value()_ is set to a generated
 classlink:#a5378[27] that extends
-_javax.xml.bind.annotation.adapter.XmlAdapter_ . The generated class’
+_jakarta.xml.bind.annotation.adapter.XmlAdapter_ . The generated class’
 _unmarshal_ method must call the <javaType> customization’s parse
 method, which is specified in link:jaxb.html#a1981[See
 <javaType> Declaration]. The generated class’ _marshal_ method must call
@@ -7755,8 +7755,8 @@ conflicting customization.
 <jaxb:property> +
 <jaxb:baseType> +
 <jaxb:javaType name="java.math.BigDecimal" +
-parseMethod="javax.xml.bind.DatatypeConverter.parseInteger" +
-printMethod="javax.xml.bind.DatatypeConverter.printInteger"/> +
+parseMethod="jakarta.xml.bind.DatatypeConverter.parseInteger" +
+printMethod="jakarta.xml.bind.DatatypeConverter.printInteger"/> +
 </jaxb:baseType> +
 </jaxb:property> +
 </xs:appinfo></xs:annotation> +
@@ -8405,17 +8405,17 @@ parse and print methods for XML schema datatypes. There is one parse and
 print method for each of XML schema datatype specified in
 link:jaxb.html#a725[See Java Mapping for XML Schema Built-in
 Types]. The interface is fully specified by the Javadoc specified in
-_javax.xml.bind.DatatypeConverterInterface_ .
+_jakarta.xml.bind.DatatypeConverterInterface_ .
 
 The _DatatypeConverter_ class defines a
 static parse and print method corresponding to each parse and print
 method respectively in the _DatatypeConverterInterface_ interface. The
-property _javax.xml.bind.DatatypeConverter_ can be used to select the
+property _jakarta.xml.bind.DatatypeConverter_ can be used to select the
 name of a class that provides an implementation of the parse and print
 methods. The name specified in the property must be a fully qualified
 class name and must implement the interface _DatatypeConverterInterface_
 . The class is fully specified by the Javadoc specified in
-_javax.xml.bind.DatatypeConverter_ .
+_jakarta.xml.bind.DatatypeConverter_ .
 
 === Usage
 
@@ -8437,7 +8437,7 @@ printMethod="pkg.MyDatatypeConverter.myPrintDate"/> +
 </jaxb:globalBindings> +
 
 package pkg; +
-import javax.xml.bind.DatatypeConverter;
+import jakarta.xml.bind.DatatypeConverter;
 
 public class MyDatatypeConverter \{ +
 public static long myParseDate(String s) \{
@@ -8607,7 +8607,7 @@ If the simple type definition is mapped to a
 schema-derived type, an _@XmlJavaTypeAdapter_ is generated on that
 class. Annotation element _@XmlJavaTypeAdapter.value()_ is set to a
 generated classlink:#a5379[28] that extends
-_javax.xml.bind.annotation.adapter.XmlAdapter_ . The generated class’
+_jakarta.xml.bind.annotation.adapter.XmlAdapter_ . The generated class’
 _unmarshal_ method must call the <javaType> customization’s parse
 method, which is specified in link:jaxb.html#a1981[See
 <javaType> Declaration]. The generated class’ _marshal_ method must call
@@ -9252,7 +9252,7 @@ facility. Mapping annotations are used for:
 * control over optimized binary data encoding.
 
 The mapping annotations are described in the
-_javax.xml.bind.annotation_ and _javax.xml.bind.annotation.adapters_
+_jakarta.xml.bind.annotation_ and _jakarta.xml.bind.annotation.adapters_
 packages.
 
 Retention Policy The retention policy of all
@@ -9399,7 +9399,7 @@ vice versa. It is the value type that is used for marshalling and
 unmarshalling. Use of this approach involves two steps:
 
 * provide an adapter class that extends the
-abstract class _@javax.xml.bind.annotation.adapters.XmlAdapter_ that
+abstract class _@jakarta.xml.bind.annotation.adapters.XmlAdapter_ that
 defines two methods _unmarshal()_ and _marshal()_ . The methods are
 invoked by JAXB vendor implementation during unmarshalling and
 marshaling respectively to adapt between bound and value types.
@@ -9473,17 +9473,17 @@ is assumed in the normative mapping tables shown below.
 The mapping of program elements to XML Schema
 constructs is subject to mapping constraints, specified elsewhere in
 this chapter. The mapping constraints must be enforced by the
-_javax.xml.bind.annotation.JAXBContext.newInstance(..)_ method. Any
+_jakarta.xml.bind.annotation.JAXBContext.newInstance(..)_ method. Any
 cycles resulting from a combination of annotations or default mapping
 must be detected in
-_javax.xml.bind.annotation.JAXBContext.newInstance(..)_ method and also
-constitutes a constraint violation. A _javax.xml.bind.JAXBException_ or
+_jakarta.xml.bind.annotation.JAXBContext.newInstance(..)_ method and also
+constitutes a constraint violation. A _jakarta.xml.bind.JAXBException_ or
 (its subclass, which can be provider specific) must be thrown upon a
 constraint violation.
 
 A JAXB Provider must support the schema
 generation at runtime. See
-_javax.xml.bind.JAXBContext.generateSchema(..)_ for more information.
+_jakarta.xml.bind.JAXBContext.generateSchema(..)_ for more information.
 
 === Type Mapping
 
@@ -10050,7 +10050,7 @@ package level
 
 package foo;
 
-@javax.xml.bind.annotation.XmlSchemaType
+@jakarta.xml.bind.annotation.XmlSchemaType
 
  (name="date",
 
@@ -11319,7 +11319,7 @@ enforced:
 annotations allowed with _@XmlElementRef_ are: _@XmlElementWrapper_ and
 _@XmlJavaTypeAdapter._
 * If the collection item type or property type
-(for single valued property) is _javax.xml.bind.JAXBElement_ , then \{
+(for single valued property) is _jakarta.xml.bind.JAXBElement_ , then \{
 _@XmlElementRef.name()_ , _@XmlElementRef.namespace()}_ must point an
 element factory method with an _@XmlElementDecl_ annotation in a class
 annotated with _@XmlRegistry_ (usually _ObjectFactory_ class generated
@@ -11330,7 +11330,7 @@ _@XmlElementRef.name()_
 _@XmlElementRef.namespace()_ .
 * If the collection item type (for collection
 property) or property type (for single valued property) is not
-_javax.xml.bind.JAXBElement_ , then the type referenced by the property
+_jakarta.xml.bind.JAXBElement_ , then the type referenced by the property
 or field must be annotated with _@XmlRootElement_ .
 
 A field or property annotated with the
@@ -11388,28 +11388,28 @@ declaration with ref attribute].
 
 if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the property type is not
-_javax.xml.bind.JAXBElement_ , then the XML name
+_jakarta.xml.bind.JAXBElement_ , then the XML name
 _@XmlRootElement.name()_ on the type being referenced.
 
 
 
 otherwise if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the parametric type or the property
-type (for single valued property) is a _javax.xml.bind.JAXBElement_ ,
+type (for single valued property) is a _jakarta.xml.bind.JAXBElement_ ,
 then the _@XmlElementRef.name()_
 
 \{target namespace}
 
 if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the property type is not
-_javax.xml.bind.JAXBElement_ , then the XML namespace of the type being
+_jakarta.xml.bind.JAXBElement_ , then the XML namespace of the type being
 referenced.
 
  __ 
 
 otherwise if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the property type is single valued
-and is _javax.xml.bind.JAXBElement_ , then the
+and is _jakarta.xml.bind.JAXBElement_ , then the
 _@XmlElementRef.namespace()_
 
 \{annotation}
@@ -12370,7 +12370,7 @@ public @interface XmlInlineBinaryData \{
 
 This annotation does not impact the schema
 generation. See the javadoc for
-_javax.xml.bind.annotation.XmlInlineBinaryData_ for more details.
+_jakarta.xml.bind.annotation.XmlInlineBinaryData_ for more details.
 
 === ObjectFactory Method
 
@@ -12558,8 +12558,8 @@ For an overview, see the section,
 link:jaxb.html#a2278[See Adapter]”.
 
 For detailed information, see the javadocs for
-_javax.xml.bind.annotation.adapters.XmlAdapter_ and
-_javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter._
+_jakarta.xml.bind.annotation.adapters.XmlAdapter_ and
+_jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter._
 
 === [[a3561]]@XmlJavaTypeAdapter
 
@@ -12876,9 +12876,9 @@ A package must be mapped with the following
 default package level mapping annotations:
 
 *  _@XmlAccessorType( +
-javax.xml.bind.annotation.XmlAccessType.PUBLIC_MEMBER)_
+jakarta.xml.bind.annotation.XmlAccessType.PUBLIC_MEMBER)_
 *  _@XmlAccessorOrder( +
-javax.xml.bind.annotation.XmlAccessOrder.UNDEFINED)_
+jakarta.xml.bind.annotation.XmlAccessOrder.UNDEFINED)_
 * 
 
 *  _@XmlSchema_
@@ -12909,33 +12909,33 @@ default mapping annotations:
 === Property / Field
 
 If the value of _@XmlAccessorType.value()_ is
-_javax.xml.bind.annotation.XmlAccessType.NONE_ , then
+_jakarta.xml.bind.annotation.XmlAccessType.NONE_ , then
 
 * properties and fields, unless explicitly
 annotated, must be considered to be annotated with _@XmlTransient_ .
 
 If the value of _@XmlAccessorType.value()_ is
-_javax.xml.bind.annotation.XmlAccessType.PROPERTY_ , then
+_jakarta.xml.bind.annotation.XmlAccessType.PROPERTY_ , then
 
 * properties not explicitly annotated must be
 mapped; fields, unless explicitly annotated, must be considered to be
 annotated with _@XmlTransient._
 
 If the value of _@XmlAccessorType.value()_ is
-_javax.xml.bind.annotation.XmlAccessType.FIELD_ , then
+_jakarta.xml.bind.annotation.XmlAccessType.FIELD_ , then
 
 * fields not explicitly annotated must be
 mapped; properties, unless explicitly annotated, must be considered to
 be annotated with _@XmlTransient._
 
 If the value of _@XmlAccessorType.value()_ is
-_javax.xml.bind.annotation.XmlAccessType.PUBLIC_MEMBER,_ then
+_jakarta.xml.bind.annotation.XmlAccessType.PUBLIC_MEMBER,_ then
 
 * all properties and public fields, unless
 annotated with _@XmlTransient_ , must be mapped.
 
 See javadoc for
-_@javax.xml.bind.annotation.XmlAccessorType_ for further information on
+_@jakarta.xml.bind.annotation.XmlAccessorType_ for further information on
 inheritance rules for this annotation.
 
 === Default Mapping
@@ -13193,7 +13193,7 @@ deployment.
 This section explicitly lists the high level
 requirements of this specification. Additional requirements can be found
 in other sections of this specification and the associated javadoc for
-package _javax.xml.bind_ and its subpackages. If any requirements listed
+package _jakarta.xml.bind_ and its subpackages. If any requirements listed
 here conflict with requirements listed elsewhere in the specification,
 the requirements here take precedence and replace the conflicting
 requirements.
@@ -13260,9 +13260,9 @@ schema-derived classes generated by a JAXB 1.0 compliant schema compiler
 and is distributed with the compatible JAXB 1.0 runtime implementation.
 Unlike JAXB 2.0, JAXB 1.0 specified a tight coupling between a JAXB 1.0
 implementation’s schema-derived code and the JAXB 1.0 implementation of
-package _javax.xml.bind_ . The required processing model for a JAXB 1.0
+package _jakarta.xml.bind_ . The required processing model for a JAXB 1.0
 schema compiler generated package is specified in
-_javax.xml.bind.JAXBContext_ class javadoc under the heading _SPEC
+_jakarta.xml.bind.JAXBContext_ class javadoc under the heading _SPEC
 REQUIREMENT_ .
 
 == CHAPTER 10 - 
@@ -13373,7 +13373,7 @@ This appendix specifies the runtime
 processing model of XML instances and requirements on JAXB 2.0
 Provider's runtime. It differs from the documentation found elsewhere in
 the specification/javadocs. Chapter 4,”Binding Framework” and the
-javadocs for the package javax.xml.bind do describe the JAXB 2.0 binding
+javadocs for the package jakarta.xml.bind do describe the JAXB 2.0 binding
 framework. But these are written from a JAXB 2.0 developer perspective
 rather than from a JAXB 2.0 Provider perspective and thus do not
 describe requirements on JAXB 2.0 Provider runtime. This was sufficient
@@ -13472,18 +13472,18 @@ framework fall into the following categories:
 . Unmarshal methods that do not take a
 declaredType as parameter:
 
- _javax.xml.bind.Unmarshaller.unmarshal_
+ _jakarta.xml.bind.Unmarshaller.unmarshal_
 (...) +
-_javax.xml.bind.Binder.unmarshal_ (...) +
+_jakarta.xml.bind.Binder.unmarshal_ (...) +
 
 
 
 . Unmarshal methods that take a declaredType
 as a parameter:
 
- _javax.xml.bind.Unmarshaller.unmarshal_
+ _jakarta.xml.bind.Unmarshaller.unmarshal_
 (..., _java.lang.Class<T> declaredType_ ) +
-_javax.xml.bind.Binder.unmashal_ (..., _java.lang.Class<T> declaredType_
+_jakarta.xml.bind.Binder.unmashal_ (..., _java.lang.Class<T> declaredType_
 )
 
 The unmarshal methods that do not take
@@ -13606,11 +13606,11 @@ So goto step 4, "Check for type substitution"
 . “Check for type substitution”
 . if xsi:type is not specified, and the
 valueType is null (i.e. the root element is unknown and we got to this
-step from step 3), throw a _javax.xml.bind.UnmarshalException_ and
+step from step 3), throw a _jakarta.xml.bind.UnmarshalException_ and
 terminate processing.
 . otherwise, if _xsi:type_ is specified, but
 is not mapped to a JAXB mapped type (e.g. class is not marked with
-@XmlType declaration), then throw a _javax.xml.bind.UnmarshalException_
+@XmlType declaration), then throw a _jakarta.xml.bind.UnmarshalException_
 and terminate processing.
 . otherwise, if xsi:type is specified, and is
 mapped to a JAXB mapped type set the valueType to the javatype to which
@@ -13649,7 +13649,7 @@ _declaredType_ as a parameter.
 as follows:
 . if _xsi:type_ is specified, but is not
 mapped to a JAXB mapped type , then throw a
-_javax.xml.bind.UnmarshalException_ and terminate processing.
+_jakarta.xml.bind.UnmarshalException_ and terminate processing.
 . otherwise if _xsi:type_ is specified and is
 mapped to JAXB mapped type, then valueType is the JAXB mapped type.
 . otherwise valueType is the argument passed
@@ -13731,12 +13731,12 @@ Information Item]”.
 . if EII.property is null, then there is no
 property to hold the value of the element. If validation is on (i.e.
 Unmarshaller.getSchema() is not null), then report a
-javax.xml.bind.ValidationEvent. Otherwise, this will cause any unknown
+jakarta.xml.bind.ValidationEvent. Otherwise, this will cause any unknown
 elements to be ignored.
 
 If EII.property is not null and there is no
 setter method as specified in section link:jaxb.html#a4259[See
-Getters/Setters]” then report a javax.xml.bind.ValidationEvent.
+Getters/Setters]” then report a jakarta.xml.bind.ValidationEvent.
 
 Goto step 8.
 
@@ -13765,10 +13765,10 @@ EII.boundtype = EII.valuetype
 EII.boundtype as follows:
 
 Wrap EII.boundtype into a
-javax.xml.bind.JAXBElement instance if:
+jakarta.xml.bind.JAXBElement instance if:
 
 . the property is not a collection type and
-its type is javax.xml.bind.JAXBElement
+its type is jakarta.xml.bind.JAXBElement
 . the property is a collection type and is a
 collection of JAXBElement instances (annotated with @XmlElementRef or
 @XmlElementRefs)
@@ -13801,12 +13801,12 @@ Information Item]”.
 . if AII.property is null, then the attribute
 is invalid with respect to the XML schema. This is possible if for e.g.
 schema has evolved. If validation is on (i.e. Unmarshaller.getSchema()
-is not null), then report a javax.xml.bind.ValidationEvent. Otherwise,
+is not null), then report a jakarta.xml.bind.ValidationEvent. Otherwise,
 this will cause any unknown elements to be ignored.
 
 If AII.property is not null and there is no
 setter method as specified in section link:jaxb.html#a4259[See
-Getters/Setters]” then report a javax.xml.bind.ValidationEvent. +
+Getters/Setters]” then report a jakarta.xml.bind.ValidationEvent. +
  +
 Goto step 8.
 
@@ -14129,7 +14129,7 @@ link:jaxb.html#a4132[See Type]”.
 === [[a4125]]XML Root Element Tag
 
 . If _obj_ is an instance of
-_javax.xml.bind.JAXBElement_ then marshal _obj_ as specified in
+_jakarta.xml.bind.JAXBElement_ then marshal _obj_ as specified in
 link:jaxb.html#a4139[See JAXBElement]”
 
 Goto step 4
@@ -14167,7 +14167,7 @@ to which it is mapped.
 === [[a4139]]JAXBElement
 
 An _obj,_ that is an instance of
-_javax.xml.bind.JAXBElement_ must be marshalled as specified here:
+_jakarta.xml.bind.JAXBElement_ must be marshalled as specified here:
 
 .  _JAXBElement jaxbelem = (JAXBElement)
 obj;_
@@ -14248,7 +14248,7 @@ section”) as follows:
 
 . If property does not have a getter method
 as specified in section link:jaxb.html#a4259[See
-Getters/Setters]” then report a javax.xml.bind.ValidationEvent. Goto
+Getters/Setters]” then report a jakarta.xml.bind.ValidationEvent. Goto
 step 4.
 . If the value of the property being
 marshalled is a subtype boundType, then
@@ -14275,10 +14275,10 @@ class must be marshalled to a lexical representation or unmarshalled
 from a lexical representation as specified in the below:
 
 * using a print or parse method in
-javax.xml.bind.DatatypeConverter interface:
+jakarta.xml.bind.DatatypeConverter interface:
 
 Many of the types have a corresponding print
-and parse method in javax.xml.bind.DatatypeConverter interface for
+and parse method in jakarta.xml.bind.DatatypeConverter interface for
 converting a value to a lexical representation in XML and vice versa.
 The implementation of DatatypeConverter is JAXB Provider specific.
 
@@ -16651,7 +16651,7 @@ attachments is described by standards such as Soap [MTOM]/Xml-binary
 Optimized Packaging[XOP] and WS-I Attachment Profile 1.0 [WSIAP]. To
 optimally support these standards when JAXB databinding is used within a
 message passing environment, link:jaxb.html#a5149[See
-javax.xml.bind.attachments]“specifies an API that allows for an
+jakarta.xml.bind.attachments]“specifies an API that allows for an
 integrated, cooperative implementation of these standards between a
 MIME-based package processor and the JAXB 2.0 unmarshal/marshal
 processes. An enhanced binding of MIME content to Java representation is
@@ -16798,10 +16798,10 @@ An XML element or attribute with a type
 definition of _ref:swaRef_ is bound to a JAXB property with base type of
 _javax.activation.DataHandler_ and annotated with _@XmlAttachmentRef_ .
 
-=== [[a5149]]javax.xml.bind.attachments
+=== [[a5149]]jakarta.xml.bind.attachments
 
 The abstract classes _AttachmentUnmarshaller_
-and _AttachmentMarshaller_ in package _javax.xml.bind.attachments_ are
+and _AttachmentMarshaller_ in package _jakarta.xml.bind.attachments_ are
 intended to be implemented by a MIME-based package processor, such as
 JAX-WS 2.0 implementation, and are called during JAXB unmarshal/marshal.
 The JAXB unmarshal/marshal processes the root part of a MIME-based
@@ -16816,7 +16816,7 @@ information that is outside the scope of the JAXB unmarshal process. A
 MIME-based package processor registers its processing context with a
 JAXB 2.0 processor using the method
 _setAttachmentUnmarshaller(AttachmentUnmarshaller)_ of
-_javax.xml.bind.Unmarshaller_ .
+_jakarta.xml.bind.Unmarshaller_ .
 
 Interactions between the Unmarshaller and the
 abstract class are summarized below. The javadoc specifies the details.
@@ -16846,7 +16846,7 @@ call to the appropriate _getAttachment*()_ method.
 === AttachmentMarshaller
 
 An _AttachmentMarshaller_ instance is
-registered with a _javax.xml.bind.Marshaller_ instance using the method
+registered with a _jakarta.xml.bind.Marshaller_ instance using the method
 _Marshaller.setAttachmentMarshaller()_ .
 
 Interactions between the Marshaller and the
@@ -17039,7 +17039,7 @@ bind to an enum type. (Section 6.2.3,7.10.5)
 * Updated Section 6 and 7 with mapping
 annotations that are generated on schema-derived JAXB
 classes/properties/fields.
-* Added javax.xml.bind.Binder class to
+* Added jakarta.xml.bind.Binder class to
 Section 4.8.2.
 * Runtime generation of schema from JAXB
 mapping annotations: JAXBContext.generateSchema().
@@ -17096,7 +17096,7 @@ _JAXBElement<T>_ class. (JAXBElement is used for schema to java binding)
 * Add flexible (by-name) unmarshal and
 describe JAXB 1.0 structural unmarshalling.
 * Moved deprecated on-demand validation,
-accessible via javax.xml.bind.Validator, to Appendix H.
+accessible via jakarta.xml.bind.Validator, to Appendix H.
 * XSD to Java Binding
 * Bind complex type definition to value class
 by default.
@@ -17115,7 +17115,7 @@ throws _JAXBException_ .
 * Simplified following bindings: +
 - union by binding to String rather than Object. +
 - Attribute Wildcard binds to portable abstraction of a
-java.util.Map<QName, String>, not javax.xml.bind.AttributeMap. +
+java.util.Map<QName, String>, not jakarta.xml.bind.AttributeMap. +
 - bind xsd:anyType to java.lang.Object in JAXB property method
 signatures and element factory method(support element/type substitution)
 * Changes required for default and customized
@@ -17156,7 +17156,7 @@ binding.
 non Java Beans.
 
  - new package
-javax.xml.bind.annotation.adapters for adapters.
+jakarta.xml.bind.annotation.adapters for adapters.
 
 - Added XmlAdapter base abstract class for
 all adapters.
@@ -17201,7 +17201,7 @@ Declaration]”.
 === Changes for 1.0 Final
 
 * Added method
-_javax.xml.bind.Marshaller.getNode(Object)_ which returns a DOM view of
+_jakarta.xml.bind.Marshaller.getNode(Object)_ which returns a DOM view of
 the Java content tree. See method's javadoc for details.
 
 === Changes for Proposed Final
@@ -17235,7 +17235,7 @@ model of a model group definition are only bound once, not once per time
 the group is referenced.
 * Change link:jaxb.html#a1384[See
 Bind wildcard schema component],” to bind to a JAXB property with a
-basetype of _java.lang.Object,_ not _javax.xml.bind.Element._ Strict and
+basetype of _java.lang.Object,_ not _jakarta.xml.bind.Element._ Strict and
 lax wildcard validation processing allows for contents constrained only
 by _xsi:type_ attribute. Current APIs should allow for future support of
 _xsi:type_ .
@@ -17274,8 +17274,8 @@ between different customizations.
 * link:jaxb.html#a1981[See <javaType>
 Declaration]”:
 * Added
-_javax.xml.bind.DatatypeConverterInterface_ interface.
-* Added _javax.xml.bind.DatatypeConverter_
+_jakarta.xml.bind.DatatypeConverterInterface_ interface.
+* Added _jakarta.xml.bind.DatatypeConverter_
 class for use by user specified parse and print methods.
 * Added
 _javax.xml.namespace.NamespaceContext_ class for processing of QNames.
@@ -17377,7 +17377,7 @@ checking only performed if customization enables it and implementation
 supports fail-fast checking
 
 [.footnoteNumber]# 4.# [[a5355]]JAXB 1.0 deprecated
-class, _javax.xml.bind.Validator_ , is described in
+class, _jakarta.xml.bind.Validator_ , is described in
 link:jaxb.html#a5096[See Validator for JAXB 1.0 schema-derived
 classes]”.
 
