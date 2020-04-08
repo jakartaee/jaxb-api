@@ -11,6 +11,9 @@ language: java
 
 dist: bionic
 
+git:
+  depth: false
+
 jdk:
   - oraclejdk11
   - oraclejdk14
