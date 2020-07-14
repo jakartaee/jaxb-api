@@ -1,0 +1,155 @@
+//
+// Copyright (c) 2020 Contributors to the Eclipse Foundation
+//
+
+== [[a151]]Requirements
+
+This chapter specifies the scope and requirements for this version of the specification.
+
+=== XML Schema to Java
+
+==== W3C XML Schema support
+
+The mapping of the following XML Schema
+components must be specified.
+
+* type substitution ( _@xsi:type_ )
+* element substitution group ( _<xs:element
+@substitutionGroup_ >)
+* wildcard support( _xs:any_ and
+_xs:anyAttribute_ )
+* identity constraints ( _xs:key_ ,
+_xs:keyref_ and _xs:unique_ )
+* redefinition of declaration ( _xs:redefine_
+)
+* NOTATION
+
+For binding builtin XML Schema datatypes which
+do not map naturally to Java datatypes, Java datatypes specified by JAXP
+1.3 (JSR 206) must be used.
+
+==== Default Bindings
+
+There must be a detailed, unambiguous
+description of the default mapping of schema components to Java
+representations in order to satisfy the portability goal.
+
+==== [[a165]]Customized Binding Schema
+
+A binding schema language and its formats must
+be specified. There must be a means to describe the binding without
+requiring modification to the original schema. Additionally, the same
+XML Schema language must be used for the two different mechanisms for
+expressing a binding declaration.
+
+==== Overriding default binding behavior
+
+Given the diverse styles that can be used to
+design a schema, it is daunting to identify a single ideal default
+binding solution. For situations where several equally good binding
+alternatives exist, the specification will describe the alternatives and
+select one to be the default (see link:jaxb.html#a165[See
+Customized Binding Schema]).
+
+The binding schema must provide a means to
+specify an alternative binding for the scope of an entire schema. This
+mechanism ensures that if the default binding is not sufficient, it can
+easily be overridden in a portable manner.
+
+==== JAX-WS 2.0
+
+===== Backward Compatibility
+
+Mapping of XML Schema to schema derived Java
+classes as specified in versions of JAX-RPC 1.x either by default or by
+customization is out of scope.
+
+===== Binding XML Schema to schema derived classes
+
+A binding of XML Schema constructs to schema
+derived classes must be specified. JAXB 1.0 specified the binding of XML
+Schema constructs to schema derived interfaces. However, JAX-RPC 1.x
+specified the binding of XML Schema constructs to schema derived
+classes, not interfaces. To provide continued support for JAX-RPC 1.x
+programming model, a customization to enable the binding of XML Schema
+constructs to schema derived classes will be added.
+
+===== Accessing MIME content stored as an attachment
+
+The W3C XMLP MTOM/XOP document and WS-I AP
+1.0[WSIAP] both provide mechanisms for embedding references to SOAP
+attachments in SOAP messages. It is desirable to bind these to suitable
+Java types (e.g. Image or DataHandler) rather than just provide URI
+refs.
+
+===== Serializable
+
+A customization must be specified to enable
+schema derived classes to implement the `java.io.Serializable`
+interface. This capability enables the schema derived instance to be
+passed as EJB method parameter and to any other API that requires
+Serializable instances.
+
+===== [[a179]]Disabling Databinding
+
+A customization to disable databinding must be
+specified. When databinding is disabled, an XML Schema component is
+bound to an XML fragment representation rather than a strongly typed
+datatype determined by mapping rules. Binding to XML fragment allows the
+use of alternative binding technologies for example to perform XML
+operations.
+
+=== Java to XML Schema
+
+==== [[a182]]Default Mapping
+
+A default mapping Java constructs to XML
+Schema must be specified. The default mapping may be overridden by
+customizations described in link:jaxb.html#a184[See Customized
+Mapping]”.
+
+==== [[a184]]Customized Mapping
+
+A customization mechanism to override default
+mapping of Java constructs to XML Schema constructs must be specified.
+Since XML Schema provides a much richer feature set than Java language
+for defining data models, the scope of customizations will be restricted
+to enable mapping to commonly used XML Schema constructs.
+
+Support for the following mechanism must be
+specified:
+
+* customization mechanism using the JSR175
+program annotation facility.
+
+==== JAX-WS 2.0
+
+===== WSDL <types>
+
+The WSDL <types> is generated using Java
+constructs to XML Schema mapping. The latter should therefore define
+customizations that enable mapping to XML Schema constructs commonly
+used in web services, subject to the requirements in
+link:jaxb.html#a184[See Customized Mapping]” and
+link:jaxb.html#a182[See Default Mapping]”.
+
+===== Backward Compatibility
+
+Mapping of existing Java constructs to XML
+Schema constructs as specified in JAX-RPC versions 1.x, either by
+default or through customization, is out of scope.
+
+=== Binding Framework
+
+==== Disabling schema validation
+
+The specification will provide an ability to
+disable schema validation for unmarshal and marshal operations.
+
+There exist a significant number of scenarios
+that do not require validation and/or can not afford the overhead of
+schema validation. An application must be allowed to disable schema
+validation checking during unmarshal and marshal operations. The goal of
+this requirement is to provide the same flexibility and functionality
+that a SAX or DOM parser allows for.
+

@@ -1,0 +1,185 @@
+//
+// Copyright (c) 2020 Contributors to the Eclipse Foundation
+//
+
+[appendix]
+== External Binding Declaration
+
+=== [[a4821]]Example
+
+=== Example: Consider the following schema and external binding file:
+
+Source Schema: _A.xsd:_
+
+<xs:schema
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+
+ xmlns:ens="http://example.com/ns"
+
+ targetNamespace="http://example.com/ns"> +
+<xs:complexType name="aType">
+
+ <xs:sequence>
+
+ <xs:element name="foo" type="xs:int"/>
+
+ </xs:sequence>
+
+ <xs:attribute name="bar" type="xs:int"/>
+
+ </xs:complexType>
+
+ <xs:element name="root" type="ens:aType"/>
+
+</xs:schema>
+
+External binding declarations file:
+
+<jaxb:bindings
+xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+
+ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+
+ version="1.0">
+
+ <jaxb:bindings schemaLocation=” _A.xsd_ ”>
+
+ <jaxb:bindings
+node="//xs:complexType[@name=’aType’]”>
+
+ <jaxb:class name="customNameType"/>
+
+ <jaxb:bindings
+node=”.//xs:element[@name=’foo’]”> +
+<jaxb:property name="customFoo"/>
+
+ </jaxb:bindings>
+
+ <jaxb:bindings
+node=”./xs:attribute[@name=’bar’]”> +
+<jaxb:property name="customBar"/> +
+</jaxb:bindings>
+
+ </jaxb:bindings>
+
+ </jaxb:bindings>
+
+</jaxb:bindings>
+
+Conceptually, the combination of the source
+schema and external binding file above are the equivalent of the
+following inline annotated schema.
+
+<xs:schema
+xmlns:xs="http://www.w3.org/2001/XMLSchema" +
+xmlns:ens="http://example.com/ns" +
+targetNamespace="http://example.com/ns"
+
+
+xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" +
+jaxb:version="1.0"> +
+<xs:complexType name="aType"> +
+_<xs:annotation> +
+<xs:appinfo> +
+_ _<jaxb:class name="customNameType"/> +
+_ _</xs:appinfo> +
+</xs:annotation> +
+_ <xs:sequence> +
+<xs:element name="foo" type="xs:int"> +
+_<xs:annotation> +
+<xs:appinfo> +
+_ _<jaxb:property name="customFoo"/> +
+_ _</xs:appinfo> +
+</xs:annotation> +
+_ </xs:element> +
+</xs:sequence> +
+<xs:attribute name="bar" type="xs:int"> +
+_<xs:annotation> +
+<xs:appinfo> +
+_ _<jaxb:property name="customBar"/> +
+_ _</xs:appinfo> +
+</xs:annotation> +
+_ </xs:attribute> +
+</xs:complexType> +
+<xs:element name="root" type="ens:aType"/> +
+</xs:schema>
+
+=== Transformation
+
+The intent of this section is to describe the
+transformation of external binding declarations and their target schemas
+into a set of schemas annotated with JAXB binding declarations. ready
+for processing by a JAXB compliant schema compiler.
+
+This transformation must be understood to
+work on XML data model level. Thus, this transformation is applicable
+even for those schemas which contain semantic errors.
+
+The transformation is applied as follows:
+
+. Gather all the top-most _<jaxb:bindings>_
+elements from all the schema documents and all the external binding
+files that participate in this process. _Top-most_ _<jaxb:bindings>_ are
+those _<jaxb:bindings>_ elements that are either a root element in a
+document or whose parent is an _<xs:appinfo>_ element. We will refer to
+these trees as “external binding forest.”
+. Collect all the namespaces used in the
+elements inside the external binding forest, except the taxi namespace,
+_"http://java.sun.com/xml/ns/jaxb”,_ and the no namespace. Allocate an
+unique prefix for each of them and declare the namespace binding at all
+the root _<xs:schema>_ elements of each schema documents. +
+Then add a _jaxb:extensionBindingPrefix_ attribute to each _<xs:schema>_
+element with all those allocated prefixes. If an _<xs:schema>_ element
+already carries this attribute, prefixes are just appended to the
+existing attributes. +
+ +
+Note: The net effect is that all “foreign” namespaces used in the
+external binding forest will be automatically be considered as extension
+customization declaration namespaces.
+. For each _<jaxb:bindings>_ element, we
+determine the “target element” that the binding declaration should be
+associated with. This process proceeds in a top-down fashion as follows:
+. Let _p_ be the target element of the parent
+_<jaxb:bindings>_ . If it is the top most _<jaxb:bindings>_ , then let
+_p_ be the < _jaxb:bindings>_ element itself.
+. Identify the “target element” using
+_<jaxb:bindings>_ attributes. +
+(i) If the _<jaxb:bindings>_ has a _@schemaLocation_ , the value of the
+attribute should be taken as an URI and be absolutized with the base URI
+of the _<jaxb:bindings>_ element. Then the target element will be the
+root node of the schema document identified by the absolutized URI. If
+there’s no such schema document in the current input, it is an error.
+Note: the root node of the schema document is not the document element.
+
+(ii) If the _<jaxb:bindings>_ has _@node_ ,
+the value of the attribute should be evaluated as an XPath 1.0
+expression. The context node in this evaluation should be _p_ as we
+computed in the previous step. It is an error if this evaluation results
+in something other than a node set that contains exactly one element.
+Then the target element will be this element.
+
+(iii) if the _<jaxb:bindings>_ has neither
+_@schemaLocation_ nor _@node_ , then the target element will be _p_ as
+we computed in the previous step. Note: _<jaxb:bindings>_ elements can’t
+have both _@schemaLocation_ and _@node_ at the same time.
+
+We define the target element of a binding
+declaration to be the target element of its parent _<jaxb:bindings>_
+element. The only exception to this is _<jaxb:globalBindings>_ binding
+declaraiton, in which case the target element will be the document
+element of any one of the schema documents being compiled (such choice
+is undeterministic, but the semantics of _<jaxb:globalBindings>_ is not
+affected by this choice, so the end result will be the same.) It is an
+error if a target element of a binding declaration doesn’t belong to the
+_"http://wwww.w3.org/2001/XMLSchema"_ namespace.
+
+. Next, for each target element of binding
+declarations, if it doesn’t have any _<xs:annotation> <xs:appinfo>_ in
+its children, one will be created and added as the first child of the
+target. +
+ +
+After that, we move each binding declaration under the target node of
+its parent _<jaxb:bindings>_ . Consider the first _<xs:appinfo>_ child
+of the target element. The binding declaration element will be moved
+under this _<xs:appinfo>_ element.
+

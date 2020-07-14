@@ -1,0 +1,83 @@
+//
+// Copyright (c) 2020 Contributors to the Eclipse Foundation
+//
+
+[appendix]
+== Deprecated JAXB 1.0 Functionality
+
+=== Overview
+
+Due to significant re-architecture in JAXB
+2.0 to improve efficiency, usability, schema-derived footprint and
+binding framework runtime footprint, certain JAXB 1.0 operations are no
+longer required to be implemented in JAXB 2.0. These deprecated
+operations do still need to be supported by a JAXB 2.0 binding runtime
+for JAXB 1.0 schema-derived classes.
+
+=== [[a5094]]On-demand Validation
+
+It is optional for a JAXB 2.0 implementation
+to implement on-demand validation for JAXB 2.0 mapped classes. There is
+no reasonable way to implement this functionality of JAXB 2.0 annotated
+classes and leverage JAXP 1.3 validation facility. For backwards
+compatibility, an implementation is required to support this
+functionality for JAXB 1.0 schema-derived classes.
+
+=== [[a5096]]Validator for JAXB 1.0 schema-derived classes
+
+ _The following text is from JAXB 1.0
+Specification and applies to JAXB 1.0 schema-derived classes._
+
+An application may wish to validate the
+correctness of the Java content tree based on schema validation
+constraints. This form of validation enables an application to initiate
+the validation process on a Java content tree at a point in time that it
+feels it should be valid. The application is notified about validation
+errors and warnings detected in the Java content tree.
+
+The _Validator_ class is responsible for
+controlling the validation of a content tree of in-memory objects. The
+following summarizes the available operations on the class.
+
+public interface Validator \{ +
+ValidationEventHandler _getEventHandler_ () +
+void _setEventHandler_ (ValidationEventHandler)
+
+  +
+boolean _validate_ (java.lang.Object subrootObject)
+
+ boolean _validateRoot_ (java.lang.Object
+rootObject) +
+
+ java.lang.Object _getProperty_
+(java.lang.String name) +
+void _setProperty_ (java.lang.String name,
+java.lang.Object value)
+
+}
+
+ _The JAXBContext_ class provides a factory
+to create a _Validator_ instance. After an application has made a series
+of modifications to a Java content tree, the application validates the
+content tree on-demand. As far as the application is concerned, this
+validation takes place against the Java content instances and validation
+constraint warnings and errors are reported to the application relative
+to the Java content tree. Validation is initiated by invoking the
+_validateRoot(Object)_ method on the root of the Java content tree or by
+invoking _validate(Object)_ method to validate any arbitrary subtree of
+the Java content tree. The only difference between these two methods is
+global constraint checking (i.e. verifying ID/IDREF constraints.) The
+_validateRoot(Object)_ method includes global constraint checking as
+part of its operation, whereas the _validate(Object)_ method does not.
+
+The validator governs the process of
+validating the content tree, serves as a registry for identifier
+references, and ensures that all local (and when appropriate, global)
+structural constraints are checked before the validation process is
+complete.
+
+If a violation of a local or global
+structural constraint is detected, then the application is notified of
+the event with a callback passing an instance of a _ValidationEvent_ as
+a parameter.
+
