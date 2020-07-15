@@ -16,14 +16,17 @@
 ifdef::backend-pdf[]
 :pagenums:
 :numbered:
-:title-logo-image: image:jakarta_ee_logo_schooner_color_stacked_default.png[pdfwidth=4.25in,align=right]
+:title-logo-image: image:images/jakarta_ee_logo_schooner_color_stacked_default.png[pdfwidth=4.25in,align=right]
 endif::[]
 
 // == License
 :sectnums!:
 include::license-efsl.adoc[]
 
+// == Scope
+:sectnums!:
+include::scope.adoc[]
+
 // == Jakarta XML Binding
 :sectnums:
-include::xml-binding.adoc[]
 include::XMLBinding.adoc[]

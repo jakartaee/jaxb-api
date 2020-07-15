@@ -1,0 +1,1135 @@
+//
+// Copyright (c) 2020 Contributors to the Eclipse Foundation
+//
+
+[appendix]
+== [[a3856]]Runtime Processing
+
+=== Introduction
+
+Two of the important goals of JAXB 2.0 are
+portability (for inclusion in J2SE) and handling of invalid XML content
+(for e.g. schema evolution). These goals imply that a JAXB Provider must
+be capable of marshalling and unmarshalling XML instances using JAXB
+annotated classes derived using another JAXB Provider. To ensure
+portable behavior of JAXB mapped classes across JAXB Providers requires
+a specification of runtime processing model of the JAXB 2.0 binding
+framework.
+
+This appendix specifies the runtime
+processing model of XML instances and requirements on JAXB 2.0
+Provider's runtime. It differs from the documentation found elsewhere in
+the specification/javadocs. Chapter 4,”Binding Framework” and the
+javadocs for the package jakarta.xml.bind do describe the JAXB 2.0 binding
+framework. But these are written from a JAXB 2.0 developer perspective
+rather than from a JAXB 2.0 Provider perspective and thus do not
+describe requirements on JAXB 2.0 Provider runtime. This was sufficient
+for JAXB 1.0 since portability was not a goal for JAXB 1.0 and schema
+derived implementation classes were coupled to the JAXB 1.0 Provider
+runtime. However, this is insufficient for JAXB 2.0, where portability
+and handling invalid XML content are goals.
+
+=== Scope and Conventions
+
+=== Scope
+
+This appendix describes marshalling and
+unmarshalling.
+
+=== Format
+
+The specification uses the following for
+specifying runtime behavior:
+
+* XML Infoset, Second Edition,
+http://www.w3.org/TR/xml-infoset augmented with attributes xsi:type and
+xsi:nil that can be used by a document author.
+* XML Schema abstract schema component model.
+* JAXB defined annotations as needed
+
+=== Notations
+
+The following notations/conventions are used:
+
+* For brevity, property is used but is used
+to mean JavaBean property or a field.
+* XML Infoset properties that are associated
+with an information item are enclosed in [...], for e.g. AII.[local
+name]. And program elements the constitute the Java representation to
+which an information item are identified as for e.g. AII.valuetype.
+* AII: Attribute Information Item in XML
+Infoset
+* AII.[local name] : local name property in
+infoset for AII
+* AII.[namespace] : namespace property in
+infoset for AII
+* AII.[owner element] : owner element in
+infoset for AII
+* AII.[normalized value]: normalized value in
+inforset for AII
+* AII.property : JAXB property to which AII
+is mapped. The property in in the java type to which AII.[owner element]
+is mapped.
+* AII.valuetype: Java type representing the
+XML serialized for AII.
+* AII.boundtype: Java type that is bound;
+this differs from AII.valuetype only if JAXB property is associated with
+a @XmlJavaTypeAdapter.
+* AII.schematype : schema type to which AII
+is bound statically using Java -> XML schema mapping rules.
+* EII: Element Information Item in infoset
+* EII.[local name] : local name property in
+XML infoset for EII
+* EII.[namespace] : namespace property in XML
+infoset for EII
+* EII.[children]: children property in XML
+infoset for EII
+* EII.[parent]: parent property in XML
+infoset for EII
+* EII.property : JAXB property to which EII
+is mapped. The property is in the javatype to which EII.[parent] is
+mapped.
+* EII.valuetype : java type representing the
+XML serialized for EII
+* EII.boundtype : java type that is bound;
+this differs from EII.valuetype only if JAXB property is associated with
+a @XmlJavaTypeAdapter.
+* EII.schematype : schema type to which EII
+is bound statically using java -> XML schema mapping rules.
+* EII.xsitype : the xsi:type specified in the
+XML instance by a document author. null if no xsi:type was specified.
+* EII.xsinil : the xsi:nil specified in the
+XML instance by a document author. null if no xsi:nil was specified.
+
+=== Unmarshalling
+
+This section specifies the runtime behavior
+and JAXB provider requirements related to unmarshalling. The
+specification includes unmarshalling of invalid XML content in an XML
+instance. +
+ +
+This section specifies only flexible, standard unmarshalling (flexible
+because unmarshalling deals with invalid XML content). Other
+unmarshalling modes will not be specified. Flexible unmarshalling
+specified here must be supported by all JAXB Providers.
+
+The unmarshalling methods in the binding
+framework fall into the following categories:
+
+. Unmarshal methods that do not take a
+declaredType as parameter:
+
+ _jakarta.xml.bind.Unmarshaller.unmarshal_
+(...) +
+_jakarta.xml.bind.Binder.unmarshal_ (...) +
+
+
+
+. Unmarshal methods that take a declaredType
+as a parameter:
+
+ _jakarta.xml.bind.Unmarshaller.unmarshal_
+(..., _java.lang.Class<T> declaredType_ ) +
+_jakarta.xml.bind.Binder.unmashal_ (..., _java.lang.Class<T> declaredType_
+)
+
+The unmarshal methods that do not take
+declaredType as parameter must be unmarshalled as specified in
+link:jaxb.html#a3902[See Globally Declared Root Element]”.
+
+The unmarshal methods that take a
+_declaredType_ as a parameter must be unmarshalled as specified in
+link:jaxb.html#a3953[See Declared Type]”.
+
+=== [[a3902]]Globally Declared Root Element
+
+There are two ways that a root element can be
+represented in Java representation:
+
+* as an element instance factory method that
+is generated in the public ObjectFactory class of a package when a
+schema is compiled. An element instance factory method is annotated with
+a
+
+@XmlElementDecl annotation. For e.g.
+
+ public class ObjectFactory \{
+
+ @XmlElementDecl(...)
+
+ public JAXBElement<T> createFoo(T
+elementValue);
+
+ ...
+
+ }
+
+* as a type (either an enum type or a class)
+that has been annotated with @XmlRootElement. For e.g.
+
+
+
+ @XmlRootElement(...)
+
+ public class Foo \{...}
+
+The unmarshalling of XML content results in a
+content tree with a root that is an instance of either a _JAXBElement_
+instance or a type that is annotated with _@XmlRootElement_ . The
+content tree must be created as follows:
+
+. lookup an element factory method in the
+ObjectFactory class matching on:
+
+EII.[namespace] ==
+@XmlElementDecl.namespace() && EII.[local name] ==
+@XmlElementDecl.name()
+
+or for a type annotated with @XmlRootElement
+matching on:
+
+EII.[namespace] ==
+@XmlRootElement.namespace() && EII.[local name] ==
+@XmlRootElement.name()
+
+NOTE: The lookup will only find one of the
+above not both. If both a type as well as an element factory method were
+found, it would be flagged as an error when JAXBContext is created.
+
+. if an element factory method in the
+ObjectFactory class or a type annotated with @XmlRootElement is found,
+then determine the valueType.
+. if an element factory method is found,
+there is no @XmlJavaTypeAdapter associated with the value parameter to
+the element factory method, then the valueType is the java type of the
+value parameter to the element factory method. For e.g.
+
+ @XmlElementDecl(name = "bar", namespace =
+"")
+
+ public JAXBElement<Foo> createBar(Foo value)
+\{
+
+ return new JAXBElement<Foo>(
+
+ _Bar_QNAME, ((Class) Foo.class), null,
+value);
+
+ }
+
+the valueType type is Foo.
+
+* 
+
+if the parameter is associated with
+@XmlJavaTypeAdapter, then the valueType is the java type specified in
+@XmlJavaTypeAdapter.value() .
+
+. if a type annotated with @XmlRootElement is
+found then valueType is the type. For e.g.
+
+ @XmlRootElement(...)
+
+ public class Foo \{ ... }
+
+* 
+
+Go to step 4, “Check for type substitution”
+
+. If neither the element factory method nor a
+type annotated with @XmlRootElement is found, then the element is
+unknown. Set valueType of the element to null.
+
+Even though the element is unknown, a
+document author can still perform type substitution. This case can arise
+if the XML schema contains only schema types and no global elements. For
+e.g a document author could have specified a xsi:type that has been
+mapped by JAXB. For e.g.
+
+ <unknownElement xsi:type="PurchaseOrder"/>
+
+So goto step 4, "Check for type substitution"
+
+. “Check for type substitution”
+. if xsi:type is not specified, and the
+valueType is null (i.e. the root element is unknown and we got to this
+step from step 3), throw a _jakarta.xml.bind.UnmarshalException_ and
+terminate processing.
+. otherwise, if _xsi:type_ is specified, but
+is not mapped to a JAXB mapped type (e.g. class is not marked with
+@XmlType declaration), then throw a _jakarta.xml.bind.UnmarshalException_
+and terminate processing.
+. otherwise, if xsi:type is specified, and is
+mapped to a JAXB mapped type set the valueType to the javatype to which
+xsi:type is mapped.
+. otherwise, xsi:type is not specified;
+valueType is unchanged.
+. Unmarshal valueType as specified in
+link:jaxb.html#a3960[See Value Type]”.
+. If the element factory method is annotated
+with @XmlJavaTypeAdapter, then convert the valueType into a boundType
+
+ boundType =
+@XmlJavaTypeAdapter.value().unmarshal(valueType)
+
+. Determine the content root type to be
+returned by unmarshal() method.
+. if the element lookup returned an element
+instance factory method, then create a JAXBElement instance using the
+boundType. The content root type is the JAXBElement instance.
+. otherwise, if the element lookup returned a
+type annotated with @XmlRootElement, then the content root type is the
+boundType.
+. otherwise, the element is an unknown
+element. Wrap the boundType using JAXBElement with an element name in
+the XML instance document (e.g. “unknown Element”). The content root
+type is the JAXBElement instance.
+. return the content root type.
+
+=== [[a3953]]Declared Type
+
+The unmarshalling process described in this
+section must be followed for the unmarshal methods that take a
+_declaredType_ as a parameter.
+
+. Determine the valueType to be unmarshalled
+as follows:
+. if _xsi:type_ is specified, but is not
+mapped to a JAXB mapped type , then throw a
+_jakarta.xml.bind.UnmarshalException_ and terminate processing.
+. otherwise if _xsi:type_ is specified and is
+mapped to JAXB mapped type, then valueType is the JAXB mapped type.
+. otherwise valueType is the argument passed
+to _declaredType_ parameter in the +
+_unmarshal_ (..., _java.lang.Class<T>declaredType_ ) call.
+. Unmarshal valueType as specified in
+link:jaxb.html#a3960[See Value Type]”.
+
+=== [[a3960]]Value Type
+
+The following steps unmarshal either
+EII.valuetype or AII.valuetype, depending upon whether an EII or AII is
+being unmarshalled.
+
+Note: Whether an EII or AII is being
+unmarshalled is determined by the “caller” of this section.
+AII.valuetype and EII.valuetype are assumed to be set by the time this
+section entered.
+
+. If an instance of valueType does not exist,
+create an instance of valueType as follows (for e.g. if a value of a
+property with type _java.util.List_ is non null, then unmarshal the
+value into that _java.util.List_ instance __ rather than creating a new
+instance of _java.util.List_ and assigning that to the property):
+. if valueType is a class and is the type
+parameter specified in the element factory method, then instantiate the
+class using element factory method; otherwise instantiate the class
+using factory method if specified by _@XmlType.factoryClass()_ and
+_@XmlType.factoryMethod();_ or if there is no factory method, using the
+no-arg constructor.
+. if valueType is an enum type, then obtain
+an instance of the enum type for the enum constant annotated with
+_@XmlEnumValue_ and _@XmlEnumValue.value()_ matches the lexical
+representation of the EII.
+. Invoke any event callbacks in the following
+order as follows:
+. If valueType implements an unmarshal event
+callback _beforeUnmarshal(..)_ as specified in Section 4.4.1,”Unmarshal
+Event Callback”, then invoke _beforeUnmarshal(..)_ .
+. If _Unmarshaller.getListener()_ returns
+_Unmarshaller.Listener_ that is not null, then invoke
+_Unmarshaller.Listener.beforeUnmarshal(..)_ .
+. If an EII.valuetype is being unmarshalled,
+unmarshal into this instance the following. Note: The following steps
+can be done in any order; the steps are just broken down and listed
+separately for clarity:
+
+If EII.valueType being unmarshalled
+
+. unmarshal each child element information
+item in EII.[children] as specified in link:jaxb.html#a3978[See
+Element Information Item]”.
+. unmarshal each attribute information item
+in EII.[attributes] as specified in link:jaxb.html#a4002[See
+Attribute Information Item]”.
+. Unmarshal the value of EII.schematype or
+AII.schematype following the Java to XML Schema rules defined in Chapter
+8, “Java Types to XML”. If the value in XML instance is unparseable,
+then it must be handled as specified in link:jaxb.html#a4086[See
+Unparseable Data for Simple types]”.
+. Invoke any event callbacks in the following
+order as follows:
+. If valueType implements an unmarshal event
+callback _afterUnmarshal(..)_ as specified in Section 4.4.1,”Unmarshal
+Event Callback”, then invoke _afterUnmarshal(..)_ .
+. If _Unmarshaller.getListener()_ returns
+_Unmarshaller.Listener_ that is not null, then invoke
+_Unmarshaller.Listener.afterUnmarshal(..)_ .
+. return // either AII.valuetype or
+EII.valuetype.
+
+=== [[a3978]]Element Information Item
+
+An EII must be unmarshalled as follows:
+
+. infer EII.property as specified in
+link:jaxb.html#a4023[See Property Inference - Element
+Information Item]”.
+. if EII.property is null, then there is no
+property to hold the value of the element. If validation is on (i.e.
+Unmarshaller.getSchema() is not null), then report a
+jakarta.xml.bind.ValidationEvent. Otherwise, this will cause any unknown
+elements to be ignored.
+
+If EII.property is not null and there is no
+setter method as specified in section link:jaxb.html#a4259[See
+Getters/Setters]” then report a jakarta.xml.bind.ValidationEvent.
+
+Goto step 8.
+
+. infer the EII.valuetype as described in
+link:jaxb.html#a4043[See Type Inference - Element Information
+Item]”.
+. if EII.valuetype is null, then go to step
+8.
+
+NOTE: EII.valuetype = null implies that there
+was problem. so don't attempt to unmarshal the element.
+
+. Unmarshal EII.valuetype as specified in
+link:jaxb.html#a3960[See Value Type]”.
+. if there is a @XmlJavaTypeAdapter
+associated with EII.property, then adapt the EII.valuetype as follows:
+
+ EII.boundtype = +
+@XmlJavaTypeAdapter.value().unmarshal(EII.valuetype)
+
+otherwise
+
+EII.boundtype = EII.valuetype
+
+. set the value of EII.property to
+EII.boundtype as follows:
+
+Wrap EII.boundtype into a
+jakarta.xml.bind.JAXBElement instance if:
+
+. the property is not a collection type and
+its type is jakarta.xml.bind.JAXBElement
+. the property is a collection type and is a
+collection of JAXBElement instances (annotated with @XmlElementRef or
+@XmlElementRefs)
+
+If EII.property is not a collection type:
+
+. set the value of EII.property to
+EII.boundtype.
+
+If EII.property is collection type:
+
+. add EII.boundtype to the end of the
+collection.
+
+NOTE: Adding JAXBElement instance or a type
+to the end of the collection preserves document order. And document
+order could be different from the order in XML Scheme if the instance
+contains invalid XML content.
+
+. return
+
+=== [[a4002]]Attribute Information Item
+
+An attribute information item must be
+unmarshalled as follows:
+
+. infer AII.property as described in section
+link:jaxb.html#a4033[See Property Inference - Attribute
+Information Item]”.
+. if AII.property is null, then the attribute
+is invalid with respect to the XML schema. This is possible if for e.g.
+schema has evolved. If validation is on (i.e. Unmarshaller.getSchema()
+is not null), then report a jakarta.xml.bind.ValidationEvent. Otherwise,
+this will cause any unknown elements to be ignored.
+
+If AII.property is not null and there is no
+setter method as specified in section link:jaxb.html#a4259[See
+Getters/Setters]” then report a jakarta.xml.bind.ValidationEvent. +
+ +
+Goto step 8.
+
+. infer the AII.valuetype as described in
+link:jaxb.html#a4079[See Type Inference - Attribute Information
+Item]”.
+. if AII.valuetype is null, then go to step
+8.
+
+NOTE: AII.valuetype = null implies that there
+was problem. so don't attempt to unmarshal the attribute.
+
+. Unmarshal AII.valuetype as specified in
+link:jaxb.html#a3960[See Value Type]”.
+. If AII.property is associated with a
+_@XmlJavaTypeAdapter_ , adapt AII.valuetype as follows:
+
+ AII.boundtype =
+
+
+@XmlJavaTypeAdapter.value().unmarshal(AII.valuetype)
+
+otherwise
+
+ AII.boundtype = AII.valuetype
+
+. If AII.property is single valued:
+. set the value of AII.property to
+AII.boundtype.
+
+If AII.property is a collection type (e.g.
+List<Integer> was mapped to a Xml Schema list simple type using @XmlList
+annotation):
+
+add EII.boundtype to the end of the
+collection.
+
+. return
+
+=== Property Inference
+
+Unmarshalling requires the inference of a
+property or a field that contains the value of EII and AII being
+unmarshalled.
+
+=== [[a4023]]Property Inference - Element Information Item
+
+The property to which an EII is mapped is
+inferred based on name.
+
+* 
+
+Infer EII.property by matching constraints
+described below:
+
+. initialize EII.property to null
+. if property is mapped to XML Schema element
+declaration, elem, in the content model of EII.[parent].schematype &&
+EII.[local name] == elem.\{name} && EII.[namespace] == elem.\{namespace}
+
+set EII.property to property
+
+ Goto step 4.
+
+. If there is a JAXB property mapped to XML
+Schema wildcard ( _xs:any_ ) (as determined by _@XmlAnyElement_ ), set
+this JAXB property to EII.property. This property will hold wildcard
+content (e.g. invalid XML content caused by schema evolution).
+. return EII.property
+
+=== [[a4033]]Property Inference - Attribute Information Item
+
+Infer the property for the AII by matching
+constraints described below:
+
+. initialize AII.property to null
+. if property mapped to XML Schema attribute
+declaration, attr, in the content model of AII.[owner].schematype &&
+AII.[local name] == attr.\{name} && AII.[namespace] == attr.\{namespace}
+
+set AII.property to property
+
+Goto step 4.
+
+. if there is a property mapped to a XML
+Schema xs:anyAttribute (i.e. annotated with _@XmlAnyAttribute_ ), then
+set this property to AII.property. This property holds XML content
+matching wildcard attribute ( _xs:anyAttribute)_ or unknown attributes
+(which can occur for e.g. if schema has evolved).
+. return AII.property
+
+=== Type Inference
+
+Unmarshalling requires the inference of the
+type of a property or a field that to contain the value of EII and AII
+being unmarshalled.
+
+=== [[a4043]]Type Inference - Element Information Item
+
+This section describes how to infer
+EII.valuetype; this holds the value of the element (content model +
+attributes).
+
+EII.valuetype must be inferred as described
+below:
+
+. initialize EII.valuetype to null.
+. if EII.xsitype is set, document author has
+performed type substitution.
+
+Goto step 4 to handle type substitution.
+
+. if EII.schematype is not mapped to a java
+type, then
+. report a validation event.
+. Go to step 7.
+
+otherwise
+
+. set EII.valuetype to the javatype to which
+EII.schematype is mapped.
+. Go to step 7.
+
+NOTE: This case can arise for example, when
+EII.schematype is compiled into a java type at schema compilation time,
+but the javatype was not registered with _JAXBContext.newInstance(..)_ .
+
+. check if EII.xsitype is mapped to a JAXB
+mapped type. It is possible that EII.xsitype is compiled to a javatype
+at schema compilation time, but the javatype was not registered with
+_JAXBContext.newInstance(..)_
+
+If EII.xsitype is not mapped, then report a
+validation event.
+
+Goto step 7.
+
+. check if the java type to which EII.xsitype
+is mapped is assignment comparable with the static type of the
+property/field if no _@XmlJavaTypeAdapter_ is associated with the
+property/field or with the _valueType_ specified in
+_XmlAdapter<valueType, boundType>_ if a _@XmlJavaTypeAdapter_ is
+associated with the property/field.
+
+The above check can fail for e.g when a
+document author attempts to substitute a complex type that derives from
+simple type but customization to enable simple type substitution was not
+used. For e.g.
+
+. <!-- local element with simple type -->
+
+ <xs:element name="foo" type="xs:int"/>
+
+ <!-- complex type for substituting the
+simple type -->
+
+ <xs:complexType name="MyInt">
+
+ <xs:extension xs:int>
+
+ ...add attributes
+
+ </xs:extends>
+
+ </xs:complexType>
+
+. customization to handle type substitution
+of simple types is not used. So the property is
+
+ public int getFoo();
+
+ public void setFoo(int );
+
+ public class MyInt \{...}
+
+. the document author attempts to substitute
+complexType MyInt.
+
+ <foo xsi:type="MyInt"/>
+
+. The type MyInt is not assignment comparable
+with int.
+. set EII.valuetype to javatype to which
+EII.xsitype is mapped.
+
+NOTE: if we got to this step, this implies
+that type substitution is valid.
+
+. return EII.valuetype
+
+=== [[a4079]]Type Inference - Attribute Information Item
+
+Infer the AII.valuetype as follows:
+
+. initialize AII.valuetype to null.
+. if AII.schematype is not mapped to a java
+type, then report a validation event. Otherwise, set AII.valuetype to
+the java type to which AII.schematype is mapped.
+
+NOTE: This case can arise for example, when
+AII.schematype is compiled into a java type at schema compilation time,
+but the javatype is not registered with the
+_JAXBContext.newInstance(..)_
+
+. return AII.valuetype
+
+=== Invalid XML Content
+
+=== [[a4086]]Unparseable Data for Simple types
+
+If simple type data cannot be parsed into a
+java datatype, then the value of the java datatype must not change the
+current set value. An access to the datatype must return the value as
+specified in link:jaxb.html#a4095[See Missing element
+information item]”. If the conversion of lexical representation into a
+value results in an exception, then the exception must be caught and a
+validation event reported. This is to ensure that such conversion errors
+do not terminate unmarshalling.
+
+// Example : XML Schema fragment
+
+<xs:element name="foo" type="xs:int"/>
+
+
+
+// Example: XML instance.
+
+// Data is not parseable into type xs:int ;
+however unmarshal will
+
+// still succeed.
+
+<foo> SUN </foo>
+
+=== [[a4095]]Missing element information item
+
+This case arises when an element declaration
+required by a XML schema is missing from the XML instance.
+
+Property or field access must return the
+value specified in link:jaxb.html#a4101[See Value for missing
+elements/attributes]”
+
+=== Missing Attribute
+
+This case arises when a property or a field
+is mapped to an XML attribute but the attribute is missing from the XML
+instance.
+
+Property or field access must return the
+value specified in link:jaxb.html#a4101[See Value for missing
+elements/attributes]”.
+
+=== [[a4101]]Value for missing elements/attributes
+
+If an attribute or an element is missing from
+an XML instance, then unmarshal will not change the current set value.
+An access to the property will return the set value or if unset, the
+uninitialized value. The uninitialized value of the property or field
+depends upon it's type. If the type is
+
+. int - value is 0
+. boolean - value is false
+. a reference (must be mapped to a simple
+type) - value is null.
+. float - the value is +0.0f
+. double - the value is 0.0d
+. short - the value is (short) 0
+. long - the value is 0L
+
+Note The uninitialized values are returned
+only if the value is not set. A value could be set for example in a
+validation handler that catches the validation event.
+
+=== Unknown Element
+
+In this case, XML instance contains EII for
+which there is no corresponding element declaration in the XML schema.
+If the valuetype to which the EII.parent maps contains a property/field
+annotated with _@XmlAnyElement_ , this EII can be unmarshalled into the
+property/field.
+
+Unknown attribute handling during
+unmarshalling is specified in link:jaxb.html#a4023[See Property
+Inference - Element Information Item]”.
+
+=== Unknown attribute
+
+In this case, XML instance contains AII for
+which there is no corresponding attribute declaration in the XML schema.
+If the valuetype to which the AII.parent maps contains a property/field
+annotated with _@XmlAnyAttribute_ , the AII can be unmarshalled into the
+property/field.
+
+Unknown attribute handling during
+unmarshalling is specified in link:jaxb.html#a4033[See Property
+Inference - Attribute Information Item]”.
+
+=== Marshalling
+
+To marshal a content tree, a JAXB application
+invokes one of the following marshal methods:
+
+Marshaller.marshal(Object jaxbElement, ...)
+throws JAXBException;
+
+
+
+Binder.marshal(Object jaxbObject, ...) throws
+JAXBException;
+
+A JAXB Provider must marshal the content tree
+as follows:
+
+* marshal the XML root element tag as
+specified in link:jaxb.html#a4125[See XML Root Element Tag]”
+* marshal _obj_ as specified in section
+link:jaxb.html#a4132[See Type]”.
+
+=== [[a4125]]XML Root Element Tag
+
+. If _obj_ is an instance of
+_jakarta.xml.bind.JAXBElement_ then marshal _obj_ as specified in
+link:jaxb.html#a4139[See JAXBElement]”
+
+Goto step 4
+
+. If _obj.getClass()_ is annotated with
+_@XmlRootElement_ , then set \{EII.[local name], EII.[namespace]} by
+deriving them from the @XmlRootElement annotation following the Java to
+Schema mapping rules in chapter 8. Marshal obj instance as specified in
+link:jaxb.html#a4132[See Type]”.
+
+Goto step 4
+
+. If obj has neither an @XmlRootElement nor
+is a JAXBElement instance, then throw a _JAXBException_ and terminate
+processing.
+. done
+
+=== [[a4132]]Type
+
+The type must be marshalled as follows. If
+the type is an instance of
+
+* JAXBElement , then marshal as specified in
+link:jaxb.html#a4139[See JAXBElement]”.
+* Otherwise, marshal the type as follows. If
+the type is a :
+* class, then marshal as specified in
+link:jaxb.html#a4156[See class]”.
+* primitive type or standard class, then
+marshal as specified in link:jaxb.html#a4180[See Primitives and
+Standard classes]”
+* enum type then marshal following the schema
+to which it is mapped.
+
+=== [[a4139]]JAXBElement
+
+An _obj,_ that is an instance of
+_jakarta.xml.bind.JAXBElement_ must be marshalled as specified here:
+
+.  _JAXBElement jaxbelem = (JAXBElement)
+obj;_
+. set \{EII.[local name] , EII.[namespace]}
+to _jaxbelem.getName()_
+. if _jaxbelem.isNil()_ , add _xsi:nil_ to
+EII.[attributes]
+. 
+
+. if _jaxbelem.isTypeSubstituted()_ is true,
+then type substitution has occurred i.e. _jaxbelem.getDeclaredType()_
+(static type) is different from _jaxbelem.getValue()_ (the type of the
+value for this instance). So,
+. EII.[local name] = “type”
+. EII.[prefix]=”xsi”
+. EII.[normalized value] = QName of the
+schema type to which _jaxbelem.getValue()_ is mapped following Java ->
+Schema mapping rules in Chapter 8. For e.g.
+
+ <foo xsi:type=”MyAddrType”/>
+
+. set boundType to _jaxbelem.getValue()_ if
+_jaxbelem.isTypeSubstituted()_ is _true_ otherwise
+_jaxbelem.getDeclaredType()_
+. determine the valueType to be marshalled.
+If the program element being processed is associated with
+@XmlJavaTypeAdapter then boundType is
+
+ valueType =
+@XmlJavaTypeAdapter.value().marshal(boundType)
+
+otherwise valueType is boundType
+
+. map valueType to XML infoset information
+items as specified in link:jaxb.html#a4132[See Type]” and add
+them to EII.
+. marshal EII.
+
+=== [[a4156]]class
+
+A class must be mapped to XML infoset items
+as follows:
+
+. If a class mapped to a value as specified
+link:jaxb.html#a3331[See @XmlValue]”, then map the value to an
+XML infoset and add it to EII.[children]
+
+return
+
+. For each property that is mapped to XML
+attribute as specified in link:jaxb.html#a3230[See
+@XmlAttribute]”:
+. derive \{AII.[local name], AII.[prefix],
+AII.[namespace] } from \{name} \{target namespace}.
+. AII.[normalized value] = value of property
+as specified in link:jaxb.html#a4169[See property type]”
+. add AII to EII.[attributes]
+
+NOTE: There order in which the properties are
+marshalled is not specified (XML attributes are unordered by XML
+Schema).
+
+. For each property that is mapped to an XML
+element declaration, elem:
+. derive \{childEII.[local name],
+childEII.[prefix], childEII.[namespace] } from elem.\{name}
+elem.\{target namespace}
+. map property type to XML infoset items into
+childEII as specified in link:jaxb.html#a4169[See property
+type]”.
+. add childEII to EII.[children]
+
+=== [[a4169]]property type
+
+The value of a property with type ,
+boundType, must be marshalled into childEII (set by “caller of this
+section”) as follows:
+
+. If property does not have a getter method
+as specified in section link:jaxb.html#a4259[See
+Getters/Setters]” then report a jakarta.xml.bind.ValidationEvent. Goto
+step 4.
+. If the value of the property being
+marshalled is a subtype boundType, then
+. EII.[local name] = “type”
+. EII.[prefix]=”xsi”
+. EII.[normalized value] = QName of the
+schema type to which _jaxbelem.getValue()_ is mapped following Java ->
+Schema mapping rules in Chapter 8. For e.g.
+
+ <foo xsi:type=”MyAddrType”/>
+
+. add EII to childEII
+. Marshal the value as specified in
+link:jaxb.html#a4132[See Type]”.
+. Return
+
+=== [[a4180]]Primitives and Standard classes
+
+Primitive values and standard classes
+described in this section map to XML schema simple types.
+
+The value of a primitive type or a standard
+class must be marshalled to a lexical representation or unmarshalled
+from a lexical representation as specified in the below:
+
+* using a print or parse method in
+jakarta.xml.bind.DatatypeConverter interface:
+
+Many of the types have a corresponding print
+and parse method in jakarta.xml.bind.DatatypeConverter interface for
+converting a value to a lexical representation in XML and vice versa.
+The implementation of DatatypeConverter is JAXB Provider specific.
+
+A XML Schema simple type can have more than
+lexical representation (e.g. “true” “false” “0” “1”). Since the
+DatatypeConverter implementation is JAXB Provider specific, the exact
+lexical representation that a value is marshalled to can vary from one
+JAXB Provider to another. However, the lexical representation must be
+valid with respect to the XML Schema.
+
+* some data types such as
+XMLGregorianCalendar contain methods on the class that return or consume
+their XML lexical representation. For such datatypes, the method
+indicated in the table is used.
+* A wrapper class (e.g. java.lang.Integer)
+must be converted to its non wrapper counterpart (e.g. int) and then
+marshalled.
+
+
+
+=== Lexical Representation of Standard Classes
+
+Java Standard Classes
+
+printMethod
+
+parse Method
+
+ _java.lang.String_
+
+ _printString_
+
+ _parseString_
+
+ _java.util.Calendar_
+
+ _printDateTime_
+
+ _parseDateTime_
+
+ _java.util.Date_
+
+ _printDateTime_
+
+ _parseDateTime_
+
+ _java.net.URI_
+
+ _URI.toString()_
+
+ _URI(String str)_
+
+ _javax.xml.datatype._
+
+ _XMLGregorianCalendar_
+
+ _XMLGregorianCalendar._
+
+ _toXMLFormat()_
+
+ _DatatypeFactory._
+
+ _newXMLGregorianCalendar(_
+
+ _String lexicalRepresentation)_
+
+ _javax.xml.datatype._
+
+ _Duration_
+
+ _Duration._
+
+ _toString()_
+
+ _DatatypeFactory._
+
+ _newDuration(_
+
+ _String lexicalRepresentation)_
+
+ _java.util.UUID_
+
+ _UUID.toString()_
+
+ _UUID.fromString()_
+
+=== Null Value
+
+A null value in Java representation can be
+marshalled either as an absence of an element from an XML instance or as
+_xsi:nil_ . The marshalled value depends upon the values of
+_@XmlElement.required()_ and _@XmlElement.nillable()_ annotation
+elements on the property/field and must be marshalled as shown below.
+For clarity, example schema fragments (as determined by the mapping
+rules specified in Chapter 8) for the following field
+
+@XmlElement(required=”..”, nillable=”...”)
+
+foo;
+
+are reproduced here along with the XML
+representation for null value produced by marshalling.
+
+*  _@XmlElement(required=true, nillable_ =
+_false)_
+
+The value of the property/field cannot be
+null.
+
+ // Example: generated schema
+
+ <xs:element name=”foo” minOccurs=”1”/ ...>
+
+ ...
+
+ </xs:element>
+
+*  _@XmlElement(required=true,
+nillable=true)_
+
+null is marshalled as _xsi:nil=”true”_
+
+ // Example:generated schema
+
+ <xs:element name=”foo” minOccurs=”1”
+nillable=”true” ...>
+
+ ...
+
+ /xs:element>
+
+
+
+ <!-- marshalled XML representation for null
+value -->
+
+ <foo xsi:nil=”true” .../>
+
+*  _@XmlElement(required=false,
+nillable=true)_
+
+null is marshalled as _xsi:nil=”true”_
+
+ // Examle: generated schema
+
+ <xs:element name=”foo” minOccurs=”0” ...>
+
+ ...
+
+ </xs:element>
+
+
+
+ <!-- Example: marshalled XML representation
+for null value -->
+
+ <foo xsi:nil=”true” .../>
+
+*  _@XmlElement(required=false,
+nillable=false)_
+
+null is not marshalled i.e it maps to absence
+of an element from XML instance.
+
+ // Example: Generated schema
+
+ <xs:element name=”foo” minOccurs=”0” ...>
+
+ ...
+
+ </xs:element>
+
+
+
+ <!-- Example: null value for foo not
+marshalled -->
+
+=== [[a4259]]Getters/Setters
+
+When _@XmlAccessType.PUBLIC_MEMBER_ or
+_@XmlAccessType.PROPERTY_ is in effect for a class, then the instance of
+the class is marshalled using getter/setter methods as opposed to
+fields. This section outlines the constraints the must be checked at
+runtime. A constraint failure is handled as specified elsewhere in the
+chapter from where this section is referenced.
+
+Unmarshalling : A property must have a setter
+method if
+
+*  _@XmlAccessorType.PUBLIC_MEMBER_ or
+_@XmlAccessorType.PROPERTY_ applies to the property.
+* or if the property’s getter/setter method
+is annotated with a mapping annotation.
+
+The one exception to the above constraint is:
+if property type is _java.util.List_ then only a getter method is
+required.
+
+* 
+
+Marshalling: A property must have a getter
+method if
+
+*  _@XmlAccessType.PUBLIC_MEMBER_ or
+_@XmlAccessType.PROPERTY_ applies to the class
+* or if the property’s getter/setter method
+is annotated with a mapping annotation.

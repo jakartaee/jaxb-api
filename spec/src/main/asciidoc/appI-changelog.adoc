@@ -1,0 +1,476 @@
+//
+// Copyright (c) 2020 Contributors to the Eclipse Foundation
+//
+
+[appendix]
+== Change Log
+
+=== Changes since Proposed Final Draft
+
+* Section 7.6.1.2, nameXmlTransform: Apply
+customization [ _jaxb:nameXmlTransform]_ addition of prefix and/or
+suffix after XML to Java name transformation is applied.
+* Section 6.7.1-2 changed to allow generation
+of element factory method for abstract element. Change was necessary to
+support element substitution. The abstract element factory method is
+generated so it can be annotated with JAXB program annotation that
+enables element substitution, _@XmlElementDecl.substitutionHeadName_ .
+* Section 7.7.3.5 fixed the example with
+<class> customization. Made the corresponding change in Section 6.7.2 so
+Objectfactory method creates an instance of generated class.
+* Chapter 8 and appendix B:
+@XmlJavaTypeAdapter on class, interface or enum type is mutually
+exclusive with any other annotation.
+* Chapter 8: added @XmlElement.required() for
+schema generation
+* Section 8.7.1.2: clarifications for no-arg
+static factory method in @XmlType annotation.
+* Section 8.9.13.2: Disallow use of @XmlList
+on single valued property.
+* Section 8.9.8.2, Table 8-30 :
+@XmlAnyAttribute maps to anyAttribute with a namespace constraint with
+##other.
+* Section 8.9.1.2: If @XmlElement.namespace()
+is different from that of the target namespace of the enclosing class,
+require a global element to be generated in the namespace specified in
+@XmlElement.namespace() to make the generated schema complete.
+* Section 8.9.15: Allow @XmlMimeType on a
+parameter.
+* Section 8.9.16: Allow @XmlAttachmentRef on
+a parameter.
+* Chapter 8: removed constraint check that
+namespace() annotation element must be a valid namespace URI from
+different annotations.
+* Chapter 8: Java Persistence and JAXB 2.0
+alignment related changes. +
+constructor requirement: public or protected no-arg constructor +
+@AccessType renamed to @XmlAccessType. +
+@AccessorOrder renamed to @XmlAccessOrder. +
+@XmlTransient is mutually exclusive with other annotations. +
+@A property or field that is transient or marked with @XmlTransient and
+specified in @XmlType.propOrder is an error.
+* Chapter 8: Clarifications for generics -
+type variables with type bound, bounded wildcards and java.util.Map.
+* Section 8.9: reworked constraints on the
+properties to handle different use cases permitted by JavaBean design
+pattern.
+* Section 8: Take elementFormDefault into
+account when determining the namespace for @XmlElement and
+@XmlElementWrapper annotations.
+* Section 8: Added missing mapping
+constraints for @XmlElementWrapper. Also disallow use of @XmlIDREF with
+@XmlElementWrapper.
+* Chapter 9, “Compatibility”: clarified
+schema generator and schema compiler requirements.
+* Section B.2.5: Added marshalling of null
+value as xsi:nil or empty element based upon @XmlElement.required and
+@XmlElement.nillable annotation elements.
+* Section B.5: Added new section and moved
+runtime requirements on getters/setters to here.
+
+=== Changes since Public Review
+
+* Update link:jaxb.html#a3815[See
+Compatibility]” for JAXB 2.0 technology. Additional requirements added
+for Java Types to XML binding and the running of JAXB 1.0 application in
+a JAXB 2.0 environment.
+* Added external event callback mechanism,
+_Unmarshaller.Listener_ and _Marshaller.Listener_ .
+* Added new unmarshal method overloading,
+unmarshal by declaredType, to _Unmarshaller_ and _Binder_ . Enables
+unmarshalling a root element that corresponds with a local element
+declaration in schema.
+* Added link:jaxb.html#a1459[See
+Modifying Schema-Derived Code]” describing use of annotation
+_@javax.annotation.Generated_ to distinguish between generated and
+user-modified code in schema-derived class.
+* Element declaration with anonymous complex
+type definition binds to _@XmlRootElement_ annotated class except for
+cases in Section 6.7.3.1.
+* Removed <jaxb:globalBindings
+nullsInCollection>. The customization <jaxb:property
+generateElementProperty=”true”> can achieve same desired result.
+* Added clarification that mapping two or
+more target namespaces to same java package can result in naming
+collision that should be detected as an error by schema compiler.
+* Added <jaxb:factoryMethod> customization to
+enable the resolution of name collisions between factory methods.
+* First parameter to any of the overloaded
+Marshaller.marshal() methods must be a JAXB element; otherwise, method
+must throw MarshalException. See updated Marshaller javadoc and
+link:jaxb.html#a397[See Marshalling]” for details.
+* Prepend “_”, not “Original”, to a Java
+class name representing an XML Schema type definition that has been
+redefined in link:jaxb.html#a1316[See Redefine]”.
+* Format for class name in _jaxb.index_ file
+clarified in JAXBConext.newInstance(String) method javadoc.
+* Clarifications on @dom customization in
+Section 7.12..
+* Chapter 8: Added support for
+@XmlJavaTypeAdapter at the package level.
+* Chapter 8: Added new annotation
+@XmlJavaTypeAdapters as a container for defining multiple
+@XmlJavaTypeAdapters at the package level.
+* Chapter 8: Added support for @XmlSchemaType
+at the package level.
+* Chapter 8: Added @XmlSchemaTypes as a
+container annotation for defining multiple @XmlSchemaType annotations at
+the package level.
+* Chapter 8: added lists of annotations
+allowed with each annotation.
+* Chapter 8: Bug fixes and clarifications
+related to mapping and mapping constraints.
+* Chapter 8: Expanded collection types mapped
+to java.util.Map and java.util.Collection.
+* Appendix B. Incorporate event call backs
+into unmarshalling process.
+* Appendix B: Incorporate into unmarshalling
+process additional unmarshal methods: Binder.unmarshal(..), unmarshal
+methods that take a declaredType as a parameter - Binder.unmarshal(...,
+declaredType) and Unmarshaller.unmarshal(...,declaredType).
+
+=== Changes since Early Draft 2
+
+* Simple type substitution support added in
+Section 6.7.4.2.
+* Updates to enum type binding. (Section
+7.5.1, 7.5.5, 7.10, Appendix D.3)
+* Optimized binary data.(Appendix H) and
+schema customizations. (Section 7.13 and 7.10.5)
+* Clarification for _<jaxb:globalBindings
+underscoreHandling=”asCharInWord”>_ (Appendix D.2)
+* Added Unmarshal and Marshal Callback Events
+(Section 4.4.1,4.5.1)
+* Clarification: xs:ID and xs:IDREF can not
+bind to an enum type. (Section 6.2.3,7.10.5)
+* Added schema customization: +
+<jaxb:globalBinding localScoping=”nested”|”toplevel”> (Section 7.5.1) +
+<jaxb:inlineBinaryData> (Section 7.13) +
+<jaxb:property @attachmentRef/> (Section 7.8.1)
+* Updated Section 6 and 7 with mapping
+annotations that are generated on schema-derived JAXB
+classes/properties/fields.
+* Added jakarta.xml.bind.Binder class to
+Section 4.8.2.
+* Runtime generation of schema from JAXB
+mapping annotations: JAXBContext.generateSchema().
+* Chapter 8: added @XmlList: bind
+property/field to simple list type
+* Chapter 8: added @XmlAnyElement: bind
+property/field to xs:any
+* Chapter 8: added @XmlAnyAttribute - bind
+property/field to xs:anyAttribute
+* Chapter 8. added @XmlMixed - for mixed
+content
+* Chapter 8, added annotations for
+attachment/MTOM support: @XmlMimeType, @XmlAttachmentRef
+* Chapter 8: added @XmlAccessorOrder - to
+specify default ordering.
+* Chapter 8: added @XmlSchemaType mainly for
+use in mapping XMLGregorianCalendar.
+* Chapter 8: map java.lang.Object to
+xs:anyType
+* Chapter 8: added mapping of
+XMLGregorianCalendar
+* Chapter 8: added mapping of generics - type
+variables, wildcardType
+* Chapter 8: added mapping of binary data
+types.
+* Chapter 8: default mappings changed for
+class, enum type.
+* Chapter 8: default mapping of propOrder
+specified.
+* Chapter 8: mapping of classes - zero arg
+constructor, factory method.
+* Chapter 8: added Runtime schema generation
+requirement.
+* Chapter 8: Clarified mapping constraints
+and other bug fixes.
+* Added Appendix B new: Added Runtime
+Processing Model to specify the marshalling/unmarshalling for dealing
+with invalid XML content and schema evolution.
+* Updated Appendix C to JAXB 2.0 binding
+schema.
+
+=== Changes since Early Draft
+
+* Updated goals in Introduction.
+* Update to Section 3 “Architecture”
+introducing Java to Schema binding.
+*  section on portable annotation-driven
+architecture.
+* section on handling of invalid XML content
+* Binding Framework
+* Replaced _IXmlElement<T>_ interface with
+_JAXBElement<T>_ class. (JAXBElement is used for schema to java binding)
+*  _JAXBIntrospector_ introduced _._
+* Add flexible (by-name) unmarshal and
+describe JAXB 1.0 structural unmarshalling.
+* Moved deprecated on-demand validation,
+accessible via jakarta.xml.bind.Validator, to Appendix H.
+* XSD to Java Binding
+* Bind complex type definition to value class
+by default.
+* Schema-derived code is annotated with JAXB
+java annotations.
+* Bind XSD simpleType with enum facet to J2SE
+5.0 enum type. Change default for jaxb:globalBinding @typeEnumBase from
+xs:NCName to xs:string.
+*  _ObjectFactory_ factory methods no longer
+throws _JAXBException_ .
+* Added customizations +
+[jaxb:globalBindings] @generateValueClass, @generateElementClass,
+@serializable, @optionalProperty, @nullInCollection +
+[jaxb:property] @generateElementProperty
+* Add binding support for redefine
+* Simplified following bindings: +
+- union by binding to String rather than Object. +
+- Attribute Wildcard binds to portable abstraction of a
+java.util.Map<QName, String>, not jakarta.xml.bind.AttributeMap. +
+- bind xsd:anyType to java.lang.Object in JAXB property method
+signatures and element factory method(support element/type substitution)
+* Changes required for default and customized
+binding in order to support flexible unmarshalling described in Section
+4.4.3.
+* Java to XSD Binding
+* Added @XmlAccessorType for controlling
+whether fields or properties are mapped by default.
+* Added @XmlEnum and @XmlEnumValue for
+mapping of enum types.
+* Collections has been redesigned to allow
+them to be used in annotation of schema derived code:
+
+ - removed @XmlCollectionItem and
+@XmlCollection
+
+- Added annotations parameters to @XmlElement
+
+- added @XmlElementRef
+
+- added @XmlElements and @XmlElementRefs as
+containers for collections of @XmlElements or @XmlElementRefs.
+
+- added @XmlElementWrapper for wrapping of
+collections.
+
+* Added mapping of anonymous types.
+* Added mapping of nested classes to schema
+* Added @XmlRootElement for annotating
+classes. @XmlElement can now only be used to annotate properties/fields.
+* Added @XmlElementRef for supporting schema
+derived code as well as mapping of existing object model to XML
+representation. javadoc for @XmlElementRef contains an example
+* Added @XmlElementDecl on object factory
+methods for supporting mapping of substitution groups for schema -> java
+binding.
+* Redesigned Adapter support for mapping of
+non Java Beans.
+
+ - new package
+jakarta.xml.bind.annotation.adapters for adapters.
+
+- Added XmlAdapter base abstract class for
+all adapters.
+
+- redesigned and moved XmlJavaTypeAdapter to
+the package.
+
+* Moved default mapping from each section to
+“Default Mapping” section.
+* Consistent treatment of defaults
+“##default”
+* Removed JAX-RPC 1.1 Alignment. JAX-WS 2.0
+is deferring its databinding to JAXB 2.0.
+
+=== Changes for 2.0 +
+Early Draft v0.4
+
+* Updated link:jaxb.html#a2[See
+Introduction]”.
+* Added link:jaxb.html#a151[See
+Requirements]”
+* Added link:jaxb.html#a2236[See Java
+Types To XML]” for Java Source to XML Schema mapping.
+* XML Schema to schema-derived Java Binding
+changes
+* Element handling changes to support element
+and type substitution in link:jaxb.html#a680[See Java Element
+Representation Summary]”, link:jaxb.html#a1023[See Element
+Declaration]” and link:jaxb.html#a630[See Element Property]”.
+* Added link:jaxb.html#a1306[See
+Attribute Wildcard]” binding
+* Support binding all wildcard content in
+link:jaxb.html#a1384[See Bind wildcard schema component]”.
+* Addition/changes in
+link:jaxb.html#a725[See Java Mapping for XML Schema Built-in
+Types].
+* XML Schema to Java Customization
+* Added ability to doable databinding for an
+XML Schema fragment in link:jaxb.html#a2165[See <dom>
+Declaration]”.
+
+=== Changes for 1.0 Final
+
+* Added method
+_jakarta.xml.bind.Marshaller.getNode(Object)_ which returns a DOM view of
+the Java content tree. See method's javadoc for details.
+
+=== Changes for Proposed Final
+
+* Added link:jaxb.html#a3815[See
+Compatibility].”
+* Section 5.9.2, “General Content Property,”
+removed value content list since it would not be tractable to support
+when type and group substitution are supported by JAXB technology.
+* Added the ability to associate
+implementation specific property/value pairs to the unmarshal,
+validation and JAXB instance creation. Changes impact Section 3.4
+“Unmarshalling,” Section 3.5 “Validator” and the ObjectFactory
+description in Section 4.2 “Java Package.”
+* Section 6.12.10.1, “Bind a Top Level Choice
+Model Group” was updated to handle Collection properties occurring
+within a Choice value class.
+* Section 6.12.11, “Model Group binding
+algorithm” changed step 4(a) to bind to choice value class rather than
+choice content property.
+* link:jaxb.html#a595[See List
+Property] and link:jaxb.html#a610[See isSet Property Modifier]”
+updated so one can discard set value for a List property via calling
+unset method.
+* At end of Section 4, added an UML diagram
+of the JAXB Java representation of XML content.
+* Updated default binding handling in
+link:jaxb.html#a996[See Model Group Definition].” Specifically,
+value class, element classes and enum types are derived from the content
+model of a model group definition are only bound once, not once per time
+the group is referenced.
+* Change link:jaxb.html#a1384[See
+Bind wildcard schema component],” to bind to a JAXB property with a
+basetype of _java.lang.Object,_ not _jakarta.xml.bind.Element._ Strict and
+lax wildcard validation processing allows for contents constrained only
+by _xsi:type_ attribute. Current APIs should allow for future support of
+_xsi:type_ .
+* Simplify anonymous simple type definition
+binding to typesafe enum class. Replace incomplete approach to derive a
+name with the requirement that the @name attribute for element
+typesafeEnumClass is mandatory when associated with an anonymous simple
+type definition.
+* Changed link:jaxb.html#a1012[See
+Deriving Class Names for Named Model Group Descendants]” to state that
+all classes and interfaces generated for XML Schema component that
+directly compose the content model for a model group, that these
+classes/interfaces should be generated once as top-level interface/class
+in a package, not in every content model that references the model
+group.
+* Current link:jaxb.html#a1580[See
+<globalBindings> Declaration]”:
+* Replaced _modelGroupAsClass_ with
+_bindingStyle_ .
+* Specified schema types that cannot be
+listed in _typesafeEnumBase_ .
+* link:jaxb.html#a1783[See <property>
+Declaration]:
+* Clarified the customization of model groups
+with respect to _choiceContentProperty, elementBinding and
+modelGroupBinding._ Dropped _choiceContentProperty_ from the
+_<property>_ declaration.
+* Added _<baseType>_ element and clarified
+semantics.
+* Added support for customization of simple
+content.
+* Added customization of simple types at
+point of reference.
+* Clarified restrictions and relationships
+between different customizations.
+* link:jaxb.html#a1981[See <javaType>
+Declaration]”:
+* Added
+_jakarta.xml.bind.DatatypeConverterInterface_ interface.
+* Added _jakarta.xml.bind.DatatypeConverter_
+class for use by user specified parse and print methods.
+* Added
+_javax.xml.namespace.NamespaceContext_ class for processing of QNames.
+* Clarified print and parse method
+requirements.
+* Added narrowing and widening conversion
+requirements.
+* Throughout link:jaxb.html#a1498[See
+Customizing XML Schema to Java Representation Binding],” clarified the
+handling of invalid customizations.
+
+=== Changes for Public Draft 2
+
+Many changes were prompted by inconsistencies
+detected within the specification by the reference implementation
+effort. Change bars indicate what has changed since Public Draft.
+
+* Section 4.5.4, “isSetProperty Modifier,”
+describes the customization required to enable its methods to he
+generated.
+* Section 5.7.2, “Binding of an anonymous
+type definition,” clarifies the generation of value class and typesafe
+enum classes from an anonymous type definition.
+* Section 5.2.4, “List” Simple Type
+Definition and the handling of list members within a union were added
+since public draft.
+* Clarification on typesafe enum global
+customization “generateName” in Section 5.2.3.4, “XML Enumvalue
+To Java Identifier Mapping.”
+* Clarification of handling binding of
+wildcard content in Section 5.9.4.
+* Chapter6, “Customization,” resolved binding
+declaration naming inconsistencies between specification and normative
+binding schema.
+* removed _enableValidation_ attribute (a
+duplicate of _enableFailFastCheck)_ from < _globalBindings>_
+declaration.
+* Added default values for <
+_globalBindings>_ declaration attributes.
+* Changed _typesafeEnumBase_ to a list of
+QNames. Clarified the binding to typesafe enum class.
+* Clarified the usage and support for
+_implClass_ attribute in _<class>_ declaration.
+* Clarified the usage and support for
+_enableFailFastCheck_ in the _<property>_ declaration.
+* Added _<javadoc>_ to typesafe enum class,
+member and property declarations.
+* Mention that embedded HTML tags in
+_<javadoc>_ declaration must be escaped.
+* Fixed mistakes in derived Java code
+throughout document.
+* Added Section 7. Compatibility and updated
+Appendix E.2 “Non required XML Schema Concepts” accordingly.
+
+=== Changes for Public Draft
+
+* link:jaxb.html#a1442[See Bind
+single occurrence choice group to a choice content property],” replaced
+overloading of choice content property setter method with a single
+setter method with a value parameter with the common type of all members
+of the choice. Since the resolution of overloaded method invocation is
+performed using compile-time typing, not runtime typing, this
+overloading was problematic. Same change was made to binding of union
+types.
+* Added details on how to construct factory
+method signature for nested content and element classes.
+* Section 3.3, default validation handler
+does not fail on first warning, only on first error or fatal error.
+* Add ID/IDREF handling in section 5.
+* Updated name mapping in appendix C.
+* link:jaxb.html#a572[See Indexed
+Property], added getIDLenth() to indexed property.
+* Removed ObjectFactory.setImplementation
+method from link:jaxb.html#a482[See Java Package]. The negative
+impact on implementation provided to be greater than the benefit it
+provided the user.
+* Introduced external binding declaration
+format.
+* Introduced a method to introduce extension
+binding declarations.
+* Added an appendix section describing JAXB
+custom bindings that align JAXB binding with JAX-RPC binding from XML to
+Java representation.
+* Generate isID() accessor for boolean
+property.
+* Section 6, Customization has been
+substantially rewritten.
