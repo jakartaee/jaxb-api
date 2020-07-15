@@ -15,9 +15,9 @@ The abstract model described in [XSD Part 1]
 is used to discuss the default binding of each schema component type.
 Each schema component is described as a list of properties and their
 semantics. References to properties of a schema component as defined in
-[XSD Part 1] are denoted using the notation \{schema property}
+[XSD Part 1] are denoted using the notation _{schema property}_
 throughout this section. References to properties of information items
-as defined in [XML-Infoset] are denoted by the notation [property].
+as defined in [XML-Infoset] are denoted by the notation *[property]*.
 
 All JAXB implementations are required to
 implement the default bindings specified in this chapter. However, users
@@ -38,7 +38,17 @@ described independent of whether it is the default mapping or a
 customized mapping, JAXB implementations are allowed to optimize away
 redundant mapping annotations that are the default mapping annotation.
 
-* 
+[NOTE]
+.Design Note
+====
+Note that the mapping annotations generated on the schema derived
+classes do not capture all aspects from the original schema.
+A schema generated from the mapping annotations of the schema derived
+classes differs from the original schema used to generate
+the schema-derived classes. The original schema is more precise
+for validation purposes than the one generated from the schema-derived classes.
+
+====
 
 All examples are non-normative. Note that in
 the examples, the schema-derived code does not list all required mapping
@@ -63,14 +73,13 @@ specified in the schema component using the simple type definition.
 While not necessary to perform by default,
 this section illustrates how a simple type definition is bound to a JAXB
 mapped class. This binding is necessary to preserve a simple type
-definition referred to by _xsi:type_ attribute in an Xml instance
+definition referred to by `xsi:type` attribute in an Xml instance
 document. See link:jaxb.html#a1582[See Usage]“for the
 customization that enables this binding.
 
 ==== Type Categorization
 
-The simple type definitions can be
-categorized as:
+The simple type definitions can be categorized as:
 
 * schema built-in datatypes [XSD PART2]
 * user-derived datatypes
@@ -104,147 +113,82 @@ image::images/xmlb-15.png[image]
 The above diagram is the same as the one in
 [XSD PART2] except for the following:
 
-* Only schema built-in atomic datatypes
-derived by restriction have been shown.
-* The schema built-in atomic datatypes have
-been annotated with Java data types from the “Java Mapping for XML
-Schema Built-in Types” table below.
-* 
+* Only schema built-in atomic datatypes derived by restriction have been shown.
+* The schema built-in atomic datatypes have been annotated with Java data types
+from the “Java Mapping for XML Schema Built-in Types” table below.
+
+[NOTE]
+.Design Note
+====
+xs:anyURI is not bound to java.net.URI by default since not all
+possible values of xs:anyURI can be passed to the java.net.URI constructor.
+Using a global JAXB customization described in Section 7.9, “<javaType> Declaration“,
+a JAXB user can override the default mapping to map xs:anyURI to java.net.URI.
+
+====
+
 
 The following is a mapping for subset of the
 XML schema built-in data types to Java data types. This table is used to
 specify the base type later.
 
 .[[a725]]Java Mapping for XML Schema Built-in Types
-XML Schema Datatype
-
-Java Datatype
-
- _xsd:string_
-
- _java.lang.String_
-
- _xsd:integer_
-
- _java.math.BigInteger_
-
- _xsd:int_
-
- _int_
-
- _xsd.long_
-
- _long_
-
- _xsd:short_
-
- _short_
-
- _xsd:decimal_
-
- _java.math.BigDecimal_
-
- _xsd:float_
-
- _float_
-
- _xsd:double_
-
- _double_
-
- _xsd:boolean_
-
- _boolean_
-
- _xsd:byte_
-
- _byte_
-
- _xsd:QName_
-
- _javax.xml.namespace.QName_ 1
-
- _xsd:dateTime_
-
-javax.xml.datatype.XMLGregorianCalendar 1
-
- _xsd:base64Binary_
-
- _byte[]_
-
- _xsd:hexBinary_
-
- _byte[]_
-
-xsd:unsignedInt
-
-long
-
-xsd:unsignedShort
-
-int
-
-xsd:unsignedByte
-
-short
-
-xsd:time
-
-javax.xml.datatype.XMLGregorianCalendar 1.
-
-xsd:date
-
-javax.xml.datatype.XMLGregorianCalendar 1.
-
-xsd:g*
-
-javax.xml.datatype.XMLGregorianCalendar 1.
-
-{empty}xsd:anySimpleType +
-(for xsd:element of this type)link:#a5368[17]
-
-java.lang.Object
-
-xsd:anySimpleType +
-(for xsd:attribute of this type)
-
-java.lang.String
-
-xsd:duration
-
-javax.xml.datatype.Duration 1
-
-xsd:NOTATION
-
-javax.xml.namespace.QName 1
-
-1. JAXP 1.3 defines package
-_javax.xml.datatype_ and _javax.xml.namespace_
+[cols="2*",options="header"]
+|===
+|XML Schema Datatype |Java Datatype
+| *xsd:string* | *java.lang.String*
+| *xsd:integer* | *java.math.BigInteger*
+| *xsd:int* | *int*
+| *xsd:long* | *long*
+| *xsd:short* | *short*
+| *xsd:decimal* | *java.math.BigDecimal*
+| *xsd:float* | *float*
+| *xsd:double* | *double*
+| *xsd:boolean* | *boolean*
+| *xsd:byte* | *byte*
+| *xsd:QName* | *javax.xml.namespace.QName* footnote:jaxp[JAXP 1.3 defines package
+`javax.xml.datatype` and `javax.xml.namespace`]
+| xsd:dateTime |javax.xml.datatype.XMLGregorianCalendar footnote:jaxp[]
+| *xsd:base64Binary* | *byte[]*
+| *xsd:hexBinary* | *byte[]*
+| xsd:unsignedInt | long
+| xsd:unsignedShort | int
+| xsd:unsignedByte | short
+| xsd:time | javax.xml.datatype.XMLGregorianCalendar footnote:jaxp[]
+| xsd:date | javax.xml.datatype.XMLGregorianCalendar footnote:jaxp[]
+| xsd:g* | javax.xml.datatype.XMLGregorianCalendar footnote:jaxp[]
+| xsd:anySimpleType +
+(for xsd:element of this type)footnote:[enable type substitution for element of xsd:anySimpleType] | java.lang.Object
+| xsd:anySimpleType +
+(for xsd:attribute of this type) | java.lang.String
+| xsd:duration | javax.xml.datatype.Duration footnote:jaxp[]
+| xsd:NOTATION | javax.xml.namespace.QName footnote:jaxp[]
+|===
 
 The base type is determined as follows:
 
 . Map by value space bounding facets +
-If the simple type derives from or is _xsd:integer_ and has either a
+If the simple type derives from or is `xsd:integer` and has either a
 constraining lower and/or upper bounds facet(s) or totalDigits facet,
 check if the following optimized binding is possible:
-. If the simple type derives from or is
-_xsd:short_ , _xsd:byte_ or _xsd:unsignedByte_ , go to step 2.
-. If the value space for the simple type is
-representable in the range of _java.lang.Integer.MIN_VALUE_ and
-_java.lang.Integer.MAX_VALUE_ , map to java primitive type, _int_ .
-. If the value space for the simple type is
-representable in the range of _java.lang.Long.MIN_VALUE_ and
-_java.lang.Long.MAX_VALUE_ , map to java primitive type, _long_ .
-. Else go to step 2.
+* If the simple type derives from or is
+`xsd:short`, `xsd:byte` or `xsd:unsignedByte`, go to step 2.
+* If the value space for the simple type is
+representable in the range of `java.lang.Integer.MIN_VALUE` and
+`java.lang.Integer.MAX_VALUE`, map to java primitive type, `int`.
+* If the value space for the simple type is
+representable in the range of `java.lang.Long.MIN_VALUE` and
+`java.lang.Long.MAX_VALUE`, map to java primitive type, `long`.
+* Else go to step 2.
 . Map by datatype +
 If a mapping is defined for the simple type in Table 6.1, the base type
 defaults to its defined Java datatype.
 . Map by base datatype +
 Otherwise, the base type must be the result obtained by repeating the
-step 1 and 2 using the \{base type definition}. For schema datatypes
-derived by restriction, the \{base type definition} represents the
+step 1 and 2 using the _{base type definition}_. For schema datatypes
+derived by restriction, the _{base type definition}_ represents the
 simple type definition from which it is derived. Therefore, repeating
-step 1 with \{base type definition} essentially walks up the XML Schema
+step 1 with _{base type definition}_ essentially walks up the XML Schema
 built-in type hierarchy until a simple type definition which is mapped
 to a Java datatype is found.
 
@@ -253,83 +197,91 @@ specified in “Simple Type Definition Validation Rules,” Section
 4.1.4[XSD PART2].
 
 *_Example:_* +
-
 The following schema fragment (taken from
 Section 4.3.1, “Length” [XSD PART2]):
 
-<xs:simpleType name="productCode"> +
-<xs:restriction base="xs:string"> +
-<xs:length value="8" fixed="true"/> +
-</xs:restriction> +
+[source,xml,indent=4]
+----
+<xs:simpleType name="productCode">
+  <xs:restriction base="xs:string">
+    <xs:length value="8" fixed="true"/>
+  </xs:restriction>
 </xs:simpleType>
+----
 
 The facet “length” constrains the length of a
-product code (represented by _productCode_ ) to 8 characters (see
+product code (represented by `productCode`) to 8 characters (see
 section 4.3.1 [XSD PART2] for details).
 
 The Java property attributes corresponding to
 the above schema fragment are:
 
-* There is no Java datatype mapping for
-_productCode._ So the Java datatype is determined by walking up the
+* There is no Java datatype mapping for `productCode`.
+So the Java datatype is determined by walking up the
 built-in type hierarchy.
-* The _\{base type definition}_ of
-_productCode_ is _xs:string. xs:string_ is mapped to _java.lang.String_
+* The `{base type definition}` of `productCode`
+is `xs:string`. `xs:string` is mapped to `java.lang.String`
 (as indicated in the table, and assuming no customization). Therefore,
-_productCode_ is mapped to the Java datatype _java.lang.String_ .
-* The predicate enforces the constraints on
-the length.
+`productCode` is mapped to the Java datatype `java.lang.String`.
+* The predicate enforces the constraints on the length.
 
 ===== Notation
 
-Given that the value space of _xsd:NOTATION_
-is the set of _xsd:QName_ , bind _xsd:NOTATION_ type to
-_javax.xml.namespace.QName_ .
+Given that the value space of `xsd:NOTATION`
+is the set of `xsd:QName`, bind `xsd:NOTATION` type to
+`javax.xml.namespace.QName`.
 
- For example, the following schema:
+For example, the following schema:
 
-<xs:schema targetNamespace="http://e.org"
-xmlns:e="http://e.org" +
-xmlns:xs="http://www.w3.org/2001/XMLSchema"> +
-<xs:notation name="jpeg" public="image/jpeg" system="jpeg.exe"/>
-<xs:notation name="png" public="image/png" system="png.exe"/> +
-<xs:simpleType name="pictureType"> +
-<xs:restriction base="xs:NOTATION"> +
-<xs:enumeration value="e:jpeg"/> +
-<xs:enumeration value="e:png"/> +
-</xs:restriction> +
-</xs:simpleType> +
-<xs:complexType name="Picture"> +
-<xs:simpleContent> +
-<xs:extension base="xs:hexBinary"> +
-<xs:attribute name="format" type="e:pictureType"/>
-
- </xs:extension> +
-</xs:simpleContent> +
-</xs:complexType> +
+[source,xml]
+----
+<xs:schema targetNamespace="http://e.org" xmlns:e="http://e.org"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:notation name="jpeg" public="image/jpeg" system="jpeg.exe"/>
+  <xs:notation name="png" public="image/png" system="png.exe"/>
+  <xs:simpleType name="pictureType">
+    <xs:restriction base="xs:NOTATION">
+      <xs:enumeration value="e:jpeg"/>
+      <xs:enumeration value="e:png"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Picture">
+    <xs:simpleContent>
+      <xs:extension base="xs:hexBinary">
+        <xs:attribute name="format" type="e:pictureType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 </xs:schema>
+----
 
- is mapped to the following Java code:
+is mapped to the following Java code:
 
-package org.e; +
-import javax.xml.namespace.QName; +
-public class Picture \{ +
-void setValue(byte[] value) \{...} +
-byte[] getValue() \{...} +
-void setFormat(QName value)\{...} +
-QName getFormat()\{...} +
+[source,java]
+----
+package org.e;
+import javax.xml.namespace.QName;
+public class Picture {
+    void setValue(byte[] value) {...}
+    byte[] getValue() {...}
+    void setFormat(QName value)\{...}
+    QName getFormat() {...}
 }
+----
 
 With the following usage scenario:
 
-Picture pic = ...; +
+[source,java,indent=4]
+----
+Picture pic = ...;
 pic.setFormat(new QName("http://e.org","jpeg"));
+----
 
 ===== [[a803]]Bind to a JAXB mapped class
 
 By default, a named simple type definition is
 not bound to a Java class. This binding is only necessary to enable the
-precise type of an _xsi:type_ substitution to be preserved as described
+precise type of an `xsi:type` substitution to be preserved as described
 in link:jaxb.html#a1158[See Type Substitution of a Simple Type
 Definition]“. This binding is enabled via the global binding
 customization attribute _@mapSimpleTypeDef_ specified in
@@ -339,29 +291,24 @@ The binding of a named simple type definition
 to a Java value class is based on the abstract model properties in
 link:jaxb.html#a4867[See Simple Type Definition Schema
 Component]. The Java value class must be defined as specified here,
-unless the ref attribute is specified on the _<jaxb:class>_ declaration,
+unless the ref attribute is specified on the `<jaxb:class>` declaration,
 in which case the schema compiler will simply assume that the nominated
 class is already bound to this simple type.
 
-*  _name:_ name is the Java identifier
-obtained by mapping the XML name _\{name}_ using the name mapping
+* *name*: name is the Java identifier
+obtained by mapping the XML name _{name}_ using the name mapping
 algorithm, specified in link:jaxb.html#a4656[See The Name to
 Identifier Mapping Algorithm]. Note that anonymous simple type
 definition’s are never bound to a Java value class.
-*  _package:_
-* The schema-derived Java value class is
-generated into the Java package that represents the binding of \{target
-namespace}
-*  _outer class name:_
-* There is no outer class name for a global
+* *package*: The schema-derived Java value class is generated
+into the Java package that represents the binding of _{target namespace}_
+* *outer class name*: There is no outer class name for a global
 simple type definition.
-*  _base class:_
-* Due to a constraint specified for @XmlValue
+* *base class*: Due to a constraint specified for @XmlValue
 in Section 8, this class can not extend any other class. The derivation
 by restriction hierarchy for simple type definitions can not be captured
 in the schema-derived Java value class.
-*  _value property:_
-* Same as the binding of simple content in
+* *value property*: Same as the binding of simple content in
 link:jaxb.html#a973[See Simple Content Binding] to an @XmlValue
 annotated JAXB property.
 
@@ -369,22 +316,27 @@ The next two examples illustrate the binding
 of a simple type definition to a Java value class when the appropriate
 JAXB schema customization is enabled.
 
-.[[a816]]Simple type definition
-
-<xs:simpleType name="productCode"> +
-<xs:restriction base="xs:string"> +
-<xs:length value="8" fixed="true"/> +
-</xs:restriction> +
+[#a816]
+.Simple type definition
+[source,xml,indent=4]
+----
+<xs:simpleType name="productCode">
+  <xs:restriction base="xs:string">
+    <xs:length value="8" fixed="true"/>
+  </xs:restriction>
 </xs:simpleType>
+----
 
-.Binding of link:jaxb.html#a816[See Simple type definition]“
-
-@XmlType(name="productCode") +
-public class ProductCode \{ +
-@XmlValue +
-String getValue(); +
-void setValue(String value); +
+.Binding of <<a816>>
+[source,java,indent=4]
+----
+@XmlType(name="productCode")
+public class ProductCode {
+    @XmlValue
+    String getValue();
+    void setValue(String value);
 }
+----
 
 ===== [[a820]]Annotations for standard XML datatypes
 
@@ -392,17 +344,12 @@ By default, a schema-derived JAXB property
 bound from one of the following standard XML datatypes is annotated with
 the specified mapping annotation.
 
-[width="100%",cols="50%,50%",options="header",]
+[cols="2*",options="header"]
 |===
-| _Schema Type_ |
-_JAXB Property Annotation_
-|xsd:ID |@XmlID
-
-|xsd:IDREF
-|@XmlIDREF
-
-|ref:swaRef
-|@XmlAttachmentRef
+| `*Schema Type*` | `*JAXB Property Annotation*`
+| `xsd:ID` | `@XmlID`
+| `xsd:IDREF` | `@XmlIDREF`
+| `ref:swaRef` | `@XmlAttachmentRef`
 |===
 
 Note that JAXB schema customizations could

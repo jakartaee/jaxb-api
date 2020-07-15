@@ -24,9 +24,6 @@ include::appI-changelog.adoc[]
 
 '''''
 
-[.footnoteNumber]# 17.# [[a5368]]enable type
-substitution for element of xsd:anySimpleType
-
 [.footnoteNumber]# 18.# [[a5369]]Exception cases that
 do not bind to enum type: when the base type is or derives from _xs:ID_
 and _xs:IDREF_ . Rationale for not binding these type definitions to an
