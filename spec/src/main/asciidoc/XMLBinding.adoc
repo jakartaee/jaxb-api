@@ -24,21 +24,6 @@ include::appI-changelog.adoc[]
 
 '''''
 
-[.footnoteNumber]# 18.# [[a5369]]Exception cases that
-do not bind to enum type: when the base type is or derives from _xs:ID_
-and _xs:IDREF_ . Rationale for not binding these type definitions to an
-enum type is in link:jaxb.html#a2126[See Customizable Schema
-Elements]“.
-
-[.footnoteNumber]# 19.# [[a5370]]Note for this case,
-the _enumConstantValueType_ is always _java.lang.String_ .
-
-[.footnoteNumber]# 20.#
-link:jaxb.html#a1582[See Usage]”
-describes the _enableFailFastCheck_ customization and
-_link:jaxb.html#a256[See Validation]_ ” defines fail-fast
-checking.
-
 [.footnoteNumber]# 21.# [[a5372]]Note that
 link:jaxb.html#a1084[See Binding of an anonymous complex type
 definition]” defines the name and package property for anonymous type

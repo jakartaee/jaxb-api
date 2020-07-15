@@ -359,9 +359,13 @@ override these default binding.
 
 The default mapping for a named atomic type
 that is derived by restriction with enumeration facet(s) and whose
-restriction base type (represented by \{base type definition}) is
-_xs:String_ link:#a5369[18] or derived from it is mapped to an
-enum type. The _[typesafeEnumBase]_ attribute customization described in
+restriction base type (represented by _{base type definition}_) is
+`xs:String` footnote:[Exception cases that
+do not bind to enum type: when the base type is or derives from `xs:ID`
+and `xs:IDREF`. Rationale for not binding these type definitions to an
+enum type is in link:jaxb.html#a2126[See Customizable Schema
+Elements]“.] or derived from it is mapped to an
+enum type. The *[typesafeEnumBase]* attribute customization described in
 link:jaxb.html#a1580[See <globalBindings> Declaration]," enables
 global configuration to alter what Xml built-in datatypes are bound by
 default to an enum type. An anonymous simple type definition is never
@@ -376,20 +380,26 @@ more formal specification.
 
 XML Schema fragment:
 
-<xs:simpleType name="USState"> +
-<xs:restriction base="xs:NCName"> +
-<xs:enumeration value="AK"/> +
-<xs:enumeration value="AL"/> +
-</xs:restriction> +
+[source,xml,indent=4]
+----
+<xs:simpleType name="USState">
+  <xs:restriction base="xs:NCName">
+    <xs:enumeration value="AK"/>
+    <xs:enumeration value="AL"/>
+  </xs:restriction>
 </xs:simpleType>
+----
 
 The corresponding enum type binding is:
 
-public enum USState \{ +
-AK, AL; +
-public String value() \{ return name(); } +
-public static USState fromValue(String value) \{ ... } +
+[source,java,indent=4]
+----
+public enum USState {
+    AK, AL;
+    public String value() { return name(); }
+    public static USState fromValue(String value) { ... }
 };
+----
 
 ===== Enum type binding
 
@@ -400,32 +410,31 @@ Component] as follows:
 
 The enum type binding is defined as follows:
 
-* name: The default name of the enum type,
-enumType, is computed by applying the XML Name to Java identifier
-mapping algorithm to the _\{name}_ of the simple type definition. There
+* *name*: The default name of the enum type,
+_enumType_, is computed by applying the XML Name to Java identifier
+mapping algorithm to the _{name}_ of the simple type definition. There
 is no mechanism to derive a name for an anonymous simple type
-definition, the customization must provide the _name_ .
-* package name: The package name is
-determined from the _\{targetname space}_ of the schema that directly
+definition, the customization must provide the *name*.
+* *package name*: The package name is
+determined from the _{targetnamespace}_ of the schema that directly
 contains the simple type definition.
-*  _outer class name:_
-* There is no _outer class name_ for a global
+* *outer class name*:
+** There is no *outer class name* for a global
 simple type definition.
-* There is no _outer class name_ when schema
-customization, _[jaxb:globalBindings]_ _@localScoping_ , specified in
+** There is no *outer class name* when schema
+customization, *[jaxb:globalBindings]* _@localScoping_ , specified in
 Section link:jaxb.html#a1582[See Usage], has a value of
-_toplevel_ .
-* The _outer class name_ for an anonymous
+_toplevel_.
+** The *outer class name* for an anonymous
 simple type definition is computed by traversing up the anonymous simple
 type definition’s ancestor tree until the first ancestor is found that
-is: +
-- an XML component that is mapped to a Java value class, the _outer
-class name_ is composed of the concatenation of this Java value class’s
-_outer class name_ , “.” _,_ and its _name_ . +
-- a global declaration or definition is reached. There is no _outer
-class name_ for this case.
-*  _enum constants_ : Specified in next
-section.
+is:
+*** an XML component that is mapped to a Java value class, the *outer
+class name* is composed of the concatenation of this Java value class’s
+*outer class name*, "**.**", and its *name*.
+*** a global declaration or definition is reached. There is no *outer
+class name* for this case.
+* *enum constants*: Specified in next section.
 
 Note that since a Java enum type is
 essentially a final class, it is not possible for it to be subclassed.
@@ -440,47 +449,41 @@ simple type definition summarized in link:jaxb.html#a4867[See
 Simple Type Definition Schema Component] as follows:
 
 .Annotate enum type with @XmlEnum element-value pairs
-[width="100%",cols="50%,50%",options="header",]
+[cols="2*",options="header"]
 |===
-|@XmlEnum element
-|@XmlEnum value
-|name |simple type
-definition's \{name}
-
-|namespace
-|\{target namespace}
-
-|value |the java
-type binding of the simple type definition’s _\{base type definition}_
+| @XmlEnum element | @XmlEnum value
+| name | simple type definition's {name}
+| namespace | {target namespace}
+| value | the java type binding of the simple type definition’s _{base type definition}_
 |===
 
 ===== Enum Constant
 
 An enum constant is derived for each
 enumeration facet of the atomic type definition. The characteristics of
-an enum constant of the enum type are derived in terms of the properties
+an _enum constant_ of the enum type are derived in terms of the properties
 of the link:jaxb.html#a4899[See Enumeration Facet Schema
 Component] as follows:
 
-*  name: The name is either specified via
-customization, _jaxb:typesafeEnumMember_ described in
+* *name*: The name is either specified via
+customization, `jaxb:typesafeEnumMember` described in
 link:jaxb.html#a2092[See Usage]“, or the name is computed as
 specified in link:jaxb.html#a863[See XML Enumvalue-to-Java
 Identifier Mapping]“.
-* type: The Java type binding of the simple
-type definition’s \{base_type_definition}.
-*  _value_ : The conversion of string
-_\{value}_ to _type_ . _Value_ is manipulated via the following
+* *type*: The Java type binding of the simple
+type definition’s _{base_type_definition}_.
+* *value* : The conversion of string
+_{value}_ to *type*. *Value* is manipulated via the following
 generated enum type methods:
 
- _public_ _type_ value(); +
-public static _enumTypeName_ fromValue( _type_ value);
+ public        type         value();
+ public static enumTypeName fromValue(type value);
 
 To assist an application in manipulating the
 enum constants that comprise an enum type, all enum types have the
 following two implicitly declared static methods as specified in Section
-8.9 in [JLS3]. The enum type’s static method _values()_ returns an array
-of all enum constants. The static method _valueOf(String name)_ returns
+8.9 in [JLS3]. The enum type’s static method `values()` returns an array
+of all enum constants. The static method `valueOf(String name)` returns
 the enum constant represented by the name parameter.
 
 ===== XML Enumvalue-[[a863]]to-Java Identifier Mapping
@@ -489,11 +492,11 @@ The default name for the enum constant is
 based on mapping of the XML enumeration value to a Java identifier as
 described below.
 
-The XML enumeration value _\{value}_ is
+The XML enumeration value _{value}_ is
 mapped to a Java Identifier using the algorithm specified in
 link:jaxb.html#a4773[See Deriving a legal Java identifier from
-an enum facet value]“.If there is a collision among the generated
-constant fields _name_ or if it is not possible to generate a legal Java
+an enum facet value]“. If there is a collision among the generated
+constant fields *name* or if it is not possible to generate a legal Java
 identifier for one or more of the generated constant field names, see
 link:jaxb.html#a1633[See @typesafeEnumMemberName]“for
 customization options to resolve this error case.
@@ -507,124 +510,137 @@ that is set by the enum type’s constructor. The code generation template
 is the following:
 
 .At least one enum constant name differs from its value.
+[source,java]
+----
+public enum enumType {
+    EnumConstantName1(EnumConstantValue1),
+    ...
+    EnumConstantNameX(EnumConstantValueX);
+    public EnumConstantValueType value() { return value; }
+    public static enumType fromValue(EnumConstantValueType val)
+        { ... }
 
- public enum _enumType_ \{ +
-_EnumConstantName_ _1_ ( _EnumConstantValue_ _1_ ), +
-... +
-_EnumConstantName_ _X_ ( _EnumConstantValue_ _X)_ _; +
-_ public _EnumConstantValueType_ value() \{ return value;} +
-public static _enumType_ fromValue( _EnumConstantValueType_ val) +
-\{ ... } +
- +
-final private _EnumConstantValueType_ value; +
-private _enumType_ ( _EnumConstantValueType_ value) \{ +
-this.value = value; +
-} +
+    final private EnumConstantValueType value;
+    private enumType(EnumConstantValueType value) {
+        this.value = value;
+    }
 }
+----
 
 .Code template when enum constant name is same as its enum constant value.
-
- public enum _enumType_ \{ +
-_EnumConstantName1_ , ..., _EnumConstantNameX_ ; +
-public _Stringlink:#a5370[19]_ value() \{ return name();} +
-public static _enumType_ fromValue( _String_ 1 value) \{ ... } +
+[source,java,subs="+quotes,+macros"]
+----
+public enum enumType {
+    EnumConstantName1, ..., EnumConstantNameX;
+    public Stringfootnote:[Note for this case, the _enumConstantValueType_ is always `java.lang.String`.] value() { return name(); }
+    public static enumType fromValue(String value) { ... }
 }
+----
 
 The schema-derived enum constant is
 annotated, either explicitly or by default mapping annotations, with the
-mapping annotation specified in Section 8. The _@XmlEnumValue_
+mapping annotation specified in Section 8. The `@XmlEnumValue`
 annotation elements are derived in terms of the abstract model
 properties for a enumerated facet summarized in
 link:jaxb.html#a4899[See Enumeration Facet Schema Component] as
 follows:
 
 .Annotate enum constant with @XmlEnumValue element-value pairs
-[width="100%",cols="50%,50%",options="header",]
+[cols="2*",options="header"]
 |===
-|@XmlEnumValue element
-|@XmlEnumValue value
-|value
-|Enumeration facet’s \{value}
+| @XmlEnumValue element | @XmlEnumValue value
+| value | Enumeration facet’s {value}
 |===
 
-.Schema-derived enum type when enumeration facet’s value does not match enum constant name.
+
 Given following schema fragment:
 
-<xs:simpleType name="Coin"> +
-<!-- Assume jaxb customization that binds Coin to an enumType--> +
-<xs:restriction base="xs:int"> +
-<!--Assume jaxb customization specifying enumConstantName--> +
-<xs:enumeration value="1"/> <!-- name="penny"--> +
-<xs:enumeration value="5"/> <!-- name="nickel"--> +
-<xs:enumeration value="10"/><!-- name="dime"--> +
-<xs:enumeration value="25"/><!-- name="quarter--> +
-</xs:restriction> +
+.Schema-derived enum type when enumeration facet’s value does not match enum constant name.
+
+[source,xml,indent=4]
+----
+<xs:simpleType name="Coin">
+  <!-- Assume jaxb customization that binds Coin to an enumType -->
+  <xs:restriction base="xs:int"> +
+    <!-- Assume jaxb customization specifying enumConstantName -->
+    <xs:enumeration value="1"/> <!-- name="penny"-->
+    <xs:enumeration value="5"/> <!-- name="nickel"-->
+    <xs:enumeration value="10"/><!-- name="dime"-->
+    <xs:enumeration value="25"/><!-- name="quarter-->
+  </xs:restriction>
 </xs:simpleType>
+----
 
 Schema-derived enum type:
 
-@XmlEnum(value="java.lang.Integer.class") +
-public enum Coin \{ +
-@XmlEnumValue("1") PENNY(1), +
-@XmlEnumValue("5") NICKEL(5), +
-@XmlEnumValue("10") DIME(10), +
-@XmlEnumValue("25") QUARTER(25); +
-public int value()\{ return value; } +
-public static Coin fromValue(int value) \{ ... } +
- +
-final private Integer value; +
-Coin(int value) \{ this.value = value; } +
+[source,java,indent=4]
+----
+@XmlEnum(value="java.lang.Integer.class")
+public enum Coin {
+    @XmlEnumValue("1") PENNY(1),
+    @XmlEnumValue("5") NICKEL(5),
+    @XmlEnumValue("10") DIME(10),
+    @XmlEnumValue("25") QUARTER(25);
+
+    public int value() { return value; }
+    public static Coin fromValue(int value) { ... }
+
+    private final Integer value;
+    Coin(int value) { this.value = value; }
 }
+----
 
 ==== [[a883]]List
 
 A list simple type definition can only
 contain list items of atomic or union datatypes. The item type within
-the list is represented by the schema property \{item type definition}.
+the list is represented by the schema property _{item type definition}_.
 
 The Java property attributes for a list
 simple type definition are:
 
-* The _base type_ is derived from the \{item
-type definition} as follows. If the Java datatype for \{item type
-definition} is a Java primitive type, then the base type is the wrapper
+* The _base type_ is derived from the _{item type definition}_ as follows.
+If the Java datatype for _{item type definition}_ is a Java primitive type,
+then the base type is the wrapper
 class for the Java primitive type. Otherwise, the Java datatype is
 derived from the XML datatype as specified in
 link:jaxb.html#a715[See Atomic Datatype]” and
 link:jaxb.html#a829[See Enum Type].”
 * The _collection type_ defaults to an
-implementation of _java.util.List_ . Note that this specification does
+implementation of `java.util.List`. Note that this specification does
 not specify the default implementation for the interface
-_java.util.List_ , it is implementation dependent.
+`java.util.List`, it is implementation dependent.
 * The _predicate_ is derived from the “Simple
 Type Definition Validation Rules,” in section 4.1.4,[XSD PART2].
 
 *_Example:_* +
-
 For the following schema fragment:
 
+[source,xml,indent=4]
+----
 <xs:simpleType name="xs:USStateList">
-
- <xs:list itemType="xs:string"/>
-
+  <xs:list itemType="xs:string"/>
 </xs:simpleType>
+----
 
 The corresponding Java property attributes
 are:
 
-* The _base type_ is derived from \{item type
-definition} which is XML datatype, _“xs:string”_ , thus the Java
-datatype is _java.util.String_ as specified in __
+* The _base type_ is derived from _{item type definition}_
+which is XML datatype, `_"xs:string"_` , thus the Java
+datatype is `java.util.String` as specified in
 link:jaxb.html#a725[See Java Mapping for XML Schema Built-in
-Types] _.”_
-* The _collection type_ defaults to an
-implementation of _java.util.List_ .
+Types].
+* The _collection type_ defaults to an implementation of `java.util.List`.
 * The _predicate_ only allows instances of
 _base type_ to be inserted into the list. When failfast check is being
-performedlink:#a5370[20], the list’s mutation methods apply the
-property’s predicate to any non- _null_ value before adding that value
+performedfootnote:[link:jaxb.html#a1582[See Usage]
+describes the `enableFailFastCheck` customization and
+link:jaxb.html#a256[See Validation]” defines fail-fast
+checking.], the list’s mutation methods apply the
+property’s predicate to any non-`null` value before adding that value
 to the list or replacing an existing element’s value with that value;
-the predicate may throw a _TypeConstraintException_ .
+the predicate may throw a `TypeConstraintException`.
 
 The schema-derived property is annotated,
 either explicitly or by default mapping annotations, with the mapping
@@ -637,13 +653,13 @@ union simple type definition schema component. A union simple type
 definition schema component consists of union members which are schema
 datatypes. A union property, is therefore, realized by:
 
-[width="100%",cols="100%",options="header",]
-|===
-|public Type get _Id_ ();
-|public void set _Id_ (Type value);
-|===
+[source,java,indent=8]
+----
+public Type getId();
+public void setId(Type value);
+----
 
-where _Id_ is a metavariable that represents
+where `_Id_` is a metavariable that represents
 the Java method identifier computed by applying the name mapping
 algorithm described in link:jaxb.html#a4656[See The Name to
 Identifier Mapping Algorithm] to _prop_ .
@@ -651,36 +667,40 @@ Identifier Mapping Algorithm] to _prop_ .
 The _base type_ is String. If one of the
 member types is derived by list, then the Union property is represented
 as the appropriate collection property as specified by the customization
-_<jaxb:globalBindings>_ _@collectionType_ value, specified in
+`<jaxb:globalBindings>` *@collectionType* value, specified in
 link:jaxb.html#a1582[See Usage].”
 
-* The _getId_ method returns the set value.
-If the property has no set value then the value _null_ is returned. The
+* The `getId` method returns the set value.
+If the property has no set value then the value `null` is returned. The
 value returned is Type.
-* The _setId_ method sets the set value. +
-If value is _null_ , the property’s set value is discarded. Prior to
+* The `setId` method sets the set value. +
+If value is `null`, the property’s _set value_ is discarded. Prior to
 setting the property’s value when TypeConstraint validation is enabled,
-a non- _null_ value is validated by applying the property’s predicate,
-which may throw a _TypeConstraintException._ No setter is generated if
+a non-`null` value is validated by applying the property’s predicate,
+which may throw a `TypeConstraintException`. No setter is generated if
 the union is represented as a collection property.
 
-*_Example:_* + Default Binding: Union
+*_Example: Default Binding: Union_*
 
 The following schema fragment:
+[source,xml,indent=4]
+----
+<xs:complexType name="CTType">
+  <xs:attribute name="state" type="ZipOrName"/>
+</xs:complexType>
+<xs:simpleType name="ZipOrName"
+               memberTypes="xs:integer xs:string"/>
+----
 
-<xs:complexType name="CTType"> +
-<xs:attribute name="state" type="ZipOrName"/> +
-</xs:complexType> +
-<xs:simpleType name="ZipOrName" +
-memberTypes="xs:integer xs:string"/>
-
- +
 is bound to the following Java representation.
 
-public class CTType \{ +
-String getState() \{...} +
-void setState(String value) \{...} +
+[source,java]
+----
+public class CTType {
+    String getState() {...}
+    void setState(String value) {...}
 }
+----
 
 ==== Union
 
@@ -690,8 +710,8 @@ attributes:
 
 * the _base type_ as specified in
 link:jaxb.html#a899[See Union Property].”
-* if one of the member types is derived by
-_<xs:list>_ , then the union is bound as a Collection property.
+* if one of the member types is derived by `<xs:list>`,
+then the union is bound as a Collection property.
 * The _predicate_ is the schema constraints
 specified in “Simple Type Definition Validation Rules,” Section 4.1.4
 [XSD PART2].
@@ -2273,7 +2293,7 @@ otherwise, set to \{target namespace}
 |attribute use's \{required}
 |===
 
-* 
+*
 
 *_Example:_* +
 
