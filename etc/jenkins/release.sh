@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 #
-# Copyright (c) 2019 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, 2020 Oracle and/or its affiliates. All rights reserved.
 #
 # This program and the accompanying materials are made available under the
 # terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -19,6 +19,9 @@ API_VERSION="${1}"
 NEXT_API_VERSION="${2}"
 DRY_RUN="${3}"
 OVERWRITE="${4}"
+
+
+export MAVEN_SKIP_RC="true"
 
 . etc/scripts/maven.incl.sh
 . etc/scripts/nexus.incl.sh
