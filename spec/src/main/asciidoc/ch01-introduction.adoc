@@ -152,7 +152,7 @@ relevant to the application. The _binder_ enables _partial binding_ of
 the relevant parts of the XML document to a content tree and
 _marshalling_ updates back to the original XML document.
 
-=== [[a23]]Goals
+=== Goals
 
 The JAXB architecture is designed with the
 goals outlined here in mind.

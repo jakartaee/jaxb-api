@@ -34,7 +34,7 @@ There must be a detailed, unambiguous
 description of the default mapping of schema components to Java
 representations in order to satisfy the portability goal.
 
-==== [[a165]]Customized Binding Schema
+==== Customized Binding Schema
 
 A binding schema language and its formats must
 be specified. There must be a means to describe the binding without
@@ -90,7 +90,7 @@ interface. This capability enables the schema derived instance to be
 passed as EJB method parameter and to any other API that requires
 Serializable instances.
 
-===== [[a179]]Disabling Databinding
+===== Disabling Databinding
 
 A customization to disable databinding must be
 specified. When databinding is disabled, an XML Schema component is
@@ -101,14 +101,14 @@ operations.
 
 === Java to XML Schema
 
-==== [[a182]]Default Mapping
+==== Default Mapping
 
 A default mapping Java constructs to XML
 Schema must be specified. The default mapping may be overridden by
 customizations described in link:jaxb.html#a184[See Customized
 Mapping]”.
 
-==== [[a184]]Customized Mapping
+==== Customized Mapping
 
 A customization mechanism to override default
 mapping of Java constructs to XML Schema constructs must be specified.

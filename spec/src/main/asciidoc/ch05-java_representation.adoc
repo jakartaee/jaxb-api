@@ -29,7 +29,7 @@ is necessary to rigorously define a standard way to perform this mapping
 so all implementations of this specification perform the mapping in the
 same compatible manner.
 
-=== [[a482]]Java Package
+=== Java Package
 
 Just as the target XML namespace provides a
 naming context for the named type definitions, named model groups,
@@ -66,7 +66,7 @@ signature for each bound element declaration.
  public JAXBElement<T> createFoo(T elementValue);
 
 ** Dynamic instance factory allocator method signature:
- 
+
  public Object newInstance(Class javaContentInterface);
 
 ** Property setter/getter +
@@ -100,8 +100,8 @@ Default derived Java code:
 ----
 package com.example.PO1;
 import jakarta.xml.bind.JAXBElement;
-public class PurchaseOrderType { .... };
-public Comment { String getValue(){...} void setValue(String){...} }
+public class PurchaseOrderType {...};
+public Comment { String getValue() {...} void setValue(String) {...} }
 ...
 public class ObjectFactory {
     PurchaseOrderType createPurchaseOrderType();
@@ -175,7 +175,7 @@ children element content of a complex type definition are represented as
 properties of the Java content representation. Property representations
 are introduced in link:jaxb.html#a541[See Properties].
 
-==== [[a521]]Value Class
+==== Value Class
 
 A value class consists of:
 
@@ -233,7 +233,7 @@ factory method signature generated in the containing Java package’s
 
  Bar.Foo createBarFoo() {...}
 
-==== [[a536]]Java Content Interface
+==== Java Content Interface
 
 JAXB 1.0 bound a complex type definition to a
 content interface. This binding is similar to the value class binding
@@ -250,7 +250,7 @@ two binding styles.
 signatures for the set of properties it contains, while a value class
 contains method implementations.
 
-=== [[a541]]Properties
+=== Properties
 
 The schema compiler binds local schema
 components to _properties_ within a Java value class.
@@ -399,7 +399,7 @@ represent a nillable element declaration, setting a collection item to
 `null` is the semantic equivalent of removing an optional element from
 the collection property.
 
-===== [[a572]]Indexed Property
+===== Indexed Property
 
 This property follows the indexed property
 design pattern for a multi-valued property from the JavaBean
@@ -502,7 +502,7 @@ public Items.ItemType getItem(int index);
 public int getItemLength();
 ----
 
-===== [[a595]]List Property
+===== List Property
 
 A list property `prop` with base type _Type_
 is realized by the method where `List`
@@ -582,7 +582,7 @@ link:jaxb.html#a1580[See <globalBindings> Declaration]” and
 link:jaxb.html#a1783[See <property> Declaration]” describe how
 to use this attribute.
 
-==== [[a610]] `isSet` Property Modifier
+==== `isSet` Property Modifier
 
 This optional modifier augments a modifiable
 property to enable the manipulation of the property’s value as
@@ -668,7 +668,7 @@ Schema. That the attribute actually has a value is a local structural
 constraint rather than a type constraint, so it is checked during
 validation rather than during mutation.
 
-==== [[a630]]Element Property
+==== Element Property
 
 This property pattern enables the dynamic
 association of an element name for a JAXB property. Typically, the
@@ -711,7 +711,7 @@ control than provided by the core properties. For example, the `isSet`
 property modifier enables an application to determine if a property’s
 value is set or not.
 
-=== [[a642]]Java Element Representation
+=== Java Element Representation
 
 Based on rationale and criteria described in
 link:jaxb.html#a1023[See Element Declaration], the schema
@@ -734,7 +734,7 @@ definition]”.] The customized binding that generates
 a schema-dervied Element class for an element declaration is described
 in link:jaxb.html#a657[See Java Element Class]”.
 
-==== [[a645]]Named Java Element instance
+==== Named Java Element instance
 
 Based on the normative binding details
 described in link:jaxb.html#a1040[See Bind to JAXBElement<T>
@@ -771,7 +771,7 @@ class ObjectFactory {
 }
 ----
 
-==== [[a657]]Java Element Class
+==== Java Element Class
 
 Based on criteria to be identified in
 link:jaxb.html#a1068[See Bind to Element Class], the schema
@@ -834,19 +834,19 @@ manipulate
 Xml Schema’s type substitution capability is enabled by this property.
 ** whether the element’s content model is `nil`
 
-*_Example:_* +:
-Given a complex type definition with mixed content:
-
-[source,xml,indent=4,subs="+macros"]
-----
-<xs:complexType name="AComplexType" mixed="true">footnote:[Bind mixed
+*_Example:_* +
+Given a complex type definition with mixed contentfootnote:[Bind mixed
 content describes why <ASimpleElement> element is bound to a Java
-Element representation.]
-  <xs:sequence>
-    <xs:element name="ASimpleElement" type="xs:int"/>footnote:[Assume a
+Element representation.]footnote:[Assume a
 customization that binds this local element declaration to an element
 class. By default, this local declaration binds to a element instance
-factory returning JAXBElement<Integer>]
+factory returning JAXBElement<Integer>]:
+
+[source,xml,indent=4]
+----
+<xs:complexType name="AComplexType" mixed="true">
+  <xs:sequence>
+    <xs:element name="ASimpleElement" type="xs:int"/>
   </xs:sequence>
 </xs:complexType>
 ----
@@ -869,7 +869,7 @@ class ObjectFactory {
 }
 ----
 
-==== [[a680]]Java Element Representation Summary
+==== Java Element Representation Summary
 
 Element declaration binding evolved in JAXB
 v2.0 to support XML Schema type substitution. The following diagrams

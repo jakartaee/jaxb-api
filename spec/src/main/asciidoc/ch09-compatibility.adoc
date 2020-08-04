@@ -2,7 +2,7 @@
 // Copyright (c) 2020 Contributors to the Eclipse Foundation
 //
 
-== [[a3815]]Compatibility
+== Compatibility
 
 This section describes conformance
 requirements for an implementor of this specification. A JAXB
