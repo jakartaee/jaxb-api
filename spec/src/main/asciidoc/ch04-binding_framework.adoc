@@ -62,7 +62,7 @@ JAXB implementation’s runtime framework. Users are required to
 regenerate the schema-derived implementation classes when changing JAXB
 implementations.
 
-=== [[a298]]JAXBContext
+=== JAXBContext
 
 The `JAXBContext` class provides the client’s
 entry point to the JAXB API. It provides an abstraction for managing the
@@ -178,7 +178,7 @@ to at least `jakarta.xml.bind` module.
 ====
 
 
-=== [[a326]]General Validation Processing
+=== General Validation Processing
 
 Three identifiable forms of validation exist
 within the JAXB architecture include:
@@ -399,7 +399,7 @@ processing than per class defined callback methods. The external
 listener receives events when unmarshalling to a JAXB element or to JAXB
 mapped class.
 
-==== [[a379]]Unmarshalling Modes
+==== Unmarshalling Modes
 
 There exist numerous use cases requiring the
 ability to unmarshal invalid XML content. A flexible unmarshalling mode
@@ -434,7 +434,7 @@ implementation classes, link:jaxb.html#a536[See Java Content
 Interface], can implement either structural unmarshalling or flexible
 unmarshalling.
 
-==== [[a386]]Flexible Unmarshalling
+==== Flexible Unmarshalling
 
 To address the rigidness of structural
 unmarshalling, flexible unmarshalling mode is specified to enable
@@ -477,7 +477,7 @@ link:jaxb.html#a3855[See Appendix],
 link:jaxb.html#a3856[See Runtime Processing]”. Flexible
 unmarshalling is required for JAXB annotated classes.
 
-=== [[a397]]Marshalling
+=== Marshalling
 
 The `Marshaller` class is responsible for
 governing the process of serializing a Java content tree into XML data.
