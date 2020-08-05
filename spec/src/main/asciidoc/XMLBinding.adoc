@@ -24,19 +24,6 @@ include::appI-changelog.adoc[]
 
 '''''
 
-[.footnoteNumber]# 26.# [[a5377]]XML schema does not
-associate anonymous types with a specific symbol space. However,
-_nameXmlTransform_ is used since it provides a convenient way to
-customize the value class to which an anonymous type is bound.
-
-[.footnoteNumber]# 27.# [[a5378]]There is no need to
-standardize the name of the generated class since
-_@XmlJavaTypeAdapter.value()_ references the class.
-
-[.footnoteNumber]# 28.# [[a5379]]There is no need to
-standardize the name of the generated class since
-_@XmlJavaTypeAdapter.value()_ references the class.
-
 [.footnoteNumber]# 29.# [[a5380]]Exception case:
 Underscore is not considered a punctuation mark for schema customization
 _<jaxb:globalBindings underscoreHandling="asCharInWord"/>_ specified in
