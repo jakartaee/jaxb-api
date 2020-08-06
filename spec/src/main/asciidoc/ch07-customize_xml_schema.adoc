@@ -2,7 +2,7 @@
 // Copyright (c) 2020 Contributors to the Eclipse Foundation
 //
 
-== [[a1498]]Customizing XML Schema to Java Representation Binding
+== Customizing XML Schema to Java Representation Binding
 
 The default binding of source schema
 components to derived Java representation by a binding compiler
@@ -28,7 +28,10 @@ _http://java.sun.com/xml/ns/jaxb_ . This specification uses the
 namespace prefix “ _jaxb_ ” to refer to the namespace of binding
 declarations. For example,
 
+[source,xml,indent=4]
+----
 <jaxb: binding declaration>
+----
 
 A binding compiler interprets the binding
 declaration relative to the source schema and a set of default bindings
@@ -61,7 +64,7 @@ It is this separation which allows the
 binding declaration syntax to be shared between inline annotated schema
 and the external binding.
 
-=== Extending the Binding Language
+==== Extending the Binding Language
 
 In recognition that there will exist a need
 for additional binding declarations than those currently specified in
@@ -91,23 +94,26 @@ mechanism for creating or processing extension binding declarations and
 does not require that implementations support any such mechanism. Such
 mechanisms, if they exist, are implementation-defined.
 
-=== Inline Annotated Schema
+==== Inline Annotated Schema
 
 This method of customization utilizes on the
 _<appinfo>_ element specified by the XML Schema [XSD PART 1]. A binding
 declaration is embedded within the _<appinfo>_ element as illustrated
 below.
 
-<xs:annotation> +
-<xs:appinfo> +
-_<binding declaration> +
-_ </xs:appinfo> +
+[source,xml,indent=4]
+----
+<xs:annotation>
+    <xs:appinfo>
+        <binding declaration>
+    </xs:appinfo>
 </xs:annotation>
+----
 
 The inline annotation where the binding
 declaration is used identifies the schema component.
 
-=== External Binding Declaration
+==== External Binding Declaration
 
 The external binding declaration format
 enables customized binding without requiring modification of the source
@@ -117,12 +123,14 @@ _<jaxb:bindings>_ element enables the specification of a remote schema
 context to associate its binding declaration(s) with. Minimally, an
 external binding declaration follows the following format.
 
-<jaxb:bindings [schemaLocation =
-"xs:anyURI"]> +
-<jaxb:bindings [node = "xs:string"]>* +
-<binding declaration> +
-<jaxb:bindings> +
+[source,xml,indent=4]
+----
+<jaxb:bindings [schemaLocation = "xs:anyURI"]>
+    <jaxb:bindings [node = "xs:string"]>
+        <binding declaration>
+    <jaxb:bindings>
 </jaxb:bindings>
+----
 
 The schemaLocation attribute is optional for
 specifying _<jaxb:globalBindings>_ , and The node attribute is optional
@@ -141,7 +149,7 @@ binding declarations with.
 An example external binding declaration can
 be found in link:jaxb.html#a4821[See Example].”
 
-=== Restrictions
+===== Restrictions
 
 * The external binding element
 _<jaxb:bindings>_ is only recognized for processing by a JAXB processor
@@ -153,7 +161,7 @@ root is referred to as an external binding declaration file.
 within an _<xs:appinfo>_ element or the root element of an external
 binding file must have its _schemaLocation_ attribute set.
 
-=== Version Attribute
+==== Version Attribute
 
 The normative binding schema specifies a
 global _version_ attribute. It is used to identify the version of the
@@ -173,8 +181,10 @@ annotations, the _version_ attribute must be specified in _<xs:schema>_
 element of the source schema. For example,
 
 
-
+[source,xml,indent=4]
+----
  <xs:schema jaxb:version="2.0">
+----
 
 * If customizations are specified in an
 external binding file, then the _jaxb:version_ attribute must be
@@ -183,18 +193,21 @@ file. Alternately, a local _version_ attribute may be used. Thus the
 version can be specified either as
 
 
-
+[source,xml,indent=4]
+----
  <jaxb:bindings version="2.0" ... />
-
+----
 or
-
+[source,xml,indent=4]
+----
  <jaxb:bindings jaxb:version="2.0" ... />
+----
 
 Specification of both _version_ and
 _<jaxb:version>_ must result in an invalid customization as specified in
 link:jaxb.html#a1544[See Invalid Customizations].”
 
-=== [[a1544]]Invalid Customizations
+==== Invalid Customizations
 
 A non conforming binding declaration is a
 binding declaration in the _jaxb_ namespace but does not conform to this
@@ -251,7 +264,7 @@ binding of a schema element to a Java representation. The binding
 declaration defines one or more customization values each of which
 customizes a part of Java representation.
 
-=== Scope
+==== Scope
 
 When a customization value is defined in a
 binding declaration, it is associated with a scope. A scope of a
@@ -260,27 +273,27 @@ If a customization value applies to a schema element, then the schema
 element is said to be covered by the scope of the customization value.
 The scopes are:
 
-* global scope: A customization value defined
+* *global scope*: A customization value defined
 in _<globalBindings>_ has global scope. A global scope covers all the
 schema elements in the source schema and (recursively) any schemas that
 are included or imported by the source schema.
-* schema scope: A customization value defined
+* *schema scope*: A customization value defined
 in <schemaBindings> has schema scope. A schema scope covers all the
 schema elements in the target namespace of a schema.
-* definition scope: A customization value in
+* *definition scope*: A customization value in
 binding declarations of a type definition or global declaration has
 definition scope. A definition scope covers all schema elements that
 reference the type definition or the global declaration. This is more
 precisely specified in the context of binding declarations later on in
 this chapter.
-* component scope: A customization value in a
+* *component scope*: A customization value in a
 binding declaration has component scope if the customization value
 applies only to the schema element that was annotated with the binding
 declaration.
 
 image:images/xmlb-18.png[image]
 
-=== Scoping Inheritance and Overriding For Binding Declarations
+===== Scoping Inheritance and Overriding For Binding Declarations
 
 The different scopes form a taxonomy. The
 taxonomy defines both the inheritance and overriding semantics of
@@ -307,7 +320,7 @@ inherited from schema scope or global scope.
 * value in component scope overrides a value
 inherited from definition, schema or global scope.
 
-=== XML Schema Parsing
+==== XML Schema Parsing
 
 Chapter 5 specified the bindings using the
 abstract schema model. Customization, on the other hand, is specified in
@@ -321,35 +334,38 @@ these are addressed.
 
 * 
 
-=== [[a1580]] _<globalBindings>_ Declaration
+=== _<globalBindings>_ Declaration
 
 The customization values in “<
 _globalBindings>_ ” binding declaration have global scope. This binding
 declaration is therefore useful for customizing at a global level.
 
-=== [[a1582]]Usage
+==== Usage
 
-<globalBindings +
-[ collectionType = "collectionType" ] +
-[ fixedAttributeAsConstantProperty = "true" | "false" | "1" | "0" ] +
-[ generateIsSetMethod = "true" | "false" | "1" | "0" ] +
-[ enableFailFastCheck = "true" | "false" | "1" | "0" ] +
-[ choiceContentProperty = "true" | "false" | "1" | "0" ] +
-[ underscoreBinding = "asWordSeparator" | "asCharInWord" ] +
-[ typesafeEnumBase = "typesafeEnumBase" ] +
-[ typesafeEnumMemberName = "skipGeneration" | +
-"generateName" | "generateError" ] +
-[ typesafeEnumMaxMembers = “xxxx”] +
-[ enableJavaNamingConventions = "true" | "false" | "1" | "0" ] +
-[ generateElementClass = "false" | "true" | "0" | "1" ] +
-[ generateElementProperty = "false" | "true" | "0" | "1" ] +
-[ generateValueClass = "true" | "true" | "0" | "1" ] +
-[ optionalProperty = "wrapper" | "primitive" | "isSet" ] +
-[ mapSimpleTypeDef = "true" | "false" | "1" | "0" ] +
-[ localScoping = "nested" | "toplevel" ] > +
-[ <javaType> ... </javaType> ]* +
-[ <serializable uid=”xxxx”/> ]* +
+[source,xml,indent=4]
+----
+<globalBindings
+    [ collectionType = "collectionType" ]
+    [ fixedAttributeAsConstantProperty = "true" | "false" | "1" | "0" ]
+    [ generateIsSetMethod = "true" | "false" | "1" | "0" ]
+    [ enableFailFastCheck = "true" | "false" | "1" | "0" ]
+    [ choiceContentProperty = "true" | "false" | "1" | "0" ]
+    [ underscoreBinding = "asWordSeparator" | "asCharInWord" ]
+    [ typesafeEnumBase = "typesafeEnumBase" ]
+    [ typesafeEnumMemberName = "skipGeneration" |
+                              "generateName" | "generateError" ]
+    [ typesafeEnumMaxMembers = “xxxx”]
+    [ enableJavaNamingConventions = "true" | "false" | "1" | "0" ]
+    [ generateElementClass = "false" | "true" | "0" | "1" ]
+    [ generateElementProperty = "false" | "true" | "0" | "1" ]
+    [ generateValueClass = "true" | "true" | "0" | "1" ]
+    [ optionalProperty = "wrapper" | "primitive" | "isSet" ]
+    [ mapSimpleTypeDef = "true" | "false" | "1" | "0" ]
+    [ localScoping = "nested" | "toplevel" ] > +
+    [ <javaType> ... </javaType> ]*
+    [ <serializable uid=”xxxx”/> ]*
 </globalBindings>
+----
 
 The following customization values are
 defined in global scope:
@@ -476,7 +492,7 @@ is valid only in the annotation element of the _<schema>_ element. There
 must only be a single instance of a _<globalBindings>_ declaration in
 the annotation element of the _<schema>_ element.
 
-=== [[a1608]]Customized Name Mapping
+==== Customized Name Mapping
 
 A customization value can be used to specify
 a name for a Java object (e.g. class name, package name etc.). In this
@@ -504,9 +520,9 @@ language naming conventions as specified in
 link:jaxb.html#a4816[See Conforming Java Identifier Algorithm]”;
 otherwise the customized name must be used as is.
 
-=== [[a1613]]Underscore Handling
+==== Underscore Handling
 
-The _[jaxb:globalBindings]_ attribute
+The *[jaxb:globalBindings]* attribute
 customization _underscoreBinding_ allows for the preservation of
 underscore(s) occurring in an XML name when deriving a a Java identifier
 from it.
@@ -529,68 +545,79 @@ mapping are in link:jaxb.html#a4755[See XML Names and derived
 Java Class, Method, and Constant Names when <jaxb:globalBindings
 underscoreHandling=”asCharInWord”>].
 
-=== [[a1617]]generateElementClass and generateValueClass
+==== generateElementClass and generateValueClass
 
 The following code examples illustrate
 default binding to value class and customization to bind to
 interface/implementation classes.
 
-=== Default Binding to a value class.
+===== Default Binding to a value class.
 
 Schema fragment:
 
-<xs:complexType name=”USAddress”> +
-<xs:attribute name=”City” type=”xs:string”/>
-
+[source,xml,indent=4]
+----
+<xs:complexType name=”USAddress”>
+    <xs:attribute name=”City” type=”xs:string”/>
 </xs:complexType>
-
+----
  Default Value Class:
 
-public class USAddress \{ +
-public USAddress() \{... } +
-public String getCity() \{....} +
-public void setCity(String value) \{...} +
-... +
+[source,java,indent=4]
+----
+public class USAddress {
+    public USAddress() {...}
+    public String getCity() {...}
+    public void setCity(String value) {...}
+    ...
 }
-
+----
 Customization _<jaxb:globalBinding
 generateValueClass=”false”>_ generates following interface instead of
 default value class:
 
-=== Customized binding to an interface.
+===== Customized binding to an interface.
 
-public interface USAddress \{ +
-String getCity(); +
-void setCity(String value); +
+[source,java,indent=4]
+----
+public interface USAddress {
+    String getCity();
+    void setCity(String value);
 }
+----
 
-=== Generation of an Element Class
+===== Generation of an Element Class
 
 Schema fragment:
 
-<xs:element name=”Address”
-type=”USAddress”/> +
- +
+[source,xml,indent=4]
+----
+<xs:element name=”Address” type=”USAddress”/>
+----
+[source,java,indent=4]
+----
 // Default Java binding of global element to element instance factory +
-public ObjectFactory \{ +
-JAXBElement<USAddress> createAddress(USAddress value); +
+public ObjectFactory {
+    JAXBElement<USAddress> createAddress(USAddress value);
 }
-
+----
  _<jaxb:globalBinding
 generateElementClass=”true”/>_ results in generation of following
 Element class:
 
- +
-public class Address extends JAXBElement<USAddress> \{ +
+[source,java,indent=4]
+----
+public class Address extends JAXBElement<USAddress> {
 }
+----
 
-=== [[a1633]]@typesafeEnumMemberName
+==== @typesafeEnumMemberName
 
 .If there is a collision among the generated
-constant fields _name_ or if it is not possible to generate a legal Java
+constant fields *name* or if it is not possible to generate a legal Java
 identifier for one or more of the generated constant field names, then
 the binding is determined based on the value of @
-_typesafeEnumMemberName_ of element _[jaxb:globalBindings]_ .
+_typesafeEnumMemberName_ of element *[jaxb:globalBindings]* .
 
 *  _skipGeneration +
 _ An enum type is not generated. This is the default behavior if
@@ -598,30 +625,31 @@ _typesafeEnumMemberName_ has not been specified. A binding compiler may
 report a warning on why the simple type definition was not bound to an
 enum type.
 *  _generateName +
-_ The constant fields _name_ is “ _VALUE__ _<N>_ _"_ where _<N>_ is 1
+_ The constant fields *name* is “ _VALUE__ _<N>_ _"_ where _<N>_ is 1
 for the first enumeration value and increments by 1 to represent each
 value within the XML enumeration.
 *  _generateError +
 _ An error must be reported.
 
-=== <serializable> Declaration
+==== <serializable> Declaration
 
 When the serializable customization is
 specified, all schema-derived classes implement _java.io.Serializable_ .
 Each class is generated with a _serialVersionUID_ field set to the value
 specified by _@uid_ .
 
-private static final long serialVersionUID =
-_<value of @uid>_ ;
-
+[source,java,indent=4]
+----
+private static final long serialVersionUID = <value of @uid>;
+----
 The JAXB user is required to identify when
 schema-derived classes do not follow
 _http://java.sun.com/j2se/1.4.2/docs/guide/serialization/spec/version.html#wp4602[Java
 serialization class evolution rules]_ and change the generated
-_serialVersionUID_ field by changing the [serializable] element’s
+_serialVersionUID_ field by changing the *[serializable]* element’s
 attribute _@uid_ value.
 
-=== @generateElementProperty
+==== @generateElementProperty
 
 Some schemas use both minOccurs="0" on
 element as well as nillable="true", causing the generation of
@@ -647,47 +675,32 @@ The customization values in
 _<schemaBindings>_ binding declaration have schema scope. This binding
 declaration is therefore useful for customizing at a schema level.
 
-=== Usage
+==== Usage
 
+[source,xml,indent=4]
+----
 <schemaBindings [ map="boolean" ] >
-
-{empty} [ <package> package </package> ]
-
- [ <nameXmlTransform> ... </nameXmlTransform>
-]*
-
+    [ <package> package </package> ]
+    [ <nameXmlTransform> ... </nameXmlTransform>]*
 </schemaBindings>
 
 
-
-{empty}<package [ name = "packageName" ]
-
-{empty} [ <javadoc> ... </javadoc> ]
-
+<package [ name = "packageName" ]
+    [ <javadoc> ... </javadoc> ]
 </package>
 
 
-
 <nameXmlTransform>
-
-{empty} [ <typeName [ suffix="suffix" ]
-
-{empty} [ prefix="prefix" ] /> ]
-
-{empty} [ <elementName [ suffix="suffix" ]
-
-{empty} [ prefix="prefix" ] /> ]
-
-{empty} [ <modelGroupName [ suffix="suffix" ]
-
-{empty} [ prefix="prefix" ] /> ]
-
-{empty} [ <anonymousTypeName [
-suffix="suffix" ]
-
-{empty} [ prefix="prefix" ] /> ]
-
+    [ <typeName         [ suffix="suffix" ]
+                        [ prefix="prefix" ] /> ]
+    [ <elementName      [ suffix="suffix" ]
+                        [ prefix="prefix" ] /> ]
+    [ <modelGroupName   [ suffix="suffix" ]
+                        [ prefix="prefix" ] /> ]
+    [ <anonymousTypeName    [ suffix="suffix" ]
+                            [ prefix="prefix" ] /> ]
 </nameXmlTransform>
+----
 
 For readability, the _<nameXmlTransform>_ and
 _<package>_ elements are shown separately. However, they are local
@@ -718,7 +731,7 @@ restriction on _<schemaBindings>_ declarations when one source schema
 imports another schema since the scope of _<schemaBindings>_ binding
 declaration is schema scope.
 
-=== package __ [[a1674]]
+===== package __
 
 Usage
 
@@ -731,32 +744,35 @@ link:jaxb.html#a2142[See <javadoc> Declaration].” The Javadoc
 must be generated as specified in link:jaxb.html#a2163[See
 Javadoc Customization].” The Javadoc section customized is the _package
 section._
-* 
+* xml
 
 The semantics of the _packageName_ is
 specified in the context where it is used. If neither _packageName_ nor
 the < _javadoc>_ element is specified, then the binding declaration has
 no effect.
 
-=== Example: Customizing Package Name
+*Example: Customizing Package Name*
 
+[source,xml,indent=4]
+----
 <jaxb:schemaBindings>
-
- <jaxb:package name = "org.example.po" />
-
+    <jaxb:package name = "org.example.po" />
 </jaxb:schemaBindings>
+----
 
 specifies “ _org.example.po_ ” as the package
 to be associated with the schema.
 
-===  _nameXmlTransform_
+=====  nameXmlTransform
 
 The use case for this declaration is the UDDI
 Version 2.0 schema. The UDDI Version 2.0 schema contains many
 declarations of the following nature:
 
-<xs:element name="bindingTemplate"
-type="uddi:bindingTemplate"/>
+[source,xml,indent=4]
+----
+<xs:element name="bindingTemplate" type="uddi:bindingTemplate"/>
+----
 
 The above declaration results in a name
 collision since both the element and type names are the same - although
@@ -777,7 +793,10 @@ definitions”
 *  _<modelGroupName>_ for the symbol space
 “model group definitions.”
 *  _<anonymousTypeName>_ for customizing Java
-value class to which an anonymous type is bound.link:#a5377[26]
+value class to which an anonymous type is bound.footnote:[XML schema does not
+associate anonymous types with a specific symbol space. However,
+_nameXmlTransform_ is used since it provides a convenient way to
+customize the value class to which an anonymous type is bound.]
 
 If _suffix_ is specified, it must be appended
 to all the default XML names in the symbol space. The _prefix_ if
@@ -799,7 +818,7 @@ _prefix_ is specified, then it must be prepended to the Java value class
 name for the anonymous type. If suffix is specified, it must be
 appended.
 
-===  _<class>_ [[a1698]] Declaration
+===  _<class>_ Declaration
 
 This binding declaration can be used to
 customize the binding of a schema component to an element class, value
@@ -822,16 +841,16 @@ implementation class may not be portable across JAXB provider
 implementations. Hence one JAXB provider implementation is not required
 to support the implementation class from another JAXB provider.
 
-=== Usage
+==== Usage
 
-{empty}<class [ name = " _className_ " ]
-
-{empty} [ implClass = " _implClass_ " ]> +
-[ ref = " _className_ " ]
-
-{empty} [ <javadoc> _..._ </javadoc> ]
-
+[source,xml,indent=4]
+----
+<class [ name = "className" ]
+       [ implClass = "implClass" ]>
+       [ ref = "className" ]
+       [ <javadoc> _..._ </javadoc> ]
 </class>
+----
 
 *  _className_ is the name of the derived
 value class, if specified. It must be a legal Java class name and must
@@ -853,7 +872,7 @@ customizes the Javadoc for the derived value class. _<javadoc>_ must be
 specified as described in link:jaxb.html#a2142[See <javadoc>
 Declaration].”
 
-=== [[a1713]]Customization Overrides
+==== Customization Overrides
 
 When binding a schema element’s Java
 representation to a value class or a Java Element class, the following
@@ -862,20 +881,20 @@ specified in a common section here and referenced from
 link:jaxb.html#a1718[See Customizable Schema Elements].”
 
 * name: The name is _className_ if specified.
-* package name: The name of the package is
+* *package name:* The name of the package is
 _packageName_ inherited from a scope that covers this schema element. +
  +
-NOTE: The _packageName_ is only set in the <package> declaration. The
+*NOTE:* The _packageName_ is only set in the <package> declaration. The
 scope of _packageName_ is schema scope and is thus inherited by all
 schema elements within the schema.
-* javadoc: The Javadoc must be generated as
+* *javadoc:* The Javadoc must be generated as
 specified in section link:jaxb.html#a2163[See Javadoc
 Customization].” The Javadoc section customized is the _class/interface
 section._
 
-=== [[a1718]]Customizable Schema Elements
+==== Customizable Schema Elements
 
-=== Complex Type Definition
+===== Complex Type Definition
 
 When _<class>_ customization specified in the
 annotation element of the complex type definition, the complex type
@@ -884,33 +903,34 @@ link:jaxb.html#a933[See Java value class]” applying the
 customization overrides as specified in link:jaxb.html#a1713[See
 Customization Overrides].”
 
-=== Example: Class Customization: Complex Type Definition To Java value class
+*Example: Class Customization: Complex Type Definition To Java value class*
 
 XML Schema fragment:
 
-<xs:complexType name="USAddress"> +
-<xs:annotation> <xs:appinfo> +
-<jaxb:class name="MyAddress" /> +
-</xs:appinfo></xs:annotation> +
-<xs:sequence>...</xs:sequence> +
-<xs:attribute name="country" type="xs:string"/> +
+[source,xml,indent=4]
+----
+<xs:complexType name="USAddress">
+    <xs:annotation> <xs:appinfo>
+        <jaxb:class name="MyAddress" />
+    </xs:appinfo></xs:annotation>
+    <xs:sequence>...</xs:sequence>
+    <xs:attribute name="country" type="xs:string"/>
 </xs:complexType>
+----
 
 Customized code:
 
-// public class USAddress \{ // Default Code
-
-public class MyAddress \{ // Customized Code
-
- public String getCountry()\{...}
-
- public void setCountry(String value)\{...}
-
- ...
-
+[source,java,indent=4]
+----
+// public class USAddress { // Default Code
+public class MyAddress { // Customized Code
+    public String getCountry() {...}
+    public void setCountry(String value) {...}
+    ...
 }
+----
 
-=== Simple Type Definition
+===== Simple Type Definition
 
 When _<class>_ customization specified in the
 annotation element of a simple type definition, the simple type
@@ -919,37 +939,43 @@ link:jaxb.html#a803[See Bind to a JAXB mapped class]” applying
 the customization overrides as specified in
 link:jaxb.html#a1713[See Customization Overrides].”
 
-=== Example: Class Customization: Simple Type Definition To Java value class
+*Example: Class Customization: Simple Type Definition To Java value class*
 
 XML Schema fragment:
 
-<xs:simpleType name="SKU"> +
-<xs:annotation> <xs:appinfo> +
-<jaxb:class/> +
-</xs:appinfo></xs:annotation> +
-<xs:restriction base=”xs:int”/> +
+[source,xml,indent=4]
+----
+<xs:simpleType name="SKU">
+    <xs:annotation> <xs:appinfo>
+        <jaxb:class/>
+    </xs:appinfo></xs:annotation>
+    <xs:restriction base=”xs:int”/>
 </xs:simpleType>
+----
 
 Customized code:
 
-public class SKU \{ +
-@XmlValue +
-public int getValue()\{...} +
-public void setValue(int value)\{...} +
-... +
+[source,java,indent=4]
+----
+public class SKU {
+    @XmlValue
+    public int getValue() {...}
+    public void setValue(int value) {...}
+    ...
 }
+----
 
-=== Model Group Definition
+===== Model Group Definition
 
 It is invalid to place a _<jaxb:class>_
 customization on a model group.
 
-=== Model Group
+===== Model Group
 
 It is invalid to place a _<jaxb:class>_
 customization on an unnamed model group.
 
-=== Global Element Declaration
+===== Global Element Declaration
 
 A < _class_ > declaration is allowed in the
 annotation element of the global element declaration. However, the
@@ -958,67 +984,54 @@ must be bound as specified in link:jaxb.html#a1068[See Bind to
 Element Class]” applying the customization overrides specified in
 link:jaxb.html#a1713[See Customization Overrides].”
 
-=== Example: Class Customization: Global Element to Class
+*Example : Class Customization: Global Element to Class*
 
 XML Schema Fragment:
 
+[source,xml,indent=4]
+----
 <xs:complexType name="AComplexType">
-
- <xs:sequence>
-
- <xs:element name="A" type="xs:int"/>
-
- <xs:element name="B" type="xs:string"/>
-
- </xs:sequence>
-
+    <xs:sequence>
+        <xs:element name="A" type="xs:int"/>
+        <xs:element name="B" type="xs:string"/>
+    </xs:sequence>
 </xs:complexType>
 
-<xs:element name="AnElement"
-type="AComplexType">
-
- <xs:annotation><xs:appinfo>
-
- <jaxb:class name="MyElement"/>
-
- </xs:appinfo></xs:annotation>
-
+<xs:element name="AnElement" type="AComplexType">
+    <xs:annotation><xs:appinfo>
+        <jaxb:class name="MyElement"/>
+    </xs:appinfo></xs:annotation>
 </xs:element>
+----
 
 Customized code:
 
-// following class is generated because of
-customization
+[source,java,indent=4]
+----
+// following class is generated because of customization
 
-public class AComplexType \{ +
-void setA(int value) \{...}
-
- int getA()\{...}
-
- void setB(String value)\{...}
-
- String getB()\{...}
-
+public class AComplexType {
+    void setA(int value) {...}
+    int getA() {...}
+    void setB(String value) {...}
+    String getB() {...}
 }
 
-public class MyElement extends
-JAXBElement<AComplexType> \{...}
+public class MyElement extends JAXBElement<AComplexType> {...}
 
-public class ObjectFactory \{
+public class ObjectFactory {
 
- // Default code
+    // Default code
+    // JAXBElement<AnElement> createAnElement(AnElement)\{...}
 
- // JAXBElement<AnElement>
-createAnElement(AnElement)\{...} +
- +
-// Customized code
-
- MyElement createMyElement(AnElement)\{...} +
-... other factory methods ...
+    // Customized code
+    MyElement createMyElement(AnElement) {...}
+    ... other factory methods ...
 
 }
+----
 
-=== Local Element
+===== Local Element
 
 A local element is a schema element that
 occurs within a complex type definition. A local element is one of:
@@ -1048,46 +1061,51 @@ specified in link:jaxb.html#a1040[See Bind to JAXBElement<T>
 Instance]” applying the customization overrides as specified in
 link:jaxb.html#a1713[See Customization Overrides].”
 
-=== Example: Class Customization: Local Element Declaration To Java Element
+*Example: Class Customization: Local Element Declaration To Java Element*
 
 The following example is from
 link:jaxb.html#a1359[See Examples].”
 
 XML Schema fragment:
 
-<xs:complexType name="Base"> +
-<xs:choice maxOccurs="unbounded"> +
-<xs:element name="A" type="xs:string"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:class name="Bar"/> +
-< _/xs:appinfo></xs:annotation> +
-_ </xs:element> +
-<xs:element name="B" type="xs:string"/> +
-<xs:element name="C" type="xs:int"/> +
-</xs:choice> +
+[source,xml,indent=4]
+----
+<xs:complexType name="Base">
+    <xs:choice maxOccurs="unbounded">
+        <xs:element name="A" type="xs:string">
+            <xs:annotation><xs:appinfo>
+                <jaxb:class name="Bar"/>
+            </xs:appinfo></xs:annotation>
+        </xs:element>
+        <xs:element name="B" type="xs:string"/>
+        <xs:element name="C" type="xs:int"/>
+    </xs:choice>
 </xs:complexType>
+----
 
 Customized code:
 
-import jakarta.xml.bind.JAXBElement; +
-public class ObjectFactory \{ +
-// element instance factories only +
-// JAXBElement<String> createBaseA(String value); //default code +
-JAXBElement<String> createBaseBar(String value); //Customized +
-JAXBElement<String> createBaseB(String value); +
-JAXBElement<Integer> createBaseC(Integer value); +
-} +
-public class Base \{ +
-static public class Bar extends JAXBElement<String> \{...}// Customized
-code +
-/** +
-* A general content list that can contain element +
-* instances of JAXBElement<String> or JAXBElement<Integer>. +
-*/ +
-List<Object> getBarOrBOrC()\{...} +
+[source,java,indent=4]
+----
+import jakarta.xml.bind.JAXBElement;
+public class ObjectFactory {
+    // element instance factories only
+    // JAXBElement<String> createBaseA(String value); //default code
+    JAXBElement<String> createBaseBar(String value); //Customized
+    JAXBElement<String> createBaseB(String value);
+    JAXBElement<Integer> createBaseC(Integer value);
 }
+public class Base {
+static public class Bar extends JAXBElement<String> {...}// Customized code
+    /**
+    * A general content list that can contain element
+    * instances of JAXBElement<String> or JAXBElement<Integer>.
+    */
+    List<Object> getBarOrBOrC() {...}
+}
+----
 
-=== [[a1783]] _<property>_ Declaration
+=== _<property>_ Declaration
 
 This binding declaration allows the
 customization of a binding of an XML schema element to its Java
@@ -1099,22 +1117,25 @@ The scope of customization value can either
 be definition scope or component scope depending upon which XML schema
 element the < _property>_ binding declaration is specified.
 
-=== [[a1786]]Usage
+==== Usage
 
-<property [ name = "propertyName" ] +
-[ collectionType = " _propertyCollectionType_ " ] +
-[ fixedAttributeAsConstantProperty = "true" | "false" | "1" | "0" ] +
-[ generateIsSetMethod = "true" | "false" | "1" | "0" ] +
-[ enableFailFastCheck="true" | "false" | "1" | "0" ] +
-[ generateElementProperty= “true” | “false” | “1” | “0” ] +
-[ attachmentRef = “resolve” | “doNotResolve” | “default” ] +
-[ <baseType name=”fully qualified Java class”> ... </baseType> ] +
-[ <javadoc> ... </javadoc> ] +
-</property> +
- +
-<baseType name=”fully qualified Java class”> +
-<javaType> ... </javaType> +
+[source,xml,indent=4]
+----
+<property [ name = "propertyName" ]
+    [ collectionType = "propertyCollectionType" ]
+    [ fixedAttributeAsConstantProperty = "true" | "false" | "1" | "0" ]
+    [ generateIsSetMethod = "true" | "false" | "1" | "0" ]
+    [ enableFailFastCheck="true" | "false" | "1" | "0" ]
+    [ generateElementProperty= “true” | “false” | “1” | “0” ]
+    [ attachmentRef = “resolve” | “doNotResolve” | “default” ]
+    [ <baseType name=”fully qualified Java class”> ... </baseType> ]
+    [ <javadoc> ... </javadoc> ]
+</property>
+
+<baseType name=”fully qualified Java class”>
+    <javaType> ... </javaType>
 </baseType>
+----
 
 For readability, the _<baseType>_ element is
 shown separately. However, it can be used only as a local element within
@@ -1178,17 +1199,18 @@ customizes the Javadoc for the property’s getter method. _<javadoc>_
 must be specified as described in link:jaxb.html#a2142[See
 <javadoc> Declaration].”
 
-===  _baseType_ [[a1801]]
+==== _baseType_
 
 The _<baseType>_ element is intended to allow
 the customization of a base type for a JAXB property. This element can
 only be a child of <jaxb:property> element.
 
-<baseType name=”fully qualified Java
-class”> +
-<javaType> ... </javaType> +
+[source,xml,indent=4]
+----
+<baseType name=”fully qualified Java class”>
+    <javaType> ... </javaType>
 </baseType>
-
+----
 
 
 The _@name_ attribute enables either the
@@ -1197,7 +1219,7 @@ JAXB property. Child element _<javaType>_ is used to convert the default
 base type to a Java class. These two mutual exclusive usages of the
 <baseType> customization are described below.
 
-=== Conversion using Child element <javaType>
+===== Conversion using Child element <javaType>
 
 Optional child element < _javaType>_ , if
 specified, defines the customization value _javaType_ and must be
@@ -1209,14 +1231,16 @@ definition to the Java class specified by <javaType> name.
 The schema-derived JAXB property is annotated
 with _@XmlJavaTypeAdapter_ specified in Section 8.
 _@XmlJavaTypeAdapter.value()_ is set to a generated
-classlink:#a5378[27] that extends
+classfootnote:[There is no need to
+standardize the name of the generated class since
+_@XmlJavaTypeAdapter.value()_ references the class.] that extends
 _jakarta.xml.bind.annotation.adapter.XmlAdapter_ . The generated class’
 _unmarshal_ method must call the <javaType> customization’s parse
 method, which is specified in link:jaxb.html#a1981[See
 <javaType> Declaration]. The generated class’ _marshal_ method must call
 the <javaType> customization’s print method.
 
-=== [[a1809]]Generalize/Specialize baseType with attribute @name
+===== Generalize/Specialize baseType with attribute @name
 
 The _name_ attribute for _<baseType>_ enables
 more precise control over the actual base type for a JAXB property. This
@@ -1252,7 +1276,7 @@ abstract model properties for a element type definition summarized in
 link:jaxb.html#a4937[See Element Declaration Schema Component]
 as follows:
 
-=== Annotate JAXB property with @XmlElement element-value pairs
+====== Annotate JAXB property with @XmlElement element-value pairs
 
 [width="100%",cols="50%,50%",options="header",]
 |===
@@ -1280,40 +1304,46 @@ property]”. If the schema only intends the reference to be to an element
 that binds to a specific type, the baseType @name schema customization
 can be used to specialize the binding.
 
-=== [[a1820]]Specialize binding of an IDREF via customization
+====== Specialize binding of an IDREF via customization
 
 Given XML Schema fragment:
 
-<xs:complexType name="Book"> +
-<xs:sequence> +
-_<xs:element name="author" type="xs:IDREF"/> +
-_ _<xs:annotation><xs:appinfo> +
-<jaxb:property> +
-<jaxb:baseType name=”AuthorBio.class”/> +
-</jaxb:property> +
-</xs:appinfo></xs:annotation> +
-_ <!-- ... --> +
-</xs:sequence> +
-</xs:complexType> +
-<xs:complexType name="AuthorBio"> +
-<xs:sequence><!-- ... --> </xs:sequence> +
-_<xs:attribute name="name" type="xs:ID"/> +
-_ </xs:complexType>
+[source,xml,indent=4]
+----
+<xs:complexType name="Book">
+    <xs:sequence>
+        <xs:element name="author" type="xs:IDREF"/>
+            <xs:annotation><xs:appinfo>
+                <jaxb:property>
+                    <jaxb:baseType name=”AuthorBio.class”/>
+                </jaxb:property>
+            </xs:appinfo></xs:annotation>
+        <!-- ... -->
+    </xs:sequence>
+</xs:complexType>
+<xs:complexType name="AuthorBio">
+    <xs:sequence><!-- ... --> </xs:sequence>
+    <xs:attribute name="name" type="xs:ID"/>
+</xs:complexType>
+----
 
 Schema-derived Java value class:
 
-public class Book \{ +
-@XmlIDREF +
-AuthorBio getAuthor() \{...} +
-void setAuthor(AuthorBio referencedObj)\{...} +
-} +
-public class AuthorBio\{ +
-@XmlID +
-String getName()\{...} +
-void setName(String value)\{...} +
+[source,java,indent=4]
+----
+public class Book {
+    @XmlIDREF
+    AuthorBio getAuthor() {...}
+    void setAuthor(AuthorBio referencedObj) {...}
 }
+public class AuthorBio {
+    @XmlID
+    String getName() {...}
+    void setName(String value) {...}
+}
+----
 
-=== [[a1825]]Usage Constraints
+===== Usage Constraints
 
 The usage constraints on _<property>_ are
 specified below. Any constraint violation must result in an invalid
@@ -1350,38 +1380,38 @@ conflicting customization.
 
 * 
 
-=== Example: Property Customization: simple type customization
+*Example: Property Customization: simple type customization*
 
-<xs:complexType name="internationalPrice"> +
-.... +
-<xs:attribute name="currency" type="xs:string"> +
-<xs:annotation> <xs:appinfo> +
-<jaxb:property> +
-<jaxb:baseType> +
-<jaxb:javaType name="java.math.BigDecimal" +
-parseMethod="jakarta.xml.bind.DatatypeConverter.parseInteger" +
-printMethod="jakarta.xml.bind.DatatypeConverter.printInteger"/> +
-</jaxb:baseType> +
-</jaxb:property> +
-</xs:appinfo></xs:annotation> +
-</xs:attribute> +
+[source,xml,indent=4]
+----
+<xs:complexType name="internationalPrice">
+    ....
+    <xs:attribute name="currency" type="xs:string">
+        <xs:annotation> <xs:appinfo>
+            <jaxb:property>
+                <jaxb:baseType>
+                    <jaxb:javaType name="java.math.BigDecimal"
+    parseMethod="jakarta.xml.bind.DatatypeConverter.parseInteger"
+    printMethod="jakarta.xml.bind.DatatypeConverter.printInteger"/>
+                </jaxb:baseType>
+            </jaxb:property>
+        </xs:appinfo></xs:annotation>
+    </xs:attribute>
 </xs:complexType>
+----
 
 The code generated is:
 
-public class InternationalPrice \{
-
- // String getCurrency(); default
-
- java.math.BigDecimal getCurrency()\{...} //
-customized
-
- public void setCurrency(java.math.BigDecimal
-val)\{...} // customized
-
+[source,java,indent=4]
+----
+public class InternationalPrice {
+    // String getCurrency(); default
+    java.math.BigDecimal getCurrency() {...} //customized
+    public void setCurrency(java.math.BigDecimal val) {...} // customized
 }
+----
 
-=== [[a1847]]Customization Overrides
+==== Customization Overrides
 
 When binding a schema element’s Java
 representation to a property, the following customization values
@@ -1389,18 +1419,18 @@ override the defaults specified in Chapter 6. It is specified in a
 common section here and referenced from link:jaxb.html#a1857[See
 Customizable Schema Elements].”
 
-* name: If propertyName is defined, then it
+* *name:* If propertyName is defined, then it
 is the name obtained by mapping the name as specified in
 link:jaxb.html#a1608[See Customized Name Mapping].”
-* base type: The basetype is
+* *base type:* The basetype is
 _propertyBaseType_ if defined. The propertyBaseType is defined by a XML
 schema element in link:jaxb.html#a1857[See Customizable Schema
 Elements].”
-* collection type: The collection type is
+* *collection type:* The collection type is
 _propertyCollectionType_ if specified; otherwise it is the
 _propertyCollectionType_ inherited from a scope that covers this schema
 element.
-* javadoc: The Javadoc must be generated as
+* *javadoc:* The Javadoc must be generated as
 specified in section link:jaxb.html#a2163[See Javadoc
 Customization].” The Javadoc section customized is the _method section._
 * If _propertyBaseType_ is a Java primitive
@@ -1420,9 +1450,9 @@ then the type constraint checking when setting a property is enforced by
 the JAXB implementation. Support for this feature is optional for a JAXB
 implementation in this version of the specification.
 
-=== [[a1857]]Customizable Schema Elements
+==== Customizable Schema Elements
 
-=== Global Attribute Declaration
+===== Global Attribute Declaration
 
 A < _property_ > declaration is allowed in
 the annotation element of the global attribute declaration.
@@ -1436,7 +1466,7 @@ is useful since it allows the customization to be done once when a
 global attribute is defined instead of at each local attribute that
 references the global attribute declaration.
 
-=== [[a1861]]Local Attribute
+===== Local Attribute
 
 A local attribute is an attribute that occurs
 within an attribute group definition, model group definition or a
@@ -1472,98 +1502,82 @@ as specified in link:jaxb.html#a1252[See Attribute use]”
 applying customization overrides as specified in
 link:jaxb.html#a1847[See Customization Overrides].”
 
-=== Example: Customizing Java Constant Property
+*Example: Customizing Java Constant Property*
 
 XML Schema fragment:
 
+[source,xml,indent=4]
+----
 <xs:complexType name="USAddress">
-
- <xs:attribute name="country"
-type="xs:NMTOKEN" fixed="US">
-
- <xs:annotation><xs:appinfo>
-
- <jaxb:property name="MY_COUNTRY"
-
- fixedAttributeAsConstantProperty="true"/>
-
- </xs:appinfo></xs:annotation>
-
- </xs:attribute>
-
+    <xs:attribute name="country" type="xs:NMTOKEN" fixed="US">
+        <xs:annotation><xs:appinfo>
+            <jaxb:property name="MY_COUNTRY"
+                           fixedAttributeAsConstantProperty="true"/>
+            </xs:appinfo></xs:annotation>
+        </xs:attribute>
 </xs:complexType>
+----
 
 Customized derived code:
 
-public class USAddress \{
-
- public static final String MY_COUNTRY =
-"US"; // Customized Code
-
+[source,java,indent=4]
+----
+public class USAddress {
+    public static final String MY_COUNTRY = "US"; // Customized Code
 }
+----
 
-=== Example 2: Customizing to other Java Property
+*Example 2: Customizing to other Java Property*
 
 XML Schema fragment:
 
+[source,xml,indent=4]
+----
 <xs:complexType name="USAddress"> +
-<xs:attribute name="country" type="xs:string">
-
- <xs:annotation><xs:appinfo>
-
- <jaxb:property name="MyCountry"/>
-
- </xs:appinfo></xs:annotation>
-
- </xs:attribute>
-
+    <xs:attribute name="country" type="xs:string">
+        <xs:annotation><xs:appinfo>
+            <jaxb:property name="MyCountry"/>
+        </xs:appinfo></xs:annotation>
+    </xs:attribute>
 </xs:complexType>
+----
 
 Customized derived code:
 
-public class USAddress \{
-
- // public getString getCountry(); // Default
-Code
-
- // public void setCountry(string value);//
-Default Code
-
- public String getMyCountry()\{...} //
-Customized Code
-
- public void setMyCountry(String value)\{...}
-// Customized Code
-
+[source,java,indent=4]
+----
+public class USAddress {
+    // public getString getCountry(); // DefaultCode
+    // public void setCountry(string value);//Default Code
+    public String getMyCountry() {...} //Customized Code
+    public void setMyCountry(String value) {...}// Customized Code
 }
+----
 
-=== Example 3: Generating IsSet Methods
+*Example 3: Generating IsSet Methods*
 
 XML Schema fragment:
 
+[source,xml,indent=4]
+----
 <xs:attribute name="account" type = "xs:int">
-
- <xs:annotation><xs:appinfo>
-
- <jaxb:property generateIsSetMethod="true"/>
-
- </xs:appinfo></xs:annotation>
-
+    <xs:annotation><xs:appinfo>
+        <jaxb:property generateIsSetMethod="true"/>
+    </xs:appinfo></xs:annotation>
 </xs:attribute>
+----
 
 Customized code:
 
+[source,java,indent=4]
+----
 public int getAccount();
-
 public void setAccount(int account);
+public boolean isSetAccount(); // Customizedcode
+public void unsetAccount(); // Customizedcode
+----
 
-public boolean isSetAccount(); // Customized
-code
-
-public void unsetAccount(); // Customized
-code
-
-=== Global Element Declaration
+===== Global Element Declaration
 
 A _<property>_ declaration is allowed in the
 annotation element of a global element declaration. However, the usage
@@ -1578,7 +1592,7 @@ useful since it allows the customization to be done once when a global
 element is defined instead of at each local element that references the
 global element declaration.
 
-=== [[a1913]]Local Element
+===== Local Element
 
 A local element is a schema element that
 occurs within a complex type definition. A local element is one of:
@@ -1611,7 +1625,7 @@ link:jaxb.html#a1966[See Example 3: Property Customization:
 Model Group To Content Property Set]” in section
 link:jaxb.html#a1944[See Model Group].”
 
-=== Wildcard
+===== Wildcard
 
 A _<property>_ declaration is allowed in the
 annotation element of the wildcard schema component. The customization
@@ -1626,43 +1640,34 @@ specified in link:jaxb.html#a1847[See Customization Overrides].”
 Example: The following schema example is from
 UDDI V2.0
 
+[source,xml,indent=4]
+----
 <xs:complexType name="businessEntityExt">
-
- <xs:sequence>
-
- <xs:any namespace="##other"
-
- processContents="strict"
-
- minOccurs="1" maxOccurs="unbounded">
-
- <xs:annotation><xs:appinfo>
-
- <jaxb:property name="Extension"/>
-
- </xs:appinfo></xs:annotation>
-
- </xs:any>
-
- ....
-
- </xs:sequence>
-
+    <xs:sequence>
+        <xs:any namespace="##other"
+                processContents="strict"
+                minOccurs="1" maxOccurs="unbounded">
+            <xs:annotation><xs:appinfo>
+                <jaxb:property name="Extension"/>
+            </xs:appinfo></xs:annotation>
+        </xs:any>
+        ....
+    </xs:sequence>
 </xs:complexType>
+----
 
 Customized derived code:
 
-public class BusinessEntityExt \{
-
- ...
-
- // List getAny(); // Default Code
-
- List getExtension()\{...} // Customized Code
-
+[source,java,indent=4]
+----
+public class BusinessEntityExt {
+    ...
+    // List getAny(); // Default Code
+    List getExtension() {...} // Customized Code
 }
+----
 
-=== [[a1944]]Model Group
+===== Model Group
 
 A _<property>_ binding declaration is allowed
 in the annotation element of the compositor (i.e. _<choice>_ ,
@@ -1685,109 +1690,119 @@ group’s parent schema element must aggregate the property set as
 specified in link:jaxb.html#a930[See Aggregation of Property
 Set].”
 
-=== Example1: Property Customization: Model Group To ChoiceContent Property
+*Example1: Property Customization: Model Group To ChoiceContent Property*
 
 XML Schema fragment
 
-<xs:annotation><xs:appinfo> +
-<jaxb:globalBindings choiceContentProperty="true"/> +
+[source,xml,indent=4]
+----
+<xs:annotation><xs:appinfo>
+    <jaxb:globalBindings choiceContentProperty="true"/>
 </xs:appinfo></xs:annotation>
-
-<xs:complexType name=”AType”> +
-<xs:choice>
-
- <xs:element name="foo" type="xs:int"/>
-
- <xs:element name="bar" type="xs:string"/>
-
- </xs:choice> +
+<xs:complexType name=”AType”>
+    <xs:choice>
+        <xs:element name="foo" type="xs:int"/>
+        <xs:element name="bar" type="xs:string"/>
+    </xs:choice>
 </xs:complexType>
+----
 
 Customized derived code:
 
-class ObjectFactory \{ +
-JAXBElement<Integer> createAtypeFoo(Integer value); +
-JAXBElement<String> createAtypeBar(String value);
-
-} +
-public class AType \{ +
-void setFooOrBar(Object o)\{...} //customized code +
-Object getFooOrBar()\{...} //customized code +
+[source,java,indent=4]
+----
+class ObjectFactory {
+    JAXBElement<Integer> createAtypeFoo(Integer value);
+    JAXBElement<String> createAtypeBar(String value);
 }
+public class AType {
+    void setFooOrBar(Object o) {...}    //customized code
+    Object getFooOrBar() {...}          //customized code
+}
+----
 
 The _choiceContentProperty_ is required to
 bind the choice model group to a choice content property.
 
-=== Example 2: Property Customization: Model Group To General Content Property
+*Example 2: Property Customization: Model Group To General Content Property*
 
 XML Schema fragment:
 
-<xs:complexType name="Base"> +
-<xs:choice maxOccurs="unbounded"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:property name="items" /> +
-</xs:appinfo></xs:annotation> +
-<xs:element name="A" type="xs:string"/> +
-<xs:element name="B" type="xs:string"/> +
-<xs:element name="C" type="xs:int"/> +
-</xs:choice> +
+[source,xml,indent=4]
+----
+<xs:complexType name="Base">
+    <xs:choice maxOccurs="unbounded">
+        <xs:annotation><xs:appinfo>
+            <jaxb:property name="items" />
+        </xs:appinfo></xs:annotation>
+        <xs:element name="A" type="xs:string"/>
+        <xs:element name="B" type="xs:string"/>
+        <xs:element name="C" type="xs:int"/>
+    </xs:choice>
 </xs:complexType>
+----
 
 Customized derived code:
 
-public class Base \{ +
-/** +
-* A general content list that can contain +
-* instances of Base.A, Base.B and Base.C. +
-*/ +
-// List getAOrBOrC(); - default +
-List getItems()\{...} // Customized Code +
+[source,java,indent=4]
+----
+public class Base {
+    /**
+    * A general content list that can contain
+    * instances of Base.A, Base.B and Base.C.
+    */
+    // List getAOrBOrC(); - default
+    List getItems()\{...} // Customized Code
 }
+----
 
-=== [[a1966]]Example 3: Property Customization: Model Group To Content Property Set
+*Example 3: Property Customization: Model Group To Content Property Set*
 
 XML Schema fragment:
 
-<xs:complexType name="USAddress"/> +
-<xs:complexType name="PurchaseOrderType"> +
-<xs:sequence> +
-<xs:choice> +
-<xs:group ref="shipAndBill"/> +
-<xs:element name="singleUSAddress" type="USAddress"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:property name="address"/> +
-</xs:appinfo></xs:annotation> +
-</xs:element> +
-</xs:choice> +
-</xs:sequence> +
+[source,xml,indent=4]
+----
+<xs:complexType name="USAddress"/>
+<xs:complexType name="PurchaseOrderType">
+    <xs:sequence>
+        <xs:choice>
+            <xs:group ref="shipAndBill"/>
+            <xs:element name="singleUSAddress" type="USAddress">
+                <xs:annotation><xs:appinfo>
+                    <jaxb:property name="address"/>
+                </xs:appinfo></xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:sequence>
 </xs:complexType>
-
-<xs:group name="shipAndBill"> +
-<xs:sequence> +
-<xs:element name="shipTo" type="USAddress"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:property name="shipAddress"/> +
-</appinfo></annotation> +
-</xs:element> +
-<xs:element name="billTo" type="USAddress"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:property name="billAddress"/> +
-</xs:appinfo></xs:annotation> +
-</xs:element> +
-</xs:sequence> +
+<xs:group name="shipAndBill">
+    <xs:sequence>
+        <xs:element name="shipTo" type="USAddress">
+            <xs:annotation><xs:appinfo>
+                <jaxb:property name="shipAddress"/>
+            </appinfo></annotation>
+        </xs:element>
+        <xs:element name="billTo" type="USAddress">
+            <xs:annotation><xs:appinfo>
+                <jaxb:property name="billAddress"/>
+            </xs:appinfo></xs:annotation>
+        </xs:element>
+    </xs:sequence>
 </xs:group>
+----
 
 Customized derived code:
 
-public interface PurchaseOrderType \{
-
- USAddress getShipAddress(); void
-setShipAddress(USAddress); +
-USAddress getBillAddress(); void setBillAddress(USAddress); +
-USAddress getAddress(); void setAddress(USAddress); +
+[source,java,indent=4]
+----
+public interface PurchaseOrderType {
+    USAddress getShipAddress(); void setShipAddress(USAddress);
+    USAddress getBillAddress(); void setBillAddress(USAddress);
+    USAddress getAddress(); void setAddress(USAddress);
 }
+----
 
-=== Model Group Reference
+===== Model Group Reference
 
 A model group reference is a reference to a
 model group using the “ref” attribute. A property customization is
@@ -1803,7 +1818,7 @@ property as specified in link:jaxb.html#a1414[See Content Model
 Default Binding]” applying customization overrides as specified in
 link:jaxb.html#a1847[See Customization Overrides].”
 
-=== [[a1976]]ComplexType
+===== ComplexType
 
 A _<property>_ customization is allowed on
 the annotation element of a complex type. The customization values must
@@ -1825,7 +1840,7 @@ applying the customization overrides as specified in
 link:jaxb.html#a1847[See Customization Overrides]".
 * 
 
-=== [[a1981]] _<javaType>_ Declaration
+=== _<javaType>_ Declaration
 
 A _<javaType>_ declaration provides a way to
 customize the binding of an XML schema atomic datatype to a Java
@@ -1844,15 +1859,15 @@ target Java datatype into its lexical representation of the XML schema
 datatype. The print method is invoked by a JAXB provider’s
 implementation during marshalling.
 
-=== Usage
+==== Usage
 
+[source,xml,indent=4]
+----
 <javaType name=" _javaType_ "
-
-{empty} [ xmlType=" _xmlType_ " ]
-
-{empty} [ parseMethod="parseMethod" ]
-
- [ printMethod="printMethod" ]>
+            [ xmlType=" _xmlType_ " ]
+            [ parseMethod="parseMethod" ]
+            [ printMethod="printMethod" ]>
+----
 
 The binding declaration can be used in one of
 the following:
@@ -1871,7 +1886,7 @@ scope. When used in an annotation element of one of the schema elements
 specified in link:jaxb.html#a2079[See Customizable Schema
 Elements].” the customization values have component scope.
 
-=== name
+===== name
 
 The _javaType_ , if specified, is the Java
 datatype to which _xmlType_ is to be bound. Therefore, _javaType_ must
@@ -1884,7 +1899,7 @@ javaType declares a public constructor with following signature,
 _javaType(java.lang.String)_ , _parseMethod_ attribute does not need to
 be specified.
 
-===  _xmlType_
+=====  _xmlType_
 
 The _xmlType_ , if specified, is the name of
 the XML Schema datatype to which _javaType_ is to bound. If specified,
@@ -1908,7 +1923,7 @@ link:jaxb.html#a2062[See Example: javaType Customization: Java
 Built-in Type]” and link:jaxb.html#a2027[See Example: javaType
 Customization: User Specified Parse Method]”
 
-===  _parseMethod_
+=====  _parseMethod_
 
 The parse method if specified, must be
 applied during unmarshalling in order to convert a string from the input
@@ -1957,7 +1972,7 @@ accessible one argument constructor, where the argument is type
 _java.lang.String_ , input text is parsed by invoking _new_ with a
 _java.lang.String_ parameter.
 
-===  _printMethod_
+=====  _printMethod_
 
 The print method if specified, must be
 applied during marshalling in order to convert a value of the target
@@ -1993,7 +2008,7 @@ is used as the default print method..
 
 
 
-===  _DatatypeConverter_
+====  _DatatypeConverter_
 
 Writing customized parse and print methods
 can be difficult for a Java programmer. This requires a programmer to
@@ -2021,49 +2036,44 @@ class name and must implement the interface _DatatypeConverterInterface_
 . The class is fully specified by the Javadoc specified in
 _jakarta.xml.bind.DatatypeConverter_ .
 
-=== Usage
+===== Usage
 
 The following example demonstrates the use of
 the _DatatypeConverter_ class for writing a customized parse and print
 method.
 
-=== [[a2027]]Example: javaType Customization: User Specified Parse Method
+*Example: javaType Customization: User Specified Parse Method*
 
 This example shows the binding of XML schema
 type _"xs:date"_ is bound to a Java datatype _long_ using user specified
 print and parse methods.
 
-<jaxb:globalBindings> +
-<jaxb:javaType name="long" xmlType="xs:date" +
-parseMethod="pkg.MyDatatypeConverter.myParseDate" +
-printMethod="pkg.MyDatatypeConverter.myPrintDate"/> +
-</jaxb:javaType> +
-</jaxb:globalBindings> +
+[source,xml,indent=4]
+----
+<jaxb:globalBindings>
+    <jaxb:javaType name="long" xmlType="xs:date"
+                parseMethod="pkg.MyDatatypeConverter.myParseDate"
+                printMethod="pkg.MyDatatypeConverter.myPrintDate"/>
+    </jaxb:javaType>
+</jaxb:globalBindings>
+----
 
-package pkg; +
+[source,java,indent=4]
+----
+package pkg;
 import jakarta.xml.bind.DatatypeConverter;
-
-public class MyDatatypeConverter \{ +
-public static long myParseDate(String s) \{
-
- java.util.Calendar d =
-DatatypeConverter.parse(s);
-
- long result= cvtCalendarToLong(d) ; // user
-defined method
-
- return result; +
+public class MyDatatypeConverter {
+public static long myParseDate(String s) {
+    java.util.Calendar d = DatatypeConverter.parse(s);
+    long result= cvtCalendarToLong(d) ; // userdefined method
+    return result;
+    }
+    public static String myPrintDate(long l) {
+        java.util.Calendar d = cvtLongToCalendar(l);//user defined
+        return DatatypeConverter.print(d);
+    }
 }
-
- public static String myPrintDate(long l) \{
-
- java.util.Calendar d = cvtLongToCalendar(l);
-//user defined
-
- return DatatypeConverter.print(d);
-
- } +
-}
+----
 
 The implementation of the print methods (
 _parseDate_ and _printDate_ ) are provided by the user.
@@ -2074,7 +2084,7 @@ implementation invokes _myParseDate_ . If _myParseDate_ method throws a
 _ParseException_ , then the JAXB implementation code catches the
 exception, and generate a _parseConversionEvent_ .
 
-=== Lexical And Value Space
+===== Lexical And Value Space
 
 [XSD PART 2] specifies both a value space and
 a lexical space for an schema datatypes. There can be more than one
@@ -2106,7 +2116,7 @@ applies, as specified by [XSD PART 2] and which is valid with respect to
 the application’s schema.
 * 
 
-=== Built-in Conversions
+==== Built-in Conversions
 
 As a convenience to the user, this section
 specifies some built-in conversions. A built-in conversion is one where
@@ -2116,15 +2126,14 @@ conversions leverage the narrowing and widening conversions defined in
 “Widening Primitive Conversion” and Section 5.1.3, “Narrowing Primitive
 Conversions.” For example:
 
+[source,xml,indent=4]
+----
 <xs:simpleType name="foo" type="xs:long">
-
- <xs:annotation><xs:appinfo>
-
- <jaxb:javaType name="int"/>
-
- </xs:appinfo></xs:annotation>
-
+    <xs:annotation><xs:appinfo>
+        <jaxb:javaType name="int"/>
+    </xs:appinfo></xs:annotation>
 </xs:simpleType>
+----
 
 If the parse method is omitted, then a JAXB
 implementation must perform the one of the following binding options:
@@ -2142,26 +2151,28 @@ _new_ with a _java.lang.String_ parameter for parsing.
 exist, this must result in an invalid binding customization as specified
 in link:jaxb.html#a1544[See Invalid Customizations].
 
-=== [[a2062]]Example: javaType Customization: Java Built-in Type
+*Example: javaType Customization: Java Built-in Type*
 
 This example illustrates how to bind a XML
 schema type to a Java type different from the default one.
 
 XML Schema fragment:
 
+[source,xml,indent=4]
+----
 <xs:element name="partNumber" type="xs:int"/>
+----
 
 Customization:
 
+[source,xml,indent=4]
+----
 <jaxb:globalBindings>
-
- ....
-
- <jaxb:javaType name="long"
-
- xmlType="xs:int"/>
-
+    ....
+    <jaxb:javaType name="long"
+                xmlType="xs:int"/>
 </jaxb:globalBindings>
+----
 
 Since a Java built-in is specified, a parse
 or a print method need not be specified. A JAXB implementation uses the
@@ -2169,10 +2180,12 @@ parse and print methods defined in _DatatypeConverter_ class for
 converting between lexical representations and values. A JAXB
 implementation unmarshals an input value using the following methods:
 
- int j =
-(int)DataTypeConverter.parseLong(string);
+[source,java,indent=4]
+----
+    int j =(int)DataTypeConverter.parseLong(string);
+----
 
-=== Events
+==== Events
 
 The parse method _parseMethod_ may fail,
 since it is only defined on those strings that are valid representations
@@ -2188,16 +2201,16 @@ not fail. If it does, then the JAXB implementation must ensure that the
 exception thrown by a print method is caught and a
 _printConversionEvent_ is generated.
 
-=== Customization Overrides
+==== Customization Overrides
 
 The _<javaType>_ overrides the default
 binding of _xmlType_ to the Java datatype specified in
 link:jaxb.html#a725[See Java Mapping for XML Schema Built-in
 Types].
 
-=== [[a2079]]Customizable Schema Elements
+==== Customizable Schema Elements
 
-=== Simple Type Definition
+==== Simple Type Definition
 
 A _<javaType>_ binding declaration is allowed
 in the annotation element of the of a simple type definition. The
@@ -2210,14 +2223,16 @@ definition.
 If the simple type definition is mapped to a
 schema-derived type, an _@XmlJavaTypeAdapter_ is generated on that
 class. Annotation element _@XmlJavaTypeAdapter.value()_ is set to a
-generated classlink:#a5379[28] that extends
+generated classfootnote:[There is no need to
+standardize the name of the generated class since
+_@XmlJavaTypeAdapter.value()_ references the class.] that extends
 _jakarta.xml.bind.annotation.adapter.XmlAdapter_ . The generated class’
 _unmarshal_ method must call the <javaType> customization’s parse
 method, which is specified in link:jaxb.html#a1981[See
 <javaType> Declaration]. The generated class’ _marshal_ method must call
 the <javaType> customization’s print method.
 
-===  _GlobalBindings_
+=====  _GlobalBindings_
 
 A _<javaType>_ binding declaration is allowed
 as part of _<globalBindings>._ The _javaType_ overrides the default
@@ -2230,7 +2245,7 @@ that references an _xmlType_ that has a globalBindings _<javaType>_
 customization specified for it, the corresponding JAXB property is
 annotated with _@XmlJavaTypeAdapter_ .
 
-===  _<property><baseType>_ declaration
+=====  _<property><baseType>_ declaration
 
 A _<javaType>_ binding declaration is allowed
 as part of _<baseType>_ in the _<property>_ binding declaration. The
@@ -2244,7 +2259,7 @@ The schema-derived JAXB property is annotated
 with _@XmlJavaTypeAdapter_ as specified in
 link:jaxb.html#a1801[See baseType]”.
 
-=== [[a2090]] _<typesafeEnum>_ Declaration
+=== _<typesafeEnum>_ Declaration
 
 This binding declaration allows the
 customization of a binding of an XML schema element to its Java
@@ -2252,21 +2267,22 @@ representation as an enum type, Section 8.9 in [JLS3]. Only simple type
 definitions with enumeration facets can be customized using this binding
 declaration.
 
-=== [[a2092]]Usage
+==== Usage
+[source,xml,indent=4]
+----
+<typesafeEnumClass>
+    [ name = "enumClassName" ]
+    [ map = “true” | “false” | “1” | “0” ]
+    [ ref = "enumClassName" ]
+    [ <typesafeEnumMember> ... </typesafeEnumMember> ]*
+    [ <javadoc> enumClassJavadoc </javadoc> ]
+</typesafeEnumClass>
 
-<typesafeEnumClass> +
-[ name = "enumClassName" ] +
-[ map = “true” | “false” | “1” | “0” ] +
-[ ref = "enumClassName" ] +
-[ <typesafeEnumMember> ... </typesafeEnumMember> ]* +
-[ <javadoc> enumClassJavadoc </javadoc> ] +
-</typesafeEnumClass> +
- +
-<typesafeEnumMember name = "enumMemberName"> +
-[ value = "enumMemberValue"] +
-[ <javadoc> enumMemberJavadoc </javadoc> ] +
+<typesafeEnumMember name = "enumMemberName">
+                  [ value = "enumMemberValue"]
+    [ <javadoc> enumMemberJavadoc </javadoc> ]
 </typesafeEnumMember>
-
+----
 There are two binding declarations
 _<typesafeEnumClass>_ and _<typesafeEnumMember>_ . The two binding
 declarations allow the enumeration members of an enumeration class and
@@ -2323,7 +2339,7 @@ in the annotation element of the enumeration member. This allows the
 enumeration member to be customized independently from the enumeration
 class.
 
-===  _value_ [[a2106]] Attribute
+====  _value_ Attribute
 
 The purpose of the _value_ attribute is to
 support customization of an enumeration value using an external binding
@@ -2355,7 +2371,7 @@ An example of external binding syntax can be
 found in link:jaxb.html#a2134[See Example 2: typesafeEnum
 Customization: External Binding Declaration].”
 
-=== Inline Annotations
+==== Inline Annotations
 
 There are two ways to customize an
 enumeration class:
@@ -2380,7 +2396,7 @@ link:jaxb.html#a2106[See value Attribute].” An example of this
 customization is shown in link:jaxb.html#a2138[See Example 3:
 typesafeEnum Customization: Combined Inline Annotation].”
 
-=== Customization Overrides
+==== Customization Overrides
 
 When binding a schema type definition’s Java
 representation to an enum type, the following customization values
@@ -2388,29 +2404,29 @@ override the defaults specified in Chapter 5. It is specified in a
 common section here and referenced from link:jaxb.html#a1857[See
 Customizable Schema Elements].”
 
-* name: If enumClassName is defined, then the
+* *name:* If enumClassName is defined, then the
 name obtained by mapping enumClassName as specified in
 link:jaxb.html#a1608[See Customized Name Mapping].”
-* package name: The name obtained by
+* *package name:* The name obtained by
 inheriting _packgeName_ from a scope that covers this schema element and
 mapping packageName as specified in link:jaxb.html#a1608[See
 Customized Name Mapping].”
-* enumclass javadoc: _enumClassJavaDoc_ if
+* *enumclass javadoc:* _enumClassJavaDoc_ if
 defined, customizes the _class/interface section (_
 link:jaxb.html#a2145[See Javadoc Sections]”) for the enumeration
 class, as specified in link:jaxb.html#a2163[See Javadoc
 Customization].”
-* enum constant set: Each member of the set
+* *enum constant set:* Each member of the set
 is computed as follows:
-*  name: If enumMemberName is defined, the
+*  *name:* If enumMemberName is defined, the
 name obtained by mapping enumMemberName as specified in
 link:jaxb.html#a1608[See Customized Name Mapping].”
-* javadoc: _enumMemberJavaDoc_ if defined,
+* *javadoc:* _enumMemberJavaDoc_ if defined,
 customizes the _field section (_ link:jaxb.html#a2145[See
 Javadoc Sections]” ) for the enumeration class, as specified in
 link:jaxb.html#a2163[See Javadoc Customization].”
 
-=== [[a2126]]Customizable Schema Elements
+==== Customizable Schema Elements
 
 Any XML Schema simple type which has an
 enumeration facet can be customized with _<jaxb:typesafeEnumClass>_
@@ -2426,74 +2442,86 @@ constant.
 
 * 
 
-=== [[a2129]]Example 1: typesafeEnum Customization: Split Inline Annotation
+*Example 1: typesafeEnum Customization: Split Inline Annotation*
 
 XML Schema fragment:
 
-<xs:simpleType name="USState"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:typesafeEnumClass name="USStateAbbr"/> +
-</xs:appinfo></xs:annotation> +
-<xs:restriction base="xs:NCName"> +
-<xs:enumeration value="AK"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:typesafeEnumMember name="STATE_AK"/> +
-</xs:appinfo></xs:annotation> +
-</xs:enumeration> +
-<xs:enumeration value="AL"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:typesafeEnumMember name="STATE_AL"/> +
-</xs:appinfo></xs:annotation> +
-</xs:enumeration> +
-</xs:restriction> +
+[source,xml,indent=4]
+----
+<xs:simpleType name="USState">
+    <xs:annotation><xs:appinfo>
+        <jaxb:typesafeEnumClass name="USStateAbbr"/>
+    </xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:NCName">
+        <xs:enumeration value="AK">
+            <xs:annotation><xs:appinfo>
+                <jaxb:typesafeEnumMember name="STATE_AK"/>
+            </xs:appinfo></xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="AL">
+            <xs:annotation><xs:appinfo>
+                <jaxb:typesafeEnumMember name="STATE_AL"/>
+            </xs:appinfo></xs:annotation>
+        </xs:enumeration>
+    </xs:restriction>
 </xs:simpleType>
+----
 
 Customized derived code:
 
-public enum USStateAbbr \{ +
-STATE_AL, STATE_AK; +
-public String value() \{ return name(); } +
-public static USStateAbbr fromValue(String value) \{ ... } +
+[source,java,indent=4]
+----
+public enum USStateAbbr {
+    STATE_AL, STATE_AK;
+    public String value() { return name(); }
+    public static USStateAbbr fromValue(String value) {...}
 };
+----
 
-=== [[a2134]]Example 2: typesafeEnum Customization: External Binding Declaration
+*Example 2: typesafeEnum Customization: External Binding Declaration*
 
 The following example shows how to customize
 the above XML schema fragment using an external binding syntax.
 
-<jaxb:typesafeEnumClass name="USStateAbbr"> +
-<jaxb:typesafeEnumMember name="STATE_AK" value="AK"> +
-<jaxb:typesafeEnumMember name="STATE_AL" value="AL"/> +
+[source,xml,indent=4]
+----
+<jaxb:typesafeEnumClass name="USStateAbbr">
+    <jaxb:typesafeEnumMember name="STATE_AK" value="AK"/>
+    <jaxb:typesafeEnumMember name="STATE_AL" value="AL"/>
 </jaxb:typesafeEnumClass>
+----
 
 The attribute _value_ must be specified for
 _<typesafeEnumMember>_ . This identifies the enumeration member to which
 _<typesafeEnumMember>_ applies.
 
-=== [[a2138]]Example 3: typesafeEnum Customization: Combined Inline Annotation
+*Example 3: typesafeEnum Customization: Combined Inline Annotation*
 
 The following example shows how to customize
 the above XML schema fragment using inline annotation which does not
 split the external binding syntax.
 
-<xs:simpleType name="USState"> +
-<xs:annotation><xs:appinfo> +
-<jaxb:typesafeEnumClass name="USStateAbbr"> +
-<jaxb:typesafeEnumMember name="STATE_AK" value="AK"/> +
-<jaxb:typesafeEnumMember name="STATE_AL" value="AL"/> +
-</jaxb:typesafeEnumClass> +
-</xs:appinfo></xs:annotation> +
-<xs:restriction base="xs:NCName"> +
-<xs:enumeration value="AK"/> +
-<xs:enumeration value="AL"/> +
-</xs:restriction> +
+[source,xml,indent=4]
+----
+<xs:simpleType name="USState">
+    <xs:annotation><xs:appinfo>
+        <jaxb:typesafeEnumClass name="USStateAbbr">
+            <jaxb:typesafeEnumMember name="STATE_AK" value="AK"/>
+            <jaxb:typesafeEnumMember name="STATE_AL" value="AL"/>
+        </jaxb:typesafeEnumClass>
+    </xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:NCName">
+        <xs:enumeration value="AK"/>
+        <xs:enumeration value="AL"/>
+    </xs:restriction>
 </xs:simpleType>
+----
 
 The attribute value must be specified for
 _typesafeEnumMember_ . This identifies the enumeration member to which
 the binding declaration applies.
 
-===  _<javadoc>_ [[a2142]] Declaration
+===  _<javadoc>_ Declaration
 
 The _<javadoc>_ declaration allows the
 customization of a javadoc that is generated when an XML schema
@@ -2504,7 +2532,7 @@ element. Hence it can only be used as a local element within the content
 model of another binding declaration. The binding declaration in which
 it is used determines the section of the Javadoc that is customized.
 
-=== [[a2145]]Javadoc Sections
+==== Javadoc Sections
 
 The terminology used for the javadoc sections
 is derived from “Requirements for Writing Java API Specifications” which
@@ -2523,30 +2551,30 @@ specification)
 * field section (corresponds to field
 specification)
 
-=== Usage
+==== Usage
 
 Note that the text content of a _<javadoc>_
 element must use _CDATA_ or _&lt;_ to escape embedded HTML tags.
 
+[source,xml,indent=4]
+----
 <javadoc>
-
- Contents in &lt;b>Javadoc&lt;\b> format.
-
+    Contents in &lt;b>Javadoc&lt;\b> format.
 </javadoc>
+----
 
 or
 
+[source,xml,indent=4]
+----
 <javadoc>
-
- <<![CDATA[
-
- Contents in <b>Javadoc<\b> format
-
- ]]>
-
+    <<![CDATA[
+    Contents in <b>Javadoc<\b> format
+    ]]>
 </javadoc>
+----
 
-=== [[a2163]]Javadoc Customization
+==== Javadoc Customization
 
 The Javadoc must be generated from the
 _<javadoc>_ element if specified. The Javadoc section depends upon where
@@ -2554,7 +2582,7 @@ _<javadoc>_ element is used. JAXB providers may generate additional
 provider specific Javadoc information (for example, contents of the
 _<xs:documentation>_ element).
 
-===  _<dom>_ [[a2165]] Declaration
+===  _<dom>_ Declaration
 
 The _<dom>_ customization binds an XML Schema
 component to DOM rather than to a strongly typed Java representation.
@@ -2566,18 +2594,20 @@ represented as DOM. This customization also meets a JAX-WS 2.0
 databinding requirement from link:jaxb.html#a179[See Disabling
 Databinding]”.
 
-=== Usage
+==== Usage
 
 The syntax for the customization is the
 following:
 
-<dom [ [type= "w3c" |
-_otherDomRepresentations_ ] />
+[source,xml,indent=4]
+----
+    <dom [ [type= "w3c" | _otherDomRepresentations_ ] />
+----
 
 You can use the optional type attribute to
 specify the type of DOM. By default, it is W3C DOM.
 
-=== Customizable Schema Elements
+==== Customizable Schema Elements
 
 This customization can be attached to the
 following XML Schema components:
@@ -2620,60 +2650,71 @@ The dom customization allows one to disable
 databinding and process a part of a document using other technologies
 that require “raw” XML.
 
-=== Examples
+==== Examples
 
-=== Wildcard Binding Example
+*Wildcard Binding Example*
 
 A wildcard is mapped to a List of
 _org.w3c.dom.Element_ . Each element that matches to the wildcard will
 be turned into a DOM tree.
 
-<xs:complexType name=”foo”> +
-<xs:sequence> +
-<xs:any maxOccurs="unbounded" processContents="lax"> +
-_<xs:annotation><xs:appinfo> +
-<jaxb:dom/> +
-</xs:appinfo></xs:annotation> +
-_ </xs:any> +
-</xs:sequence> +
+[source,xml,indent=4]
+----
+<xs:complexType name=”foo”>
+    <xs:sequence>
+        <xs:any maxOccurs="unbounded" processContents="lax">
+            <xs:annotation><xs:appinfo>
+                <jaxb:dom/>
+            </xs:appinfo></xs:annotation>
+        </xs:any>
+    </xs:sequence>
 </xs:complexType>
+----
 
- +
-import org.w3c.dom.Element; +
-public class Foo \{ +
-@XmlAnyElement(lax=”false”) +
-List<Element> getContent()\{...} +
+[source,java,indent=4]
+----
+import org.w3c.dom.Element;
+public class Foo {
+    @XmlAnyElement(lax=”false”)
+    List<Element> getContent() {...}
 }
+----
 
-=== Wildcard and Mixed Content Binding Example
+*Wildcard and Mixed Content Binding Example*
 
 If the complexType definition above is
 defined to have mixed content, due to element _[complexType]_ __ having
 attribute _@mixed=”true”_ , the JAXB binding is:
 
-import org.w3c.dom.Element; +
-public class Foo \{ +
-/* Element content is represented _org.w3c.dom.Element_ . +
-* Character data information is represented as instances of +
-* _java.lang.String_ . */ +
-@XmlMixed +
-@XmlAnyElement(lax=”false”) +
-List<Object> getContent()\{...} +
+[source,java,indent=4]
+----
+import org.w3c.dom.Element;
+public class Foo {
+    /* Element content is represented _org.w3c.dom.Element_ .
+    * Character data information is represented as instances of
+    * _java.lang.String_ . */
+    @XmlMixed
+    @XmlAnyElement(lax=”false”)
+    List<Object> getContent() {...}
 }
+----
 
-===  _<inlineBinaryData>_ [[a2193]] Declaration
+===  _<inlineBinaryData>_ Declaration
 
 The _<inlineBinaryData>_ customization
 provides declarative control over the optimization for binary data
 described in link:jaxb.html#a5109[See Appendix],
 link:jaxb.html#a5110[See Enhanced Binary Data Handling].
 
-=== Usage
+==== Usage
 
 The syntax for the customization is the
 following:
 
-<inlineBinaryData/>
+[source,xml,indent=4]
+----
+    <inlineBinaryData/>
+----
 
 This customization disables considering the
 binary data optimization for a schema component containing binary data.
@@ -2701,13 +2742,15 @@ link:jaxb.html#a482[See Java Package].”. This customization is
 useful to resolve name collisions between factory methods in the
 schema-derived _ObjectFactory_ class.
 
-=== Usage
+==== Usage
 
 The syntax for the customization is the
 following:
 
-<factoryMethod
-name=”BaseForFactoryMethodName”/>
+[source,xml,indent=4]
+----
+<factoryMethod name=”BaseForFactoryMethodName”/>
+----
 
 The customization value defined is:
 
@@ -2721,7 +2764,7 @@ by concatenating the following components:
 * The string constant _create_
 *  _@name_ ’s value
 
-=== Usage Constraints
+===== Usage Constraints
 
 The usage constraints on _<factoryMethod>_
 are specified below. Any constraint violation must result in an invalid
@@ -2737,7 +2780,7 @@ name if a factory method is to be generated for the annotated element
 declaration or type definition. Section 6 and 7 specifies when a factory
 method is generated for an element declarations or type definitions.
 
-=== [[a2217]]Annotation Restrictions
+=== Annotation Restrictions
 
 [XSD PART 1] allows an annotation element to
 be specified for most elements but is ambiguous in some cases. The
@@ -2758,17 +2801,15 @@ For example in the following schema fragment
 (for brevity, the declaration of the global element “Name” and “Address”
 has been omitted).
 
- _<xs:element name = "Customer">_
-
- _<xs:complexType>_
-
- _<xs:element ref = "Name"/>_
-
- _<xs:element ref = "Address" />_
-
- _</xs:complexType>_
-
- _</xs:element>_
+[source,xml,indent=4]
+----
+<xs:element name = "Customer">
+    <xs:complexType>
+        <xs:element ref = "Name"/>
+        <xs:element ref = "Address" />
+    </xs:complexType>
+</xs:element>
+----
 
 XML Schema spec is ambiguous on whether an
 annotation element can be specified at the reference to the “Name”
