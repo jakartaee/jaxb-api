@@ -2,7 +2,7 @@
 // Copyright (c) 2020 Contributors to the Eclipse Foundation
 //
 
-== [[a2236]]Java Types To XML
+== Java Types To XML
 
 === Introduction
 
@@ -16,7 +16,7 @@ This section is non normative and provides a
 high level view of Java to XML Schema mapping targeted towards both JAXB
 application developers and JAXB implementation vendors.
 
-=== Mapping Scope
+==== Mapping Scope
 
 The mapping covers program elements commonly
 used in the composition of a data model for an application: package,
@@ -28,11 +28,11 @@ In so far as possible, a program element is
 mapped to an equivalent XML Schema construct in an intuitive manner.
 Thus,
 
-* Package maps to a XML target namespace. A
+* *Package* maps to a XML target namespace. A
 package provides a naming context for types. A XML target namespace
 provides a naming context for schema components such as elements, type
 definitions.
-* Type maps to a schema type. A value type is
+* *Type* maps to a schema type. A value type is
 a data container for values; e.g. a value class contains values
 represented by it’s properties and fields. A schema type is a datatype,
 an instance of which (e.g. element) acts as a data container for values
@@ -43,9 +43,9 @@ type. For e.g.,
 definition
 * java primitive types and wrapper classes map
 to XML Schema simple type definition.
-* Field or property maps to an element or an
+* *Field or property* maps to an element or an
 attribute contained within the complex type to which a type is mapped.
-* Enum type maps to a simple schema type
+* *Enum type* maps to a simple schema type
 constrained by enumeration facets.
 
 The input to the mapping process is one or
@@ -53,9 +53,9 @@ more sets of packages or classes. A package or a class is mapped and
 recursively, fields, properties and types contained with it. The mapping
 is customizable.
 
-=== Mapping Annotations
+==== Mapping Annotations
 
-Mapping annotationsThe mapping of program
+*Mapping annotations* The mapping of program
 elements to XML Schema construct can be customized using mapping
 annotations, program annotations based on JSR 175 program annotation
 facility. Mapping annotations are used for:
@@ -77,14 +77,14 @@ XML Schema constructs. This policy also allows a JAXB vendor
 implementation to generate a schema from a program element’s compiled
 form rather than its source.
 
-=== XML Name Derivation
+==== XML Name Derivation
 
 Mapped program element is a program element
 that has been mapped to an XML Schema construct. It is possible to use
 _@XmlTransient_ annotation type to prevent the mapping of a program
 element.
 
-XML Names An XML name may be needed for the
+*XML Names* An XML name may be needed for the
 schema components for a mapped program element, for e.g. element name.
 XML names are usually derived from a program element name, for e.g.
 property, field, class name etc.But they can be customized using mapping
@@ -93,22 +93,22 @@ capitalization rules are used. If a Java Identifier is not a legal XML
 name, then a legal XML name can be assigned using an annotation element
 (e.g. _@XmlType(name=”foo”)_ ).
 
-=== Fields and Properties
+==== Fields and Properties
 
-XML global element Fields and properties
+*XML global element* Fields and properties
 typically map to local elements within a complex type for a class. But a
 well formed XML document begins with a root element (a global element in
 the corresponding schema). The _@XmlRootElement_ annotation can be used
 to associate a global element with a class or an enum type.
 
-Null Value and Nillable Element A null value
+*Null Value and Nillable Element* A null value
 for a type mapped to an XML Schema element in two ways: absence of an
 element or an nillable element. The mapping annotation for an element
 allows either mapping.
 
 
 
-=== Type Mapping
+==== Type Mapping
 
 Legacy applications One of the primary use
 cases for Java language to XML Schema mapping is to allow an existing
@@ -119,7 +119,7 @@ designed to enable such classes to be mapped to schema with minimal
 changes to existing code. See link:jaxb.html#a3676[See Default
 Mapping] for default mapping.
 
-Class A class usually maps to a complex type.
+*Class* A class usually maps to a complex type.
 However, using _@XmlValue_ annotation, a class can also be mapped to a
 simple type (to hold a simple value) or a complexType with simpleContent
 (to hold a simple value and attributes). The _@XmlType_ annotation can
@@ -129,24 +129,24 @@ properties and/or fields. Properties and fields are unordered; but they
 can be mapped to a content model that is ordered (e.g. xs:sequence) or
 unordered content model (xs:all).
 
-Class Designs A class with a public or
+*Class Designs* A class with a public or
 protected no-arg constructor can be mapped. If a class has a static
 zero-arg factory method, then the factory method can be specified using
 the annotation element _@XmlType.factoryMethod()_ and
 _@XmlType.factoryClass()_ .
 
-Ordering of Properties/fields: The ordering of
+*Ordering of Properties/fields:* The ordering of
 properties and fields can be customized in one of two ways: at the
 package level using @XmlAccessorOrder or using _@XmlType.propOrder()_ at
 the class level.
 
-Class Hierarchy Mapping Class hierarchy
+*Class Hierarchy* Mapping Class hierarchy
 typically maps to a type derivation hierarchy. The _@XmlType_ and
 _@XmlValue_ annotations together provide support mapping class hierarchy
 to schema type hierarchy where XML Schema complex type derives by
 extension from either another complex type or a simple type.
 
-Supported Collection Types Typed collections
+*Supported Collection Types* Typed collections
 and untyped collections are mapped. Mapped collection types are: arrays,
 indexed properties and parametric types. Mapped untyped collection are:
 _java.util.List_ , _java.util.Set_ and _java.util.HashMap_ . Of these,
@@ -166,25 +166,29 @@ When a collection type is mapped to a XML
 Schema complex type, the mapping is designed to support two forms of
 serialization shown below.
 
-//Example: code fragment +
-int[] names; +
- +
-// XML Serialization Form 1 (Unwrapped collection) +
-// Element name is derived from property or field name +
-<names> ... </names> +
-<names> ... </names> +
-... +
- +
-// XML Serialization Form 2 ( Wrapped collection ) +
-// Element name of wrapper is derived from property or field name +
-// Element name of each item in collection is also derived from
+[source,java,indent=4]
+----
+//Example: code fragment
+int[] names;
+----
+[source,xml,indent=4]
+----
+<!--XML Serialization Form 1 (Unwrapped collection)
+    Element name is derived from property or field name-->
+<names> ... </names>
+<names> ... </names>
+...
 
-// property name +
-<names> +
-<names> value-of-item </names> +
-<names> value-of-item </names> +
-.... +
+<!--XML Serialization Form 2 (Wrapped collection)
+    Element name of wrapper is derived from property or field name
+    Element name of each item in collection is also derived from
+    property name-->
+<names>
+    <names> value-of-item </names> +
+    <names> value-of-item </names> +
+    ....
 </names>
+----
 
 The two serialized XML forms allow a null
 collection to be represented either by absence or presence of an element
@@ -193,11 +197,11 @@ property or field is used to customize the schema corresponding to the
 above XML serialization forms.
 
 A parameterized collection (e.g.
-List<Integer>) can also be mapped to simple schema that derives by list
+List<*Integer*>) can also be mapped to simple schema that derives by list
 using _@XmlList_ annotation. For e.g. the serialized XML form is: “1 2 3
 “.
 
-=== [[a2278]]Adapter
+==== Adapter
 
 A type may not map naturally to a XML
 representation (see Supported Collection Types above). As another
@@ -219,7 +223,7 @@ marshaling respectively to adapt between bound and value types.
 * specify the adapter class using the
 _@XmlJavaTypeAdapter_ annotation.
 
-=== Referential Integrity
+==== Referential Integrity
 
 Preserving referential integrity of an object
 graph across XML serialization followed by a XML de serialization,
@@ -242,17 +246,18 @@ customize the mapping is useful since it can result in mapping of
 program elements to a schema that defines a document structure more
 meaningfully to an application than a default derived schema.
 
-=== Property/Field Name Collision
+==== Property/Field Name Collision
 
 A XML name collision can arise when the
 property name obtained by bean de capitalization and the name of a field
 map to a same schema component. For example
 
+[source,java,indent=4]
+----
 public int item;
-
-pubilc int getItem();
-
+public int getItem();
 public void setItem(int val);
+----
 
 The name collision occurs because the property
 name, bean de capitalization, and the name of the public field are both
@@ -303,135 +308,111 @@ _jakarta.xml.bind.JAXBContext.generateSchema(..)_ for more information.
 This section specifies the mapping of Java
 types to XML Schema.
 
-=== Java Primitive types
+==== Java Primitive types
 
 The default mapping of Java types (and their
 wrapper classes) specified in table link:jaxb.html#a2310[See
 Mapping: Java Primitive types to Schema Types] must be supported.
 
-=== [[a2310]]Mapping: Java Primitive types to Schema Types
+.Table 8-1 Mapping: Java Primitive types to Schema Types
+|===
+| Java Primitive Type | XML data type
 
-Java Primitive Type
+| boolean
+| xs:boolean
 
-XML data type
+| byte
+| xs:byte
 
-boolean
+| short
+| xs:short
 
-xs:boolean
+| int
+| xs:int
 
-byte
+| long
+| xs:long
 
-xs:byte
+| float
+| xs:float
 
-short
+| double
+| xs:double
 
-xs:short
+|===
 
-int
-
-xs:int
-
-long
-
-xs:long
-
-float
-
-xs:float
-
-double
-
-xs:double
-
-=== Java Standard Classes
+==== Java Standard Classes
 
 The default mapping of Java classes specified
 in link:jaxb.html#a2329[See Mapping of Standard Java classes]
 must be supported.
 
-=== [[a2329]]Mapping of Standard Java classes
+.Table 8-2 Mapping of Standard Java classes
+|===
 
-Java Class
+| Java Class | XML data type
 
-XML data type
+| java.lang.String
+| xs:string
 
-java.lang.String
+| java.math.BigInteger
+| xs:integer
 
-xs:string
+| java.math.BigDecimal
+| xs:decimal
 
-java.math.BigInteger
+| java.util.Calendar
+| xs:dateTime
 
-xs:integer
+| java.util.Date
+| xs:dateTime
 
-java.math.BigDecimal
+| javax.xml.namespace.QName
+| xs:QName
 
-xs:decimal
+| java.net.URI
+| xs:string
 
-java.util.Calendar
+| javax.xml.datatype.XMLGregorianCalendar
+| xs:anySimpleType
 
-xs:dateTime
+| javax.xml.datatype.Duration
+| xs:duration
 
-java.util.Date
+| java.lang.Object
+| xs:anyType
 
-xs:dateTime
+| java.awt.Image
+| xs:base64Binary
 
-javax.xml.namespace.QName
+| javax.activation.DataHandler
+| xs:base64Binary
 
-xs:QName
+| javax.xml.transform.Source
+| xs:base64Binary
 
-java.net.URI
-
-xs:string
-
-javax.xml.datatype.XMLGregorianCalendar
-
-xs:anySimpleType
-
-javax.xml.datatype.Duration
-
-xs:duration
-
-java.lang.Object
-
-xs:anyType
-
-java.awt.Image
-
-xs:base64Binary
-
-javax.activation.DataHandler
-
-xs:base64Binary
-
-javax.xml.transform.Source
-
-xs:base64Binary
-
-java.util.UUID
-
-xs:string
-
-
-
-* 
+| java.util.UUID
+| xs:string
+|===
 
 A byte[] must map to xs:base64Binary by
 default.
 
-=== Generics
+==== Generics
 
-=== Type Variable
+===== Type Variable
 
 The following grammar is from [JLS], Section
 4.4, “Type Variables”.
 
- _TypeParameter: +
-TypeVariable TypeBoundopt_
+----
+ TypeParameter:
+    TypeVariable TypeBoundopt
 
 
-
- _TypeBound: +
-extends ClassOrInterfaceType AdditionalBoundListopt_
+ TypeBound:
+    extends ClassOrInterfaceType AdditionalBoundListopt
+----
 
 A type variable without a Typebound must be
 mapped to xs:anyType.
@@ -441,75 +422,52 @@ the schema type to which ClassOrInterfaceType is mapped; the mapping of
 ClassOrInterface is subject to the mapping constraints specified in
 other sections in this chapter.
 
-<!-- code fragment
-
-public class Shape <T> \{
-
- public T xshape;
-
- public Shape() \{};
-
- public Shape(T f) \{
-
- xshape = f;
-
- }
-
+[source,java,indent=4]
+----
+// code fragment
+public class Shape <T> {
+    public T xshape;
+    public Shape() {};
+    public Shape(T f) {
+        xshape = f;
+    }
 }
+----
 
-
-
-<!-- XML Schema
-
+[source,xml,indent=4]
+----
+<!-- XML Schema -->
 <xs:complexType name="shape">
+    <xs:sequence>
+        <xs:element name="xshape" type="xs:anyType" minOccurs="0"/>
+    </xs:sequence>
+</xs:complexType>
+----
 
- <xs:sequence>
-
- <xs:element name="xshape" type="xs:anyType"
-minOccurs="0"/>
-
- </xs:sequence>
-
- </xs:complexType>
-
-=== [[a2386]]Type Arguments and Wildcards
+===== Type Arguments and Wildcards
 
 The following grammar is from [JLS], Section
 4.5.1, “Type Arguments and Wildcards”.
 
+----
 TypeArguments:
-
- <ActualTypeArgumentList>
-
-
+    <ActualTypeArgumentList>
 
 ActualTypeArgumentList:
-
- ActualTypeArgument
-
- ActualTypeArgumentList, ActualTypeArgument
-
-
+    ActualTypeArgument
+    ActualTypeArgumentList, ActualTypeArgument
 
 ActualTypeArgument:
-
- ReferenceType
-
- Wildcard
-
-
+    ReferenceType
+    Wildcard
 
 Wildcard:
-
 ?WildcardBounds
 
-
-
 WildcardBounds:
-
- extends ReferenceType
-
- super ReferenceType
+    extends ReferenceType
+    super ReferenceType
+----
 
 A wildcard without a WildcardBounds must map
 to schema type xs:anyType.
@@ -523,91 +481,54 @@ is mapped; this mapping is subject to the mapping constraints specified
 in other sections in this chapter and is determined by the annotations
 as specified in the mapping tables in the chapter. For example:
 
-
-
-
-
-/** EXAMPLE : WildcarType Mapping
-
+[source,java,indent=4]
+----
+/**
+* EXAMPLE : WildcarType Mapping
+*/
 // Code fragment
+public class Shape {...}
 
-public class Shape \{...}
+public class Rectangle extends Shape {...}
+public class Circle extends Shape {...}
 
-
-
-public class Rectangle extends Shape \{...}
-
-public class Circle extends Shape \{...}
-
-
-
-public class Foo \{
-
- public java.util.List<? extends Shape>
-shapes;
-
+public class Foo {
+    public java.util.List<? extends Shape> shapes;
 }
+----
 
-
-
-<-- XML Schema fragment
-
+[source,xml,indent=4]
+----
+<!-- XML Schema fragment -->
 <xs:complexType name="shape">
-
- ...
-
+    ...
 </xs:complexType>
-
-
 
 <xs:complexType name="circle">
-
- <xs:complexContent>
-
- <xs:extension base="shape">
-
- ...
-
- </xs:extension>
-
- </xs:complexContent>
-
- </xs:complexType>
-
-
+    <xs:complexContent>
+        <xs:extension base="shape">
+            ...
+        </xs:extension>
+    </xs:complexContent>
+</xs:complexType>
 
 <xs:complexType name="rectangle">
-
- <xs:complexContent>
-
- <xs:extension base="shape">
-
- ...
-
- </xs:extension>
-
- </xs:complexContent>
-
+    <xs:complexContent>
+        <xs:extension base="shape">
+            ...
+        </xs:extension>
+    </xs:complexContent>
 </xs:complexType>
-
-
 
 <xs:complexType name="foo">
-
- <xs:sequence>
-
- <xs:element name="shapes" type="shape"
-nillable="true"
-
- maxOccurs="unbounded" minOccurs="0"/>
-
- </xs:sequence>
-
+    <xs:sequence>
+        <xs:element name="shapes" type="shape" nillable="true"
+                    maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
 </xs:complexType>
+----
 
-
-
-=== Collections
+==== Collections
 
 The following collection must be supported:
 
@@ -627,116 +548,77 @@ JavaBean index property.
  _@XmlSchema_ is used in the mapping of
 package to an XML target namespace.
 
-=== [[a2456]]@XmlSchema
+==== @XmlSchema
 
-=== Synopsis
+===== Synopsis
 
-public enum XmlNsForm \{UNQUALIFIED,
-QUALIFIED, UNSET}
+[source,java,indent=4]
+----
+public enum XmlNsForm {UNQUALIFIED, QUALIFIED, UNSET}
 
+@Retention(RUNTIME) @Target({})
+public @interface XmlNs {...}
 
-
-@Retention(RUNTIME) @Target(\{})
-
-public @interface XmlNs \{
-
-
-
-@Retention(RUNTIME) @Target(\{PACKAGE})
-
-public @interface XmlSchema \{
-
- XmlNs[] xmlns() default \{};
-
- String namespace() default "";
-
- String location() default "";
-
- XmlNsForm elementFormDefault() default
-XmlNsForm.UNSET;
-
- XmlNsForm attributeFormDefault() default
-XmlNsForm.UNSET;
-
+@Retention(RUNTIME) @Target({PACKAGE})
+public @interface XmlSchema {
+    XmlNs[] xmlns() default {};
+    String namespace() default "";
+    String location() default "";
+    XmlNsForm elementFormDefault() default XmlNsForm.UNSET;
+    XmlNsForm attributeFormDefault() default XmlNsForm.UNSET;
 }
+----
 
-=== Mapping
+===== Mapping
 
 If _location()_ is “”, a package annotated
 with _@XmlSchema_ must be mapped as specified in
 link:jaxb.html#a2476[See Mapping: Package to XML target
 namespace]. Otherwise a package will not produce any schema document.
 
-* 
-
-* 
-
-
-
-=== Mapping: Package to [[a2476]]XML target namespace
-
- _targetNamespace_
-
-if _@XmlSchema.namespace()_ is __ "" _,_ then
-_absent;_
-
-
-
+.Table 8-3 Mapping: Package to XML target namespace
+|===
+| _targetNamespace_ | if _@XmlSchema.namespace()_ is "" _,_ then _absent;_ +
 otherwise @XmlSchema.namespace()
 
- _elementFormDefault_
+| _elementFormDefault_ | if the value of
+_@XmlSchema.elementFormDefault()_
+is _@XmlNsForm.UNSET,_ then _absent;_
 
- if the value of
-_@XmlSchema.elementFormDefault()_ is _@XmlNsForm.UNSET,_ then _absent;_
-
-
-
-otherwise, the value of
+otherwise, the value of +
 _@XmlSchema.elementFormDefault()_
 
- _attributeFormDefault_
-
- if the value of
-_@XmlSchema.attributeFormDefault()_ is _@XmlNsForm.UNSET,_ then
-_absent;_
-
-
+| _attributeFormDefault_ | if the value of
+_@XmlSchema.attributeFormDefault()_ is
+_@XmlNsForm.UNSET,_ then _absent;_
 
 otherwise, the value of
 _@XmlSchema.attributeFormDefault()_
 
- _Namespace prefixes_
-
-if _@XmlSchema.xmlns()_ is \{} then
+| _Namespace prefixes_ | if _@XmlSchema.xmlns()_ is {} then
 implementation defined;
 
-
-
 otherwise _@XmlSchema.xmlns()_
+|===
 
-=== @XmlAccessorType
+==== @XmlAccessorType
 
 This annotation allows control over default
 serialization of fields and properties.
 
-=== Synopsis
+===== Synopsis
 
-@Inherited @Retention(RUNTIME)
-@Target(\{PACKAGE, TYPE})
-
-public @interface XmlAccessorType \{
-
- XmlAccessType value() default
-XmlAccessType.PUBLIC_MEMBER;
-
+[source,java,indent=4]
+----
+@Inherited @Retention(RUNTIME) @Target({PACKAGE, TYPE})
+public @interface XmlAccessorType {
+    XmlAccessType value() default XmlAccessType.PUBLIC_MEMBER;
 }
 
+public enum XmlAccessType { NONE, PROPERTY, FIELD, PUBLIC_MEMBER }
+----
 
-
-public enum XmlAccessType \{ NONE, PROPERTY,
-FIELD, PUBLIC_MEMBER}
-
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -750,31 +632,27 @@ annotations at the package level: _@ XmlJavaTypeAdapter_ .
 See link:jaxb.html#a3676[See Default
 Mapping]”.
 
-=== [[a2506]]@XmlAccessorOrder
+==== @XmlAccessorOrder
 
 This annotation allows control over the
 default ordering of properties and fields that are mapped to XML
 elements. Properties and fields mapped to XML attributes are not
 impacted by this annotation since XML attributes are unordered.
 
-=== Synopsis
+===== Synopsis
 
+[source,java,indent=4]
+----
 @Inhertited @Retention(RUNTIME)
-@Target(\{PACKAGE, TYPE})
-
-public @interface XmlAccessorOrder \{
-
- XmlAccessOrder value() default
-XmlAccessOrder.UNDEFINED;
-
+@Target({PACKAGE, TYPE})
+public @interface XmlAccessorOrder {
+    XmlAccessOrder value() default XmlAccessOrder.UNDEFINED;
 }
 
+public enum XmlAccessOrder { UNDEFINED, ALPHABETICAL }
+----
 
-
-public enum XmlAccessOrder \{ UNDEFINED,
-ALPHABETICAL}
-
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -794,7 +672,7 @@ If the _@XmlAccessorOrder.value()_ is
 _XmlAccessOrder.UNDEFINED_ , then the default ordering of
 fields/properties is unspecified.
 
-=== [[a2520]]@XmlSchemaType
+==== @XmlSchemaType
 
 This annotation allows a customized mapping to
 a XML Schema built in type. This is useful where a Java type can map to
@@ -802,25 +680,21 @@ more than one schema built in types. An example is
 _XMLGregorianCalendar_ which can represent one of the eight schema
 built-in types.
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD,
-PACKAGE})
-
-public @interface XmlSchemaType \{
-
- String name();
-
- String namespace() default
-"http://www.w3.org/2001/XMLSchema";
-
- Class type() default DEFAULT.class;
-
- static final class DEFAULT \{}
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME)
+@Target({FIELD, METHOD, PACKAGE})
+public @interface XmlSchemaType {
+    String name();
+    String namespace() default "http://www.w3.org/2001/XMLSchema";
+    Class type() default DEFAULT.class;
+    static final class DEFAULT {}
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -830,16 +704,13 @@ type (or a type that derives from it) to which the type of the property
 or field can be mapped from XML Schema -> Java as specified in Section
 6.2.2, “Atomic Datatype”. Example
 
-
-
- // @XmlSchemaType can specify any one of the
-eight calendar types
-
- // that map to XMLGregorianCalendar.
-
- @XmlSchemaType(name=”date”)
-
- XMLGregorianCalendar foo;
+[source,java,indent=4]
+----
+// @XmlSchemaType can specify any one of the eight calendar types
+// that map to XMLGregorianCalendar.
+@XmlSchemaType(name=”date”)
+XMLGregorianCalendar foo;
+----
 
 *  If the annotation is used as a package
 level annotation or within _@XmlSchemaTypes_ , value of
@@ -858,17 +729,14 @@ level, the mapping applies to references to _@XmlSchemaType.type()_ as
 specified below. For clarity, the following code example is used along
 with normative text.
 
-// Example: change the default mapping at
-package level
-
+[source,java,indent=4]
+----
+// Example: change the default mapping at package level
 package foo;
-
 @jakarta.xml.bind.annotation.XmlSchemaType
-
- (name="date",
-
-
-type=javax.xml.datatype.XMLGregorianCalendar.class)
+    (name="date",
+    type=javax.xml.datatype.XMLGregorianCalendar.class)
+----
 
 A _@XmlSchemaType_ that is specified as a
 package level annotation must apply at the point of reference as
@@ -878,21 +746,22 @@ follows:
 (e.g _exmple.po)_ whose reference type is _@XmlSchemaType.type()_ . For
 e.g.
 
- // XMLGregorianCalendar will be mapped to XML
-Schema type "date"
-
- XMLGregorianCalendar cal;
+[source,java,indent=4]
+----
+// XMLGregorianCalendar will be mapped to XML Schema type "date"
+XMLGregorianCalendar cal;
+----
 
 . a property/field within a class in package
 (e.g _exmple.po)_ , where _@XmlSchemaType.type()_ is used as a
 parametric type. For e.g.
 
- // Example: Following code maps to a
-repeating element with
-
+[source,java,indent=4]
+----
+ // Example: Following code maps to a repeating element with
  // XML Schema type of "date".
-
  List<XMLGregorianCalendar> bar;
+----
 
 property/field:
 
@@ -901,44 +770,41 @@ property/field maps references to _@XmlSchemaType.type()_ as follows:
 
 . property/field is a single valued.
 
- // Maps XMLGregorianCalendar to XML Schema
-type "date"”
-
- @XmlSchemaType(name=”date”)
-
- public XMLGregorianCalendar cal;
+[source,java,indent=4]
+----
+// Maps XMLGregorianCalendar to XML Schema type "date"”
+@XmlSchemaType(name=”date”)
+public XMLGregorianCalendar cal;
+----
 
 . a property/field where
 _@XmlSchemaType.type()_ is used as a parametric type. For e.g.
 
- // Example: Following code maps to a
-repeating element with
+[source,java,indent=4]
+----
+// Example: Following code maps to a repeating element with
+// XML Schema type of "date".
+@XmlSchemaType(name="date")
+List<XMLGregorianCalendar> bar;
+----
 
- // XML Schema type of "date".
-
- @XmlSchemaType(name="date")
-
- List<XMLGregorianCalendar> bar;
-
-=== @XmlSchemaTypes
+==== @XmlSchemaTypes
 
 This annotation is a container annotation for
 defining multiple _@XmlSchemaType_ annotations at the package level.
 
-=== Synopsis
+===== Synopsis
 
- @Retention(RUNTIME) @Target(\{PACKAGE})
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({PACKAGE})
+public @interface XmlSchemaTypes {
+    // Collection of @{@link XmlSchemaType} annotations
+    XmlSchemaType[] value();
+}
+----
 
- public @interface XmlSchemaTypes \{
-
- // Collection of @\{@link XmlSchemaType}
-annotations
-
- XmlSchemaType[] value();
-
- }
-
-=== Mapping
+===== Mapping
 
 Each _@XmlSchemaType_ annotation in
 _@XmlSchemaTypes.value()_ must be mapped as specified in
@@ -946,35 +812,28 @@ link:jaxb.html#a2520[See @XmlSchemaType]”.
 
 === Java class
 
-=== [[a2578]]@XmlType
+==== @XmlType
 
  _@XmlType_ is used to map a Java class to a
 schema type. The schema type is computed from its annotation element
 values.
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{TYPE})
-
-public @interface XmlType \{
-
- String name() default "##default";
-
- String[] propOrder() default \{""};
-
- String namespace() default "##default" ;
-
- Class factoryClass() default DEFAULT.class;
-
- static final class DEFAULT \{};
-
- String factoryMethod() default "";
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({TYPE})
+public @interface XmlType {
+    String name() default "##default";
+    String[] propOrder() default {""};
+    String namespace() default "##default" ;
+    Class factoryClass() default DEFAULT.class;
+    static final class DEFAULT {};
+    String factoryMethod() default "";
 }
+----
 
-
-
-=== [[a2591]]Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -1030,106 +889,68 @@ specified in link:jaxb.html#a2611[See Mapping: Class to Complex
 Type
 Definition].
 
-=== [[a2611]]Mapping: Class to Complex Type Definition
+.Table 8-4 Mapping: Class to Complex Type Definition
+|===
 
-\{name}
-
-if _@XmlType.name()_ is ““, then absent
-
-
+| {name} | if _@XmlType.name()_ is ““, then absent +
 
 otherwise if _@XmlType.name()_ is “
 _##default_ “, then the XML name derived from the class name as
 specified in link:jaxb.html#a3678[See Java Identifier To XML
-Name]”
-
-
+Name]”  +
 
 otherwise _@XmlType.name()_
 
-\{target namespace}
-
-{empty}if _@XmlType.namespace()_ is “
+| {target namespace} | if _@XmlType.namespace()_ is “
 _##default_ “ && _@XmlType.name()_ is ““ and class is annotated with
-_@XmlRootElement_ , then the \{target namespace} as specified in
-link:jaxb.html#a2742[See Mapping: Class to Element Declaration]
-
-
+_@XmlRootElement_ , then the {target namespace} as specified in
+link:jaxb.html#a2742[See Mapping: Class to Element Declaration] +
 
 otherwise if _@XmlType.namespace()_ is “
 _##default_ “ && _@XmlType.name()_ is ““ and class is not annotated with
-_@XmlRootElement_ , then the \{target namespace} of the attribute or
+_@XmlRootElement_ , then the {target namespace} of the attribute or
 element to which the property or field, from where this class is
-referenced, is mapped.
+referenced, is mapped. +
 
-
-
-{empty}otherwise if _@XmlType.namespace()_ is
+otherwise if _@XmlType.namespace()_ is
 “ _##default_ “ && _@XmlType.name()_ is not ““, then the namespace to
 which the package, in which class is defined, is mapped as specified in
 link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace]
-
-
+namespace] +
 
 otherwise _@XmlType.namespace()_
 
-\{base type definition}
-
-if the class contains a mapped property or
+| {base type definition} | if the class contains a mapped property or
 field annotated with _@XmlValue_ as specified in
 link:jaxb.html#a3331[See @XmlValue]”, then the schema type to
-which mapped property or field’s type is mapped.
-
-
+which mapped property or field’s type is mapped. +
 
 otherwise schema type to which the nearest
 XML-bound ancestor class is mapped
 
-* 
-
-* 
-
-\{derivation method}
-
-if _\{base type definition}_ is _xs:anyType_ ,
-then by _restriction_
-
-
+| {derivation method} | if _{base type definition}_ is _xs:anyType_ ,
+then by _restriction_ +
 
 otherwise _extension_
 
-\{final}
-
-if class modifier final is present. then the
-set \{extension, restriction};
-
-
+| {final} | if class modifier final is present. then the
+set {extension, restriction}; +
 
 otherwise, the empty set.
 
-\{abstract}
-
-true if the class modifier abstract is
-present;
-
-
+| {abstract} | true if the class modifier abstract is
+present; +
 
 otherwise false.
 
-\{attribute uses}
-
-The set of properties or fields mapped to
+| {attribute uses} | The set of properties or fields mapped to
 attributes as specified in link:jaxb.html#a3230[See
 @XmlAttribute]”.
 
-\{attribute wildcard}
-
-Attribute wildcard as specified in
+| {attribute wildcard} | Attribute wildcard as specified in
 link:jaxb.html#a3303[See XmlAnyAttribute]”.
 
-\{content type}
-
+|{content type} |
 . empty if no mapped property or field is
 annotated with _@XmlElement_
 .  _mixed_ if a property or field is annotated
@@ -1147,200 +968,116 @@ properties is annotated with _@XmlElement; +
 content model_ mapped as specified in link:jaxb.html#a2662[See
 Mapping: Class body to Model Group Component]”.
 
-\{prohibited substitutions}
+| {prohibited substitutions} | Empty set
 
-Empty set
+| {annotations} |  _absent_
+|===
 
-
-
-* 
-
-\{annotations}
-
- _absent_
-
-=== [[a2662]]Mapping: Class body to Model Group Component
-
-\{compositor}
-
-if _@XmlType.propOrder()_ is \{} then _xs:all_
-;
-
-
+.Table 8-5 Mapping: Class body to Model Group Component
+|===
+| {compositor} | if _@XmlType.propOrder()_ is \{} then _xs:all_;
 
 otherwise _xs:sequence_ . The ordering of
-particles is:
-
-if _@XmlType.propOrder()_ is not ““, then the
+particles is: if _@XmlType.propOrder()_ is not ““, then the
 order in which properties/fields are listed in _@XmlType.propOrder()_ .
 
-
-
-if _@XmlType.propOrder()_ is ““ &&
-
-class is annotated with
+if _@XmlType.propOrder()_ is ““ && class is annotated with
 _@XmlAccessorOrder(XmlAcessOrder.ALPHABETICAL) )_ or
 _@XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)_ is specified at the
 package level and class is not annotated with
 _@XmlAccessorOrder(XmlAccessOrder.UNDEFINED)_ , then alphabetical order
 as specified in link:jaxb.html#a2506[See @XmlAccessorOrder]”.
 
-
-
 otherwise order is unspecified.
 
-\{particles}
+| {particles} | Set of properties or fields mapped to
+particles. See _{compositor}_ mapping above for ordering of particles.
 
-Set of properties or fields mapped to
-particles. See _\{compositor}_ mapping above for ordering of particles.
+| {annotation} | _unspecified_
+|===
 
-\{annotation}
+.Table 8-6 Mapping: Class to Simple Type Definition
+|===
 
- _unspecified_
-
-
-
-=== [[a2678]]Mapping: Class to Simple Type Definition
-
-\{name}
-
-if _@XmlType.name()_ is ““, then absent
-
-
+| {name} | if _@XmlType.name()_ is ““, then absent
 
 otherwise if _@XmlType.name()_ is “
-_##default_ “,
-
-then the XML name derived from the class name
+_##default_ “, then the XML name derived from the class name
 as specified in link:jaxb.html#a3678[See Java Identifier To XML
 Name]”
 
-
-
 otherwise _@XmlType.name()_
 
-\{target namespace}
-
-{empty}if _@XmlType.namespace()_ is “
+| {target namespace} | if _@XmlType.namespace()_ is “
 _##default_ “ && _@XmlType.name()_ is ““ and class is annotated with
-_@XmlRootElement_ , then the \{target namespace} as specified in
+_@XmlRootElement_ , then the {target namespace} as specified in
 link:jaxb.html#a2742[See Mapping: Class to Element Declaration]
-
-
 
 otherwise if _@XmlType.namespace()_ is “
 _##default_ “ && _@XmlType.name()_ is ““ and class is not annotated with
-_@XmlRootElement_ , then the \{target namespace} of the attribute or
+_@XmlRootElement_ , then the {target namespace} of the attribute or
 element to which the property or field, from where this class is
 referenced, is mapped.
 
-
-
-{empty}otherwise if _@XmlType.namespace()_ is
-“ _##default_ “ && _@XmlType.name()_ is not ““, then the namespace to
+otherwise if _@XmlType.namespace()_ is“
+_##default_ “ && _@XmlType.name()_ is not ““, then the namespace to
 which the package, in which class is defined, is mapped as specified in
 link:jaxb.html#a2476[See Mapping: Package to XML target
 namespace]
 
-
-
 otherwise _@XmlType.namespace()_
 
-\{base type definition}
-
-ur-type definition, _xs:anyType_ .
-
-
+| {base type definition} | ur-type definition, _xs:anyType_ .
 
 NOTE: This is subject to the mapping
 constraints on XmlType. See link:jaxb.html#a2591[See Mapping]”.
 
-\{facets}
+| {facets} |  _empty set_
 
- _empty set_
+| {fundamental facets} | derived
 
-\{fundamental facets}
+| {final} | empty set.
+A subset of {extension, list, restriction, union}.
 
-derived
+| {variety} | Must be mapped as shown below
 
-\{final}
-
-empty set.
-
-A subset of \{extension, list, restriction,
-union}.
-
-\{variety}
-
-Must be mapped as shown below
-
-
-
-atomic
-
- _\{primitive type definition}_
-
-if property or field type is one of:
-
+| | atomic +
+_{primitive type definition}_ | if property or field type is one of:
 - primitive type
-
 - wrapper class
-
-- reference type mapped to a simple atomic
-type.
-
-
-
-
-
-list
-
- _\{item type definition}_
-
-if the property or field type is one of the
+- reference type mapped to a simple atomictype.
+| | list +
+_{item type definition}_ | if the property or field type is one of the
 following collection types:
-
 - generic list
-
 - indexed property
-
 - single dimensional array
-
-{empty}link:jaxb.html#a3800[See
+link:jaxb.html#a3800[See
 @XmlType: List simple type]
 
+| | union +
+_{member type definitions}_ | Not mapped.
 
+| {annotation} | _unspecified_
+|===
 
-union
-
- _\{member type definitions}_
-
-Not mapped.
-
-\{annotation}
-
- _unspecified_
-
-
-
-=== @XmlRootElement
+==== @XmlRootElement
 
  _@XmlRooElement_ can be used to associate a
 global element with the schema type to which a class is mapped.
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{TYPE}
-
-public @interface XmlRootElement \{
-
- String name() default "##default" ;
-
- String namespace() default "##default" ;
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({TYPE}
+public @interface XmlRootElement {
+    Stringname() default "##default";
+    String namespace() default "##default";
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -1353,87 +1090,60 @@ A class annotated with _@XmlRootElement_
 annotation, must be mapped as specified in
 link:jaxb.html#a2742[See Mapping: Class to Element Declaration].
 
-=== Mapping: Class [[a2742]]to Element Declaration
+.Table 8-7 Mapping: Class to Element Declaration
+|===
 
-\{name}
-
-if _@XmlRootElement.name()_ is “##default“,
+| {name} | if _@XmlRootElement.name()_ is “##default“,
 then the XML name derived from the class name as specified in
 link:jaxb.html#a3678[See Java Identifier To XML Name]”;
 
-
-
 otherwise _@XmlRootElement.name()_
 
-\{target namespace}
-
-{empty}if _@XmlRootElement.namespace()_ is “
+| {target namespace} | if _@XmlRootElement.namespace()_ is “
 _##default_ “ _,_ then the value of the targetNamespace to which the
 package containing the class is mapped as specified in
 link:jaxb.html#a2476[See Mapping: Package to XML target
 namespace]
 
-
-
 otherwise _@XmlRootElement.namespace()_
 
-\{type definition}
-
-schema type to which the class is mapped as
+| {type definition} | schema type to which the class is mapped as
 specified in link:jaxb.html#a2578[See @XmlType]”.
 
-\{scope}
+| {scope} | _global_
 
- _global_
+| {value constraint} | _absent_
 
-\{value constraint}
+| {nillable} | _false_
 
- _absent_
+| {identity-constraint definitions} | empty set
 
-\{nillable}
+| {substitution group affiliation} | _absent_
 
- _false_
 
-\{identity-constraint definitions}
+| {substitution group exclusions} | _{extension, restriction}_
 
-empty set
+| {disallowed substitution} | _{substitution,extension,restriction}_
 
-\{substitution group affiliation}
+| {abstract} | _false_
 
- _absent_
+| {annotation} | _unspecified_
+|===
 
-* 
+==== @XmlTransient
 
-\{substitution group exclusions}
-
- _\{extension, restriction}_
-
-\{disallowed substitution}
-
- _\{substitution,extension,restriction}_
-
-\{abstract}
-
- _false_
-
-* 
-
-\{annotation}
-
- _unspecified_
-
-=== @XmlTransient
-
- _@XmlTransient_ is used to prevent the
+_@XmlTransient_ is used to prevent the
 mapping of a class.
 
-=== Synopsis
+===== Synopsis
 
+[source,java,indent=4]
+----
 @Retention(RUNTIME) @Target(TYPE)
+public @interface XmlTransient {}
+----
 
-public @interface XmlTransient \{}
-
-=== Mapping
+===== Mapping
 
 The class must not be mapped. Any reference to
 this class from the other XML-bound classes will treated as if they are
@@ -1444,7 +1154,7 @@ class.)
 For the effect that this annotation causes on
 derived classes, see link:jaxb.html#a2611[See Mapping: Class to
 Complex Type Definition].
-
+"##default"
 Note that a class with _@XmlTransient_ may
 still have properties and fields with JAXB annotations. Those are mapped
 to XML when a derived class is mapped to XML. See section
@@ -1456,43 +1166,39 @@ enforced:
 *  _@XmlTransient_ is mutually exclusive with
 all other mapping annotations.
 
-=== @XmlSeeAlso
+==== @XmlSeeAlso
 
  _@XmlSeeAlso_ is an annotation that can be
 optionally placed on a class to instruct the JAXB runtime and the schema
 generator to also bind classes listed in _@XmlSeeAlso_ , when it binds
 the class that _@XmlSeeAlso_ is on.
 
-=== Synopsis
+===== Synopsis
 
+[source,java,indent=4]
+----
 @Retention(RUNTIME) @Target(TYPE)
-
-public @interface XmlRootElement \{
-
- Class[] value();
-
+public @interface XmlRootElement {
+    Class[] value();
 }
+----
 
 === Enum Type
 
-=== @XmlEnum
+==== @XmlEnum
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{TYPE}
-
-public @interface XmlEnum \{
-
- // Java type that is mapped to a XML simple
-type
-
- Class <?> value() default String.class;
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({TYPE})
+public @interface XmlEnum {
+    // Java type that is mapped to a XML simple type
+    Class <?> value() default String.class;
 }
+----
 
-
-
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -1500,38 +1206,32 @@ enforced:
  _@XmlEnum.value()_ must be mapped to a XML
 schema simple type.
 
-=== Mapping: Enum type to Base Type Definition
+'Table 8-8 Mapping: Enum type to Base Type Definition
+|===
 
-\{base type definition}
-
-schema type to which _@XmlEnum.value()_ is
+| {base type definition} | schema type to which _@XmlEnum.value()_ is
 mapped.
 
-\{variety}
-
-The value depends upon the schema type to
+| {variety} | The value depends upon the schema type to
 which the _@XmlEnum.value()_ is mapped. But syntactically, it is always
 a restriction of \{base type definition}.
 
 derived from the \{base type definition}
+|===
 
-* 
+==== @XmlEnumValue
 
+===== Synopsis
 
-
-=== @XmlEnumValue
-
-=== Synopsis
-
-@Retention(RUNTIME) @Target(\{FIELD}
-
-public @interface XmlEnumValue \{
-
- String value();
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD}
+public @interface XmlEnumValue {
+    String value();
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -1541,39 +1241,31 @@ lexical representation for _@XmlEnum.value()_ .
 
 
 
-=== Mapping: Enum constant to Enumeration Schema Component
+.Table 8-9 Mapping: Enum constant to Enumeration Schema Component
+|===
+| {value} |  _@XmlEnumValue.value()_
 
-\{value}
+| {annotation} | unspecified
+|===
 
- _@XmlEnumValue.value()_
+==== @XmlType
 
-\{annotation}
+===== Synopsis
 
-unspecified
-
-=== @XmlType
-
-=== Synopsis
-
-@Retention(RUNTIME) @Target(\{TYPE})
-
-public @interface XmlType \{
-
- String name() default "##default";
-
- String namespace() default "##default" ;
-
- String[] propOrder() default \{""};
-
- Class factoryClass() default DEFAULT.class;
-
- static final class DEFAULT \{};
-
- String factoryMethod() default ““;
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({TYPE})
+public @interface XmlType {
+    String name() default "##default";
+    String namespace() default "##default";
+    String[] propOrder() default {""};
+    Class factoryClass() default DEFAULT.class;
+    static final class DEFAULT {};
+    String factoryMethod() default ““;
 }
+----
 
-=== [[a2837]]Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -1586,7 +1278,7 @@ following other annotations: _@XmlRootElement, @XmlAccessorOrder,
 must be ignored; they are not meaningful when used to annotate an enum
 type.
 
-=== @XmlRootElement
+==== @XmlRootElement
 
  _@XmlRootElement_ can be used to associate a
 global element with the schema type to which the enum type is mapped.
@@ -1604,74 +1296,46 @@ The mapping must be performed as specified in
 link:jaxb.html#a2846[See Mapping: Enum type to Element
 Declaration].
 
-=== [[a2846]]Mapping: Enum type to Element Declaration
+.Table 8-10 Mapping: Enum type to Element Declaration
+|===
 
-\{name}
-
-if _@XmlRootElement.name()_ is “##default“,
+| {name} | if _@XmlRootElement.name()_ is “##default“,
 then the XML name derived from the enum type name as specified in
 link:jaxb.html#a3678[See Java Identifier To XML Name]”;
 
-
-
 otherwise _@XmlRootElement.name()_
 
-\{target namespace}
-
-{empty}if _@XmlRootElement.namespace()_ is “
+| {target namespace} | if _@XmlRootElement.namespace()_ is “
 _##default_ “ _,_ then the value of the targetNamespace to which the
 package containing the class is mapped as specified in
 link:jaxb.html#a2476[See Mapping: Package to XML target
 namespace]
 
-
-
 otherwise _@XmlRootElement.namespace()_
 
-\{type definition}
-
-schema type to which the class is mapped as
+| {type definition} | schema type to which the class is mapped as
 specified in link:jaxb.html#a2578[See @XmlType]”.
 
-\{scope}
+| {scope} | _global_
 
- _global_
+| {value constraint} | _absent_
 
-\{value constraint}
+| {nillable} | _false_
 
- _absent_
+| {identity-constraint definitions} | empty set
 
-\{nillable}
+| {substitution group affiliation} | _absent_
 
- _false_
+| {substitution group exclusions} | _{extension, restriction}_
 
-\{identity-constraint definitions}
+| {disallowed substitution} | _{substitution,extension,restriction}_
 
-empty set
+| {abstract} | _false_
 
-\{substitution group affiliation}
+| {annotation} | _unspecified_
+|===
 
- _absent_
-
-* 
-
-\{substitution group exclusions}
-
- _\{extension, restriction}_
-
-\{disallowed substitution}
-
- _\{substitution,extension,restriction}_
-
-\{abstract}
-
- _false_
-
-\{annotation}
-
- _unspecified_
-
-=== [[a2876]]Property And Field
+=== Property And Field
 
 The following must be mapped (subject to the
 mapping constraints listed below):
@@ -1706,56 +1370,38 @@ mapped. +
 name of a mapped property must be unique within a class. For e.g.
 
 
-
+[source,java,indent=4]
+----
  // Example 1:
-
- // Both the field “x” and property getX/setX
-are mapped by
-
- // default. However, the decapitalized name
-property getX/setX
-
- // is also “x” which collides with the field
-name “x”.
-
- public class Foo \{
-
- public int x;
-
-
-
- public int getX \{..};
-
- public void setX \{..};
-
+ // Both the field “x” and property getX/setX are mapped by
+ // default. However, the decapitalized name property getX/setX
+ // is also “x” which collides with the field name “x”.
+public class Foo {
+    public int x;
+    public int getX {...};
+    public void setX {...};
  }
+----
 
-=== [[a2898]]@XmlElement
+==== @XmlElement
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD}
-
-public @interface XmlElement \{
-
- String name() default "##default" ; // name
-for XML element
-
- boolean nillable() default false;
-
- boolean required() default false;
-
- String namespace() default "##default" ;
-
- Class type() default DEFAULT.class;
-
- String defaultValue() default "\u0000";
-
- static final class DEFAULT \{}
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD}
+public @interface XmlElement {
+    String name() default "##default"; // name for XML element
+    boolean nillable() default false;
+    boolean required() default false;
+    String namespace() default "##default";
+    Class type() default DEFAULT.class;
+    String defaultValue() default "\u0000";
+    static final class DEFAULT {}
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -1783,264 +1429,184 @@ is annotated with _@XmlRootElement_ and _@XmlType.name()= ““_ , then the
 property must be mapped as specified in link:jaxb.html#a2941[See
 Mapping: Property/field to Particle - ref attribute].
 
-Design Note: This mapping is designed to
+*Design Note:* This mapping is designed to
 eliminate an infinite recursion. For example:
 
- // Code fragment
-
- @XmlRootElement
-
- @XmlType(name="")
-
- class Foo \{
-
- Foo foo;
-
- }
+[source,java,indent=4]
+----
+// Code fragment
+@XmlRootElement
+@XmlType(name="")
+class Foo {
+    Foo foo;
+}
+----
 
 In the absence of the above mapping, the above
 code would map to:
 
- <schema>
-
- <element name="foo">
-
- <complexType>
-
- <sequence>
-
- <element name=”foo” minOccurs=”0”>
-
- <complexType>
-
- ... infinite recursion ...
+[source,xml,indent=4]
+----
+<schema>
+    <element name="foo">
+        <complexType>
+            <sequence>
+                <element name=”foo” minOccurs=”0”>
+                    <complexType>
+                        ... infinite recursion ...
+----
 
 With the above mapping, the code fragment
 would instead map to:
 
- <schema>
-
- <element name="foo">
-
- <complexType>
-
- <sequence>
-
- <element ref=”foo” minOccurs=”0”>
-
-
+[source,xml,indent=4]
+----
+<schema>
+    <element name="foo">
+        <complexType>
+            <sequence>
+                <element ref=”foo” minOccurs=”0”>
+----
 
 * otherwise, it must be mapped as
 link:jaxb.html#a2959[See Mapping: Property/field to Particle -
 no ref attribute].
-* 
 
-=== Mapping: Property/field to [[a2941]]Particle - ref attribute
+.Table 8-12 Mapping: Property/field to Particle - ref attribute
+|===
 
-\{min occurs}
-
-if _@XmlElement.required()_ is true, then 1
-
-
+| {min occurs} | if _@XmlElement.required()_ is true, then 1
 
 if the property type is a primitive type or a
 multi dimensional array with a primitive type then 1
 
-
-
 otherwise 0
 
-\{max occurs}
-
-if the type of the property/field is not a
+| {max occurs} | if the type of the property/field is not a
 collection type, then 1
 
+otherwise _unbounded_.
 
-
-otherwise _unbounded_ .
-
-\{term}
-
-element declaration as specified in
+| {term} | element declaration as specified in
 link:jaxb.html#a2973[See Mapping: Property/field to Element
 declaration] with the following overrides for the abstract schema
 component properties:
 
-\{scope} is _global_
-
- _\{value constraint}_ is _absent_
-
- _\{type definition}_ is _xs:anyType_ if the
+| {scope} | is _global_ _{value constraint}_ is _absent_
+ _{type definition}_ is _xs:anyType_ if the
 mapping results in two or more element decalarations with the same name.
 
-Note: The above make the element a global
+*Note:* The above make the element a global
 element declaration rather than a local element declaration.
+|===
 
+.Table 8-13 Mapping: Property/field to Particle - no ref attribute
+|===
 
-
-=== [[a2959]]Mapping: Property/field to Particle - no ref attribute
-
-\{min occurs}
-
-if _@XmlElement.required()_ is true, then 1
-
-
+| {min occurs} | if _@XmlElement.required()_ is true, then 1
 
 otherwise if the property type is a primitive
 type or a multi dimensional array with a primitive type then 1
 
-
-
 otherwise 0
 
-\{max occurs}
-
-if the type of the property/field is not a
+| {max occurs} | if the type of the property/field is not a
 collection type, then 1;
-
-
 
 otherwise _unbounded_ .
 
-\{term}
-
-must be mapped as specified in
+| {term} | must be mapped as specified in
 link:jaxb.html#a2973[See Mapping: Property/field to Element
 declaration].
+|===
 
+.Table 8-14 Mapping: Property/field to Element declaration
+|===
 
-
-=== Mapping: [[a2973]]Property/field to Element declaration
-
-\{name}
-
-if _@XmlElement.name()_ is _“##default”,_ then
+| {name} | if _@XmlElement.name()_ is _“##default”,_ then
 the XML name derived from the property or field name as specified in
 link:jaxb.html#a3678[See Java Identifier To XML Name]”;
 
-
-
 otherwise _@XmlElement.name()_
 
-\{target namespace}
-
-if _@XmlElement.namespace()_ is “ _##default_
-“, then
-
+| {target namespace} | if _@XmlElement.namespace()_ is “ _##default_
+“, then +
 if the enclosing package has @ _XmlSchema_
 annotation and is _@XmlSchema.elementFormDefault_ is
 _@XmlNsForm.QUALIFIED_ , then the namespace of the enclosing class. +
- +
+
 otherwise ““ (which produces unqualified element in the default
 namespace).
 
 otherwise, _@XmlElement.namespace()_
 
-\{type definition}
-
-Note: The order of type inference below is
+| {type definition} | Note: The order of type inference below is
 significant.
-
-
 
 if _@XmlElement.type()_ is not _DEFAULT.class_
 , then the schema type to which _@XmlElement.type()_ is mapped.
-
-
 
 otherwise if annotated with _@XmlList,_ schema
 type derived by mapping as specified in link:jaxb.html#a3399[See
 @XmlList]”
 
-
-
 otherwise if annotated with _@XmlValue_ ,
 schema type derived by mapping as specified in
 link:jaxb.html#a3331[See @XmlValue]”
-
-
 
 otherwise if annotated with _@XmlID_ , the
 schema type derived by mapping as specified in
 link:jaxb.html#a3377[See @XmlID]”
 
-
-
 otherwise if annotated with _@XmlIDREF_ , the
 schema type derived by mapping as specified in
 link:jaxb.html#a3387[See @XmlIDREF]”
-
-
 
 otherwise if the property or field is a
 collection type, then the schema type derived by mapping the collection
 item type.
 
-
-
 otherwise the schema type to which the type of
 the property is mapped.
 
-\{scope}
-
-complex type to which the property’s or the
+| {scope} | complex type to which the property’s or the
 field’s containing class is mapped as specified in
 link:jaxb.html#a2456[See @XmlSchema]”.
 
-\{value constraint}
-
-if @XmlElement.defaultValue() is "\u0000" then
+| {value constraint} | if @XmlElement.defaultValue() is "\u0000" then
 _absent_
-
-
 
 otherwise default value with the value
 _@XmlElement.defaultvalue()_ .
 
-\{nillable}
+| {nillable} | _@XmlElement.nillable()_
 
- _@XmlElement.nillable()_
+| {identity-constraint definitions} | _absent_
 
-\{identity-constraint definitions}
+| {substitution group affiliation} | _absent_
 
- _absent_
+| {substitution group exclusions} | { _extension, restriction_ }
 
-\{substitution group affiliation}
+| {disallowed substitution} | { _extension, restriction,substitution_ }
 
- _absent_
+| {abstract} | _false_
 
-\{substitution group exclusions}
+| {annotation} | _unspecified_
+|===
 
-\{ _extension, restriction_ }
+==== @XmlElements
 
-\{disallowed substitution}
+===== Synopsis
 
-\{ _extension, restriction,substitution_ }
-
-\{abstract}
-
- _false_
-
-\{annotation}
-
- _unspecified_
-
-.
-
-=== [[a3019]]@XmlElements
-
-=== Synopsis
-
-@Retention(RUNTIME) @Target(\{FIELD,METHOD})
-
-public @interface XmlElements \{
-
- XmlElement[] value(); // collection of
-@XmlElement annotations
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD,METHOD})
+public @interface XmlElements {
+    XmlElement[] value(); // collection of @XmlElement annotations
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2067,63 +1633,50 @@ particle].
 
 
 
-=== [[a3034]]Mapping: List of types to choice particle
+.Table 8-15 Mapping: List of types to choice particle
+|===
 
-\{min occurs}
+| {min occurs} | 0
 
-0
+| {max occurs} |  _unbounded_
 
-\{max occurs}
-
- _unbounded_
-
-\{term}
-
-{empty}If \{particples} row in
+| {term} | If {particples} row in
 link:jaxb.html#a3042[See Mapping: List of types to choice model
 group of elements] results in a single particle, then that single
 particle. Otherwise mapped as specified in
 link:jaxb.html#a3042[See Mapping: List of types to choice model
 group of elements]
+|===
 
 
+.Table 8-16 Mapping: List of types to choice model group of elements
+|===
 
-=== [[a3042]]Mapping: List of types to choice model group of elements
+| {compositor} | _choice_
 
-\{compositor}
-
- _choice_
-
-\{particles}
-
-set obtained by mapping each _@XmlElement_ in
+| {particles} | set obtained by mapping each _@XmlElement_ in
 _@XmlElements.value()_ as specified in link:jaxb.html#a2973[See
 Mapping: Property/field to Element declaration].
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
+==== @XmlElementRef
 
-=== [[a3049]]@XmlElementRef
+===== Synopsis
 
-=== Synopsis
-
-@Retention(RUNTIME) @Target(\{FIELD, METHOD}
-
-public @interface XmlElementRef \{
-
- String name() default "##default" ; // name
-for XML element
-
- String namespace() default "##default" ;
-
- Class type() default DEFAULT.class;
-
- static final class DEFAULT \{}
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD}
+public @interface XmlElementRef {
+    String name() default "##default"; // name for XML element
+    String namespace() default "##default";
+    Class type() default DEFAULT.class;
+    static final class DEFAULT {}
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2137,9 +1690,9 @@ _@XmlElementRef.name()_ , _@XmlElementRef.namespace()}_ must point an
 element factory method with an _@XmlElementDecl_ annotation in a class
 annotated with _@XmlRegistry_ (usually _ObjectFactory_ class generated
 by the schema compiler) :
-*  _@XmlElementDecl.name()_ must equal
+**  _@XmlElementDecl.name()_ must equal
 _@XmlElementRef.name()_
-*  _@XmlElementDecl.namespace()_ must equal
+**  _@XmlElementDecl.namespace()_ must equal
 _@XmlElementRef.namespace()_ .
 * If the collection item type (for collection
 property) or property type (for single valued property) is not
@@ -2159,132 +1712,86 @@ link:jaxb.html#a3097[See Mapping: Property/Field (parametric
 type) to choice particle].
 
 
+.Table 8-17 Mapping: Property/field (property type single valued) to Particle with ref attribute
+|===
 
+| {min occurs} | 1
 
+| {max occurs} | 1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- +
-
-
-=== [[a3078]]Mapping: Property/field (property type single valued) to Particle with ref attribute
-
-\{min occurs}
-
-1
-
-\{max occurs}
-
-1
-
-\{term}
-
-must be mapped as specified in
+| {term} | must be mapped as specified in
 link:jaxb.html#a3085[See Mapping: Property/field to Element
 declaration with ref attribute].
+|===
 
-=== [[a3085]]Mapping: Property/field to Element declaration with ref attribute
+.Table 8-18 Mapping: Property/field to Element declaration with ref attribute
+|===
 
-\{name}
-
-if _@XmlElementRef.type()_ is
+| {name} | if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the property type is not
 _jakarta.xml.bind.JAXBElement_ , then the XML name
 _@XmlRootElement.name()_ on the type being referenced.
-
-
 
 otherwise if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the parametric type or the property
 type (for single valued property) is a _jakarta.xml.bind.JAXBElement_ ,
 then the _@XmlElementRef.name()_
 
-\{target namespace}
-
-if _@XmlElementRef.type()_ is
+| {target namespace} | if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the property type is not
 _jakarta.xml.bind.JAXBElement_ , then the XML namespace of the type being
 referenced.
-
- __ 
 
 otherwise if _@XmlElementRef.type()_ is
 _@XmlElementRef.DEFAULT.class_ and the property type is single valued
 and is _jakarta.xml.bind.JAXBElement_ , then the
 _@XmlElementRef.namespace()_
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
+.Table 8-19 Mapping: Property/Field (parametric type) to choice particle
+|===
 
+| {min occurs} | _0_
 
+| {max occurs} | _unbounded_
 
-=== [[a3097]]Mapping: Property/Field (parametric type) to choice particle
-
-\{min occurs}
-
- _0_
-
-\{max occurs}
-
- _unbounded_
-
-\{term}
-
-{empty}If \{particles} row in
+| {term} | If {particles} row in
 link:jaxb.html#a3105[See Mapping: Property/field (parametric
 type) to choice model group of element refs] results in single particle,
 then that single particle. Otherwise mapped as specified in
 link:jaxb.html#a3105[See Mapping: Property/field (parametric
 type) to choice model group of element refs]
+|===
 
+.Table 8-20 Mapping: Property/field (parametric type) to choice model group of element refs
+|===
 
+| {compositor} | _choice_
 
-=== [[a3105]]Mapping: Property/field (parametric type) to choice model group of element refs
-
-\{compositor}
-
- _choice_
-
-\{particles}
-
-set obtained by visiting parametric type and
+| {particles} | set obtained by visiting parametric type and
 each of its derived types and if annotated with @XmlRootElement, then
 mapping the @XmlRootElement as specified in as specified in
 link:jaxb.html#a3085[See Mapping: Property/field to Element
 declaration with ref attribute].
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
+==== @XmlElementRefs
 
-=== [[a3112]]@XmlElementRefs
+===== Synopsis
 
-=== Synopsis
-
-@Retention(RUNTIME) @Target(\{FIELD,METHOD})
-
-public @interface XmlElementRefs \{
-
- XmlElementRef[] value();
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD,METHOD})
+public @interface XmlElementRefs {
+    XmlElementRef[] value();
 }
+----
 
-
-
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2299,68 +1806,54 @@ instances to choice particle].
 
 
 
-=== [[a3124]]Mapping: List of element instances to choice particle
+.Table 8-21 Mapping: List of element instances to choice particle
+|===
 
-\{min occurs}
+| {min occurs} | _0_
 
- _0_
+| {max occurs} | _unbounded_
 
-\{max occurs}
-
- _unbounded_
-
-\{term}
-
-{empty}If the \{particles} row in
+| {term} | If the \{particles} row in
 link:jaxb.html#a3132[See Mapping: List of element instances to
 choice model group of element refs] results in a single particle, then
 that single particle. Otherwise mapped as specified in
 link:jaxb.html#a3132[See Mapping: List of element instances to
 choice model group of element refs]
+|===
 
+.Table 8-22 Mapping: List of element instances to choice model group of element refs
+|===
 
+| {compositor} | _choice_
 
-=== [[a3132]]Mapping: List of element instances to choice model group of element refs
-
-\{compositor}
-
- _choice_
-
-\{particles}
-
-set obtained by mapping
+| {particles} | set obtained by mapping
 
 * each _@XmlElementRef_ in
 _@XmlElementRefs.value()_ as specified in
-link:jaxb.html#a3049[See @XmlElementRef]”.
+link:jaxb.html#a3049[See @XmlElementRef]”. +
 * if property is annotated with
 _@XmlAnyElement,_ then the particle obtained by mapping as specified in
 link:jaxb.html#a3210[See @XmlAnyElement]”
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
+==== @XmlElementWrapper
 
-=== @XmlElementWrapper
+===== Synopsis
 
-=== Synopsis
-
-@Retention(RUNTIME) @Target(\{FIELD, METHOD}
-
-public @interface XmlElementWrapper \{
-
- String name() default "##default" ; // name
-for XML element
-
- String namespace() default "##default" ;
-
- boolean nillable() default false;
-
- boolean required() default false;
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD}
+public @interface XmlElementWrapper {
+    String name() default "##default" ; // name for XML element
+    String namespace() default "##default";
+    boolean nillable() default false;
+    boolean required() default false;
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2385,148 +1878,102 @@ Element Wrapper].
 
 
 
-=== [[a3158]]Mapping: Property/field to Particle for Element Wrapper
+.Table 8-23 Mapping: Property/field to Particle for Element Wrapper
+|===
 
-\{min occurs}
-
-if _@XmlElementWrapper.nillable()_ is true or
+| {min occurs} | if _@XmlElementWrapper.nillable()_ is true or
 _@XmlElementWrapper.required()_ is true, then 1;
-
-
 
 otherwise 0
 
-\{max occurs}
+| {max occurs} | 1
 
-1
-
-\{term}
-
-must be mapped as specified in
+| {term} | must be mapped as specified in
 link:jaxb.html#a3167[See Mapping: Property/field to Element
 Declaration for Element Wrapper].
+|===
 
-=== Mapping: Property/field to Element Declaration for Element Wrapper [[a3167]]
+.Table 8-24 Mapping: Property/field to Element Declaration for Element Wrapper [[a3167]]
+|===
 
-\{name}
-
-if _@XmlElementWrapper.name()_ is “
+| {name} | if _@XmlElementWrapper.name()_ is “
 _##default_ “, then the XML name derived from the property or field name
 as specified in link:jaxb.html#a3678[See Java Identifier To XML
 Name]”;
 
-
-
 otherwise _@XmlElementWrapper.name()_
 
-\{target namespace}
-
-if _@XmlElementWrapper.namespace()_ is “
+| {target namespace} | if _@XmlElementWrapper.namespace()_ is “
 _##default_ “,
 
 if the enclosing package has @ _XmlSchema_
 annotation and is _@XmlSchema.elementFormDefault_ is
 _@XmlNsForm.QUALIFIED_ , then the namespace of the enclosing class. +
- +
+
 otherwise ““ (which produces unqualified element in the default
 namespace).
 
 otherwise _@XmlElementWrapper.namespace()_
 
-\{type definition}
-
-{empty}if property/field is annotated with
+| {type definition} | if property/field is annotated with
 _@XmlElementRef_ or _@XmlElementRefs_ then the schema type as specified
 in link:jaxb.html#a3124[See Mapping: List of element instances
 to choice particle]
-
-
 
 otherwise if property/field is annotated with
 _@XmlElement_ or _@XmlElements_ then the schema type as specified
 inlink:jaxb.html#a3034[See Mapping: List of types to choice
 particle].
 
-\{scope}
-
-complex type to which the property’s or the
+| {scope} | complex type to which the property’s or the
 field’s containing class is mapped.
 
-\{value constraint}
+| {value constraint} | _absent_
 
- _absent_
+| {nillable} | _@XmlElementWrapper.nillable()_
 
-\{nillable}
+| {identity-constraint definitions} | _absent_
 
- _@XmlElementWrapper.nillable()_
+| {substitution group affiliation} | _absent_
 
-\{identity-constraint definitions}
+| {substitution group exclusions} | { _extension, restriction_ }
 
- _absent_
+| {disallowed substitution} | { _extension, restriction,substitution_ }
 
+| {abstract} | _false_
 
+| {annotation} | _unspecified_
+|===
 
-\{substitution group affiliation}
+.Table 8-25 Mapping: Property/field Element Wrapper with ref attribute
+|===
 
- _absent_
+| {min occurs} | 1
 
+| {max occurs} | 1
 
-
-\{substitution group exclusions}
-
-\{ _extension, restriction_ }
-
-
-
-\{disallowed substitution}
-
-\{ _extension, restriction,substitution_ }
-
-
-
-\{abstract}
-
- _false_
-
-\{annotation}
-
- _unspecified_
-
-=== [[a3202]]Mapping: Property/field Element Wrapper with ref attribute
-
-\{min occurs}
-
-1
-
-\{max occurs}
-
-1
-
-\{term}
-
-element declaration whose \{name} is
+| {term} | element declaration whose \{name} is
 _@XmlElementWrapper.name()_ and \{target namespace} is
 _@XmlElementWrapper.namespace()._
 
 Note: The element declaration is assumed to
 already exist and is not created.
+|===
 
-=== [[a3210]]@XmlAnyElement
+==== @XmlAnyElement
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD})
-
-public @interface XmlAnyElement \{
-
- boolean lax() default false;
-
- Class<? extends DomHandler> value() default
-W3CDomHandler.class;
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD})
+public @interface XmlAnyElement {
+    boolean lax() default false;
+    Class<? extends DomHandler> value() default W3CDomHandler.class;
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2544,41 +1991,35 @@ The property or field must be mapped as
 specified in link:jaxb.html#a3223[See Mapping: Wildcard schema
 component for wildcard (xs:any)]”.
 
-=== [[a3223]]Mapping: Wildcard schema component for wildcard (xs:any)
+.Table 8-26 Mapping: Wildcard schema component for wildcard (xs:any)
+|===
 
-\{namespace constraint}
+| {namespace constraint} | _##other_
 
- _##other_
-
-\{process contents}
-
- _”lax”_ if _lax()_ is _true_ otherwise
+| {process contents} | _”lax”_ if _lax()_ is _true_ otherwise
 _“skip”_
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
-
-=== [[a3230]]@XmlAttribute
+==== @XmlAttribute
 
  _@XmlAttribute_ is used to map a property or
 a field to an XML attribute.
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD})
-
-public @interface XmlAttribute \{
-
- String name() default ##default”;
-
- boolean required() default false;
-
- String namespace() default "##default" ;
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD})
+public @interface XmlAttribute {
+    String name() default ##default”;
+    boolean required() default false;
+    String namespace() default "##default" ;
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2586,30 +2027,27 @@ enforced:
 * If the type of the field or the property is
 a collection type, then the collection item type must be mapped to
 schema simple type. Examples:
-
- @XmlAttribute List<Integer> foo; // legal
-
- @XmlAttribute List<Bar> foo; // illegal if
-Bar does not map to a
-
- // schema simple type
-
+[source,java,indent=4]
+----
+@XmlAttribute List<Integer> foo; // legal
+@XmlAttribute List<Bar> foo;     // illegal if Bar does not map to a
+                                 // schema simple type
+----
 * If the type of the field or the property is
 a non collection type, then the type of the property or field must map
 to a simple schema type. Examples:
 
- @XmlAttribute int foo; // legal
-
- @XmlAttribute Foo foo; // illegal if Foo does
-not map to a schema
-
- // simple type
+[source,java,indent=4]
+----
+@XmlAttribute int foo;  // legal
+@XmlAttribute Foo foo;  // illegal if Foo does not map to a schema
+                        // simple type
+----
 
 * The only additional mapping annotations
 allowed with _@XmlAttribute_ are: _@XmlID, @XmlIDREF, @XmlList,
 @XmlSchemaType, @XmlValue, @XmlAttachmentRef, @XmlMimeType,
 @XmlInlineBinaryData, @XmlJavaTypeAdapter._
-* 
 
 The property or field must be mapped as
 follows:
@@ -2626,131 +2064,94 @@ Use (no ref attribute)].
 
 
 
-=== [[a3255]]Mapping: Property/field to Attribute Use (with ref attribute)
+.Table 8-27 Mapping: Property/field to Attribute Use (with ref attribute)
+|===
 
-\{required}
+| {required} | _@XmlAttribute.required()_
 
- _@XmlAttribute.required()_
-
-\{attribute declaration}
-
-attribute declaration whose \{name} is
+| {attribute declaration} | attribute declaration whose \{name} is
 _@XmlAttribute.name()_ and \{target namespace} is
-_@XmlAttribute.namespace()._
-
+_@XmlAttribute.namespace()._ +
 For e.g.
+_<xs:attribute ref=”xml:lang”/>_
 
- _<xs:attribute ref=”xml:lang”/>_
+| {value constraint} | _absent_
 
-\{value constraint}
+| {annotation} | _unspecified_
+|===
 
- _absent_
+.Table 8-28 Mapping: Property/field to Attribute Use (no ref attribute)
+|===
 
-\{annotation}
+| {required} | _@XmlAttribute.required()_
 
- _unspecified_
-
-=== [[a3266]]Mapping: Property/field to Attribute Use (no ref attribute)
-
-\{required}
-
- _@XmlAttribute.required()_
-
-\{attribute declaration}
-
-Mapped as specified in
+| {attribute declaration} | Mapped as specified in
 link:jaxb.html#a3276[See Mapping: Property/field to Attribute
 Declaration]”
 
-\{value constraint}
-
-
-
-if field has access modifiers public and
+| {value constraint} | if field has access modifiers public and
 static then the _fixed_
 
 otherwise _absent_
+|===
 
 
+.Table 8-29 Mapping: Property/field to Attribute Declaration
+|===
 
-=== [[a3276]]Mapping: Property/field to Attribute Declaration
-
-\{name}
-
-if _@XmlAttribute.name()_ is “##default“, then
+| {name} | if _@XmlAttribute.name()_ is “##default“, then
 the XML name derived from the property or field name as specified in
 link:jaxb.html#a3678[See Java Identifier To XML Name]”;
 
-
-
 otherwise _@XmlAttribute.name()_ .
 
-\{target namespace}
-
-if _@XmlAttribute.namespace()_ is
+| {target namespace} | if _@XmlAttribute.namespace()_ is
 _“##default”,_ then value of targetNamespace in
 link:jaxb.html#a2476[See Mapping: Package to XML target
 namespace];
 
-
-
 otherwise _@XmlType.namespace()_
 
-\{type definition}
-
-if annotated with _@XmlList,_ schema type
+| {type definition} | if annotated with _@XmlList,_ schema type
 derived by mapping as specified in link:jaxb.html#a3399[See
 @XmlList]”
-
-
 
 otherwise if annotated with _@XmlID_ , the
 schema type derived by mapping as specified in
 link:jaxb.html#a3377[See @XmlID]”
 
-
-
 otherwise if annotated with _@XmlIDREF_ , the
 schema type derived by mapping as specified in
 link:jaxb.html#a3387[See @XmlIDREF]”
-
-
 
 otherwise if the type of the property is a
 collection type, then the schema type derived by mapping the collection
 item type.
 
-
-
 otherwise the schema type to which the type of
 the property is mapped.
 
-\{scope}
+| {scope} | complex type of the containing class
 
-complex type of the containing class
-
-\{value constraint}
-
-if field has access modifiers static and final
+| {value constraint} | if field has access modifiers static and final
 then _fixed_
 
 otherwise _absent_
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
+==== XmlAnyAttribute
 
+===== Synopsis
 
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD})
+public @interface XmlAnyAttribute{}
+----
 
-=== [[a3303]]XmlAnyAttribute
-
-=== Synopsis
-
-@Retention(RUNTIME) @Target(\{FIELD, METHOD})
-
-public @interface XmlAnyAttribute\{}
-
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2767,33 +2168,29 @@ The property or field must be mapped as
 specified in link:jaxb.html#a3313[See Mapping: Wildcard schema
 component for Attribute Wildcard].”
 
-=== [[a3313]]Mapping: Wildcard schema component for Attribute Wildcard
+.Table 8-30 Mapping: Wildcard schema component for Attribute Wildcard
+|===
 
-\{namespace constraint}
+| {namespace constraint} | _##other_
 
- _##other_
+| {process contents} | _skip_
 
-\{process contents}
+| {annotation} | _unspecified_
+|===
 
- _skip_
-
-\{annotation}
-
- _unspecified_
-
-=== @XmlTransient
+==== @XmlTransient
 
  _@XmlTransient_ is used to prevent the
 mapping of a property or a field.
 
-=== Synopsis
+===== Synopsis
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD, TYPE})
+public @interface XmlTransient {}
+----
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD,
-TYPE})
-
-public @interface XmlTransient \{}
-
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2803,20 +2200,17 @@ mapped.
 *  _@XmlTransient_ is mutually exclusive with
 all other mapping annotations.
 
+==== @XmlValue
 
+===== Synopsis
 
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD})
+public @interface XmlValue {}
+----
 
-
-=== [[a3331]]@XmlValue
-
-=== Synopsis
-
- _@Retention(RUNTIME) @Target(\{FIELD,
-METHOD})_
-
- _public @interface XmlValue \{}_
-
-=== XmlValue Type Mapping
+===== XmlValue Type Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2825,27 +2219,22 @@ enforced:
 can be annotated with @ _XmlValue_ .
 .  _@XmlValue_ can be used with the following
 annotations:
-.  _@XmlList_ - however this is redundant
+..  _@XmlList_ - however this is redundant
 since _@XmlList_ maps a type to a schema simple type that derives by
 list just as _@XmlValue_ would.
-.  _@XmlJavaTypeAdapter_
+..  _@XmlJavaTypeAdapter_
 . If the type of the field or property is a
 collection type, then the collection item type must map to a simple
 schema type. Examples:
 
- // Examples (not exhaustive): Legal usage of
-@XmlValue
-
- @XmlValue List<Integer> foo; // int maps to
-xs:int
-
- @XmlValue String[] foo; // String maps to
-xs:string
-
- @XmlValue List<Bar> foo; // only if Bar maps
-to a simple
-
- // schema type
+[source,java,indent=4]
+----
+// Examples (not exhaustive): Legal usage of @XmlValue
+@XmlValue List<Integer> foo; // int maps to xs:int
+@XmlValue String[] foo;      // String maps to xs:string
+@XmlValue List<Bar> foo;     // only if Bar maps to a simple
+                             // schema type
+----
 
 . If the type of the field or property is not
 a collection type, then the type of the property or field must map to a
@@ -2853,7 +2242,7 @@ schema simple type.
 . The containing class must not extend another
 class (other than java.lang.Obect).
 
-=== Mapping
+===== Mapping
 
 * If the type of the property or field is a
 collection type, then the type must be must be mapped as specified in
@@ -2862,43 +2251,26 @@ type]”.
 * Otherwise, the schema type to which the type
 of the property or field is mapped.
 
+.Table 8-31 @XmlValue: Mapping to list simple type
+|===
 
+| {name} | _absent_
 
-=== [[a3353]]@XmlValue: Mapping to list simple type
-
-\{name}
-
- _absent_
-
-\{target namespace}
-
-\{target namespace} of the attribute or
+| {target namespace} | {target namespace} of the attribute or
 element to which the property or field is mapped and from where this
 type is referenced.
 
-\{base type definition}
+| {base type definition} | ur-type definition, _xs:anyType_.
 
-ur-type definition, _xs:anyType_ .
+| {facets} | _empty set_
 
-\{facets}
+| {fundamental facets} | derived
 
- _empty set_
+| {final} | #all
 
-\{fundamental facets}
+| {variety} | list
 
-derived
-
-\{final}
-
-#all
-
-\{variety}
-
-list
-
-\{item type definition}
-
-if the field, property or parameter is a
+| {item type definition} | if the field, property or parameter is a
 collection type
 
 * if annotated with _@XmlIDREF_ , then
@@ -2913,19 +2285,20 @@ _xs:IDREF_ as specified in link:jaxb.html#a3387[See @XmlIDREF]”
 * otherwise the schema type to which the type
 of the property, field or the parameter is mapped.
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
+==== @XmlID
 
-=== [[a3377]]@XmlID
+===== Synopsis
 
-=== Synopsis
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD})
+public @interface XmlID {}
+----
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD})
-
-public @interface XmlID \{}
-
-=== XmlID Type Mapping
+===== XmlID Type Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2940,15 +2313,17 @@ with _@XmlID_ are: _@XmlAttribute_ and _@XmlElement_ .
 The type of the annotated program element must
 be mapped to _xs:ID._
 
-=== [[a3387]]@XmlIDREF
+==== @XmlIDREF
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD})
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD})
+public @interface XmlIDREF {}
+----
 
-public @interface XmlIDREF \{}
-
-=== XmlIDREF Type Mapping
+===== XmlIDREF Type Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2977,19 +2352,20 @@ If the type of the field or property is single
 valued, then the type of the property or field must be mapped to
 _xs:IDREF_ .
 
-=== [[a3399]]@XmlList
+==== @XmlList
 
 This annotation maps a collection type to a
 list simple type.
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD,
-PARAMETER})
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD, PARAMETER})
+public @interface XmlList {}
+----
 
-public @interface XmlList \{}
-
-=== XmlIList Type Mapping
+===== XmlIList Type Mapping
 
 The following mapping constraints must be
 enforced:
@@ -2999,46 +2375,26 @@ must be a collection type.
 * The collection item type must map to a
 simple schema type that does not derive by list. For example:
 
+[source,java,indent=4]
+----
+// Examples: Legal usage of @XmlList
+@XmlList List<Integer> foo; // int maps to xs:int
+@XmlList String[] foo; // String maps to xs:string
+@XmlList List<Bar> foo; // only if Bar maps to a simple type
 
+// Example: Illegal usage of @XmlList
+public class Foo {
+    // @XmlValue maps List to a XML Schema listsimple type
+    @XmlValue List<Integer> a;
+}
 
- // Examples: Legal usage of @XmlList
-
- @XmlList List<Integer> foo; // int maps to
-xs:int
-
- @XmlList String[] foo; // String maps to
-xs:string
-
- @XmlList List<Bar> foo; // only if Bar maps
-to a simple type
-
-
-
- // Example: Illegal usage of @XmlList
-
- public class Foo \{
-
- // @XmlValue maps List to a XML Schema list
-simple type
-
- @XmlValue List<Integer> a;
-
- }
-
- class Bar \{
-
- // Use of @XmlList is illegal since Foo
-itself mapped
-
- // to a XML Schema list simple type; XML
-Schema list simple
-
- // type can't derive from another XML Schema
-list simple type
-
- @XmlList List<Foo> y;
-
- }
+class Bar {
+    // Use of @XmlList is illegal since Fooitself mapped
+    // to a XML Schema list simple type; XMLSchema list simple
+    // type can't derive from another XML Schemalist simple type
+    @XmlList List<Foo> y;
+}
+----
 
 * The only additional mapping annotations
 allowed with _@XmlList_ are: _@XmlElement, @XmlAttribute, @XmlValue_ and
@@ -3048,66 +2404,48 @@ The type of the property or field must be
 mapped as specified in link:jaxb.html#a3428[See @XmlList:
 Mapping to list simple type].
 
+.Table 8-32 @XmlList: Mapping to list simple type
+|===
 
+| {name} | _absent_
 
-=== [[a3428]]@XmlList: Mapping to list simple type
-
-\{name}
-
- _absent_
-
-\{target namespace}
-
-\{target namespace} of the attribute or
+| {target namespace} | {target namespace} of the attribute or
 element to which the property or field is mapped and from where this
 type is referenced.
 
-\{base type definition}
+| {base type definition} |  ur-type definition, _xs:anyType_ .
 
-ur-type definition, _xs:anyType_ .
+| {facets} | _empty set_
 
-\{facets}
+| {fundamental facets} | derived
 
- _empty set_
+| {final} | #all
 
-\{fundamental facets}
+| {variety} | list
 
-derived
-
-\{final}
-
-#all
-
-\{variety}
-
-list
-
-\{item type definition}
-
-if annotated with _@XmlIDREF_ , then xs:IDREF
+| {item type definition} | if annotated with _@XmlIDREF_ , then xs:IDREF
 as specified in link:jaxb.html#a3387[See @XmlIDREF]”
-
-
 
 otherwise the schema type to which the
 collection item type is mapped.
 
-\{annotation}
+| {annotation} | _unspecified_
+|===
 
- _unspecified_
-
-=== [[a3449]]@XmlMixed
+==== @XmlMixed
 
 This annotation is used for dealing with mixed
 content in XML instances.
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{FIELD, METHOD})
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD, METHOD})
+public @interface XmlMixed {}
+----
 
-public @interface XmlMixed \{}
-
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -3119,67 +2457,60 @@ allowed with _@XmlMixed_ are: _@XmlElementRef, @XmlAnyElement,
 The java.lang.String instances must be
 serialized as XML infoset text information items.
 
-=== @XmlMimeType
+==== @XmlMimeType
 
-=== Synopsis
+===== Synopsis
 
+[source,java,indent=4]
+----
 @Retention(RUNTIME)
-@Target(\{FIELD,METHOD,PARAMETER})
-
-public @interface XmlMimeType \{
-
- // Textual representation of the MIME type,
-such as "image/jpeg"
-
- // "image/*", "text/xml; charset=iso-8859-1"
-and so on.
-
- String value();
-
+@Target({FIELD,METHOD,PARAMETER})
+public @interface XmlMimeType {
+    // Textual representation of the MIME type,such as "image/jpeg"
+    // "image/*", "text/xml; charset=iso-8859-1"and so on.
+    String value();
 }
+----
 
-=== Mapping
+===== Mapping
 
 
 
-=== @XmlMimeType: Mapping to Foreign Namespace attribute
+.Table 8-33 @XmlMimeType: Mapping to Foreign Namespace attribute
+|===
 
-\{name}
+| {name} | _“expectedContentTypes”_
 
- _“expectedContentTypes”_
+| {target namespace} | "http://www.w3.org/2005/05/xmlmime"
 
-\{target namespace}
+| attribute value | _@XmlMimeType.value()_
+|===
 
-"http://www.w3.org/2005/05/xmlmime"
+==== @XmlAttachmentRef
 
-attribute value
+===== Synopsis
 
- _@XmlMimeType.value()_
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD,METHOD,PARAMETER})
+public @interface XmlAttachmentRef {}
+----
 
-=== @XmlAttachmentRef
-
-=== Synopsis
-
-@Retention(RUNTIME)
-@Target(\{FIELD,METHOD,PARAMETER})
-
-public @interface XmlAttachmentRef \{ }
-
-=== Mapping
+===== Mapping
 
 The type of property or field must map to
 _ref:swaRef_ .
 
-=== XmlInlineBinaryData
+==== XmlInlineBinaryData
 
-@Retention(RUNTIME)
-@Target(\{FIELD,METHOD,TYPE})
-
-public @interface XmlInlineBinaryData \{
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({FIELD,METHOD,TYPE})
+public @interface XmlInlineBinaryData {
 }
+----
 
-=== Mapping
+===== Mapping
 
 This annotation does not impact the schema
 generation. See the javadoc for
@@ -3193,48 +2524,31 @@ methods in the schema derived ObjectFactory class
 (link:jaxb.html#a482[See Java Package]”). They are not expected
 to be used when mapping existing classes to schema.
 
+==== @XmlElementDecl
 
+===== Synopsis
 
-=== @XmlElementDecl
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({METHOD})
+public @interface XmlElementDecl {
+    Class scope() default GLOBAL.class;
 
-=== Synopsis
+    // XML namespace of element
+    String namespace() default "##default";
 
-@Retention(RUNTIME) @Target(\{METHOD})
+    String name(); // local name of element
 
-public @interface XmlElementDecl \{
+    //XML namespace name of a substitution group's head element.
+    String substitutionHeadNamespace() default "##default";
 
- Class scope() default GLOBAL.class;
-
-
-
- // XML namespace of element
-
- String namespace() default "##default";
-
-
-
- String name(); // local name of element
-
-
-
- //XML namespace name of a substitution
-group's head element.
-
- String substitutionHeadNamespace() default
-"##default";
-
-
-
- //XML local name of a substitution group's
-head element.
-
- String substitutionHeadName() default "";
-
- public final class GLOBAL \{}
-
+    //XML local name of a substitution group's head element.
+    String substitutionHeadName() default "";
+    public final class GLOBAL {}
 }
+----
 
-=== Mapping
+===== Mapping
 
 The following mapping constraints must be
 enforced:
@@ -3273,99 +2587,63 @@ method to Element Declaration].
 
 
 
-=== [[a3518]]Mapping: Element Factory method to Element Declaration
+.Table 8-34 Mapping: Element Factory method to Element Declaration
+|===
 
-\{name}
+| {name} | _@XmlElementDecl.name()_
 
- _@XmlElementDecl.name()_
-
-\{target namespace}
-
-{empty}if _@XmlElementDecl.namespace()_ is “
+| {target namespace} | if _@XmlElementDecl.namespace()_ is “
 _##default_ “ _,_ then the value of the targetNamespace to which the
 package of the class containing the factory method is mapped as
 specified in link:jaxb.html#a2476[See Mapping: Package to XML
 target namespace]
 
-
-
 otherwise _@XmlElementDecl.namespace()_
 
-\{type definition}
-
-schema type to which the class is mapped as
+| {type definition} | schema type to which the class is mapped as
 specified in link:jaxb.html#a2578[See @XmlType]”.
 
-\{scope}
-
- _global_ if _@XmlElementDecl.scope()_ is
+| {scope} | _global_ if _@XmlElementDecl.scope()_ is
 _@XmlElementDecl.GLOBAL_
-
-
 
 otherwise the complex type definition to which
 the class containing the object factory method is mapped.
 
-\{value constraint}
+| {value constraint} | _absent_
 
- _absent_
+| {nillable} | _false_
 
-\{nillable}
+| {identity-constraint definitions} | empty set
 
- _false_
-
-\{identity-constraint definitions}
-
-empty set
-
-\{substitution group affiliation}
-
-element declaration derived from
+| {substitution group affiliation} | element declaration derived from
 _@XmlElementDecl.name()_ and _@XmlElementDecl.substitutionHeadName()_
 
-\{substitution group exclusions}
+| {substitution group exclusions} |  _{}_
 
- _\{}_
+| {disallowed substitution} | {}
 
-\{disallowed substitution}
+| {abstract} | _false_
 
-\{}
-
-\{abstract}
-
- _false_
-
-\{annotation}
-
- _unspecified_
+| {annotation} | _unspecified_
+|===
 
 === Adapter
 
-=== XmlAdapter
+==== XmlAdapter
 
-public abstract class
-XmlAdapter<ValueType,BoundType> \{
+[source,java,indent=4]
+----
+public abstract class XmlAdapter<ValueType,BoundType> {
+    // Do-nothing constructor for the derivedclasses.
+    protected XmlAdapter() {}
 
- // Do-nothing constructor for the derived
-classes.
+    // Convert a value type to a bound type.
+    public abstract BoundType unmarshal(ValueType v);
 
- protected XmlAdapter() \{}
-
-
-
- // Convert a value type to a bound type.
-
- public abstract BoundType unmarshal(ValueType
-v);
-
-
-
- // Convert a bound type to a value type.
-
- public abstract ValueType marshal(BoundType
-v);
-
+    // Convert a bound type to a value type.
+    public abstract ValueType marshal(BoundType v);
 }
+----
 
 For an overview, see the section,
 link:jaxb.html#a2278[See Adapter]”.
@@ -3374,27 +2652,24 @@ For detailed information, see the javadocs for
 _jakarta.xml.bind.annotation.adapters.XmlAdapter_ and
 _jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter._
 
-=== [[a3561]]@XmlJavaTypeAdapter
+==== @XmlJavaTypeAdapter
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME)
-@Target(\{PACKAGE,FIELD,METHOD,TYPE,PARAMETER})
-
-public @interface XmlJavaTypeAdapter \{
-
- Class<? extends XmlAdapter> value();
-
- Class type() default DEFAULT.class;
-
- static final class DEFAULT \{}
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({PACKAGE,FIELD,METHOD,TYPE,PARAMETER})
+public @interface XmlJavaTypeAdapter {
+    Class<? extends XmlAdapter> value();
+    Class type() default DEFAULT.class;
+    static final class DEFAULT {}
 }
+----
 
 For an overview, see
 link:jaxb.html#a2278[See Adapter]”.
 
-=== Scope
+===== Scope
 
 The scope of _@XmlJavaTypeAdapter_ must cover
 the program elements as specified below:
@@ -3404,18 +2679,14 @@ package:
 For clarity, the following code example is
 used along with normative text.
 
+[source,java,indent=4]
+----
 // Adapts Foo type to MyFoo type
-
 FooAdapter extends XmlAdapter<MyFoo, Foo>
 
-
-
-// FooAdapter is installed at the package
-level - example.po
-
-@XmlJavaTypeAdapter(value=FooAdapter.class,
-type=Foo.class)
-
+// FooAdapter is installed at the package level - example.po
+@XmlJavaTypeAdapter(value=FooAdapter.class, type=Foo.class)
+----
 A _@XmlJavaTypeAdapter_ that extends
 _XmlAdapter <valueType, boundType>_ and is specified as a package level
 annotation must adapt _boundType_ at the point of reference as follows:
@@ -3423,18 +2694,20 @@ annotation must adapt _boundType_ at the point of reference as follows:
 . a property/field/parameter within a class in
 package (e.g _exmple.po)_ whose reference type is _boundType_ . For e.g.
 
+[source,java,indent=4]
+----
  // Foo will be adapted to MyFoo
-
  Foo foo;
-
+----
 . a property/field/parameter within a class in
 package (e.g _exmple.po)_ , where _boundType_ is used as a parametric
 type. For e.g.
 
+[source,java,indent=4]
+----
  // List<Foo> will be adapted to List<MyFoo>
-
  Foo foo;
-
+----
 
 
 class, interface, enum type:
@@ -3442,16 +2715,14 @@ class, interface, enum type:
 For clarity, the following code example is
 used along with normative text.
 
+[source,java,indent=4]
+----
 // Adapts Foo type to MyFoo type
-
 FooAdapter extends XmlAdapter<MyFoo, Foo>
 
-
-
-// FooAdapter is specified on class, interface
-or enum type. @XmlJavaTypeAdapter(FooAdapter.class)
-
-public class Foo \{...}
+// FooAdapter is specified on class, interface or enum type. @XmlJavaTypeAdapter(FooAdapter.class)
+public class Foo {...}
+----
 
 A _@XmlJavaTypeAdapter_ that extends
 _XmlAdapter <valueType, boundType>_ and is specified on the class,
@@ -3461,45 +2732,37 @@ reference as follows:
 
 . a property/field whose reference type is
 _boundType_ . For e.g.
-
- // Foo will be adapted to MyFoo
-
- Foo foo;
-
+[source,java,indent=4]
+----
+// Foo will be adapted to MyFoo
+Foo foo;
+----
 . a property/field where _boundType_ is used
 as a parametric type. For e.g.
 
- // List<Foo> will be adapted to List<MyFoo>
-
- List<Foo> foo;
-
+[source,java,indent=4]
+----
+// List<Foo> will be adapted to List<MyFoo>
+List<Foo> foo;
+----
 Note: A _@XmlJavaTypeAdapter_ on a class does
 not apply to references to it’s sub class.
 
+[source,java,indent=4]
+----
 //Example:
-
-@XmlJavaTypeAdapter(..) public class Foo \{..}
-
+@XmlJavaTypeAdapter(...) public class Foo {...}
 ...
-
-public class DerivedFoo extends Foo \{..}
-
+public class DerivedFoo extends Foo \{...}
 ...
-
-public class Bar \{
-
- // XmlJavaTypeAdapter applies to foo;
-
- public Foo foo;
-
- ...
-
- // XmlJavaTypeAdaper DOES NOT apply to
-derivedFoo;
-
- public DerivedFoo derivedFoo;
-
+public class Bar {
+    // XmlJavaTypeAdapter applies to foo;
+    public Foo foo;
+    ...
+    // XmlJavaTypeAdaper DOES NOT apply to derivedFoo;
+    public DerivedFoo derivedFoo;
 }
+----
 
 property/field/parameter:
 
@@ -3510,55 +2773,47 @@ property/field or parameter must adapt _boundType_ as follows:
 . property/field is a single valued and its
 type is _boundType_ :
 
- // Foo will be adapted to MyFoo
-
- @XmlJavaTypeAdapter(FooAdapter.class) Foo
-foo;
-
+[source,java,indent=4]
+----
+// Foo will be adapted to MyFoo
+@XmlJavaTypeAdapter(FooAdapter.class) Foo foo;
+----
 . a property/field where _boundType_ is used
 as a parametric type. For e.g.
 
- // List<Foo> will be adapted to List<MyFoo>
+[source,java,indent=4]
+----
+// List<Foo> will be adapted to List<MyFoo>
+List<Foo> foo;
+----
 
- List<Foo> foo;
-
-=== Relationship to other annotations
+===== Relationship to other annotations
 
  _@XmlJavaTypeAdapter_ must be applied first
 before any other mapping annotation is processed. Further annotation
 processing is subject to their respective mapping constraints. For
 example,
 
-// PtoQAdapter is applied first and therefore
-converts type Q to P
+[source,java,indent=4]
+----
 
-// Next foo is mapped with a type of P (not Q)
-subject to the
-
-// mapping constraints specified in
-@XmlElements.
-
+// PtoQAdapter is applied first and therefore converts type Q to P
+// Next foo is mapped with a type of P (not Q) subject to the
+// mapping constraints specified in@XmlElements.
 @XmlJavaTypeAdapter(PtoQAdapter)
-
-@XmlElements(\{
-
- @XmlElement(name="x",type=PX.class),
-
- @XmlElement(name="y",type=PY.class)
-
+@XmlElements({
+    @XmlElement(name="x",type=PX.class),
+    @XmlElement(name="y",type=PY.class)
 })
-
 Q foo;
 
+@XmlType abstract class P {}
+@XmlType class PX extends P {}
+@XmlType class PY extends P {}
 
+----
 
-@XmlType abstract class P \{}
-
-@XmlType class PX extends P \{}
-
-@XmlType class PY extends P \{}
-
-=== Class Inheritance Semantics
+===== Class Inheritance Semantics
 
 When annotated on a class, the use of
 _@XmlJavaTypeAdapter_ annotation is subject to the class inheritance
@@ -3577,22 +2832,23 @@ unmarshalling of an instance of property or a field with a static type
 of baseClass must follow the schema to which
 _XmlJavaTypeAdapter.value()_ is mapped.
 
+[source,java,indent=4]
+----
 //Example: code fragment
-
-@XmlJavaTypeAdapter(..) BaseClass \{..}
-
-public SubClass extends BaseClass \{..}
-
+@XmlJavaTypeAdapter(...) BaseClass {...}
+public SubClass extends BaseClass {...}
 public BaseClass foo;
-
 public SubClass subFoo = new SubClass();
-
 foo = subFoo;
+----
 
 In the absence of _@XmlJavaTypeAdapter_
 annotation, the instance of subFoo is marshalled with an xsi:type:
 
+[source,xml,indent=4]
+----
 <foo xsi:type="subClass"/>
+----
 
 With the _@XmlJavaTypeAdapter_ annotation,
 however, the instance of subFoo must be marshalled/unmarshalled
@@ -3606,68 +2862,55 @@ object with a static type of _BaseClass_ but containing an instance of
 _SubClass_ can’t be marshalled or unmarshalled. An attempt to do so must
 fail. For e.g,
 
+[source,java,indent=4]
+----
 // Example: Code fragment
-
-BaseClass\{..}
-
+BaseClass{...}
 ...
+@XmlJavaTypeAdapter(...) SubClass extends BaseClass {...}
 
-@XmlJavaTypeAdapter(..) SubClass extends
-BaseClass \{..}
+public class Bar {
+    public BaseClass foo;
+    public SubClass subFoo = new SubClass();
 
+    // marshal, unmarshal of foo will fail
+    foo = subFoo;
 
-
-public class Bar \{
-
- public BaseClass foo;
-
- public SubClass subFoo = new SubClass();
-
-
-
- // marshal, unmarshal of foo will fail
-
- foo = subFoo;
-
-
-
- // marshal, unmarshal of subFoo will succeed
-
+    // marshal, unmarshal of subFoo will succeed
 }
+----
 
-=== @XmlJavaTypeAdapters
+==== @XmlJavaTypeAdapters
 
 This annotation is a container annotation for
 defining multiple _@XmlJavTypeAdapters_ annotations at the package
 level.
 
-=== Synopsis
+===== Synopsis
 
-@Retention(RUNTIME) @Target(\{PACKAGE})
-
-public @interface XmlJavaTypeAdapters \{
-
- // Collection of @\{@link XmlJavaTypeAdapter}
-annotations
-
- XmlJavaTypeAdapter[] value();
-
+[source,java,indent=4]
+----
+@Retention(RUNTIME) @Target({PACKAGE})
+public @interface XmlJavaTypeAdapters {
+    // Collection of @{@link XmlJavaTypeAdapter}annotations
+    XmlJavaTypeAdapter[] value();
 }
+----
 
-=== Mapping
+===== Mapping
 
 Each _@XmlJavaTypeAdapter_ annotation in
 _@XmlJavaTypeAdapters.value()_ must be mapped as specified in
 link:jaxb.html#a3561[See @XmlJavaTypeAdapter]”.
 
-=== [[a3676]]Default Mapping
+=== Default Mapping
 
 This section describes the default mapping of
 program elements. The default mapping is specified in terms of default
 annotations that are considered to apply to a program element even in
 their absence.
 
-=== [[a3678]]Java Identifier To XML Name
+==== Java Identifier To XML Name
 
 The following is the default mapping for
 different identifiers:
@@ -3683,7 +2926,7 @@ from JavaBean access method (e.g. getAddress) by JavaBean de
 capitalization of the JavaBean property name
 _java.beans.Introspector.decapitalize(JavaBeanAccessMethod)_
 
-=== Package
+==== Package
 
 A package must be mapped with the following
 default package level mapping annotations:
@@ -3696,30 +2939,31 @@ jakarta.xml.bind.annotation.XmlAccessOrder.UNDEFINED)_
 
 *  _@XmlSchema_
 
-=== Class
+==== Class
 
 Unless _@XmlTransient_ annotation is present,
 a class with a public or protected no-arg constructor must be mapped
 with the following default mapping annotations: _@XmlType_ .
 
-=== enum type
+==== enum type
 
 An enum type must be mapped with the following
 default mapping annotations:
 
 * enum type declaration:
-
- @XmlType
-
- @XmlEnum
-
- enum type \{...}
-
+[source,java,indent=4]
+----
+@XmlType
+@XmlEnum
+enum type {...}
+----
 * each enum constant:
+[source,java,indent=4]
+----
+@XmlEnumValue (enumConstatEnum.name())
+----
 
- @XmlEnumValue (enumConstatEnum.name())
-
-=== Property / Field
+==== Property / Field
 
 If the value of _@XmlAccessorType.value()_ is
 _jakarta.xml.bind.annotation.XmlAccessType.NONE_ , then
@@ -3751,7 +2995,7 @@ See javadoc for
 _@jakarta.xml.bind.annotation.XmlAccessorType_ for further information on
 inheritance rules for this annotation.
 
-=== Default Mapping
+===== Default Mapping
 
 A property name (e.g. address) must be derived
 from JavaBean access method (e.g. getAddress) by JavaBean
@@ -3761,9 +3005,7 @@ _java.beans.Introspector.decapitalize(JavaBeanAccessMethod)_
 A single valued property or field must be
 mapped with the following default mapping annotation:
 
- _@XmlElement_
-
-* 
+_@XmlElement_
 
 A property or field with a collection type
 must be mapped by with the following default mapping annotation:
@@ -3771,15 +3013,13 @@ must be mapped by with the following default mapping annotation:
 * if the property or field is annotated with
 _@XmlList_ , then the default mapping annotation is:
 
- @XmlElement
-
-
+_@XmlElement_
 
 * otherwise the default mapping annotation is:
 
- @XmlElements( \{ @XmlElement(nillable=true)})
+_@XmlElements( { @XmlElement(nillable=true)})_
 
-=== Map
+==== Map
 
 By default, _java.util.Map<K,V>_ must be
 mapped to the following anonymous schema type. The parameterized types K
@@ -3787,78 +3027,47 @@ and V must be mapped as specified in link:jaxb.html#a2386[See
 Type Arguments and Wildcards]”. The anonymous schema type is at the
 point of reference.
 
-<!-- Default XML Schema mapping for Map<K,V>
--->
-
+[source,xml,indent=4]
+----
+<!-- Default XML Schema mapping for Map<K,V> -->
 <xs:complexType>
-
- <xs:sequence>
-
- <xs:element name="entry"
-
- minOccurs ="0" maxOccurs="unbounded">
-
- <xs:complexType>
-
- <xs:sequence>
-
- <xs:element name="key" type="xs:anyType"
-
- minOccurs="0"/>
-
- <xs:element name="value" type="xs:anyType"
-
- minOccurs="0"/>
-
- </xs:sequence>
-
- </xs:complexType>
-
- </xs:element>
-
- </xs:sequence>
-
+    <xs:sequence>
+        <xs:element name="entry"
+                    minOccurs ="0" maxOccurs="unbounded">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="key" type="xs:anyType"
+                                minOccurs="0"/>
+                    <xs:element name="value" type="xs:anyType"
+                                minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:sequence>
 </xs:complexType>
 
-
-
-<!-- Default XML Schema mapping for
-Map<String, Integer>-->
-
+<!-- Default XML Schema mapping for Map<String, Integer>-->
 <xs:complexType>
-
- <xs:sequence>
-
- <xs:element name="entry"
-
- minOccurs="0" maxOccurs="unbounded">
-
- <xs:complexType>
-
- <xs:sequence>
-
- <xs:element name="key" type="xs:string"
-
- minOccurs="0"/>
-
- <xs:element name="value" type="xs:int"
-
- minOccurs="0"/>
-
- </xs:sequence>
-
- </xs:complexType>
-
- </xs:element>
-
- </xs:sequence>
-
+    <xs:sequence>
+        <xs:element name="entry"
+                    minOccurs="0" maxOccurs="unbounded">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"
+                                minOccurs="0"/>
+                    <xs:element name="value" type="xs:int"
+                    minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:sequence>
 </xs:complexType>
+----
 
 The mapping of Map can be customized using
 _@XmlJavaTypeAdapter_ annotation.
 
-=== Multidimensional Array
+==== Multidimensional Array
 
 By default, a multidimensional array must be
 mapped to a complex type as follows. Note the table specifies a two
@@ -3867,95 +3076,65 @@ the mapping is used recursively.
 
 
 
-=== Mapping: Two dimensional array to Complex Type Definition
+.Table 8-35 Mapping: Two dimensional array to Complex Type Definition
+|===
 
-\{name}
-
-If the basetype is a primitive type (e.g.
+| {name} | If the basetype is a primitive type (e.g.
 int[][]) or its corresponding wrapper class (e.g. Integer[][]), then the
 name is basetype concatenated with “Array” (e.g. intArray).
-
-
 
 otherwise if the basetype is a reference type
 (e.g. Foo[][]), then the XML name to which the reference type is mapped
 (e.g. foo) concatenated with “Array” (e.g. fooArray).
 
-\{target namespace}
-
-if the basetype is a primitive or its
+| {target namespace} | if the basetype is a primitive or its
 corresponding wrapper class then "http://jaxb.dev.java.net/array"
-
- __ 
 
 otherwise the namespace to which the reference
 type is mapped (e.g. for Foo[][], the namespace of the XML type to which
 Foo is mapped).
 
-\{base type definition}
+| {base type definition} | _xs:anyType_
 
- _xs:anyType_
+| {derivation method} | _restriction_
 
-\{derivation method}
+| {final} | _#all_
 
- _restriction_
+| {abstract} | false
 
-\{final}
+| {attribute uses} | empty set
 
- _#all_
+| {attribute wildcard} | absent
 
-\{abstract}
-
-false
-
-\{attribute uses}
-
-empty set
-
-\{attribute wildcard}
-
-absent
-
-\{content type}
-
- _element-only content +
+| {content type} | _element-only content +
 content model_ mapped as specified in link:jaxb.html#a3787[See
 Mapping: Two dimensional array to sequence model group]”.
 
-\{prohibited substitutions}
+| {prohibited substitutions} | Empty set
 
-Empty set
+| {annotations} | _absent_
+|===
 
-\{annotations}
+.Table 8-36 Mapping: Two dimensional array to sequence model group
+|===
 
- _absent_
+| {compositor} | _xs:sequence_
 
+| {particles} | A repeating element defined as follows:
 
-
-=== [[a3787]]Mapping: Two dimensional array to sequence model group
-
-\{compositor}
-
- _xs:sequence_
-
-\{particles}
-
-A repeating element defined as follows:
-
-
-
- _<xs:element name="item" type=schematype
-minOccurs="0" maxOccurs="unbounded" nillable="true"/>_
-
-
+[source,xml,indent=4]
+----
+<xs:element name="item"
+type=schematype minOccurs="0"
+maxOccurs="unbounded" nillable="true"/>
+----
 
 where schematype is the schema to which the
 array’s component type is mapped (e.g. int[][], then “xs:int”; Foo[][]
 then “foo” assuming Foo is mapped to the schema type foo.
 
-\{annotation}
-
- _unspecified_
+| {annotation} | _unspecified_
+|===
 
 === Notes
 
@@ -3965,30 +3144,26 @@ are collected here in a separate section and referenced from possibly
 multiple places elsewhere in the specification to make the specification
 more compact.
 
-=== [[a3800]]@XmlType: List simple type
+==== @XmlType: List simple type
 
 It is possible to map a homogenous collection
-to a simple type with a variety of \{list}. For e.g.
+to a simple type with a variety of {list}. For e.g.
 
+[source,java,indent=4]
+----
 // Code fragment
-
-public class USStateList \{
-
- @XmlValue
-
- List <int> items;
-
+public class USStateList {
+    @XmlValue List <int> items;
 }
-
-
+----
 
 // schema fragment
-
+[source,xml,indent=4]
+----
 <xs:simpleType name=”USStateList”>
-
- <xs:list itemType=”int”/>
-
-<xs:simpleType>
+    <xs:list itemType=”int”/>
+</xs:simpleType>
+----
 
 Other types which can be mapped to a list
 simple type include: indexed property, single dimensional arrays.
