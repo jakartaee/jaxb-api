@@ -30,7 +30,7 @@ External binding declarations file:
 
 [source,xml]
 ----
-<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+<jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                version="3.0">
   <jaxb:bindings schemaLocation="A.xsd">
@@ -56,7 +56,7 @@ following inline annotated schema.
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:ens="http://example.com/ns"
            targetNamespace="http://example.com/ns"
-           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
            jaxb:version="3.0">
   <xs:complexType name="aType">
     <xs:annotation>
@@ -106,7 +106,7 @@ document or whose parent is an `<xs:appinfo>` element. We will refer to
 these trees as “external binding forest.”
 . Collect all the namespaces used in the
 elements inside the external binding forest, except the taxi namespace,
-`"http://java.sun.com/xml/ns/jaxb"`, and the no namespace. Allocate an
+`"https://jakarta.ee/xml/ns/jaxb"`, and the no namespace. Allocate an
 unique prefix for each of them and declare the namespace binding at all
 the root `<xs:schema>` elements of each schema documents. +
 Then add a `jaxb:extensionBindingPrefix` attribute to each `<xs:schema>`
