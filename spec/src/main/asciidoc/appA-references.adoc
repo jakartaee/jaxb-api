@@ -6,84 +6,89 @@
 == References
 
 [XSD Part 0] XML Schema Part 0: Primer, +
-Available at _http://www.w3.org/TR/2004/REC-xmlschema-0-20041028/ +
-_ (schema fragments borrowed from this widely used source)
+Available at _http://www.w3.org/TR/2004/REC-xmlschema-0-20041028/_ +
+(schema fragments borrowed from this widely used source).
 
 [XSD Part 1] XML Schema Part 1: Structures, +
-Available at _http://www.w3.org/TR/2004/REC-xmlschema-1-20041028/_
+Available at _http://www.w3.org/TR/2004/REC-xmlschema-1-20041028/_.
 
 [XSD Part 2] XML Schema Part 2: Datatypes, +
-Available at _http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/_
+Available at _http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/_.
 
 [XMl-Infoset] XML Information Set, John Cowan
-and Richard Tobin, eds., W3C, 16 March 2001. Available at
-_http://www.w3.org/TR/2001/WD-xml-infoset-20010316/_
+and Richard Tobin, eds., W3C, 16 March 2001. +
+Available at _http://www.w3.org/TR/2001/WD-xml-infoset-20010316/_.
 
 [XML 1.0] Extensible Markup Language (XML)
 1.0 (Second Edition), +
 W3C Recommendation 6 October 2000. +
-Available at _http://www.w3.org/TR/2000/REC-xml-20001006_ .
+Available at _http://www.w3.org/TR/2000/REC-xml-20001006_.
 
 [Namespaces in XML] Namespaces in XML +
 W3C Recommendation 14 January 1999. +
-Available at _http://www.w3.org/TR/1999/REC-xml-names-19990114_
+Available at _http://www.w3.org/TR/1999/REC-xml-names-19990114_.
 
 [XPath], XML Path Language, James Clark and
-Steve DeRose, eds., W3C, 16 November 1999. Available at
-_http://www.w3.org/TR/1999/REC-xpath-19991116_
+Steve DeRose, eds., W3C, 16 November 1999. +
+Available at _http://www.w3.org/TR/1999/REC-xpath-19991116_.
 
 [XSLT 1.0] XSL Transformations (XSLT),
-Version 1.0, James Clark, W3C Recommendation 16 November 1999. Available
-at http://www.w3.org/TR/1999/REC-xslt-19991116.
+Version 1.0, James Clark, +
+W3C Recommendation 16 November 1999. +
+Available at _http://www.w3.org/TR/1999/REC-xslt-19991116_.
 
-[BEANS] JavaBeans(TM), Version 1.01, July 24,
-1997. Available at _http://java.sun.com/beans_ .
+[BEANS] JavaBeans(TM), Version 1.01, July 24, 1997. +
+Available at _http://java.sun.com/beans_.
 
 [XSD Primer] XML Schema Part 0: Primer, +
 W3C Recommendation 2 May 2001 +
-Available at _http://www.w3.org/TR/xmlschema-0/_
+Available at _http://www.w3.org/TR/xmlschema-0/_.
 
 [BLOCH] Joshua Bloch, Effective Java, Chapter
 3, Typesafe Enums +
-_http://developer.java.sun.com/developer/Books/shiftintojavapage1.html#replaceenum_
+_http://developer.java.sun.com/developer/Books/shiftintojavapage1.html#replaceenum_.
 
 [BLOCH_2] Joshua Bloch, Effective Java,
 Chapter 1, Item 1: Consider factory methods over constructors
 
 [RFC2396] Uniform Resource Identifiers (URI):
-Generic Syntax, _http://www.ietf.org/rfc/rfc2396.txt._
+Generic Syntax, +
+_http://www.ietf.org/rfc/rfc2396.txt._
 
-[JAX-RPC] Javaª API for XML-based RPC JAX-RPC
-1.0, _http://java.sun.com/xml/downloads/jaxrpc.html_ .
+[JAX-RPC] Jakarta XML RPC, +
+_https://jakarta.ee/specifications/xml-rpc/_.
 
-[JAX-WS] Javaª API for XML Web
-Services(JAX-WS) 2.0, Marc Hadley, Roberto Chinnici.
+[JAX-WS] Jakarta XML Web Services, +
+_https://jakarta.ee/specifications/xml-web-services/_.
 
 [JLS] or [JLS3] The Java Language
-Specification, 3rd Edition, Gosling, Joy, Steele, Bracha. Available at
-_http://java.sun.com/docs/books/jls_ .
+Specification, 3rd Edition, Gosling, Joy, Steele, Bracha. +
+Available at
+_http://java.sun.com/docs/books/jls_.
 
 [NIST] NIST XML Schema Test Suite, +
 _http://xw2k.sdct.itl.nist.gov/xml/page4.html._
 
 [MTOM] SOAP Message Transmission Optimization
-Mechanism, http://www.w3.org/TR/2004/WD-soap12-mtom-20040608/
+Mechanism, +
+_http://www.w3.org/TR/2004/WD-soap12-mtom-20040608/_.
 
 [XOP] Martin Gudgin, Noah Mendelsohn, Mark
-Nottingham, and Herve Ruellan. XML-binary Optimized Packaging.
-Recommendation, W3C, January 2005. http://www.w3.org/TR/xop10/.
+Nottingham, and Herve Ruellan. XML-binary Optimized Packaging. +
+Recommendation, W3C, January 2005. + _http://www.w3.org/TR/xop10/_.
 
 [MIME] Anish Karmarkar, Ümit Yalçinalp,
-"Describing Media Content of Binary Data in XML", W3C note,
-http://www.w3.org/TR/2005/NOTE-xml-media-types-20050504
+"Describing Media Content of Binary Data in XML", +
+W3C note, +
+_http://www.w3.org/TR/2005/NOTE-xml-media-types-20050504_
 
 [WSIAP] Chris Ferris, Anish Karmarkar, and
 Canyang Kevin Liu. Attachments Profile Version 1.0. Final 1 Material,
-WS-I, August 2004.
-http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html.
+WS-I, August 2004. +
+_http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html_.
 
-[WSIBP] WS-I Basic Profile 1.0,
-http://www.ws-i.org/Profile/Basic/2003-08/BasicProfile-1.0a.html
+[WSIBP] WS-I Basic Profile 1.0, +
+_http://www.ws-i.org/Profile/Basic/2003-08/BasicProfile-1.0a.html_
 
-[CA] Common Annotations for the Javaª
-Platform, Rajiv Mordani
+[CA] Jakarta Annotations +
+_https://jakarta.ee/specifications/annotations/_
