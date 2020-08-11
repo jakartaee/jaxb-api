@@ -167,7 +167,7 @@ global `version` attribute. It is used to identify the version of the
 binding declarations. For example, a future version of this
 specification may use the version attribute to specify backward
 compatibility. To indicate this version of the specification, the
-`version should` be `"2.0"`. It is also valid for @version to be “1.0”.
+`version should` be `"3.0"`. It is also valid for @version to be “1.0”.
 If any other version is specified, it must result in an invalid
 customization as specified in link:jaxb.html#a1544[See Invalid
 Customizations].”
@@ -198,7 +198,7 @@ or
 +
 [source,xml,indent=4]
 ----
- <jaxb:bindings jaxb:version="2.0" ... />
+ <jaxb:bindings jaxb:version="3.0" ... />
 ----
 +
 Specification of both `version` and
