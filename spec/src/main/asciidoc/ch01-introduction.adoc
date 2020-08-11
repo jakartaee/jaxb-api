@@ -382,7 +382,7 @@ prefix `xs:` and `xsd:` refers to schema components in W3C XML Schema
 namespace as specified in [XSD Part 1] and [XSD Part 2]. The XML
 namespace prefix `xsi:` refers to the XML instance namespace defined in
 [XSD Part 1]. Additionally, the XML namespace prefix `jaxb:` refers to
-the JAXB namespace, `http://java.sun.com/xml/ns/jaxb`. The XML
+the JAXB namespace, `https://jakarta.ee/xml/ns/jaxb`. The XML
 namespace prefix `ref:` refers to the namespace
 `http://ws-i.org/profiles/basic/1.1/xsd` as defined in [WSIBP] and
 [WSIAP].
