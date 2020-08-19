@@ -21,19 +21,3 @@ include::appF-xml_schema.adoc[]
 include::appG-deprecated.adoc[]
 include::appH-binary_data.adoc[]
 include::appI-changelog.adoc[]
-
-'''''
-
-[.footnoteNumber]# 29.# [[a5380]]Exception case:
-Underscore is not considered a punctuation mark for schema customization
-_<jaxb:globalBindings underscoreHandling="asCharInWord"/>_ specified in
-link:jaxb.html#a1613[See Underscore Handling]". For this
-customization, underscore is considered a special letter that never
-results in a word break as defined in link:jaxb.html#a4681[See
-XML Word Breaks] and it is definitely not considered an uncased letter.
-See example bindings in link:jaxb.html#a4755[See XML Names and
-derived Java Class, Method, and Constant Names when <jaxb:globalBindings
-underscoreHandling=”asCharInWord”>].
-
-[.footnoteNumber]# 30.# [[a5381]]Sample URN
-"urn:hl7-org:v3" \{"h17-org", "v3") transforms to \{"h17.org", "v3"}.
