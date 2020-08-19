@@ -14,481 +14,222 @@ the binding of XML Schema components to Java representation. One must
 refer to [XSD Part 1] for the complete normative description for these
 components.
 
-=== [[a4867]]Simple Type Definition Schema Component
+==== Simple Type Definition Schema Component
 
-=== Simple Type Definition Schema Components
+.Simple Type Definition Schema Components
+[cols=",,",options="header"]
+|===
+| Component 2+| Description
+| `{name}` 2+| Optional. An NCName as defined by [XML-Namespaces].
+| `{target namespace}` 2+| Either ·absent· or a namespace name.
+| `{base type definition}` 2+| A simple type definition
+| `{facets}` 2+| A set of constraining facets.
+| `{fundamental facets}` 2+| A set of fundamental facets.
+| `{final}` 2+| A subset of {extension, list, restriction, union}.
+| `{variety}` 2+| One of {atomic, list, union}. Depending on
+the value of {variety}, further properties are defined as follows:
+| | atomic
 
-Component
+`{primitive type definition}` | A built-in primitive simple type definition.
+| | list
 
-Description
+`{item type definition}` | A simple type definition.
+| | union
 
-\{name}
+`{member type definitions}` |A non-empty sequence of simple type definitions.
 
-Optional. An NCName as defined by
-[XML-Namespaces].
+| `{annotation}` 2+| Optional. An annotation.
+|===
 
-\{target namespace}
+==== Enumeration Facet Schema Component
 
-Either ·absent· or a namespace name.
-
-\{base type definition}
-
-A simple type definition
-
-\{facets}
-
-A set of constraining facets.
-
-\{fundamental facets}
-
-A set of fundamental facets.
-
-\{final}
-
-A subset of \{extension, list, restriction,
-union}.
-
-\{variety}
-
-One of \{atomic, list, union}. Depending on
-the value of \{variety}, further properties are defined as follows:
-
-
-
-atomic
-
- _\{primitive type definition}_
-
-A built-in primitive simple type definition.
-
-
-
-list
-
- _\{item type definition}_
-
-A simple type definition.
-
-
-
-union
-
- _\{member type definitions}_
-
-A non-empty sequence of simple type
-definitions.
-
-\{annotation}
-
-Optional. An annotation.
-
-=== [[a4899]]Enumeration Facet Schema Component
-
-=== Enumeration Facet Schema Components
-
-Component
-
-Description
-
-\{value}
-
-The actual value of the value. (Must be in
+.Enumeration Facet Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{value}` | The actual value of the value. (Must be in
 value space of base type definition.)
+| `{annotation}` | Optional annotation.
+|===
 
-\{annotation}
+==== Complex Type Definition Schema Component
 
-Optional annotation.
-
-=== [[a4907]]Complex Type Definition Schema Component
-
-=== Complex Type Definition Schema Components
-
-Component
-
-Description
-
-\{name}
-
-Optional. An NCName as defined by
-[XML-Namespaces].
-
-\{target namespace}
-
-Either ·absent· or a namespace name.
-
-\{base type definition}
-
-Either a simple type definition or a complex
-type definition.
-
-\{scope}
-
-Either _global_ or a complex type definition
-
-\{derivation method}
-
-Either extension or restriction.
-
-\{final}
-
-A subset of \{extension, restriction}.
-
-\{abstract}
-
-A boolean
-
-\{attribute uses}
-
-A set of attribute uses.
-
-\{attribute wildcard}
-
-Optional. A wildcard.
-
-\{content type}
-
- One of empty, a simple type definition, or a
-pair consisting of a ·content model· and one of mixed, element-only.
-
-\{prohibited substitutions}
-
-A subset of \{extension, restriction}.
-
-\{substitution group affiliation}
-
-Optional. If exists, this element declaration
+.Complex Type Definition Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{name}` | Optional. An NCName as defined by [XML-Namespaces].
+| `{target namespace}` | Either `absent` or a namespace name.
+| `{base type definition}` | Either a simple type definition or a complex type definition.
+| `{scope}` | Either _global_ or a complex type definition
+| `{derivation method}` | Either extension or _restriction_.
+| `{final}` | A subset of {extension, restriction}.
+| `{abstract}` | A boolean
+| `{attribute uses}` | A set of attribute uses.
+| `{attribute wildcard}` | Optional. A wildcard.
+| `{content type}` | One of _empty_, a _simple type definition_, or a
+pair consisting of a `content model` and one of _mixed_, _element-only_.
+| `{prohibited substitutions}` | A subset of {extension, restriction}.
+| `{substitution group affiliation}` | Optional. If exists, this element declaration
 belongs to a substitution group and this specified element name is the
 QName of the substitution head.
+| `{annotations}` | A set of annotations.
+|===
 
-\{annotations}
+==== Element Declaration Schema Component
 
-A set of annotations.
+.Element Declaration Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{name}` | An NCName as defined by [XML-Namespaces].
+| `{target namespace}` | Either ·absent· or a namespace name
+| `{type definition}` | Either a simple type definition or a complex type definition.
+| `{scope}` | Optional. Either global or a complex type definition.
+| `{value constraint}` | Optional. A pair consisting of a value and one of default, fixed.
+| `{nillable}` | A boolean.
+| `{identity-constraint definitions}` | A set of constraint definitions.
+| `{substitution group affiliation}` | Optional. A top-level element definition.
+| `{substitution group exclusions}` | A subset of {extension, restriction}.
+| `{disallowed substitution}` | A subset of {substitution,extension,restriction}.
+| `{abstract}` | A boolean.
+| `{annotation}` | Optional. An annotation.
+|===
 
-=== [[a4937]]Element Declaration Schema Component
+==== Attribute Declaration Schema Component
 
-=== Element Declaration Schema Components
-
-Component
-
-Description
-
-\{name}
-
-An NCName as defined by [XML-Namespaces].
-
-\{target namespace}
-
-Either ·absent· or a namespace name
-
-\{type definition}
-
-Either a simple type definition or a complex
-type definition.
-
-\{scope}
-
-Optional. Either global or a complex type
-definition.
-
-\{value constraint}
-
-Optional. A pair consisting of a value and
-one of default, fixed.
-
-\{nillable}
-
-A boolean.
-
-\{identity-constraint definitions}
-
-A set of constraint definitions.
-
-\{substitution group affiliation}
-
-Optional. A top-level element definition.
-
-\{substitution group exclusions}
-
-A subset of \{extension, restriction}.
-
-\{disallowed substitution}
-
-A subset of
-\{substitution,extension,restriction}.
-
-\{abstract}
-
-A boolean.
-
-\{annotation}
-
-Optional. An annotation.
-
-=== [[a4965]]Attribute Declaration Schema Component
-
-=== Attribute Declaration Schema Components
-
-Component
-
-Description
-
-\{name}
-
-An NCName as defined by [XML-Namespaces].
-
-\{target namespace}
-
-If form is present and is “qualified”, or if
+.Attribute Declaration Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{name}` | An NCName as defined by [XML-Namespaces].
+| `{target namespace}` | If form is present and is "qualified", or if
 form is absent and the value of @attributeFormDefault on the <schema>
-ancestor is “qualified”, then the schema’s \{targetNamespace}, or
-·absent· if there is none, otherwise ·absent·
-
-\{type definition}
-
-A simple type definition.
-
-\{scope}
-
-Optional. Either global or a complex type
-definition.
-
-\{value constraint}
-
-Optional. A pair consisting of a value and
+ancestor is "qualified", then the schema’s {targetNamespace}, or
+`absent` if there is none, otherwise `absent`
+| `{type definition}` | A simple type definition.
+| `{scope}` | Optional. Either global or a complex type definition.
+| `{value constraint}` | Optional. A pair consisting of a value and
 one of default, fixed.
+| `{annotation}` | Optional. An annotation.
+|===
 
-\{annotation}
+==== Model Group Definition Schema Component
 
-Optional. An annotation.
+.Model Group Definition Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{name}` | An NCName as defined by [XML-Namespaces].
+| `{target namespace}` | Either `absent` or a namespace name.
+| `{model group}` | A model group.
+| `{annotation}` | Optional. An annotation.
+|===
 
-=== Model Group Definition Schema Component
+==== Identity-constraint Definition Schema Component
 
-=== Model Group Definition Schema Components
-
-Component
-
-Description
-
-\{name}
-
-An NCName as defined by [XML-Namespaces].
-
-\{target namespace}
-
-Either ·absent· or a namespace name.
-
-\{model group}
-
-A model group.
-
-\{annotation}
-
-Optional. An annotation.
-
-=== Identity-constraint Definition Schema Component
-
-=== Identity-constraint Definition Schema Components
-
-Component
-
-Description
-
-\{name}
-
-An NCName as defined by [XML-Namespaces].
-
-\{target namespace}
-
-Either ·absent· or a namespace name.
-
-\{identity-constraint category}
-
-One of key, keyref or unique.
-
-\{selector}
-
-A restricted XPath ([XPath]) expression.
-
-\{fields}
-
-A non-empty list of restricted XPath
-([XPath]) expressions.
-
-\{referenced key}
-
-Required if \{identity-constraint category}
+.Identity-constraint Definition Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{name}` | An NCName as defined by [XML-Namespaces].
+| `{target namespace}` | Either ·absent· or a namespace name.
+| `{identity-constraint category}` | One of key, keyref or unique.
+| `{selector}` | A restricted XPath ([XPath]) expression.
+| `{fields}` | A non-empty list of restricted XPath ([XPath]) expressions.
+| `{referenced key}` | Required if \identity-constraint category}
 is keyref, forbidden otherwise.
 
 An identity-constraint definition with
-\{identity-constraint category} equal to key or unique.
+{identity-constraint category} equal to key or unique.
 
-\{annotation}
+| `{annotation}` | Optional. An annotation.
+|===
 
-Optional. An annotation.
+==== Attribute Use Schema Component
 
-=== [[a5012]]Attribute Use Schema Component
-
-=== Attribute Use Schema Components
-
-Component
-
-Description
-
-\{required}
-
-A boolean.
-
-\{attribute declaration}
-
-An attribute declaration.
-
-\{value constraint}
-
-Optional. A pair consisting of a value and
+.Attribute Use Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{required}` | A boolean.
+| `{attribute declaration}` | An attribute declaration.
+| `{value constraint}` | Optional. A pair consisting of a value and
 one of default, fixed.
+|===
 
-=== [[a5022]]Particle Schema Component
+==== Particle Schema Component
 
-=== Particle Schema Components
+.Particle Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{min occurs}` | A non-negative integer.
+| `{max occurs}` | Either a non-negative integer or unbounded.
+| `{term}` | One of a model group, a wildcard, or an element declaration.
+|===
 
-Component
+==== Wildcard Schema Component
 
-Description
+.Wildcard Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{namespace constraint}` | One of any; a pair of not and a namespace
+name or `absent`; or a set whose members are either namespace names or
+`absent`.
+| `{process contents}` | One of `skip`, `lax` or `strict`.
+| `{annotation}` | Optional. An annotation.
+|===
 
-\{min occurs}
+==== Model Group Schema Component
 
-A non-negative integer.
+.Model Group Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{compositor}` | One of _all, choice_ or _sequence_.
+| `{particles}` | A list of particles.
+| `{annotation}` | An annotation.
+|===
 
-\{max occurs}
+==== Notation Declaration Schema Component
 
-Either a non-negative integer or unbounded.
-
-\{term}
-
-One of a model group, a wildcard, or an
-element declaration.
-
-=== [[a5032]]Wildcard Schema Component
-
-=== Wildcard Schema Components
-
-Component
-
-Description
-
-\{namespace constraint}
-
-One of any; a pair of not and a namespace
-name or ·absent·; or a set whose members are either namespace names or
-·absent·.
-
-\{process contents}
-
-One of skip, lax or strict.
-
-\{annotation}
-
-Optional. An annotation.
-
-=== Model Group Schema Component
-
-=== Model Group Components
-
-Component
-
-Description
-
-\{compositor}
-
-One of _all, choice_ or _sequence_ .
-
-\{particles}
-
-A list of particles.
-
-\{annotation}
-
-An annotation.
-
-=== Notation Declaration Schema Component
-
-=== Notation Declaration Components
-
-Component
-
-Description
-
-\{name}
-
-An NCName as defined by [XML-Namespaces].
-
-\{target namespace}
-
-Actual value of the targetNamespace
+.Notation Declaration Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{name}` | An NCName as defined by [XML-Namespaces].
+| `{target namespace}` | Actual value of the targetNamespace
 [attribute] of the parent schema element
-
-\{system identifier}
-
-The ·actual value· of the system [attribute],
+| `{system identifier}` | The ·actual value· of the system [attribute],
 if present, otherwise absent.
+| `{public identifier}` | The ·actual value· of the public [attribute]
+| `{annotation}` | Optional. An annotation.
+|===
 
-\{public identifier}
+==== Wildcard Schema Component
 
-{empty}The ·actual value· of the public
-[attribute]
+.Wildcard Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{namespace constraint}` | One of `any`; a pair of `no` and a
+namespace name or `absent`; or a set whose members are either namespace
+names or `absent`.
+| `{process contents}` | One of `skip`, `lax` or `strict`.
+| `{annotation}` | Optional. An annotation.
+|===
 
-\{annotation}
+==== Attribute Group Definition Schema Component
 
-Optional. An annotation.
-
-=== Wildcard Schema Component
-
-=== Wildcard Components
-
-Component
-
-Description
-
-\{namespace constraint}
-
- One of _any_ ; a pair of _not_ and a
-namespace name or ·absent·; or a set whose members are either namespace
-names or ·absent·.
-
-\{process contents}
-
-One of _skip_ , _lax_ or _strict_ .
-
-\{annotation}
-
-Optional. An annotation.
-
-=== Attribute Group Definition Schema Component
-
-=== Attribute Group Definition Schema Components
-
-Component
-
-Description
-
-\{name}
-
-An NCName as defined by [XML-Namespaces].
-
-\{target namespace}
-
-Either ·absent· or a namespace name.
-
-\{attribute uses}
-
-A set of attribute uses.
-
-\{attribute wildcard}
-
-Optional. A wildcard. _(part of the complete
-wildcard)_
-
-\{annotation}
-
-Optional. An annotation.
-
+.Attribute Group Definition Schema Components
+[cols=",",options="header"]
+|===
+| Component | Description
+| `{name}` | An NCName as defined by [XML-Namespaces].
+| `{target namespace}` | Either `absent` or a namespace name.
+| `{attribute uses}` | A set of attribute uses.
+| `{attribute wildcard}` | Optional. A wildcard. _(part of the complete wildcard)_
+| `{annotation}` | Optional. An annotation.
+|===
