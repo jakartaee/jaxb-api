@@ -3,7 +3,7 @@
 //
 
 [appendix]
-== [[a5110]]Enhanced Binary Data Handling
+== Enhanced Binary Data Handling
 
 === Overview
 
@@ -17,177 +17,169 @@ integrated, cooperative implementation of these standards between a
 MIME-based package processor and the JAXB 2.0 unmarshal/marshal
 processes. An enhanced binding of MIME content to Java representation is
 specified in link:jaxb.html#a5113[See Binding MIME Binary
-Data]“.
+Data].
 
-=== [[a5113]]Binding MIME Binary Data
+=== Binding MIME Binary Data
 
-=== Binary Data Schema Annotation
+==== Binary Data Schema Annotation
 
 As specified in [MIME], the XML Schema
-annotation attribute, _xmime:expectedContentTypes_ , lists the expected
+annotation attribute, `xmime:expectedContentTypes`, lists the expected
 MIME content-type(s) for element content whose type derives from the xsd
-binary datatypes, _xs:base64Binary_ or x _s:hexBinary_ .
+binary datatypes, `xs:base64Binary` or `xs:hexBinary`.
 
 JAXB 2.0 databinding recognizes this schema
 constraint to improve the binding of MIME type constrained binary data
-to Java representation. The _xmime:expectedContentType_ attribute is
+to Java representation. The `xmime:expectedContentType` attribute is
 allowed on type definitions deriving from binary datatypes and on
 element declarations with types that derive from binary datatypes. For
 JAXB 2.0 binding purposes, the schema annotation,
-_xmime:expectedContentTypes_ is evaluated for binding purposes for all
+`xmime:expectedContentTypes` is evaluated for binding purposes for all
 cases EXCEPT when the annotation is on an element declaration with a
 named complex type definition. For that case, the
-_xmime:expectedContentTypes_ annotation must be located directly within
+`xmime:expectedContentTypes` annotation must be located directly within
 the scope of the complex type definition in order to impact the binding
 of the complex type definition’s simple binary content.
 
-=== Binding Known Media Type
+===== Binding Known Media Type
 
-When _@xmime:expectedContentTypes_ schema
+When `@xmime:expectedContentTypes` schema
 annotation only refers to one MIME type, it is considered a known media
-type for the binary data. [MIME] does not require an _xmime:contentType_
+type for the binary data. [MIME] does not require an `xmime:contentType`
 attribute to hold the dynamic mime type for the binary data for this
 case. JAXB binding can achieve an optimal binding for this case. The
 default MIME type to Java datatype are in
 link:jaxb.html#a5119[See Default Binding for Known Media Type].
 
-=== [[a5119]]Default Binding for Known Media Type
-
-[width="100%",cols="50%,50%",options="header",]
+.Default Binding for Known Media Type
+[cols=",",options="header",]
 |===
-|MIME Type |Java
-Type
-|image/gif
-|java.awt.Image
-
-|image/jpeg
-|java.awt.Image
-
-|text/xml or application/xml
-|javax.xml.transform.Source
-
-| _any other MIME types_
-|javax.activation.DataHandler
+| MIME Type | Java Type
+| `image/gif` | `java.awt.Image`
+| `image/jpeg` | `java.awt.Image`
+| `text/xml` or `application/xml` | `javax.xml.transform.Source`
+| `_any other MIME types_` | `jakarta.activation.DataHandler`
 |===
 
 A JAXB program annotation element,
-_@XmlMimeType_ , is generated to preserve the known media type for use
+`@XmlMimeType`, is generated to preserve the known media type for use
 at marshal time.
 
-=== schema with a known media type
-
-<?xml version="1.0" ?> +
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" +
-xmlns:tns="http://example.com/know-type" +
-| xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
-
-
-targetNamespace="http://example.com/know-type">
-
- <xs:import
-namespace="http://www.w3.org/2005/05/xmlmime"
-
-
-schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
-
- <xs:element name="JPEGPicture"
-type="xs:base64binary" +
-xmime:expectedContentTypes="image/jpeg"/> +
+.schema with a known media type
+[source,xml,indent="2"]
+----
+<?xml version="1.0" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://example.com/know-type"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+           targetNamespace="http://example.com/know-type">
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime"
+             schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:element name="JPEGPicture"
+              type="xs:base64binary"
+              xmime:expectedContentTypes="image/jpeg"/>
 </xs:schema>
+----
 
-=== JAXB 2.0 binding of Example 9-1
-
- import java.awt.Image; +
-@XmlRegistry +
-class ObjectFactory \{ +
-@XmlElementDecl(...) +
-@XmlMimeType("image/jpeg")
-
- JAXBELement<Image> createJPEGPicture(Image
-value); +
+.JAXB 2.0 binding of Example 8-1
+[source,java,indent="4"]
+----
+import java.awt.Image;
+@XmlRegistry
+class ObjectFactory {
+    @XmlElementDecl(...)
+    @XmlMimeType("image/jpeg")
+    JAXBELement<Image> createJPEGPicture(Image value);
 }
+----
 
-The _@XmlMimeType_ annotation provides the
+The `@XmlMimeType` annotation provides the
 MIME content type needed by JAXB 2.0 Marshaller to specify the mime type
-to set _DataHandler.setContentType(String)_ .
+to set `DataHandler.setContentType(String)`.
 
-=== [[a5140]]Schema for local element declaration annotated with known media type
-
- <?xml version="1.0" ?> +
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" +
-xmlns:tns="http://example.com/know-type" +
-xmlns:xmime="http://www.w3.org/2005/05/xmlmime" +
-targetNamespace="http://example.com/know-type"> +
-<xs:import namespace="http://www.w3.org/2005/05/xmlmime" +
-schemaLocation="http://www.w3.org/2005/05/xmlmime"/> +
-<xs:complexType name="Item"> +
-<xs:sequence> +
-<xs:element name="JPEGPicture" +
-type="xs:base64Binary" +
-xmime:expectedContentTypes="image/jpeg"/> +
-</xs:sequence> +
-</xs:complexType> +
+.Schema for local element declaration annotated with known media type
+[source,xml,indent="2"]
+----
+<?xml version="1.0" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://example.com/know-type"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+           targetNamespace="http://example.com/know-type">
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime"
+             schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element name="JPEGPicture"
+                  type="xs:base64Binary"
+                  xmime:expectedContentTypes="image/jpeg"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>
+----
 
-=== Java Binding of link:jaxb.html#a5140[See Schema for local element declaration annotated with known media type]“
-
-import java.awt.Image; +
-public class Item \{ +
-@XmlMimeType("image/jpeg") +
-Image getJPEGPicture(); +
-void setJPEGPicture(Image value); +
+.Java Binding of link:jaxb.html#a5140[See Schema for local element declaration annotated with known media type]“
+[source,java,indent="4"]
+----
+import java.awt.Image;
+public class Item {
+    @XmlMimeType("image/jpeg")
+    Image getJPEGPicture();
+    void setJPEGPicture(Image value);
 }
+----
 
-=== Binding Preferred Media Types
+===== Binding Preferred Media Types
 
 If there are more than one mime type listed
-in _xmime:expectedContentTypes_ or if there is one with a wildcard in
+in `xmime:expectedContentTypes` or if there is one with a wildcard in
 it, the annotation specifies the Preferred Media Types and recommends
 that the binary data be simple content that has an attribute
-_xmime:contentType_ that specifies which of the
-_xmime:expectedContentTypes_ the binary data represents.
+`xmime:contentType` that specifies which of the
+`xmime:expectedContentTypes` the binary data represents.
 
 Given that the exact media type is not known
 for this case, a Preferred Media Type binds to
-_javax.activation.DataHandler_ . _DataHandler_ has a property
-_get/setContentType_ that should be kept synchronized with the value of
-the JAXB binding for the _xmime:contentType_ attribute.
+`jakarta.activation.DataHandler`. `DataHandler` has a property
+`get/setContentType` that should be kept synchronized with the value of
+the JAXB binding for the `xmime:contentType` attribute.
 
-=== [[a5147]]Binding WS-I Attachment Profile _ref:swaRef_
+==== Binding WS-I Attachment Profile `ref:swaRef`
 
 An XML element or attribute with a type
-definition of _ref:swaRef_ is bound to a JAXB property with base type of
-_javax.activation.DataHandler_ and annotated with _@XmlAttachmentRef_ .
+definition of `ref:swaRef` is bound to a JAXB property with base type of
+`jakarta.activation.DataHandler` and annotated with `@XmlAttachmentRef`.
 
-=== [[a5149]]jakarta.xml.bind.attachments
+=== jakarta.xml.bind.attachments
 
-The abstract classes _AttachmentUnmarshaller_
-and _AttachmentMarshaller_ in package _jakarta.xml.bind.attachments_ are
+The abstract classes `AttachmentUnmarshaller`
+and `AttachmentMarshaller` in package `jakarta.xml.bind.attachments` are
 intended to be implemented by a MIME-based package processor, such as
 JAX-WS 2.0 implementation, and are called during JAXB unmarshal/marshal.
 The JAXB unmarshal/marshal processes the root part of a MIME-based
 package, delegating knowledge of the overall package and its other parts
-to the _Attachment*_ class implementations.
+to the `Attachment*` class implementations.
 
-=== AttachmentUnmarshaller
+==== AttachmentUnmarshaller
 
 An implementation of this abstract class by a
 MIME-based package processor provides access to package-level
 information that is outside the scope of the JAXB unmarshal process. A
 MIME-based package processor registers its processing context with a
 JAXB 2.0 processor using the method
-_setAttachmentUnmarshaller(AttachmentUnmarshaller)_ of
-_jakarta.xml.bind.Unmarshaller_ .
+`setAttachmentUnmarshaller(AttachmentUnmarshaller)` of
+`jakarta.xml.bind.Unmarshaller`.
 
 Interactions between the Unmarshaller and the
 abstract class are summarized below. The javadoc specifies the details.
 
-public abstract class AttachmentUnmarshaller
-\{ +
-public boolean isXOPPackage(); +
-public abstract DataHandler getAttachmentAsDataHandler(String cid); +
-public abstract byte[] getAttachmentAsByteArray(String cid); +
+[source,java,indent="4"]
+----
+public abstract class AttachmentUnmarshaller {
+public boolean isXOPPackage();
+public abstract DataHandler getAttachmentAsDataHandler(String cid);
+public abstract byte[] getAttachmentAsByteArray(String cid);
 }
+----
 
 The JAXB unmarshal process communicates with
 a MIME-based package processor via an instance of AttachmentUnmarshaller
@@ -196,58 +188,59 @@ marshal/unmarshalling of optimized binary content.] summarizes this
 processing.
 
 * MTOM/XOP processing during unmarshal: +
-When _isXOPPackage()_ returns true, the unmarshaller replaces each XOP
+When `isXOPPackage()` returns true, the unmarshaller replaces each XOP
 include element it encounters with MIME content returned by the
-appropriate _getAttachment*()_ method.
+appropriate `getAttachment*()` method.
 * WS-I AP processing: +
-Each element or attribute of type definition _ref:swaRef_ , a content-id
+Each element or attribute of type definition `ref:swaRef`, a content-id
 uri reference to binary data, is resolved by the unmarshal process by a
-call to the appropriate _getAttachment*()_ method.
+call to the appropriate `getAttachment*()` method.
 
-=== AttachmentMarshaller
+==== AttachmentMarshaller
 
-An _AttachmentMarshaller_ instance is
-registered with a _jakarta.xml.bind.Marshaller_ instance using the method
-_Marshaller.setAttachmentMarshaller()_ .
+An `AttachmentMarshaller` instance is
+registered with a `jakarta.xml.bind.Marshaller` instance using the method
+`Marshaller.setAttachmentMarshaller()`.
 
 Interactions between the Marshaller and the
 abstract class is summarized below. See the javadoc for details.
 
-public abstract class AttachmentMarshaller
-\{ +
-public boolean isXOPPackage(); +
-public abstract String +
-addMtomAttachment(DataHandler data, +
-String elementNamespace, +
-String elementLocalName); +
-public abstract String +
-addMtomAttachment(byte[] data, +
-String elementNamespace, +
-String elementLocalName); +
-public abstract String addSwaRefAttachment(DataHandler data); +
+[source,java,indent="4"]
+----
+public abstract class AttachmentMarshaller {
+public boolean isXOPPackage();
+public abstract String addMtomAttachment(
+                    DataHandler data,
+                    String elementNamespace,
+                    String elementLocalName);
+public abstract String addMtomAttachment(
+                    byte[] data,
+                    String elementNamespace,
+                    String elementLocalName);
+public abstract String addSwaRefAttachment(DataHandler data);
 }
+----
 
 When an AttachmentMarshaller instance is
 registered with the Marshaller, the following processing takes place.
 
 * MTOM/XOP processing: +
-When _isXOPPackage_ () is true and a JAXB property representing binary
-data is being marshalled, the method _addMtomAttachment_ (...) is called
+When `isXOPPackage()` is true and a JAXB property representing binary
+data is being marshalled, the method `addMtomAttachment(..)` is called
 to provide the MIME-based package processor the opportunity to decide to
-optimize or inline the binary data. +
- +
+optimize or inline the binary data.
++
 Note that the schema customization specified in
-link:jaxb.html#a2193[See <inlineBinaryData> Declaration]“can be
+link:jaxb.html#a2193[See <inlineBinaryData> Declaration] can be
 used to declaratively disable XOP processing for binary data.
 * WS-I AP processing: +
-The _addSwaRefAttachment_ method is called when marshalling content
-represented by a _ref:swaRef_ type definition. +
+The `addSwaRefAttachment` method is called when marshalling content
+represented by a `ref:swaRef` type definition.
  +
 One can declaratively customize swaRef processing within a schema using
 schema customization @attachmentRef of <jaxb:property>, specified in
 link:jaxb.html#a1786[See Usage]“.
 
-=== [[a5165]]JAXB marshal/unmarshalling of optimized binary content.
-
-image:images/xmlb-23.png[image]
+.JAXB marshal/unmarshalling of optimized binary content.
+image::images/xmlb-23.png[image]
 
