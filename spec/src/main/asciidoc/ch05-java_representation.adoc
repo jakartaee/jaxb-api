@@ -899,11 +899,9 @@ just the datatype that was defined statically within the schema.
 
 An added benefit to the default binding
 change is to reduce the overhead associated with always generating Java
-Element classes for every global element declaration.In JAXB 1.0, an
-interface was generated for every complex type definition and global
-element declaration. In JAXB 2.0, a value class is generated for every
-complex type definition and only a factory method needs to be generated
-for each global element declaration.
+Element classes for every global element declaration. A value class
+is generated for every complex type definition and only a factory
+method needs to be generated for each global element declaration.
 
 === Summary
 

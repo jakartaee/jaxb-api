@@ -154,7 +154,7 @@ definition of `ref:swaRef` is bound to a JAXB property with base type of
 The abstract classes `AttachmentUnmarshaller`
 and `AttachmentMarshaller` in package `jakarta.xml.bind.attachments` are
 intended to be implemented by a MIME-based package processor, such as
-JAX-WS 2.0 implementation, and are called during JAXB unmarshal/marshal.
+Jakarta XML Web Services implementation, and are called during JAXB unmarshal/marshal.
 The JAXB unmarshal/marshal processes the root part of a MIME-based
 package, delegating knowledge of the overall package and its other parts
 to the `Attachment*` class implementations.
