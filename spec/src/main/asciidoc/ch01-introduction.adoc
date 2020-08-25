@@ -171,11 +171,12 @@ communicates using SOAP and XML as a transport mechanism. The
 marshalling of Java object graph is according to program annotations,
 either explicit or defaulted, on the existing Java classes.
 
-* Meet data binding requirements for The Java API for XML Web Services(JAX-WS) 2.0 +
+* Meet data binding requirements for Jakarta XML Web Services +
  +
-JAX-WS 2.0 will use the XML data binding
-facility defined by JAXB 2.0. Hence, JAXB 2.0 will meet all data binding
-requirements of JAX-WS 2.0.
+Jakarta XML Web Services will use the XML data binding
+facility defined by Jakarta XML Binding. Hence,
+Jakarta XML Binding will meet all data binding
+requirements of Jakarta XML Web Services.
 
 * Ease of Development: Leverage J2SE 5.0 Language Extensions +
  +

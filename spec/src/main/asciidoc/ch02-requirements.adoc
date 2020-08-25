@@ -56,23 +56,18 @@ specify an alternative binding for the scope of an entire schema. This
 mechanism ensures that if the default binding is not sufficient, it can
 easily be overridden in a portable manner.
 
-==== JAX-WS 2.0
+==== Jakarta XML Web Services
 
 ===== Backward Compatibility
 
 Mapping of XML Schema to schema derived Java
-classes as specified in versions of JAX-RPC 1.x either by default or by
+classes as specified in versions of Jakarta XML-RPC either by default or by
 customization is out of scope.
 
 ===== Binding XML Schema to schema derived classes
 
 A binding of XML Schema constructs to schema
-derived classes must be specified. JAXB 1.0 specified the binding of XML
-Schema constructs to schema derived interfaces. However, JAX-RPC 1.x
-specified the binding of XML Schema constructs to schema derived
-classes, not interfaces. To provide continued support for JAX-RPC 1.x
-programming model, a customization to enable the binding of XML Schema
-constructs to schema derived classes will be added.
+derived classes must be specified.
 
 ===== Accessing MIME content stored as an attachment
 
@@ -122,7 +117,7 @@ specified:
 * customization mechanism using the JSR175
 program annotation facility.
 
-==== JAX-WS 2.0
+==== Jakarta XML Web Services
 
 ===== WSDL <types>
 
@@ -136,7 +131,7 @@ link:jaxb.html#a182[See Default Mapping]”.
 ===== Backward Compatibility
 
 Mapping of existing Java constructs to XML
-Schema constructs as specified in JAX-RPC versions 1.x, either by
+Schema constructs as specified in Jakarta XML-RPC, either by
 default or through customization, is out of scope.
 
 === Binding Framework
