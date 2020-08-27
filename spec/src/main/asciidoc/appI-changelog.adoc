@@ -5,6 +5,39 @@
 [appendix]
 == Change Log
 
+=== Changes in Version 3
+
+* Changed specification version and license.
+* Package namespace changed to `jakarta.xml.bind.*`.
+* Customization schema namespace changed to `https://jakarta.ee/xml/ns/jaxb`,
+minimal supported version set to `3.0`.
+* Relaxed requirements tight to JAXB 1.0
+* Removed inclusion in Java SE from specification goals
+
+=== Changes since Maintenance Release 2
+
+* Section 4.2 added note related to Java Platform Module System.
+* Added section 4.9 Implementation discovery.
+* Added change logs for MR1 and MR2.
+
+=== Changes since Maintenance Release 1
+
+Details can be found at:
+_https://jcp.org/aboutJava/communityprocess/maintenance/jsr222/222mr2.zip_
+
+* Section 8.9.1.1 @XmlElement target extended for type PARAMETER
+* Section 8.9.3.1 added required annotation element to @XmlElementRef
+
+=== Changes since Final Draft
+
+Details can be found at:
+https://jcp.org/aboutJava/communityprocess/maintenance/jsr222/222changes.txt
+
+* Section 7.1.3 External Binding Declaration @schemaLocation and @node are optional.
+* Section E.2 3 and 3b updated.
+* Section 3.5.2.1 constraint violation updated JAXB 2.0 implementation
+delegate to the validation API in JAXP 1.3.
+
 === Changes since Proposed Final Draft
 
 * Section 7.6.1.2, nameXmlTransform: Apply

@@ -235,8 +235,7 @@ factory method signature generated in the containing Java package’s
 
 ==== Java Content Interface
 
-JAXB 1.0 bound a complex type definition to a
-content interface. This binding is similar to the value class binding
+This binding is similar to the value class binding
 with the following differences.
 
 * A content interface is a public interface
@@ -871,8 +870,8 @@ class ObjectFactory {
 
 ==== Java Element Representation Summary
 
-Element declaration binding evolved in JAXB
-v2.0 to support XML Schema type substitution. The following diagrams
+Element declaration binding evolved inJakarta XML Binding
+to support XML Schema type substitution. The following diagrams
 illustrate the binding changes for the following schema fragment:
 
 [source,xml,indent=8]
@@ -883,14 +882,14 @@ illustrate the binding changes for the following schema fragment:
 .JAXB 1.0: isA Relationship between generated element interface and its type
 image::images/xmlb-9.png[image]
 
-.JAXB 2.0: hasA Relationship between element instance and its type as described in link:jaxb.html#a645[See Named Java Element instance]”
+.Jakarta XML Binding: hasA Relationship between element instance and its type as described in link:jaxb.html#a645[See Named Java Element instance]”
 image::images/xmlb-10.png[image]
 
-.JAXB 2.0: hasA Relationship between generated element class and its type as described in link:jaxb.html#a657[See Java Element Class]”
+.Jakarta XML Binding: hasA Relationship between generated element class and its type as described in link:jaxb.html#a657[See Java Element Class]”
 image::images/xmlb-11.png[image]
 
-While a JAXB v1.0 Element interface
-implemented its type’s interface, a JAXB v2.0 Element instance has a
+While a JAXB 1.0 Element interface implemented its type’s interface,
+a Jakarta XML Binding Element instance has a
 composition relationship to the value of the element declaration’s type,
 accessible via the `jakarta.xml.bind.JAXBElement<T>` property `Value` .
 This change reflects the relationship that type substitution allows an

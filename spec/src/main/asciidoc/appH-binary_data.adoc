@@ -14,7 +14,7 @@ optimally support these standards when JAXB databinding is used within a
 message passing environment, link:jaxb.html#a5149[See
 jakarta.xml.bind.attachments]“specifies an API that allows for an
 integrated, cooperative implementation of these standards between a
-MIME-based package processor and the JAXB 2.0 unmarshal/marshal
+MIME-based package processor and the Jakarta XML Binding unmarshal/marshal
 processes. An enhanced binding of MIME content to Java representation is
 specified in link:jaxb.html#a5113[See Binding MIME Binary
 Data].
@@ -28,12 +28,12 @@ annotation attribute, `xmime:expectedContentTypes`, lists the expected
 MIME content-type(s) for element content whose type derives from the xsd
 binary datatypes, `xs:base64Binary` or `xs:hexBinary`.
 
-JAXB 2.0 databinding recognizes this schema
+Jakarta XML Binding databinding recognizes this schema
 constraint to improve the binding of MIME type constrained binary data
 to Java representation. The `xmime:expectedContentType` attribute is
 allowed on type definitions deriving from binary datatypes and on
 element declarations with types that derive from binary datatypes. For
-JAXB 2.0 binding purposes, the schema annotation,
+Jakarta XML Binding binding purposes, the schema annotation,
 `xmime:expectedContentTypes` is evaluated for binding purposes for all
 cases EXCEPT when the annotation is on an element declaration with a
 named complex type definition. For that case, the
@@ -81,7 +81,7 @@ at marshal time.
 </xs:schema>
 ----
 
-.JAXB 2.0 binding of Example 8-1
+.Jakarta XML Binding binding of Example 8-1
 [source,java,indent="4"]
 ----
 import java.awt.Image;
@@ -94,7 +94,7 @@ class ObjectFactory {
 ----
 
 The `@XmlMimeType` annotation provides the
-MIME content type needed by JAXB 2.0 Marshaller to specify the mime type
+MIME content type needed by Jakarta XML Binding Marshaller to specify the mime type
 to set `DataHandler.setContentType(String)`.
 
 .Schema for local element declaration annotated with known media type
@@ -165,7 +165,7 @@ An implementation of this abstract class by a
 MIME-based package processor provides access to package-level
 information that is outside the scope of the JAXB unmarshal process. A
 MIME-based package processor registers its processing context with a
-JAXB 2.0 processor using the method
+Jakarta XML Binding processor using the method
 `setAttachmentUnmarshaller(AttachmentUnmarshaller)` of
 `jakarta.xml.bind.Unmarshaller`.
 

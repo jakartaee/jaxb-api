@@ -7,26 +7,26 @@
 
 === Introduction
 
-Two of the important goals of JAXB 2.0 are
-portability (for inclusion in J2SE) and handling of invalid XML content
-(for e.g. schema evolution). These goals imply that a JAXB Provider must
-be capable of marshalling and unmarshalling XML instances using JAXB
-annotated classes derived using another JAXB Provider. To ensure
-portable behavior of JAXB mapped classes across JAXB Providers requires
-a specification of runtime processing model of the JAXB 2.0 binding
+Two of the important goals of Jakarta XML Binding specification are
+portability and handling of invalid XML content
+(for e.g. schema evolution). These goals imply that a Jakarta XML Binding Provider must
+be capable of marshalling and unmarshalling XML instances using Jakarta XML Binding
+annotated classes derived using another Jakarta XML Binding Provider. To ensure
+portable behavior of Jakarta XML Binding mapped classes across JAXB Providers requires
+a specification of runtime processing model of the Jakarta XML Binding binding
 framework.
 
 This appendix specifies the runtime
-processing model of XML instances and requirements on JAXB 2.0
+processing model of XML instances and requirements on Jakarta XML Binding
 Provider's runtime. It differs from the documentation found elsewhere in
 the specification/javadocs. Chapter 4,"Binding Framework" and the
-javadocs for the package jakarta.xml.bind do describe the JAXB 2.0 binding
-framework. But these are written from a JAXB 2.0 developer perspective
-rather than from a JAXB 2.0 Provider perspective and thus do not
-describe requirements on JAXB 2.0 Provider runtime. This was sufficient
+javadocs for the package jakarta.xml.bind do describe the Jakarta XML Binding binding
+framework. But these are written from a Jakarta XML Binding developer perspective
+rather than from a Jakarta XML Binding Provider perspective and thus do not
+describe requirements on Jakarta XML Binding Provider runtime. This was sufficient
 for JAXB 1.0 since portability was not a goal for JAXB 1.0 and schema
 derived implementation classes were coupled to the JAXB 1.0 Provider
-runtime. However, this is insufficient for JAXB 2.0, where portability
+runtime. However, this is insufficient for Jakarta XML Binding, where portability
 and handling invalid XML content are goals.
 
 === Scope and Conventions

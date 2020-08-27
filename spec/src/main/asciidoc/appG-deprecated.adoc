@@ -7,21 +7,17 @@
 
 === Overview
 
-Due to significant re-architecture in JAXB
-2.0 to improve efficiency, usability, schema-derived footprint and
+Due to significant re-architecture in Jakarta XML Binding
+to improve efficiency, usability, schema-derived footprint and
 binding framework runtime footprint, certain JAXB 1.0 operations are no
-longer required to be implemented in JAXB 2.0. These deprecated
-operations do still need to be supported by a JAXB 2.0 binding runtime
-for JAXB 1.0 schema-derived classes.
+longer required to be implemented in Jakarta XML Binding.
 
 === On-demand Validation
 
-It is optional for a JAXB 2.0 implementation
-to implement on-demand validation for JAXB 2.0 mapped classes. There is
-no reasonable way to implement this functionality of JAXB 2.0 annotated
-classes and leverage JAXP 1.3 validation facility. For backwards
-compatibility, an implementation is required to support this
-functionality for JAXB 1.0 schema-derived classes.
+It is optional for a Jakarta XML Binding implementation
+to implement on-demand validation for Jakarta XML Binding mapped classes. There is
+no reasonable way to implement this functionality of Jakarta XML Binding annotated
+classes and leverage JAXP validation facility.
 
 ==== Validator for JAXB 1.0 schema-derived classes
 

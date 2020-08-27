@@ -1077,10 +1077,10 @@ model group definition’s content model is defined in
 link:jaxb.html#a1012[See Deriving Class Names for Named Model
 Group Descendants]."
 
-To meet the JAXB goal of predictable
+To meet the Jakarta XML Binding goal of predictable
 unmarshalling of invalid XML content, the JAXB 1.0 customization for
 binding a model group to a JAXB mapped class is no longer supported.
-link:jaxb.html#a386[See Flexible Unmarshalling]“details the
+link:jaxb.html#a386[See Flexible Unmarshalling] details the
 rationale behind this change.
 
 ==== Bind to a set of properties
