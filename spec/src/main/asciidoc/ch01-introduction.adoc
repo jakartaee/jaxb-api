@@ -154,7 +154,7 @@ _marshalling_ updates back to the original XML document.
 
 === Goals
 
-The JAXB architecture is designed with the
+The Jakarta XML Binding architecture is designed with the
 goals outlined here in mind.
 
 * [[a25]]Full W3C XML Schema support +
@@ -194,8 +194,8 @@ development from the deployment phases. This enables choice of
 generation of artifacts such as derived classes or derived schema at
 either development or deployment time.
 Any requirements related to the deployment of
-components using JAXB in a container managed environment will be
-addressed.
+components using Jakarta XML Binding in a container managed environment
+will be addressed.
 
 * Schema evolution +
  +
@@ -227,20 +227,19 @@ Java technologies will be clarified. +
 * Relationship to XML related specifications +
  +
 XML related specifications will be surveyed to
-determine their relationship to JAXB.
+determine their relationship to Jakarta XML Binding.
 
-* Portability of JAXB mapped classes +
+* Portability of Jakarta XML Binding mapped classes +
  +
 An architecture that provides for a fully
-portable JAXB 2.0 applications written to the J2SE platform will be
-defined. JAXB 2.0 is targeted for inclusion in a future version of J2SE.
-Application portability is a key requirement for inclusion in J2SE. +
+portable Jakarta XML Binding applications written to the Java SE platform
+will be defined. +
  +
-JAXB annotated classes must be source level
-and binary compatible with any other JAXB 2.0 binding framework
-implementation. As in JAXB 1.0, schema-derived interfaces/implementation
-classes are only required to be source code compatible with other JAXB
-implementations of the same version.
+Jakarta XML Binding annotated classes must be source level
+and binary compatible with any other Jakarta XML Binding binding framework
+implementation. Schema-derived interfaces/implementation
+classes are only required to be source code compatible with other
+Jakarta XML Binding implementations of the same version.
 
 * Preserving equivalence - Round tripping (Java to XML to Java) +
  +
@@ -253,8 +252,8 @@ Java content tree before and after the transformation.
 While JAXB 1.0 specification did not require
 the preservation of the XML information set when round tripping from XML
 document to Java representation and back to XML document again, it did
-not forbid the preservation either. The same applies to this version of
-the specification.
+not forbid the preservation either. The same applies to Jakarta XML Binding
+specification.
 
 * Unmarshalling invalid XML content +
  +
@@ -317,9 +316,9 @@ corresponding Java language construct in the derived classes.
 
 * Support for Java versions prior to J2SE 5.0 +
  +
-JAXB 2.0 relies on many of the Java language
-features added in J2SE 5.0. It is not a goal to support JAXB 2.0 on Java
-versions prior to J2SE 5.0.
+Jakarta XML Binding relies on many of the Java language
+features added in J2SE 5.0. It is not a goal to support Jakarta XML Binding
+on Java versions prior to J2SE 5.0.
 
 * Explicit support for specifying the binding of DTD to a Java representation. +
  +
@@ -327,15 +326,15 @@ While it was desired to explicitly support
 binding DTD to a Java representation, it became impractical to describe
 both XML Schema binding and DTD binding. The existence of several
 conversion tools that automate the conversion of a DTD to XML Schema
-allows DTD users to be able to take advantage of JAXB technology by
-converting their existing DTDs to XML Schema.
+allows DTD users to be able to take advantage of Jakarta XML Binding
+technology by converting their existing DTDs to XML Schema.
 
 * XML Schema Extensions +
  +
 XML Schema specification allows the annotation
 of schemas and schema components with appinfo elements. JAXB 1.0
 specifies the use of appinfo elements to customize the generated code.
-For this version of the specification, use of appinfo elements for
+For Jakarta XML Binding specification, use of appinfo elements for
 customization of generated code continues to be in scope. However, use
 of appinfo element to introduce validation constraints beyond those
 already described in XML Schema 1.0 specification is out of scope.
@@ -352,17 +351,17 @@ While working with a content tree
 corresponding to an XML document it is often necessary to validate the
 tree against the constraints in the source schema. JAXB 1.0 made it
 possible to do this at any time, without the user having to first
-marshal the tree into XML. However it is a non goal in JAXB 2.0, which
-leverages the JAXP 1.3 validation API.
+marshal the tree into XML. However it is a non goal in Jakarta XML Binding
+specification, which leverages the JAXP validation API.
 
 * Object graph traversal +
  +
 Portable mechanisms to traverse a graph of
-JavaBean objects will not be addressed in JAXB 2.0.
+JavaBean objects will not be addressed in Jakarta XML Binding specification.
 
 * Mapping any existing Java classes to any existing XML schema +
  +
-The JAXB annotation mechanism is not
+The Jakarta XML Binding annotation mechanism is not
 sophisticated enough to enable mapping an arbitrary class to all XML
 schema concepts.
 
@@ -378,12 +377,13 @@ described.
 Conforming implementations are required to behave as described;
 otherwise they are in error.
 
-Throughout the document, the XML namespace
+Throughout the document, references to JAXB refer to the Jakarta XML Binding
+unless otherwise noted. The XML namespace
 prefix `xs:` and `xsd:` refers to schema components in W3C XML Schema
 namespace as specified in [XSD Part 1] and [XSD Part 2]. The XML
 namespace prefix `xsi:` refers to the XML instance namespace defined in
 [XSD Part 1]. Additionally, the XML namespace prefix `jaxb:` refers to
-the JAXB namespace, `https://jakarta.ee/xml/ns/jaxb`. The XML
+the Jakarta XML Binding namespace, `https://jakarta.ee/xml/ns/jaxb`. The XML
 namespace prefix `ref:` refers to the namespace
 `http://ws-i.org/profiles/basic/1.1/xsd` as defined in [WSIBP] and
 [WSIAP].
@@ -480,8 +480,8 @@ Systems
 This document is a derivative work of concepts
 and an initial draft initially led by Mark Reinhold of Sun Microsystems.
 Our thanks to all who were involved in pioneering that initial effort.
-The feedback from the Java User community on the initial JAXB technology
-prototype greatly assisted in identifying requirements and directions.
+The feedback from the Java User community on the initial Jakarta XML Binding
+technology prototype greatly assisted in identifying requirements and directions.
 
 The data binding experiences of the expert
 group members have been instrumental in identifying the proper blend of
@@ -491,9 +491,9 @@ contributions and their review feedback.
 
 Kohsuke Kawaguchi and Ryan Shoemaker have
 directly contributed content to the specification and wrote the
-companion javadoc. The following JAXB technology team members have been
-invaluable in keeping the specification effort on the right track: Tom
-Amiro, Leonid Arbouzov, Evgueni Astigueevitch, Jennifer Ball, Carla
+companion javadoc. The following Jakarta XML Binding technology team members
+have been invaluable in keeping the specification effort on the right track:
+Tom Amiro, Leonid Arbouzov, Evgueni Astigueevitch, Jennifer Ball, Carla
 Carlson, Patrick Curran, Scott Fordin, Omar Fung, Peter Kacandes, Dmitry
 Khukhro, Tom Kincaid, K. Ari Krupnikov, Ramesh Mandava, Bhakti Mehta, Ed
 Mooney, Ilya Neverov, Oleg Oleinik, Brian Ogata, Vivek Pandey, Cecilia
@@ -502,13 +502,13 @@ from Sun Microsystems, have provided valuable input to this effort:
 Roberto Chinnici, Chris Ferris, Mark Hapner, Eve Maler, Farrukh Najmi,
 Eduardo Pelegri-llopart, Bill Shannon and Rahul Sharma.
 
-The JAXB TCK software team would like to
+The Jakarta XML Binding TCK software team would like to
 acknowledge that the NIST XML Schema test suite [NIST] has greatly
 assisted the conformance testing of this specification.
 
-=== Acknowledgements for JAXB 2.0
+=== Acknowledgements for Jakarta XML Binding
 
-Version 2.0 of this specification was created
+Original version of this specification was created
 under the Java Community Process as JSR-222. This specification is
 shaped by valuable input from expert group members, people with Sun, and
 Java User community feedback based on their experience with JAXB 1.0.
@@ -532,7 +532,7 @@ Jindal. Valuable input was provided by the following people from Sun:
 Eduardo Pelegri-Llopart, Graham Hamilton, Mark Hapner, Bill Shannon.
 
 
-The JAXB TCK software team would like to
+The Jakarta XML Binding TCK software team would like to
 acknowledge that the NIST XML Schema test suite [NIST] has greatly
 assisted the conformance testing of this specification.
 

@@ -44,10 +44,10 @@ optionally be enabled as part of the marshalling process.
 As used in this specification, the term
 _schema_ includes the W3C XML Schema as defined in the XML Schema 1.0
 Recommendation[XSD Part 1][XSD Part 2]. link:jaxb.html#a210[See
-Non-Normative JAXB 2.0 Architecture diagram] illustrates relationships
+Non-Normative Jakarta XML Binding Architecture diagram] illustrates relationships
 between concepts introduced in this section.
 
-.[[a210]]Non-Normative JAXB 2.0 Architecture diagram
+.[[a210]]Non-Normative Jakarta XML Binding Architecture diagram
 image::images/xmlb-3.png[image]
 
 JAXB-annotated classes are common to both
@@ -110,9 +110,9 @@ need to refactor them.
 *_Interface_* JAXB 1.0 bound schema components
 (XML content) to schema derived content interfaces and implementation
 classes. The interface/implementation classes tightly couple the schema
-derived implementation classes to the JAXB implementation runtime
-framework and are thus not portable. The binding of schema components to
-schema derived interfaces continues to be supported in JAXB 2.0.
+derived implementation classes to the Jakarta XML Binding implementation
+runtime framework and are thus not portable. The binding of schema components to
+schema derived interfaces continues to be supported in Jakarta XML Binding.
 
 [NOTE]
 .Note
@@ -341,11 +341,11 @@ optionally be validated at unmarshal and marshal time.
 ===== Validation Re architecture
 
 The detection of complex schema constraint
-violations has been redesigned to have a JAXB 2.0 implementation to
-delegate to the validation API in JAXP 1.3. JAXP 1.3 defines a standard
+violations has been redesigned to have a Jakarta XML Binding implementation to
+delegate to the validation API in JAXP. JAXP defines a standard
 validation API (`javax.xml.validation` package) for validating XML
-content against constraints within a schema. Furthermore, JAXP 1.3 has
-been incorporated into J2SE 5.0 platform. Any JAXB 2.0 implementation
+content against constraints within a schema. Furthermore, JAXP has
+been incorporated into J2SE 5.0 platform. Any Jakarta XML Binding implementation
 that takes advantage of the validation API will result in a smaller
 footprint.
 
@@ -368,7 +368,7 @@ framework makes validation optional.
 ===== Marshal Validation
 
 Validation may also be optionally performed
-at marshal time. This is new for JAXB 2.0. Validation of object graph
+at marshal time. This is new for Jakarta XML Binding. Validation of object graph
 while marshalling is useful in web services where the marshalled output
 must conform to schema constraints specified in a WSDL document. This
 could provide a valuable debugging aid for dealing with any
@@ -471,7 +471,7 @@ schema-to-Java representation.
 
 Binding of purchase order schema to a Java
 representationfootnote:[In the interest of
-terseness, JAXB 2.0 program annotations have been ommitted.]:
+terseness, Jakarta XML Binding program annotations have been ommitted.]:
 
 [source,java,subs="+macros"]
 ----

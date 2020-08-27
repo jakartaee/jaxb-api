@@ -44,22 +44,25 @@ Available at _http://java.sun.com/beans_.
 W3C Recommendation 2 May 2001 +
 Available at _http://www.w3.org/TR/xmlschema-0/_.
 
-[BLOCH] Joshua Bloch, Effective Java, Chapter
-3, Typesafe Enums +
+[BLOCH] Joshua Bloch, Effective Java, +
+Chapter 3, Typesafe Enums +
 _http://developer.java.sun.com/developer/Books/shiftintojavapage1.html#replaceenum_.
 
-[BLOCH_2] Joshua Bloch, Effective Java,
+[BLOCH_2] Joshua Bloch, Effective Java, +
 Chapter 1, Item 1: Consider factory methods over constructors
 
 [RFC2396] Uniform Resource Identifiers (URI):
 Generic Syntax, +
 _http://www.ietf.org/rfc/rfc2396.txt._
 
-[JAX-RPC] Jakarta XML RPC, +
+[XML-RPC] Jakarta XML RPC, +
 _https://jakarta.ee/specifications/xml-rpc/_.
 
-[JAX-WS] Jakarta XML Web Services, +
+[XML-WS] Jakarta XML Web Services, +
 _https://jakarta.ee/specifications/xml-web-services/_.
+
+[JAXB 1.0] XML Data Binding Specification, +
+_https://jcp.org/en/jsr/detail?id=31_
 
 [JLS] or [JLS3] The Java Language
 Specification, 3rd Edition, Gosling, Joy, Steele, Bracha. +
