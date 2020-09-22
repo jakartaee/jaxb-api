@@ -40,7 +40,7 @@ import java.io.IOException;
  * {@link jakarta.xml.bind.Marshaller} interface.
  * 
  * <p>
- * The only methods that a JAXB Provider has to implement are
+ * The only methods that a Jakarta XML Binding Provider has to implement are
  * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.transform.Result)},
  * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.stream.XMLStreamWriter)}, and
  * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.stream.XMLEventWriter)}.

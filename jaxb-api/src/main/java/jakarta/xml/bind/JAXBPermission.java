@@ -13,13 +13,13 @@ package jakarta.xml.bind;
 import java.security.BasicPermission;
 
 /**
- * This class is for JAXB permissions. A {@code JAXBPermission}
+ * This class is for Jakarta XML Binding permissions. A {@code JAXBPermission}
  * contains a name (also referred to as a "target name") but
  * no actions list; you either have the named permission
  * or you don't.
  *
  * <P>
- * The target name is the name of the JAXB permission (see below).
+ * The target name is the name of the Jakarta XML Binding permission (see below).
  *
  * <P>
  * The following table lists all the possible {@code JAXBPermission} target names,
@@ -46,7 +46,7 @@ import java.security.BasicPermission;
  *   </td>
  *   <td>
  *     Malicious code can set {@link DatatypeConverterInterface}, which has
- *     VM-wide singleton semantics,  before a genuine JAXB implementation sets one.
+ *     VM-wide singleton semantics,  before a genuine Jakarta XML Binding implementation sets one.
  *     This allows malicious code to gain access to objects that it may otherwise
  *     not have access to, such as {@link java.awt.Frame#getFrames()} that belongs to
  *     another application running in the same JVM.

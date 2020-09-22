@@ -30,25 +30,25 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Class that defines convenience methods for common, simple use of JAXB.
+ * Class that defines convenience methods for common, simple use of Jakarta XML Binding.
  *
  * <p>
  * Methods defined in this class are convenience methods that combine several basic operations
  * in the {@link JAXBContext}, {@link Unmarshaller}, and {@link Marshaller}.
  *
  * They are designed
- * to be the prefered methods for developers new to JAXB. They have
+ * to be the prefered methods for developers new to Jakarta XML Binding. They have
  * the following characterstics:
  *
  * <ol>
  *  <li>Generally speaking, the performance is not necessarily optimal.
  *      It is expected that people who need to write performance
- *      critical code will use the rest of the JAXB API directly.
+ *      critical code will use the rest of the Jakarta XML Binding API directly.
  *  <li>Errors that happen during the processing is wrapped into
  *      {@link DataBindingException} (which will have {@link JAXBException}
  *      as its {@link Throwable#getCause() cause}. It is expected that
  *      people who prefer the checked exception would use
- *      the rest of the JAXB API directly.
+ *      the rest of the Jakarta XML Binding API directly.
  * </ol>
  *
  * <p>
@@ -469,18 +469,18 @@ public final class JAXB {
      * <p>
      * This method is a convenience method that combines several basic operations
      * in the {@link JAXBContext} and {@link Marshaller}. This method is designed
-     * to be the prefered method for developers new to JAXB. This method
+     * to be the prefered method for developers new to Jakarta XML Binding. This method
      * has the following characterstics:
      *
      * <ol>
      *  <li>Generally speaking, the performance is not necessarily optimal.
      *      It is expected that those people who need to write performance
-     *      critical code will use the rest of the JAXB API directly.
+     *      critical code will use the rest of the Jakarta XML Binding API directly.
      *  <li>Errors that happen during the processing is wrapped into
      *      {@link DataBindingException} (which will have {@link JAXBException}
      *      as its {@link Throwable#getCause() cause}. It is expected that
      *      those people who prefer the checked exception would use
-     *      the rest of the JAXB API directly.
+     *      the rest of the Jakarta XML Binding API directly.
      * </ol>
      *
      * @param jaxbObject

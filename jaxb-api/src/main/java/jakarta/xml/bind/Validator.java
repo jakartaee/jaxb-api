@@ -11,7 +11,7 @@
 package jakarta.xml.bind;
 
 /**
- * As of JAXB 2.0, this class is deprecated and optional.
+ * As of Jakarta XML Binding, this class is deprecated and optional.
  * <p>
  * The {@code Validator} class is responsible for controlling the validation
  * of content trees during runtime.
@@ -44,8 +44,8 @@ package jakarta.xml.bind;
  *        <dd> This form of validation enables a client application to receive 
  *             immediate feedback about modifications to the Java content tree 
  *             that violate type constraints on Java Properties as defined in 
- *             the specification.  JAXB Providers are not required support
- *             this type of validation.  Of the JAXB Providers that do support
+ *             the specification.  Jakarta XML Binding Providers are not required support
+ *             this type of validation.  Of the Jakarta XML Binding Providers that do support
  *             this type of validation, some may require you to decide at schema
  *             compile time whether or not a client application will be allowed
  *             to request fail-fast validation at runtime.
@@ -111,9 +111,9 @@ package jakarta.xml.bind;
  * <p>
  * Validation events are handled differently depending on how the client 
  * application is configured to process them as described in the previous
- * section.  However, there are certain cases where a JAXB Provider indicates
+ * section.  However, there are certain cases where a Jakarta XML Binding Provider indicates
  * that it is no longer able to reliably detect and report errors.  In these
- * cases, the JAXB Provider will set the severity of the ValidationEvent to
+ * cases, the Jakarta XML Binding Provider will set the severity of the ValidationEvent to
  * FATAL_ERROR to indicate that the unmarshal, validate, or marshal operations 
  * should be terminated.  The default event handler and 
  * {@code ValidationEventCollector} utility class must terminate processing
@@ -128,7 +128,7 @@ package jakarta.xml.bind;
  * <blockquote>
  * <p>
  * There currently are not any properties required to be supported by all 
- * JAXB Providers on Validator.  However, some providers may support 
+ * Jakarta XML Binding Providers on Validator.  However, some providers may support 
  * their own set of provider specific properties.
  * </blockquote>
  * 
@@ -147,7 +147,7 @@ public interface Validator {
     /**
      * Allow an application to register a validation event handler.
      * <p>
-     * The validation event handler will be called by the JAXB Provider if any
+     * The validation event handler will be called by the Jakarta XML Binding Provider if any
      * validation errors are encountered during calls to 
      * {@link #validate(Object) validate}.  If the client application does not 
      * register a validation event handler before invoking the validate method, 
@@ -228,7 +228,7 @@ public interface Validator {
     /**
      * Set the particular property in the underlying implementation of 
      * {@code Validator}.  This method can only be used to set one of
-     * the standard JAXB defined properties above or a provider specific
+     * the standard Jakarta XML Binding defined properties above or a provider specific
      * property.  Attempting to set an undefined property will result in
      * a PropertyException being thrown.  See <a href="#supportedProps">
      * Supported Properties</a>.
@@ -250,7 +250,7 @@ public interface Validator {
     /**
      * Get the particular property in the underlying implementation of 
      * {@code Validator}.  This method can only be used to get one of
-     * the standard JAXB defined properties above or a provider specific
+     * the standard Jakarta XML Binding defined properties above or a provider specific
      * property.  Attempting to get an undefined property will result in
      * a PropertyException being thrown.  See <a href="#supportedProps">
      * Supported Properties</a>.

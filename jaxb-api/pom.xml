@@ -88,6 +88,7 @@
                         <release>11</release>
                         <nodeprecated>false</nodeprecated>
                         <notimestamp>true</notimestamp>
+                        <nosince>true</nosince>
                         <use>false</use>
                         <author>true</author>
                         <version>true</version>

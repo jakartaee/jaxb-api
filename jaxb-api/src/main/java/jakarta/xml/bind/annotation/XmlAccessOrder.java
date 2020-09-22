@@ -12,7 +12,7 @@ package jakarta.xml.bind.annotation;
 
 /**
  * Used by XmlAccessorOrder to control the ordering of properties and
- * fields in a JAXB bound class.
+ * fields in a Jakarta XML Binding bound class.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0

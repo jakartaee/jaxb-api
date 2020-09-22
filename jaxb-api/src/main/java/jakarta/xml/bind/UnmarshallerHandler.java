@@ -16,7 +16,7 @@ import org.xml.sax.ContentHandler;
  * Unmarshaller implemented as SAX ContentHandler.
  * 
  * <p>
- * Applications can use this interface to use their JAXB provider as a component 
+ * Applications can use this interface to use their Jakarta XML Binding provider as a component 
  * in an XML pipeline.  For example:
  * 
  * <pre>

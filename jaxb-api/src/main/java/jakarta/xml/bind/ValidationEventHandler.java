@@ -19,13 +19,13 @@ package jakarta.xml.bind;
  * {@link Unmarshaller#setEventHandler(ValidationEventHandler) Unmarshaller}, 
  * the {@link Validator#setEventHandler(ValidationEventHandler) Validator}, or 
  * the {@link Marshaller#setEventHandler(ValidationEventHandler) Marshaller}.  
- * The JAXB Provider will then report validation errors and warnings encountered
+ * The Jakarta XML Binding Provider will then report validation errors and warnings encountered
  * during the unmarshal, marshal, and validate operations to these event 
  * handlers.
  *
  * <p>
  * If the {@code handleEvent} method throws an unchecked runtime exception,
- * the JAXB Provider must treat that as if the method returned false, effectively
+ * the Jakarta XML Binding Provider must treat that as if the method returned false, effectively
  * terminating whatever operation was in progress at the time (unmarshal, 
  * validate, or marshal).
  * 
@@ -63,13 +63,13 @@ public interface ValidationEventHandler {
      * indicates where the error or warning occurred.
      *
      * <p>
-     * If an unchecked runtime exception is thrown from this method, the JAXB
+     * If an unchecked runtime exception is thrown from this method, the Jakarta XML Binding
      * provider will treat it as if the method returned false and interrupt
      * the current unmarshal, validate, or marshal operation.
      * 
      * @param event the encapsulated validation event information.  It is a 
      * provider error if this parameter is null.
-     * @return true if the JAXB Provider should attempt to continue the current
+     * @return true if the Jakarta XML Binding Provider should attempt to continue the current
      *         unmarshal, validate, or marshal operation after handling this 
      *         warning/error, false if the provider should terminate the current 
      *         operation with the appropriate {@code UnmarshalException},

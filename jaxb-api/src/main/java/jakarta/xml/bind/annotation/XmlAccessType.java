@@ -23,19 +23,19 @@ package jakarta.xml.bind.annotation;
 
 public enum XmlAccessType {
     /**
-     * Every getter/setter pair in a JAXB-bound class will be automatically
+     * Every getter/setter pair in a Jakarta XML Binding-bound class will be automatically
      * bound to XML, unless annotated by {@link XmlTransient}.
      *
      * Fields are bound to XML only when they are explicitly annotated
-     * by some of the JAXB annotations.
+     * by some of the Jakarta XML Binding annotations.
      */
     PROPERTY,
     /**
-     * Every non static, non transient field in a JAXB-bound class will be automatically
+     * Every non static, non transient field in a Jakarta XML Binding-bound class will be automatically
      * bound to XML, unless annotated by {@link XmlTransient}.
      *
      * Getter/setter pairs are bound to XML only when they are explicitly annotated
-     * by some of the JAXB annotations.
+     * by some of the Jakarta XML Binding annotations.
      */
     FIELD,
     /**
@@ -44,12 +44,12 @@ public enum XmlAccessType {
      *
      * Fields or getter/setter pairs that are private, protected, or 
      * defaulted to package-only access are bound to XML only when they are
-     * explicitly annotated by the appropriate JAXB annotations.
+     * explicitly annotated by the appropriate Jakarta XML Binding annotations.
      */
     PUBLIC_MEMBER,
     /**
      * None of the fields or properties is bound to XML unless they
-     * are specifically  annotated with some of the JAXB annotations.
+     * are specifically  annotated with some of the Jakarta XML Binding annotations.
      */
     NONE
 }

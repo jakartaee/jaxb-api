@@ -23,7 +23,7 @@ import org.xml.sax.SAXParseException;
  * Default implementation of the ValidationEventLocator interface.
  * 
  * <p>
- * JAXB providers are allowed to use whatever class that implements
+ * Jakarta XML Binding providers are allowed to use whatever class that implements
  * the ValidationEventLocator interface. This class is just provided for a
  * convenience.
  *
@@ -108,7 +108,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
     }
 
     /** 
-     * Constructs an object that points to a JAXB content object. 
+     * Constructs an object that points to a Jakarta XML Binding content object. 
      * 
      * The object's Object becomes available. ColumnNumber, LineNumber, Node, 
      * Offset, and URL are not available.

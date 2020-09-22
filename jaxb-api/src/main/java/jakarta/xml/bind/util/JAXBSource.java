@@ -30,14 +30,14 @@ import org.xml.sax.XMLFilter;
 
 /**
  * JAXP {@link javax.xml.transform.Source} implementation
- * that marshals a JAXB-generated object.
+ * that marshals a Jakarta XML Binding-generated object.
  * 
  * <p>
- * This utility class is useful to combine JAXB with
+ * This utility class is useful to combine Jakarta XML Binding with
  * other Java/XML technologies.
  * 
  * <p>
- * The following example shows how to use JAXB to marshal a document
+ * The following example shows how to use Jakarta XML Binding to marshal a document
  * for transformation by XSLT.
  * 
  * <blockquote>
@@ -84,7 +84,7 @@ public class JAXBSource extends SAXSource {
      *      <code>contentObject</code>. This context is used
      *      to create a new instance of marshaller and must not be null.
      * @param   contentObject
-     *      An instance of a JAXB-generated class, which will be
+     *      An instance of a Jakarta XML Binding-generated class, which will be
      *      used as a {@link javax.xml.transform.Source} (by marshalling it into XML).  It must
      *      not be null.
      * @throws JAXBException if an error is encountered while creating the
@@ -112,7 +112,7 @@ public class JAXBSource extends SAXSource {
      *      created from a JAXBContext that was used to build
      *      <code>contentObject</code> and must not be null.
      * @param   contentObject
-     *      An instance of a JAXB-generated class, which will be
+     *      An instance of a Jakarta XML Binding-generated class, which will be
      *      used as a {@link javax.xml.transform.Source} (by marshalling it into XML).  It must
      *      not be null.
      * @throws JAXBException if an error is encountered while creating the

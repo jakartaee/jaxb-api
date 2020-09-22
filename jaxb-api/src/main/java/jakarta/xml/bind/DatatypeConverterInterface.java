@@ -12,9 +12,9 @@ package jakarta.xml.bind;
 
 /**
  * <p>
- * The DatatypeConverterInterface is for JAXB provider use only. A
- * JAXB provider must supply a class that implements this interface.
- * JAXB Providers are required to call the
+ * The DatatypeConverterInterface is for Jakarta XML Binding provider use only. A
+ * Jakarta XML Binding provider must supply a class that implements this interface.
+ * Jakarta XML Binding Providers are required to call the
  * {@link DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface)
  * DatatypeConverter.setDatatypeConverter} api at
  * some point before the first marshal or unmarshal operation (perhaps during
@@ -27,7 +27,7 @@ package jakarta.xml.bind;
  * <p>
  * This interface defines the parse and print methods. There is one
  * parse and print method for each XML schema datatype specified in the
- * the default binding Table 5-1 in the JAXB specification.
+ * the default binding Table 5-1 in the Jakarta XML Binding specification.
  *
  * <p>
  * The parse and print methods defined here are invoked by the static parse

@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Propagates openness of JAXB annottated classess packages to JAXB impl module.
+ * Propagates openness of Jakarta XML Binding annottated classess packages to Jakarta XML Binding impl module.
  *
  * @author Roman Grigoriadi
  */
@@ -30,7 +30,7 @@ class ModuleUtil {
     private static Logger logger = Logger.getLogger("jakarta.xml.bind");
 
     /**
-     * JAXB-RI default context factory.
+     * Jakarta XML Binding-RI default context factory.
      */
     // NOTICE: .toString() is used to prevent constant inlining by Java Compiler
     static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.bind.v2.ContextFactory".toString();
@@ -111,13 +111,13 @@ class ModuleUtil {
     }
 
     /**
-     * Implementation may be defined in other module than {@code java.xml.bind}. In that case openness
+     * Implementation may be defined in other module than {@code jakarta.xml.bind}. In that case openness
      * {@linkplain Module#isOpen open} of classes should be delegated to implementation module.
      *
      * @param classes used to resolve module for {@linkplain Module#addOpens(String, Module)}
      * @param factorySPI used to resolve {@link Module} of the implementation.
      *
-     * @throws JAXBException if ony of a classes package is not open to {@code java.xml.bind} module.
+     * @throws JAXBException if ony of a classes package is not open to {@code jakarta.xml.bind} module.
      */
     public static void delegateAddOpensToImplModule(Class[] classes, Class<?> factorySPI) throws JAXBException {
         final Module implModule = factorySPI.getModule();
@@ -134,7 +134,7 @@ class ModuleUtil {
             if (!classModule.isNamed() || classModule.getName().equals("java.base")) {
                 continue;
             }
-            //report error if they are not open to java.xml.bind
+            //report error if they are not open to jakarta.xml.bind
             if (!classModule.isOpen(packageName, jaxbModule)) {
                 throw new JAXBException(Messages.format(Messages.JAXB_CLASSES_NOT_OPEN,
                                                         packageName, jaxbClass.getName(), classModule.getName()));

@@ -11,7 +11,7 @@
 package jakarta.xml.bind;
 
 /**
- * Exception that represents a failure in a JAXB operation.
+ * Exception that represents a failure in a Jakarta XML Binding operation.
  *
  * <p>
  * This exception differs from {@link JAXBException} in that

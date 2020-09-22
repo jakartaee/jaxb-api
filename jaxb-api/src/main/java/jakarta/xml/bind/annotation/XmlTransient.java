@@ -43,7 +43,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * </ul>
  *
  * <p>{@code @XmlTransient} is mutually exclusive with all other
- * JAXB defined annotations. </p>
+ * Jakarta XML Binding defined annotations. </p>
  * 
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>

@@ -14,11 +14,11 @@ import jakarta.activation.DataHandler;
 import jakarta.xml.bind.Marshaller;
 
 /**
- * <p>Enable JAXB marshalling to optimize storage of binary data.
+ * <p>Enable Jakarta XML Binding marshalling to optimize storage of binary data.
  *
  * <p>This API enables an efficient cooperative creation of optimized
- * binary data formats between a JAXB marshalling process and a MIME-based package
- * processor. A JAXB implementation marshals the root body of a MIME-based package,
+ * binary data formats between a Jakarta XML Binding marshalling process and a MIME-based package
+ * processor. A Jakarta XML Binding implementation marshals the root body of a MIME-based package,
  * delegating the creation of referenceable MIME parts to
  * the MIME-based package processor that implements this abstraction.
  *
@@ -28,7 +28,7 @@ import jakarta.xml.bind.Marshaller;
  *
  * <p>WS-I Attachment Profile 1.0 is supported by
  * {@link #addSwaRefAttachment(DataHandler)} being called by the
- * marshaller for each JAXB property related to
+ * marshaller for each Jakarta XML Binding property related to
  * {http://ws-i.org/profiles/basic/1.1/xsd}swaRef.
  *
  *
@@ -48,7 +48,7 @@ public abstract class AttachmentMarshaller {
      * <p>Consider MIME content {@code data} for optimized binary storage as an attachment.
      *
      * <p>
-     * This method is called by JAXB marshal process when {@link #isXOPPackage()} is
+     * This method is called by Jakarta XML Binding marshal process when {@link #isXOPPackage()} is
      * {@code true}, for each element whose datatype is "base64Binary", as described in
      * Step 3 in
      * <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages">Creating XOP Packages</a>.
@@ -59,14 +59,14 @@ public abstract class AttachmentMarshaller {
      * of the binary data as a MIME part, it is responsible for attaching {@code data} to the
      * MIME-based package, and then assigning an unique content-id, cid, that identifies
      * the MIME part within the MIME message. This method returns the cid,
-     * which enables the JAXB marshaller to marshal a XOP element that refers to that cid in place
-     * of marshalling the binary data. When the method returns null, the JAXB marshaller
+     * which enables the Jakarta XML Binding marshaller to marshal a XOP element that refers to that cid in place
+     * of marshalling the binary data. When the method returns null, the Jakarta XML Binding marshaller
      * inlines {@code data} as base64binary data.
      *
      * <p>
      * The caller of this method is required to meet the following constraint.
      * If the element infoset item containing {@code data} has the attribute
-     * {@code xmime:contentType} or if the JAXB property/field representing
+     * {@code xmime:contentType} or if the Jakarta XML Binding property/field representing
      * {@code data} is annotated with a known MIME type,
      * {@code data.getContentType()} should be set to that MIME type.
      *
@@ -119,7 +119,7 @@ public abstract class AttachmentMarshaller {
      *       must be non-negative and no larger than array.length
      *
      * @param mimeType
-     *      If the data has an associated MIME type known to JAXB, that is passed
+     *      If the data has an associated MIME type known to Jakarta XML Binding, that is passed
      *      as this parameter. If none is known, "application/octet-stream".
      *      This parameter may never be null.
      *
@@ -138,7 +138,7 @@ public abstract class AttachmentMarshaller {
     public abstract String addMtomAttachment(byte[] data, int offset, int length, String mimeType, String elementNamespace, String elementLocalName);
 
     /**
-     * <p>Read-only property that returns true if JAXB marshaller should enable XOP creation.
+     * <p>Read-only property that returns true if Jakarta XML Binding marshaller should enable XOP creation.
      *
      * <p>This value must not change during the marshalling process. When this
      * value is true, the {@code addMtomAttachment(...)} method
@@ -167,7 +167,7 @@ public abstract class AttachmentMarshaller {
     * <p>Add MIME {@code data} as an attachment and return attachment's content-id, cid.
     *
     * <p>
-    * This method is called by JAXB marshal process for each element/attribute typed as
+    * This method is called by Jakarta XML Binding marshal process for each element/attribute typed as
     * {http://ws-i.org/profiles/basic/1.1/xsd}swaRef. The MIME-based package processor
     * implementing this method is responsible for attaching the specified data to a
     * MIME attachment, and generating a content-id, cid, that uniquely identifies the attachment

@@ -28,8 +28,8 @@ import java.net.URL;
  * error or fatal error.
  * 
  * <p>
- * This handler is not the default handler for JAXB mapped classes following 
- * JAXB 2.0 or later versions. Default validation event handling has changed 
+ * This handler is not the default handler for Jakarta XML Binding mapped classes following 
+ * Jakarta XML Binding or later versions. Default validation event handling has changed 
  * and is specified in  {@link jakarta.xml.bind.Unmarshaller} and
  * {@link jakarta.xml.bind.Marshaller}.
  *

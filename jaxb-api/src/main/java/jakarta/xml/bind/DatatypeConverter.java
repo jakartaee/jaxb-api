@@ -24,7 +24,7 @@ import javax.xml.namespace.NamespaceContext;
  * </p>
  * <p>
  * This class makes it easier to write parse and print methods. It defines
- * static parse and print methods that provide access to a JAXB provider's 
+ * static parse and print methods that provide access to a Jakarta XML Binding provider's 
  * implementation of parse and print methods. These methods are invoked by 
  * custom parse and print methods. For example, the binding of xsd:dateTime 
  * to a long can be customized using parse and print methods as follows:
@@ -54,7 +54,7 @@ import javax.xml.namespace.NamespaceContext;
  * a parse or a print method in a javaType binding declaration.
  * </p>
  * <p>
- * JAXB Providers are required to call the 
+ * Jakarta XML Binding Providers are required to call the 
  * {@link #setDatatypeConverter(DatatypeConverterInterface) 
  * setDatatypeConverter} api at some point before the first marshal or unmarshal 
  * operation (perhaps during the call to JAXBContext.newInstance).  This step is 
@@ -89,10 +89,10 @@ final public class DatatypeConverter {
     }
     
     /**
-     * This method is for JAXB provider use only.
+     * This method is for Jakarta XML Binding provider use only.
      * <p>
-     * JAXB Providers are required to call this method at some point before
-     * allowing any of the JAXB client marshal or unmarshal operations to
+     * Jakarta XML Binding Providers are required to call this method at some point before
+     * allowing any of the Jakarta XML Binding client marshal or unmarshal operations to
      * occur.  This is necessary to configure the datatype converter that 
      * should be used to perform the print and parse conversions.
      * 

@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  * This class is package private and therefore is not exposed as part of the
- * JAXB API.
+ * Jakarta XML Binding API.
  *
  * This code is designed to implement the JAXB 1.0 spec pluggability feature
  *

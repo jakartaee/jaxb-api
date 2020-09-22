@@ -31,7 +31,7 @@ public interface JAXBContextFactory {
      * @param classesToBeBound
      *      List of java classes to be recognized by the new {@link JAXBContext}.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@code open} to at least the {@code java.xml.bind} module.
+     *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
      *      Can be empty, in which case a {@link JAXBContext} that only knows about
      *      spec-defined classes will be returned.
      * @param properties
@@ -45,13 +45,13 @@ public interface JAXBContextFactory {
      *      if an error was encountered while creating the
      *      {@code JAXBContext}, such as (but not limited to):
      * <ol>
-     *  <li>No JAXB implementation was discovered
-     *  <li>Classes use JAXB annotations incorrectly
+     *  <li>No Jakarta XML Binding implementation was discovered
+     *  <li>Classes use Jakarta XML Binding annotations incorrectly
      *  <li>Classes have colliding annotations (i.e., two classes with the same type name)
-     *  <li>The JAXB implementation was unable to locate
+     *  <li>The Jakarta XML Binding implementation was unable to locate
      *      provider-specific out-of-band information (such as additional
      *      files generated at the development time.)
-     *  <li>{@code classesToBeBound} are not open to {@code java.xml.bind} module
+     *  <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
      * </ol>
      *
      * @throws IllegalArgumentException
@@ -76,7 +76,7 @@ public interface JAXBContextFactory {
      * @param contextPath
      *      List of java package names that contain schema derived classes.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@code open} to at least the {@code java.xml.bind} module.
+     *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
      * @param classLoader
      *      This class loader will be used to locate the implementation classes.
      * @param properties
@@ -91,7 +91,7 @@ public interface JAXBContextFactory {
      *   <li>an ambiguity among global elements contained in the contextPath</li>
      *   <li>failure to locate a value for the context factory provider property</li>
      *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     *   <li>packages are not open to {@code java.xml.bind} module</li>
+     *   <li>packages are not open to {@code jakarta.xml.bind} module</li>
      * </ol>
      *
      * @since 9, JAXB 2.3

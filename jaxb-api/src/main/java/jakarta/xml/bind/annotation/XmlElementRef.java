@@ -39,7 +39,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * that were not statically specified in the content model of a
  * schema using substitution groups. Schema derived code provides
  * support for substitution groups using an <i>element property</i>,
- * (section 5.5.5, "Element Property" of JAXB 2.0 specification). An
+ * (section 5.5.5, "Element Property" of Jakarta XML Binding specification). An
  * element property method signature is of the form:
  * <pre>{@code
  *     public void setTerm(JAXBElement<? extends Operator>);
@@ -267,7 +267,7 @@ public @interface XmlElementRef {
      * for a multivalued property.
      *
      * <p>
-     * For compatibility with JAXB 2.1, this property defaults to {@code true},
+     * For compatibility with Jakarta XML Binding, this property defaults to {@code true},
      * despite the fact that {@link XmlElement#required()} defaults to false.
      *
      * @since 1.7, JAXB 2.2

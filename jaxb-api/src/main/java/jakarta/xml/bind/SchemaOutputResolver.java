@@ -14,7 +14,7 @@ import javax.xml.transform.Result;
 import java.io.IOException;
 
 /**
- * Controls where a JAXB implementation puts the generates
+ * Controls where a Jakarta XML Binding implementation puts the generates
  * schema files.
  *
  * <p>
@@ -43,7 +43,7 @@ public abstract class SchemaOutputResolver {
      *      The namespace URI that the schema declares.
      *      Can be the empty string, but never be null.
      * @param suggestedFileName
-     *      A JAXB implementation generates an unique file name (like "schema1.xsd")
+     *      A Jakarta XML Binding implementation generates an unique file name (like "schema1.xsd")
      *      for the convenience of the callee. This name can be
      *      used for the file name of the schema, or the callee can just
      *      ignore this name and come up with its own name.

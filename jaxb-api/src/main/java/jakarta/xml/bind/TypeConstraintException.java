@@ -17,7 +17,7 @@ package jakarta.xml.bind;
  * <p>
  * This exception can be thrown by the generated setter methods of the schema
  * derived Java content classes.  However, since fail-fast validation is
- * an optional feature for JAXB Providers to support, not all setter methods
+ * an optional feature for Jakarta XML Binding Providers to support, not all setter methods
  * will throw this exception when a type constraint is violated.
  * 
  * <p>
