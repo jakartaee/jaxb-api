@@ -17,11 +17,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
 /**
- * Instructs JAXB to also bind other classes when binding this class.
+ * Instructs Jakarta XML Binding to also bind other classes when binding this class.
  *
  * <p>
  * Java makes it impractical/impossible to list all sub-classes of
- * a given class. This often gets in a way of JAXB users, as it JAXB
+ * a given class. This often gets in a way of Jakarta XML Binding users, as it Jakarta XML Binding
  * cannot automatically list up the classes that need to be known
  * to {@link JAXBContext}.
  *
@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  *
  * <p>
  * This would allow you to do {@code JAXBContext.newInstance(Animal.class)}.
- * By the help of this annotation, JAXB implementations will be able to
+ * By the help of this annotation, Jakarta XML Binding implementations will be able to
  * correctly bind {@code Dog} and {@code Cat}.
  *
  * @author Kohsuke Kawaguchi

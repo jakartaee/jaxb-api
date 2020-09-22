@@ -36,7 +36,7 @@ import jakarta.xml.bind.JAXBElement;
  * <li>Children element information items are added as instances of
  * {@link JAXBElement} or instances with a class that is annotated with
  * &#64;XmlRootElement.</li>
- * <li>Unknown content that is not be bound to a JAXB mapped class is inserted
+ * <li>Unknown content that is not be bound to a Jakarta XML Binding mapped class is inserted
  * as {@link Element}. (Assumes property annotated with &#64;XmlAnyElement)</li>
  * </ul>
  *
@@ -89,7 +89,7 @@ import jakarta.xml.bind.JAXBElement;
  * Monitor</productName> shipped from our warehouse. ....
  * </letterBody>
  * }</pre>
- * that can be constructed using following JAXB API calls.
+ * that can be constructed using following Jakarta XML Binding API calls.
  * <pre>{@code
  * LetterBody lb = ObjectFactory.createLetterBody();
  * JAXBElement<LetterBody> lbe = ObjectFactory.createLetterBody(lb);

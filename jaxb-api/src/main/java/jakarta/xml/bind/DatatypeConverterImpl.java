@@ -22,7 +22,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 /**
- * This class is the JAXB RI's default implementation of the
+ * This class is the Jakarta XML Binding CI's default implementation of the
  * {@link DatatypeConverterInterface}.
  *
  * <p>

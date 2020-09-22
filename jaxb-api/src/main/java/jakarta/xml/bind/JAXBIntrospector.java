@@ -13,13 +13,13 @@ package jakarta.xml.bind;
 import  javax.xml.namespace.QName;
 
 /**
- * Provide access to JAXB xml binding data for a JAXB object.
+ * Provide access to Jakarta XML Binding xml binding data for a Jakarta XML Binding object.
  *
  * <p>
  * Intially, the intent of this class is to just conceptualize how 
- * a JAXB application developer can access xml binding information, 
+ * a Jakarta XML Binding application developer can access xml binding information, 
  * independent if binding model is java to schema or schema to java.
- * Since accessing the XML element name related to a JAXB element is
+ * Since accessing the XML element name related to a Jakarta XML Binding element is
  * a highly requested feature, demonstrate access to this
  * binding information.
  *
@@ -32,8 +32,8 @@ import  javax.xml.namespace.QName;
 public abstract class JAXBIntrospector {
 
     /** 
-     * <p>Return true if <code>object</code> represents a JAXB element.</p>
-     * <p>Parameter <code>object</code> is a JAXB element for following cases:
+     * <p>Return true if <code>object</code> represents a Jakarta XML Binding element.</p>
+     * <p>Parameter <code>object</code> is a Jakarta XML Binding element for following cases:
      * <ol>
      *   <li>It is an instance of <code>jakarta.xml.bind.JAXBElement</code>.</li>
      *   <li>The class of <code>object</code> is annotated with 
@@ -51,12 +51,12 @@ public abstract class JAXBIntrospector {
      * @param jaxbElement is an object that {@link #isElement(Object)} returned true.
      *                    
      * @return xml element qname associated with jaxbElement;
-     *         null if <code>jaxbElement</code> is not a JAXB Element.
+     *         null if <code>jaxbElement</code> is not a JAXBElement.
      */
     public abstract QName getElementName(Object jaxbElement);
 
     /**
-     * <p>Get the element value of a JAXB element.</p>
+     * <p>Get the element value of a Jakarta XML Binding element.</p>
      *
      * <p>Convenience method to abstract whether working with either 
      *    a jakarta.xml.bind.JAXBElement instance or an instance of

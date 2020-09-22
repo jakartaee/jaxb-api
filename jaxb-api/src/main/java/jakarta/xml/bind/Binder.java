@@ -15,18 +15,18 @@ import org.w3c.dom.Node;
 import javax.xml.validation.Schema;
 
 /**
- * Enable synchronization between XML infoset nodes and JAXB objects 
+ * Enable synchronization between XML infoset nodes and Jakarta XML Binding objects 
  * representing same XML document.
  *
  * <p>
  * An instance of this class maintains the association between XML nodes of
- * an infoset preserving view and a JAXB representation of an XML document. 
+ * an infoset preserving view and a Jakarta XML Binding representation of an XML document. 
  * Navigation between the two views is provided by the methods
  * {@link #getXMLNode(Object)} and {@link #getJAXBNode(Object)}.
  * 
  * <p>
  * Modifications can be made to either the infoset preserving view or the 
- * JAXB representation of the document while the other view remains 
+ * Jakarta XML Binding representation of the document while the other view remains 
  * unmodified. The binder is able to synchronize the changes made in the 
  * modified view back into the other view using the appropriate
  * Binder update methods, {@link #updateXML(Object, Object)} or 
@@ -36,11 +36,11 @@ import javax.xml.validation.Schema;
  * A typical usage scenario is the following:
  * <ul>
  *   <li>load XML document into an XML infoset representation</li>
- *   <li>{@link #unmarshal(Object)} XML infoset view to JAXB view.
+ *   <li>{@link #unmarshal(Object)} XML infoset view to Jakarta XML Binding view.
  *       (Note to conserve resources, it is possible to only unmarshal a
- *       subtree of the XML infoset view to the JAXB view.)</li>
- *   <li>application access/updates JAXB view of XML document.</li>
- *   <li>{@link #updateXML(Object)} synchronizes modifications to JAXB view 
+ *       subtree of the XML infoset view to the Jakarta XML Binding view.)</li>
+ *   <li>application access/updates Jakarta XML Binding view of XML document.</li>
+ *   <li>{@link #updateXML(Object)} synchronizes modifications to Jakarta XML Binding view 
  *       back into the XML infoset view. Update operation preserves as 
  *       much of original XML infoset as possible (i.e. comments, PI, ...)</li>
  * </ul>
@@ -65,12 +65,12 @@ import javax.xml.validation.Schema;
  */
 public abstract class Binder<XmlNode> {
     /**
-     * Unmarshal XML infoset view to a JAXB object tree.
+     * Unmarshal XML infoset view to a Jakarta XML Binding object tree.
      *
      * <p>
      * This method is similar to {@link Unmarshaller#unmarshal(Node)}
      * with the addition of maintaining the association between XML nodes 
-     * and the produced JAXB objects, enabling future update operations,
+     * and the produced Jakarta XML Binding objects, enabling future update operations,
      * {@link #updateXML(Object, Object)} or {@link #updateJAXB(Object)}.
      *
      * <p>
@@ -81,15 +81,15 @@ public abstract class Binder<XmlNode> {
      * This method throws {@link UnmarshalException} when the Binder's
      * {@link JAXBContext} does not have a mapping for the XML element name
      * or the type, specifiable via {@code @xsi:type}, of {@code xmlNode}
-     * to a JAXB mapped class. The method {@link #unmarshal(Object, Class)} 
-     * enables an application to specify the JAXB mapped class that
+     * to a Jakarta XML Binding mapped class. The method {@link #unmarshal(Object, Class)} 
+     * enables an application to specify the Jakarta XML Binding mapped class that
      * the {@code xmlNode} should be mapped to.
      *
      * @param xmlNode 
      *      the document/element to unmarshal XML data from.
      *
      * @return
-     *      the newly created root object of the JAXB object tree.
+     *      the newly created root object of the Jakarta XML Binding object tree.
      *
      * @throws JAXBException
      *      If any unexpected errors occur while unmarshalling
@@ -105,7 +105,7 @@ public abstract class Binder<XmlNode> {
 
     /**
      * Unmarshal XML root element by provided {@code declaredType}
-     * to a JAXB object tree.
+     * to a Jakarta XML Binding object tree.
      *
      * <p>
      * Implements <a href="Unmarshaller.html#unmarshalByDeclaredType">Unmarshal by Declared Type</a>
@@ -113,7 +113,7 @@ public abstract class Binder<XmlNode> {
      * <p>
      * This method is similar to {@link Unmarshaller#unmarshal(Node, Class)}
      * with the addition of maintaining the association between XML nodes 
-     * and the produced JAXB objects, enabling future update operations,
+     * and the produced Jakarta XML Binding objects, enabling future update operations,
      * {@link #updateXML(Object, Object)} or {@link #updateJAXB(Object)}.
      *
      * <p>
@@ -123,10 +123,10 @@ public abstract class Binder<XmlNode> {
      * @param xmlNode 
      *      the document/element to unmarshal XML data from.
      * @param declaredType
-     *      appropriate JAXB mapped class to hold {@code node}'s XML data.
+     *      appropriate Jakarta XML Binding mapped class to hold {@code node}'s XML data.
      *
      * @return
-     * <a href="JAXBElement.html">JAXB Element</a> representation 
+     * <a href="JAXBElement.html">JAXBElement</a> representation 
      * of {@code node}
      *
      * @throws JAXBException
@@ -145,11 +145,11 @@ public abstract class Binder<XmlNode> {
 	throws JAXBException;
 
     /**
-     * Marshal a JAXB object tree to a new XML document.
+     * Marshal a Jakarta XML Binding object tree to a new XML document.
      *
      * <p>
      * This method is similar to {@link Marshaller#marshal(Object, Node)}
-     * with the addition of maintaining the association between JAXB objects 
+     * with the addition of maintaining the association between Jakarta XML Binding objects 
      * and the produced XML nodes,
      * enabling future update operations such as 
      * {@link #updateXML(Object, Object)} or {@link #updateJAXB(Object)}.
@@ -177,25 +177,25 @@ public abstract class Binder<XmlNode> {
     public abstract void marshal( Object jaxbObject, XmlNode xmlNode ) throws JAXBException;
 
     /**
-     * Gets the XML element associated with the given JAXB object.
+     * Gets the XML element associated with the given Jakarta XML Binding object.
      *
      * <p>
-     * Once a JAXB object tree is associated with an XML fragment,
+     * Once a Jakarta XML Binding object tree is associated with an XML fragment,
      * this method enables navigation between the two trees.
      *
      * <p>
-     * An association between an XML element and a JAXB object is
+     * An association between an XML element and a Jakarta XML Binding object is
      * established by the bind methods and the update methods.
      * Note that this association is partial; not all XML elements
-     * have associated JAXB objects, and not all JAXB objects have
+     * have associated Jakarta XML Binding objects, and not all Jakarta XML Binding objects have
      * associated XML elements.
      *
      * @param jaxbObject An instance that is reachable from a prior 
      *                   call to a bind or update method that returned
-     *                   a JAXB object tree.
+     *                   a Jakarta XML Binding object tree.
      *
      * @return
-     *      null if the specified JAXB object is not known to this
+     *      null if the specified Jakarta XML Binding object is not known to this
      *      {@link Binder}, or if it is not associated with an
      *      XML element.
      *
@@ -205,23 +205,23 @@ public abstract class Binder<XmlNode> {
     public abstract XmlNode getXMLNode( Object jaxbObject );
 
     /**
-     * Gets the JAXB object associated with the given XML element.
+     * Gets the Jakarta XML Binding object associated with the given XML element.
      *
      * <p>
-     * Once a JAXB object tree is associated with an XML fragment,
+     * Once a Jakarta XML Binding object tree is associated with an XML fragment,
      * this method enables navigation between the two trees.
      *
      * <p>
-     * An association between an XML element and a JAXB object is
+     * An association between an XML element and a Jakarta XML Binding object is
      * established by the unmarshal, marshal and update methods.
      * Note that this association is partial; not all XML elements
-     * have associated JAXB objects, and not all JAXB objects have
+     * have associated Jakarta XML Binding objects, and not all Jakarta XML Binding objects have
      * associated XML elements.
      *
      * @return
      *      null if the specified XML node is not known to this
      *      {@link Binder}, or if it is not associated with a
-     *      JAXB object.
+     *      Jakarta XML Binding object.
      *
      * @throws IllegalArgumentException
      *      If the node parameter is null
@@ -229,7 +229,7 @@ public abstract class Binder<XmlNode> {
     public abstract Object getJAXBNode( XmlNode xmlNode );
 
     /**
-     * Takes an JAXB object and updates
+     * Takes an Jakarta XML Binding object and updates
      * its associated XML node and its descendants.
      *
      * <p>
@@ -246,7 +246,7 @@ public abstract class Binder<XmlNode> {
     public abstract XmlNode updateXML( Object jaxbObject ) throws JAXBException;
 
     /**
-     * Changes in JAXB object tree are updated in its associated XML parse tree.
+     * Changes in Jakarta XML Binding object tree are updated in its associated XML parse tree.
      *
      * <p>
      * This operation can be thought of as an "in-place" marshalling.
@@ -256,14 +256,14 @@ public abstract class Binder<XmlNode> {
      *
      * <p>
      * For example, unknown elements/attributes in XML that were not bound
-     * to JAXB will be left untouched (whereas a marshalling operation
+     * to Jakarta XML Binding will be left untouched (whereas a marshalling operation
      * would create a new tree that doesn't contain any of those.)
      *
      * <p>
      * As a side-effect, this operation updates the association between
-     * XML nodes and JAXB objects.
+     * XML nodes and Jakarta XML Binding objects.
      *
-     * @param jaxbObject root of potentially modified JAXB object tree
+     * @param jaxbObject root of potentially modified Jakarta XML Binding object tree
      * @param xmlNode    root of update target XML parse tree
      *
      * @return
@@ -280,20 +280,20 @@ public abstract class Binder<XmlNode> {
     public abstract XmlNode updateXML( Object jaxbObject, XmlNode xmlNode ) throws JAXBException;
 
     /**
-     * Takes an XML node and updates its associated JAXB object and its descendants.
+     * Takes an XML node and updates its associated Jakarta XML Binding object and its descendants.
      *
      * <p>
      * This operation can be thought of as an "in-place" unmarshalling.
-     * The difference is that instead of creating a whole new JAXB tree,
-     * this operation updates an existing tree, reusing as much JAXB objects
+     * The difference is that instead of creating a whole new Jakarta XML Binding tree,
+     * this operation updates an existing tree, reusing as much Jakarta XML Binding objects
      * as possible.
      *
      * <p>
      * As a side-effect, this operation updates the association between
-     * XML nodes and JAXB objects.
+     * XML nodes and Jakarta XML Binding objects.
      *
      * @return
-     *      Returns the updated JAXB object. Typically, this is the same
+     *      Returns the updated Jakarta XML Binding object. Typically, this is the same
      *      object that was returned from earlier
      *      {@link #marshal(Object,Object)} or
      *      {@link #updateJAXB(Object)} method invocation,
@@ -302,7 +302,7 @@ public abstract class Binder<XmlNode> {
      *      element has changed.
      * 
      * @throws JAXBException
-     *      If any unexpected problem occurs updating corresponding JAXB mapped content.
+     *      If any unexpected problem occurs updating corresponding Jakarta XML Binding mapped content.
      * @throws IllegalArgumentException
      *      If node parameter is null
      */
@@ -330,7 +330,7 @@ public abstract class Binder<XmlNode> {
     /**
      * Allow an application to register a {@code ValidationEventHandler}.
      * <p>
-     * The {@code ValidationEventHandler} will be called by the JAXB Provider
+     * The {@code ValidationEventHandler} will be called by the Jakarta XML Binding Provider
      * if any validation errors are encountered during calls to any of the
      * Binder unmarshal, marshal and update methods.  
      * 
@@ -359,7 +359,7 @@ public abstract class Binder<XmlNode> {
      * 
      * Set the particular property in the underlying implementation of
      * {@code Binder}.  This method can only be used to set one of
-     * the standard JAXB defined unmarshal/marshal properties 
+     * the standard Jakarta XML Binding defined unmarshal/marshal properties 
      * or a provider specific property for binder, unmarshal or marshal.
      * Attempting to set an undefined property will result in
      * a PropertyException being thrown.  See 
@@ -384,7 +384,7 @@ public abstract class Binder<XmlNode> {
      * Get the particular property in the underlying implementation of
      * {@code Binder}.  This method can only
      * be used to get one of
-     * the standard JAXB defined unmarshal/marshal properties 
+     * the standard Jakarta XML Binding defined unmarshal/marshal properties 
      * or a provider specific property for binder, unmarshal or marshal.  
      * Attempting to get an undefined property will result in
      * a PropertyException being thrown.  See 

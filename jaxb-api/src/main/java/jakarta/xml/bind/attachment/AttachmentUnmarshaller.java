@@ -13,11 +13,11 @@ package jakarta.xml.bind.attachment;
 import jakarta.activation.DataHandler;
 
 /**
- * <p>Enables JAXB unmarshalling of a root document containing optimized binary data formats.</p>
+ * <p>Enables Jakarta XML Binding unmarshalling of a root document containing optimized binary data formats.</p>
  *
  * <p>This API enables an efficient cooperative processing of optimized
- * binary data formats between a JAXB 2.0 implementation and MIME-based package
- * processor (MTOM/XOP and WS-I AP 1.0). JAXB unmarshals the body of a package, delegating the 
+ * binary data formats between a Jakarta XML Binding implementation and MIME-based package
+ * processor (MTOM/XOP and WS-I AP 1.0). Jakarta XML Binding unmarshals the body of a package, delegating the 
  * understanding of the packaging format being used to a MIME-based 
  * package processor that implements this abstract class.</p>
  *
@@ -111,7 +111,7 @@ public abstract class AttachmentUnmarshaller {
     public abstract byte[] getAttachmentAsByteArray(String cid);
 
     /**
-     * <p>Read-only property that returns true if JAXB unmarshaller needs to perform XOP processing.</p>
+     * <p>Read-only property that returns true if Jakarta XML Binding unmarshaller needs to perform XOP processing.</p>
      *
      * <p>This method returns {@code true} when the constraints specified
      * in  <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#identifying_xop_documents">Identifying XOP Documents</a> are met.

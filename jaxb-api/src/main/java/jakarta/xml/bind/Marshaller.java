@@ -135,15 +135,15 @@ import java.io.File;
  *
  * <p>
  * <a id="elementMarshalling"></a>
- * <b>Marshalling content tree rooted by a JAXB element</b><br>
+ * <b>Marshalling content tree rooted by a Jakarta XML Binding element</b><br>
  * <blockquote>
  * The first parameter of the overloaded
  * {@code Marshaller.marshal(java.lang.Object, ...)} methods must be a
- * JAXB element as computed by 
+ * Jakarta XML Binding element as computed by 
  * {@link JAXBIntrospector#isElement(java.lang.Object)};
  * otherwise, a {@code Marshaller.marshal} method must throw a
  * {@link MarshalException}. There exist two mechanisms 
- * to enable marshalling an instance that is not a JAXB element.
+ * to enable marshalling an instance that is not a Jakarta XML Binding element.
  * One method is to wrap the instance as a value of a {@link JAXBElement}, 
  * and pass the wrapper element as the first parameter to
  * a {@code Marshaller.marshal} method. For java to schema binding, it
@@ -170,12 +170,12 @@ import java.io.File;
  * Client applications are not required to validate the Java content tree prior
  * to calling any of the marshal API's.  Furthermore, there is no requirement 
  * that the Java content tree be valid with respect to its original schema in
- * order to marshal it back into XML data.  Different JAXB Providers will 
+ * order to marshal it back into XML data.  Different Jakarta XML Binding Providers will 
  * support marshalling invalid Java content trees at varying levels, however
- * all JAXB Providers must be able to marshal a valid content tree back to 
- * XML data.  A JAXB Provider must throw a {@code MarshalException} when it
+ * all Jakarta XML Binding Providers must be able to marshal a valid content tree back to 
+ * XML data.  A Jakarta XML Binding Provider must throw a {@code MarshalException} when it
  * is unable to complete the marshal operation due to invalid content.  Some
- * JAXB Providers will fully allow marshalling invalid content, others will fail
+ * Jakarta XML Binding Providers will fully allow marshalling invalid content, others will fail
  * on the first validation error.
  * <p>
  * Even when schema validation is not explictly enabled for the marshal operation,
@@ -184,7 +184,7 @@ import java.io.File;
  * event handler.  If the client application has not registered an event handler
  * prior to invoking one of the marshal API's, then events will be delivered to
  * a default event handler which will terminate the marshal operation after
- * encountering the first error or fatal error. Note that for JAXB 2.0 and
+ * encountering the first error or fatal error. Note that for Jakarta XML Binding and
  * later versions, {@link jakarta.xml.bind.helpers.DefaultValidationEventHandler} is
  * no longer used.
  * 
@@ -195,7 +195,7 @@ import java.io.File;
  * <b>Supported Properties</b><br>
  * <blockquote>
  * <p>
- * All JAXB Providers are required to support the following set of properties.
+ * All Jakarta XML Binding Providers are required to support the following set of properties.
  * Some providers may support additional properties.
  * <dl>
  *   <dt>{@code jaxb.encoding} - value must be a java.lang.String</dt>
@@ -262,12 +262,12 @@ import java.io.File;
  * "The {@link Marshaller} provides two styles of callback mechanisms
  * that allow application specific processing during key points in the
  * unmarshalling process.  In 'class defined' event callbacks, application
- * specific code placed in JAXB mapped classes is triggered during
+ * specific code placed in Jakarta XML Binding mapped classes is triggered during
  * marshalling.  'External listeners' allow for centralized processing
  * of marshal events in one callback method rather than by type event callbacks.
  *
  * <p>
- * Class defined event callback methods allow any JAXB mapped class to specify 
+ * Class defined event callback methods allow any Jakarta XML Binding mapped class to specify 
  * its own specific callback methods by defining methods with the following method signatures:
  * <blockquote>
  * <pre>
@@ -341,7 +341,7 @@ public interface Marshaller {
      * {@code javax.xml.transform.Result}.
      * 
      * <p>
-     * All JAXB Providers must at least support
+     * All Jakarta XML Binding Providers must at least support
      * {@link javax.xml.transform.dom.DOMResult},
      * {@link javax.xml.transform.sax.SAXResult}, and
      * {@link javax.xml.transform.stream.StreamResult}. It can 
@@ -359,7 +359,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
@@ -381,7 +381,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
@@ -403,7 +403,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      * @since 1.6, JAXB 2.1
@@ -426,7 +426,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
@@ -448,7 +448,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
@@ -474,7 +474,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
@@ -497,7 +497,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      * @since 1.6, JAXB 2.0
@@ -521,7 +521,7 @@ public interface Marshaller {
      *      returns false from its {@code handleEvent} method or the
      *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
      *      object reachable from {@code jaxbElement}).  See <a href="#elementMarshalling">
-     *      Marshalling a JAXB element</a>.
+     *      Marshalling a Jakarta XML Binding element</a>.
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      * @since 1.6, JAXB 2.0
@@ -537,12 +537,12 @@ public interface Marshaller {
      * Use {@link #marshal(Object, org.w3c.dom.Node)} to force
      * a deep copy of the content tree to a DOM representation.
      * 
-     * @param contentTree - JAXB Java representation of XML content
+     * @param contentTree - Jakarta XML Binding Java representation of XML content
      * 
      * @return the DOM tree view of the contentTree
      * 
      * @throws UnsupportedOperationException
-     *      If the JAXB provider implementation does not support a
+     *      If the Jakarta XML Binding provider implementation does not support a
      *      DOM view of the content tree
      * 
      * @throws IllegalArgumentException
@@ -558,7 +558,7 @@ public interface Marshaller {
     /**
      * Set the particular property in the underlying implementation of 
      * {@code Marshaller}.  This method can only be used to set one of
-     * the standard JAXB defined properties above or a provider specific
+     * the standard Jakarta XML Binding defined properties above or a provider specific
      * property.  Attempting to set an undefined property will result in
      * a PropertyException being thrown.  See <a href="#supportedProps">
      * Supported Properties</a>.
@@ -579,7 +579,7 @@ public interface Marshaller {
     /**
      * Get the particular property in the underlying implementation of 
      * {@code Marshaller}.  This method can only be used to get one of
-     * the standard JAXB defined properties above or a provider specific
+     * the standard Jakarta XML Binding defined properties above or a provider specific
      * property.  Attempting to get an undefined property will result in
      * a PropertyException being thrown.  See <a href="#supportedProps">
      * Supported Properties</a>.
@@ -598,7 +598,7 @@ public interface Marshaller {
     /**
      * Allow an application to register a validation event handler.
      * <p>
-     * The validation event handler will be called by the JAXB Provider if any
+     * The validation event handler will be called by the Jakarta XML Binding Provider if any
      * validation errors are encountered during calls to any of the marshal
      * API's.  If the client application does not register a validation event 
      * handler before invoking one of the marshal methods, then validation 
@@ -763,7 +763,7 @@ public interface Marshaller {
          * Note that if the class of {@code source} defines its own {@code beforeMarshal} method,
          * the class specific callback method is invoked just before this method is invoked.
          *
-         * @param source instance of JAXB mapped class prior to marshalling from it.
+         * @param source instance of Jakarta XML Binding mapped class prior to marshalling from it.
          */
         public void beforeMarshal(Object source) {
         }
@@ -777,7 +777,7 @@ public interface Marshaller {
          * Note that if the class of {@code source} defines its own {@code afterMarshal} method,
          * the class specific callback method is invoked just before this method is invoked.
          *
-         * @param source instance of JAXB mapped class after marshalling it.
+         * @param source instance of Jakarta XML Binding mapped class after marshalling it.
          */
         public void afterMarshal(Object source) {
         }

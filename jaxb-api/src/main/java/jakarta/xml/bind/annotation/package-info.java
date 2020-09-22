@@ -14,7 +14,7 @@
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
  *
  * <h2>Package Specification</h2>
- * <p>The following table shows the JAXB mapping annotations
+ * <p>The following table shows the Jakarta XML Binding mapping annotations
  * that can be associated with each program element. </p>
  * <p>
  * <table class="striped">
@@ -22,7 +22,7 @@
  *   <thead>
  *     <tr>
  *       <th scope="col">Program Element</th>
- *       <th scope="col">JAXB annotation</th>
+ *       <th scope="col">Jakarta XML Binding annotation</th>
  *     </tr>
  *   </thead>
  *   <tbody style="text-align:left">
@@ -124,7 +124,7 @@
  * mean either a top level class or a nested static
  * class.
  * <p>
- * <b>mapping annotation:</b>A JAXB 2.0 defined program
+ * <b>mapping annotation:</b>A Jakarta XML Binding defined program
  * annotation based on the JSR 175 programming annotation
  * facility.
  * <h3>Common Usage Constraints</h3>

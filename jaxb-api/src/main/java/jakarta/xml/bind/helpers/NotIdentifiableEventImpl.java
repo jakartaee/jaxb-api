@@ -16,7 +16,7 @@ import jakarta.xml.bind.ValidationEventLocator;
  * Default implementation of the NotIdentifiableEvent interface.
  * 
  * <p>
- * JAXB providers are allowed to use whatever class that implements
+ * Jakarta XML Binding providers are allowed to use whatever class that implements
  * the ValidationEvent interface. This class is just provided for a
  * convenience.
  *

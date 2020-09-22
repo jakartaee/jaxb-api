@@ -18,14 +18,14 @@ import javax.xml.transform.sax.SAXResult;
 
 /**
  * JAXP {@link javax.xml.transform.Result} implementation
- * that unmarshals a JAXB object.
+ * that unmarshals a Jakarta XML Binding object.
  * 
  * <p>
- * This utility class is useful to combine JAXB with
+ * This utility class is useful to combine Jakarta XML Binding with
  * other Java/XML technologies.
  * 
  * <p>
- * The following example shows how to use JAXB to unmarshal a document
+ * The following example shows how to use Jakarta XML Binding to unmarshal a document
  * resulting from an XSLT transformation.
  * 
  * <blockquote>

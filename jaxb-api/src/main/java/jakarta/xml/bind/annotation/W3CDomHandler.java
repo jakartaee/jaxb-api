@@ -34,7 +34,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
     /**
      * Default constructor.
      *
-     * It is up to a JAXB provider to decide which DOM implementation
+     * It is up to a Jakarta XML Binding provider to decide which DOM implementation
      * to use or how that is configured.
      */
     public W3CDomHandler() {
@@ -46,7 +46,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
      * to be used.
      *
      * @param builder
-     *      must not be null. JAXB uses this {@link DocumentBuilder} to create
+     *      must not be null. Jakarta XML Binding uses this {@link DocumentBuilder} to create
      *      a new element.
      */
     public W3CDomHandler(DocumentBuilder builder) {
@@ -83,7 +83,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
             return (Element)n.getChildNodes().item(0);
 
         // if the result object contains something strange,
-        // it is not a user problem, but it is a JAXB provider's problem.
+        // it is not a user problem, but it is a Jakarta XML Binding provider's problem.
         // That's why we throw a runtime exception.
         throw new IllegalStateException(n.toString());
     }

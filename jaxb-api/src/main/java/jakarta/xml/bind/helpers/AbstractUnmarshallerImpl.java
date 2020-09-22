@@ -43,7 +43,7 @@ import java.net.URL;
  * {@link jakarta.xml.bind.Unmarshaller}interface.
  * 
  * <p>
- * A JAXB Provider has to implement five methods (getUnmarshallerHandler,
+ * A Jakarta XML Binding Provider has to implement five methods (getUnmarshallerHandler,
  * unmarshal(Node), unmarshal(XMLReader,InputSource),
  * unmarshal(XMLStreamReader), and unmarshal(XMLEventReader).
  * 
@@ -219,7 +219,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     /**
      * Allow an application to register a validation event handler.
      * <p>
-     * The validation event handler will be called by the JAXB Provider if any
+     * The validation event handler will be called by the Jakarta XML Binding Provider if any
      * validation errors are encountered during calls to any of the
      * {@code unmarshal} methods.  If the client application does not register
      * a validation event handler before invoking the unmarshal methods, then

@@ -13,7 +13,7 @@ package jakarta.xml.bind;
 import java.io.PrintWriter;
 
 /**
- * This is the root exception class for all JAXB exceptions.
+ * This is the root exception class for all Jakarta XML Binding exceptions.
  *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext

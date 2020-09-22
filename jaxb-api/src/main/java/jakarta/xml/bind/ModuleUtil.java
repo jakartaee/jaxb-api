@@ -27,8 +27,8 @@ class ModuleUtil {
      * in their jar files.
      *
      * <p>
-     * When the user bundles his own JAXB implementation, we'd like to use it, and we
-     * want the platform default to be used only when there's no other JAXB provider.
+     * When the user bundles his own Jakarta XML Binding implementation, we'd like to use it, and we
+     * want the platform default to be used only when there's no other Jakarta XML Binding provider.
      *
      * <p>
      * For this reason, we have to hard-code the class name into the API.
@@ -52,7 +52,7 @@ class ModuleUtil {
     }
 
     /**
-     * Implementation may be defined in other module than {@code java.xml.bind}. In that case openness
+     * Implementation may be defined in other module than {@code jakarta.xml.bind}. In that case openness
      * {@linkplain java.lang.Module#isOpen open} of classes should be delegated to implementation module.
      *
      * @param classes used to resolve module for {@linkplain java.lang.Module#addOpens(String, java.lang.Module)}

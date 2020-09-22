@@ -30,17 +30,17 @@ package jakarta.xml.bind.annotation.adapters;
  *
  * <p>
  * This abstract class defines methods for adapting a bound type to a value
- * type or vice versa. The methods are invoked by the JAXB binding
+ * type or vice versa. The methods are invoked by the Jakarta XML Binding binding
  * framework during marshaling and unmarshalling:
  *
  * <ul>
- *   <li> <b> XmlAdapter.marshal(...): </b> During marshalling, JAXB
+ *   <li> <b> XmlAdapter.marshal(...): </b> During marshalling, Jakarta XML Binding
  *        binding framework invokes XmlAdapter.marshal(..) to adapt a
  *        bound type to value type, which is then marshaled to XML 
  *        representation. </li> 
  *
  *   <li> <b> XmlAdapter.unmarshal(...): </b> During unmarshalling,
- *        JAXB binding framework first unmarshals XML representation
+ *        Jakarta XML Binding binding framework first unmarshals XML representation
  *        to a value type and then invokes XmlAdapter.unmarshal(..) to
  *        adapt the value type to a bound type. </li> 
  * </ul>
@@ -137,11 +137,11 @@ package jakarta.xml.bind.annotation.adapters;
  * }</pre>
  *
  * @param <BoundType>
- *      The type that JAXB doesn't know how to handle. An adapter is written
+ *      The type that Jakarta XML Binding doesn't know how to handle. An adapter is written
  *      to allow this type to be used as an in-memory representation through
  *      the {@code ValueType}.
  * @param <ValueType>
- *      The type that JAXB knows how to handle out of the box.
+ *      The type that Jakarta XML Binding knows how to handle out of the box.
  *
  * @author <ul><li>Sekhar Vajjhala, Sun Microsystems Inc.</li> <li> Kohsuke Kawaguchi, Sun Microsystems Inc.</li></ul>
  * @see XmlJavaTypeAdapter

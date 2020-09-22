@@ -12,7 +12,7 @@ package jakarta.xml.bind;
 
 /**
  * This exception indicates that an error has occurred while performing
- * an unmarshal operation that prevents the JAXB Provider from completing
+ * an unmarshal operation that prevents the Jakarta XML Binding Provider from completing
  * the operation.
  * 
  * <p>

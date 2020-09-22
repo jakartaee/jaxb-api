@@ -18,9 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Shared ServiceLoader/FactoryFinder Utils shared among SAAJ, JAXB and JAXWS
- * - this class must be duplicated to all those projects, but it's
- * basically generic code and we want to have it everywhere same.
+ * Shared ServiceLoader/FactoryFinder Utils shared among Jakarta SOAP with Attachments, Jakarta XML Binding
+ * and Jakarta XML Web Services.
+ * Class duplicated to all those projects.
  *
  * @author Miroslav.Kos@oracle.com
  */

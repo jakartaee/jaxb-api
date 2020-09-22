@@ -25,12 +25,12 @@ import javax.xml.transform.Source;
  *
  * <p>
  * Implementations hide how a portion of XML is converted into/from such
- * DOM-like representation, allowing JAXB providers to work with arbitrary
+ * DOM-like representation, allowing Jakarta XML Binding providers to work with arbitrary
  * such library.
  *
  * <P>
  * This interface is intended to be implemented by library writers
- * and consumed by JAXB providers. None of those methods are intended to
+ * and consumed by Jakarta XML Binding providers. None of those methods are intended to
  * be called from applications.
  *
  * @author Kohsuke Kawaguchi
@@ -38,12 +38,12 @@ import javax.xml.transform.Source;
  */
 public interface DomHandler<ElementT,ResultT extends Result> {
     /**
-     * When a JAXB provider needs to unmarshal a part of a document into an
+     * When a Jakarta XML Binding provider needs to unmarshal a part of a document into an
      * infoset representation, it first calls this method to create a
      * {@link Result} object.
      *
      * <p>
-     * A JAXB provider will then send a portion of the XML
+     * A Jakarta XML Binding provider will then send a portion of the XML
      * into the given result. Such a portion always form a subtree
      * of the whole XML document rooted at an element.
      *
@@ -65,7 +65,7 @@ public interface DomHandler<ElementT,ResultT extends Result> {
 
     /**
      * Once the portion is sent to the {@link Result}. This method is called
-     * by a JAXB provider to obtain the unmarshalled element representation.
+     * by a Jakarta XML Binding provider to obtain the unmarshalled element representation.
      *
      * <p>
      * Multiple invocations of this method may return different objects.
@@ -82,13 +82,13 @@ public interface DomHandler<ElementT,ResultT extends Result> {
     ElementT getElement(ResultT rt);
 
     /**
-     * This method is called when a JAXB provider needs to marshal an element
+     * This method is called when a Jakarta XML Binding provider needs to marshal an element
      * to XML.
      *
      * <p>
      * If non-null, the returned {@link Source} must contain a whole document
      * rooted at one element, which will then be weaved into a bigger document
-     * that the JAXB provider is marshalling.
+     * that the Jakarta XML Binding provider is marshalling.
      *
      * @param errorHandler
      *      Receives any errors happened during the process of converting

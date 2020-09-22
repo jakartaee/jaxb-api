@@ -14,7 +14,7 @@ import javax.xml.namespace.QName;
 import java.io.Serializable;
 
 /**
- * <p>JAXB representation of an Xml Element.</p>
+ * <p>Jakarta XML Binding representation of an Xml Element.</p>
  *
  * <p>This class represents information about an Xml Element from both the element 
  * declaration within a schema and the element instance value within an xml document
@@ -28,7 +28,7 @@ import java.io.Serializable;
  * </ul>
  * 
  * <p>The {@code declaredType} and {@code scope} property are the
- * JAXB class binding for the xml type definition.
+ * Jakarta XML Binding class binding for the xml type definition.
  * </p>
  * 
  * <p><b>{@code Scope}</b> is either {@link GlobalScope} or the Java class representing the

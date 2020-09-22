@@ -20,8 +20,8 @@ import java.util.Properties;
 
 /**
  * The {@code JAXBContext} class provides the client's entry point to the
- * JAXB API. It provides an abstraction for managing the XML/Java binding
- * information necessary to implement the JAXB binding framework operations:
+ * Jakarta XML Binding API. It provides an abstraction for managing the XML/Java binding
+ * information necessary to implement the Jakarta XML Binding binding framework operations:
  * unmarshal, marshal and validate.
  *
  * <p>A client application normally obtains new instances of this class using
@@ -32,8 +32,8 @@ import java.util.Properties;
  * <li>{@link #newInstance(String, ClassLoader) JAXBContext.newInstance( "com.acme.foo:com.acme.bar" )} <br>
  * The JAXBContext instance is initialized from a list of colon
  * separated Java package names. Each java package contains
- * JAXB mapped classes, schema-derived classes and/or user annotated
- * classes. Additionally, the java package may contain JAXB package annotations
+ * Jakarta XML Binding mapped classes, schema-derived classes and/or user annotated
+ * classes. Additionally, the java package may contain Jakarta XML Binding package annotations
  * that must be processed. (see JLS, Section 7.4.1 "Named Packages").
  * </li>
  * <li>{@link #newInstance(Class...) JAXBContext.newInstance( com.acme.foo.Foo.class )} <br>
@@ -45,8 +45,8 @@ import java.util.Properties;
  *
  * <p><i>
  * The following JAXB 1.0 requirement is only required for schema to
- * java interface/implementation binding. It does not apply to JAXB annotated
- * classes. JAXB Providers must generate a {@code jaxb.properties} file in
+ * java interface/implementation binding. It does not apply to Jakarta XML Binding annotated
+ * classes. Jakarta XML Binding Providers must generate a {@code jaxb.properties} file in
  * each package containing schema derived classes.  The property file must
  * contain a property named {@code jakarta.xml.bind.context.factory} whose
  * value is the name of the class that implements the {@code createContext}
@@ -93,10 +93,10 @@ import java.util.Properties;
  *
  * <p>
  * The client application may also generate Java content trees explicitly rather
- * than unmarshalling existing XML data.  For all JAXB-annotated value classes,
+ * than unmarshalling existing XML data.  For all Jakarta XML Binding-annotated value classes,
  * an application can create content using constructors.
  * For schema-derived interface/implementation classes and for the
- * creation of elements that are not bound to a JAXB-annotated
+ * creation of elements that are not bound to a Jakarta XML Binding-annotated
  * class, an application needs to have access and knowledge about each of
  * the schema derived {@code ObjectFactory} classes that exist in each of
  * java packages contained in the {@code contextPath}.  For each schema
@@ -162,20 +162,20 @@ import java.util.Properties;
  * Validation has been changed significantly since JAXB 1.0.  The {@link Validator}
  * class has been deprecated and made optional.  This means that you are advised
  * not to use this class and, in fact, it may not even be available depending on
- * your JAXB provider.  JAXB 1.0 client applications that rely on {@code Validator}
+ * your Jakarta XML Binding provider.  JAXB 1.0 client applications that rely on {@code Validator}
  * will still work properly when deployed with the JAXB 1.0 runtime system.
  *
- * In JAXB 2.0, the {@link Unmarshaller} has included convenince methods that expose
+ * In Jakarta XML Binding, the {@link Unmarshaller} has included convenience methods that expose
  * the JAXP 1.3 {@link javax.xml.validation} framework.  Please refer to the
  * {@link Unmarshaller#setSchema(javax.xml.validation.Schema)} API for more
  * information.
  *
  *
- * <h3>JAXB Runtime Binding Framework Compatibility</h3>
+ * <h3>Jakarta XML Binding Runtime Framework Compatibility</h3>
  * <p>
  * The following JAXB 1.0 restriction only applies to binding schema to
  * interfaces/implementation classes.
- * Since this binding does not require a common runtime system, a JAXB
+ * Since this binding does not require a common runtime system, a Jakarta XML Binding
  * client application must not attempt to mix runtime objects ({@code JAXBContext,
  * Marshaller}, etc. ) from different providers.  This does not
  * mean that the client application isn't portable, it simply means that a
@@ -183,7 +183,7 @@ import java.util.Properties;
  * used to compile the schema.
  *
  *
- * <h3>Discovery of JAXB implementation</h3>
+ * <h3>Discovery of Jakarta XML Binding implementation</h3>
  * <p>
  * To create an instance of {@link JAXBContext}, one of {@code JAXBContext.newInstance(...)} methods is invoked. After
  * JAX-B implementation is discovered, call is delegated to appropriate provider's method {@code createContext(...)}
@@ -209,7 +209,7 @@ import java.util.Properties;
  * then loaded by the associated class loader discussed above.
  *
  * <p>
- * This phase of the look up allows some packages to force the use of a certain JAXB implementation.
+ * This phase of the look up allows some packages to force the use of a certain Jakarta XML Binding implementation.
  * (For example, perhaps the schema compiler has generated some vendor extension in the code.)
  *
  * <p>
@@ -219,7 +219,7 @@ import java.util.Properties;
  * If the system property {@link #JAXB_CONTEXT_FACTORY} exists, then its value is assumed to be the provider
  * factory class. If no such property exists, properties {@code "jakarta.xml.bind.context.factory"} and
  * {@code "jakarta.xml.bind.JAXBContext"} are checked too (in this order), for backwards compatibility reasons. This phase
- * of the look up enables per-JVM override of the JAXB implementation.
+ * of the look up enables per-JVM override of the Jakarta XML Binding implementation.
  *
  * <li>
  * Provider of {@link jakarta.xml.bind.JAXBContextFactory} is loaded using the service-provider loading
@@ -242,7 +242,7 @@ import java.util.Properties;
  *
  * <li>
  * Finally, if all the steps above fail, then the rest of the look up is unspecified. That said,
- * the recommended behavior is to simply look for some hard-coded platform default JAXB implementation.
+ * the recommended behavior is to simply look for some hard-coded platform default Jakarta XML Binding implementation.
  * This phase of the look up is so that Java SE can have its own JAXB implementation as the last resort.
  * </ol>
  *
@@ -326,7 +326,7 @@ public abstract class JAXBContext {
      *   <li>an ambiguity among global elements contained in the contextPath</li>
      *   <li>failure to locate a value for the context factory provider property</li>
      *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     *   <li>packages are not open to {@code java.xml.bind} module</li>
+     *   <li>packages are not open to {@code jakarta.xml.bind} module</li>
      * </ol>
      */
     public static JAXBContext newInstance( String contextPath )
@@ -342,16 +342,16 @@ public abstract class JAXBContext {
      * <p>
      * The client application must supply a context path which is a list of
      * colon (':', \u005Cu003A) separated java package names that contain
-     * schema-derived classes and/or fully qualified JAXB-annotated classes.
+     * schema-derived classes and/or fully qualified Jakarta XML Binding-annotated classes.
      * Schema-derived
      * code is registered with the JAXBContext by the
      * ObjectFactory.class generated per package.
      * Alternatively than being listed in the context path, programmer
-     * annotated JAXB mapped classes can be listed in a
+     * annotated Jakarta XML Binding mapped classes can be listed in a
      * {@code jaxb.index} resource file, format described below.
      * Note that a java package can contain both schema-derived classes and
-     * user annotated JAXB classes. Additionally, the java package may
-     * contain JAXB package annotations  that must be processed. (see JLS,
+     * user annotated Jakarta XML Binding classes. Additionally, the java package may
+     * contain Jakarta XML Binding package annotations  that must be processed. (see JLS,
      * Section 7.4.1 "Named Packages").
      * </p>
      *
@@ -390,11 +390,11 @@ public abstract class JAXBContext {
      * To maintain compatibility with JAXB 1.0 schema to java
      * interface/implementation binding, enabled by schema customization
      * {@code <jaxb:globalBindings valueClass="false">},
-     * the JAXB provider will ensure that each package on the context path
+     * the Jakarta XML Binding provider will ensure that each package on the context path
      * has a {@code jaxb.properties} file which contains a value for the
      * {@code jakarta.xml.bind.context.factory} property and that all values
      * resolve to the same provider.  This requirement does not apply to
-     * JAXB annotated classes.
+     * Jakarta XML Binding annotated classes.
      *
      * <p>
      * If there are any global XML element name collisions across the various
@@ -402,19 +402,19 @@ public abstract class JAXBContext {
      * will be thrown.
      *
      * <p>
-     * Mixing generated interface/impl bindings from multiple JAXB Providers
+     * Mixing generated interface/impl bindings from multiple Jakarta XML Binding Providers
      * in the same context path may result in a {@code JAXBException}
      * being thrown.
      *
      * <p>
-     * The steps involved in discovering the JAXB implementation is discussed in the class javadoc.
+     * The steps involved in discovering the Jakarta XML Binding implementation is discussed in the class javadoc.
      *
      * @param contextPath
      *      List of java package names that contain schema
-     *      derived class and/or java to schema (JAXB-annotated)
+     *      derived class and/or java to schema (Jakarta XML Binding-annotated)
      *      mapped classes.
      *      Packages in {@code contextPath} that are in named modules must be
-     *      {@code open} to at least the {@code java.xml.bind} module.
+     *      {@code open} to at least the {@code jakarta.xml.bind} module.
      * @param classLoader
      *      This class loader will be used to locate the implementation
      *      classes.
@@ -427,7 +427,7 @@ public abstract class JAXBContext {
      *   <li>an ambiguity among global elements contained in the contextPath</li>
      *   <li>failure to locate a value for the context factory provider property</li>
      *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     *   <li>packages are not open to {@code java.xml.bind} module</li>
+     *   <li>packages are not open to {@code jakarta.xml.bind} module</li>
      * </ol>
      */
     public static JAXBContext newInstance( String contextPath, ClassLoader classLoader ) throws JAXBException {
@@ -449,10 +449,10 @@ public abstract class JAXBContext {
      *
      * @param contextPath
      *      List of java package names that contain schema
-     *      derived class and/or java to schema (JAXB-annotated)
+     *      derived class and/or java to schema (Jakarta XML Binding-annotated)
      *      mapped classes.
      *      Packages in {@code contextPath} that are in named modules must be
-     *      {@code open} to at least the {@code java.xml.bind} module.
+     *      {@code open} to at least the {@code jakarta.xml.bind} module.
      * @param classLoader
      *      This class loader will be used to locate the implementation classes.
      * @param properties
@@ -467,7 +467,7 @@ public abstract class JAXBContext {
      *   <li>an ambiguity among global elements contained in the contextPath</li>
      *   <li>failure to locate a value for the context factory provider property</li>
      *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     *   <li>packages are not open to {@code java.xml.bind} module</li>
+     *   <li>packages are not open to {@code jakarta.xml.bind} module</li>
      * </ol>
      * @since 1.6, JAXB 2.0
      */
@@ -476,7 +476,7 @@ public abstract class JAXBContext {
                                            Map<String,?>  properties  ) throws JAXBException {
 
         return ContextFinder.find(
-                        /* The default property name according to the JAXB spec */
+                        /* The default property name according to the Jakarta XML Binding spec */
                 JAXB_CONTEXT_FACTORY,
 
                         /* the context path supplied by the client app */
@@ -531,11 +531,11 @@ public abstract class JAXBContext {
 //     *      if an error was encountered while creating the
 //     *      {@code JAXBContext}, such as (but not limited to):
 //     * <ol>
-//     *  <li>No JAXB implementation was discovered
-//     *  <li>Classes use JAXB annotations incorrectly
+//     *  <li>No Jakarta XML Binding implementation was discovered
+//     *  <li>Classes use Jakarta XML Binding annotations incorrectly
 //     *  <li>Classes have colliding annotations (i.e., two classes with the same type name)
 //     *  <li>Specified external bindings are incorrect
-//     *  <li>The JAXB implementation was unable to locate
+//     *  <li>The Jakarta XML Binding implementation was unable to locate
 //     *      provider-specific out-of-band information (such as additional
 //     *      files generated at the development time.)
 //     * </ol>
@@ -596,12 +596,12 @@ public abstract class JAXBContext {
      * (see JLS, Section 7.4.1 "Named Packages").
      *
      * <p>
-     * The steps involved in discovering the JAXB implementation is discussed in the class javadoc.
+     * The steps involved in discovering the Jakarta XML Binding implementation is discussed in the class javadoc.
      *
      * @param classesToBeBound
      *      List of java classes to be recognized by the new {@link JAXBContext}.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@code open} to at least the {@code java.xml.bind} module.
+     *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
      *      Can be empty, in which case a {@link JAXBContext} that only knows about
      *      spec-defined classes will be returned.
      *
@@ -612,13 +612,13 @@ public abstract class JAXBContext {
      *      if an error was encountered while creating the
      *      {@code JAXBContext}, such as (but not limited to):
      * <ol>
-     *  <li>No JAXB implementation was discovered
-     *  <li>Classes use JAXB annotations incorrectly
+     *  <li>No Jakarta XML Binding implementation was discovered
+     *  <li>Classes use Jakarta XML Binding annotations incorrectly
      *  <li>Classes have colliding annotations (i.e., two classes with the same type name)
-     *  <li>The JAXB implementation was unable to locate
+     *  <li>The Jakarta XML Binding implementation was unable to locate
      *      provider-specific out-of-band information (such as additional
      *      files generated at the development time.)
-     *  <li>{@code classesToBeBound} are not open to {@code java.xml.bind} module
+     *  <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
      * </ol>
      *
      * @throws IllegalArgumentException
@@ -646,7 +646,7 @@ public abstract class JAXBContext {
      * @param classesToBeBound
      *      List of java classes to be recognized by the new {@link JAXBContext}.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@code open} to at least the {@code java.xml.bind} module.
+     *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
      *      Can be empty, in which case a {@link JAXBContext} that only knows about
      *      spec-defined classes will be returned.
      * @param properties
@@ -660,13 +660,13 @@ public abstract class JAXBContext {
      *      if an error was encountered while creating the
      *      {@code JAXBContext}, such as (but not limited to):
      * <ol>
-     *  <li>No JAXB implementation was discovered
-     *  <li>Classes use JAXB annotations incorrectly
+     *  <li>No Jakarta XML Binding implementation was discovered
+     *  <li>Classes use Jakarta XML Binding annotations incorrectly
      *  <li>Classes have colliding annotations (i.e., two classes with the same type name)
-     *  <li>The JAXB implementation was unable to locate
+     *  <li>The Jakarta XML Binding implementation was unable to locate
      *      provider-specific out-of-band information (such as additional
      *      files generated at the development time.)
-     *  <li>{@code classesToBeBound} are not open to {@code java.xml.bind} module
+     *  <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
      * </ol>
      *
      * @throws IllegalArgumentException
@@ -716,7 +716,7 @@ public abstract class JAXBContext {
 
 
     /**
-     * {@link Validator} has been made optional and deprecated in JAXB 2.0.  Please
+     * {@link Validator} has been made optional and deprecated in Jakarta XML Binding.  Please
      * refer to the javadoc for {@link Validator} for more detail.
      * <p>
      * Create a {@code Validator} object that can be used to validate a
@@ -764,7 +764,7 @@ public abstract class JAXBContext {
 
     /**
      * Creates a {@code JAXBIntrospector} object that can be used to
-     * introspect JAXB objects.
+     * introspect Jakarta XML Binding objects.
      *
      * @return
      *      always return a non-null valid {@code JAXBIntrospector} object.

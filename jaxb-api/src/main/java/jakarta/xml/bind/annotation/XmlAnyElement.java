@@ -24,11 +24,11 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Maps a JavaBean property to XML infoset representation and/or JAXB element.
+ * Maps a JavaBean property to XML infoset representation and/or JAXBElement.
  *
  * <p>
  * This annotation serves as a "catch-all" property while unmarshalling
- * xml content into a instance of a JAXB annotated class. It typically
+ * xml content into a instance of a Jakarta XML Binding annotated class. It typically
  * annotates a multi-valued JavaBean property, but it can occur on
  * single value JavaBean property. During unmarshalling, each xml element
  * that does not match a static &#64;XmlElement or &#64;XmlElementRef
@@ -40,7 +40,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * &#64;XmlAnyElement
  * public {@link Element}[] others;
  *
- * // Collection of {@link Element} or JAXB elements.
+ * // Collection of {@link Element} or JAXBElements.
  * &#64;XmlAnyElement(lax="true")
  * public {@link Object}[] others;
  *
@@ -250,18 +250,18 @@ public @interface XmlAnyElement {
      * is known to {@link JAXBContext} (for example, there's a class with
      * {@link XmlRootElement} that has the same tag name, or there's
      * {@link XmlElementDecl} that has the same tag name),
-     * the unmarshaller will eagerly unmarshal this element to the JAXB object,
+     * the unmarshaller will eagerly unmarshal this element to the Jakarta XML Binding object,
      * instead of unmarshalling it to DOM. Additionally, if the element is
      * unknown but it has a known xsi:type, the unmarshaller eagerly unmarshals
      * the element to a {@link JAXBElement}, with the unknown element name and
-     * the JAXBElement value is set to an instance of the JAXB mapping of the
+     * the JAXBElement value is set to an instance of the Jakarta XML Binding mapping of the
      * known xsi:type.
      * </dd>
      * </dl>
      *
      * <p>
      * As a result, after the unmarshalling, the property can become heterogeneous;
-     * it can have both DOM nodes and some JAXB objects at the same time.
+     * it can have both DOM nodes and some Jakarta XML Binding objects at the same time.
      *
      * <p>
      * This can be used to emulate the "lax" wildcard semantics of the W3C XML Schema.
