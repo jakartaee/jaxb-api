@@ -33,7 +33,7 @@ class ModuleUtil {
      * Jakarta XML Binding-RI default context factory.
      */
     // NOTICE: .toString() is used to prevent constant inlining by Java Compiler
-    static final String DEFAULT_FACTORY_CLASS = "com.sun.xml.bind.v2.ContextFactory".toString();
+    static final String DEFAULT_FACTORY_CLASS = "org.glassfish.jaxb.runtime.v2.ContextFactory".toString();
 
     /**
      * Resolves classes from context path.
