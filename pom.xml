@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 
-    Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -77,7 +77,7 @@
         <spotbugs.exclude>${project.basedir}/exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.0.4</spotbugs.version>
+        <spotbugs.version>4.2.0</spotbugs.version>
 
         <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
         <release.spec.date>Jul 2017</release.spec.date>
@@ -85,7 +85,7 @@
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>3.0</spec.version>
         <impl.version>0</impl.version>
-        <activation.version>2.0.0</activation.version>
+        <activation.version>2.0.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
@@ -130,7 +130,7 @@
                 <plugin>
                     <groupId>org.glassfish.copyright</groupId>
                     <artifactId>glassfish-copyright-maven-plugin</artifactId>
-                    <version>2.3</version>
+                    <version>2.4</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -164,7 +164,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
@@ -209,6 +209,7 @@
                     <update>${copyright.update}</update>
                     <!-- check that year is correct -->
                     <ignoreYear>${copyright.ignoreyear}</ignoreYear>
+                    <quiet>false</quiet>
                 </configuration>
                 <executions>
                     <execution>
