@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -42,6 +42,22 @@ class ContextFinder {
     private static final String JAXB_CONTEXT_FACTORY_DEPRECATED = "jakarta.xml.bind.context.factory";
 
     private static final Logger logger;
+
+    /**
+     * When JAXB is in J2SE, rt.jar has to have a JAXB implementation.
+     * However, rt.jar cannot have META-INF/services/jakarta.xml.bind.JAXBContext
+     * because if it has, it will take precedence over any file that applications have
+     * in their jar files.
+     *
+     * <p>
+     * When the user bundles his own Jakarta XML Binding implementation, we'd like to use it, and we
+     * want the platform default to be used only when there's no other Jakarta XML Binding provider.
+     *
+     * <p>
+     * For this reason, we have to hard-code the class name into the API.
+     */
+    //XXX: should we define and rely on "default" in jakarta?
+    static final String DEFAULT_FACTORY_CLASS = "org.glassfish.jaxb.runtime.v2.ContextFactory";
 
     static {
         logger = Logger.getLogger("jakarta.xml.bind");
@@ -125,7 +141,7 @@ class ContextFinder {
                                    Map properties) throws JAXBException {
 
         try {
-            Class spFactory = ServiceLoaderUtil.safeLoadClass(className, ModuleUtil.DEFAULT_FACTORY_CLASS, classLoader);
+            Class spFactory = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, classLoader);
             return newInstance(contextPath, contextPathClasses, spFactory, classLoader, properties);
         } catch (ClassNotFoundException x) {
             throw new JAXBException(Messages.format(Messages.DEFAULT_PROVIDER_NOT_FOUND), x);
@@ -227,7 +243,7 @@ class ContextFinder {
 
         Class spi;
         try {
-            spi = ServiceLoaderUtil.safeLoadClass(className, ModuleUtil.DEFAULT_FACTORY_CLASS, getContextClassLoader());
+            spi = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, getContextClassLoader());
         } catch (ClassNotFoundException e) {
             throw new JAXBException(Messages.format(Messages.DEFAULT_PROVIDER_NOT_FOUND), e);
         }
@@ -315,7 +331,7 @@ class ContextFinder {
 
         // else no provider found
         logger.fine("Trying to create the platform default provider");
-        return newInstance(contextPath, contextPathClasses, ModuleUtil.DEFAULT_FACTORY_CLASS, classLoader, properties);
+        return newInstance(contextPath, contextPathClasses, DEFAULT_FACTORY_CLASS, classLoader, properties);
     }
 
     static JAXBContext find(Class<?>[] classes, Map<String, ?> properties) throws JAXBException {
@@ -372,7 +388,7 @@ class ContextFinder {
 
         // else no provider found
         logger.fine("Trying to create the platform default provider");
-        return newInstance(classes, properties, ModuleUtil.DEFAULT_FACTORY_CLASS);
+        return newInstance(classes, properties, DEFAULT_FACTORY_CLASS);
     }
 
 
