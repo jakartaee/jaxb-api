@@ -239,11 +239,18 @@ class ContextFinder {
     /**
      * Create an instance of a class using the thread context ClassLoader
      */
-    static JAXBContext newInstance(Class[] classes, Map properties, String className) throws JAXBException {
+    private static JAXBContext newInstance(Class[] classes, Map properties, String className) throws JAXBException {
+        return newInstance(classes, properties, className, getContextClassLoader());
+    }
+
+    /**
+     * Create an instance of a class using passed in ClassLoader
+     */
+    private static JAXBContext newInstance(Class[] classes, Map properties, String className, ClassLoader loader) throws JAXBException {
 
         Class spi;
         try {
-            spi = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, getContextClassLoader());
+            spi = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, loader);
         } catch (ClassNotFoundException e) {
             throw new JAXBException(Messages.format(Messages.DEFAULT_PROVIDER_NOT_FOUND), e);
         }
@@ -358,7 +365,7 @@ class ContextFinder {
                                 jaxbPropertiesUrl,
                                 JAXBContext.JAXB_CONTEXT_FACTORY, JAXB_CONTEXT_FACTORY_DEPRECATED);
 
-                return newInstance(classes, properties, factoryClassName);
+                return newInstance(classes, properties, factoryClassName, c.getClassLoader());
             }
 
         }
@@ -375,8 +382,8 @@ class ContextFinder {
         }
 
         // to ensure backwards compatibility
-        String className = firstByServiceLoaderDeprecated(JAXBContext.class, getContextClassLoader());
-        if (className != null) return newInstance(classes, properties, className);
+        String className = firstByServiceLoaderDeprecated(JAXBContext.class, classes[0].getClassLoader());
+        if (className != null) return newInstance(classes, properties, className, classes[0].getClassLoader());
 
         logger.fine("Trying to create the platform default provider");
         Class ctxFactoryClass =
