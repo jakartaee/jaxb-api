@@ -365,7 +365,7 @@ class ContextFinder {
                                 jaxbPropertiesUrl,
                                 JAXBContext.JAXB_CONTEXT_FACTORY, JAXB_CONTEXT_FACTORY_DEPRECATED);
 
-                return newInstance(classes, properties, factoryClassName, c.getClassLoader());
+                return newInstance(classes, properties, factoryClassName, getClassClassLoader(c));
             }
 
         }
@@ -382,8 +382,12 @@ class ContextFinder {
         }
 
         // to ensure backwards compatibility
-        String className = firstByServiceLoaderDeprecated(JAXBContext.class, classes[0].getClassLoader());
-        if (className != null) return newInstance(classes, properties, className, classes[0].getClassLoader());
+        // it is guaranteed classes are not null but it is not guaranteed, that array is not empty
+        ClassLoader loader = classes.length > 0
+                ? getClassClassLoader(classes[0])
+                : getContextClassLoader();
+        String className = firstByServiceLoaderDeprecated(JAXBContext.class, loader);
+        if (className != null) return newInstance(classes, properties, className, loader);
 
         logger.fine("Trying to create the platform default provider");
         Class ctxFactoryClass =
