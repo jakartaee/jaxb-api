@@ -382,10 +382,15 @@ class ContextFinder {
         }
 
         // to ensure backwards compatibility
+        ClassLoader loader = getContextClassLoader();
         // it is guaranteed classes are not null but it is not guaranteed, that array is not empty
-        ClassLoader loader = classes.length > 0
-                ? getClassClassLoader(classes[0])
-                : getContextClassLoader();
+        if (classes.length > 0) {
+            ClassLoader c = getClassClassLoader(classes[0]);
+            //switch to classloader which loaded the class if it is not a bootstrap cl
+            if (c != null) {
+                loader = c;
+            }
+        }
         String className = firstByServiceLoaderDeprecated(JAXBContext.class, loader);
         if (className != null) return newInstance(classes, properties, className, loader);
 
