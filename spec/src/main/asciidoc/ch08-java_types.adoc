@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 == Java Types To XML
@@ -113,8 +113,7 @@ application to be exported as a web service. In many cases, the existing
 applications are legacy applications consisting of classes that follow
 different class designs. The annotations and default mapping are
 designed to enable such classes to be mapped to schema with minimal
-changes to existing code. See link:jaxb.html#a3676[See Default
-Mapping] for default mapping.
+changes to existing code. See <<Default Mapping>> for default mapping.
 
 *_Class_* A class usually maps to a complex type.
 However, using `@XmlValue` annotation, a class can also be mapped to a
@@ -150,7 +149,7 @@ indexed properties and parametric types. Mapped untyped collection are:
 For example, `HashMap` can have different XML serialized forms which
 differ in trade-offs made between memory and speed or specificity and
 generality. The XML serialization form can be customized using
-`@XmlJavaTypeAdapter` (link:jaxb.html#a2278[See Adapter]).
+`@XmlJavaTypeAdapter` (<<adapter>>).
 
 *_Collection serialized forms_* A collection type
 can be mapped to a XML Schema complex type and collection item is mapped
@@ -334,10 +333,10 @@ types to XML Schema.
 ==== Java Primitive types
 
 The default mapping of Java types (and their
-wrapper classes) specified in table link:jaxb.html#a2310[See
-Mapping: Java Primitive types to Schema Types] must be supported.
+wrapper classes) specified in table <<a2310>> must be supported.
 
 .Mapping: Java Primitive types to Schema Types
+[[a2310]]
 [cols=",",options="header"]
 |===
 | Java Primitive Type | XML data type
@@ -352,11 +351,10 @@ Mapping: Java Primitive types to Schema Types] must be supported.
 
 ==== Java Standard Classes
 
-The default mapping of Java classes specified
-in link:jaxb.html#a2329[See Mapping of Standard Java classes]
-must be supported.
+The default mapping of Java classes specified in <<a2329>> must be supported.
 
 .Mapping of Standard Java classes
+[[a2329]]
 [cols=",",options="header"]
 |===
 | Java Class | XML data type
@@ -564,9 +562,8 @@ public @interface XmlSchema {
 ===== Mapping
 
 If `location()` is "", a package annotated
-with `@XmlSchema` must be mapped as specified in
-link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace]. Otherwise a package will not produce any schema document.
+with `@XmlSchema` must be mapped as specified in <<a2476>>.
+Otherwise a package will not produce any schema document.
 
 [NOTE]
 .Design Note
@@ -597,6 +594,7 @@ that's preferrable for the user.
 ====
 
 .Table 8-3 Mapping: Package to XML target namespace
+[[a2476]]
 [cols=","]
 |===
 | `targetNamespace` | if `@XmlSchema.namespace()` is "", then `absent;` +
@@ -644,7 +642,7 @@ following other annotations: `@XmlType`, `@XmlRootElement`,
 `@XmlJavaTypeAdapters`. It can also be used with the following
 annotations at the package level: `@XmlJavaTypeAdapter`.
 
-See link:jaxb.html#a3676[See Default Mapping].
+See <<Default Mapping>>.
 
 ==== @XmlAccessorOrder
 
@@ -820,8 +818,7 @@ public @interface XmlSchemaTypes {
 ===== Mapping
 
 Each `@XmlSchemaType` annotation in
-`@XmlSchemaTypes.value()` must be mapped as specified in
-link:jaxb.html#a2520[See @XmlSchemaType].
+`@XmlSchemaTypes.value()` must be mapped as specified in <<xmlschematype>>.
 
 === Java class
 
@@ -865,10 +862,10 @@ class.
 * if `@XmlType.propOrder` is not {} or {""},
 then the set must include all of the properties and fields mapped to
 particles as specified in:
-** link:jaxb.html#a2898[See @XmlElement]
-** link:jaxb.html#a3019[See @XmlElements]
-** link:jaxb.html#a3049[See @XmlElementRef]
-** link:jaxb.html#a3112[See @XmlElementRefs]
+** <<xmlelement>>
+** <<xmlelements>>
+** <<xmlelementref>>
+** <<xmlelementrefs>>
 * `@XmlType.propOrder` must not include a
 field or property annotated with `@XmlTransient`.
 * if the class, _subClass_, derives from another
@@ -887,30 +884,27 @@ is disallowed on an interface.
 A class annotated with `@XmlType`, must be
 mapped as specified below:
 
-* class must be mapped as specified in
-link:jaxb.html#a2678[See Mapping: Class to Simple Type
-Definition] if the class contains only one mapped property or field that
-is annotated with `@XmlValue` as specified in
-link:jaxb.html#a3331[See @XmlValue].
-* otherwise, the class must be mapped as
-specified in link:jaxb.html#a2611[See Mapping: Class to Complex
-Type Definition].
+* class must be mapped as specified in <<a2678>>
+if the class contains only one mapped property or field that
+is annotated with `@XmlValue` as specified in <<xmlvalue>>.
+* otherwise, the class must be mapped as specified in <<a2611>>.
 
 .Table 8-4 Mapping: Class to Complex Type Definition
+[[a2611]]
 [cols=","]
 |===
 | `{name}` | if `@XmlType.name()` is "", then absent +
  +
 otherwise if `@XmlType.name()` is `##default`, then
 the XML name derived from the class name as
-specified in link:jaxb.html#a3678[See Java Identifier To XML Name]  +
+specified in <<Java Identifier To XML Name>>  +
  +
 otherwise `@XmlType.name()`
 
 | `{target namespace}` | if `@XmlType.namespace()` is `\\##default`
 && `@XmlType.name()` is "" and class is annotated with
 `@XmlRootElement`, then the `{target namespace}` as specified in
-link:jaxb.html#a2742[See Mapping: Class to Element Declaration] +
+<<a2742>> +
  +
 otherwise if `@XmlType.namespace()` is `##default` && `@XmlType.name()`
 is "" and class is not annotated with
@@ -921,15 +915,13 @@ referenced, is mapped. +
 otherwise if `@XmlType.namespace()` is `##default` && `@XmlType.name()`
 is not "", then the namespace to
 which the package, in which class is defined, is mapped as specified in
-link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace] +
+<<a2476>> +
  +
 otherwise `@XmlType.namespace()`
 
 | `{base type definition}` a| if the class contains a mapped property or
-field annotated with `@XmlValue` as specified in
-link:jaxb.html#a3331[See @XmlValue], then the schema type to
-which mapped property or field’s type is mapped. +
+field annotated with `@XmlValue` as specified in <<xmlvalue>>,
+then the schema type to which mapped property or field’s type is mapped. +
  +
 otherwise schema type to which the nearest
 XML-bound ancestor class is mapped +
@@ -962,31 +954,29 @@ present; +
 otherwise `false`.
 
 | `{attribute uses}` | The set of properties or fields mapped to
-attributes as specified in link:jaxb.html#a3230[See @XmlAttribute].
+attributes as specified in <<xmlattribute>>.
 
-| `{attribute wildcard}` | Attribute wildcard as specified in
-link:jaxb.html#a3303[See XmlAnyAttribute].
+| `{attribute wildcard}` | Attribute wildcard as specified in <<xmlanyattribute>>.
 
 | `{content type}` a|
 . empty if no mapped property or field is
 annotated with `@XmlElement`
 . `mixed` if a property or field is annotated
-with _@XmlMixed_ as specified in link:jaxb.html#a3449[See
-@XmlMixed].
+with _@XmlMixed_ as specified in <<xmlmixed>>.
 . `simpleContent` if :
 .. no property or field is annotated with `@XmlElement`
 .. && one or more properties or fields is annotated with `@XmlAttribute`
 .. && one property is annotated with `@XmlValue`.
 . `element-only content` if one or more
 properties is annotated with `@XmlElement`; +
-`content model` mapped as specified in link:jaxb.html#a2662[See
-Mapping: Class body to Model Group Component].
+`content model` mapped as specified in <<a2662>>.
 
 | `{prohibited substitutions}` | `empty set`
 | `{annotations}` | `absent`
 |===
 
 .Table 8-5 Mapping: Class body to Model Group Component
+[[a2662]]
 [cols=","]
 |===
 | `{compositor}` | if `@XmlType.propOrder()` is {} then `xs:all`; +
@@ -1000,7 +990,7 @@ if `@XmlType.propOrder()` is "" && class is annotated with
 `@XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)` is specified at the
 package level and class is not annotated with
 `@XmlAccessorOrder(XmlAccessOrder.UNDEFINED)`, then alphabetical order
-as specified in link:jaxb.html#a2506[See @XmlAccessorOrder]. +
+as specified in <<xmlaccessororder>>. +
  +
 otherwise order is unspecified.
 
@@ -1011,20 +1001,20 @@ particles. See `{compositor}` mapping above for ordering of particles.
 |===
 
 .Table 8-6 Mapping: Class to Simple Type Definition
+[[a2678]]
 [cols=",,"]
 |===
 | `{name}` 2.+| if `@XmlType.name()` is "", then absent +
  +
 otherwise if `@XmlType.name()` is `##default`, then the XML name derived from the class name
-as specified in link:jaxb.html#a3678[See Java Identifier To XML
-Name] +
+as specified in <<Java Identifier To XML Name>> +
  +
 otherwise `@XmlType.name()`
 
 | `{target namespace}` 2.+| if `@XmlType.namespace()` is `\\##default`
 && `@XmlType.name()` is "" and class is annotated with
 `@XmlRootElement`, then the `{target namespace}` as specified in
-link:jaxb.html#a2742[See Mapping: Class to Element Declaration] +
+<<a2742>> +
  +
 otherwise if `@XmlType.namespace()` is `##default` && `@XmlType.name()`
 is "" and class is not annotated with
@@ -1035,15 +1025,14 @@ referenced, is mapped. +
 otherwise if `@XmlType.namespace()` is `##default` && `@XmlType.name()`
 is not "", then the namespace to
 which the package, in which class is defined, is mapped as specified in
-link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace] +
+<<a2476>> +
  +
 otherwise `@XmlType.namespace()`
 
 | `{base type definition}` 2.+| ur-type definition, `xs:anyType`. +
  +
 NOTE: This is subject to the mapping
-constraints on XmlType. See link:jaxb.html#a2591[See Mapping].
+constraints on XmlType. See <<mapping-6>>.
 
 | `{facets}` 2.+| `empty set`
 | `{fundamental facets}` 2.+| derived
@@ -1065,7 +1054,7 @@ following collection types:
 
 * generic list
 * indexed property
-* single dimensional array link:jaxb.html#a3800[See @XmlType: List simple type]
+* single dimensional array <<xmltype-list-simple-type>>
 
 | | union +
 `{member type definitions}` | Not mapped.
@@ -1099,28 +1088,27 @@ annotation are: `@XmlType`, `@XmlEnum`, `@XmlAccessorType`,
 `@XmlAcessorOrder`.
 
 A class annotated with `@XmlRootElement`
-annotation, must be mapped as specified in
-link:jaxb.html#a2742[See Mapping: Class to Element Declaration].
+annotation, must be mapped as specified in <<a2742>>.
 
 .Table 8-7 Mapping: Class to Element Declaration
+[[a2742]]
 [cols=","]
 |===
 | `{name}` | if `@XmlRootElement.name()` is `##default`,
 then the XML name derived from the class name as specified in
-link:jaxb.html#a3678[See Java Identifier To XML Name]; +
+<<Java Identifier To XML Name>>; +
  +
 otherwise `@XmlRootElement.name()`
 
 | `{target namespace}` | if `@XmlRootElement.namespace()` is `##default`,
 then the value of the `targetNamespace` to which the
 package containing the class is mapped as specified in
-link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace] +
+<<a2476>> +
  +
 otherwise `@XmlRootElement.namespace()`
 
 | `{type definition}` | schema type to which the class is mapped as
-specified in link:jaxb.html#a2578[See @XmlType].
+specified in <<xmltype-2>>.
 
 | `{scope}` | `global`
 | `{value constraint}` | `absent`
@@ -1170,13 +1158,12 @@ refering to the nearest XML-bound ancestor of this class (which could be
 class.)
 
 For the effect that this annotation causes on
-derived classes, see link:jaxb.html#a2611[See Mapping: Class to
-Complex Type Definition].
+derived classes, see <<a2611>>.
 
 Note that a class with`@XmlTransient` may
 still have properties and fields with JAXB annotations. Those are mapped
-to XML when a derived class is mapped to XML. See section
-link:jaxb.html#a2876[See Property And Field] for more details.
+to XML when a derived class is mapped to XML. See <<Property And Field>>
+for more details.
 
 The following mapping constraints must be enforced:
 
@@ -1223,6 +1210,7 @@ enforced:
 * `@XmlEnum.value()` must be mapped to a XML schema simple type.
 
 .Table 8-8 Mapping: Enum type to Base Type Definition
+[[a3331]]
 [cols=",a"]
 |===
 | `{base type definition}` | schema type to which `@XmlEnum.value()` is mapped.
@@ -1257,6 +1245,7 @@ The following mapping constraints must be enforced:
 * `@XmlEnumValue.value()` must have a valid lexical representation for `@XmlEnum.value()`.
 
 .Table 8-9 Mapping: Enum constant to Enumeration Schema Component
+[[a3230]]
 [cols=","]
 |===
 | `{value}` |  `@XmlEnumValue.value()`
@@ -1291,21 +1280,21 @@ following other annotations: `@XmlRootElement`, `@XmlAccessorOrder`,
 must be ignored; they are not meaningful when used to annotate an enum
 type.
 
-.Table 8-10 Mapping: Enum type to Simple Tpe Definition
+.Table 8-10 Mapping: Enum type to Simple Type Definition
 [cols=","]
 |===
 | `{name}` | if `@XmlType.name()` is "", then absent +
  +
 otherwise if `@XmlType.name()` is `##default`, then
 the XML name derived from the class name as
-specified in link:jaxb.html#a3678[See Java Identifier To XML Name]  +
+specified in <<Java Identifier To XML Name>>  +
  +
 otherwise `@XmlType.name()`
 
 | `{target namespace}` | if `@XmlType.namespace()` is `\\##default`
 && `@XmlType.name()` is "" and enum type is annotated with
 `@XmlRootElement`, then the `{target namespace}` as specified in
-link:jaxb.html#a2742[See Mapping: Enum type to Element Declaration] +
+<<a2742>> +
  +
 otherwise if `@XmlType.namespace()` is `##default` && `@XmlType.name()`
 is "" and enum type is not annotated with
@@ -1316,22 +1305,18 @@ referenced, is mapped. +
 otherwise if `@XmlType.namespace()` is `##default` && `@XmlType.name()`
 is not "", then the namespace to
 which the package, in which enum type is defined, is mapped as specified in
-link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace] +
+<<a2476>> +
  +
 otherwise `@XmlType.namespace()`
 
-| `{base type definition}` a| Mapped as specified in
-link:jaxb.html#a3331[See Mapping: Enum type to Base Type Definition].
+| `{base type definition}` a| Mapped as specified in <<a3331>>.
 
-| `{variety}` a| Mapped as specified in
-link:jaxb.html#a3331[See Mapping: Enum type to Base Type Definition].
+| `{variety}` a| Mapped as specified in <<a3331>>.
 
 | `{final}` | `extension, restriction, list, union`.
 
 | `{facets}` | the set constructed by mapping each enum constant
-to an enumeration schema component as specified in
-link:jaxb.html#a3230[See Mapping: Enum constant to Enumeration Schema Component].
+to an enumeration schema component as specified in <<a3230>>.
 
 | `{fundamental facets}` | `empty set`
 | `{annotations}` | `unspecified`
@@ -1350,32 +1335,29 @@ The following mapping constraints must be enforced:
 annotation are: `@XmlType`, `@XmlEnum`, `@XmlAccessorType`,
 `@XmlAcessorOrder`. +
 Note that `@XmlAccessorType` and `@XmlAccessorOrder`
-while allowed will be ignored by the constraint in
-link:jaxb.html#a2837[See Mapping].
+while allowed will be ignored by the constraint in <<Mapping>>.
 
-The mapping must be performed as specified in
-link:jaxb.html#a2846[See Mapping: Enum type to Element
-Declaration].
+The mapping must be performed as specified in <<a2846>>.
 
 .Table 8-11 Mapping: Enum type to Element Declaration
+[[a2846]]
 [cols=","]
 |===
 | `{name}` | if `@XmlRootElement.name()` is `"##default"`,
 then the XML name derived from the enum type name as specified in
-link:jaxb.html#a3678[See Java Identifier To XML Name];
+<<Java Identifier To XML Name>>;
 
 otherwise `@XmlRootElement.name()`
 
 | `{target namespace}` | if `@XmlRootElement.namespace()` is `"##default"`,
 then the value of the targetNamespace to which the
 package containing the class is mapped as specified in
-link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace]
+<<a2476>>
 
 otherwise `@XmlRootElement.namespace()`
 
 | `{type definition}` | schema type to which the class is mapped as
-specified in link:jaxb.html#a2578[See @XmlType].
+specified in <<xmltype-2>>.
 
 | `{scope}` | `global`
 | `{value constraint}` | `absent`
@@ -1475,12 +1457,10 @@ A field or property annotated must be mapped as follows:
 
 * If `@XmlElement.namespace()` is not `"##default"`
 and different from the `{target namespace}` of the
-enclosing class, then it must be mapped as specified in
-link:jaxb.html#a2941[See Mapping: Property/field to Particle - ref attribute].
+enclosing class, then it must be mapped as specified in <<a2941>>.
 * If property is single valued, and it’s type
 is annotated with `@XmlRootElement` and `@XmlType.name() = ""`, then the
-property must be mapped as specified in link:jaxb.html#a2941[See
-Mapping: Property/field to Particle - ref attribute].
+property must be mapped as specified in <<a2941>>.
 +
 [NOTE]
 .Design Note
@@ -1521,9 +1501,7 @@ With the above mapping, the code fragment would instead map to:
         <element ref="foo" minOccurs="0">
 ----
 ====
-* otherwise, it must be mapped as
-link:jaxb.html#a2959[See Mapping: Property/field to Particle -
-no ref attribute].
+* otherwise, it must be mapped as <<a2959>>.
 
 [NOTE]
 .Design Note
@@ -1533,6 +1511,7 @@ and an element declaration. This is reflected in the mapping shown below.
 ====
 
 .Table 8-12 Mapping: Property/field to Particle - ref attribute
+[[a2941]]
 [cols=","]
 |===
 | `{min occurs}` | if `@XmlElement.required()` is `true`, then `1`
@@ -1547,10 +1526,8 @@ collection type, then `1`
 
 otherwise `unbounded`.
 
-| `{term}` a| element declaration as specified in
-link:jaxb.html#a2973[See Mapping: Property/field to Element
-declaration] with the following overrides for the abstract schema
-component properties: +
+| `{term}` a| element declaration as specified in <<a2973>>
+with the following overrides for the abstract schema component properties: +
 `{scope}` is `global` +
 `{value constraint}` is `absent` +
 `{type definition}` is `xs:anyType` if the
@@ -1564,6 +1541,7 @@ element declaration rather than a local element declaration.
 |===
 
 .Table 8-13 Mapping: Property/field to Particle - no ref attribute
+[[a2959]]
 [cols=","]
 |===
 | `{min occurs}` | if `@XmlElement.required()` is `true`, then `1`
@@ -1578,17 +1556,16 @@ collection type, then `1`;
 
 otherwise `unbounded`.
 
-| `{term}` | must be mapped as specified in
-link:jaxb.html#a2973[See Mapping: Property/field to Element
-declaration].
+| `{term}` | must be mapped as specified in <<a2973>>.
 |===
 
 .Table 8-14 Mapping: Property/field to Element declaration
+[[a2973]]
 [cols=","]
 |===
 | `{name}` | if `@XmlElement.name()` is `"##default"`, then
 the XML name derived from the property or field name as specified in
-link:jaxb.html#a3678[See Java Identifier To XML Name];
+<<Java Identifier To XML Name>>;
 
 otherwise `@XmlElement.name()`
 
@@ -1608,20 +1585,17 @@ if `@XmlElement.type()` is not `DEFAULT.class`,
 then the schema type to which `@XmlElement.type()` is mapped.
 
 otherwise if annotated with `@XmlList`, schema
-type derived by mapping as specified in link:jaxb.html#a3399[See
-@XmlList]
+type derived by mapping as specified in <<xmllist>>
 
 otherwise if annotated with `@XmlValue`,
-schema type derived by mapping as specified in
-link:jaxb.html#a3331[See @XmlValue]
+schema type derived by mapping as specified in <<xmlvalue>>
 
 otherwise if annotated with `@XmlID`, the
-schema type derived by mapping as specified in
-link:jaxb.html#a3377[See @XmlID]
+schema type derived by mapping as specified in <<xmlid>>
 
 otherwise if annotated with `@XmlIDREF`, the
 schema type derived by mapping as specified in
-link:jaxb.html#a3387[See @XmlIDREF]
+<<xmlidref>>
 
 otherwise if the property or field is a
 collection type, then the schema type derived by mapping the collection
@@ -1631,8 +1605,7 @@ otherwise the schema type to which the type of
 the property is mapped.
 
 | `{scope}` | complex type to which the property’s or the
-field’s containing class is mapped as specified in
-link:jaxb.html#a2456[See @XmlSchema].
+field’s containing class is mapped as specified in <<xmlschema>>.
 
 | `{value constraint}` | if `@XmlElement.defaultValue()` is `"\u0000"` then `absent`
 
@@ -1683,35 +1656,29 @@ with `@XmlID`.
 The property or field must be mapped as follows:
 
 * If the size of `@XmlElements.value()` is `1`,
-then the property must be mapped as specified in
-link:jaxb.html#a2898[See @XmlElement].
-* otherwise it must be mapped as specified in
-link:jaxb.html#a3034[See Mapping: List of types to choice
-particle].
+then the property must be mapped as specified in <<xmlelement>>.
+* otherwise it must be mapped as specified in <<a3034>>.
 
 
 
 .Table 8-15 Mapping: List of types to choice particle
+[[a3034]]
 [cols=","]
 |===
 | `{min occurs}` | `0`
 | `{max occurs}` | `unbounded`
-| `{term}` | If `{particles}` row in
-link:jaxb.html#a3042[See Mapping: List of types to choice model
-group of elements] results in a single particle, then that single
-particle. Otherwise mapped as specified in
-link:jaxb.html#a3042[See Mapping: List of types to choice model
-group of elements]
+| `{term}` | If `{particles}` row in <<a3042>> results in a single particle,
+then that single particle. Otherwise mapped as specified in <<a3042>>
 |===
 
 
 .Table 8-16 Mapping: List of types to choice model group of elements
+[[a3042]]
 [cols=","]
 |===
 | `{compositor}` | `choice`
 | `{particles}` | set obtained by mapping each `@XmlElement` in
-`@XmlElements.value()` as specified in link:jaxb.html#a2973[See
-Mapping: Property/field to Element declaration].
+`@XmlElements.value()` as specified in <<a2973>>.
 | `{annotation}` | `unspecified`
 |===
 
@@ -1754,28 +1721,24 @@ A field or property annotated with the
 `@XmlElementRef` annotation must be mapped as follows:
 
 * if the type of the property or field is
-single valued property, then it must be mapped as specified in
-link:jaxb.html#a3078[See Mapping: Property/field (property type
-single valued) to Particle with ref attribute]
+single valued property, then it must be mapped as specified in <<a3078>>
 * otherwise (the type of the property or field
-is a parametric type), then it must be mapped as specified in
-link:jaxb.html#a3097[See Mapping: Property/Field (parametric
-type) to choice particle].
+is a parametric type), then it must be mapped as specified in <<a3097>>.
 
 
 .Table 8-17 Mapping: Property/field (property type single valued) to Particle with ref attribute
+[[a3078]]
 [cols=","]
 |===
 | `{min occurs}` | if `@XmlElementRef.required()` is `true` ,then `1`;
 
 otherwise `0`
 | `{max occurs}` | `1`
-| `{term}` | must be mapped as specified in
-link:jaxb.html#a3085[See Mapping: Property/field to Element
-declaration with ref attribute].
+| `{term}` | must be mapped as specified in <<a3085>>.
 |===
 
 .Table 8-18 Mapping: Property/field to Element declaration with ref attribute
+[[a3085]]
 [cols=","]
 |===
 
@@ -1803,28 +1766,24 @@ and is `jakarta.xml.bind.JAXBElement`, then the
 |===
 
 .Table 8-19 Mapping: Property/Field (parametric type) to choice particle
+[[a3097]]
 [cols=","]
 |===
 
 | `{min occurs}` | `0`
 | `{max occurs}` | `unbounded`
-| `{term}` | If `{particles}` row in
-link:jaxb.html#a3105[See Mapping: Property/field (parametric
-type) to choice model group of element refs] results in single particle,
-then that single particle. Otherwise mapped as specified in
-link:jaxb.html#a3105[See Mapping: Property/field (parametric
-type) to choice model group of element refs]
+| `{term}` | If `{particles}` row in <<a3105>> results in single particle,
+then that single particle. Otherwise mapped as specified in <<a3105>>
 |===
 
 .Table 8-20 Mapping: Property/field (parametric type) to choice model group of element refs
+[[a3105]]
 [cols=","]
 |===
 | `{compositor}` | `choice`
 | `{particles}` | set obtained by visiting parametric type and
 each of its derived types and if annotated with @XmlRootElement, then
-mapping the @XmlRootElement as specified in as specified in
-link:jaxb.html#a3085[See Mapping: Property/field to Element
-declaration with ref attribute].
+mapping the @XmlRootElement as specified in as specified in <<a3085>>.
 
 | `{annotation}` | `unspecified`
 |===
@@ -1850,35 +1809,30 @@ annotations allowed with `@XmlElementRefs` are: `@XmlElementWrapper` and
 `@XmlJavaTypeAdapter`.
 
 The property or field must be mapped as
-specified in link:jaxb.html#a3124[See Mapping: List of element
-instances to choice particle].
+specified in <<a3124>>.
 
 
 .Table 8-21 Mapping: List of element instances to choice particle
+[[a3124]]
 [cols=","]
 |===
 | `{min occurs}` | `0`
 | `{max occurs}` | `unbounded`
-| `{term}` | If the `{particles}` row in
-link:jaxb.html#a3132[See Mapping: List of element instances to
-choice model group of element refs] results in a single particle, then
-that single particle. Otherwise mapped as specified in
-link:jaxb.html#a3132[See Mapping: List of element instances to
-choice model group of element refs]
+| `{term}` | If the `{particles}` row in <<a3132>> results in a single particle,
+then that single particle. Otherwise mapped as specified in <<a3132>>
 |===
 
 .Table 8-22 Mapping: List of element instances to choice model group of element refs
+[[a3132]]
 [cols=","]
 |===
 | `{compositor}` | `choice`
 | `{particles}` a| set obtained by mapping
 
 * each `@XmlElementRef` in
-`@XmlElementRefs.value()` as specified in
-link:jaxb.html#a3049[See @XmlElementRef].
-* if property is annotated with
-`@XmlAnyElement`, then the particle obtained by mapping as specified in
-link:jaxb.html#a3210[See @XmlAnyElement]
+`@XmlElementRefs.value()` as specified in <<xmlelementref>>.
+* if property is annotated with `@XmlAnyElement`,
+then the particle obtained by mapping as specified in <<xmlanyelement>>
 
 | `{annotation}` | `unspecified`
 |===
@@ -1910,15 +1864,12 @@ allowed with `@XmlElementWrapper` are: `@XmlElement`, `@XmlElements`,
 The property or field must be mapped as follows:
 
 * If `@XmlElementWrapper.namespace()` is not `"##default"`
-and different from the `{target namespace}` of the
-enclosing class, then it must be mapped as specified as specified in
-link:jaxb.html#a3202[See Mapping: Property/field Element Wrapper
-with ref attribute].
-* otherwise, it must be mapped as
-link:jaxb.html#a3158[See Mapping: Property/field to Particle for
-Element Wrapper].
+and different from the `{target namespace}` of the enclosing class,
+then it must be mapped as specified as specified in <<a3202>>.
+* otherwise, it must be mapped as <<a3158>>.
 
 .Table 8-23 Mapping: Property/field to Particle for Element Wrapper
+[[a3158]]
 [cols=","]
 |===
 | `{min occurs}` | if `@XmlElementWrapper.nillable()` is `true` or
@@ -1927,18 +1878,16 @@ Element Wrapper].
 otherwise `0`
 
 | `{max occurs}` | `1`
-| `{term}` | must be mapped as specified in
-link:jaxb.html#a3167[See Mapping: Property/field to Element
-Declaration for Element Wrapper].
+| `{term}` | must be mapped as specified in <<a3167>>.
 |===
 
-.Table 8-24 Mapping: Property/field to Element Declaration for Element Wrapper [[a3167]]
+.Table 8-24 Mapping: Property/field to Element Declaration for Element Wrapper
+[[a3167]]
 [cols=","]
 |===
 | `{name}` | if `@XmlElementWrapper.name()` is `"##default"`,
 then the XML name derived from the property or field name
-as specified in link:jaxb.html#a3678[See Java Identifier To XML
-Name];
+as specified in <<Java Identifier To XML Name>>;
 
 otherwise `@XmlElementWrapper.name()`
 
@@ -1952,14 +1901,10 @@ annotation and is `@XmlSchema.elementFormDefault` is
 otherwise `@XmlElementWrapper.namespace()`
 
 | `{type definition}` | if property/field is annotated with
-`@XmlElementRef` or `@XmlElementRefs` then the schema type as specified
-in link:jaxb.html#a3124[See Mapping: List of element instances
-to choice particle]
+`@XmlElementRef` or `@XmlElementRefs` then the schema type as specified in <<a3124>>
 
 otherwise if property/field is annotated with
-`@XmlElement` or `@XmlElements` then the schema type as specified
-inlink:jaxb.html#a3034[See Mapping: List of types to choice
-particle].
+`@XmlElement` or `@XmlElements` then the schema type as specified <<a3034>>.
 
 | `{scope}` | complex type to which the property’s or the
 field’s containing class is mapped.
@@ -1974,6 +1919,7 @@ field’s containing class is mapped.
 |===
 
 .Table 8-25 Mapping: Property/field Element Wrapper with ref attribute
+[[a3202]]
 [cols=","]
 |===
 | `{min occurs}` | `1`
@@ -2016,10 +1962,10 @@ rooted at _baseType_ can contain a property annotated with
 `@XmlAnyElement`.
 
 The property or field must be mapped as
-specified in link:jaxb.html#a3223[See Mapping: Wildcard schema
-component for wildcard (xs:any)].
+specified in <<a3223>>.
 
 .Table 8-26 Mapping: Wildcard schema component for wildcard (xs:any)
+[[a3223]]
 [cols=","]
 |===
 | `{namespace constraint}` | `##other`
@@ -2089,16 +2035,13 @@ The property or field must be mapped as follows:
 * If `@XmlAttribute.namespace()` is not
 `"##default"` and differs from the `{target namespace}` of the schema
 type to which the type containing the property or field is mapped, then
-the property or field must be mapped as specified in
-link:jaxb.html#a3255[See Mapping: Property/field to Attribute
-Use (with ref attribute)].
-* otherwise, it must be mapped as specified in
-link:jaxb.html#a3266[See Mapping: Property/field to Attribute
-Use (no ref attribute)].
+the property or field must be mapped as specified in <<a3255>>.
+* otherwise, it must be mapped as specified in <<a3266>>.
 
 
 
 .Table 8-27 Mapping: Property/field to Attribute Use (with ref attribute)
+[[a3255]]
 [cols=","]
 |===
 | `{required}` | `@XmlAttribute.required()`
@@ -2115,12 +2058,11 @@ For e.g.
 |===
 
 .Table 8-28 Mapping: Property/field to Attribute Use (no ref attribute)
+[[a3266]]
 [cols=","]
 |===
 | `{required}` | `@XmlAttribute.required()`
-| `{attribute declaration}` | Mapped as specified in
-link:jaxb.html#a3276[See Mapping: Property/field to Attribute
-Declaration]
+| `{attribute declaration}` | Mapped as specified in <<a3276>>
 
 | `{value constraint}` | if field has access modifiers public and
 static then the `fixed`
@@ -2130,32 +2072,29 @@ otherwise `absent`
 
 
 .Table 8-29 Mapping: Property/field to Attribute Declaration
+[[a3276]]
 [cols=","]
 |===
 | `{name}` | if `@XmlAttribute.name()` is `"##default"`, then
 the XML name derived from the property or field name as specified in
-link:jaxb.html#a3678[See Java Identifier To XML Name];
+<<Java Identifier To XML Name>>;
 
 otherwise `@XmlAttribute.name()`.
 
 | `{target namespace}` | if `@XmlAttribute.namespace()` is `"##default"`,
-then value of targetNamespace in
-link:jaxb.html#a2476[See Mapping: Package to XML target
-namespace];
+then value of targetNamespace in <<a2476>>;
 
 otherwise `@XmlAttribute.namespace()`
 
 | `{type definition}` | if annotated with `@XmlList`, schema type
-derived by mapping as specified in link:jaxb.html#a3399[See
-@XmlList]
+derived by mapping as specified in <<xmllist>>
 
 otherwise if annotated with `@XmlID`, the
 schema type derived by mapping as specified in
-link:jaxb.html#a3377[See @XmlID]
+<<xmlid>>
 
 otherwise if annotated with `@XmlIDREF`, the
-schema type derived by mapping as specified in
-link:jaxb.html#a3387[See @XmlIDREF]
+schema type derived by mapping as specified in <<xmlidref>>
 
 otherwise if the type of the property is a
 collection type, then the schema type derived by mapping the collection
@@ -2196,10 +2135,10 @@ on the property or field with `@XmlAnyAttribute` are:
 `@XmlJavaTypeAdapter`.
 
 The property or field must be mapped as
-specified in link:jaxb.html#a3313[See Mapping: Wildcard schema
-component for Attribute Wildcard].
+specified in <<a3313>>.
 
 .Table 8-30 Mapping: Wildcard schema component for Attribute Wildcard
+[[a3313]]
 [cols=","]
 |===
 | `{namespace constraint}` | `##other`
@@ -2270,12 +2209,12 @@ class (other than `java.lang.Obect`).
 
 * If the type of the property or field is a
 collection type, then the type must be must be mapped as specified in
-link:jaxb.html#a3353[See @XmlValue: Mapping to list simple
-type].
+<<a3353>>.
 * Otherwise, the schema type to which the type
 of the property or field is mapped.
 
 .Table 8-31 @XmlValue: Mapping to list simple type
+[[a3353]]
 [cols=","]
 |===
 | `{name}` | `absent`
@@ -2292,14 +2231,14 @@ type is referenced.
 collection type
 
 * if annotated with `@XmlIDREF`, then
-`xs:IDREF` as specified in link:jaxb.html#a3387[See @XmlIDREF]
+`xs:IDREF` as specified in <<xmlidref>>
 * otherwise the schema type to which the
 collection item type is mapped.
 
 otherwise
 
 * if annotated with `@XmlIDREF`, then
-`xs:IDREF` as specified in link:jaxb.html#a3387[See @XmlIDREF]
+`xs:IDREF` as specified in <<xmlidref>>
 * otherwise the schema type to which the type
 of the property, field or the parameter is mapped.
 
@@ -2419,10 +2358,10 @@ allowed with `@XmlList` are: `@XmlElement`, `@XmlAttribute`, `@XmlValue` and
 `@XmlIDREF`, `@XmlJavaTypeAdapter`.
 
 The type of the property or field must be
-mapped as specified in link:jaxb.html#a3428[See @XmlList:
-Mapping to list simple type].
+mapped as specified in <<a3428>>.
 
 .Table 8-32 @XmlList: Mapping to list simple type
+[[a3428]]
 [cols=","]
 |===
 | `{name}` | `absent`
@@ -2436,7 +2375,7 @@ type is referenced.
 | `{final}` | `#all`
 | `{variety}` | list
 | `{item type definition}` | if annotated with `@XmlIDREF`, then `xs:IDREF`
-as specified in link:jaxb.html#a3387[See @XmlIDREF]
+as specified in <<xmlidref>>
 
 otherwise the schema type to which the
 collection item type is mapped.
@@ -2527,7 +2466,7 @@ generation. See the javadoc for
 The annotations in this section are intended
 primarily for use by schema compiler in annotating element factory
 methods in the schema derived ObjectFactory class
-(link:jaxb.html#a482[See Java Package]). They are not expected
+(<<Java Package>>). They are not expected
 to be used when mapping existing classes to schema.
 
 ==== @XmlElementDecl
@@ -2558,9 +2497,8 @@ public @interface XmlElementDecl {
 
 The following mapping constraints must be enforced:
 
-* annotation can only be used on an _element factory method_
-(link:jaxb.html#a482[See Java Package]). The
-annotation creates a mapping between an XML schema element declaration
+* annotation can only be used on an _element factory method_ (<<Java Package>>).
+The annotation creates a mapping between an XML schema element declaration
 and a element factory method that returns a `JAXBElement` instance
 representing the element declaration. Typically, the element factory
 method is generated (and annotated) from a schema into the
@@ -2587,23 +2525,22 @@ method (e.g. `createFoo`) annotated with `@XmlElementDec`. But the
 developer annotates `Foo` with `@XmlRootElement`.
 
 An element factory method must be mapped as
-specified in link:jaxb.html#a3518[See Mapping: Element Factory
-method to Element Declaration].
+specified in <<a3518>>.
 
 .Table 8-34 Mapping: Element Factory method to Element Declaration
+[[a3518]]
 [cols=","]
 |===
 | `{name}` | `@XmlElementDecl.name()`
 | `{target namespace}` | if `@XmlElementDecl.namespace()` is `"##default"`,
 then the value of the `targetNamespace` to which the
 package of the class containing the factory method is mapped as
-specified in link:jaxb.html#a2476[See Mapping: Package to XML
-target namespace]
+specified in <<a2476>>
 
 otherwise `@XmlElementDecl.namespace()`
 
 | `{type definition}` | schema type to which the class is mapped as
-specified in link:jaxb.html#a2578[See @XmlType].
+specified in <<xmltype-2>>.
 
 | `{scope}` | `global` if `@XmlElementDecl.scope()` is
 `@XmlElementDecl.GLOBAL`
@@ -2641,8 +2578,7 @@ public abstract class XmlAdapter<ValueType,BoundType> {
 }
 ----
 
-For an overview, see the section,
-link:jaxb.html#a2278[See Adapter].
+For an overview, see the section, <<adapter>>.
 
 For detailed information, see the javadocs for
 `jakarta.xml.bind.annotation.adapters.XmlAdapter` and
@@ -2662,8 +2598,7 @@ public @interface XmlJavaTypeAdapter {
 }
 ----
 
-For an overview, see
-link:jaxb.html#a2278[See Adapter].
+For an overview, see <<adapter>>.
 
 ===== Scope
 
@@ -2894,7 +2829,7 @@ public @interface XmlJavaTypeAdapters {
 
 Each `@XmlJavaTypeAdapter` annotation in
 `@XmlJavaTypeAdapters.value()` must be mapped as specified in
-link:jaxb.html#a3561[See @XmlJavaTypeAdapter].
+<<xmljavatypeadapter>>.
 
 === Default Mapping
 
@@ -3023,8 +2958,8 @@ must be mapped by with the following default mapping annotation:
 
 By default, `java.util.Map<K,V>` must be
 mapped to the following anonymous schema type. The parameterized types K
-and V must be mapped as specified in link:jaxb.html#a2386[See
-Type Arguments and Wildcards]. The anonymous schema type is at the
+and V must be mapped as specified in <<Type Arguments and Wildcards>>.
+The anonymous schema type is at the
 point of reference.
 
 [source,xml,indent=2]

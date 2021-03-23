@@ -55,13 +55,11 @@ names we use the following definitions:
 * An underscore (’\_’, \u005F, LOW LINE) with following exceptionfootnote:exc[Exception case:
 Underscore is not considered a punctuation mark for schema customization
 _<jaxb:globalBindings underscoreHandling="asCharInWord"/>_ specified in
-link:jaxb.html#a1613[See Underscore Handling]". For this
+<<Underscore Handling>>. For this
 customization, underscore is considered a special letter that never
-results in a word break as defined in link:jaxb.html#a4681[See
-XML Word Breaks] and it is definitely not considered an uncased letter.
-See example bindings in link:jaxb.html#a4755[See XML Names and
-derived Java Class, Method, and Constant Names when <jaxb:globalBindings
-underscoreHandling=”asCharInWord”>].]
+results in a word break as defined in <<xmlWordBreaks>>
+and it is definitely not considered an uncased letter.
+See example bindings in <<asCharInWord>>.]
 
 These are all legal characters in XML names.
 
@@ -96,6 +94,7 @@ any word, and the suffix matches part of the word that follows the
 break. The word breaks are defined as:
 
 .XML Word Breaks
+[[xmlWordBreaks]]
 [cols=",,,",options="header"]
 |===
 | Prefix | Separator | Suffix | Example
@@ -141,12 +140,12 @@ property access method.
 
 To improve user experience with default
 binding, the automated resolution of frequent naming collision is
-specified in link:jaxb.html#a4770[See Standardized Name
-Collision Resolution].
+specified in <<Standardized Name Collision Resolution>>.
 
 *_Example_*
 
 .XML Names and derived Java Class, Method, and Constant Names
+[[jcmcn]]
 [cols=",,,",options="header"]
 |===
 | XML Name | Class Name | Method Name | Constant Name
@@ -157,6 +156,7 @@ Collision Resolution].
 |===
 
 .XML Names and derived Java Class, Method, and Constant Names when <jaxb:globalBindings underscoreHandling=”asCharInWord”>
+[[asCharInWord]]
 [cols=",,,",options="header"]
 |===
 | XML Name | Class Name | Method Name | Constant Name
@@ -180,8 +180,8 @@ within the source schema or by specifying a customized binding that maps
 one of the two XML names to an alternative Java identifier.
 
 A class name must not conflict with the
-generated JAXB class, `ObjectFactory`, link:jaxb.html#a482[See
-Java Package], that occurs in each schema-derived Java package. Method
+generated JAXB class, `ObjectFactory`, <<Java Package>>,
+that occurs in each schema-derived Java package. Method
 names are forbidden to conflict with Java keywords or literals, with
 methods declared in `java.lang.Object`, or with methods declared in the
 binding-framework classes. Such conflicts are reported as errors and may
@@ -386,8 +386,7 @@ using `"."` as a separating character to produce a package name.
 Final package name: "com.acme.go.espeak".
 ----
 
-link:jaxb.html#a4767[See Collisions
-and conflicts], specifies what to do when the above algorithm results in
+<<Collisions and conflicts>> specifies what to do when the above algorithm results in
 an invalid Java package name.
 
 === Conforming Java Identifier Algorithm
@@ -395,11 +394,11 @@ an invalid Java package name.
 This section describes how to convert a legal
 Java identifier which may not conform to Java naming conventions to a
 Java identifier that conforms to the standard naming conventions.
-link:jaxb.html#a1608[See Customized Name Mapping] discusses when
+<<Customized Name Mapping>> discusses when
 this algorithm is applied to customization names.
 
 Since a legal Java identifier is also a XML
-name, this algorithm is the same as link:jaxb.html#a4656[See The
-Name to Identifier Mapping Algorithm] with the following exception:
+name, this algorithm is the same as <<The Name to Identifier Mapping Algorithm>>
+with the following exception:
 constant names must not be mapped to a Java constant that conforms to
 the Java naming convention for a constant.

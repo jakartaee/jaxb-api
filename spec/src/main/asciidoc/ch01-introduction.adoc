@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 == [[a2]]Introduction
@@ -157,12 +157,12 @@ _marshalling_ updates back to the original XML document.
 The Jakarta XML Binding architecture is designed with the
 goals outlined here in mind.
 
-* [[a25]]Full W3C XML Schema support +
+* [[a25,Full W3C XML Schema support]]Full W3C XML Schema support +
  +
 Support for XML Schema features not required
 to be supported in JAXB 1.0 has been added in this version.
 
-* [[a27]]Binding existing Java classes to generated XML schema +
+* [[a27,Binding existing Java classes to generated XML schema]]Binding existing Java classes to generated XML schema +
  +
 This addresses application scenarios where
 design begins with Java classes rather than an XML schema. One such
@@ -288,14 +288,11 @@ existing XML schema components to Java representation will be provided.
 JAXB 1.0 provided customization mechanisms for the subset of XML Schema
 components supported in JAXB 1.0. Customization support will be extended
 to additional XML Schema features to be supported in this version of the
-specification link:jaxb.html#a25[See Full W3C XML Schema
-support].
+specification, see <<a25>>. +
 ** Java to XML: +
  +
 A standard way to customize the binding of
-existing Java classes to XML schema will be added,
-link:jaxb.html#a27[See Binding existing Java classes to
-generated XML schema].
+existing Java classes to XML schema will be added, see <<a27>>.
 
 * Schema derived classes should be natural +
  +

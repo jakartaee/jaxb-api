@@ -1,8 +1,8 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
-== [[a151]]Requirements
+== Requirements
 
 This chapter specifies the scope and requirements for this version of the specification.
 
@@ -48,8 +48,7 @@ Given the diverse styles that can be used to
 design a schema, it is daunting to identify a single ideal default
 binding solution. For situations where several equally good binding
 alternatives exist, the specification will describe the alternatives and
-select one to be the default (see link:jaxb.html#a165[See
-Customized Binding Schema]).
+select one to be the default (see <<Customized Binding Schema>>).
 
 The binding schema must provide a means to
 specify an alternative binding for the scope of an entire schema. This
@@ -100,8 +99,7 @@ operations.
 
 A default mapping Java constructs to XML
 Schema must be specified. The default mapping may be overridden by
-customizations described in link:jaxb.html#a184[See Customized
-Mapping]”.
+customizations described in <<Customized Mapping>>.
 
 ==== Customized Mapping
 
@@ -125,8 +123,7 @@ The WSDL <types> is generated using Java
 constructs to XML Schema mapping. The latter should therefore define
 customizations that enable mapping to XML Schema constructs commonly
 used in web services, subject to the requirements in
-link:jaxb.html#a184[See Customized Mapping]” and
-link:jaxb.html#a182[See Default Mapping]”.
+<<Customized Mapping>> and <<Default Mapping>>.
 
 ===== Backward Compatibility
 
