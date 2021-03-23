@@ -1,9 +1,13 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 [appendix]
 == Change Log
+
+=== Changes in Version 3 rev1
+
+* fixed cross-references in the specification document
 
 === Changes in Version 3
 
@@ -103,8 +107,7 @@ runtime requirements on getters/setters to here.
 
 === Changes since Public Review
 
-* Update link:jaxb.html#a3815[See
-Compatibility]” for JAXB 2.0 technology. Additional requirements added
+* Update <<Compatibility>> for JAXB 2.0 technology. Additional requirements added
 for Java Types to XML binding and the running of JAXB 1.0 application in
 a JAXB 2.0 environment.
 * Added external event callback mechanism,
@@ -113,8 +116,7 @@ _Unmarshaller.Listener_ and _Marshaller.Listener_ .
 unmarshal by declaredType, to _Unmarshaller_ and _Binder_ . Enables
 unmarshalling a root element that corresponds with a local element
 declaration in schema.
-* Added link:jaxb.html#a1459[See
-Modifying Schema-Derived Code]” describing use of annotation
+* Added <<modifying-schema-derived-code>> describing use of annotation
 _@javax.annotation.Generated_ to distinguish between generated and
 user-modified code in schema-derived class.
 * Element declaration with anonymous complex
@@ -131,10 +133,10 @@ enable the resolution of name collisions between factory methods.
 * First parameter to any of the overloaded
 Marshaller.marshal() methods must be a JAXB element; otherwise, method
 must throw MarshalException. See updated Marshaller javadoc and
-link:jaxb.html#a397[See Marshalling]” for details.
+<<Marshalling>> for details.
 * Prepend “_”, not “Original”, to a Java
 class name representing an XML Schema type definition that has been
-redefined in link:jaxb.html#a1316[See Redefine]”.
+redefined in <<Redefine>>.
 * Format for class name in _jaxb.index_ file
 clarified in JAXBConext.newInstance(String) method javadoc.
 * Clarifications on @dom customization in
@@ -318,29 +320,22 @@ is deferring its databinding to JAXB 2.0.
 === Changes for 2.0 +
 Early Draft v0.4
 
-* Updated link:jaxb.html#a2[See
-Introduction]”.
-* Added link:jaxb.html#a151[See
-Requirements]”
-* Added link:jaxb.html#a2236[See Java
-Types To XML]” for Java Source to XML Schema mapping.
+* Updated <<Introduction>>.
+* Added <<Requirements>>
+* Added <<Java Types To XML>> for Java Source to XML Schema mapping.
 * XML Schema to schema-derived Java Binding
 changes
 * Element handling changes to support element
-and type substitution in link:jaxb.html#a680[See Java Element
-Representation Summary]”, link:jaxb.html#a1023[See Element
-Declaration]” and link:jaxb.html#a630[See Element Property]”.
-* Added link:jaxb.html#a1306[See
-Attribute Wildcard]” binding
+and type substitution in <<Java Element Representation Summary>>,
+<<Element Declaration>> and <<Element Property>>.
+* Added <<Attribute Wildcard>> binding
 * Support binding all wildcard content in
-link:jaxb.html#a1384[See Bind wildcard schema component]”.
+<<Bind wildcard schema component>>.
 * Addition/changes in
-link:jaxb.html#a725[See Java Mapping for XML Schema Built-in
-Types].
+<<Java Mapping for XML Schema Built-in Types>>.
 * XML Schema to Java Customization
 * Added ability to doable databinding for an
-XML Schema fragment in link:jaxb.html#a2165[See <dom>
-Declaration]”.
+XML Schema fragment in <<dom-declaration>>.
 
 === Changes for 1.0 Final
 
@@ -350,8 +345,7 @@ the Java content tree. See method's javadoc for details.
 
 === Changes for Proposed Final
 
-* Added link:jaxb.html#a3815[See
-Compatibility].”
+* Added <<Compatibility>>.
 * Section 5.9.2, “General Content Property,”
 removed value content list since it would not be tractable to support
 when type and group substitution are supported by JAXB technology.
@@ -366,19 +360,17 @@ within a Choice value class.
 * Section 6.12.11, “Model Group binding
 algorithm” changed step 4(a) to bind to choice value class rather than
 choice content property.
-* link:jaxb.html#a595[See List
-Property] and link:jaxb.html#a610[See isSet Property Modifier]”
+* <<List Property>> and <<isset-property-modifier>>
 updated so one can discard set value for a List property via calling
 unset method.
 * At end of Section 4, added an UML diagram
 of the JAXB Java representation of XML content.
 * Updated default binding handling in
-link:jaxb.html#a996[See Model Group Definition].” Specifically,
+<<Model Group Definition>>. Specifically,
 value class, element classes and enum types are derived from the content
 model of a model group definition are only bound once, not once per time
 the group is referenced.
-* Change link:jaxb.html#a1384[See
-Bind wildcard schema component],” to bind to a JAXB property with a
+* Change <<Bind wildcard schema component>>, to bind to a JAXB property with a
 basetype of _java.lang.Object,_ not _jakarta.xml.bind.Element._ Strict and
 lax wildcard validation processing allows for contents constrained only
 by _xsi:type_ attribute. Current APIs should allow for future support of
@@ -388,21 +380,18 @@ binding to typesafe enum class. Replace incomplete approach to derive a
 name with the requirement that the @name attribute for element
 typesafeEnumClass is mandatory when associated with an anonymous simple
 type definition.
-* Changed link:jaxb.html#a1012[See
-Deriving Class Names for Named Model Group Descendants]” to state that
-all classes and interfaces generated for XML Schema component that
+* Changed <<Deriving Class Names for Named Model Group Descendants>>
+to state that all classes and interfaces generated for XML Schema component that
 directly compose the content model for a model group, that these
 classes/interfaces should be generated once as top-level interface/class
 in a package, not in every content model that references the model
 group.
-* Current link:jaxb.html#a1580[See
-<globalBindings> Declaration]”:
+* Current <<globalbindings-declaration>>:
 * Replaced _modelGroupAsClass_ with
 _bindingStyle_ .
 * Specified schema types that cannot be
 listed in _typesafeEnumBase_ .
-* link:jaxb.html#a1783[See <property>
-Declaration]:
+* <<property-declaration>>:
 * Clarified the customization of model groups
 with respect to _choiceContentProperty, elementBinding and
 modelGroupBinding._ Dropped _choiceContentProperty_ from the
@@ -415,8 +404,7 @@ content.
 point of reference.
 * Clarified restrictions and relationships
 between different customizations.
-* link:jaxb.html#a1981[See <javaType>
-Declaration]”:
+* <<javatype-declaration>>:
 * Added
 _jakarta.xml.bind.DatatypeConverterInterface_ interface.
 * Added _jakarta.xml.bind.DatatypeConverter_
@@ -427,9 +415,8 @@ _javax.xml.namespace.NamespaceContext_ class for processing of QNames.
 requirements.
 * Added narrowing and widening conversion
 requirements.
-* Throughout link:jaxb.html#a1498[See
-Customizing XML Schema to Java Representation Binding],” clarified the
-handling of invalid customizations.
+* Throughout <<Customizing XML Schema to Java Representation Binding>>,
+clarified the handling of invalid customizations.
 
 === Changes for Public Draft 2
 
@@ -476,9 +463,8 @@ Appendix E.2 “Non required XML Schema Concepts” accordingly.
 
 === Changes for Public Draft
 
-* link:jaxb.html#a1442[See Bind
-single occurrence choice group to a choice content property],” replaced
-overloading of choice content property setter method with a single
+* <<Bind single occurrence choice group to a choice content property>>,
+replaced overloading of choice content property setter method with a single
 setter method with a value parameter with the common type of all members
 of the choice. Since the resolution of overloaded method invocation is
 performed using compile-time typing, not runtime typing, this
@@ -490,10 +476,9 @@ method signature for nested content and element classes.
 does not fail on first warning, only on first error or fatal error.
 * Add ID/IDREF handling in section 5.
 * Updated name mapping in appendix C.
-* link:jaxb.html#a572[See Indexed
-Property], added getIDLenth() to indexed property.
+* <<Indexed Property>>, added getIDLenth() to indexed property.
 * Removed ObjectFactory.setImplementation
-method from link:jaxb.html#a482[See Java Package]. The negative
+method from <<Java Package>>. The negative
 impact on implementation provided to be greater than the benefit it
 provided the user.
 * Introduced external binding declaration

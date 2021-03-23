@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 [appendix]
@@ -120,11 +120,11 @@ jakarta.xml.bind.Binder.unmashal(..., java.lang.Class<T> declaredType)
 ----
 The unmarshal methods that do not take
 declaredType as parameter must be unmarshalled as specified in
-link:jaxb.html#a3902[See Globally Declared Root Element].
+<<globally-declared-root-element>>.
 
 The unmarshal methods that take a
 `declaredType` as a parameter must be unmarshalled as specified in
-link:jaxb.html#a3953[See Declared Type].
+<<declared-type>>.
 
 ==== Globally Declared Root Element
 
@@ -245,7 +245,7 @@ and terminate processing.
 mapped to a JAXB mapped type set the _valueType_ to the javatype to which
 xsi:type is mapped.
 .. otherwise, `xsi:type` is not specified; _valueType_ is unchanged.
-. Unmarshal _valueType_ as specified in link:jaxb.html#a3960[See Value Type].
+. Unmarshal _valueType_ as specified in <<value-type>>.
 . If the element factory method is annotated
 with @XmlJavaTypeAdapter, then convert the _valueType_ into a _boundType_
 +
@@ -282,8 +282,7 @@ mapped to JAXB mapped type, then _valueType_ is the JAXB mapped type.
 .. otherwise _valueType_ is the argument passed
 to `declaredType` parameter in the
 `unmarshal(..., java.lang.Class<T>declaredType)` call.
-. Unmarshal _valueType_ as specified in
-link:jaxb.html#a3960[See Value Type].
+. Unmarshal _valueType_ as specified in <<value-type>>.
 
 ==== Value Type
 
@@ -330,16 +329,13 @@ separately for clarity:
 If EII.valueType being unmarshalled
 
 .. unmarshal each child element information
-item in EII.[children] as specified in link:jaxb.html#a3978[See
-Element Information Item].
+item in EII.[children] as specified in <<element-information-item>>.
 .. unmarshal each attribute information item
-in EII.[attributes] as specified in link:jaxb.html#a4002[See
-Attribute Information Item].
+in EII.[attributes] as specified in <<attribute-information-item>>.
 . Unmarshal the value of EII.schematype or
 AII.schematype following the Java to XML Schema rules defined in Chapter
 8, "Java Types to XML". If the value in XML instance is unparseable,
-then it must be handled as specified in link:jaxb.html#a4086[See
-Unparseable Data for Simple types].
+then it must be handled as specified in <<Unparseable Data for Simple types>>.
 . Invoke any event callbacks in the following order as follows:
 .. If _valueType_ implements an unmarshal event
 callback `afterUnmarshal(..)` as specified in Section 4.4.1,"Unmarshal
@@ -354,9 +350,7 @@ EII.valuetype.
 
 An EII must be unmarshalled as follows:
 
-. infer EII.property as specified in
-link:jaxb.html#a4023[See Property Inference - Element
-Information Item].
+. infer EII.property as specified in <<property-inference-element-information-item>>.
 . if EII.property is null, then there is no
 property to hold the value of the element. If validation is on (i.e.
 Unmarshaller.getSchema() is not null), then report a
@@ -364,14 +358,12 @@ jakarta.xml.bind.ValidationEvent. Otherwise, this will cause any unknown
 elements to be ignored.
 +
 If EII.property is not null and there is no
-setter method as specified in section link:jaxb.html#a4259[See
-Getters/Setters] then report a jakarta.xml.bind.ValidationEvent.
+setter method as specified in section <<getterssetters>>
+then report a jakarta.xml.bind.ValidationEvent.
 +
 Goto step 8.
 
-. infer the EII.valuetype as described in
-link:jaxb.html#a4043[See Type Inference - Element Information
-Item].
+. infer the EII.valuetype as described in <<type-inference-element-information-item>>.
 . if EII.valuetype is null, then go to step 8.
 +
 [NOTE]
@@ -380,8 +372,7 @@ Item].
 EII.valuetype = null implies that there
 was problem. so don't attempt to unmarshal the element.
 ====
-. Unmarshal EII.valuetype as specified in
-link:jaxb.html#a3960[See Value Type].
+. Unmarshal EII.valuetype as specified in <<value-type>>.
 . if there is a @XmlJavaTypeAdapter
 associated with EII.property, then adapt the EII.valuetype as follows:
 +
@@ -436,8 +427,7 @@ contains invalid XML content.
 An attribute information item must be unmarshalled as follows:
 
 . infer AII.property as described in section
-link:jaxb.html#a4033[See Property Inference - Attribute
-Information Item].
+<<property-inference-attribute-information-item>>.
 . if AII.property is null, then the attribute
 is invalid with respect to the XML schema. This is possible if for e.g.
 schema has evolved. If validation is on (i.e. Unmarshaller.getSchema()
@@ -445,14 +435,13 @@ is not null), then report a jakarta.xml.bind.ValidationEvent. Otherwise,
 this will cause any unknown elements to be ignored.
 +
 If AII.property is not null and there is no
-setter method as specified in section link:jaxb.html#a4259[See
-Getters/Setters] then report a jakarta.xml.bind.ValidationEvent.
+setter method as specified in section <<getterssetters>>
+then report a jakarta.xml.bind.ValidationEvent.
 +
 Goto step 8.
 
 . infer the AII.valuetype as described in
-link:jaxb.html#a4079[See Type Inference - Attribute Information
-Item].
+<<type-inference-attribute-information-item>>.
 . if AII.valuetype is null, then go to step 8.
 +
 [NOTE]
@@ -461,8 +450,7 @@ Item].
 AII.valuetype = null implies that there
 was problem. so don't attempt to unmarshal the attribute.
 ====
-. Unmarshal AII.valuetype as specified in
-link:jaxb.html#a3960[See Value Type].
+. Unmarshal AII.valuetype as specified in <<value-type>>.
 . If AII.property is associated with a
 `@XmlJavaTypeAdapter`, adapt AII.valuetype as follows:
 +
@@ -664,8 +652,8 @@ but the java type is not registered with the `JAXBContext.newInstance(..)`
 If simple type data cannot be parsed into a
 java datatype, then the value of the java datatype must not change the
 current set value. An access to the datatype must return the value as
-specified in link:jaxb.html#a4095[See Missing element
-information item]. If the conversion of lexical representation into a
+specified in <<missing-element-information-item>>.
+If the conversion of lexical representation into a
 value results in an exception, then the exception must be caught and a
 validation event reported. This is to ensure that such conversion errors
 do not terminate unmarshalling.
@@ -689,8 +677,7 @@ This case arises when an element declaration
 required by a XML schema is missing from the XML instance.
 
 Property or field access must return the
-value specified in link:jaxb.html#a4101[See Value for missing
-elements/attributes]
+value specified in <<value-for-missing-elementsattributes>>.
 
 ===== Missing Attribute
 
@@ -699,8 +686,7 @@ is mapped to an XML attribute but the attribute is missing from the XML
 instance.
 
 Property or field access must return the
-value specified in link:jaxb.html#a4101[See Value for missing
-elements/attributes].
+value specified in <<value-for-missing-elementsattributes>>.
 
 ===== Value for missing elements/attributes
 
@@ -735,8 +721,7 @@ annotated with `@XmlAnyElement`, this EII can be unmarshalled into the
 property/field.
 
 Unknown attribute handling during
-unmarshalling is specified in link:jaxb.html#a4023[See Property
-Inference - Element Information Item].
+unmarshalling is specified in <<property-inference-element-information-item>>.
 
 ===== Unknown attribute
 
@@ -747,8 +732,7 @@ annotated with `@XmlAnyAttribute`, the AII can be unmarshalled into the
 property/field.
 
 Unknown attribute handling during
-unmarshalling is specified in link:jaxb.html#a4033[See Property
-Inference - Attribute Information Item].
+unmarshalling is specified in <<property-inference-attribute-information-item>>.
 
 === Marshalling
 
@@ -763,15 +747,15 @@ Binder.marshal(Object jaxbObject, ...) throws JAXBException;
 A JAXB Provider must marshal the content tree as follows:
 
 * marshal the XML root element tag as
-specified in link:jaxb.html#a4125[See XML Root Element Tag]
+specified in <<xml-root-element-tag>>
 * marshal `obj` as specified in section
-link:jaxb.html#a4132[See Type].
+<<type>>.
 
 ==== XML Root Element Tag
 
 . If `obj` is an instance of
 `jakarta.xml.bind.JAXBElement` then marshal `obj` as specified in
-link:jaxb.html#a4139[See JAXBElement]
+<<jaxbelement>>
 +
 Goto step 4
 
@@ -779,7 +763,7 @@ Goto step 4
 `@XmlRootElement`, then set {EII.[local name], EII.[namespace]} by
 deriving them from the @XmlRootElement annotation following the Java to
 Schema mapping rules in chapter 8. Marshal obj instance as specified in
-link:jaxb.html#a4132[See Type].
+<<type>>.
 +
 Goto step 4
 
@@ -792,15 +776,13 @@ processing.
 
 The type must be marshalled as follows. If the type is an instance of
 
-* JAXBElement, then marshal as specified in
-link:jaxb.html#a4139[See JAXBElement].
+* JAXBElement, then marshal as specified in <<jaxbelement>>.
 * Otherwise, marshal the type as follows. If
 the type is a:
 ** class, then marshal as specified in
-link:jaxb.html#a4156[See class].
+<<class-2>>.
 ** primitive type or standard class, then
-marshal as specified in link:jaxb.html#a4180[See Primitives and
-Standard classes]
+marshal as specified in <<primitives-and-standard-classes>>
 ** enum type then marshal following the schema
 to which it is mapped.
 
@@ -852,7 +834,7 @@ valueType = @XmlJavaTypeAdapter.value().marshal(boundType)
 otherwise _valueType_ is _boundType_
 
 . map _valueType_ to XML infoset information
-items as specified in link:jaxb.html#a4132[See Type] and add
+items as specified in <<type>> and add
 them to EII.
 . marshal EII.
 
@@ -860,19 +842,17 @@ them to EII.
 
 A class must be mapped to XML infoset items as follows:
 
-. If a class mapped to a value as specified
-link:jaxb.html#a3331[See @XmlValue], then map the value to an
-XML infoset and add it to EII.[children]
+. If a class mapped to a value as specified <<xmlvalue>>,
+then map the value to an XML infoset and add it to EII.[children]
 +
 return
 
 . For each property that is mapped to XML
-attribute as specified in link:jaxb.html#a3230[See
-@XmlAttribute]:
+attribute as specified in <<xmlattribute>>:
 .. derive {AII.[local name], AII.[prefix],
 AII.[namespace] } from {name} {target namespace}.
 .. AII.[normalized value] = value of property
-as specified in link:jaxb.html#a4169[See property type]
+as specified in <<property-type>>
 .. add AII to EII.[attributes]
 +
 [NOTE]
@@ -889,7 +869,7 @@ element declaration, elem:
 childEII.[prefix], childEII.[namespace]} from elem.{name}
 elem.{target namespace}
 .. map property type to XML infoset items into
-childEII as specified in link:jaxb.html#a4169[See property type].
+childEII as specified in <<property-type>>.
 .. add childEII to EII.[children]
 
 ===== property type
@@ -899,8 +879,8 @@ must be marshalled into childEII (set by "caller of this
 section") as follows:
 
 . If property does not have a getter method
-as specified in section link:jaxb.html#a4259[See
-Getters/Setters] then report a jakarta.xml.bind.ValidationEvent.
+as specified in section <<getterssetters>>
+then report a jakarta.xml.bind.ValidationEvent.
 +
 Goto step 4.
 . If the value of the property being marshalled is a subtype _boundType_, then
@@ -915,7 +895,7 @@ Java -> Schema mapping rules in Chapter 8. For e.g.
 <foo xsi:type="MyAddrType"/>
 ----
 .. add EII to childEII
-. Marshal the value as specified in link:jaxb.html#a4132[See Type].
+. Marshal the value as specified in <<type>>.
 . Return
 
 ===== Primitives and Standard classes

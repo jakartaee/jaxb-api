@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 == Architecture
@@ -8,7 +8,7 @@
 
 This chapter describes the architectural
 components, comprising the XML-databinding facility, that realize the
-goals outlined in link:jaxb.html#a23[See Goals]”. The scope of
+goals outlined in <<Goals>>. The scope of
 this version of specification covers many additional goals beyond those
 in JAXB 1.0. As a result, JAXB 1.0 architecture has been revised
 significantly.
@@ -43,11 +43,11 @@ optionally be enabled as part of the marshalling process.
 
 As used in this specification, the term
 _schema_ includes the W3C XML Schema as defined in the XML Schema 1.0
-Recommendation[XSD Part 1][XSD Part 2]. link:jaxb.html#a210[See
-Non-Normative Jakarta XML Binding Architecture diagram] illustrates relationships
+Recommendation[XSD Part 1][XSD Part 2]. <<a210>> illustrates relationships
 between concepts introduced in this section.
 
-.[[a210]]Non-Normative Jakarta XML Binding Architecture diagram
+.Non-Normative Jakarta XML Binding Architecture diagram
+[[a210]]
 image::images/xmlb-3.png[image]
 
 JAXB-annotated classes are common to both
@@ -223,7 +223,7 @@ JAXB vendor implementation.
 
 *_Adding application specific behavior and data_*
 Applications can choose to add either behavior or data to schema derived
-code. link:jaxb.html#a1459[See Modifying Schema-Derived Code]”
+code. Section <<Modifying Schema-Derived Code>>
 specifies how the mapping annotation, `@jakarta.annotation.Generated`,
 should be used by a developer to denote developer added/modified code
 from schema-derived code. This information can be utilized by tools to
@@ -256,7 +256,7 @@ many reasons:
 Support for invalid XML content required
 changes to JAXB 1.0 schema to java binding rules as well as the
 introduction of a flexible unmarshalling mode. These changes are
-described in link:jaxb.html#a379[See Unmarshalling Modes]”.
+described in <<Unmarshalling Modes>>.
 
 ==== Validation
 
@@ -397,8 +397,7 @@ completed.
 Unmarshalling and marshalling are the two
 operations that can result in multiple validation failures. The same
 mechanism is used to handle both failure scenarios. See
-link:jaxb.html#a326[See General Validation Processing] for
-further details.
+<<General Validation Processing>> for further details.
 
 === An example
 

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 == Compatibility
@@ -20,24 +20,21 @@ requirements.
 
 A JAXB implementation must implement the
 processing model specified in Appendix B,
-link:jaxb.html#a3856[See Runtime Processing]”.
+<<Runtime Processing>>.
 
 A JAXB implementation included in a product
 that supports software development must support a schema generator. A
 schema generator must support all the Java Types to XML Schema mapping
-specified in Section 8, link:jaxb.html#a2236[See Java Types To
-XML]”.
+specified in <<Java Types To XML>>.
 
 A JAXB implementation included in a product
 that supports software development must support a schema compiler. All
 operating modes of a schema compiler must support all the XML
 Schema-to-Java bindings described in this specification. Additionally,
 any operating mode must not implement a default binding for XML
-Schema-to-Java bindings as an alternative to those specified in Section
-6, link:jaxb.html#a694[See Binding XML Schema to Java
-Representations]” nor alternative interpretations for the standard
-customizations described in Section 7, link:jaxb.html#a1498[See
-Customizing XML Schema to Java Representation Binding].”
+Schema-to-Java bindings as an alternative to those specified in
+<<Binding XML Schema to Java Representations>> nor alternative interpretations for the standard
+customizations described in <<Customizing XML Schema to Java Representation Binding>>.
 
 The default operating mode for a schema
 compiler MUST report an error when extension binding declaration is
@@ -47,13 +44,11 @@ Section 7. An extension binding declaration must be introduced in the
 following cases:
 
 . to alter a binding customization that is
-allowed to be associated with a schema element as specified in Section
-7, link:jaxb.html#a1498[See Customizing XML Schema to Java
-Representation Binding].”
+allowed to be associated with a schema element as specified in
+<<Customizing XML Schema to Java Representation Binding>>.
 . to associate a binding customization with a
-schema element where it is disallowed as specified in Section 7,
-link:jaxb.html#a1498[See Customizing XML Schema to Java
-Representation Binding].”
+schema element where it is disallowed as specified in
+<<Customizing XML Schema to Java Representation Binding>>.
 
 The default operating mode for a schema
 compiler MUST report an error when processing a schema that does not

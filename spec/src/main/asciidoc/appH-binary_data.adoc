@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 [appendix]
@@ -11,13 +11,12 @@ Optimized transmission of binary data as
 attachments is described by standards such as Soap [MTOM]/Xml-binary
 Optimized Packaging[XOP] and WS-I Attachment Profile 1.0 [WSIAP]. To
 optimally support these standards when JAXB databinding is used within a
-message passing environment, link:jaxb.html#a5149[See
-jakarta.xml.bind.attachments]“specifies an API that allows for an
+message passing environment, <<jakarta-xml-bind-attachments>>
+specifies an API that allows for an
 integrated, cooperative implementation of these standards between a
 MIME-based package processor and the Jakarta XML Binding unmarshal/marshal
 processes. An enhanced binding of MIME content to Java representation is
-specified in link:jaxb.html#a5113[See Binding MIME Binary
-Data].
+specified in <<Binding MIME Binary Data>>.
 
 === Binding MIME Binary Data
 
@@ -48,10 +47,10 @@ annotation only refers to one MIME type, it is considered a known media
 type for the binary data. [MIME] does not require an `xmime:contentType`
 attribute to hold the dynamic mime type for the binary data for this
 case. JAXB binding can achieve an optimal binding for this case. The
-default MIME type to Java datatype are in
-link:jaxb.html#a5119[See Default Binding for Known Media Type].
+default MIME type to Java datatype are in <<a5119>>.
 
 .Default Binding for Known Media Type
+[[a5119]]
 [cols=",",options="header",]
 |===
 | MIME Type | Java Type
@@ -98,6 +97,7 @@ MIME content type needed by Jakarta XML Binding Marshaller to specify the mime t
 to set `DataHandler.setContentType(String)`.
 
 .Schema for local element declaration annotated with known media type
+[[a5140]]
 [source,xml,indent="2"]
 ----
 <?xml version="1.0" ?>
@@ -117,7 +117,7 @@ to set `DataHandler.setContentType(String)`.
 </xs:schema>
 ----
 
-.Java Binding of link:jaxb.html#a5140[See Schema for local element declaration annotated with known media type]“
+.Java Binding of <<a5140>>
 [source,java,indent="4"]
 ----
 import java.awt.Image;
@@ -183,8 +183,8 @@ public abstract byte[] getAttachmentAsByteArray(String cid);
 
 The JAXB unmarshal process communicates with
 a MIME-based package processor via an instance of AttachmentUnmarshaller
-registered with the unmarshaller. link:jaxb.html#a5165[See JAXB
-marshal/unmarshalling of optimized binary content.] summarizes this
+registered with the unmarshaller.
+<<opbin>> summarizes this
 processing.
 
 * MTOM/XOP processing during unmarshal: +
@@ -231,7 +231,7 @@ to provide the MIME-based package processor the opportunity to decide to
 optimize or inline the binary data.
 +
 Note that the schema customization specified in
-link:jaxb.html#a2193[See <inlineBinaryData> Declaration] can be
+<<inlinebinarydata-declaration>> can be
 used to declaratively disable XOP processing for binary data.
 * WS-I AP processing: +
 The `addSwaRefAttachment` method is called when marshalling content
@@ -239,8 +239,9 @@ represented by a `ref:swaRef` type definition.
  +
 One can declaratively customize swaRef processing within a schema using
 schema customization @attachmentRef of <jaxb:property>, specified in
-link:jaxb.html#a1786[See Usage]“.
+<<usage-4>>.
 
 .JAXB marshal/unmarshalling of optimized binary content.
+[[opbin]]
 image::images/xmlb-23.png[image]
 

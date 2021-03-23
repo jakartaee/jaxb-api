@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 == Binding XML Schema to Java Representations
@@ -27,8 +27,8 @@ manner.
 
 For each binding of a schema component to its
 Java representation, there is a description of Java mapping
-annotation(s), described in link:jaxb.html#a2236[See Java Types
-To XML]“, to be generated with the Java representation. The
+annotation(s), described in <<Java Types To XML>>,
+to be generated with the Java representation. The
 standardization of these mapping annotations assist in specifying the
 portability of a schema-derived JAXB-annotated classes. All JAXB
 implementations are required to be able to unmarshal/marshal another
@@ -74,7 +74,7 @@ While not necessary to perform by default,
 this section illustrates how a simple type definition is bound to a JAXB
 mapped class. This binding is necessary to preserve a simple type
 definition referred to by `xsi:type` attribute in an Xml instance
-document. See link:jaxb.html#a1582[See Usage]“for the
+document. See <<Usage>> for the
 customization that enables this binding.
 
 ==== Type Categorization
@@ -100,7 +100,7 @@ attributes for each of these are described next.
 
 If an atomic datatype has been derived by
 restriction using an “enumeration” facet, the Java property attributes
-are defined by link:jaxb.html#a829[See Enum Type].” Otherwise
+are defined by <<Enum Type>>. Otherwise
 they are defined as described here.
 
 The base type is derived upon the XML
@@ -115,14 +115,14 @@ The above diagram is the same as the one in
 
 * Only schema built-in atomic datatypes derived by restriction have been shown.
 * The schema built-in atomic datatypes have been annotated with Java data types
-from the “Java Mapping for XML Schema Built-in Types” table below.
+from the <<a725>> table below.
 
 [NOTE]
 .Design Note
 ====
 xs:anyURI is not bound to java.net.URI by default since not all
 possible values of xs:anyURI can be passed to the java.net.URI constructor.
-Using a global JAXB customization described in Section 7.9, “<javaType> Declaration“,
+Using a global JAXB customization described in <<javatype-declaration>>,
 a JAXB user can override the default mapping to map xs:anyURI to java.net.URI.
 
 ====
@@ -132,7 +132,8 @@ The following is a mapping for subset of the
 XML schema built-in data types to Java data types. This table is used to
 specify the base type later.
 
-.[[a725]]Java Mapping for XML Schema Built-in Types
+.Java Mapping for XML Schema Built-in Types
+[[a725]]
 [cols="2*",options="header"]
 |===
 |XML Schema Datatype |Java Datatype
@@ -282,23 +283,23 @@ pic.setFormat(new QName("http://e.org","jpeg"));
 By default, a named simple type definition is
 not bound to a Java class. This binding is only necessary to enable the
 precise type of an `xsi:type` substitution to be preserved as described
-in link:jaxb.html#a1158[See Type Substitution of a Simple Type
-Definition]“. This binding is enabled via the global binding
+in <<Type Substitution of a Simple Type Definition>>.
+This binding is enabled via the global binding
 customization attribute _@mapSimpleTypeDef_ specified in
-link:jaxb.html#a1582[See Usage]“.
+<<Usage>>.
 
 The binding of a named simple type definition
 to a Java value class is based on the abstract model properties in
-link:jaxb.html#a4867[See Simple Type Definition Schema
-Component]. The Java value class must be defined as specified here,
+<<Simple Type Definition Schema Component>>.
+The Java value class must be defined as specified here,
 unless the ref attribute is specified on the `<jaxb:class>` declaration,
 in which case the schema compiler will simply assume that the nominated
 class is already bound to this simple type.
 
 * *name*: name is the Java identifier
 obtained by mapping the XML name _{name}_ using the name mapping
-algorithm, specified in link:jaxb.html#a4656[See The Name to
-Identifier Mapping Algorithm]. Note that anonymous simple type
+algorithm, specified in <<The Name to Identifier Mapping Algorithm>>.
+Note that anonymous simple type
 definition’s are never bound to a Java value class.
 * *package*: The schema-derived Java value class is generated
 into the Java package that represents the binding of _{target namespace}_
@@ -309,7 +310,7 @@ in Section 8, this class can not extend any other class. The derivation
 by restriction hierarchy for simple type definitions can not be captured
 in the schema-derived Java value class.
 * *value property*: Same as the binding of simple content in
-link:jaxb.html#a973[See Simple Content Binding] to an @XmlValue
+<<Simple Content Binding>> to an @XmlValue
 annotated JAXB property.
 
 The next two examples illustrate the binding
@@ -363,15 +364,13 @@ restriction base type (represented by _{base type definition}_) is
 `xs:String` footnote:[Exception cases that
 do not bind to enum type: when the base type is or derives from `xs:ID`
 and `xs:IDREF`. Rationale for not binding these type definitions to an
-enum type is in link:jaxb.html#a2126[See Customizable Schema
-Elements]“.] or derived from it is mapped to an
+enum type is in <<Customizable Schema Elements>>.] or derived from it is mapped to an
 enum type. The *[typesafeEnumBase]* attribute customization described in
-link:jaxb.html#a1580[See <globalBindings> Declaration]," enables
+<<globalbindings-declaration>>, enables
 global configuration to alter what Xml built-in datatypes are bound by
 default to an enum type. An anonymous simple type definition is never
 bound to an enum class by default, but it can be customized as described
-in link:jaxb.html#a2090[See <typesafeEnum> Declaration]” to bind
-to an enum type.
+in <<typesafeenum-declaration>> to bind to an enum type.
 
 ===== Example binding
 
@@ -405,8 +404,7 @@ public enum USState {
 
 The characteristics of an _enum type_ are
 derived in terms of the properties of the
-link:jaxb.html#a4867[See Simple Type Definition Schema
-Component] as follows:
+<<Simple Type Definition Schema Component>> as follows:
 
 The enum type binding is defined as follows:
 
@@ -423,7 +421,7 @@ contains the simple type definition.
 simple type definition.
 ** There is no *outer class name* when schema
 customization, *[jaxb:globalBindings]* _@localScoping_ , specified in
-Section link:jaxb.html#a1582[See Usage], has a value of
+Section <<Usage>>, has a value of
 _toplevel_.
 ** The *outer class name* for an anonymous
 simple type definition is computed by traversing up the anonymous simple
@@ -445,8 +443,8 @@ The schema-derived enum is annotated, either
 explicitly or by default mapping annotations, with the mapping
 annotation @XmlEnum, specified in Section 8. The @XmlEnum annotation
 elements are derived in terms of the abstract model properties for a
-simple type definition summarized in link:jaxb.html#a4867[See
-Simple Type Definition Schema Component] as follows:
+simple type definition summarized in
+<<Simple Type Definition Schema Component>> as follows:
 
 .Annotate enum type with @XmlEnum element-value pairs
 [cols="2*",options="header"]
@@ -462,14 +460,12 @@ Simple Type Definition Schema Component] as follows:
 An enum constant is derived for each
 enumeration facet of the atomic type definition. The characteristics of
 an _enum constant_ of the enum type are derived in terms of the properties
-of the link:jaxb.html#a4899[See Enumeration Facet Schema
-Component] as follows:
+of the <<Enumeration Facet Schema Component>> as follows:
 
 * *name*: The name is either specified via
 customization, `jaxb:typesafeEnumMember` described in
-link:jaxb.html#a2092[See Usage]“, or the name is computed as
-specified in link:jaxb.html#a863[See XML Enumvalue-to-Java
-Identifier Mapping]“.
+<<usage-7>>, or the name is computed as
+specified in <<xml-enumvalue-to-java-identifier-mapping>>.
 * *type*: The Java type binding of the simple
 type definition’s _{base_type_definition}_.
 * *value* : The conversion of string
@@ -494,12 +490,11 @@ described below.
 
 The XML enumeration value _{value}_ is
 mapped to a Java Identifier using the algorithm specified in
-link:jaxb.html#a4773[See Deriving a legal Java identifier from
-an enum facet value]“. If there is a collision among the generated
+<<Deriving a legal Java identifier from an enum facet value>>.
+If there is a collision among the generated
 constant fields *name* or if it is not possible to generate a legal Java
 identifier for one or more of the generated constant field names, see
-link:jaxb.html#a1633[See @typesafeEnumMemberName]“for
-customization options to resolve this error case.
+<<typesafeenummembername>> for customization options to resolve this error case.
 
 ===== Enum Constant Name differs from its Value
 
@@ -542,7 +537,7 @@ annotated, either explicitly or by default mapping annotations, with the
 mapping annotation specified in Section 8. The `@XmlEnumValue`
 annotation elements are derived in terms of the abstract model
 properties for a enumerated facet summarized in
-link:jaxb.html#a4899[See Enumeration Facet Schema Component] as
+<<Enumeration Facet Schema Component>> as
 follows:
 
 .Annotate enum constant with @XmlEnumValue element-value pairs
@@ -604,8 +599,7 @@ If the Java datatype for _{item type definition}_ is a Java primitive type,
 then the base type is the wrapper
 class for the Java primitive type. Otherwise, the Java datatype is
 derived from the XML datatype as specified in
-link:jaxb.html#a715[See Atomic Datatype]” and
-link:jaxb.html#a829[See Enum Type].”
+<<Atomic Datatype>> and <<Enum Type>>.
 * The _collection type_ defaults to an
 implementation of `java.util.List`. Note that this specification does
 not specify the default implementation for the interface
@@ -628,15 +622,13 @@ are:
 
 * The _base type_ is derived from _{item type definition}_
 which is XML datatype, `_"xs:string"_` , thus the Java
-datatype is `java.util.String` as specified in
-link:jaxb.html#a725[See Java Mapping for XML Schema Built-in
-Types].
+datatype is `java.util.String` as specified in <<a725>>.
 * The _collection type_ defaults to an implementation of `java.util.List`.
 * The _predicate_ only allows instances of
 _base type_ to be inserted into the list. When failfast check is being
-performedfootnote:[link:jaxb.html#a1582[See Usage]
+performedfootnote:[<<Usage>>
 describes the `enableFailFastCheck` customization and
-link:jaxb.html#a256[See Validation]” defines fail-fast
+<<Validation>> defines fail-fast
 checking.], the list’s mutation methods apply the
 property’s predicate to any non-`null` value before adding that value
 to the list or replacing an existing element’s value with that value;
@@ -661,14 +653,13 @@ public void setId(Type value);
 
 where `_Id_` is a metavariable that represents
 the Java method identifier computed by applying the name mapping
-algorithm described in link:jaxb.html#a4656[See The Name to
-Identifier Mapping Algorithm] to _prop_ .
+algorithm described in <<The Name to Identifier Mapping Algorithm>> to _prop_ .
 
 The _base type_ is String. If one of the
 member types is derived by list, then the Union property is represented
 as the appropriate collection property as specified by the customization
 `<jaxb:globalBindings>` *@collectionType* value, specified in
-link:jaxb.html#a1582[See Usage].”
+<<Usage>>.
 
 * The `getId` method returns the set value.
 If the property has no set value then the value `null` is returned. The
@@ -709,7 +700,7 @@ is bound using the union property with the following Java property
 attributes:
 
 * the _base type_ as specified in
-link:jaxb.html#a899[See Union Property].”
+<<Union Property>>.
 * if one of the member types is derived by `<xs:list>`,
 then the union is bound as a Collection property.
 * The _predicate_ is the schema constraints
@@ -769,35 +760,31 @@ property name.
 
 The binding of a complex type
 definition to a Java value class is based on the abstract model
-properties in link:jaxb.html#a4907[See Complex Type Definition
-Schema Component]. The Java value class must be defined as specified
+properties in <<Complex Type Definition Schema Component>>. The Java value class must be defined as specified
 here, unless the ref attribute is specified on the _<jaxb:class>_
 customization, in which case the schema compiler will simply assume that
 the nominated class is already bound to this complex
 type.footnote:[Note that
-link:jaxb.html#a1084[See Binding of an anonymous complex type
-definition] defines the name and package property for anonymous type
+<<Binding of an anonymous complex type definition>> defines the name and package property for anonymous type
 definitions occurring within an element declaration.]
 
 * *name*: name is the Java identifier
 obtained by mapping the XML name _{name}_ using the name mapping
-algorithm, specified in link:jaxb.html#a4656[See The Name to
-Identifier Mapping Algorithm]. For the handling of an anonymous complex
-type definition, see link:jaxb.html#a1084[See Binding of an
-anonymous complex type definition]” for how a *name* value is derived
+algorithm, specified in <<The Name to Identifier Mapping Algorithm>>.
+For the handling of an anonymous complex
+type definition, see <<Binding of an anonymous complex type definition>>
+for how a *name* value is derived
 from its parent element declaration.
 * *package*:
 ** For a global complex type definition, the
 derived Java value class is generated into the Java package that
 represents the binding of _{target namespace}_
 ** For the value of *package* for an anonymous
-complex type definition, see link:jaxb.html#a1084[See Binding of
-an anonymous complex type definition]".
+complex type definition, see <<Binding of an anonymous complex type definition>>.
 * *outer class name*:
 ** There is no outer class name for a global
 complex type definition.
-** link:jaxb.html#a1084[See Binding of
-an anonymous complex type definition]" defines how to derive this
+** <<Binding of an anonymous complex type definition>> defines how to derive this
 property from the element declaration that contains the anonymous
 complex type definition.
 * *base class*: A complex type definition
@@ -824,27 +811,25 @@ abstract when the complex type definition’s _{abstract}_ property is
 `true`.
 * *property set*: The Java representation of
 each of the following must be aggregated into Java value class’s
-property set (link:jaxb.html#a918[See Aggregation of Java
-Representation]).
+property set (<<Aggregation of Java Representation>>).
 ** A subset of _{attribute uses}_ is
 constructed. The subset must include the schema attributes corresponding
 to the `<xs:attribute>` children and the _{attribute uses}_ of the
 schema attribute groups resolved by the <ref> attribute. Every
-attribute’s Java representation (link:jaxb.html#a1252[See Attribute use])
+attribute’s Java representation (<<Attribute use>>)
 in the set of attributes computed above must be aggregated.
 ** If the optional _{attribute wildcard}_ is
 present, either directly or indirectly, a property defined by
-link:jaxb.html#a1306[See Attribute Wildcard]“is generated.
+<<Attribute Wildcard>> is generated.
 ** The Java representation for _{content type}_ must be aggregated.
 +
 For a “Complex Type Definition with complex
 content,” the Java representation for _{content type}_ is specified in
-link:jaxb.html#a1332[See Content Model - Particle, Model Group,
-Wildcard].”
+<<content-model-particle-model-group-wildcard>>.
 +
 For a complex type definition which is a “Simple Type Definition with
 simple content,” the Java representation for _{content type}_ is
-specified in link:jaxb.html#a973[See Simple Content Binding].”
+specified in <<Simple Content Binding>>.
 ** If a complex type derives by restriction,
 there is no requirement that Java properties representing the attributes
 or elements removed by the restriction to be disabled. This is because
@@ -853,7 +838,7 @@ derivation by extension.
 * When the complex type definition’s
 _{abstract}_ property is `false`, a factory method is generated in the
 package’s `ObjectFactory` class introduced in
-link:jaxb.html#a482[See Java Package]. The factory method
+<<Java Package>>. The factory method
 returns the type of the Java value class. The name of the factory method
 is generated by concatenating the following components:
 ** The string constant `create`.
@@ -861,13 +846,13 @@ is generated by concatenating the following components:
 
 The schema-derived Java value class is
 annotated, either explicitly or by default mapping annotations, with the
-mapping annotation @XmlType, specified in Section
-link:jaxb.html#a2578[See @XmlType]. The @XmlType annotation
+mapping annotation @XmlType, specified in <<xmltype-3>>. The @XmlType annotation
 elements are derived in terms of the abstract model properties for a
-complex type definition summarized in link:jaxb.html#a4907[See
-Complex Type Definition Schema Component] as follows:
+complex type definition summarized in
+<<Complex Type Definition Schema Component>> as follows:
 
-.[[a956]]Annotate Java value class with @XmlType element-value pairs
+.Annotate Java value class with @XmlType element-value pairs
+[[a956]]
 [width="100%",cols="50%,50%",options="header",]
 |===
 | @XmlType element | @XmlType value
@@ -948,7 +933,7 @@ simple content is bound to a Java property defined by:
 As specified in [XSD Part 1], when a complex type has simple content,
 the content type (_{content type}_) is always a simple type schema
 component. And a simple type component always maps to a Java datatype
-(link:jaxb.html#a702[See Simple Type Definition]”). Values of
+(<<Simple Type Definition>>). Values of
 the following three properties are copied from that Java type:
 ** base type
 ** predicate
@@ -956,8 +941,7 @@ the following three properties are copied from that Java type:
 
 The schema-derived JAXB property representing
 simple content is annotated, either explicitly or by default mapping
-annotations, with the mapping annotation @XmlValue, specified in Section
-link:jaxb.html#a3331[See @XmlValue].
+annotations, with the mapping annotation @XmlValue, specified in <<xmlvalue>>.
 
 *_Example:_* Simple Content: Binding To Property
 
@@ -1033,11 +1017,10 @@ class. However, when the xml document does not constrain the
 element node instance of a supported DOM API.
 
 Type substitution is covered in more detail
-in Section link:jaxb.html#a1148[See Type Substitution of a
-Complex Type Definition] and link:jaxb.html#a1158[See Type
-Substitution of a Simple Type Definition]. Element substitution is
-covered in more detail in Section link:jaxb.html#a1223[See Bind
-to a Simple Element property].
+in <<Type Substitution of a Complex Type Definition>>
+and <<Type Substitution of a Simple Type Definition>>.
+Element substitution is covered in more detail in
+<<Bind to a Simple Element property>>.
 
 === Attribute Group Definition
 
@@ -1046,11 +1029,11 @@ group definition. When an attribute group is referenced, each attribute
 in the attribute group definition becomes a part of the _[attribute uses]_
 property of the referencing complex type definition. Each attribute is
 mapped to a Java property as described in
-link:jaxb.html#a1252[See Attribute use]“. If the attribute group
+<<Attribute use>>. If the attribute group
 definition contains an attribute wildcard, denoted by the
 `xs:anyAttribute` element, then the referencing complex type definition
 will contain a property providing access to wildcard attributes as
-described in link:jaxb.html#a1306[See Attribute Wildcard]“.
+described in <<Attribute Wildcard>>.
 
 === Model Group Definition
 
@@ -1058,10 +1041,10 @@ When a named model group definition is
 referenced, the JAXB property set representing its content model is
 aggregated into the Java value class representing the complex type
 definition that referenced the named model group definition as
-illustrated in link:jaxb.html#a999[See Binding for a reference
-to a model group definition.]”
+illustrated in <<a999>>.
 
-.[[a999]]Binding for a reference to a model group definition.
+.Binding for a reference to a model group definition.
+[[a999]]
 image::images/xmlb-16.png[image]
 
 This binding style results in the same
@@ -1074,30 +1057,27 @@ class, element class or enum type, it is desirable to only create a
 single Java representation, not one for each complex content that
 references the named model group definition. This default binding from a
 model group definition’s content model is defined in
-link:jaxb.html#a1012[See Deriving Class Names for Named Model
-Group Descendants]."
+<<Deriving Class Names for Named Model Group Descendants>>.
 
 To meet the Jakarta XML Binding goal of predictable
 unmarshalling of invalid XML content, the JAXB 1.0 customization for
 binding a model group to a JAXB mapped class is no longer supported.
-link:jaxb.html#a386[See Flexible Unmarshalling] details the
-rationale behind this change.
+<<Flexible Unmarshalling>> details the rationale behind this change.
 
 ==== Bind to a set of properties
 
 A non-repeating reference to a model group
 definition, when the particle referencing the group has _{max occurs}_
 equal to one, results in a set of content properties being generated to
-represent the content model. link:jaxb.html#a1332[See Content
-Model - Particle, Model Group, Wildcard]” describes how a content model
+represent the content model. <<content-model-particle-model-group-wildcard>>
+describes how a content model
 is bound to a set of properties and has examples of the binding.
 
 ==== Bind to a list property
 
 A reference to a model group definition from
 a particle with a repeating occurrence is bound by default as specified
-in link:jaxb.html#a1402[See Bind a repeating occurrence model
-group]“.
+in <<Bind a repeating occurrence model group>>.
 
 *_Example:_* +
 Schema fragment contains a particle that
@@ -1189,8 +1169,7 @@ enum class customization name of `Colors`, the enum type name is
 
 An attribute declaration is bound to a Java
 property when it is referenced or declared, as described in
-link:jaxb.html#a1252[See Attribute use],” from a complex type
-definition.
+<<Attribute use>>, from a complex type definition.
 
 ==== Bind global attribute to a QName Constant
 
@@ -1235,7 +1214,7 @@ public class ObjectFactory {
 This section describes the binding of an XML
 element declaration to a Java representation. For a description of how
 this binding has changed since the previous version, see
-link:jaxb.html#a680[See Java Element Representation Summary]“.
+<<Java Element Representation Summary>>.
 This section introduces why a JAXB technology user has to use instances
 of JAXB element as opposed to instances of Java datatypes or Java value
 class when manipulating XML content.
@@ -1292,8 +1271,7 @@ marshalling an instance of `ChairKind`.
 The next schema/derived Java code example
 illustrates when XML element information can not be inferred by the
 derived Java representation of the XML content. Note that this example
-relies on binding described in link:jaxb.html#a1384[See Bind
-wildcard schema component].”
+relies on binding described in <<Bind wildcard schema component>>.
 
 *_Example:_*
 
@@ -1321,17 +1299,15 @@ value of an XML element and the XML element name since the XML element
 name could not be statically associated with the content-property `any`
 when the Java representation was derived from its XML Schema
 representation. The XML element information is dynamically provided by
-the application for this case. link:jaxb.html#a1332[See Content
-Model - Particle, Model Group, Wildcard] cover additional circumstances
-when one can use JAXB elements.
+the application for this case. <<content-model-particle-model-group-wildcard>>
+cover additional circumstances when one can use JAXB elements.
 
 ==== Bind to _JAXBElement<T>_ Instance
 
 The characteristics of the generated
 ObjectFactory element factory method that returns an `JAXBElement<T>`
 instance are derived in terms of the properties of the
-link:jaxb.html#a4937[See Element Declaration Schema Component]
-as follows:
+<<Element Declaration Schema Component>> as follows:
 
 * The element factory method is generated
 into the `ObjectFactory` class in the Java package that represents the
@@ -1354,8 +1330,7 @@ the schema customization *[jaxb:globalBindings]*  _@localScoping_ has a
 value of toplevel, skip this step.
 ** A name that is generated from the element
 declaration's _{name}_ using the XML Name to Java identifier name
-mapping algorithm specified in link:jaxb.html#a4656[See The Name
-to Identifier Mapping Algorithm].
+mapping algorithm specified in <<The Name to Identifier Mapping Algorithm>>.
 * The `JAXBElement<T>` property for nil
 test whether an element’s content model is `xsi:nil="true"`.
 
@@ -1383,18 +1358,17 @@ type, the element’s value, for this case.
 _{scope}_ of a complex type definition, occurring within content that is
 mapped to a general content property of JAXB elements must have an
 element factory method generated. General content property is specified
-in link:jaxb.html#a1344[See General content property]” An
+in <<General content property>>. An
 example of when a content model is mapped to a general content property,
 forcing the generation of element declarations is at
-link:jaxb.html#a1359[See Examples].”
+<<Examples>>.
 
 The schema-derived element factory method is
 annotated, either explicitly or by default mapping annotations, with the
 mapping annotation `@XmlElementDecl`, specified in Section 8. The
 `@XmlElementDecl` annotation elements are derived in terms of the
 abstract model properties for an element declaration summarized in
-link:jaxb.html#a4937[See Element Declaration Schema Component]
-as follows:
+<<Element Declaration Schema Component>> as follows:
 
 .Annotate element instance factory with @XmlElementDecl element-value pairs.
 [width="100%",cols="50%,50%",options="header",]
@@ -1412,9 +1386,9 @@ its namespace.
 
 The element declaration’s _{type}_ can
 result in additional JAXB annotations being generated on the element
-instance factory. For more details, see link:jaxb.html#a820[See
-Annotations for standard XML datatypes]“and @XmlList in
-link:jaxb.html#a883[See List]“.
+instance factory. For more details, see <<Annotations for standard XML datatypes>>
+and @XmlList in
+<<list>>.
 
 The schema-derived ObjectFactory class
 containing the @XmlElementDecl annotations is annotated with
@@ -1422,12 +1396,10 @@ containing the @XmlElementDecl annotations is annotated with
 
 ==== Bind to Element Class
 
-link:jaxb.html#a1698[See <class>
-Declaration]“customization enables the binding of an element declaration
+<<class-declaration>> customization enables the binding of an element declaration
 with a named type definition to a schema-derived Element class. The
 characteristics of the schema-derived Element class are derived in terms
-of the properties of the link:jaxb.html#a4937[See Element
-Declaration Schema Component] as follows:
+of the properties of the <<Element Declaration Schema Component>> as follows:
 
 * The _name_ of the generated Java Element
 class is derived from the element declaration _{name}_ using the XML Name
@@ -1451,8 +1423,8 @@ _{type definition}_.
 instance of _name_ has a single parameter that is an instance of type `T`.
 By default, the name of the ObjectFactory method is derived by
 concatenating _outerClassNames_ and _name_. When schema customization,
-*[jaxb:globalBindings]* _@localScoping,_ specified in Section
-_link:jaxb.html#a1582[See Usage],_ has a value of _toplevel_,
+*[jaxb:globalBindings]* _@localScoping,_ specified in <<Usage>>,
+has a value of _toplevel_,
 then the outer Classnames are ommitted from the factory method name.
 * If _{scope}_ is
 ** *Global*: The derived Element class is
@@ -1471,8 +1443,8 @@ substitute the default or fixed value if an empty tag for the element
 declaration occurs in the XML content.
 
 A global binding customization,
-*@generateElementClass*, specified in link:jaxb.html#a1580[See
-<globalBindings> Declaration]“enables this binding over the default
+*@generateElementClass*, specified in <<globalbindings-declaration>>
+enables this binding over the default
 binding specified in the previous subsection.
 
 ==== Binding of an anonymous complex type definition
@@ -1482,8 +1454,7 @@ to a generated schema-derived Java value class by default.
 
 The naming characteristics of the generated
 Java value class is derived in terms of the properties of the
-link:jaxb.html#a4937[See Element Declaration Schema Component]
-as follows:
+<<Element Declaration Schema Component>> as follows:
 
 * The _name_ of the generated Java value class
 is derived from the element declaration _{name}_ using the XML Name to
@@ -1503,12 +1474,12 @@ _{scope}_. The derived Java value is not generated nested when schema
 customization *[globalBindings]* has attribute _@localScoping_ with a
 value of _toplevel_.
 * _base class_: Same as defined in
-link:jaxb.html#a933[See Java value class]“.
+<<Java value class>>.
 *  _property set_: As defined in
-link:jaxb.html#a933[See Java value class]“.
+<<Java value class>>.
 * A type factory method is generated in the
 package’s `ObjectFactory` class introduced in
-link:jaxb.html#a482[See Java Package].” The factory method
+<<Java Package>>. The factory method
 returns the type of the Java value class. The name of the factory method
 is generated by concatenating the following components:
 ** The string constant `create`.
@@ -1520,23 +1491,22 @@ names. This step is skipped when @localScoping has a value of _toplevel_.
 ** The _name_ of the Java value class.
 
 The schema-derived value class is annotated
-with the mapping annotation `@XmlType`, specified in Section
-link:jaxb.html#a2578[See @XmlType]. The `@XmlType` annotation
-elements are set as described in link:jaxb.html#a956[See
-Annotate Java value class with @XmlType element-value pairs] with one
+with the mapping annotation `@XmlType`, specified in
+<<xmltype-2>>. The `@XmlType` annotation
+elements are set as described in <<a956>> with one
 exception: `@XmlType.name()` is set to the empty string.
 
 As long as the element declaration is not one
-of the exception cases specified in link:jaxb.html#a1113[See
-Bind Element Declaration to JAXBElement]", the schema-derived value
+of the exception cases specified in
+<<Bind Element Declaration to JAXBElement>>, the schema-derived value
 class is annotated with the mapping annotation `@XmlRootElement`
 specified in Section 8. The `@XmlRootElement` annotation elements are
 derived in terms of the abstract model properties for the referenced
 global element declaration summarized in
-link:jaxb.html#a4937[See Element Declaration Schema Component]
-as follows:
+<<Element Declaration Schema Component>> as follows:
 
 .Annotate JAXB Mapped Class with @XmlRootElement element-value pairs
+
 [width="100%",cols="50%,50%",options="header",]
 |===
 | @XmlRootElement element | @XmlRootElement value
@@ -1603,8 +1573,7 @@ When one or more of the above conditions are
 met, the schema-derived class representing the anonymous complex type
 definition must not be annotated with `@XmlRootElement`. Instead, an
 element factory that returns `JAXBElement<__anonymousTypeValueClass__>`
-may be generated as specified in link:jaxb.html#a1040[See
-Bind to JAXBElement<T> Instance]“.
+may be generated as specified in <<bind-to-jaxbelementt-instance>>.
 
 *_Example:_*
 
@@ -1643,26 +1612,24 @@ class ObjectFactory {
 
 A local element declaration is bound by
 default to a Java property as described in
-link:jaxb.html#a541[See Properties]. The characteristics of the
+<<Properties>>. The characteristics of the
 Java property are derived in terms of the properties of the
-link:jaxb.html#a4937[See Element Declaration Schema Component]
-and link:jaxb.html#a5022[See Particle Schema Component] as
-follows:
+<<Element Declaration Schema Component>>
+and <<Particle Schema Component>> as follows:
 
 * The _name_ of the Java property is derived
 from the _{element declaration}_ property’s _{name}_ property using the
 XML Name to Java Identifier mapping algorithm described in
-link:jaxb.html#a4656[See The Name to Identifier Mapping
-Algorithm].
+<<The Name to Identifier Mapping Algorithm>>.
 * A _base type_ for the Java property is
 derived from the `{element declaration}` property’s `{type
 definition}` property as described in binding of Simple Type Definition
-in _link:jaxb.html#a702[See Simple Type Definition]_ .” or
-link:jaxb.html#a917[See Complex Type Definition]". If the base
+in <<Simple Type Definition>>. or
+<<Complex Type Definition>>. If the base
 type is initially a primitive type and this JAXB property is _optional_,
 the *[jaxb:globalBinding]* customization `@optionalProperty` controls
 the binding of an optional primitive property as described in
-link:jaxb.html#a1582[See Usage]“.
+<<Usage>>.
 * An optional _predicate_ for the Java
 property is constructed from the `{element declaration}` property’s
 `{type definition}` property as described in the binding of simple type
@@ -1692,7 +1659,7 @@ base type to the Java wrapper class for the primitive type. One can test
 and set the absence of an optional property using null. The
 *[jaxb:globalBinding]* customization `@optionalProperty` controls
 alternative bindings of an optional primitive property as described in
-link:jaxb.html#a1582[See Usage]“.
+<<Usage>>.
 * If the element declaration’s _{nillable}_
 property is `"true"` , the base type for the Java property is mapped to
 the corresponding Java wrapper class for the Java primitive type.
@@ -1706,11 +1673,10 @@ containing the local element declaration or reference to global element.
 The schema-derived JAXB property getter
 method is annotated, either explicitly or by default mapping
 annotations, with the mapping annotation `@XmlElement`, specified in
-Section 8, “@XmlElement”. The `@XmlElement` annotation elements are
+<<xmlelement>>. The `@XmlElement` annotation elements are
 derived in terms of the abstract model properties for the referenced
 global element declaration summarized in
-link:jaxb.html#a4937[See Element Declaration Schema Component]
-as follows:
+<<Element Declaration Schema Component>> as follows:
 
 .Annotate JAXB Property with @XmlElement element-value pairs
 [width="100%",cols="50%,50%",options="header",]
@@ -1733,22 +1699,17 @@ package level annotation of @XmlSchema and not setting
 set defaultValue() to _{value constraint}_ ’s value.
 |===
 
-link:jaxb.html#a1240[See Xml Schema
-example containing an element substitution group]illustrates how to
+<<a1240>> illustrates how to
 define an element substitution group and to reference the head element
 of the substitution group within an Xml Schema.
-link:jaxb.html#a1242[See avo binding of Xml Schema from CODE
-EXAMPLE 6-5] illustrates the Java bindings of the element substation
-enabled schema. link:jaxb.html#a1244[See Element substitution
-using Java bindings from CODE EXAMPLE 6-6] demonstrates element
-substitution using the JAXB API.link:jaxb.html#a1246[See Invalid
-element substitution using Java bindings from CODE EXAMPLE 6-6]
+<<a1242>> illustrates the Java bindings of the element substation
+enabled schema. <<a1244>> demonstrates element
+substitution using the JAXB API. <<a1246>>
 illustrates invalid element substitution handling.
 
 ===== Type Substitution of a Complex Type Definition
 
-link:jaxb.html#a917[See Complex Type
-Definition]“describes that when a complex type definition is mapped to
+<<Complex Type Definition>> describes that when a complex type definition is mapped to
 Java value class that the type definition derivation hierarchy is
 preserved in the Java class hierarchy. This preservation makes it quite
 natural for Java to support the Xml Schema mechanism type substitution
@@ -1764,7 +1725,8 @@ The following three code examples illustrate
 how type substitution is supported in JAXB for a complex type
 definition hierarchy.
 
-.[[a1152]]Xml Schema example containing type derivation hierarchy
+.Xml Schema example containing type derivation hierarchy
+[[a1152]]
 [source,xml,indent=4,subs=+quotes]
 ----
 <xs:schema targetNamespace="travel:acme" xmlns:a="travel:acme">
@@ -1787,7 +1749,8 @@ definition hierarchy.
 </xs:schema>
 ----
 
-.[[a1154]]Java binding of Xml Schema from link:jaxb.html#a1240[See Xml Schema example containing an element substitution group]
+.Java binding of Xml Schema from <<a1240>>
+[[a1154]]
 [source,java,indent=4,subs=+quotes]
 ----
 package travel.acme;
@@ -1813,7 +1776,7 @@ public class Itinerary {
 }
 ----
 
-.Type substitution using Java bindings from link:jaxb.html#a1242[See avo binding of Xml Schema from CODE EXAMPLE 6-5]
+.Type substitution using Java bindings from <<a1242>>
 [source,java,indent=8,subs=+quotes]
 ----
 ObjectFactory of = ...;
@@ -1837,8 +1800,8 @@ typed binding conflicts with fully supporting type substitution of a
 simple type definition. Unlike the JAXB binding of complex type
 definitions, the simple type derivation hierarchy is not preserved when
 binding builtin XML Schema simple type definitions to corresponding Java
-datatypes as specified in link:jaxb.html#a715[See Atomic
-Datatype]“. Since there is not a natural Java inheritance hierarchy to
+datatypes as specified in <<Atomic Datatype>>.
+Since there is not a natural Java inheritance hierarchy to
 support simple type substitution, a JAXB property customization is
 required to enable optimal support of simple type substitution.
 
@@ -1877,8 +1840,8 @@ occurring in an XML document.
 To enable more comprehensive support of
 simple type substituting of an XML element with a simple type
 definition, the JAXB property customization specified in
-link:jaxb.html#a1809[See Generalize/Specialize baseType with
-attribute @name] enables setting the property’s base type to the more
+<<generalizespecialize-basetype-with-attribute-name>> enables
+setting the property’s base type to the more
 general type of `java.lang.Object`. This binding allows for retention of
 the XML document `xsi:type` and attributes associated with complex type
 definition substituted for an XML element with a simple type definition.
@@ -1888,8 +1851,8 @@ schema type.
 
 To preserve an application-defined simple
 type definition involved in simple type substitution, it must be mapped
-to a JAXB mapped class as described in link:jaxb.html#a803[See
-Bind to a JAXB mapped class]“. This can be achieved for all simple type
+to a JAXB mapped class as described in <<Bind to a JAXB mapped class>>.
+This can be achieved for all simple type
 definitions in a schema using the customization `<jaxb:globalBinding
 mapSimpleTypeDefs="true"/>` or it can be achieved per simple type
 definition using <jaxb:class> customization. An invalid simple type
@@ -1900,7 +1863,8 @@ Below are examples of the type substitution
 of an XML element’s simple type definition for the default and
 customized binding.
 
-.[[a1168]]Schema fragment to illustrate simple type substitution
+.Schema fragment to illustrate simple type substitution
+[[a1168]]
 [source,xml,indent=4,subs=+quotes]
 ----
 <xsd:element name="Price">
@@ -1924,7 +1888,8 @@ customized binding.
 </xsd:simpleType>
 ----
 
-.[[a1170]]XML documents with simple type substitution
+.XML documents with simple type substitution
+[[a1170]]
 [source,xml,indent=4,subs=+quotes]
 ----
 <product>
@@ -1950,7 +1915,8 @@ customized binding.
 
 ====== Default Handling of Simple Type Substitution
 
-.[[a1176]]Default JAXB binding of link:jaxb.html#a1168[See Schema fragment to illustrate simple type substitution]
+.Default JAXB binding of <<a1168>>
+[[a1176]]
 [source,java,indent=4]
 ----
 public class AmountType {
@@ -1967,17 +1933,13 @@ public class Product {
 ----
 
 Unmarshalling XML document fragments from
-link:jaxb.html#a1170[See XML documents with simple type
-substitution] into link:jaxb.html#a1176[See Default JAXB binding
-of CODE EXAMPLE 6-1] JAXB binding of element `product` results in the
+<<a1170>> into <<a1176>> JAXB binding of element `product` results in the
 `xsi:type` and attributes associated with JAXB mapped class `Price`
 being lost as part of the unmarshal process. This loss is illustrated by
-comparing link:jaxb.html#a1179[See Product instances from
-unmarshalling XML docs from CODE EXAMPLE 6-2] with
-link:jaxb.html#a1204[See Product instances from unmarshalling
-XML docs from CODE EXAMPLE 6-2].
+comparing <<a1179>> with <<a1204>>.
 
-.[[a1179]]Product instances from unmarshalling XML docs from link:jaxb.html#a1170[See XML documents with simple type substitution]
+.Product instances from unmarshalling XML docs from <<a1170>>
+[[a1179]]
 [width="100%",cols="20%,20%,20%,20%,20%",options="header",]
 |===
 | document xsi:type | Product.name +
@@ -2008,10 +1970,10 @@ to a JAXB class either by `<jaxb:class>` customization or by
 </jaxb:bindings>
 ----
 
-specified in link:jaxb.html#a1809[See
-Generalize/Specialize baseType with attribute @name]“.
+specified in <<generalizespecialize-basetype-with-attribute-name>>.
 
-.[[a1201]]Customized JAXB binding of link:jaxb.html#a1168[See Schema fragment to illustrate simple type substitution]
+.Customized JAXB binding of <<a1168>>
+[[a1201]]
 [source,java,indent=4]
 ----
 public class AmountType {
@@ -2034,14 +1996,14 @@ public class Product {
 ----
 
 Unmarshalling XML document fragments from
-link:jaxb.html#a1170[See XML documents with simple type
-substitution] into link:jaxb.html#a1201[See Customized JAXB
-binding of CODE EXAMPLE 6-1] JAXB binding of element `product` preserves
+<<a1170>>
+into <<a1201>>
+JAXB binding of element `product` preserves
 the `xsi:type` and attributes associated with JAXB mapped class
-`AmountType` is illustrated in link:jaxb.html#a1204[See Product
-instances from unmarshalling XML docs from CODE EXAMPLE 6-2].
+`AmountType` is illustrated in <<a1204>>.
 
-.[[a1204]]Product instances from unmarshalling XML docs from link:jaxb.html#a1170[See XML documents with simple type substitution]
+.Product instances from unmarshalling XML docs from <<a1170>>
+[[a1204]]
 [width="100%",cols="20%,20%,20%,20%,20%",options="header",]
 |===
 | document xsi:type | Product.name +
@@ -2082,13 +2044,12 @@ derive from or have the same type definition as the head element.
 To support element substitution, for
 each global element reference to a head element of a substitution group
 or to an abstract element, it is necessary to generate the Element
-property bindings defined in link:jaxb.html#a630[See Element
-Property].footnote:[Element substitution
+property bindings defined in <<Element Property>>.footnote:[Element substitution
 extensibility does allow element substitution(s) to be defined in a
 separate schema than a global element reference occurs. When schemas are
 not compiled at same time, the schema to java binding declaration,
 <jaxb:property generateElementProperty=”true”/> described in
-link:jaxb.html#a1786[See Usage] forces the generation of an
+<<usage-4>> forces the generation of an
 element property for a global element reference, independent of it not
 belonging to a element substitution group.] This property enables the overriding
 of the schema-specified element name bound to a JAXB property by setting
@@ -2110,7 +2071,7 @@ setter.footnote:[The desire to reduce
 the overall number of schema-derived classes generated by default
 influenced the decision to default to binding an element declaration to
 an element instance factory. A customization described in
-link:jaxb.html#a1580[See <globalBindings> Declaration] exists
+<<globalbindings-declaration>> exists
 that binds each element declaration to a Java element class so element
 substitution checking can be enforced entirely by strongly typed method
 signatures.]
@@ -2121,8 +2082,7 @@ annotations, with the mapping annotation `@XmlElementRef`, specified in
 Section 8.10.3, “@XmlElementRef”. The `@XmlElementRef` annotation
 elements are derived in terms of the abstract model properties for the
 referenced global element declaration summarized in
-link:jaxb.html#a4937[See Element Declaration Schema Component]
-as follows:
+<<Element Declaration Schema Component>> as follows:
 
 .Annotate Element Property with @XmlElementRef element-value pairs
 [cols="1,1",options="header",]
@@ -2133,19 +2093,16 @@ as follows:
 | name | referenced element declaration _{name}_
 |===
 
-link:jaxb.html#a1240[See Xml Schema
-example containing an element substitution group]illustrates how to
+<<a1240>> illustrates how to
 define an element substitution group and to reference the head element
 of the substitution group within an Xml Schema.
-link:jaxb.html#a1242[See avo binding of Xml Schema from CODE
-EXAMPLE 6-5] illustrates the Java bindings of the element substation
-enabled schema. link:jaxb.html#a1244[See Element substitution
-using Java bindings from CODE EXAMPLE 6-6] demonstrates element
-substitution using the JAXB API.link:jaxb.html#a1246[See Invalid
-element substitution using Java bindings from CODE EXAMPLE 6-6]
-illustrates invalid element substitution handling.
+<<a1242>> illustrates the Java bindings of the element substation
+enabled schema. <<a1244>>
+demonstrates element substitution using the JAXB API.
+<<a1246>> illustrates invalid element substitution handling.
 
-.[[a1240]]Xml Schema example containing an element substitution group
+.Xml Schema example containing an element substitution group
+[[a1240]]
 [source,xml,indent=4]
 ----
 <xs:schema targetNamespace="travel:acme" xmlns:a="travel:acme">
@@ -2167,7 +2124,8 @@ complexType definitions TransportType, PlaneType, AutoType and SUV.-->
 </xs:schema>
 ----
 
-.[[a1242]]avoid binding of Xml Schema from link:jaxb.html#a1240[See Xml Schema example containing an element substitution group]
+.Avoid binding of Xml Schema from <<a1240>>
+[[a1242]]
 [source,java,indent=4]
 ----
 package travel.acme;
@@ -2193,7 +2151,8 @@ public class Itinerary {
 }
 ----
 
-.[[a1244]]Element substitution using Java bindings from link:jaxb.html#a1242[See avo binding of Xml Schema from CODE EXAMPLE 6-5]
+.Element substitution using Java bindings from <<a1242>>
+[[a1244]]
 [source,java,indent=8,subs=+quotes]
 ----
 ObjectFactory of = ...;
@@ -2212,7 +2171,8 @@ __// Substitutes <e:auto xsi:type="e:SUV"> for <e:transport>__
 itinerary.setTransport(of.createAuto(of.createSUV()));
 ----
 
-.[[a1246]]Invalid element substitution using Java bindings from link:jaxb.html#a1242[See avoid binding of Xml Schema from CODE EXAMPLE 6-5]
+.Invalid element substitution using Java bindings from <<a1242>>
+[[a1246]]
 [source,xml,indent=4]
 ----
 <!-- Add elements not part of element substitution group. -->
@@ -2245,7 +2205,7 @@ A repeating occurrence element declaration
 that is element substitutable binds solely to a JAXB Collection property
 of JAXBElement.
 
-.Bind repeating occurrence element substitution variant of link:jaxb.html#a1240[See Xml Schema example containing an element substitution group]
+.Bind repeating occurrence element substitution variant of <<a1240>>
 [source,xml,indent=4,subs=+quotes]
 ----
 <!--deleted schema that remains same -->
@@ -2269,25 +2229,23 @@ public class Itinerary {
 
 A ‘required’ or ‘optional’ attribute use is
 bound by default to a Java property as described in
-link:jaxb.html#a541[See Properties]. The characteristics of the
+<<Properties>>. The characteristics of the
 Java property are derived in terms of the properties of the
-link:jaxb.html#a5012[See Attribute Use Schema Component] and
-link:jaxb.html#a4965[See Attribute Declaration Schema Component]
+<<Attribute Use Schema Component>> and <<Attribute Declaration Schema Component>>
 as follows:
 
 * The _name_ of the Java property is derived
 from the _{attribute declaration}_ property’s _{name}_ property using the
 XML Name to Java Identifier mapping algorithm described in
-link:jaxb.html#a4656[See The Name to Identifier Mapping
-Algorithm].
+<<The Name to Identifier Mapping Algorithm>>.
 * A _base type_ for the Java property is
 derived from the `{attribute declaration}` property’s `{type
 definition}` property as described in binding of Simple Type Definition
-in _link:jaxb.html#a702[See Simple Type Definition]_ . If the
+in <<Simple Type Definition>>. If the
 base type is initially a primitive type and this JAXB property is
 _optional_ , the *[jaxb:globalBinding]* customization
 `@optionalProperty` controls the binding of an optional primitive
-property as described in link:jaxb.html#a1582[See Usage]“.
+property as described in <<Usage>>.
 * An optional _predicate_ for the Java
 property is constructed from the `{attribute declaration}` property’s
 `{type definition}` property as described in the binding of simple type
@@ -2309,14 +2267,14 @@ containing the attribute use
 
 The JAXB property getter for this attribute
 is annotated, either explicitly or via default mapping, with the mapping
-annotation @XmlAttribute, specified in Section
-link:jaxb.html#a3230[See @XmlAttribute]. The @XmlAttribute
+annotation @XmlAttribute, specified in <<xmlattribute>>. The @XmlAttribute
 element values are derived in terms of the properties of the
-link:jaxb.html#a5012[See Attribute Use Schema Component] and
-link:jaxb.html#a4965[See Attribute Declaration Schema Component]
+<<Attribute Use Schema Component>> and
+<<Attribute Declaration Schema Component>>
 as follows:
 
-.[[a1262]]Annotate Attribute property getter method with @XmlAttribute annotation
+.Annotate Attribute property getter method with @XmlAttribute annotation
+[[a1262]]
 [cols="1,1",options="header",]
 |===
 | @XmlAttribute element | @XmlAttribute value
@@ -2370,8 +2328,8 @@ can be bound to a Java Constant property. This mapping is not performed
 by default since `fixed` is only a validation constraint. The user must
 set the binding declaration attribute `fixedAttributeToConstantProperty`
 on `<jaxb:globalBinding>` element as specified in
-link:jaxb.html#a1582[See Usage] or on`<jaxb:property>` element
-as specified in link:jaxb.html#a1786[See Usage] to enable this
+<<usage>> or on`<jaxb:property>` element
+as specified in <<usage-4>> to enable this
 mapping.
 
 *_Example:_* +
@@ -2403,8 +2361,7 @@ public class USAddress {
 The schema-derived constant for this fixed
 attribute is annotated, either explicitly or via default mapping, with
 the mapping annotation `@XmlAttribute`. The elements of `@XmlAttribute`
-are set as described in link:jaxb.html#a1262[See Annotate
-Attribute property getter method with @XmlAttribute annotation]
+are set as described in <<a1262>>.
 
 Note that if derivation by restriction
 constrains an existing attribute declaration to be fixed, this
@@ -2443,8 +2400,7 @@ reported by marshalling.
 * The _name_ of the Java property is derived
 from the _{name}_ property _of the attribute or element_ using the XML Name
 to Java Identifier mapping algorithm described in
-link:jaxb.html#a4656[See The Name to Identifier Mapping
-Algorithm].
+<<The Name to Identifier Mapping Algorithm>>.
 * A _base type_ for the Java property is java.lang.Object.
 * There is no _predicate_ for a property representing an `xs:IDREF`.
 * An optional _collection type_
@@ -2510,11 +2466,9 @@ authorBio.setName("<some author’s name>");
 Note that `ID` and `IDREF` mechanisms do not
 incorporate type definitions that can be referenced. To generate
 stronger typing for a JAXB property representing an IDREF, the schema
-customization described in link:jaxb.html#a1809[See
-Generalize/Specialize baseType with attribute @name]" can be used to
-specialize the binding.. link:jaxb.html#a1820[See Specialize
-binding of an IDREF via customization] illustrates the generation of
-stronger typing for the above example.
+customization described in <<Generalize/Specialize baseType with attribute @name>>
+can be used to specialize the binding. <<exidrefcust,Specialize binding of an IDREF via customization>>
+illustrates the generation of stronger typing for the above example.
 
 === Attribute Wildcard
 
@@ -2605,7 +2559,7 @@ described in the following subsections.
 ==== Bind Redefined Simple Type Definition
 
 As introduced in
-link:jaxb.html#a702[See Simple Type Definition]“, a schema
+<<Simple Type Definition>>, a schema
 component using a simple type definition typically binds to a JAXB
 property. The base type, collection type and predicate of the JAXB
 property are derived from the simple type definition. Thus, the redefine
@@ -2616,7 +2570,7 @@ predicate of the JAXB property.
 The one exception to this binding is that a
 simple type definition with enum facets is sometimes bound to an enum
 type. A redefined simple type definition that binds to an enum type, as
-described in link:jaxb.html#a829[See Enum Type]“, is not bound
+described in <<Enum Type>>, is not bound
 to a Java representation, only the redefinition is bound to an enum
 type.
 
@@ -2677,7 +2631,7 @@ The attribute or model group redefinition is
 used instead of the initial group definition to construct the property
 set of the content model(s) that reference the redefined attribute or
 model group definition. The construction of a property set is described
-in link:jaxb.html#a933[See Java value class]“.
+in <<Java value class>>.
 
 Since there is no binding of an attribute or
 model group definition to a Java representation, no other special case
@@ -2778,7 +2732,7 @@ A general content property is, as its name
 implies, the most general of all content properties. Such a property can
 be used with any content specification, no matter how complex. A general
 content property is represented as a List property as introduced in
-link:jaxb.html#a595[See List Property]. Unlike the prior
+<<List Property>>. Unlike the prior
 approach where the JAXB implementation must infer ordering between the
 element content, this approach always requires the JAXB technology user
 to specify a valid ordering of element and text content. This approach
@@ -2800,16 +2754,14 @@ annotations, with the mapping annotations reflecting what content is
 within the Collection.
 
 * If the content model is mixed, the property
-is annotated as `@XmlMixed`. See link:jaxb.html#a1369[See Bind
-mixed content]“for details.
-* link:jaxb.html#a1351[See Collection
-of Element types]“describes an optimized binding of a collection of
+is annotated as `@XmlMixed`. See <<Bind mixed content>> for details.
+* <<Collection of Element types>> describes an optimized binding of a collection of
 element values, instead of a collection of JAXB elements annotated with
 `@XmlElementRefs(@XmlElementRef, ...)`.
 * If optimized binding can not be used, each
 element in the content model is represented by an `@XmlElementRef`,
-described in link:jaxb.html#a1223[See Bind to a Simple Element
-property]“. If there is more than one element annotations needed, they
+described in <<Bind to a Simple Element property>>.
+If there is more than one element annotations needed, they
 must occur as elements in the map annotation `@XmlElementRefs` specified
 in Section 8.10.3, “@XmlElementRef”.
 
@@ -2915,7 +2867,7 @@ public class FooBar {
 When a complex type definition’s _{content type}_
 is “mixed,” its character and element information content is
 bound to general content list as described in
-link:jaxb.html#a1344[See General content property].” Character
+<<General content property>>. Character
 information data is inserted as instances of `java.lang.String` into a
 JAXB collection property.
 
@@ -3015,7 +2967,7 @@ annotated with `@XmlRootElement`. +
 Corresponds to a recognized global element tag name registered with
 the instance `jakarta.xml.bind.JAXBContext`, meaning the schema(s)
 describing the element content is registered with the _JAXBContext_
-instance, see link:jaxb.html#a298[See JAXBContext] on how
+instance, see <<JAXBContext>> on how
 bindings are registered with a `JAXBContext` instance.,
 .. instance of `jakarta.xml.bind.JAXBElement`. +
 Corresponds to an unknown element name but a recognized type
@@ -3042,8 +2994,7 @@ representing wildcard content is annotated, either explicitly or by
 default mapping annotations, with the mapping annotation
 `@XmlAnyElement`, specified in Section 8. The @XmlAnyElement annotation
 element values are derived in terms of the abstract model properties for
-wildcard summarized in link:jaxb.html#a5032[See Wildcard Schema
-Component] as follows:
+wildcard summarized in <<Wildcard Schema Component>> as follows:
 
 .Annotate JAXB property with @XmlAnyElement element-value pairs
 [cols="1,1",options="header"]
@@ -3067,11 +3018,9 @@ following manner:
 ** If a named model group definition is being
 referenced, the value of its _{name}_ property is mapped to a Java
 identifier for a method using the algorithm specified in
-link:jaxb.html#a4656[See The Name to Identifier Mapping
-Algorithm].
+<<The Name to Identifier Mapping Algorithm>>.
 ** To derive a content property _name_ for
-unnamed model group, see link:jaxb.html#a4780[See Deriving an
-identifier for a model group].
+unnamed model group, see <<Deriving an identifier for a model group>>.
 * Content-property _base type_ set to
 `java.lang.Object`. A binding schema customization could provide a more
 specialized java class.
@@ -3085,9 +3034,8 @@ default collection property is a List property.
 * There is no _default value_.
 
 The schema-derived collection property is
-annotated as specified in link:jaxb.html#a1344[See General
-content property] and link:jaxb.html#a1351[See Collection of
-Element types].
+annotated as specified in <<General content property>>
+and <<Collection of Element types>>.
 
 *_Local structural Constraints_*
 
@@ -3104,26 +3052,23 @@ style for a complex type definition’s content model.
 . If _{content type}_ is mixed, bind the
 entire content model to a general content property with the
 content-property name `"content"`. See
-link:jaxb.html#a1369[See Bind mixed content] for more details.
+<<Bind mixed content>> for more details.
 . If (1) a particle has _{max occurs}_ >1 and
 (2) its _{term}_ is a model group and (3) all the particles in the model
 group have \{terms} that bind to different Java datatypes, bind to a
 collection of element types. See complete list of constraints required
-to perform this optimized binding in link:jaxb.html#a1351[See
-Collection of Element types].
+to perform this optimized binding in <<Collection of Element types>>.
 . If (1) a particle has _{max occurs}_ >1 and
 (2) its _{term}_ is a model group, then that particle and its descendants
 are mapped to one general content property that represents them. See
-link:jaxb.html#a1402[See Bind a repeating occurrence model
-group] for details.
+<<Bind a repeating occurrence model group>> for details.
 . Process all the remaining particles (1)
 whose _{term}_ are wildcard particles and (2) that did not belong to a
 repeating occurrence model group bound in step 2. If there is only one
-wildcard, bind it as specified in link:jaxb.html#a1384[See Bind
-wildcard schema component].” If there is more than one, then fallback to
+wildcard, bind it as specified in <<Bind wildcard schema component>>.
+If there is more than one, then fallback to
 representing the entire content model as a single general content
-property. See link:jaxb.html#a1344[See General content
-property]).
+property. See <<General content property>>.
 . Process all particles (1) whose _{term}_ are
 element declarations and (2) that do not belong to a repeating
 occurrence model group bound in step 2.
@@ -3243,7 +3188,7 @@ class ObjectFactory {
 
 Setting the `choiceContentProperty` attribute
 of `<jaxb:globalBindings>` as specified in
-link:jaxb.html#a1582[See Usage] enables this customized binding
+<<Usage>> enables this customized binding
 option.
 
 A non-repeating choice model group is bound
@@ -3252,8 +3197,7 @@ a choice model group as follows:
 
 * The choice content property name is either
 the referenced model group definition _{name}_ or obtained using the
-algorithm specified in link:jaxb.html#a4780[See Deriving an
-identifier for a model group].
+algorithm specified in <<Deriving an identifier for a model group>>.
 * The choice content property `base type` is
 the first common supertype of all items within the choice model group,
 with `java.lang.Object` always being a common root for all Java
@@ -3280,7 +3224,7 @@ parameter that is the type of the choice content property `base type`.
 The `globalBindings` and property
 customization attribute, `choiceContentProperty`, enables this
 customized binding. The customization is specified in
-link:jaxb.html#a1580[See <globalBindings> Declaration].
+<<globalbindings-declaration>>.
 
 *_Example:_* +
 
@@ -3411,6 +3355,7 @@ content that validates against xs:any processContents=”lax” or “skip”,
 allow instances of org.w3c.dom.Node into the list.
 
 .Summarize default XSD to Java binding for Figure 5.1 and Figure 5.2
+[[table614]]
 [cols="1,1",options="header"]
 |===
 | XML Schema | Java Representation
