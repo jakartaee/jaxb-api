@@ -889,7 +889,7 @@ public interface Unmarshaller {
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
-    public void setSchema( javax.xml.validation.Schema schema );
+    public void setSchema( Schema schema );
 
     /**
      * Get the JAXP {@link javax.xml.validation.Schema Schema} object
@@ -904,7 +904,7 @@ public interface Unmarshaller {
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
-    public javax.xml.validation.Schema getSchema();
+    public Schema getSchema();
 
     /**
      * Associates a configured instance of {@link XmlAdapter} with this unmarshaller.
@@ -919,7 +919,7 @@ public interface Unmarshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public void setAdapter( XmlAdapter adapter );
+    public <A extends XmlAdapter<?, ?>> void setAdapter( A adapter );
 
     /**
      * Associates a configured instance of {@link XmlAdapter} with this unmarshaller.
@@ -948,7 +948,7 @@ public interface Unmarshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public <A extends XmlAdapter> void setAdapter( Class<A> type, A adapter );
+    public <A extends XmlAdapter<?, ?>> void setAdapter( Class<A> type, A adapter );
 
     /**
      * Gets the adapter associated with the specified type.
@@ -961,7 +961,7 @@ public interface Unmarshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public <A extends XmlAdapter> A getAdapter( Class<A> type );
+    public <A extends XmlAdapter<?, ?>> A getAdapter( Class<A> type );
 
     /**
      * <p>Associate a context that resolves cid's, content-id URIs, to
@@ -999,6 +999,13 @@ public interface Unmarshaller {
      * @since 1.6, JAXB 2.0
      */
     public static abstract class Listener {
+
+        /**
+         * Do-nothing constructor for the derived classes.
+         */
+        protected Listener() {
+        }
+
         /**
          * <p>
          * Callback method invoked before unmarshalling into {@code target}.

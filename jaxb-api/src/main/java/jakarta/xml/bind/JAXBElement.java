@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -21,7 +21,7 @@ import java.io.Serializable;
  * with the following properties
  * <ul>
  *   <li>element's xml tag <b>{@code name}</b></li>
- *   <li><b>{@code value}</b> represents the element instance's atttribute(s) and content model</li>
+ *   <li><b>{@code value}</b> represents the element instance's attribute(s) and content model</li>
  *   <li>element declaration's <b>{@code declaredType}</b> ({@code xs:element @type} attribute)</li>
  *   <li><b>{@code scope}</b> of element declaration</li>
  *   <li>boolean <b>{@code nil}</b> property. (element instance's <b>{@code xsi:nil}</b> attribute)</li>
@@ -61,7 +61,7 @@ public class JAXBElement<T> implements Serializable {
      *     representation of complex type defintion containing
      *     xml element declaration. 
      */
-    final protected Class scope;
+    final protected Class<?> scope;
 
     /** xml element value. 
         Represents content model and attributes of an xml element instance. */
@@ -73,7 +73,9 @@ public class JAXBElement<T> implements Serializable {
     /**
      * Designates global scope for an xml element.
      */
-    public static final class GlobalScope {}
+    public static final class GlobalScope {
+        private GlobalScope() {}
+    }
 
     /**
      * <p>Construct an xml element instance.</p>
@@ -90,7 +92,7 @@ public class JAXBElement<T> implements Serializable {
      */
     public JAXBElement(QName name, 
 		       Class<T> declaredType, 
-		       Class scope,
+		       Class<?> scope,
 		       T value) {
         if(declaredType==null || name==null)
             throw new IllegalArgumentException();
@@ -152,7 +154,7 @@ public class JAXBElement<T> implements Serializable {
      * @see #isGlobalScope()
      * @return {@code GlobalScope.class} if this element is of global scope.
      */
-    public Class getScope() {
+    public Class<?> getScope() {
         return scope;
     }
     

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -181,12 +181,14 @@ public @interface XmlElement {
     /**
      * The Java class being referenced.
      */
-    Class type() default DEFAULT.class;
+    Class<?> type() default DEFAULT.class;
 
     /**
      * Used in {@link XmlElement#type()} to
      * signal that the type be inferred from the signature
      * of the property.
      */
-    static final class DEFAULT {}
+    static final class DEFAULT {
+        private DEFAULT() {}
+    }
 }

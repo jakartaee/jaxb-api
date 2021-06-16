@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -81,7 +81,7 @@ public @interface XmlSchemaType {
      * the type() must be specified.
      */
 
-    Class type() default DEFAULT.class;
+    Class<?> type() default DEFAULT.class;
 
     /**
      * Used in {@link XmlSchemaType#type()} to
@@ -89,7 +89,9 @@ public @interface XmlSchemaType {
      * of the property.
      */
 
-    static final class DEFAULT {}
+    static final class DEFAULT {
+        private DEFAULT() {};
+    }
 
 }
 

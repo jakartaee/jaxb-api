@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -52,7 +52,13 @@ import jakarta.activation.DataHandler;
  * @see <a href="http://www.w3.org/TR/xml-media-types/">Describing Media Content of Binary Data in XML</a>
  */
 public abstract class AttachmentUnmarshaller {
-   /**
+
+    /**
+     * Do-nothing constructor for the derived classes.
+     */
+    protected AttachmentUnmarshaller() {}
+
+    /**
     * <p>Lookup MIME content by content-id, {@code cid}, and return as a {@link DataHandler}.</p>
     * 
     * <p>The returned {@code DataHandler} instance must be configured

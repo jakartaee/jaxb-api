@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -128,7 +128,7 @@ public @interface XmlElementDecl {
      * If this is not {@link XmlElementDecl.GLOBAL}, then this element
      * declaration mapping is only active within the specified class.
      */
-    Class scope() default GLOBAL.class;
+    Class<?> scope() default GLOBAL.class;
 
     /**
      * namespace name of the XML element.
@@ -198,5 +198,7 @@ public @interface XmlElementDecl {
      * Used in {@link XmlElementDecl#scope()} to
      * signal that the declaration is in the global scope.
      */
-    public final class GLOBAL {}
+    public final class GLOBAL {
+        private GLOBAL() {}
+    }
 }

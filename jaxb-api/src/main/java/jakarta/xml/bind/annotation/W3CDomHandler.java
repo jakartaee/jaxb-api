@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -63,6 +63,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
         this.builder = builder;
     }
 
+    @Override
     public DOMResult createUnmarshaller(ValidationEventHandler errorHandler) {
         if(builder==null)
             return new DOMResult();
@@ -70,6 +71,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
             return new DOMResult(builder.newDocument());
     }
 
+    @Override
     public Element getElement(DOMResult r) {
         // JAXP spec is ambiguous about what really happens in this case,
         // so work defensively
@@ -88,6 +90,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
         throw new IllegalStateException(n.toString());
     }
 
+    @Override
     public Source marshal(Element element, ValidationEventHandler errorHandler) {
         return new DOMSource(element);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -43,6 +43,11 @@ import jakarta.xml.bind.Marshaller;
  * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html">WS-I Attachments Profile Version 1.0.</a>
  */
 public abstract class AttachmentMarshaller {
+
+    /**
+     * Do-nothing constructor for the derived classes.
+     */
+    protected AttachmentMarshaller() {}
 
     /**
      * <p>Consider MIME content {@code data} for optimized binary storage as an attachment.

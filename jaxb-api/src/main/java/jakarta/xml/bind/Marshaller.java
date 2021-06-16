@@ -641,7 +641,7 @@ public interface Marshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public void setAdapter( XmlAdapter adapter );
+    public <A extends XmlAdapter<?, ?>> void setAdapter( A adapter );
 
     /**
      * Associates a configured instance of {@link XmlAdapter} with this marshaller.
@@ -670,7 +670,7 @@ public interface Marshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public <A extends XmlAdapter> void setAdapter( Class<A> type, A adapter );
+    public <A extends XmlAdapter<?, ?>> void setAdapter( Class<A> type, A adapter );
 
     /**
      * Gets the adapter associated with the specified type.
@@ -683,7 +683,7 @@ public interface Marshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public <A extends XmlAdapter> A getAdapter( Class<A> type );
+    public <A extends XmlAdapter<?, ?>> A getAdapter( Class<A> type );
 
 
     /**
@@ -753,6 +753,13 @@ public interface Marshaller {
      * @since 1.6, JAXB 2.0
      */
     public static abstract class Listener {
+
+        /**
+         * Do-nothing constructor for the derived classes.
+         */
+        protected Listener() {
+        }
+
         /**
          * <p>
          * Callback method invoked before marshalling from {@code source} to XML.
@@ -804,7 +811,3 @@ public interface Marshaller {
      */
     public Listener getListener();
 }
-
-
-
-

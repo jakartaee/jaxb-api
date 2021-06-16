@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -135,6 +135,7 @@ public class TypeConstraintException extends java.lang.RuntimeException {
      * Returns a short description of this TypeConstraintException.
      *
      */
+    @Override
     public String toString() {
         return linkedException == null ? 
             super.toString() :
@@ -148,6 +149,7 @@ public class TypeConstraintException extends java.lang.RuntimeException {
      *
      * @param s PrintStream to use for output
      */
+    @Override
     public void printStackTrace( java.io.PrintStream s ) {
         if( linkedException != null ) {
           linkedException.printStackTrace(s);
@@ -162,6 +164,7 @@ public class TypeConstraintException extends java.lang.RuntimeException {
      * of the linkedException if it is non-null) to {@code System.err}.
      *
      */
+    @Override
     public void printStackTrace() {
         printStackTrace(System.err);
     }

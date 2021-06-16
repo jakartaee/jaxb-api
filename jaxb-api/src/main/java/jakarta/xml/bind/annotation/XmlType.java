@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -424,14 +424,16 @@ public @interface XmlType {
      * {@code factoryMethod} must not be "" and must be the name of
      * a static factory method specified in {@code factoryClass}.
      */
-    Class factoryClass() default DEFAULT.class;
+    Class<?> factoryClass() default DEFAULT.class;
 
     /**
      * Used in {@link XmlType#factoryClass()} to
      * signal that either factory mehod is not used or
      * that it's in the class with this {@link XmlType} itself.
      */
-    static final class DEFAULT {}
+    static final class DEFAULT {
+        private DEFAULT() {}
+    }
 
     /**
      * Name of a no-arg factory method in the class specified in

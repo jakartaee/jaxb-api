@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2006, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -23,6 +23,7 @@ final class GetPropertyAction implements PrivilegedAction<String> {
         this.propertyName = propertyName;
     }
 
+    @Override
     public String run() {
         return System.getProperty(propertyName);
     }

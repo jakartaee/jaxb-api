@@ -32,10 +32,10 @@ class ModuleUtil {
      * Resolves classes from context path.
      * Only one class per package is needed to access its {@link java.lang.Module}
      */
-    static Class[] getClassesFromContextPath(String contextPath, ClassLoader classLoader) throws JAXBException {
-        List<Class> classes = new ArrayList<>();
+    static Class<?>[] getClassesFromContextPath(String contextPath, ClassLoader classLoader) throws JAXBException {
+        List<Class<?>> classes = new ArrayList<>();
         if (contextPath == null || contextPath.isEmpty()){
-          return classes.toArray(new Class[]{});
+          return classes.toArray(new Class<?>[]{});
         }
         
         String [] tokens = contextPath.split(":"); 
@@ -53,7 +53,7 @@ class ModuleUtil {
               
            // look for jaxb.index and load the list of classes
            try {
-               final Class firstByJaxbIndex = findFirstByJaxbIndex(pkg, classLoader);
+               final Class<?> firstByJaxbIndex = findFirstByJaxbIndex(pkg, classLoader);
                if (firstByJaxbIndex != null) {
                    classes.add(firstByJaxbIndex);
                }
@@ -65,13 +65,13 @@ class ModuleUtil {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "Resolved classes from context path: {0}", classes);
         }
-        return classes.toArray(new Class[]{});
+        return classes.toArray(new Class<?>[]{});
     }
 
     /**
      * Find first class in package by {@code jaxb.index} file.
      */
-    static Class findFirstByJaxbIndex(String pkg, ClassLoader classLoader) throws IOException, JAXBException {
+    static Class<?> findFirstByJaxbIndex(String pkg, ClassLoader classLoader) throws IOException, JAXBException {
         final String resource = pkg.replace('.', '/') + "/jaxb.index";
         final InputStream resourceAsStream = classLoader.getResourceAsStream(resource);
 
@@ -112,13 +112,13 @@ class ModuleUtil {
      *
      * @throws JAXBException if ony of a classes package is not open to {@code jakarta.xml.bind} module.
      */
-    public static void delegateAddOpensToImplModule(Class[] classes, Class<?> factorySPI) throws JAXBException {
+    public static void delegateAddOpensToImplModule(Class<?>[] classes, Class<?> factorySPI) throws JAXBException {
         final Module implModule = factorySPI.getModule();
 
         Module jaxbModule = JAXBContext.class.getModule();
 
-        for (Class cls : classes) {
-            Class jaxbClass = cls.isArray() ?
+        for (Class<?> cls : classes) {
+            Class<?> jaxbClass = cls.isArray() ?
                 cls.getComponentType() : cls;
 
             final Module classModule = jaxbClass.getModule();

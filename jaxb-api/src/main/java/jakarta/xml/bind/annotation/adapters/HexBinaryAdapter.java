@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -22,11 +22,16 @@ import jakarta.xml.bind.DatatypeConverter;
  * @since 1.6, JAXB 2.0
  */
 public final class HexBinaryAdapter extends XmlAdapter<String,byte[]> {
+
+    public HexBinaryAdapter() {}
+
+    @Override
     public byte[] unmarshal(String s) {
         if(s==null)     return null;
         return DatatypeConverter.parseHexBinary(s);
     }
 
+    @Override
     public String marshal(byte[] bytes) {
         if(bytes==null)     return null;
         return DatatypeConverter.printHexBinary(bytes);

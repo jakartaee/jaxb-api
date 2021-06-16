@@ -75,6 +75,7 @@ public class ValidationEventImpl implements ValidationEvent
     private Throwable linkedException;
     private ValidationEventLocator locator;
     
+    @Override
     public int getSeverity() {
         return severity;
     }
@@ -99,6 +100,7 @@ public class ValidationEventImpl implements ValidationEvent
         this.severity = _severity;
     }
     
+    @Override
     public String getMessage() {
         return message;
     }
@@ -111,6 +113,7 @@ public class ValidationEventImpl implements ValidationEvent
         this.message = _message;
     }
     
+    @Override
     public Throwable getLinkedException() {
         return linkedException;
     }
@@ -123,6 +126,7 @@ public class ValidationEventImpl implements ValidationEvent
         this.linkedException = _linkedException;
     }
     
+    @Override
     public ValidationEventLocator getLocator() {
         return locator;
     }
@@ -141,6 +145,7 @@ public class ValidationEventImpl implements ValidationEvent
      * 
      * @see Object#equals(Object)
      */
+    @Override
     public String toString() {
         String s;
         switch(getSeverity()) {

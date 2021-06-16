@@ -23,6 +23,11 @@ import jakarta.xml.bind.ValidationEventHandler;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.attachment.AttachmentUnmarshaller;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.Reader;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLEventReader;
@@ -32,7 +37,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
-import java.io.*;
 import java.net.URL;
 
 /**
@@ -65,6 +69,11 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     private XMLReader reader = null;
 
     /**
+     * Do-nothing constructor for the derived classes.
+     */
+    protected AbstractUnmarshallerImpl() {}
+
+    /**
      * Obtains a configured XMLReader.
      * 
      * This method is used when the client-specified
@@ -84,15 +93,14 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
                 // a proper schemaLocation.
                 parserFactory.setValidating(false);
                 reader = parserFactory.newSAXParser().getXMLReader();
-            } catch( ParserConfigurationException e ) {
-                throw new JAXBException(e);
-            } catch( SAXException e ) {
+            } catch( ParserConfigurationException | SAXException e ) {
                 throw new JAXBException(e);
             }
         }
         return reader;
     }
     
+    @Override
     public Object unmarshal( Source source ) throws JAXBException {
         if( source == null ) {
             throw new IllegalArgumentException(
@@ -128,6 +136,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      */
     protected abstract Object unmarshal( XMLReader reader, InputSource source ) throws JAXBException;
     
+    @Override
     public final Object unmarshal( InputSource source ) throws JAXBException {
         if( source == null ) {
             throw new IllegalArgumentException(
@@ -142,6 +151,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
         return unmarshal( new InputSource(url) );
     }
     
+    @Override
     public final Object unmarshal( URL url ) throws JAXBException {
         if( url == null ) {
             throw new IllegalArgumentException(
@@ -151,6 +161,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
         return unmarshal( url.toExternalForm() );
     }
     
+    @Override
     public final Object unmarshal( File f ) throws JAXBException {
         if( f == null ) {
             throw new IllegalArgumentException(
@@ -164,6 +175,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
         }
     }
     
+    @Override
     public final Object unmarshal( java.io.InputStream is ) 
         throws JAXBException {
             
@@ -176,6 +188,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
         return unmarshal( isrc );
     }
 
+    @Override
     public final Object unmarshal( Reader reader ) throws JAXBException {
         if( reader == null ) {
             throw new IllegalArgumentException(
@@ -211,6 +224,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * @throws JAXBException if an error was encountered while setting the
      *        event handler
      */
+    @Override
     public void setEventHandler(ValidationEventHandler handler) 
         throws JAXBException {
         
@@ -231,6 +245,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * @throws JAXBException if an error was encountered while getting the
      *        current event handler
      */
+    @Override
     public ValidationEventHandler getEventHandler() throws JAXBException {
         return eventHandler;
     }
@@ -281,6 +296,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * properties. If a provider needs to handle additional 
      * properties, it should override this method in a derived class.
      */
+    @Override
     public void setProperty( String name, Object value )
         throws PropertyException {
 
@@ -298,6 +314,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * properties. If a provider needs to handle additional 
      * properties, it should override this method in a derived class.
      */
+    @Override
     public Object getProperty( String name )
         throws PropertyException {
             
@@ -309,66 +326,83 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
         throw new PropertyException(name);
     }
     
+    @Override
     public Object unmarshal(XMLEventReader reader) throws JAXBException {
         
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public Object unmarshal(XMLStreamReader reader) throws JAXBException {
         
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public <T> JAXBElement<T> unmarshal(Node node, Class<T> expectedType) throws JAXBException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public <T> JAXBElement<T> unmarshal(Source source, Class<T> expectedType) throws JAXBException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public <T> JAXBElement<T> unmarshal(XMLStreamReader reader, Class<T> expectedType) throws JAXBException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public <T> JAXBElement<T> unmarshal(XMLEventReader reader, Class<T> expectedType) throws JAXBException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void setSchema(Schema schema) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public Schema getSchema() {
         throw new UnsupportedOperationException();
     }
 
-    public void setAdapter(XmlAdapter adapter) {
-        if(adapter==null)
+    @Override
+    @SuppressWarnings("unchecked")
+    public <A extends XmlAdapter<?, ?>> void setAdapter(A adapter) {
+        if(adapter==null) {
             throw new IllegalArgumentException();
-        setAdapter((Class)adapter.getClass(),adapter);
+        }
+        setAdapter((Class<A>) adapter.getClass(),adapter);
     }
 
-    public <A extends XmlAdapter> void setAdapter(Class<A> type, A adapter) {
+    @Override
+    public <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter) {
         throw new UnsupportedOperationException();
     }
 
-    public <A extends XmlAdapter> A getAdapter(Class<A> type) {
+    @Override
+    public <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void setAttachmentUnmarshaller(AttachmentUnmarshaller au) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public AttachmentUnmarshaller getAttachmentUnmarshaller() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void setListener(Listener listener) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public Listener getListener() {
         throw new UnsupportedOperationException();
     }

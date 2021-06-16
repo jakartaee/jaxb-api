@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -46,10 +46,12 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     protected DatatypeConverterImpl() {
     }
 
+    @Override
     public String parseString(String lexicalXSDString) {
         return lexicalXSDString;
     }
 
+    @Override
     public BigInteger parseInteger(String lexicalXSDInteger) {
         return _parseInteger(lexicalXSDInteger);
     }
@@ -58,6 +60,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return new BigInteger(removeOptionalPlus(WhiteSpaceProcessor.trim(s)).toString());
     }
 
+    @Override
     public String printInteger(BigInteger val) {
         return _printInteger(val);
     }
@@ -66,6 +69,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return val.toString();
     }
 
+    @Override
     public int parseInt(String s) {
         return _parseInt(s);
     }
@@ -104,6 +108,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return r * sign;
     }
 
+    @Override
     public long parseLong(String lexicalXSLong) {
         return _parseLong(lexicalXSLong);
     }
@@ -112,6 +117,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return Long.parseLong(removeOptionalPlus(WhiteSpaceProcessor.trim(s)).toString());
     }
 
+    @Override
     public short parseShort(String lexicalXSDShort) {
         return _parseShort(lexicalXSDShort);
     }
@@ -120,6 +126,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return (short) _parseInt(s);
     }
 
+    @Override
     public String printShort(short val) {
         return _printShort(val);
     }
@@ -128,6 +135,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return String.valueOf(val);
     }
 
+    @Override
     public BigDecimal parseDecimal(String content) {
         return _parseDecimal(content);
     }
@@ -154,6 +162,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         // 1 (not 1.0) is returned from "1.000"
     }
 
+    @Override
     public float parseFloat(String lexicalXSDFloat) {
         return _parseFloat(lexicalXSDFloat);
     }
@@ -195,6 +204,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return Float.parseFloat(s);
     }
 
+    @Override
     public String printFloat(float v) {
         return _printFloat(v);
     }
@@ -212,6 +222,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return String.valueOf(v);
     }
 
+    @Override
     public double parseDouble(String lexicalXSDDouble) {
         return _parseDouble(lexicalXSDDouble);
     }
@@ -240,9 +251,10 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return Double.parseDouble(val);
     }
 
+    @Override
     public boolean parseBoolean(String lexicalXSDBoolean) {
         Boolean b = _parseBoolean(lexicalXSDBoolean);
-        return (b == null) ? false : b.booleanValue();
+        return (b == null) ? false : b;
     }
 
     public static Boolean _parseBoolean(CharSequence literal) {
@@ -317,6 +329,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 //            throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
     }
 
+    @Override
     public String printBoolean(boolean val) {
         return val ? "true" : "false";
     }
@@ -325,6 +338,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return val ? "true" : "false";
     }
 
+    @Override
     public byte parseByte(String lexicalXSDByte) {
         return _parseByte(lexicalXSDByte);
     }
@@ -333,6 +347,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return (byte) _parseInt(literal);
     }
 
+    @Override
     public String printByte(byte val) {
         return _printByte(val);
     }
@@ -341,6 +356,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return String.valueOf(val);
     }
 
+    @Override
     public QName parseQName(String lexicalXSDQName, NamespaceContext nsc) {
         return _parseQName(lexicalXSDQName, nsc);
     }
@@ -398,6 +414,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return new QName(uri, localPart, prefix);
     }
 
+    @Override
     public Calendar parseDateTime(String lexicalXSDDateTime) {
         return _parseDateTime(lexicalXSDDateTime);
     }
@@ -407,6 +424,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return datatypeFactory.newXMLGregorianCalendar(val).toGregorianCalendar();
     }
 
+    @Override
     public String printDateTime(Calendar val) {
         return _printDateTime(val);
     }
@@ -415,10 +433,12 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return CalendarFormatter.doFormat("%Y-%M-%DT%h:%m:%s%z", val);
     }
 
+    @Override
     public byte[] parseBase64Binary(String lexicalXSDBase64Binary) {
         return _parseBase64Binary(lexicalXSDBase64Binary);
     }
 
+    @Override
     public byte[] parseHexBinary(String s) {
         final int len = s.length();
 
@@ -456,6 +476,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
     private static final char[] hexCode = "0123456789ABCDEF".toCharArray();
 
+    @Override
     public String printHexBinary(byte[] data) {
         StringBuilder r = new StringBuilder(data.length * 2);
         for (byte b : data) {
@@ -465,30 +486,37 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return r.toString();
     }
 
+    @Override
     public long parseUnsignedInt(String lexicalXSDUnsignedInt) {
         return _parseLong(lexicalXSDUnsignedInt);
     }
 
+    @Override
     public String printUnsignedInt(long val) {
         return _printLong(val);
     }
 
+    @Override
     public int parseUnsignedShort(String lexicalXSDUnsignedShort) {
         return _parseInt(lexicalXSDUnsignedShort);
     }
 
+    @Override
     public Calendar parseTime(String lexicalXSDTime) {
         return datatypeFactory.newXMLGregorianCalendar(lexicalXSDTime).toGregorianCalendar();
     }
 
+    @Override
     public String printTime(Calendar val) {
         return CalendarFormatter.doFormat("%h:%m:%s%z", val);
     }
 
+    @Override
     public Calendar parseDate(String lexicalXSDDate) {
         return datatypeFactory.newXMLGregorianCalendar(lexicalXSDDate).toGregorianCalendar();
     }
 
+    @Override
     public String printDate(Calendar val) {
         return _printDate(val);
     }
@@ -497,16 +525,19 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return CalendarFormatter.doFormat((new StringBuilder("%Y-%M-%D").append("%z")).toString(),val);
     }
 
+    @Override
     public String parseAnySimpleType(String lexicalXSDAnySimpleType) {
         return lexicalXSDAnySimpleType;
 //        return (String)SimpleURType.theInstance._createValue( lexicalXSDAnySimpleType, null );
     }
 
+    @Override
     public String printString(String val) {
 //        return StringType.theInstance.convertToLexicalValue( val, null );
         return val;
     }
 
+    @Override
     public String printInt(int val) {
         return _printInt(val);
     }
@@ -515,6 +546,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return String.valueOf(val);
     }
 
+    @Override
     public String printLong(long val) {
         return _printLong(val);
     }
@@ -523,6 +555,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return String.valueOf(val);
     }
 
+    @Override
     public String printDecimal(BigDecimal val) {
         return _printDecimal(val);
     }
@@ -531,6 +564,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return val.toPlainString();
     }
 
+    @Override
     public String printDouble(double v) {
         return _printDouble(v);
     }
@@ -548,6 +582,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return String.valueOf(v);
     }
 
+    @Override
     public String printQName(QName val, NamespaceContext nsc) {
         return _printQName(val, nsc);
     }
@@ -567,14 +602,17 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         return qname;
     }
 
+    @Override
     public String printBase64Binary(byte[] val) {
         return _printBase64Binary(val);
     }
 
+    @Override
     public String printUnsignedShort(int val) {
         return String.valueOf(val);
     }
 
+    @Override
     public String printAnySimpleType(String val) {
         return val;
     }

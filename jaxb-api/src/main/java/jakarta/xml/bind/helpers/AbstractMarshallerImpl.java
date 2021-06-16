@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -73,6 +73,12 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /** store the value of the fragment property. */
     private boolean fragment = false;
 
+    /**
+     * Do-nothing constructor for the derived classes.
+     */
+    protected AbstractMarshallerImpl() {}
+
+    @Override
     public final void marshal( Object obj, java.io.OutputStream os )
         throws JAXBException {
             
@@ -80,6 +86,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         marshal( obj, new StreamResult(os) );
     }
 
+    @Override
     public void marshal(Object jaxbElement, File output) throws JAXBException {
         checkNotNull(jaxbElement, "jaxbElement", output, "output" );
         try {
@@ -94,6 +101,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         }
     }
 
+    @Override
     public final void marshal( Object obj, java.io.Writer w ) 
         throws JAXBException {
             
@@ -101,6 +109,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         marshal( obj, new StreamResult(w) );
     }
     
+    @Override
     public final void marshal( Object obj, org.xml.sax.ContentHandler handler ) 
         throws JAXBException {
             
@@ -108,6 +117,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         marshal( obj, new SAXResult(handler) );
     }
     
+    @Override
     public final void marshal( Object obj, org.w3c.dom.Node node ) 
         throws JAXBException {
             
@@ -122,6 +132,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      * Implementations that choose to support this method must
      * override this method.
      */
+    @Override
     public org.w3c.dom.Node getNode( Object obj ) throws JAXBException {
         
         checkNotNull( obj, "obj", Boolean.TRUE, "foo" );
@@ -305,6 +316,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      * needs to handle additional properties, it should override 
      * this method in a derived class.
      */
+    @Override
     public void setProperty( String name, Object value )
         throws PropertyException {
         
@@ -349,6 +361,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      * needs to support additional provider specific properties, 
      * it should override this method in a derived class.
      */
+    @Override
     public Object getProperty( String name )
         throws PropertyException {
             
@@ -374,6 +387,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * @see jakarta.xml.bind.Marshaller#getEventHandler()
      */
+    @Override
     public ValidationEventHandler getEventHandler() throws JAXBException {
         return eventHandler;
     }
@@ -381,6 +395,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * @see jakarta.xml.bind.Marshaller#setEventHandler(ValidationEventHandler)
      */
+    @Override
     public void setEventHandler(ValidationEventHandler handler)
         throws JAXBException {
         
@@ -428,52 +443,65 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         }
     }
 
+    @Override
     public void marshal(Object obj, XMLEventWriter writer)
         throws JAXBException {
         
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void marshal(Object obj, XMLStreamWriter writer)
         throws JAXBException {
         
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void setSchema(Schema schema) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public Schema getSchema() {
         throw new UnsupportedOperationException();
     }
 
-    public void setAdapter(XmlAdapter adapter) {
-        if(adapter==null)
+    @Override
+    @SuppressWarnings("unchecked")
+    public <A extends XmlAdapter<?, ?>> void setAdapter(A adapter) {
+        if (adapter==null) {
             throw new IllegalArgumentException();
-        setAdapter((Class)adapter.getClass(),adapter);
+        }
+        setAdapter((Class<A>)adapter.getClass(),adapter);
     }
 
-    public <A extends XmlAdapter> void setAdapter(Class<A> type, A adapter) {
+    @Override
+    public <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter) {
         throw new UnsupportedOperationException();
     }
 
-    public <A extends XmlAdapter> A getAdapter(Class<A> type) {
+    @Override
+    public <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void setAttachmentMarshaller(AttachmentMarshaller am) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public AttachmentMarshaller getAttachmentMarshaller() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void setListener(Listener listener) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public Listener getListener() {
         throw new UnsupportedOperationException();
     }

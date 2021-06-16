@@ -146,6 +146,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
     /**
      * @see jakarta.xml.bind.ValidationEventLocator#getURL()
      */
+    @Override
     public URL getURL() {
         return url;
     }    
@@ -162,6 +163,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
     /**
      * @see jakarta.xml.bind.ValidationEventLocator#getOffset()
      */
+    @Override
     public int getOffset() {
         return offset;
     }
@@ -178,6 +180,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
     /**
      * @see jakarta.xml.bind.ValidationEventLocator#getLineNumber()
      */
+    @Override
     public int getLineNumber() {
         return lineNumber;
     }
@@ -194,6 +197,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
     /**
      * @see jakarta.xml.bind.ValidationEventLocator#getColumnNumber()
      */
+    @Override
     public int getColumnNumber() {
         return columnNumber;
     }
@@ -210,6 +214,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
     /**
      * @see jakarta.xml.bind.ValidationEventLocator#getObject()
      */
+    @Override
     public Object getObject() {
         return object;
     }
@@ -226,6 +231,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
     /**
      * @see jakarta.xml.bind.ValidationEventLocator#getNode()
      */
+    @Override
     public Node getNode() {
         return node;
     }
@@ -245,6 +251,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
      * 
      * @see Object#equals(Object)
      */
+    @Override
     public String toString() {
         return MessageFormat.format("[node={0},object={1},url={2},line={3},col={4},offset={5}]",
             getNode(),

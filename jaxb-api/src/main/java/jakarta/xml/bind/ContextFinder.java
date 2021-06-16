@@ -18,6 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.Map;
@@ -121,7 +122,7 @@ class ContextFinder {
      *          The Class object of the type that is being cast to
      * @return JAXBException to be thrown.
      */
-    private static JAXBException handleClassCastException(Class originalType, Class targetType) {
+    private static JAXBException handleClassCastException(Class<?> originalType, Class<?> targetType) {
         final URL targetTypeURL = which(targetType);
 
         return new JAXBException(Messages.format(Messages.ILLEGAL_CAST,
@@ -135,13 +136,13 @@ class ContextFinder {
      * Create an instance of a class using the specified ClassLoader
      */
     static JAXBContext newInstance(String contextPath,
-                                   Class[] contextPathClasses,
+                                   Class<?>[] contextPathClasses,
                                    String className,
                                    ClassLoader classLoader,
-                                   Map properties) throws JAXBException {
+                                   Map<String, ?> properties) throws JAXBException {
 
         try {
-            Class spFactory = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, classLoader);
+            Class<?> spFactory = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, classLoader);
             return newInstance(contextPath, contextPathClasses, spFactory, classLoader, properties);
         } catch (ClassNotFoundException x) {
             throw new JAXBException(Messages.format(Messages.DEFAULT_PROVIDER_NOT_FOUND), x);
@@ -161,10 +162,10 @@ class ContextFinder {
     }
 
     static JAXBContext newInstance(String contextPath,
-                                   Class[] contextPathClasses,
-                                   Class spFactory,
+                                   Class<?>[] contextPathClasses,
+                                   Class<?> spFactory,
                                    ClassLoader classLoader,
-                                   Map properties) throws JAXBException {
+                                   Map<String, ?> properties) throws JAXBException {
 
         try {
 
@@ -225,7 +226,7 @@ class ContextFinder {
                 return AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
                     @Override
                     public Object run() throws Exception {
-                        return implClass.newInstance();
+                        return implClass.getConstructor().newInstance();
                     }
                 });
             }
@@ -239,16 +240,16 @@ class ContextFinder {
     /**
      * Create an instance of a class using the thread context ClassLoader
      */
-    private static JAXBContext newInstance(Class[] classes, Map properties, String className) throws JAXBException {
+    private static JAXBContext newInstance(Class<?>[] classes, Map<String, ?> properties, String className) throws JAXBException {
         return newInstance(classes, properties, className, getContextClassLoader());
     }
 
     /**
      * Create an instance of a class using passed in ClassLoader
      */
-    private static JAXBContext newInstance(Class[] classes, Map properties, String className, ClassLoader loader) throws JAXBException {
+    private static JAXBContext newInstance(Class<?>[] classes, Map<String, ?> properties, String className, ClassLoader loader) throws JAXBException {
 
-        Class spi;
+        Class<?> spi;
         try {
             spi = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, loader);
         } catch (ClassNotFoundException e) {
@@ -263,9 +264,9 @@ class ContextFinder {
         return newInstance(classes, properties, spi);
     }
 
-    static JAXBContext newInstance(Class[] classes,
-                                   Map properties,
-                                   Class spFactory) throws JAXBException {
+    static JAXBContext newInstance(Class<?>[] classes,
+                                   Map<String, ?> properties,
+                                   Class<?> spFactory) throws JAXBException {
         try {
             ModuleUtil.delegateAddOpensToImplModule(classes,  spFactory);
 
@@ -292,7 +293,7 @@ class ContextFinder {
     static JAXBContext find(String factoryId,
                             String contextPath,
                             ClassLoader classLoader,
-                            Map properties) throws JAXBException {
+                            Map<String, ?> properties) throws JAXBException {
 
         if (contextPath == null || contextPath.isEmpty()) {
             // no context is specified
@@ -300,7 +301,7 @@ class ContextFinder {
         }
 
         //ModuleUtil is mr-jar class, scans context path for jaxb classes on jdk9 and higher
-        Class[] contextPathClasses = ModuleUtil.getClassesFromContextPath(contextPath, classLoader);
+        Class<?>[] contextPathClasses = ModuleUtil.getClassesFromContextPath(contextPath, classLoader);
 
         //first try with classloader#getResource
         String factoryClassName = jaxbProperties(contextPath, classLoader, factoryId);
@@ -329,7 +330,7 @@ class ContextFinder {
         factoryName = firstByServiceLoaderDeprecated(JAXBContext.class, classLoader);
         if (factoryName != null) return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
 
-        Class ctxFactory = (Class) ServiceLoaderUtil.lookupUsingOSGiServiceLoader(
+        Class<?> ctxFactory = (Class<?>) ServiceLoaderUtil.lookupUsingOSGiServiceLoader(
                 "jakarta.xml.bind.JAXBContext", logger);
 
         if (ctxFactory != null) {
@@ -345,7 +346,7 @@ class ContextFinder {
 
         // search for jaxb.properties in the class loader of each class first
         logger.fine("Searching jaxb.properties");
-        for (final Class c : classes) {
+        for (final Class<?> c : classes) {
             // this classloader is used only to load jaxb.properties, so doing this should be safe.
             // this is possible for primitives, arrays, and classes that are
             // loaded by poorly implemented ClassLoaders
@@ -395,7 +396,7 @@ class ContextFinder {
         if (className != null) return newInstance(classes, properties, className, loader);
 
         logger.fine("Trying to create the platform default provider");
-        Class ctxFactoryClass =
+        Class<?> ctxFactoryClass =
                 (Class) ServiceLoaderUtil.lookupUsingOSGiServiceLoader("jakarta.xml.bind.JAXBContext", logger);
 
         if (ctxFactoryClass != null) {
@@ -516,7 +517,7 @@ class ContextFinder {
      * @return
      *          the URL for the class or null if it wasn't found
      */
-    static URL which(Class clazz, ClassLoader loader) {
+    static URL which(Class<?> clazz, ClassLoader loader) {
 
         String classnameAsResource = clazz.getName().replace('.', '/') + ".class";
 
@@ -539,7 +540,7 @@ class ContextFinder {
      * @return
      *          the URL for the class or null if it wasn't found
      */
-    static URL which(Class clazz) {
+    static URL which(Class<?> clazz) {
         return which(clazz, getClassClassLoader(clazz));
     }
 
@@ -548,10 +549,10 @@ class ContextFinder {
         if (System.getSecurityManager() == null) {
             return Thread.currentThread().getContextClassLoader();
         } else {
-            return (ClassLoader) java.security.AccessController.doPrivileged(
-                    new java.security.PrivilegedAction() {
+            return AccessController.doPrivileged(
+                    new PrivilegedAction<ClassLoader>() {
                         @Override
-                        public java.lang.Object run() {
+                        public ClassLoader run() {
                             return Thread.currentThread().getContextClassLoader();
                         }
                     });
@@ -559,14 +560,14 @@ class ContextFinder {
     }
 
     @SuppressWarnings("unchecked")
-    private static ClassLoader getClassClassLoader(final Class c) {
+    private static ClassLoader getClassClassLoader(final Class<?> c) {
         if (System.getSecurityManager() == null) {
             return c.getClassLoader();
         } else {
-            return (ClassLoader) java.security.AccessController.doPrivileged(
-                    new java.security.PrivilegedAction() {
+            return AccessController.doPrivileged(
+                    new PrivilegedAction<ClassLoader>() {
                         @Override
-                        public java.lang.Object run() {
+                        public ClassLoader run() {
                             return c.getClassLoader();
                         }
                     });
@@ -577,10 +578,10 @@ class ContextFinder {
         if (System.getSecurityManager() == null) {
             return ClassLoader.getSystemClassLoader();
         } else {
-            return (ClassLoader) java.security.AccessController.doPrivileged(
-                    new java.security.PrivilegedAction() {
+            return AccessController.doPrivileged(
+                    new PrivilegedAction<ClassLoader>() {
                         @Override
-                        public java.lang.Object run() {
+                        public ClassLoader run() {
                             return ClassLoader.getSystemClassLoader();
                         }
                     });
@@ -589,7 +590,7 @@ class ContextFinder {
 
     // ServiceLoaderUtil.firstByServiceLoaderDeprecated should be used instead.
     @Deprecated
-    static String firstByServiceLoaderDeprecated(Class spiClass,
+    static String firstByServiceLoaderDeprecated(Class<?> spiClass,
                                                  ClassLoader classLoader) throws JAXBException {
 
         final String jaxbContextFQCN = spiClass.getName();
@@ -645,8 +646,8 @@ class ContextFinder {
         return null;
     }
 
-    private static String jaxbProperties(Class[] classesFromContextPath, String factoryId) throws JAXBException {
-        for (Class c : classesFromContextPath) {
+    private static String jaxbProperties(Class<?>[] classesFromContextPath, String factoryId) throws JAXBException {
+        for (Class<?> c : classesFromContextPath) {
             URL jaxbPropertiesUrl = getResourceUrl(c, "jaxb.properties");
             if (jaxbPropertiesUrl != null) {
                 return classNameFromPackageProperties(jaxbPropertiesUrl, factoryId, JAXB_CONTEXT_FACTORY_DEPRECATED);

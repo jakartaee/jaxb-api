@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -37,8 +37,8 @@ class ServiceLoaderUtil {
             ServiceLoader<P> serviceLoader = ServiceLoader.load(spiClass);
 
             for (P impl : serviceLoader) {
-                logger.fine("ServiceProvider loading Facility used; returning object [" +
-                        impl.getClass().getName() + "]");
+                logger.log(Level.FINE, "ServiceProvider loading Facility used; returning object [{0}]",
+                        impl.getClass().getName());
 
                 return impl;
             }
@@ -52,14 +52,14 @@ class ServiceLoaderUtil {
 
         try {
             // Use reflection to avoid having any dependency on ServiceLoader class
-            Class serviceClass = Class.forName(factoryId);
-            Class target = Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
+            Class<?> serviceClass = Class.forName(factoryId);
+            Class<?> target = Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
             Method m = target.getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class);
-            Iterator iter = ((Iterable) m.invoke(null, serviceClass)).iterator();
+            Iterator<?> iter = ((Iterable) m.invoke(null, serviceClass)).iterator();
             if (iter.hasNext()) {
                 Object next = iter.next();
-                logger.fine("Found implementation using OSGi facility; returning object [" +
-                        next.getClass().getName() + "].");
+                logger.log(Level.FINE, "Found implementation using OSGi facility; returning object [{0}].",
+                        next.getClass().getName());
                 return next;
             } else {
                 return null;
@@ -85,7 +85,7 @@ class ServiceLoaderUtil {
         }
     }
 
-    static Class nullSafeLoadClass(String className, ClassLoader classLoader) throws ClassNotFoundException {
+    static Class<?> nullSafeLoadClass(String className, ClassLoader classLoader) throws ClassNotFoundException {
         if (classLoader == null) {
             return Class.forName(className);
         } else {
@@ -100,7 +100,7 @@ class ServiceLoaderUtil {
                                                     String defaultImplClassName,
                                                     final ExceptionHandler<T> handler) throws T {
         try {
-            return safeLoadClass(className, defaultImplClassName, contextClassLoader(handler)).newInstance();
+            return safeLoadClass(className, defaultImplClassName, contextClassLoader(handler)).getConstructor().newInstance();
         } catch (ClassNotFoundException x) {
             throw handler.createException(x, "Provider " + className + " not found");
         } catch (Exception x) {
@@ -108,7 +108,7 @@ class ServiceLoaderUtil {
         }
     }
 
-    static Class safeLoadClass(String className,
+    static Class<?> safeLoadClass(String className,
                                String defaultImplClassName,
                                ClassLoader classLoader) throws ClassNotFoundException {
 
@@ -125,7 +125,7 @@ class ServiceLoaderUtil {
         return nullSafeLoadClass(className, classLoader);
     }
 
-    static ClassLoader contextClassLoader(ExceptionHandler exceptionHandler) throws Exception {
+    static <T extends Exception> ClassLoader contextClassLoader(ExceptionHandler<T> exceptionHandler) throws T {
         try {
             return Thread.currentThread().getContextClassLoader();
         } catch (Exception x) {

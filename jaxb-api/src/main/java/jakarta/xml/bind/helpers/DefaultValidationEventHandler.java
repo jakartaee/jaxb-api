@@ -39,7 +39,10 @@ import java.net.URL;
  * @since 1.6, JAXB 1.0
  */
 public class DefaultValidationEventHandler implements ValidationEventHandler {
-    
+
+    public DefaultValidationEventHandler() {}
+
+    @Override
     public boolean handleEvent( ValidationEvent event ) {
         
         if( event == null ) {
@@ -86,7 +89,7 @@ public class DefaultValidationEventHandler implements ValidationEventHandler {
      * 
      */
     private String getLocation(ValidationEvent event) {
-        StringBuffer msg = new StringBuffer();
+        StringBuilder msg = new StringBuilder();
         
         ValidationEventLocator locator = event.getLocator();
         
@@ -98,13 +101,13 @@ public class DefaultValidationEventHandler implements ValidationEventHandler {
             int line = locator.getLineNumber();
             
             if( url!=null || line!=-1 ) {
-                msg.append( "line " + line );
+                msg.append("line ").append(line);
                 if( url!=null )
-                    msg.append( " of " + url );
+                    msg.append(" of ").append(url);
             } else if( obj != null ) {
-                msg.append( " obj: " + obj.toString() );
+                msg.append(" obj: ").append(obj.toString());
             } else if( node != null ) {
-                msg.append( " node: " + node.toString() );
+                msg.append(" node: ").append(node.toString());
             }
         } else {
             msg.append( Messages.format( Messages.LOCATION_UNAVAILABLE ) );

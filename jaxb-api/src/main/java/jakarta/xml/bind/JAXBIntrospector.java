@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -16,7 +16,7 @@ import  javax.xml.namespace.QName;
  * Provide access to Jakarta XML Binding xml binding data for a Jakarta XML Binding object.
  *
  * <p>
- * Intially, the intent of this class is to just conceptualize how 
+ * Initially, the intent of this class is to just conceptualize how 
  * a Jakarta XML Binding application developer can access xml binding information, 
  * independent if binding model is java to schema or schema to java.
  * Since accessing the XML element name related to a Jakarta XML Binding element is
@@ -30,6 +30,11 @@ import  javax.xml.namespace.QName;
  * @since 1.6, JAXB 2.0
  */
 public abstract class JAXBIntrospector {
+
+    /**
+     * Do-nothing constructor for the derived classes.
+     */
+    protected JAXBIntrospector() {}
 
     /** 
      * <p>Return true if <code>object</code> represents a Jakarta XML Binding element.</p>

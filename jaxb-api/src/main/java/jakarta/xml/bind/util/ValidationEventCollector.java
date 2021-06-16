@@ -21,7 +21,7 @@ import java.util.List;
  * 
  * <p>
  * To use this class, create a new instance and pass it to the setEventHandler
- * method of the Validator, Unmarshaller, Marshaller class.  After the call to 
+ * method of the Unmarshaller, Marshaller class.  After the call to 
  * validate or unmarshal completes, call the getEvents method to retrieve all 
  * the reported errors and warnings.
  *
@@ -33,8 +33,10 @@ import java.util.List;
  */
 public class ValidationEventCollector implements ValidationEventHandler
 {
-    private final List<ValidationEvent> events = new ArrayList<ValidationEvent>();
-     
+    private final List<ValidationEvent> events = new ArrayList<>();
+
+    public ValidationEventCollector() {}
+
     /**
      * Return an array of ValidationEvent objects containing a copy of each of 
      * the collected errors and warnings.
@@ -65,6 +67,7 @@ public class ValidationEventCollector implements ValidationEventHandler
         return !events.isEmpty();
     }
     
+    @Override
     public boolean handleEvent( ValidationEvent event ) {        
         events.add(event);
 
