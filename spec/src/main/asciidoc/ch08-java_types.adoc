@@ -1380,8 +1380,7 @@ The value is always absent since there is no mapping to a substitution group.
 
 The following must be mapped (subject to the mapping constraints listed below):
 
-* read/write property as identified by
-`java.beans.Introspector.getBeanInfo` with its nearest XML-bound
+* read/write property with its nearest XML-bound
 superclass as the stopClass.
 * non static, non transient field of all the
 ancestors up to the stopClass (but excluding the stopClass itself); if
@@ -2843,15 +2842,12 @@ element even in their absence.
 The following is the default mapping for different identifiers:
 
 * _class name_: a class name is mapped to an XML
-name by de capitalization using
-`java.beans.Introspector.decapitalize(_class name_)`.
+name by de capitalization of the unqualified class name.
 * _enumtype name_: enumtype name is mapped to an
-XML name by de capitalization using
-`java.beans.Introspector.decapitalize(_enumtype name_)`.
+XML name by de capitalization of the unqualified enumtype name.
 * A property name (e.g. address) is derived
-from JavaBean access method (e.g. getAddress) by JavaBean de
-capitalization of the JavaBean property name
-`java.beans.Introspector.decapitalize(_JavaBeanAccessMethod_)`
+from access method (e.g. getAddress) by de
+capitalization of the property name.
 
 ==== Package
 
@@ -2930,8 +2926,7 @@ inheritance rules for this annotation.
 
 A property name (e.g. address) must be derived
 from JavaBean access method (e.g. getAddress) by JavaBean
-decapitalization of the JavaBean property name
-`java.beans.Introspector.decapitalize(_JavaBeanAccessMethod_)`
+decapitalization of the JavaBean property name.
 
 A single valued property or field must be
 mapped with the following default mapping annotation:

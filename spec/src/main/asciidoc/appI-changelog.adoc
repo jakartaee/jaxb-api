@@ -8,6 +8,7 @@
 === Changes in Version 3 rev1
 
 * fixed cross-references in the specification document
+* removed constraints on using `java.beans.Introspector`
 
 === Changes in Version 3
 
