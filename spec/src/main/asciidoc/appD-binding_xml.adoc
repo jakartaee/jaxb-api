@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
 //
 
 [appendix]
@@ -307,7 +307,7 @@ to a Java package name. The example URI,
 beginning of the URI, if present. +
 Since there is no formal syntax to identify the optional URI scheme,
 restrict the schemes to be removed to case insensitive checks for
-schemes `"http"` and `"urn"`.
+schemes `"http"`, `"https"` and `"urn"`.
 +
 [source]
 ----
