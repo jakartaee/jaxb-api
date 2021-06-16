@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -30,6 +30,12 @@ import java.io.IOException;
  * @since 1.6
  */
 public abstract class SchemaOutputResolver {
+
+    /**
+     * Do-nothing constructor for the derived classes.
+     */
+    protected SchemaOutputResolver() {}
+
     /**
      * Decides where the schema file (of the given namespace URI)
      * will be written, and return it as a {@link Result} object.

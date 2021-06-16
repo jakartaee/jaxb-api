@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -213,7 +213,7 @@ public @interface XmlElementRef {
      * If the value is DEFAULT.class, the type is inferred from the
      * the type of the JavaBean property.
      */
-    Class type() default DEFAULT.class;
+    Class<?> type() default DEFAULT.class;
 
     /**
      * This parameter and {@link #name()} are used to determine the
@@ -250,7 +250,9 @@ public @interface XmlElementRef {
      * signal that the type be inferred from the signature
      * of the property.
      */
-    static final class DEFAULT {}
+    static final class DEFAULT {
+        private DEFAULT() {}
+    }
 
     /**
      * Customize the element declaration to be required.

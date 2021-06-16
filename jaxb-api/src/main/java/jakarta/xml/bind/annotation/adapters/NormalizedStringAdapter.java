@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -9,8 +9,6 @@
  */
 
 package jakarta.xml.bind.annotation.adapters;
-
-
 
 /**
  * {@link XmlAdapter} to handle {@code xs:normalizedString}.
@@ -23,10 +21,14 @@ package jakarta.xml.bind.annotation.adapters;
  * @since 1.6, JAXB 2.0
  */
 public final class NormalizedStringAdapter extends XmlAdapter<String,String> {
+
+    public NormalizedStringAdapter() {}
+
     /**
      * Replace any tab, CR, and LF by a whitespace character ' ',
      * as specified in <a href="http://www.w3.org/TR/xmlschema-2/#rf-whiteSpace">the whitespace facet 'replace'</a>
      */
+    @Override
     public String unmarshal(String text) {
         if(text==null)      return null;    // be defensive
 
@@ -57,6 +59,7 @@ public final class NormalizedStringAdapter extends XmlAdapter<String,String> {
      *
      * Just return the same string given as the parameter.
      */
+    @Override
         public String marshal(String s) {
             return s;
         }

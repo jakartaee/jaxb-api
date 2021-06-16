@@ -18,14 +18,14 @@ import java.util.List;
 /**
  * {@link jakarta.xml.bind.ValidationEventHandler ValidationEventHandler}
  * implementation that collects all events.
- * 
+ *
  * <p>
  * To use this class, create a new instance and pass it to the setEventHandler
- * method of the Validator, Unmarshaller, Marshaller class.  After the call to 
- * validate or unmarshal completes, call the getEvents method to retrieve all 
+ * method of the Unmarshaller, Marshaller class.  After the call to
+ * validate or unmarshal completes, call the getEvents method to retrieve all
  * the reported errors and warnings.
  *
- * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul> 
+ * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.ValidationEventHandler
  * @see jakarta.xml.bind.ValidationEvent
  * @see jakarta.xml.bind.ValidationEventLocator
@@ -33,12 +33,14 @@ import java.util.List;
  */
 public class ValidationEventCollector implements ValidationEventHandler
 {
-    private final List<ValidationEvent> events = new ArrayList<ValidationEvent>();
-     
+    private final List<ValidationEvent> events = new ArrayList<>();
+
+    public ValidationEventCollector() {}
+
     /**
-     * Return an array of ValidationEvent objects containing a copy of each of 
+     * Return an array of ValidationEvent objects containing a copy of each of
      * the collected errors and warnings.
-     * 
+     *
      * @return
      *      a copy of all the collected errors and warnings or an empty array
      *      if there weren't any
@@ -46,26 +48,27 @@ public class ValidationEventCollector implements ValidationEventHandler
     public ValidationEvent[] getEvents() {
         return events.toArray(new ValidationEvent[events.size()]);
     }
-    
+
     /**
      * Clear all collected errors and warnings.
      */
     public void reset() {
         events.clear();
     }
-    
+
     /**
-     * Returns true if this event collector contains at least one 
+     * Returns true if this event collector contains at least one
      * ValidationEvent.
      *
-     * @return true if this event collector contains at least one 
+     * @return true if this event collector contains at least one
      *         ValidationEvent, false otherwise
      */
     public boolean hasEvents() {
         return !events.isEmpty();
     }
-    
-    public boolean handleEvent( ValidationEvent event ) {        
+
+    @Override
+    public boolean handleEvent( ValidationEvent event ) {
         events.add(event);
 
         boolean retVal = true;
@@ -80,12 +83,12 @@ public class ValidationEventCollector implements ValidationEventHandler
                 retVal = false; // halt validation
                 break;
             default:
-                _assert( false, 
+                _assert( false,
                          Messages.format( Messages.UNRECOGNIZED_SEVERITY,
                                  event.getSeverity() ) );
                 break;
         }
-        
+
         return retVal;
     }
 

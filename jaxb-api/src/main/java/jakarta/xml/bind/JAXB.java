@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2006, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -80,7 +80,7 @@ import java.net.URLConnection;
  */
 public final class JAXB {
     /**
-     * No instanciation is allowed.
+     * No instantiation is allowed.
      */
     private JAXB() {}
 
@@ -88,10 +88,10 @@ public final class JAXB {
      * To improve the performance, we'll cache the last {@link JAXBContext} used.
      */
     private static final class Cache {
-        final Class type;
+        final Class<?> type;
         final JAXBContext context;
 
-        public Cache(Class type) throws JAXBException {
+        public Cache(Class<?> type) throws JAXBException {
             this.type = type;
             this.context = JAXBContext.newInstance(type);
         }
@@ -121,7 +121,7 @@ public final class JAXB {
 
         // overwrite the cache
         Cache d = new Cache(type);
-        cache = new WeakReference<Cache>(d);
+        cache = new WeakReference<>(d);
 
         return d.context;
     }
@@ -151,9 +151,7 @@ public final class JAXB {
         try {
             JAXBElement<T> item = getContext(type).createUnmarshaller().unmarshal(toSource(xml), type);
             return item.getValue();
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -169,9 +167,7 @@ public final class JAXB {
         try {
             JAXBElement<T> item = getContext(type).createUnmarshaller().unmarshal(toSource(xml), type);
             return item.getValue();
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -188,9 +184,7 @@ public final class JAXB {
         try {
             JAXBElement<T> item = getContext(type).createUnmarshaller().unmarshal(toSource(xml), type);
             return item.getValue();
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -206,9 +200,7 @@ public final class JAXB {
         try {
             JAXBElement<T> item = getContext(type).createUnmarshaller().unmarshal(toSource(xml), type);
             return item.getValue();
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -225,9 +217,7 @@ public final class JAXB {
         try {
             JAXBElement<T> item = getContext(type).createUnmarshaller().unmarshal(toSource(xml), type);
             return item.getValue();
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -242,9 +232,7 @@ public final class JAXB {
         try {
             JAXBElement<T> item = getContext(type).createUnmarshaller().unmarshal(toSource(xml), type);
             return item.getValue();
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             throw new DataBindingException(e);
         }
     }
@@ -535,6 +523,7 @@ public final class JAXB {
      * @throws DataBindingException
      *      If the operation fails, such as due to I/O error, unbindable classes.
      */
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private static void _marshal( Object jaxbObject, Object xml ) {
         try {
             JAXBContext context;
@@ -554,14 +543,12 @@ public final class JAXB {
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
             m.marshal(jaxbObject, toResult(xml));
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             throw new DataBindingException(e);
         }
     }
 
-    private static String inferName(Class clazz) {
+    private static String inferName(Class<?> clazz) {
         // XXX - behaviour of this method must be same as of Introspector.decapitalize
         // which is not used to avoid dependency on java.desktop
         String simpleName = clazz.getSimpleName();

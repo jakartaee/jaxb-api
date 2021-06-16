@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,15 +24,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p> <b>Usage</b> </p>
  * <p>
  * {@code @XmlSchemaType} annotation can be used with the following program
- * elements: 
- * <ul> 
+ * elements:
+ * <ul>
  *   <li> a JavaBean property </li>
  *   <li> field </li>
  *   <li> package</li>
  * </ul>
  *
  * <p> {@code @XmlSchemaType} annotation defined for Java type
- * applies to all references to the Java type from a property/field. 
+ * applies to all references to the Java type from a property/field.
  * A {@code @XmlSchemaType} annotation specified on the
  * property/field overrides the {@code @XmlSchemaType} annotation
  * specified at the package level.
@@ -42,7 +42,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p>
  * <b>Example 1: </b> Customize mapping of XMLGregorianCalendar on the
  *  field.
- * 
+ *
  * <pre>
  *     //Example: Code fragment
  *     public class USPrice {
@@ -51,7 +51,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *         public XMLGregorianCalendar date;
  *     }
  * {@code
- * 
+ *
  *     <!-- Example: Local XML Schema element -->
  *     <xs:complexType name="USPrice"/>
  *       <xs:sequence>
@@ -68,11 +68,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *          name="date", type=javax.xml.datatype.XMLGregorianCalendar.class)
  *     }
  * </pre>
- * 
+ *
  * @since 1.6, JAXB 2.0
  */
 
-@Retention(RUNTIME) @Target({FIELD,METHOD,PACKAGE})        
+@Retention(RUNTIME) @Target({FIELD,METHOD,PACKAGE})
 public @interface XmlSchemaType {
     String name();
     String namespace() default "http://www.w3.org/2001/XMLSchema";
@@ -81,7 +81,7 @@ public @interface XmlSchemaType {
      * the type() must be specified.
      */
 
-    Class type() default DEFAULT.class;
+    Class<?> type() default DEFAULT.class;
 
     /**
      * Used in {@link XmlSchemaType#type()} to
@@ -89,7 +89,9 @@ public @interface XmlSchemaType {
      * of the property.
      */
 
-    static final class DEFAULT {}
+    static final class DEFAULT {
+        private DEFAULT() {};
+    }
 
 }
 

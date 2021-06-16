@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -14,9 +14,10 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Maps a JavaBean property to a XML element derived from property name.
@@ -181,12 +182,14 @@ public @interface XmlElement {
     /**
      * The Java class being referenced.
      */
-    Class type() default DEFAULT.class;
+    Class<?> type() default DEFAULT.class;
 
     /**
      * Used in {@link XmlElement#type()} to
      * signal that the type be inferred from the signature
      * of the property.
      */
-    static final class DEFAULT {}
+    static final class DEFAULT {
+        private DEFAULT() {}
+    }
 }
