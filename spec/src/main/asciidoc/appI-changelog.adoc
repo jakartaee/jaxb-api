@@ -9,6 +9,7 @@
 
 * fixed cross-references in the specification document
 * removed deprecated jakarta.xml.bind.Validator
+* removed constraints on using `java.beans.Introspector`
 
 === Changes in Version 3
 
