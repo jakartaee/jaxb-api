@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -294,7 +294,6 @@ import java.io.File;
  * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
- * @see Validator
  * @see Unmarshaller
  * @since 1.6, JAXB 1.0
  */
@@ -701,7 +700,7 @@ public interface Marshaller {
     AttachmentMarshaller getAttachmentMarshaller();
 
     /**
-     * Specify the JAXP 1.3 {@link javax.xml.validation.Schema Schema}
+     * Specify the JAXP {@link javax.xml.validation.Schema Schema}
      * object that should be used to validate subsequent marshal operations
      * against.  Passing null into this method will disable validation.
      *
@@ -720,7 +719,7 @@ public interface Marshaller {
     public void setSchema( Schema schema );
 
     /**
-     * Get the JAXP 1.3 {@link javax.xml.validation.Schema Schema} object
+     * Get the JAXP {@link javax.xml.validation.Schema Schema} object
      * being used to perform marshal-time validation.  If there is no
      * Schema set on the marshaller, then this method will return null
      * indicating that marshal-time validation will not be performed.
