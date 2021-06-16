@@ -13,9 +13,7 @@ javadoc for the package `jakarta.xml.bind`.
 The binding framework resides in two main
 packages. The `jakarta.xml.bind` package defines abstract classes and
 interfaces that are used directly with content classes. The
-`jakarta.xml.bind` footnote:[JAXB 1.0 deprecated
-class, `jakarta.xml.bind.Validator`, is described in
-<<Validator for JAXB 1.0 schema-derived classes>>] package defines the
+`jakarta.xml.bind` package defines the
 `Unmarshaller`, `Marshaller` and `Binder` classes, which are auxiliary
 objects for providing their respective operations.
 
@@ -190,9 +188,7 @@ jakarta.xml.bind.Unmarshaller javadoc for a description on how to enable
 this feature.
 
 *  *On-demand validation* +
-This mode of validation is deprecated in Jakarta XML Binding.
-See <<On-demand Validation>> for the
-JAXB 1.0 description of this functionality.
+This mode of validation is not defined in Jakarta XML Binding Specification.
 
 *  *Fail-fast validation* +
 This form of validation enables a client
@@ -311,7 +307,7 @@ then the `unmarshal` operation will abort immediately by throwing an
 unmarshalling from various input sources.
 
 An application can enable or disable
-unmarshal-time validation by enabling JAXP 1.3 validation via the
+unmarshal-time validation by enabling JAXP validation via the
 `setSchema(javax.xml.validation.Schema)` method. The application has the
 option to customize validation error handling by overriding the default
 event handler using the `setEventHandler(ValidationEventHandler)`. The
@@ -534,7 +530,7 @@ instance's class with the appropriate program annotation,
 
 The marshalling process can optionally be
 configured to validate the content tree being marshalled. An application
-can enable or disable marshal-time validation by enabling JAXP 1.3
+can enable or disable marshal-time validation by enabling JAXP
 validation via the `setSchema(javax.xml.validation.Schema)` method. The
 application has the option to customize validation error handling by
 overriding the default event handler using the
@@ -739,7 +735,7 @@ DOM view using `Binder.updateXML` method.
 * XPATH navigation +
  +
 Given that binder maintains a relationship between XML infoset view of
-document and JAXB representation, one can use JAXP 1.3 XPATH on the XML
+document and JAXB representation, one can use JAXP XPATH on the XML
 infoset view and use the binder’s associative mapping to get from the
 infoset node to JAXB representation.
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -159,14 +159,8 @@ import java.util.Properties;
  *
  * <h3>Validation</h3>
  * <p>
- * Validation has been changed significantly since JAXB 1.0.  The {@link Validator}
- * class has been deprecated and made optional.  This means that you are advised
- * not to use this class and, in fact, it may not even be available depending on
- * your Jakarta XML Binding provider.  JAXB 1.0 client applications that rely on {@code Validator}
- * will still work properly when deployed with the JAXB 1.0 runtime system.
- *
  * In Jakarta XML Binding, the {@link Unmarshaller} has included convenience methods that expose
- * the JAXP 1.3 {@link javax.xml.validation} framework.  Please refer to the
+ * the JAXP {@link javax.xml.validation} framework.  Please refer to the
  * {@link Unmarshaller#setSchema(javax.xml.validation.Schema)} API for more
  * information.
  *
@@ -714,22 +708,6 @@ public abstract class JAXBContext {
      */
     public abstract Marshaller createMarshaller() throws JAXBException;
 
-
-    /**
-     * {@link Validator} has been made optional and deprecated in Jakarta XML Binding.  Please
-     * refer to the javadoc for {@link Validator} for more detail.
-     * <p>
-     * Create a {@code Validator} object that can be used to validate a
-     * java content tree against its source schema.
-     *
-     * @return a {@code Validator} object
-     *
-     * @throws JAXBException if an error was encountered while creating the
-     *                       {@code Validator} object
-     * @deprecated since JAXB2.0
-     */
-    @Deprecated
-    public abstract Validator createValidator() throws JAXBException;
 
     /**
      * Creates a {@code Binder} object that can be used for

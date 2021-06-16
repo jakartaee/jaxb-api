@@ -346,10 +346,10 @@ the WS-I Basic Profile[WSIBP] excludes SOAP encoding.
  +
 While working with a content tree
 corresponding to an XML document it is often necessary to validate the
-tree against the constraints in the source schema. JAXB 1.0 made it
-possible to do this at any time, without the user having to first
-marshal the tree into XML. However it is a non goal in Jakarta XML Binding
-specification, which leverages the JAXP validation API.
+tree against the constraints in the source schema. It is a non goal
+in Jakarta XML Binding specification, which leverages the JAXP validation API,
+to make the validation possible to do at any time, without the user
+having to first marshal the tree into XML.
 
 * Object graph traversal +
  +

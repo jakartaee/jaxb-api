@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -16,8 +16,7 @@ package jakarta.xml.bind;
  * <p>
  * If an application needs to implement customized event handling, it must
  * implement this interface and then register it with either the 
- * {@link Unmarshaller#setEventHandler(ValidationEventHandler) Unmarshaller}, 
- * the {@link Validator#setEventHandler(ValidationEventHandler) Validator}, or 
+ * {@link Unmarshaller#setEventHandler(ValidationEventHandler) Unmarshaller}, or
  * the {@link Marshaller#setEventHandler(ValidationEventHandler) Marshaller}.  
  * The Jakarta XML Binding Provider will then report validation errors and warnings encountered
  * during the unmarshal, marshal, and validate operations to these event 
@@ -41,14 +40,19 @@ package jakarta.xml.bind;
  * <p>
  * <b>Default Event Handler</b>
  * <blockquote>
- *    See: <a href="Validator.html#defaulthandler">Validator javadocs</a>
+ *    If the client application does not set an event handler on their
+ *    {@code Unmarshaller}, or {@code Marshaller} prior to
+ *    calling the validate, unmarshal, or marshal methods, then a default event
+ *    handler will receive notification of any errors or warnings encountered.
+ *    The default event handler will cause the current operation to halt after
+ *    encountering the first error or fatal error (but will attempt to continue
+ *    after receiving warnings).
  * </blockquote>
  *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li>
  *             <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
  *             <li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see Unmarshaller
- * @see Validator
  * @see Marshaller
  * @see ValidationEvent
  * @see jakarta.xml.bind.util.ValidationEventCollector

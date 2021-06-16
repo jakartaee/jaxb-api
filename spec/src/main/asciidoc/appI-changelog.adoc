@@ -5,9 +5,10 @@
 [appendix]
 == Change Log
 
-=== Changes in Version 3 rev1
+=== Changes in Version 4
 
 * fixed cross-references in the specification document
+* removed deprecated jakarta.xml.bind.Validator
 * removed constraints on using `java.beans.Introspector`
 
 === Changes in Version 3

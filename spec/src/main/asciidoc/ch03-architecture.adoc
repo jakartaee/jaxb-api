@@ -237,9 +237,9 @@ significantly since JAXB 1.0. Significant changes include:
 
 * support for unmarshalling of invalid XML
 content.
-* deprecation of on-demand validation.
+* removal of on-demand validation.
 * unmarshal/marshal time validation deferring
-to JAXP 1.3 validation.
+to JAXP validation.
 
 ==== Unmarshalling
 
