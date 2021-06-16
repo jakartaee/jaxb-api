@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,7 +24,6 @@ import jakarta.xml.bind.ValidationEventLocator;
  * convenience.
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li></ul> 
- * @see jakarta.xml.bind.Validator
  * @see jakarta.xml.bind.ValidationEventHandler
  * @see jakarta.xml.bind.ValidationEvent
  * @see jakarta.xml.bind.ValidationEventLocator

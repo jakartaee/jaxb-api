@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -18,7 +18,6 @@ package jakarta.xml.bind;
  * 
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
- * @see Validator
  * @see Unmarshaller
  * @since 1.6, JAXB 1.0
  */

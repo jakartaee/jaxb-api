@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -311,10 +311,10 @@ import java.io.Reader;
  * <b>Validation and Well-Formedness</b><br>
  * <blockquote>
  * <p>
- * A client application can enable or disable JAXP 1.3 validation
+ * A client application can enable or disable JAXP validation
  * mechanism via the {@code setSchema(javax.xml.validation.Schema)} API.
  * Sophisticated clients can specify their own validating SAX 2.0 compliant 
- * parser and bypass the JAXP 1.3 validation mechanism using the 
+ * parser and bypass the JAXP validation mechanism using the 
  * {@link #unmarshal(javax.xml.transform.Source) unmarshal(Source)}  API.
  * 
  * <p>
@@ -384,7 +384,6 @@ import java.io.Reader;
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  * @see Marshaller
- * @see Validator
  * @since 1.6, JAXB 1.0
  */
 public interface Unmarshaller {
@@ -804,58 +803,6 @@ public interface Unmarshaller {
     public UnmarshallerHandler getUnmarshallerHandler();
     
     /**
-     * Specifies whether or not the default validation mechanism of the
-     * {@code Unmarshaller} should validate during unmarshal operations.
-     * By default, the {@code Unmarshaller} does not validate.
-     * <p>
-     * This method may only be invoked before or after calling one of the
-     * unmarshal methods.
-     * <p>
-     * This method only controls the Jakarta XML Binding Provider's default unmarshal-time
-     * validation mechanism - it has no impact on clients that specify their 
-     * own validating SAX 2.0 compliant parser.  Clients that specify their
-     * own unmarshal-time validation mechanism may wish to turn off the Jakarta XML Binding
-     * Provider's default validation mechanism via this API to avoid "double
-     * validation".
-     * <p>
-     * This method is deprecated as of Jakarta XML Binding - please use the new
-     * {@link #setSchema(javax.xml.validation.Schema)} API.
-     *
-     * @param validating true if the Unmarshaller should validate during 
-     *        unmarshal, false otherwise
-     * @throws JAXBException if an error occurred while enabling or disabling
-     *         validation at unmarshal time
-     * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on an Unmarshaller created from a JAXBContext referencing
-     *         Jakarta XML Binding mapped classes
-     * @deprecated since JAXB2.0, please see {@link #setSchema(javax.xml.validation.Schema)}
-     */
-    public void setValidating( boolean validating ) 
-        throws JAXBException;
-    
-    /**
-     * Indicates whether or not the {@code Unmarshaller} is configured to
-     * validate during unmarshal operations.
-     * <p>
-     * This API returns the state of the Jakarta XML Binding Provider's default unmarshal-time
-     * validation mechanism. 
-     * <p>
-     * This method is deprecated as of Jakarta XML Binding - please use the new
-     * {@link #getSchema()} API.
-     *
-     * @return true if the Unmarshaller is configured to validate during 
-     *         unmarshal operations, false otherwise
-     * @throws JAXBException if an error occurs while retrieving the validating
-     *         flag
-     * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on an Unmarshaller created from a JAXBContext referencing
-     *         Jakarta XML Binding mapped classes
-     * @deprecated since JAXB2.0, please see {@link #getSchema()}
-     */
-    public boolean isValidating() 
-        throws JAXBException;
-    
-    /**
      * Allow an application to register a {@code ValidationEventHandler}.
      * <p>
      * The {@code ValidationEventHandler} will be called by the Jakarta XML Binding Provider
@@ -929,12 +876,9 @@ public interface Unmarshaller {
     public Object getProperty( String name ) throws PropertyException;
 
     /**
-     * Specify the JAXP 1.3 {@link javax.xml.validation.Schema Schema}
+     * Specify the JAXP {@link javax.xml.validation.Schema Schema}
      * object that should be used to validate subsequent unmarshal operations
      * against.  Passing null into this method will disable validation.
-     * <p>
-     * This method replaces the deprecated {@link #setValidating(boolean) setValidating(boolean)}
-     * API.
      *
      * <p>
      * Initially this property is set to {@code null}.
@@ -948,18 +892,10 @@ public interface Unmarshaller {
     public void setSchema( javax.xml.validation.Schema schema );
 
     /**
-     * Get the JAXP 1.3 {@link javax.xml.validation.Schema Schema} object
+     * Get the JAXP {@link javax.xml.validation.Schema Schema} object
      * being used to perform unmarshal-time validation.  If there is no
      * Schema set on the unmarshaller, then this method will return null
      * indicating that unmarshal-time validation will not be performed.
-     * <p>
-     * This method provides replacement functionality for the deprecated
-     * {@link #isValidating()} API as well as access to the Schema object.
-     * To determine if the Unmarshaller has validation enabled, simply
-     * test the return type for null:
-     * <pre>{@code
-     *   boolean isValidating = u.getSchema()!=null;
-     * }</pre>
      * 
      * @return the Schema object being used to perform unmarshal-time
      *      validation or null if not present

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -58,9 +58,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     /** handler that will be used to process errors and warnings during unmarshal */
     private ValidationEventHandler eventHandler = 
         new DefaultValidationEventHandler();
-    
-    /** whether or not the unmarshaller will validate */
-    protected boolean validating = false;
 
     /**
      * XMLReader that will be used to parse a document.
@@ -201,22 +198,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     
     
     /**
-     * Indicates whether or not the Unmarshaller is configured to validate
-     * during unmarshal operations.
-     * <p>
-     * <i><b>Note:</b> I named this method isValidating() to stay in-line
-     * with JAXP, as opposed to naming it getValidating(). </i>
-     *
-     * @return true if the Unmarshaller is configured to validate during
-     *        unmarshal operations, false otherwise
-     * @throws JAXBException if an error occurs while retrieving the validating
-     *        flag
-     */
-    public boolean isValidating() throws JAXBException {
-        return validating;
-    }
-    
-    /**
      * Allow an application to register a validation event handler.
      * <p>
      * The validation event handler will be called by the Jakarta XML Binding Provider if any
@@ -240,22 +221,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
         }
     }
     
-    /**
-     * Specifies whether or not the Unmarshaller should validate during
-     * unmarshal operations. By default, the {@code Unmarshaller} does
-     * not validate.
-     * <p>
-     * This method may only be invoked before or after calling one of the
-     * unmarshal methods.
-     *
-     * @param validating true if the Unmarshaller should validate during
-     *       unmarshal, false otherwise
-     * @throws JAXBException if an error occurred while enabling or disabling
-     * validation at unmarshal time
-     */
-    public void setValidating(boolean validating) throws JAXBException {
-        this.validating = validating;
-    }
     
     /**
      * Return the current event handler or the default event handler if one
