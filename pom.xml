@@ -24,7 +24,7 @@
 
     <groupId>jakarta.xml.bind</groupId>
     <artifactId>jakarta.xml.bind-api-parent</artifactId>
-    <version>3.0.2-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Jakarta XML Binding</name>
     <description>Jakarta XML Binding API</description>
@@ -83,7 +83,7 @@
         <release.spec.date>Jul 2017</release.spec.date>
         <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
-        <spec.version>3.0</spec.version>
+        <spec.version>4.0</spec.version>
         <impl.version>0</impl.version>
         <activation.version>2.0.1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
