@@ -17,8 +17,8 @@ import jakarta.activation.DataHandler;
  *
  * <p>This API enables an efficient cooperative processing of optimized
  * binary data formats between a Jakarta XML Binding implementation and MIME-based package
- * processor (MTOM/XOP and WS-I AP 1.0). Jakarta XML Binding unmarshals the body of a package, delegating the 
- * understanding of the packaging format being used to a MIME-based 
+ * processor (MTOM/XOP and WS-I AP 1.0). Jakarta XML Binding unmarshals the body of a package, delegating the
+ * understanding of the packaging format being used to a MIME-based
  * package processor that implements this abstract class.</p>
  *
  * <p>This abstract class identifies if a package requires XOP processing, {@link #isXOPPackage()}
@@ -27,24 +27,24 @@ import jakarta.activation.DataHandler;
  * <h2>Identifying the content-id, cid, to pass to {@code getAttachment*(String cid)}</h2>
  * <ul>
  * <li>
- * For XOP processing, the infoset representation of the cid is described 
- * in step 2a in 
+ * For XOP processing, the infoset representation of the cid is described
+ * in step 2a in
  * <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#interpreting_xop_packages">Section 3.2 Interpreting XOP Packages</a>
  * </li>
  * <li>
- * For WS-I AP 1.0, the cid is identified as an element or attribute of 
+ * For WS-I AP 1.0, the cid is identified as an element or attribute of
  * type {@code ref:swaRef} specified in
  * <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html#Referencing_Attachments_from_the_SOAP_Envelope">
  * Section 4.4 Referencing Attachments from the SOAP Envelope</a>
  * </li>
  * </ul>
- * 
+ *
  * @author Marc Hadley
  * @author Kohsuke Kawaguchi
  * @author Joseph Fialli
- * 
+ *
  * @since 1.6, JAXB 2.0
- * 
+ *
  * @see jakarta.xml.bind.Unmarshaller#setAttachmentUnmarshaller(AttachmentUnmarshaller)
  *
  * @see <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">XML-binary Optimized Packaging</a>
@@ -60,9 +60,9 @@ public abstract class AttachmentUnmarshaller {
 
     /**
     * <p>Lookup MIME content by content-id, {@code cid}, and return as a {@link DataHandler}.</p>
-    * 
+    *
     * <p>The returned {@code DataHandler} instance must be configured
-    * to meet the following required mapping constaint. 
+    * to meet the following required mapping constaint.
     * <table class="striped">
     *   <caption>Required Mappings between MIME and Java Types</caption>
     *   <thead>
@@ -91,11 +91,11 @@ public abstract class AttachmentUnmarshaller {
     *   </tbody>
     *  </table>
     * Note that it is allowable to support additional mappings.
-    * 
-    * @param cid It is expected to be a valid lexical form of the XML Schema 
+    *
+    * @param cid It is expected to be a valid lexical form of the XML Schema
     * {@code xs:anyURI} datatype. If {@link #isXOPPackage()}{@code ==true},
     * it must be a valid URI per the {@code cid:} URI scheme (see <a href="http://www.ietf.org/rfc/rfc2387.txt">RFC 2387</a>)
-    * 
+    *
     * @return
     *       a {@link DataHandler} that represents the MIME attachment.
     *
@@ -106,12 +106,12 @@ public abstract class AttachmentUnmarshaller {
     /**
      * <p>Retrieve the attachment identified by content-id, {@code cid}, as a {@code byte[]}.
      *
-     * @param cid It is expected to be a valid lexical form of the XML Schema 
+     * @param cid It is expected to be a valid lexical form of the XML Schema
      * {@code xs:anyURI} datatype. If {@link #isXOPPackage()}{@code ==true},
      * it must be a valid URI per the {@code cid:} URI scheme (see <a href="http://www.ietf.org/rfc/rfc2387.txt">RFC 2387</a>)
      *
      * @return byte[] representation of attachment identified by cid.
-     * 
+     *
     * @throws IllegalArgumentException if the attachment for the given cid is not found.
      */
     public abstract byte[] getAttachmentAsByteArray(String cid);
@@ -125,7 +125,7 @@ public abstract class AttachmentUnmarshaller {
      *
      * @return true when MIME context is a XOP Document.
      */
-    public boolean isXOPPackage() { return false; } 
+    public boolean isXOPPackage() { return false; }
 }
 
 

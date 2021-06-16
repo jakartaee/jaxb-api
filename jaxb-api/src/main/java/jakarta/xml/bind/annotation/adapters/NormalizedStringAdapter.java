@@ -10,8 +10,6 @@
 
 package jakarta.xml.bind.annotation.adapters;
 
-
-
 /**
  * {@link XmlAdapter} to handle {@code xs:normalizedString}.
  *

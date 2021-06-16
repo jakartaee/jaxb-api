@@ -27,18 +27,18 @@ import static java.lang.annotation.ElementType.METHOD;
  * declaration. Typically, the element factory method is generated
  * (and annotated) from a schema into the ObjectFactory class in a
  * Java package that represents the binding of the element
- * declaration's target namespace. Thus, while the annotation syntax 
+ * declaration's target namespace. Thus, while the annotation syntax
  * allows &#64;XmlElementDecl to be used on any method, semantically
- * its use is restricted to annotation of element factory method. 
+ * its use is restricted to annotation of element factory method.
  *
  * The usage is subject to the following constraints:
- * 
+ *
  * <ul>
  *   <li> The class containing the element factory method annotated
  *        with &#64;XmlElementDecl must be marked with {@link
- *        XmlRegistry}. </li> 
+ *        XmlRegistry}. </li>
  *   <li> The element factory method must take one parameter
- *        assignable to {@link Object}.</li> 
+ *        assignable to {@link Object}.</li>
  * </ul>
  *
  * <p><b>Example 1: </b>Annotation on a factory method
@@ -51,7 +51,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *     }
  * </pre>
  * <pre> {@code
- * 
+ *
  *     <!-- XML input -->
  *     <foo>string</foo>
  *
@@ -71,11 +71,11 @@ import static java.lang.annotation.ElementType.METHOD;
  * <p>
  * The following example illustrates the use of scope annotation
  * parameter in binding of element declaration in schema derived
- * code. 
+ * code.
  * <p>
  * The following example may be replaced in a future revision of
  * this javadoc.
- * 
+ *
  * <pre>{@code
  *     <!-- Example: XML schema definition -->
  *     <xs:schema>
@@ -87,7 +87,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *       </xs:complexType>
  *       <xs:element name="foo" type="xs:int"/>
  *     </xs:schema>
- * }</pre> 
+ * }</pre>
  * <pre>
  *     // Example: expected default binding
  *     class Pea {
@@ -97,23 +97,23 @@ import static java.lang.annotation.ElementType.METHOD;
  *         })
  *         List&lt;JAXBElement&lt;String&gt;&gt; fooOrBar;
  *     }
- * 
+ *
  *     &#64;XmlRegistry
  *     class ObjectFactory {
  *         &#64;XmlElementDecl(scope=Pea.class,name="foo")
  *         JAXBElement&lt;String&gt; createPeaFoo(String s);
- * 
+ *
  *         &#64;XmlElementDecl(scope=Pea.class,name="bar")
  *         JAXBElement&lt;String&gt; createPeaBar(String s);
- * 
+ *
  *         &#64;XmlElementDecl(name="foo")
  *         JAXBElement&lt;Integer&gt; createFoo(Integer i);
  *     }
- * 
+ *
  * </pre>
  * Without scope createFoo and createPeaFoo would become ambiguous
  * since both of them map to a XML schema element with the same local
- * name "foo". 
+ * name "foo".
  *
  * @see XmlRegistry
  * @since 1.6, JAXB 2.0
@@ -156,14 +156,14 @@ public @interface XmlElementDecl {
      * <p>
      * This specifies the namespace name of the XML element whose local
      * name is specified by {@code substitutionHeadName()}.
-     * <p> 
+     * <p>
      * If {@code susbtitutionHeadName()} is "", then this
      * value can only be "##default". But the value is ignored since
      * since this element is not part of susbtitution group when the
      * value of {@code susbstitutionHeadName()} is "".
      * <p>
      * If {@code susbtitutionHeadName()} is not "" and the value is
-     * "##default", then the namespace name is the namespace name to 
+     * "##default", then the namespace name is the namespace name to
      * which the package of the containing class, marked with {@link
      * XmlRegistry }, is mapped.
      * <p>
@@ -193,7 +193,7 @@ public @interface XmlElementDecl {
      * to recognize the 'no default value' state.
      */
     String defaultValue() default "\u0000";
-    
+
     /**
      * Used in {@link XmlElementDecl#scope()} to
      * signal that the declaration is in the global scope.

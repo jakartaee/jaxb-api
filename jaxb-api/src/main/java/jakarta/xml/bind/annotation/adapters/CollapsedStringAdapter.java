@@ -10,8 +10,6 @@
 
 package jakarta.xml.bind.annotation.adapters;
 
-
-
 /**
  * Built-in {@link XmlAdapter} to handle {@code xs:token} and its derived types.
  *

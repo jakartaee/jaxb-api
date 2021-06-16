@@ -17,10 +17,10 @@ import java.io.Reader;
 
 /**
  * The {@code Unmarshaller} class governs the process of deserializing XML
- * data into newly created Java content trees, optionally validating the XML 
+ * data into newly created Java content trees, optionally validating the XML
  * data as it is unmarshalled.  It provides an overloading of unmarshal methods
  * for many different input kinds.
- *    
+ *
  * <p>
  * Unmarshalling from a File:
  * <blockquote>
@@ -31,7 +31,7 @@ import java.io.Reader;
  *    </pre>
  * </blockquote>
  *
- *  
+ *
  * <p>
  * Unmarshalling from an InputStream:
  * <blockquote>
@@ -55,7 +55,7 @@ import java.io.Reader;
  * </blockquote>
  *
  * <p>
- * Unmarshalling from a StringBuffer using a 
+ * Unmarshalling from a StringBuffer using a
  * {@code javax.xml.transform.stream.StreamSource}:
  * <blockquote>
  *    <pre>{@code
@@ -72,7 +72,7 @@ import java.io.Reader;
  *    <pre>
  *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *       Unmarshaller u = jc.createUnmarshaller();
- * 
+ *
  *       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
  *       dbf.setNamespaceAware(true);
  *       DocumentBuilder db = dbf.newDocumentBuilder();
@@ -81,7 +81,7 @@ import java.io.Reader;
  *       Object o = u.unmarshal( doc );
  *    </pre>
  * </blockquote>
- * 
+ *
  * <p>
  * Unmarshalling from a {@code javax.xml.transform.sax.SAXSource} using a
  * client specified validating SAX2.0 parser:
@@ -102,7 +102,7 @@ import java.io.Reader;
  *       spf.setNamespaceAware(true);
  *       spf.setValidating(true);
  *       SAXParser saxParser = spf.newSAXParser();
- *       
+ *
  *       try {
  *           saxParser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
  *           saxParser.setProperty(JAXP_SCHEMA_LOCATION, "http://....");
@@ -111,7 +111,7 @@ import java.io.Reader;
  *       }
  *
  *       XMLReader xmlReader = saxParser.getXMLReader();
- *       SAXSource source = 
+ *       SAXSource source =
  *           new SAXSource( xmlReader, new InputSource( "http://..." ) );
  *
  *       // Setup Jakarta XML Binding to unmarshal
@@ -119,8 +119,8 @@ import java.io.Reader;
  *       Unmarshaller u = jc.createUnmarshaller();
  *       ValidationEventCollector vec = new ValidationEventCollector();
  *       u.setEventHandler( vec );
- *       
- *       // turn off the Jakarta XML Binding provider's default validation mechanism to 
+ *
+ *       // turn off the Jakarta XML Binding provider's default validation mechanism to
  *       // avoid duplicate validation
  *       u.setValidating( false )
  *
@@ -140,10 +140,10 @@ import java.io.Reader;
  *    <pre>
  *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *       Unmarshaller u = jc.createUnmarshaller();
- * 
- *       javax.xml.stream.XMLStreamReader xmlStreamReader = 
+ *
+ *       javax.xml.stream.XMLStreamReader xmlStreamReader =
  *           javax.xml.stream.XMLInputFactory().newInstance().createXMLStreamReader( ... );
- * 
+ *
  *       Object o = u.unmarshal( xmlStreamReader );
  *    </pre>
  * </blockquote>
@@ -154,10 +154,10 @@ import java.io.Reader;
  *    <pre>
  *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *       Unmarshaller u = jc.createUnmarshaller();
- * 
- *       javax.xml.stream.XMLEventReader xmlEventReader = 
+ *
+ *       javax.xml.stream.XMLEventReader xmlEventReader =
  *           javax.xml.stream.XMLInputFactory().newInstance().createXMLEventReader( ... );
- * 
+ *
  *       Object o = u.unmarshal( xmlEventReader );
  *    </pre>
  * </blockquote>
@@ -166,20 +166,20 @@ import java.io.Reader;
  * <a id="unmarshalEx"></a>
  * <b>Unmarshalling XML Data</b><br>
  * <blockquote>
- * Unmarshalling can deserialize XML data that represents either an entire XML document 
+ * Unmarshalling can deserialize XML data that represents either an entire XML document
  * or a subtree of an XML document. Typically, it is sufficient to use the
- * unmarshalling methods described by  
+ * unmarshalling methods described by
  * <a href="#unmarshalGlobal">Unmarshal root element that is declared globally</a>.
  * These unmarshal methods utilize {@link JAXBContext}'s mapping of global XML element
- * declarations and type definitions to Jakarta XML Binding mapped classes to initiate the 
- * unmarshalling of the root element of  XML data.  When the {@link JAXBContext}'s 
- * mappings are not sufficient to unmarshal the root element of XML data, 
- * the application can assist the unmarshalling process by using the 
+ * declarations and type definitions to Jakarta XML Binding mapped classes to initiate the
+ * unmarshalling of the root element of  XML data.  When the {@link JAXBContext}'s
+ * mappings are not sufficient to unmarshal the root element of XML data,
+ * the application can assist the unmarshalling process by using the
  * <a href="#unmarshalByDeclaredType">unmarshal by declaredType methods</a>.
  * These methods are useful for unmarshalling XML data where
  * the root element corresponds to a local element declaration in the schema.
  * </blockquote>
- * 
+ *
  * <blockquote>
  * An unmarshal method never returns null. If the unmarshal process is unable to unmarshal
  * the root of XML content to a Jakarta XML Binding mapped object, a fatal error is reported that
@@ -191,9 +191,9 @@ import java.io.Reader;
  * <b>Unmarshal a root element that is globally declared</b><br>
  * <blockquote>
  * The unmarshal methods that do not have an {@code declaredType} parameter use
- * {@link JAXBContext} to unmarshal the root element of an XML data. The {@link JAXBContext} 
+ * {@link JAXBContext} to unmarshal the root element of an XML data. The {@link JAXBContext}
  * instance is the one that was used to create this {@code Unmarshaller}. The {@link JAXBContext}
- * instance maintains a mapping of globally declared XML element and type definition names to 
+ * instance maintains a mapping of globally declared XML element and type definition names to
  * Jakarta XML Binding mapped classes. The unmarshal method checks if {@link JAXBContext} has a mapping
  * from the root element's XML name and/or {@code @xsi:type} to a Jakarta XML Binding mapped class.  If it does, it umarshalls the
  * XML data using the appropriate Jakarta XML Binding mapped class. Note that when the root element name is unknown and the root
@@ -201,11 +201,11 @@ import java.io.Reader;
  * using that Jakarta XML Binding mapped class as the value of a {@link JAXBElement}.
  * When the {@link JAXBContext} object does not have a mapping for the root element's name
  * nor its {@code @xsi:type}, if it exists,
- * then the unmarshal operation will abort immediately by throwing a {@link UnmarshalException 
- * UnmarshalException}. This exception scenario can be worked around by using the unmarshal by 
+ * then the unmarshal operation will abort immediately by throwing a {@link UnmarshalException
+ * UnmarshalException}. This exception scenario can be worked around by using the unmarshal by
  * declaredType methods described in the next subsection.
  * </blockquote>
- * 
+ *
  * <p>
  * <a id="unmarshalByDeclaredType"></a>
  * <b>Unmarshal by Declared Type</b><br>
@@ -215,16 +215,16 @@ import java.io.Reader;
  * there is no mapping in {@link JAXBContext} of the root element's XML name.
  * The unmarshaller unmarshals the root element using the application provided
  * mapping specified as the {@code declaredType} parameter.
- * Note that even when the root element's element name is mapped by {@link JAXBContext}, 
+ * Note that even when the root element's element name is mapped by {@link JAXBContext},
  * the {@code declaredType} parameter overrides that mapping for
- * deserializing the root element when using these unmarshal methods. 
+ * deserializing the root element when using these unmarshal methods.
  * Additionally, when the root element of XML data has an {@code xsi:type} attribute and
- * that attribute's value references a type definition that is mapped 
- * to a Jakarta XML Binding mapped class by {@link JAXBContext}, that the root 
+ * that attribute's value references a type definition that is mapped
+ * to a Jakarta XML Binding mapped class by {@link JAXBContext}, that the root
  * element's {@code xsi:type} attribute takes
  * precedence over the unmarshal methods {@code declaredType} parameter.
  * These methods always return a {@code JAXBElement<declaredType>}
- * instance. The table below shows how the properties of the returned JAXBElement 
+ * instance. The table below shows how the properties of the returned JAXBElement
  * instance are set.
  *
  * <a id="unmarshalDeclaredTypeReturn"></a>
@@ -258,12 +258,12 @@ import java.io.Reader;
  * </blockquote>
  *
  * <p>
- * The following is an example of 
+ * The following is an example of
  * <a href="#unmarshalByDeclaredType">unmarshal by declaredType method</a>.
  * <p>
  * Unmarshal by declaredType from a {@code org.w3c.dom.Node}:
  * <blockquote>
- *    <pre>{@code 
+ *    <pre>{@code
  *       Schema fragment for example
  *       <xs:schema>
  *          <xs:complexType name="FooType">...<\xs:complexType>
@@ -281,19 +281,19 @@ import java.io.Reader;
  *
  *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *       Unmarshaller u = jc.createUnmarshaller();
- * 
+ *
  *       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
  *       dbf.setNamespaceAware(true);
  *       DocumentBuilder db = dbf.newDocumentBuilder();
  *       Document doc = db.parse(new File( "nosferatu.xml"));
- *       Element  fooSubtree = ...; // traverse DOM till reach xml element foo, constrained by a 
+ *       Element  fooSubtree = ...; // traverse DOM till reach xml element foo, constrained by a
  *                                  // local element declaration in schema.
- * 
+ *
  *       // FooType is the Jakarta XML Binding mapping of the type of local element declaration foo.
  *       JAXBElement<FooType> foo = u.unmarshal( fooSubtree, FooType.class);
  *    }</pre>
  * </blockquote>
- * 
+ *
  * <p>
  * <b>Support for SAX2.0 Compliant Parsers</b><br>
  * <blockquote>
@@ -303,7 +303,7 @@ import java.io.Reader;
  * is not required to be SAX2.0 compliant, all providers are required to allow
  * a client application to specify their own SAX2.0 parser.  Some providers may
  * require the client application to specify the SAX2.0 parser at schema compile
- * time. See {@link #unmarshal(javax.xml.transform.Source) unmarshal(Source)} 
+ * time. See {@link #unmarshal(javax.xml.transform.Source) unmarshal(Source)}
  * for more detail.
  * </blockquote>
  *
@@ -313,22 +313,22 @@ import java.io.Reader;
  * <p>
  * A client application can enable or disable JAXP validation
  * mechanism via the {@code setSchema(javax.xml.validation.Schema)} API.
- * Sophisticated clients can specify their own validating SAX 2.0 compliant 
- * parser and bypass the JAXP validation mechanism using the 
+ * Sophisticated clients can specify their own validating SAX 2.0 compliant
+ * parser and bypass the JAXP validation mechanism using the
  * {@link #unmarshal(javax.xml.transform.Source) unmarshal(Source)}  API.
- * 
+ *
  * <p>
- * Since unmarshalling invalid XML content is defined in Jakarta XML Binding, 
+ * Since unmarshalling invalid XML content is defined in Jakarta XML Binding,
  * the Unmarshaller default validation event handler was made more lenient
  * than in JAXB 1.0.  When schema-derived code generated
- * by JAXB 1.0 binding compiler is registered with {@link JAXBContext}, 
- * the default unmarshal validation handler is 
+ * by JAXB 1.0 binding compiler is registered with {@link JAXBContext},
+ * the default unmarshal validation handler is
  * {@link jakarta.xml.bind.helpers.DefaultValidationEventHandler} and it
- * terminates the marshal  operation after encountering either a fatal error or an error. 
+ * terminates the marshal  operation after encountering either a fatal error or an error.
  * For a Jakarta XML Binding client application, there is no explicitly defined default
- * validation handler and the default event handling only 
+ * validation handler and the default event handling only
  * terminates the unmarshal operation after encountering a fatal error.
- * 
+ *
  * </blockquote>
  *
  * <p>
@@ -336,11 +336,11 @@ import java.io.Reader;
  * <b>Supported Properties</b><br>
  * <blockquote>
  * <p>
- * There currently are not any properties required to be supported by all 
- * Jakarta XML Binding Providers on Unmarshaller.  However, some providers may support 
+ * There currently are not any properties required to be supported by all
+ * Jakarta XML Binding Providers on Unmarshaller.  However, some providers may support
  * their own set of provider specific properties.
  * </blockquote>
- * 
+ *
  * <p>
  * <a id="unmarshalEventCallback"></a>
  * <b>Unmarshal Event Callbacks</b><br>
@@ -352,53 +352,53 @@ import java.io.Reader;
  * unmarshalling.  'External listeners' allow for centralized processing
  * of unmarshal events in one callback method rather than by type event callbacks.
  * <p>
- * 'Class defined' event callback methods allow any Jakarta XML Binding mapped class to specify 
+ * 'Class defined' event callback methods allow any Jakarta XML Binding mapped class to specify
  * its own specific callback methods by defining methods with the following method signature:
  * <blockquote>
  * <pre>
- *   // This method is called immediately after the object is created and before the unmarshalling of this 
+ *   // This method is called immediately after the object is created and before the unmarshalling of this
  *   // object begins. The callback provides an opportunity to initialize JavaBean properties prior to unmarshalling.
  *   void beforeUnmarshal(Unmarshaller, Object parent);
- * 
- *   //This method is called after all the properties (except IDREF) are unmarshalled for this object, 
+ *
+ *   //This method is called after all the properties (except IDREF) are unmarshalled for this object,
  *   //but before this object is set to the parent object.
  *   void afterUnmarshal(Unmarshaller, Object parent);
  * </pre>
  * </blockquote>
  * The class defined callback methods should be used when the callback method requires
- * access to non-public methods and/or fields of the class. 
+ * access to non-public methods and/or fields of the class.
  * <p>
- * The external listener callback mechanism enables the registration of a {@link Listener} 
- * instance with an {@link Unmarshaller#setListener(Listener)}. The external listener receives all callback events, 
- * allowing for more centralized processing than per class defined callback methods.  The external listener 
+ * The external listener callback mechanism enables the registration of a {@link Listener}
+ * instance with an {@link Unmarshaller#setListener(Listener)}. The external listener receives all callback events,
+ * allowing for more centralized processing than per class defined callback methods.  The external listener
  * receives events when unmarshalling process is marshalling to a Jakarta XML Binding element or to Jakarta XML Binding mapped class.
  * <p>
  * The 'class defined' and external listener event callback methods are independent of each other,
  * both can be called for one event.  The invocation ordering when both listener callback methods exist is
- * defined in {@link Listener#beforeUnmarshal(Object, Object)} and {@link Listener#afterUnmarshal(Object, Object)}. 
+ * defined in {@link Listener#beforeUnmarshal(Object, Object)} and {@link Listener#afterUnmarshal(Object, Object)}.
 * <p>
  * An event callback method throwing an exception terminates the current unmarshal process.
- * 
+ *
  * </blockquote>
- * 
+ *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  * @see Marshaller
  * @since 1.6, JAXB 1.0
  */
 public interface Unmarshaller {
-    
+
     /**
      * Unmarshal XML data from the specified file and return the resulting
      * content tree.
      *
      * <p>
      * Implements <a href="#unmarshalGlobal">Unmarshal Global Root Element</a>.
-     * 
-     * @param f the file to unmarshal XML data from
-     * @return the newly created root object of the java content tree 
      *
-     * @throws JAXBException 
+     * @param f the file to unmarshal XML data from
+     * @return the newly created root object of the java content tree
+     *
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -409,19 +409,19 @@ public interface Unmarshaller {
      *      If the file parameter is null
      */
     public Object unmarshal( java.io.File f ) throws JAXBException;
-    
+
     /**
-     * Unmarshal XML data from the specified InputStream and return the 
+     * Unmarshal XML data from the specified InputStream and return the
      * resulting content tree.  Validation event location information may
      * be incomplete when using this form of the unmarshal API.
      *
      * <p>
      * Implements <a href="#unmarshalGlobal">Unmarshal Global Root Element</a>.
-     * 
-     * @param is the InputStream to unmarshal XML data from
-     * @return the newly created root object of the java content tree 
      *
-     * @throws JAXBException 
+     * @param is the InputStream to unmarshal XML data from
+     * @return the newly created root object of the java content tree
+     *
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -441,7 +441,7 @@ public interface Unmarshaller {
      *
      * <p>
      * Implements <a href="#unmarshalGlobal">Unmarshal Global Root Element</a>.
-     * 
+     *
      * @param reader the Reader to unmarshal XML data from
      * @return the newly created root object of the java content tree
      *
@@ -466,9 +466,9 @@ public interface Unmarshaller {
      * Implements <a href="#unmarshalGlobal">Unmarshal Global Root Element</a>.
      *
      * @param url the url to unmarshal XML data from
-     * @return the newly created root object of the java content tree 
+     * @return the newly created root object of the java content tree
      *
-     * @throws JAXBException 
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -479,7 +479,7 @@ public interface Unmarshaller {
      *      If the URL parameter is null
      */
     public Object unmarshal( java.net.URL url ) throws JAXBException;
-    
+
     /**
      * Unmarshal XML data from the specified SAX InputSource and return the
      * resulting content tree.
@@ -488,9 +488,9 @@ public interface Unmarshaller {
      * Implements <a href="#unmarshalGlobal">Unmarshal Global Root Element</a>.
      *
      * @param source the input source to unmarshal XML data from
-     * @return the newly created root object of the java content tree 
+     * @return the newly created root object of the java content tree
      *
-     * @throws JAXBException 
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -501,7 +501,7 @@ public interface Unmarshaller {
      *      If the InputSource parameter is null
      */
     public Object unmarshal( org.xml.sax.InputSource source ) throws JAXBException;
-    
+
     /**
      * Unmarshal global XML data from the specified DOM tree and return the resulting
      * content tree.
@@ -512,9 +512,9 @@ public interface Unmarshaller {
      * @param node
      *      the document/element to unmarshal XML data from.
      *      The caller must support at least Document and Element.
-     * @return the newly created root object of the java content tree 
+     * @return the newly created root object of the java content tree
      *
-     * @throws JAXBException 
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -539,10 +539,10 @@ public interface Unmarshaller {
      *      The caller must support at least Document and Element.
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code node}'s XML data.
-     * 
+     *
      * @return <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a> representation of {@code node}
-     * 
-     * @throws JAXBException 
+     *
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -554,10 +554,10 @@ public interface Unmarshaller {
      * @since 1.6, JAXB 2.0
      */
     public <T> JAXBElement<T> unmarshal( org.w3c.dom.Node node, Class<T> declaredType ) throws JAXBException;
-    
+
     /**
-     * Unmarshal XML data from the specified XML Source and return the 
-     * resulting content tree.  
+     * Unmarshal XML data from the specified XML Source and return the
+     * resulting content tree.
      *
      * <p>
      * Implements <a href="#unmarshalGlobal">Unmarshal Global Root Element</a>.
@@ -578,29 +578,29 @@ public interface Unmarshaller {
      * then the Jakarta XML Binding provider's default parser mechanism will be used.
      * <p>
      * This parser replacement mechanism can also be used to replace the Jakarta XML Binding
-     * provider's unmarshal-time validation engine.  The client application 
+     * provider's unmarshal-time validation engine.  The client application
      * must properly configure their SAX 2.0 compliant parser to perform
      * validation (as shown in the example above).  Any {@code SAXParserExceptions}
      * encountered by the parser during the unmarshal operation will be
-     * processed by the Jakarta XML Binding provider and converted into Jakarta XML Binding 
+     * processed by the Jakarta XML Binding provider and converted into Jakarta XML Binding
      * {@code ValidationEvent} objects which will be reported back to the
      * client via the {@code ValidationEventHandler} registered with the
      * {@code Unmarshaller}.  <i>Note:</i> specifying a substitute validating
-     * SAX 2.0 parser for unmarshalling does not necessarily replace the 
-     * validation engine used by the Jakarta XML Binding provider for performing on-demand 
+     * SAX 2.0 parser for unmarshalling does not necessarily replace the
+     * validation engine used by the Jakarta XML Binding provider for performing on-demand
      * validation.
      * <p>
      * The only way for a client application to specify an alternate parser
-     * mechanism to be used during unmarshal is via the 
+     * mechanism to be used during unmarshal is via the
      * {@code unmarshal(SAXSource)} API.  All other forms of the unmarshal
-     * method (File, URL, Node, etc) will use the Jakarta XML Binding provider's default 
+     * method (File, URL, Node, etc) will use the Jakarta XML Binding provider's default
      * parser and validator mechanisms.
      *
      * @param source the XML Source to unmarshal XML data from (providers are
      *        only required to support SAXSource, DOMSource, and StreamSource)
      * @return the newly created root object of the java content tree
      *
-     * @throws JAXBException 
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -617,7 +617,7 @@ public interface Unmarshaller {
 
     /**
      * Unmarshal XML data from the specified XML Source by {@code declaredType} and return the
-     * resulting content tree.  
+     * resulting content tree.
      *
      * <p>
      * Implements <a href="#unmarshalByDeclaredType">Unmarshal by Declared Type</a>
@@ -627,11 +627,11 @@ public interface Unmarshaller {
      *
      * @param source the XML Source to unmarshal XML data from (providers are
      *        only required to support SAXSource, DOMSource, and StreamSource)
-     * @param declaredType 
+     * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code source}'s xml root element
      * @return Java content rooted by <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a>
      *
-     * @throws JAXBException 
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -644,27 +644,27 @@ public interface Unmarshaller {
      */
     public <T> JAXBElement<T> unmarshal( javax.xml.transform.Source source, Class<T> declaredType )
         throws JAXBException;
-    
+
     /**
      * Unmarshal XML data from the specified pull parser and return the
      * resulting content tree.
      *
      * <p>
      * Implements <a href="#unmarshalGlobal">Unmarshal Global Root Element</a>.
-     * 
+     *
      * <p>
      * This method assumes that the parser is on a START_DOCUMENT or
-     * START_ELEMENT event.  Unmarshalling will be done from this 
-     * start event to the corresponding end event.  If this method 
+     * START_ELEMENT event.  Unmarshalling will be done from this
+     * start event to the corresponding end event.  If this method
      * returns successfully, the {@code reader} will be pointing at
      * the token right after the end event.
-     * 
+     *
      * @param reader
      *      The parser to be read.
      * @return
      *      the newly created root object of the java content tree.
      *
-     * @throws JAXBException 
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -681,28 +681,28 @@ public interface Unmarshaller {
      */
     public Object unmarshal( javax.xml.stream.XMLStreamReader reader )
         throws JAXBException;
-    
+
     /**
      * Unmarshal root element to Jakarta XML Binding mapped {@code declaredType}
      * and return the resulting content tree.
-     * 
+     *
      * <p>
      * This method implements <a href="#unmarshalByDeclaredType">unmarshal by declaredType</a>.
      * <p>
      * This method assumes that the parser is on a START_DOCUMENT or
-     * START_ELEMENT event. Unmarshalling will be done from this 
-     * start event to the corresponding end event.  If this method 
-     * returns successfully, the {@code reader} will be pointing at 
+     * START_ELEMENT event. Unmarshalling will be done from this
+     * start event to the corresponding end event.  If this method
+     * returns successfully, the {@code reader} will be pointing at
      * the token right after the end event.
      *
      * @param reader
-     *      The parser to be read. 
+     *      The parser to be read.
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code reader}'s START_ELEMENT XML data.
-     * 
+     *
      * @return   content tree rooted by <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a> representation
-     * 
-     * @throws JAXBException 
+     *
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -724,17 +724,17 @@ public interface Unmarshaller {
      *
      * <p>
      * This method assumes that the parser is on a START_DOCUMENT or
-     * START_ELEMENT event.  Unmarshalling will be done from this 
-     * start event to the corresponding end event.  If this method 
-     * returns successfully, the {@code reader} will be pointing at 
-     * the token right after the end event. 
-     * 
+     * START_ELEMENT event.  Unmarshalling will be done from this
+     * start event to the corresponding end event.  If this method
+     * returns successfully, the {@code reader} will be pointing at
+     * the token right after the end event.
+     *
      * @param reader
      *      The parser to be read.
      * @return
      *      the newly created root object of the java content tree.
      *
-     * @throws JAXBException 
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -751,29 +751,29 @@ public interface Unmarshaller {
      */
     public Object unmarshal( javax.xml.stream.XMLEventReader reader )
         throws JAXBException;
-    
+
     /**
      * Unmarshal root element to Jakarta XML Binding mapped {@code declaredType}
      * and return the resulting content tree.
-     * 
+     *
      * <p>
      * This method implements <a href="#unmarshalByDeclaredType">unmarshal by declaredType</a>.
      *
      * <p>
      * This method assumes that the parser is on a START_DOCUMENT or
-     * START_ELEMENT event. Unmarshalling will be done from this 
-     * start event to the corresponding end event.  If this method 
-     * returns successfully, the {@code reader} will be pointing at 
+     * START_ELEMENT event. Unmarshalling will be done from this
+     * start event to the corresponding end event.  If this method
+     * returns successfully, the {@code reader} will be pointing at
      * the token right after the end event.
      *
      * @param reader
-     *      The parser to be read. 
+     *      The parser to be read.
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code reader}'s START_ELEMENT XML data.
-     * 
+     *
      * @return   content tree rooted by <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a> representation
-     * 
-     * @throws JAXBException 
+     *
+     * @throws JAXBException
      *     If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
      *     If the {@link ValidationEventHandler ValidationEventHandler}
@@ -789,10 +789,10 @@ public interface Unmarshaller {
     /**
      * Get an unmarshaller handler object that can be used as a component in
      * an XML pipeline.
-     * 
+     *
      * <p>
-     * The Jakarta XML Binding Provider can return the same handler object for multiple 
-     * invocations of this method. In other words, this method does not 
+     * The Jakarta XML Binding Provider can return the same handler object for multiple
+     * invocations of this method. In other words, this method does not
      * necessarily create a new instance of {@code UnmarshallerHandler}. If the
      * application needs to use more than one {@code UnmarshallerHandler}, it
      * should create more than one {@code Unmarshaller}.
@@ -801,16 +801,16 @@ public interface Unmarshaller {
      * @see UnmarshallerHandler
      */
     public UnmarshallerHandler getUnmarshallerHandler();
-    
+
     /**
      * Allow an application to register a {@code ValidationEventHandler}.
      * <p>
      * The {@code ValidationEventHandler} will be called by the Jakarta XML Binding Provider
-     * if any validation errors are encountered during calls to any of the 
-     * unmarshal methods.  If the client application does not register a 
+     * if any validation errors are encountered during calls to any of the
+     * unmarshal methods.  If the client application does not register a
      * {@code ValidationEventHandler} before invoking the unmarshal methods,
      * then {@code ValidationEvents} will be handled by the default event
-     * handler which will terminate the unmarshal operation after the first 
+     * handler which will terminate the unmarshal operation after the first
      * error or fatal error is encountered.
      * <p>
      * Calling this method with a null parameter will cause the Unmarshaller
@@ -829,14 +829,14 @@ public interface Unmarshaller {
      *
      * @return the current ValidationEventHandler or the default event handler
      *         if it hasn't been set
-     * @throws JAXBException if an error was encountered while getting the 
+     * @throws JAXBException if an error was encountered while getting the
      *         current event handler
      */
     public ValidationEventHandler getEventHandler()
         throws JAXBException;
 
     /**
-     * Set the particular property in the underlying implementation of 
+     * Set the particular property in the underlying implementation of
      * {@code Unmarshaller}.  This method can only be used to set one of
      * the standard Jakarta XML Binding defined properties above or a provider specific
      * property.  Attempting to set an undefined property will result in
@@ -844,7 +844,7 @@ public interface Unmarshaller {
      * Supported Properties</a>.
      *
      * @param name the name of the property to be set. This value can either
-     *              be specified using one of the constant fields or a user 
+     *              be specified using one of the constant fields or a user
      *              supplied string.
      * @param value the value of the property to be set
      *
@@ -853,11 +853,11 @@ public interface Unmarshaller {
      * @throws IllegalArgumentException
      *      If the name parameter is null
      */
-    public void setProperty( String name, Object value ) 
+    public void setProperty( String name, Object value )
         throws PropertyException;
-    
+
     /**
-     * Get the particular property in the underlying implementation of 
+     * Get the particular property in the underlying implementation of
      * {@code Unmarshaller}.  This method can only be used to get one of
      * the standard Jakarta XML Binding defined properties above or a provider specific
      * property.  Attempting to get an undefined property will result in
@@ -896,7 +896,7 @@ public interface Unmarshaller {
      * being used to perform unmarshal-time validation.  If there is no
      * Schema set on the unmarshaller, then this method will return null
      * indicating that unmarshal-time validation will not be performed.
-     * 
+     *
      * @return the Schema object being used to perform unmarshal-time
      *      validation or null if not present
      * @throws UnsupportedOperationException could be thrown if this method is
@@ -1045,11 +1045,11 @@ public interface Unmarshaller {
     /**
      * <p>
      * Register unmarshal event callback {@link Listener} with this {@link Unmarshaller}.
-     * 
+     *
      * <p>
      * There is only one Listener per Unmarshaller. Setting a Listener replaces the previous set Listener.
      * One can unregister current Listener by setting listener to {@code null}.
-     * 
+     *
      * @param listener  provides unmarshal event callbacks for this {@link Unmarshaller}
      * @since 1.6, JAXB 2.0
      */

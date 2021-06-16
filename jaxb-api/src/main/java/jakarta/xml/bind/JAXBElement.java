@@ -16,7 +16,7 @@ import java.io.Serializable;
 /**
  * <p>Jakarta XML Binding representation of an Xml Element.</p>
  *
- * <p>This class represents information about an Xml Element from both the element 
+ * <p>This class represents information about an Xml Element from both the element
  * declaration within a schema and the element instance value within an xml document
  * with the following properties
  * <ul>
@@ -26,22 +26,22 @@ import java.io.Serializable;
  *   <li><b>{@code scope}</b> of element declaration</li>
  *   <li>boolean <b>{@code nil}</b> property. (element instance's <b>{@code xsi:nil}</b> attribute)</li>
  * </ul>
- * 
+ *
  * <p>The {@code declaredType} and {@code scope} property are the
  * Jakarta XML Binding class binding for the xml type definition.
  * </p>
- * 
+ *
  * <p><b>{@code Scope}</b> is either {@link GlobalScope} or the Java class representing the
  * complex type definition containing the schema element declaration.
  * </p>
- * 
+ *
  * <p>There is a property constraint that if <b>{@code value}</b> is {@code null},
  * then {@code nil} must be {@code true}. The converse is not true to enable
  * representing a nil element with attribute(s). If {@code nil} is true, it is possible
  * that {@code value} is non-null so it can hold the value of the attributes
  * associated with a nil element.
  * </p>
- * 
+ *
  * @author Kohsuke Kawaguchi, Joe Fialli
  * @since 1.6, JAXB 2.0
  */
@@ -57,13 +57,13 @@ public class JAXBElement<T> implements Serializable {
     /** Scope of xml element declaration representing this xml element instance.
      *  Can be one of the following values:
      *  - {@link GlobalScope} for global xml element declaration.
-     *  - local element declaration has a scope set to the Java class 
+     *  - local element declaration has a scope set to the Java class
      *     representation of complex type defintion containing
-     *     xml element declaration. 
+     *     xml element declaration.
      */
     final protected Class<?> scope;
 
-    /** xml element value. 
+    /** xml element value.
         Represents content model and attributes of an xml element instance. */
     protected T value;
 
@@ -79,7 +79,7 @@ public class JAXBElement<T> implements Serializable {
 
     /**
      * <p>Construct an xml element instance.</p>
-     * 
+     *
      * @param name          Java binding of xml element tag name
      * @param declaredType  Java binding of xml element declaration's type
      * @param scope
@@ -90,8 +90,8 @@ public class JAXBElement<T> implements Serializable {
      * @see #getScope()
      * @see #isTypeSubstituted()
      */
-    public JAXBElement(QName name, 
-		       Class<T> declaredType, 
+    public JAXBElement(QName name,
+		       Class<T> declaredType,
 		       Class<?> scope,
 		       T value) {
         if(declaredType==null || name==null)
@@ -140,7 +140,7 @@ public class JAXBElement<T> implements Serializable {
 
     /**
      * <p>Return the content model and attribute values for this element.</p>
-     * 
+     *
      * <p>See {@link #isNil()} for a description of a property constraint when
      * this value is {@code null}</p>
      */
@@ -157,7 +157,7 @@ public class JAXBElement<T> implements Serializable {
     public Class<?> getScope() {
         return scope;
     }
-    
+
     /**
      * <p>Returns {@code true} iff this element instance content model
      * is nil.</p>
@@ -173,15 +173,15 @@ public class JAXBElement<T> implements Serializable {
 
     /**
      * <p>Set whether this element has nil content.</p>
-     * 
+     *
      * @see #isNil()
      */
     public void setNil(boolean value) {
         this.nil = value;
     }
-    
-    /* Convenience methods  
-     * (Not necessary but they do unambiguously conceptualize 
+
+    /* Convenience methods
+     * (Not necessary but they do unambiguously conceptualize
      *  the rationale behind this class' fields.)
      */
 

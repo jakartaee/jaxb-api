@@ -37,8 +37,8 @@ class ModuleUtil {
         if (contextPath == null || contextPath.isEmpty()){
           return classes.toArray(new Class<?>[]{});
         }
-        
-        String [] tokens = contextPath.split(":"); 
+
+        String [] tokens = contextPath.split(":");
         for (String pkg : tokens){
 
            // look for ObjectFactory and load it
@@ -50,7 +50,7 @@ class ModuleUtil {
            } catch (ClassNotFoundException e) {
                // not necessarily an error
            }
-              
+
            // look for jaxb.index and load the list of classes
            try {
                final Class<?> firstByJaxbIndex = findFirstByJaxbIndex(pkg, classLoader);
