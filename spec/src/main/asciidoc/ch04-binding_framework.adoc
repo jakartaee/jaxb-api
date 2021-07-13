@@ -792,34 +792,15 @@ discovery happens each time `JAXBContext.newInstance` is invoked.
 Implementation discovery consists of following steps in the order
 specified (first successful resolution applies):
 
-. Context path or classes’ packages explicitly passed in
-to the newInstance method are searched for the jaxb.properties file. +
- +
-If such a resource is discovered, it is loaded as a property file,
-and the value of the `jakarta.xml.bind.JAXBContextFactory` key
-will be assumed to be the provider factory class.
-If no value found, `jakarta.xml.bind.context.factory` is used
-as a key for backwards compatibility reasons. +
- +
-This configuration method is deprecated.
-
 . If the system property `jakarta.xml.bind.JAXBContextFactory` exists,
-then its value is assumed to be the provider factory class.
-If no such property exists, properties `jakarta.xml.bind.context.factory`
-and `jakarta.xml.bind.JAXBContext` are checked too (in this order),
-for backwards compatibility reasons.
+then its value is assumed to be the provider factory class. This phase
+of the look up enables per-JVM override of the Jakarta XML Binding implementation.
 
 . Provider of `jakarta.xml.bind.JAXBContextFactory` is loaded
 using the service-provider loading facilities, as defined by
 Java SE Platform, to attempt to locate and load
 an implementation of the service.
 
-. Look for resource `/META-INF/services/jakarta.xml.bind.JAXBContext`.
-If such a resource exists, its content is assumed to be the provider
-factory class. +
- +
- This configuration method is deprecated.
- 
  . Finally, if all of the steps above fail,
  then the rest of the look up is unspecified.
 

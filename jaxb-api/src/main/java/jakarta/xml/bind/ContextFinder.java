@@ -10,10 +10,8 @@
 
 package jakarta.xml.bind;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -32,15 +30,12 @@ import java.util.logging.Logger;
  * This class is package private and therefore is not exposed as part of the
  * Jakarta XML Binding API.
  *
- * This code is designed to implement the JAXB 1.0 spec pluggability feature
+ * This code is designed to implement the XML Binding spec pluggability feature
  *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  */
 class ContextFinder {
-
-    // previous value of JAXBContext.JAXB_CONTEXT_FACTORY, using also this to ensure backwards compatibility
-    private static final String JAXB_CONTEXT_FACTORY_DEPRECATED = "jakarta.xml.bind.context.factory";
 
     private static final Logger logger;
 
@@ -303,18 +298,6 @@ class ContextFinder {
         //ModuleUtil is mr-jar class, scans context path for jaxb classes on jdk9 and higher
         Class<?>[] contextPathClasses = ModuleUtil.getClassesFromContextPath(contextPath, classLoader);
 
-        //first try with classloader#getResource
-        String factoryClassName = jaxbProperties(contextPath, classLoader, factoryId);
-        if (factoryClassName == null && contextPathClasses != null) {
-            //try with class#getResource
-            factoryClassName = jaxbProperties(contextPathClasses, factoryId);
-        }
-
-        if (factoryClassName != null) {
-            return newInstance(contextPath, contextPathClasses, factoryClassName, classLoader, properties);
-        }
-
-
         String factoryName = classNameFromSystemProperties();
         if (factoryName != null) return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
 
@@ -326,12 +309,8 @@ class ContextFinder {
             return obj.createContext(contextPath, classLoader, properties);
         }
 
-        // to ensure backwards compatibility
-        factoryName = firstByServiceLoaderDeprecated(JAXBContext.class, classLoader);
-        if (factoryName != null) return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
-
         Class<?> ctxFactory = (Class<?>) ServiceLoaderUtil.lookupUsingOSGiServiceLoader(
-                "jakarta.xml.bind.JAXBContext", logger);
+                JAXBContext.JAXB_CONTEXT_FACTORY, logger);
 
         if (ctxFactory != null) {
             return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
@@ -343,34 +322,6 @@ class ContextFinder {
     }
 
     static JAXBContext find(Class<?>[] classes, Map<String, ?> properties) throws JAXBException {
-
-        // search for jaxb.properties in the class loader of each class first
-        logger.fine("Searching jaxb.properties");
-        for (final Class<?> c : classes) {
-            // this classloader is used only to load jaxb.properties, so doing this should be safe.
-            // this is possible for primitives, arrays, and classes that are
-            // loaded by poorly implemented ClassLoaders
-            if (c.getPackage() == null) continue;
-
-            // TODO: do we want to optimize away searching the same package?  org.Foo, org.Bar, com.Baz
-            // classes from the same package might come from different class loades, so it might be a bad idea
-            // TODO: it's easier to look things up from the class
-            // c.getResourceAsStream("jaxb.properties");
-
-            URL jaxbPropertiesUrl = getResourceUrl(c, "jaxb.properties");
-
-            if (jaxbPropertiesUrl != null) {
-
-                String factoryClassName =
-                        classNameFromPackageProperties(
-                                jaxbPropertiesUrl,
-                                JAXBContext.JAXB_CONTEXT_FACTORY, JAXB_CONTEXT_FACTORY_DEPRECATED);
-
-                return newInstance(classes, properties, factoryClassName, getClassClassLoader(c));
-            }
-
-        }
-
         String factoryClassName = classNameFromSystemProperties();
         if (factoryClassName != null) return newInstance(classes, properties, factoryClassName);
 
@@ -382,22 +333,9 @@ class ContextFinder {
             return factory.createContext(classes, properties);
         }
 
-        // to ensure backwards compatibility
-        ClassLoader loader = getContextClassLoader();
-        // it is guaranteed classes are not null but it is not guaranteed, that array is not empty
-        if (classes.length > 0) {
-            ClassLoader c = getClassClassLoader(classes[0]);
-            //switch to classloader which loaded the class if it is not a bootstrap cl
-            if (c != null) {
-                loader = c;
-            }
-        }
-        String className = firstByServiceLoaderDeprecated(JAXBContext.class, loader);
-        if (className != null) return newInstance(classes, properties, className, loader);
-
         logger.fine("Trying to create the platform default provider");
         Class<?> ctxFactoryClass =
-                (Class) ServiceLoaderUtil.lookupUsingOSGiServiceLoader("jakarta.xml.bind.JAXBContext", logger);
+                (Class) ServiceLoaderUtil.lookupUsingOSGiServiceLoader(JAXBContext.JAXB_CONTEXT_FACTORY, logger);
 
         if (ctxFactoryClass != null) {
             return newInstance(classes, properties, ctxFactoryClass);
@@ -408,53 +346,14 @@ class ContextFinder {
         return newInstance(classes, properties, DEFAULT_FACTORY_CLASS);
     }
 
-
-    /**
-     * first factoryId should be the preferred one,
-     * more of those can be provided to support backwards compatibility
-     */
-    private static String classNameFromPackageProperties(URL packagePropertiesUrl,
-                                                         String ... factoryIds) throws JAXBException {
-
-        logger.log(Level.FINE, "Trying to locate {0}", packagePropertiesUrl.toString());
-        Properties props = loadJAXBProperties(packagePropertiesUrl);
-        for(String factoryId : factoryIds) {
-            if (props.containsKey(factoryId)) {
-                return props.getProperty(factoryId);
-            }
-        }
-        //Factory key not found
-        String propertiesUrl = packagePropertiesUrl.toExternalForm();
-        String packageName = propertiesUrl.substring(0, propertiesUrl.indexOf("/jaxb.properties"));
-        throw new JAXBException(Messages.format(Messages.MISSING_PROPERTY, packageName, factoryIds[0]));
-    }
-
     private static String classNameFromSystemProperties() throws JAXBException {
 
         String factoryClassName = getSystemProperty(JAXBContext.JAXB_CONTEXT_FACTORY);
         if (factoryClassName != null) {
             return factoryClassName;
         }
-        // leave this here to assure compatibility
-        factoryClassName = getDeprecatedSystemProperty(JAXB_CONTEXT_FACTORY_DEPRECATED);
-        if (factoryClassName != null) {
-            return factoryClassName;
-        }
-        // leave this here to assure compatibility
-        factoryClassName = getDeprecatedSystemProperty(JAXBContext.class.getName());
-        if (factoryClassName != null) {
-            return factoryClassName;
-        }
-        return null;
-    }
 
-    private static String getDeprecatedSystemProperty(String property) {
-        String value = getSystemProperty(property);
-        if (value != null) {
-            logger.log(Level.WARNING, "Using non-standard property: {0}. Property {1} should be used instead.",
-                    new Object[] {property, JAXBContext.JAXB_CONTEXT_FACTORY});
-        }
-        return value;
+        return null;
     }
 
     private static String getSystemProperty(String property) {
@@ -586,74 +485,6 @@ class ContextFinder {
                         }
                     });
         }
-    }
-
-    // ServiceLoaderUtil.firstByServiceLoaderDeprecated should be used instead.
-    @Deprecated
-    static String firstByServiceLoaderDeprecated(Class<?> spiClass,
-                                                 ClassLoader classLoader) throws JAXBException {
-
-        final String jaxbContextFQCN = spiClass.getName();
-
-        logger.fine("Searching META-INF/services");
-
-        // search META-INF services next
-        BufferedReader r = null;
-        final String resource = "META-INF/services/" + jaxbContextFQCN;
-        try {
-            final InputStream resourceStream =
-                    (classLoader == null) ?
-                            ClassLoader.getSystemResourceAsStream(resource) :
-                            classLoader.getResourceAsStream(resource);
-
-            if (resourceStream != null) {
-                r = new BufferedReader(new InputStreamReader(resourceStream, "UTF-8"));
-                String factoryClassName = r.readLine();
-                if (factoryClassName != null) {
-                    factoryClassName = factoryClassName.trim();
-                }
-                r.close();
-                logger.log(Level.FINE, "Configured factorty class:{0}", factoryClassName);
-                return factoryClassName;
-            } else {
-                logger.log(Level.FINE, "Unable to load:{0}", resource);
-                return null;
-            }
-        } catch (IOException e) {
-            throw new JAXBException(e);
-        } finally {
-            try {
-                if (r != null) {
-                    r.close();
-                }
-            } catch (IOException ex) {
-                logger.log(Level.SEVERE, "Unable to close resource: " + resource, ex);
-            }
-        }
-    }
-
-    private static String jaxbProperties(String contextPath, ClassLoader classLoader, String factoryId) throws JAXBException {
-        String[] packages = contextPath.split(":");
-
-        for (String pkg : packages) {
-            String pkgUrl = pkg.replace('.', '/');
-            URL jaxbPropertiesUrl = getResourceUrl(classLoader, pkgUrl + "/jaxb.properties");
-            if (jaxbPropertiesUrl != null) {
-                return classNameFromPackageProperties(jaxbPropertiesUrl,
-                                                      factoryId, JAXB_CONTEXT_FACTORY_DEPRECATED);
-            }
-        }
-        return null;
-    }
-
-    private static String jaxbProperties(Class<?>[] classesFromContextPath, String factoryId) throws JAXBException {
-        for (Class<?> c : classesFromContextPath) {
-            URL jaxbPropertiesUrl = getResourceUrl(c, "jaxb.properties");
-            if (jaxbPropertiesUrl != null) {
-                return classNameFromPackageProperties(jaxbPropertiesUrl, factoryId, JAXB_CONTEXT_FACTORY_DEPRECATED);
-            }
-        }
-        return null;
     }
 
 }

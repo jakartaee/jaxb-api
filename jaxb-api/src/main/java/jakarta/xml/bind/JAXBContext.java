@@ -13,10 +13,8 @@ package jakarta.xml.bind;
 import org.w3c.dom.Node;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * The {@code JAXBContext} class provides the client's entry point to the
@@ -44,21 +42,7 @@ import java.util.Properties;
  * </ul>
  *
  * <p><i>
- * The following JAXB 1.0 requirement is only required for schema to
- * java interface/implementation binding. It does not apply to Jakarta XML Binding annotated
- * classes. Jakarta XML Binding Providers must generate a {@code jaxb.properties} file in
- * each package containing schema derived classes.  The property file must
- * contain a property named {@code jakarta.xml.bind.context.factory} whose
- * value is the name of the class that implements the {@code createContext}
- * APIs.</i>
- *
- * <p><i>
- * The class supplied by the provider does not have to be assignable to
- * {@code jakarta.xml.bind.JAXBContext}, it simply has to provide a class that
- * implements the {@code createContext} APIs.</i>
- *
- * <p><i>
- * In addition, the provider must call the
+ * The provider must call the
  * {@link DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface)
  * DatatypeConverter.setDatatypeConverter} api prior to any client
  * invocations of the marshal and unmarshal methods.  This is necessary to
@@ -191,29 +175,8 @@ import java.util.Properties;
  * <ol>
  *
  * <li>
- * Packages/classes explicitly passed in to the {@link #newInstance} method are processed in the order they are
- * specified, until {@code jaxb.properties} file is looked up in its package, by using the associated classloader &mdash;
- * this is {@link Class#getClassLoader() the owner class loader} for a {@link Class} argument, and for a package
- * the specified {@link ClassLoader}.
- *
- * <p>
- * If such a resource is discovered, it is {@link Properties#load(InputStream) loaded} as a property file, and
- * the value of the {@link #JAXB_CONTEXT_FACTORY} key will be assumed to be the provider factory class. If no value
- * found, {@code "jakarta.xml.bind.context.factory"} is used as a key for backwards compatibility reasons. This class is
- * then loaded by the associated class loader discussed above.
- *
- * <p>
- * This phase of the look up allows some packages to force the use of a certain Jakarta XML Binding implementation.
- * (For example, perhaps the schema compiler has generated some vendor extension in the code.)
- *
- * <p>
- * This configuration method is deprecated.
- *
- * <li>
  * If the system property {@link #JAXB_CONTEXT_FACTORY} exists, then its value is assumed to be the provider
- * factory class. If no such property exists, properties {@code "jakarta.xml.bind.context.factory"} and
- * {@code "jakarta.xml.bind.JAXBContext"} are checked too (in this order), for backwards compatibility reasons. This phase
- * of the look up enables per-JVM override of the Jakarta XML Binding implementation.
+ * factory class. This phase of the look up enables per-JVM override of the Jakarta XML Binding implementation.
  *
  * <li>
  * Provider of {@link jakarta.xml.bind.JAXBContextFactory} is loaded using the service-provider loading
@@ -228,56 +191,14 @@ import java.util.Properties;
  * configuration error} a {@link jakarta.xml.bind.JAXBException} will be thrown.
  *
  * <li>
- * Look for resource {@code /META-INF/services/jakarta.xml.bind.JAXBContext} using provided class loader.
- * Methods without class loader parameter use {@code Thread.currentThread().getContextClassLoader()}.
- * If such a resource exists, its content is assumed to be the provider factory class.
- *
- * This configuration method is deprecated.
- *
- * <li>
  * Finally, if all the steps above fail, then the rest of the look up is unspecified. That said,
  * the recommended behavior is to simply look for some hard-coded platform default Jakarta XML Binding implementation.
- * This phase of the look up is so that Java SE can have its own JAXB implementation as the last resort.
+ * This phase of the look up is so that the environment can have its own Jakarta XML Binding implementation as the last resort.
  * </ol>
  *
  * <p>
  * Once the provider factory class is discovered, context creation is delegated to one of its
  * {@code createContext(...)} methods.
- *
- * For backward compatibility reasons, there are two ways how to implement provider factory class:
- * <ol>
- *     <li>the class is implementation of {@link jakarta.xml.bind.JAXBContextFactory}. It must also implement no-arg
- *     constructor. If discovered in other step then 3, new instance using no-arg constructor is created first.
- *     After that, appropriate instance method is invoked on this instance.
- *     <li>the class is not implementation of interface above and then it is mandated to implement the following
- *     static method signatures:
- * <pre>
- *
- * public static JAXBContext createContext(
- *                                      String contextPath,
- *                                      ClassLoader classLoader,
- *                                      Map&lt;String,Object&gt; properties ) throws JAXBException
- *
- * public static JAXBContext createContext(
- *                                      Class[] classes,
- *                                      Map&lt;String,Object&gt; properties ) throws JAXBException
- * </pre>
- *      In this scenario, appropriate static method is used instead of instance method. This approach is incompatible
- *      with {@link java.util.ServiceLoader} so it can't be used with step 3.
- * </ol>
- * <p>
- * There is no difference in behavior of given method {@code createContext(...)} regardless of whether it uses approach
- * 1 (JAXBContextFactory) or 2 (no interface, static methods).
- *
- * @apiNote
- * Service discovery method using resource {@code /META-INF/services/jakarta.xml.bind.JAXBContext} (described in step 4)
- * is supported only to allow backwards compatibility, it is strongly recommended to migrate to standard
- * {@link java.util.ServiceLoader} mechanism (described in step 3). The difference here is the resource name, which
- * doesn't match service's type name.
- * <p>
- * Also using providers implementing interface {@link JAXBContextFactory} is preferred over using ones defining
- * static methods, same as {@link JAXBContext#JAXB_CONTEXT_FACTORY} property is preferred over property
- * {@code "jakarta.xml.bind.context.factory"}
  *
  * @implNote
  * Within the last step, if Glassfish AS environment detected, its specific service loader is used to find factory class.
@@ -379,16 +300,6 @@ public abstract class JAXBContext {
      *       A qualified class name,relative to current package,
      *       is only allowed to specify a nested or inner class.</li>
      * </ul>
-     *
-     * <p>
-     * To maintain compatibility with JAXB 1.0 schema to java
-     * interface/implementation binding, enabled by schema customization
-     * {@code <jaxb:globalBindings valueClass="false">},
-     * the Jakarta XML Binding provider will ensure that each package on the context path
-     * has a {@code jaxb.properties} file which contains a value for the
-     * {@code jakarta.xml.bind.context.factory} property and that all values
-     * resolve to the same provider.  This requirement does not apply to
-     * Jakarta XML Binding annotated classes.
      *
      * <p>
      * If there are any global XML element name collisions across the various

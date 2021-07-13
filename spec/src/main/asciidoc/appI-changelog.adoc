@@ -8,8 +8,12 @@
 === Changes in Version 4
 
 * fixed cross-references in the specification document
-* removed deprecated jakarta.xml.bind.Validator
+* removed deprecated `jakarta.xml.bind.Validator`
 * removed constraints on using `java.beans.Introspector`
+* removed deprecated steps in implementation lookup algorithm - dropped search
+through `jaxb.properties` file, `jakarta.xml.bind.context.factory` and
+`jakarta.xml.bind.JAXBContext` properties and `/META-INF/services/jakarta.xml.bind.JAXBContext`
+resource file
 
 === Changes in Version 3
 
