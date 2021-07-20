@@ -84,8 +84,8 @@
         <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>4.0</spec.version>
-        <impl.version>0</impl.version>
-        <activation.version>2.0.1</activation.version>
+        <impl.version>3.0.2-SNAPSHOT</impl.version>
+        <activation.version>2.0.2-SNAPSHOT</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
@@ -104,8 +104,13 @@
             </dependency>
             <dependency>
                 <groupId>com.sun.activation</groupId>
-                <artifactId>jakarta.activation</artifactId>
+                <artifactId>sun-activation-registry</artifactId>
                 <version>${activation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${impl.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
