@@ -84,7 +84,8 @@
         <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>4.0</spec.version>
-        <impl.version>3.0.2-SNAPSHOT</impl.version>
+        <!-- Update to JAXB implementation version dependent on current API. -->
+        <impl.version>3.0.1</impl.version>
         <activation.version>2.1.0-RC1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
@@ -92,7 +93,6 @@
 
     <modules>
         <module>jaxb-api</module>
-        <module>jaxb-api-test</module>
     </modules>
 
     <dependencyManagement>
@@ -238,5 +238,14 @@
         </plugins>
 
     </build>
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <modules>
+                <module>jaxb-api-test</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>
