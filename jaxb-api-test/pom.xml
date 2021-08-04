@@ -103,10 +103,6 @@
                             src/test/resources/logging.properties
                         </java.util.logging.config.file>
                     </systemPropertyVariables>
-                    <!-- Those tests are broken. Some of them depend on JAXB implementation.-->
-                    <excludes>
-                        <exclude>jakarta/xml/bind/test/JAXBContextTest.java</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
