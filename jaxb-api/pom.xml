@@ -30,12 +30,9 @@
     </properties>
 
     <dependencies>
-        <!-- usign '-api' artifact here is causing issues for API consumers,
-             ie conflicts on JPMS, since one cannot have two artifacts having same
-             packages on the path and 'provided' scope is not transitive -->
         <dependency>
-            <groupId>com.sun.activation</groupId>
-            <artifactId>jakarta.activation</artifactId>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
         </dependency>
     </dependencies>
 
