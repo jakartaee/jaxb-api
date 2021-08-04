@@ -1,0 +1,50 @@
+<!--
+
+    Copyright (c) 2013, 2021 Oracle and/or its affiliates. All rights reserved.
+
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Distribution License v. 1.0, which is available at
+    http://www.eclipse.org/org/documents/edl-v10.php.
+
+    SPDX-License-Identifier: BSD-3-Clause
+
+-->
+
+<FindBugsFilter>
+
+    <!--
+    As designed.
+    -->
+    <Match>
+        <Class name="jakarta.xml.bind.util.JAXBSource$1"/>
+        <Bug pattern="XFB_XML_FACTORY_BYPASS"/>
+    </Match>
+
+    <!--
+    TODO: reevaluate for MR
+    As designed, impossible to change, maybe with MR.
+    -->
+    <Match>
+        <Class name="jakarta.xml.bind.DatatypeConverterImpl"/>
+        <Bug pattern="NP_BOOLEAN_RETURN_NULL"/>
+    </Match>
+
+    <!--
+    TODO: reevaluate for MR
+    As designed, impossible to change, maybe with MR?
+    -->
+    <Match>
+        <Class name="jakarta.xml.bind.annotation.adapters.HexBinaryAdapter"/>
+        <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS"/>
+    </Match>
+
+    <!--
+      https://github.com/eclipse-ee4j/jaxb-api/issues/78
+    -->
+    <Match>
+        <Class name="jakarta.xml.bind.ModuleUtil"/>
+        <Bug pattern="DM_STRING_TOSTRING"/>
+    </Match>
+
+
+</FindBugsFilter>
