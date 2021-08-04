@@ -84,8 +84,6 @@
         <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>4.0</spec.version>
-        <!-- Update to JAXB implementation version dependent on current API. -->
-        <impl.version>3.0.1</impl.version>
         <activation.version>2.1.0-RC1</activation.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
@@ -101,11 +99,6 @@
                 <groupId>jakarta.activation</groupId>
                 <artifactId>jakarta.activation-api</artifactId>
                 <version>${activation.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.xml.bind</groupId>
-                <artifactId>jaxb-impl</artifactId>
-                <version>${impl.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
