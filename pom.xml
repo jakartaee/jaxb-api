@@ -90,7 +90,7 @@
     </properties>
 
     <modules>
-        <module>jaxb-api</module>
+        <module>api</module>
     </modules>
 
     <dependencyManagement>
