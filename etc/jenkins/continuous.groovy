@@ -67,7 +67,7 @@ pipeline {
                     '''
                 }
                 junit '**/target/surefire-reports/*.xml'
-                recordIssues(tools: [spotBugs(useRankAsPriority: true)])
+                recordIssues(tools: [java(), javaDoc(), spotBugs(useRankAsPriority: true)])
             }
         }
 
