@@ -50,7 +50,7 @@ import javax.xml.validation.Schema;
  * {@link JAXBContext#createBinder()} or {@link JAXBContext#createBinder(Class)}.
  *
  * <p>
- * The template parameter, <code>XmlNode</code>, is the
+ * @param <XmlNode> the template parameter, <code>XmlNode</code>, is the
  * root interface/class for the XML infoset preserving representation.
  * A Binder implementation is required to minimally support
  * an <code>XmlNode</code> value of <code>org.w3c.dom.Node.class</code>.
@@ -130,6 +130,7 @@ public abstract class Binder<XmlNode> {
      *      the document/element to unmarshal XML data from.
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code node}'s XML data.
+     * @param <T> the declared type
      *
      * @return
      * <a href="JAXBElement.html">JAXBElement</a> representation
@@ -224,6 +225,8 @@ public abstract class Binder<XmlNode> {
      * have associated Jakarta XML Binding objects, and not all Jakarta XML Binding objects have
      * associated XML elements.
      *
+     * @param xmlNode the XML element
+     *
      * @return
      *      null if the specified XML node is not known to this
      *      {@link Binder}, or if it is not associated with a
@@ -243,6 +246,10 @@ public abstract class Binder<XmlNode> {
      * <pre>
      * updateXML( jaxbObject, getXMLNode(jaxbObject));
      * </pre>
+     *
+     * @param jaxbObject the XML Binding object
+     *
+     * @return the XML node associated with XML Binding object
      *
      * @throws JAXBException
      *      If any unexpected problem occurs updating corresponding XML content.
@@ -297,6 +304,8 @@ public abstract class Binder<XmlNode> {
      * <p>
      * As a side-effect, this operation updates the association between
      * XML nodes and Jakarta XML Binding objects.
+     *
+     * @param xmlNode the XML node
      *
      * @return
      *      Returns the updated Jakarta XML Binding object. Typically, this is the same
