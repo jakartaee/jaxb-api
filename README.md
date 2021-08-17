@@ -8,7 +8,7 @@
 
 # Jakarta XML Binding project
 
-[![Build Status](https://travis-ci.com/eclipse-ee4j/jaxb-api.svg?branch=master)](https://travis-ci.com/eclipse-ee4j/jaxb-api)
+[![Build Status](https://travis-ci.com/eclipse-ee4j/jaxb-api.svg?branch=master)](https://github.com/eclipse-ee4j/jaxb-api/actions/workflows)
 [![Jakarta Staging (Snapshots)](https://img.shields.io/nexus/s/https/jakarta.oss.sonatype.org/jakarta.xml.bind/jakarta.xml.bind-api.svg)](https://jakarta.oss.sonatype.org/content/repositories/staging/jakarta/xml/bind/jakarta.xml.bind-api/)
 
 The Jakarta XML Binding provides an API and tools that automate the mapping
