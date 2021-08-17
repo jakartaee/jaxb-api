@@ -234,6 +234,10 @@ public abstract class JAXBContext {
      * {@link #newInstance(String,ClassLoader)} method with
      * the context class loader of the current thread.
      *
+     * @param contextPath the context path
+     *
+     * @return the new instance of a {@code JAXBContext} class
+     *
      * @throws JAXBException if an error was encountered while creating the
      *                       {@code JAXBContext} such as
      * <ol>
@@ -624,7 +628,9 @@ public abstract class JAXBContext {
      * Creates a {@code Binder} object that can be used for
      * associative/in-place unmarshalling/marshalling.
      *
-     * @param domType select the DOM API to use by passing in its DOM Node class.
+     * @param domType select the DOM API to use by passing in its DOM Node class
+     *
+     * @param <T> the DOM API type
      *
      * @return always a new valid {@code Binder} object.
      *
@@ -697,12 +703,8 @@ public abstract class JAXBContext {
             return Thread.currentThread().getContextClassLoader();
         } else {
             return java.security.AccessController.doPrivileged(
-                    new java.security.PrivilegedAction<ClassLoader>() {
-                        @Override
-                        public ClassLoader run() {
-                            return Thread.currentThread().getContextClassLoader();
-                        }
-                    });
+                    (java.security.PrivilegedAction<ClassLoader>) ()
+                            -> Thread.currentThread().getContextClassLoader());
         }
     }
 

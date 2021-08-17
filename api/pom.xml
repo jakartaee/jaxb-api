@@ -27,6 +27,7 @@
     <properties>
         <config.dir>${project.basedir}/../etc/config</config.dir>
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
+        <spotbugs.exclude>${project.basedir}/../etc/spotbugs-exclude.xml</spotbugs.exclude>
     </properties>
 
     <dependencies>
@@ -61,18 +62,6 @@
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                         <shortRevisionLength>7</shortRevisionLength>
                         <revisionOnScmFailure>false</revisionOnScmFailure>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>com.github.spotbugs</groupId>
-                    <artifactId>spotbugs-maven-plugin</artifactId>
-                    <configuration>
-                        <threshold>${spotbugs.threshold}</threshold>
-                        <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
-                        <excludeFilterFile>
-                            ${spotbugs.exclude}
-                        </excludeFilterFile>
-                        <fork>true</fork>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -207,6 +196,8 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                     </compilerArgs>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
                 </configuration>
                 <executions>
                     <execution>
@@ -280,6 +271,23 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <configuration>
+                    <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+                    <fork>true</fork>
+                    <excludeFilterFile>${spotbugs.exclude}</excludeFilterFile>
+                    <failThreshold>High</failThreshold>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

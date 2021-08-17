@@ -540,6 +540,8 @@ public interface Unmarshaller {
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code node}'s XML data.
      *
+     * @param <T> the XML Binding mapped class
+     *
      * @return <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a> representation of {@code node}
      *
      * @throws JAXBException
@@ -629,6 +631,9 @@ public interface Unmarshaller {
      *        only required to support SAXSource, DOMSource, and StreamSource)
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code source}'s xml root element
+     *
+     * @param <T> the XML Binding mapped class
+     *
      * @return Java content rooted by <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a>
      *
      * @throws JAXBException
@@ -700,6 +705,8 @@ public interface Unmarshaller {
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code reader}'s START_ELEMENT XML data.
      *
+     * @param <T> the XML Binding mapped class
+     *
      * @return   content tree rooted by <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a> representation
      *
      * @throws JAXBException
@@ -770,6 +777,8 @@ public interface Unmarshaller {
      *      The parser to be read.
      * @param declaredType
      *      appropriate Jakarta XML Binding mapped class to hold {@code reader}'s START_ELEMENT XML data.
+     *
+     * @param <T> the XML Binding mapped class
      *
      * @return   content tree rooted by <a href="#unmarshalDeclaredTypeReturn">JAXBElement</a> representation
      *
@@ -912,6 +921,10 @@ public interface Unmarshaller {
      * <p>
      * This is a convenience method that invokes {@code setAdapter(adapter.getClass(),adapter);}.
      *
+     * @param adapter the configured instance of {@link XmlAdapter}
+     *
+     * @param <A> the type of {@link XmlAdapter}
+     *
      * @see #setAdapter(Class,XmlAdapter)
      * @throws IllegalArgumentException
      *      if the adapter parameter is null.
@@ -942,6 +955,9 @@ public interface Unmarshaller {
      * @param adapter
      *      The instance of the adapter to be used. If null, it will un-register
      *      the current adapter set for this type.
+     *
+     * @param <A> the type of the adapter
+     *
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
@@ -952,8 +968,18 @@ public interface Unmarshaller {
 
     /**
      * Gets the adapter associated with the specified type.
-     *
      * This is the reverse operation of the {@link #setAdapter} method.
+     *
+     *
+     * @param type
+     *      The type of the adapter. The specified instance will be used when
+     *      {@link jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter#value()}
+     *      refers to this type.
+     *
+     * @param <A> the type of the adapter
+     *
+     * @return
+     *      The adapter associated with the specified type.
      *
      * @throws IllegalArgumentException
      *      if the type parameter is null.
@@ -964,11 +990,12 @@ public interface Unmarshaller {
     public <A extends XmlAdapter<?, ?>> A getAdapter( Class<A> type );
 
     /**
-     * <p>Associate a context that resolves cid's, content-id URIs, to
-     * binary data passed as attachments.</p>
-     * <p>Unmarshal time validation, enabled via {@link #setSchema(Schema)},
+     * Associate a context that resolves cid's, content-id URIs, to
+     * binary data passed as attachments.
+     * Unmarshal time validation, enabled via {@link #setSchema(Schema)},
      * must be supported even when unmarshaller is performing XOP processing.
-     * </p>
+     *
+     * @param au the attachment unmarshaller to be set
      *
      * @throws IllegalStateException if attempt to concurrently call this
      *                               method during a unmarshal operation.

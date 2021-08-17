@@ -634,6 +634,12 @@ public interface Marshaller {
      * <p>
      * This is a convenience method that invokes {@code setAdapter(adapter.getClass(),adapter);}.
      *
+     * @param adapter
+     *      The instance of the adapter to be used. If null, it will un-register
+     *      the current adapter set for this type.
+     *
+     * @param <A> the type of the adapter
+     *
      * @see #setAdapter(Class,XmlAdapter)
      * @throws IllegalArgumentException
      *      if the adapter parameter is null.
@@ -664,6 +670,8 @@ public interface Marshaller {
      * @param adapter
      *      The instance of the adapter to be used. If null, it will un-register
      *      the current adapter set for this type.
+     * @param <A> the type of the adapter
+     *
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
@@ -674,8 +682,17 @@ public interface Marshaller {
 
     /**
      * Gets the adapter associated with the specified type.
-     *
      * This is the reverse operation of the {@link #setAdapter} method.
+     *
+     * @param type
+     *      The type of the adapter. The specified instance will be used when
+     *      {@link jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter#value()}
+     *      refers to this type.
+     *
+     * @param <A> the type of the adapter
+     *
+     * @return
+     *      The adapter associated with the specified type.
      *
      * @throws IllegalArgumentException
      *      if the type parameter is null.
@@ -687,10 +704,12 @@ public interface Marshaller {
 
 
     /**
-     * <p>Associate a context that enables binary data within an XML document
+     * Associate a context that enables binary data within an XML document
      * to be transmitted as XML-binary optimized attachment.
      * The attachment is referenced from the XML document content model
      * by content-id URIs(cid) references stored within the xml document.
+     *
+     * @param am the attachment marshaller to be set
      *
      * @throws IllegalStateException if attempt to concurrently call this
      *                               method during a marshal operation.
