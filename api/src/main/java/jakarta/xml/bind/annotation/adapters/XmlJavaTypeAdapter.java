@@ -81,7 +81,7 @@ public @interface XmlJavaTypeAdapter {
      * Points to the class that converts a value type to a bound type or vice versa.
      * See {@link XmlAdapter} for more details.
      */
-    Class<? extends XmlAdapter<?, ?>> value();
+    Class<? extends XmlAdapter> value();
 
     /**
      * If this annotation is used at the package level, then value of
