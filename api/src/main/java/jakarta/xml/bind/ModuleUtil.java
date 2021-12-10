@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  */
 class ModuleUtil {
 
-    private static final Logger logger = Logger.getLogger("jakarta.xml.bind");
+    private static final Logger LOGGER = Logger.getLogger("jakarta.xml.bind");
 
     /**
      * Resolves classes from context path.
@@ -61,8 +61,8 @@ class ModuleUtil {
             }
         }
 
-        if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "Resolved classes from context path: {0}", classes);
+        if (LOGGER.isLoggable(Level.FINE)) {
+            LOGGER.log(Level.FINE, "Resolved classes from context path: {0}", classes);
         }
         return classes.toArray(new Class<?>[]{});
     }
@@ -129,8 +129,8 @@ class ModuleUtil {
             }
             //propagate openness to impl module
             classModule.addOpens(packageName, implModule);
-            if (logger.isLoggable(Level.FINE)) {
-                logger.log(Level.FINE, "Propagating openness of package {0} in {1} to {2}.",
+            if (LOGGER.isLoggable(Level.FINE)) {
+                LOGGER.log(Level.FINE, "Propagating openness of package {0} in {1} to {2}.",
                         new String[]{ packageName, classModule.getName(), implModule.getName() });
             }
         }
