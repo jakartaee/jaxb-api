@@ -22,8 +22,10 @@ package jakarta.xml.bind;
  * @since 1.6, JAXB 1.0
  */
 public class PropertyException extends JAXBException {
-    
-    /** 
+
+    private static final long serialVersionUID = 3159963351607157477L;
+
+    /**
      * Construct a PropertyException with the specified detail message.  The 
      * errorCode and linkedException will default to null.
      *

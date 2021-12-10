@@ -67,11 +67,6 @@
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <configuration>
-                        <additionalOptions>
-                            <additionalOptions>--add-modules</additionalOptions>
-                            <additionalOptions>java.desktop</additionalOptions>
-                        </additionalOptions>
-                        <release>11</release>
                         <nodeprecated>false</nodeprecated>
                         <notimestamp>true</notimestamp>
                         <nosince>true</nosince>
@@ -146,21 +141,6 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                             </resources>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>add-mr-resource</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>add-resource</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}/src/main/mr-jar</directory>
-                                    <targetPath>META-INF/versions/9</targetPath>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -191,41 +171,12 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                     </compilerArgs>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>default-compile-mr</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <release>9</release>
-                            <compileSourceRoots>
-                                <compileSourceRoot>${project.basedir}/src/main/mr-jar</compileSourceRoot>
-                            </compileSourceRoots>
-                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/9</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>base-compile</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <release>8</release>
-                            <excludes>
-                                <exclude>module-info.java</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -244,9 +195,8 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                                 Jakarta XML Binding API ${spec.version} Design Specification
                             </Bundle-Description>
                             <Extension-Name>${extension.name}</Extension-Name>
-                            <Implementation-Version>${spec.version}.${impl.version}</Implementation-Version>
+                            <Implementation-Version>${project.version}</Implementation-Version>
                             <Specification-Version>${spec.version}</Specification-Version>
-                            <Export-Package>${api.package}.*; version=${spec.version}.${impl.version}</Export-Package>
                             <Import-Package>
                                 !org.glassfish.hk2.osgiresourcelocator,
                                 *
@@ -255,7 +205,6 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                             <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
                             <Specification-Vendor>${vendor.name}</Specification-Vendor>
                             <Implementation-Build-Id>${buildNumber}</Implementation-Build-Id>
-                            <Multi-Release>true</Multi-Release>
                         </instructions>
                     </configuration>
                     </execution>
@@ -276,7 +225,6 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <configuration>
-                    <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                     <fork>true</fork>
                     <excludeFilterFile>${spotbugs.exclude}</excludeFilterFile>
                     <failThreshold>High</failThreshold>

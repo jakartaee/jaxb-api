@@ -78,6 +78,8 @@
         <spotbugs.threshold>Low</spotbugs.threshold>
         <spotbugs.version>4.3.0</spotbugs.version>
 
+        <maven.compiler.release>11</maven.compiler.release>
+
         <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
         <release.spec.date>Jul 2017</release.spec.date>
         <api.package>jakarta.xml.bind</api.package>

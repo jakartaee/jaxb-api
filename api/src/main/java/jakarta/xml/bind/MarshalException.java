@@ -27,6 +27,8 @@ package jakarta.xml.bind;
  */
 public class MarshalException extends JAXBException {
 
+    private static final long serialVersionUID = 1570397297836071517L;
+
     /** 
      * Construct a MarshalException with the specified detail message.  The 
      * errorCode and linkedException will default to null.

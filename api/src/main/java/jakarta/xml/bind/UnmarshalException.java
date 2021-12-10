@@ -29,6 +29,8 @@ package jakarta.xml.bind;
  */
 public class UnmarshalException extends JAXBException {
 
+    private static final long serialVersionUID = 6121932693435295453L;
+
     /** 
      * Construct an UnmarshalException with the specified detail message.  The 
      * errorCode and linkedException will default to null.
