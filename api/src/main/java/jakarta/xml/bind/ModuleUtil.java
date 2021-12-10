@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  */
 class ModuleUtil {
 
-    private static Logger logger = Logger.getLogger("jakarta.xml.bind");
+    private static final Logger logger = Logger.getLogger("jakarta.xml.bind");
 
     /**
      * Resolves classes from context path.
