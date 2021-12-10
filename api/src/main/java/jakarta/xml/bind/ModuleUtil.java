@@ -42,9 +42,8 @@ class ModuleUtil {
         for (String pkg : tokens){
 
             // look for ObjectFactory and load it
-            final Class<?> o;
             try {
-                o = classLoader.loadClass(pkg+".ObjectFactory");
+                final Class<?> o = classLoader.loadClass(pkg+".ObjectFactory");
                 classes.add(o);
                 continue;
             } catch (ClassNotFoundException e) {
