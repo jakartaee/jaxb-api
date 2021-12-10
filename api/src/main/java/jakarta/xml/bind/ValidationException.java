@@ -26,6 +26,8 @@ package jakarta.xml.bind;
  */
 public class ValidationException extends JAXBException {
 
+    private static final long serialVersionUID = 2206436657505193108L;
+
     /** 
      * Construct an ValidationException with the specified detail message.  The 
      * errorCode and linkedException will default to null.

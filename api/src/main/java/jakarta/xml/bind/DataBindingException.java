@@ -22,6 +22,9 @@ package jakarta.xml.bind;
  * @since 1.6, JAXB 2.1
  */
 public class DataBindingException extends RuntimeException {
+
+    private static final long serialVersionUID = 4743686626270704879L;
+
     public DataBindingException(String message, Throwable cause) {
         super(message, cause);
     }
