@@ -431,7 +431,7 @@ public @interface XmlType {
      * signal that either factory mehod is not used or
      * that it's in the class with this {@link XmlType} itself.
      */
-    static final class DEFAULT {
+    final class DEFAULT {
         private DEFAULT() {}
     }
 

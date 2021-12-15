@@ -701,7 +701,7 @@ public @interface XmlSchemaType {
     String name();
     String namespace() default "http://www.w3.org/2001/XMLSchema";
     Class type() default DEFAULT.class;
-    static final class DEFAULT {}
+    final class DEFAULT {}
 }
 ----
 
@@ -838,7 +838,7 @@ public @interface XmlType {
     String[] propOrder() default {""};
     String namespace() default "##default";
     Class factoryClass() default DEFAULT.class;
-    static final class DEFAULT {};
+    final class DEFAULT {};
     String factoryMethod() default "";
 }
 ----
@@ -1264,7 +1264,7 @@ public @interface XmlType {
     String namespace() default "##default";
     String[] propOrder() default {""};
     Class factoryClass() default DEFAULT.class;
-    static final class DEFAULT {};
+    final class DEFAULT {};
     String factoryMethod() default "";
 }
 ----
@@ -2488,7 +2488,7 @@ public @interface XmlElementDecl {
 
     //XML local name of a substitution group's head element.
     String substitutionHeadName() default "";
-    public final class GLOBAL {}
+    final class GLOBAL {}
 }
 ----
 
@@ -2593,7 +2593,7 @@ For detailed information, see the javadocs for
 public @interface XmlJavaTypeAdapter {
     Class<? extends XmlAdapter> value();
     Class type() default DEFAULT.class;
-    static final class DEFAULT {}
+    final class DEFAULT {}
 }
 ----
 

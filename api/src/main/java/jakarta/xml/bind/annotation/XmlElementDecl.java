@@ -198,7 +198,7 @@ public @interface XmlElementDecl {
      * Used in {@link XmlElementDecl#scope()} to
      * signal that the declaration is in the global scope.
      */
-    public final class GLOBAL {
+    final class GLOBAL {
         private GLOBAL() {}
     }
 }
