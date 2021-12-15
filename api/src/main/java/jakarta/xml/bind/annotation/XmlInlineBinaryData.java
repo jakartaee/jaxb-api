@@ -27,7 +27,7 @@ import jakarta.activation.DataHandler;
  *
  * <p>
  * When XOP encoding is enabled as described in {@link AttachmentMarshaller#isXOPPackage()},
- * this annotation disables datatypes such as {@link java.awt.Image} or {@link Source}
+ * this annotation disables datatypes such as {@code java.awt.Image} or {@link Source}
  * or {@code byte[]} that are bound to base64-encoded binary from being considered for
  * XOP encoding. If a Jakarta XML Binding property is annotated with this annotation or if
  * the Jakarta XML Binding property's base type is annotated with this annotation, 

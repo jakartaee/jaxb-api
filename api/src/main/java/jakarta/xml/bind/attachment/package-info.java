@@ -13,7 +13,6 @@
  * enables the interpretation and creation of optimized binary data
  * within an MIME-based package format.
  * <p>
- * <p>
  * Soap MTOM[1], XOP([2][3]) and WS-I AP[4] standardize approaches to
  * optimized transmission of binary datatypes as an attachment.
  * To optimally support these standards within a message passing
@@ -23,13 +22,10 @@
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
  *
  * <h2>Package Specification</h2>
- * <p>
  * <ul>
  * <li><a href="https://projects.eclipse.org/projects/ee4j.jaxb">Jakarta XML Binding Specification project</a>
  * </ul>
- * <p>
  * <h2>Related Standards</h2>
- * <p>
  * <ul>
  * <li><a href="http://www.w3.org/TR/2004/WD-soap12-mtom-20040608/">[1]SOAP Message Transmission Optimization Mechanism</a> </li>
  * <li><a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">[2]XML-binary Optimized Packaging</a></li>

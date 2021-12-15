@@ -289,7 +289,7 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
@@ -313,7 +313,7 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
@@ -340,7 +340,7 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
@@ -364,7 +364,7 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
@@ -389,7 +389,7 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
@@ -413,7 +413,7 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
@@ -437,7 +437,7 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
@@ -477,14 +477,16 @@ public final class JAXB {
      *      the body. If this object has {@link XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
-     *      the root tag name is {@link java.beans.Introspector#decapitalize(String) infered} from
+     *      the root tag name is inferred from
      *      {@link Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
      *      Represents the receiver of XML. Objects of the following types are allowed.
      *
-     *      <table><tr>
+     *      <table>
+     *          <caption>Allowed Objects</caption>
+     *      <tr>
      *          <th>Type</th>
      *          <th>Operation</th>
      *      </tr><tr>
@@ -552,14 +554,14 @@ public final class JAXB {
         // XXX - behaviour of this method must be same as of Introspector.decapitalize
         // which is not used to avoid dependency on java.desktop
         String simpleName = clazz.getSimpleName();
-        if (simpleName == null || simpleName.isEmpty()) {
+        if (simpleName.isEmpty()) {
             return simpleName;
         }
         if (simpleName.length() > 1 && Character.isUpperCase(simpleName.charAt(1))
                 && Character.isUpperCase(simpleName.charAt(0))) {
             return simpleName;
         }
-        char chars[] = simpleName.toCharArray();
+        char[] chars = simpleName.toCharArray();
         chars[0] = Character.toLowerCase(chars[0]);
         return new String(chars);
     }

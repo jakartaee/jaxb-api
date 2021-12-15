@@ -12,21 +12,16 @@
  * Provides a runtime binding framework for client applications including
  * unmarshalling, marshalling, and validation capabilities.
  * <p>
- * <p>
  * <code>JAXBContext</code> is the client-entry point to the runtime binding
  * framework.
- * <p>
  * <p>
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
  *
  * <h2>Package Specification</h2>
- * <p>
  * <ul>
  * <li><a href="https://projects.eclipse.org/projects/ee4j.jaxb">Jakarta XML Binding Specification project</a>
  * </ul>
- * <p>
  * <h2>Related Documentation</h2>
- * <p>
  * For overviews, tutorials, examples, guides, and tool documentation,
  * please see:
  * <ul>

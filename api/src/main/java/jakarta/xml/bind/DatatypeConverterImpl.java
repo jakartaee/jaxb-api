@@ -75,7 +75,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     /**
-     * Faster but less robust String->int conversion.
+     * Faster but less robust {@code String->int} conversion.
      *
      * Note that:
      * <ol>

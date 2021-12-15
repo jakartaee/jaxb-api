@@ -81,6 +81,7 @@ public @interface XmlJavaTypeAdapter {
      * Points to the class that converts a value type to a bound type or vice versa.
      * See {@link XmlAdapter} for more details.
      */
+    @SuppressWarnings({"rawtypes"})
     Class<? extends XmlAdapter> value();
 
     /**

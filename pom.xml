@@ -76,12 +76,12 @@
         <copyright.update>false</copyright.update>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.3.0</spotbugs.version>
+        <spotbugs.version>4.5.0.0</spotbugs.version>
 
         <maven.compiler.release>11</maven.compiler.release>
 
         <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
-        <release.spec.date>Jul 2017</release.spec.date>
+        <release.spec.date>Jan 2022</release.spec.date>
         <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>4.0</spec.version>
@@ -110,7 +110,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
-                    <version>1.4</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -132,7 +132,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>

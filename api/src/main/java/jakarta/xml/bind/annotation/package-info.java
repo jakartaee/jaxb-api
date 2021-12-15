@@ -16,7 +16,6 @@
  * <h2>Package Specification</h2>
  * <p>The following table shows the Jakarta XML Binding mapping annotations
  * that can be associated with each program element. </p>
- * <p>
  * <table class="striped">
  *   <caption>Annotations for customizing Java program elements to XML Schema mapping</caption>
  *   <thead>
@@ -143,7 +142,6 @@
  * <b>Namespace prefixes</b>
  * <p>The following namespace prefixes are used in the XML Schema
  * fragments in this package.
- * <p>
  * <table class="striped">
  *   <caption>XML Schema fragments namespace prefixes</caption>
  *   <thead>
