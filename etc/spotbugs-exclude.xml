@@ -22,15 +22,6 @@
 
     <!--
     TODO: reevaluate for MR
-    As designed, impossible to change, maybe with MR.
-    -->
-    <Match>
-        <Class name="jakarta.xml.bind.DatatypeConverterImpl"/>
-        <Bug pattern="NP_BOOLEAN_RETURN_NULL"/>
-    </Match>
-
-    <!--
-    TODO: reevaluate for MR
     As designed, impossible to change, maybe with MR?
     -->
     <Match>
