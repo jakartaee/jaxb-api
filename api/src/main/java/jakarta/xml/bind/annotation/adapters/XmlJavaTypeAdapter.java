@@ -97,7 +97,7 @@ public @interface XmlJavaTypeAdapter {
      * of the field, property, parameter or the class.
      */
 
-    static final class DEFAULT {
+    final class DEFAULT {
         private DEFAULT() {}
     }
 

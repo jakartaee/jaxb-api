@@ -303,21 +303,21 @@ public interface Marshaller {
      * The name of the property used to specify the output encoding in
      * the marshalled XML data.
      */
-    public static final String JAXB_ENCODING =
+    String JAXB_ENCODING =
         "jaxb.encoding";
 
     /**
      * The name of the property used to specify whether or not the marshalled
      * XML data is formatted with linefeeds and indentation.
      */
-    public static final String JAXB_FORMATTED_OUTPUT =
+    String JAXB_FORMATTED_OUTPUT =
         "jaxb.formatted.output";
 
     /**
      * The name of the property used to specify the xsi:schemaLocation
      * attribute value to place in the marshalled XML output.
      */
-    public static final String JAXB_SCHEMA_LOCATION =
+    String JAXB_SCHEMA_LOCATION =
         "jaxb.schemaLocation";
 
     /**
@@ -325,14 +325,14 @@ public interface Marshaller {
      * xsi:noNamespaceSchemaLocation attribute value to place in the marshalled
      * XML output.
      */
-    public static final String JAXB_NO_NAMESPACE_SCHEMA_LOCATION =
+    String JAXB_NO_NAMESPACE_SCHEMA_LOCATION =
         "jaxb.noNamespaceSchemaLocation";
 
     /**
      * The name of the property used to specify whether or not the marshaller
      * will generate document level events (ie calling startDocument or endDocument).
      */
-    public static final String JAXB_FRAGMENT =
+    String JAXB_FRAGMENT =
         "jaxb.fragment";
 
     /**
@@ -362,7 +362,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
-    public void marshal( Object jaxbElement, javax.xml.transform.Result result )
+    void marshal(Object jaxbElement, javax.xml.transform.Result result)
         throws JAXBException;
 
     /**
@@ -384,7 +384,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
-    public void marshal( Object jaxbElement, java.io.OutputStream os )
+    void marshal(Object jaxbElement, java.io.OutputStream os)
         throws JAXBException;
 
     /**
@@ -407,7 +407,7 @@ public interface Marshaller {
      *      If any of the method parameters are null
      * @since 1.6, JAXB 2.1
      */
-    public void marshal( Object jaxbElement, File output )
+    void marshal(Object jaxbElement, File output)
         throws JAXBException;
 
     /**
@@ -429,7 +429,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
-    public void marshal( Object jaxbElement, java.io.Writer writer )
+    void marshal(Object jaxbElement, java.io.Writer writer)
         throws JAXBException;
 
     /**
@@ -451,7 +451,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
-    public void marshal( Object jaxbElement, org.xml.sax.ContentHandler handler )
+    void marshal(Object jaxbElement, org.xml.sax.ContentHandler handler)
         throws JAXBException;
 
     /**
@@ -477,7 +477,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      If any of the method parameters are null
      */
-    public void marshal( Object jaxbElement, org.w3c.dom.Node node )
+    void marshal(Object jaxbElement, org.w3c.dom.Node node)
         throws JAXBException;
 
     /**
@@ -501,7 +501,7 @@ public interface Marshaller {
      *      If any of the method parameters are null
      * @since 1.6, JAXB 2.0
      */
-    public void marshal( Object jaxbElement, javax.xml.stream.XMLStreamWriter writer )
+    void marshal(Object jaxbElement, javax.xml.stream.XMLStreamWriter writer)
         throws JAXBException;
 
     /**
@@ -525,7 +525,7 @@ public interface Marshaller {
      *      If any of the method parameters are null
      * @since 1.6, JAXB 2.0
      */
-    public void marshal( Object jaxbElement, javax.xml.stream.XMLEventWriter writer )
+    void marshal(Object jaxbElement, javax.xml.stream.XMLEventWriter writer)
         throws JAXBException;
 
     /**
@@ -551,7 +551,7 @@ public interface Marshaller {
      *      If any unexpected problem occurs
      *
      */
-    public org.w3c.dom.Node getNode( java.lang.Object contentTree )
+    org.w3c.dom.Node getNode(java.lang.Object contentTree)
         throws JAXBException;
 
     /**
@@ -572,7 +572,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      If the name parameter is null
      */
-    public void setProperty( String name, Object value )
+    void setProperty(String name, Object value)
         throws PropertyException;
 
     /**
@@ -592,7 +592,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      If the name parameter is null
      */
-    public Object getProperty( String name ) throws PropertyException;
+    Object getProperty(String name) throws PropertyException;
 
     /**
      * Allow an application to register a validation event handler.
@@ -611,7 +611,7 @@ public interface Marshaller {
      * @throws JAXBException if an error was encountered while setting the
      *         event handler
      */
-    public void setEventHandler( ValidationEventHandler handler )
+    void setEventHandler(ValidationEventHandler handler)
         throws JAXBException;
 
     /**
@@ -623,7 +623,7 @@ public interface Marshaller {
      * @throws JAXBException if an error was encountered while getting the
      *         current event handler
      */
-    public ValidationEventHandler getEventHandler()
+    ValidationEventHandler getEventHandler()
         throws JAXBException;
 
 
@@ -647,7 +647,7 @@ public interface Marshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public <A extends XmlAdapter<?, ?>> void setAdapter( A adapter );
+    <A extends XmlAdapter<?, ?>> void setAdapter(A adapter);
 
     /**
      * Associates a configured instance of {@link XmlAdapter} with this marshaller.
@@ -678,7 +678,7 @@ public interface Marshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public <A extends XmlAdapter<?, ?>> void setAdapter( Class<A> type, A adapter );
+    <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter);
 
     /**
      * Gets the adapter associated with the specified type.
@@ -700,7 +700,7 @@ public interface Marshaller {
      *      if invoked agains a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
-    public <A extends XmlAdapter<?, ?>> A getAdapter( Class<A> type );
+    <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
 
 
     /**
@@ -735,7 +735,7 @@ public interface Marshaller {
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
-    public void setSchema( Schema schema );
+    void setSchema(Schema schema);
 
     /**
      * Get the JAXP {@link javax.xml.validation.Schema Schema} object
@@ -750,7 +750,7 @@ public interface Marshaller {
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
-    public Schema getSchema();
+    Schema getSchema();
 
     /**
      * <p>
@@ -771,7 +771,7 @@ public interface Marshaller {
      * @see Marshaller#getListener()
      * @since 1.6, JAXB 2.0
      */
-    public static abstract class Listener {
+    abstract class Listener {
 
         /**
          * Do-nothing constructor for the derived classes.
@@ -819,7 +819,7 @@ public interface Marshaller {
      * @param listener an instance of a class that implements {@link Listener}
      * @since 1.6, JAXB 2.0
      */
-    public void setListener(Listener listener);
+    void setListener(Listener listener);
 
     /**
      * <p>Return {@link Listener} registered with this {@link Marshaller}.
@@ -828,5 +828,5 @@ public interface Marshaller {
      *         if no Listener is registered with this Marshaller.
      * @since 1.6, JAXB 2.0
      */
-    public Listener getListener();
+    Listener getListener();
 }

@@ -80,7 +80,7 @@ public interface ValidationEventHandler {
      *         {@code ValidationException}, or {@code MarshalException}.
      * @throws IllegalArgumentException if the event object is null.
      */
-    public boolean handleEvent( ValidationEvent event );
+    boolean handleEvent(ValidationEvent event);
     
 }
 

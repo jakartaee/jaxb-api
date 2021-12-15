@@ -250,7 +250,7 @@ public @interface XmlElementRef {
      * signal that the type be inferred from the signature
      * of the property.
      */
-    static final class DEFAULT {
+    final class DEFAULT {
         private DEFAULT() {}
     }
 

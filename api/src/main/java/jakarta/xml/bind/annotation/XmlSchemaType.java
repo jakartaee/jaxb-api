@@ -89,7 +89,7 @@ public @interface XmlSchemaType {
      * of the property.
      */
 
-    static final class DEFAULT {
+    final class DEFAULT {
         private DEFAULT() {};
     }
 

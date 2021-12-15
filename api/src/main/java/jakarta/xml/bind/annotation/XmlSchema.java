@@ -190,5 +190,5 @@ public @interface XmlSchema {
      */
     // the actual value is chosen because ## is not a valid
     // sequence in xs:anyURI.
-    static final String NO_LOCATION = "##generate";
+    String NO_LOCATION = "##generate";
 }

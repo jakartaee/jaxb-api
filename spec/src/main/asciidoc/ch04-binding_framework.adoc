@@ -477,11 +477,11 @@ It provides the basic marshalling methods:
 [source,java]
 ----
 interface Marshaller {
-    static final string JAXB_ENCODING;
-    static final string JAXB_FORMATTED_OUTPUT;
-    static final string JAXB_SCHEMA_LOCATION;
-    static final string JAXB_NO_NAMESPACE_SCHEMA_LOCATION;
-    static final string JAXB_FRAGMENT;
+    string JAXB_ENCODING;
+    string JAXB_FORMATTED_OUTPUT;
+    string JAXB_SCHEMA_LOCATION;
+    string JAXB_NO_NAMESPACE_SCHEMA_LOCATION;
+    string JAXB_FRAGMENT;
 
     <PROTENTIALLY MORE PROPERTIES...>
 
