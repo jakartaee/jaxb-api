@@ -13,6 +13,35 @@
 <FindBugsFilter>
 
     <!--
+    TODO: reevaluate for MR
+    As designed, impossible to change, maybe with MR.
+    -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP"/>
+        <Or>
+            <Class name="~.*\.*Exception"/>
+            <Class name="~.*\.W3CDomHandler"/>
+            <Class name="~.*\.ValidationEventImpl"/>
+            <Class name="~.*\.ValidationEventLocatorImpl"/>
+        </Or>
+    </Match>
+
+    <!--
+    TODO: reevaluate for MR
+    As designed, impossible to change, maybe with MR.
+    -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+        <Or>
+            <Class name="~.*\.*Exception"/>
+            <Class name="~.*\.W3CDomHandler"/>
+            <Class name="~.*\.ValidationEventImpl"/>
+            <Class name="~.*\.ValidationEventLocatorImpl"/>
+            <Class name="jakarta.xml.bind.util.JAXBSource"/>
+        </Or>
+    </Match>
+
+    <!--
     As designed.
     -->
     <Match>
@@ -28,14 +57,5 @@
         <Class name="jakarta.xml.bind.annotation.adapters.HexBinaryAdapter"/>
         <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS"/>
     </Match>
-
-    <!--
-      https://github.com/eclipse-ee4j/jaxb-api/issues/78
-    -->
-    <Match>
-        <Class name="jakarta.xml.bind.ModuleUtil"/>
-        <Bug pattern="DM_STRING_TOSTRING"/>
-    </Match>
-
 
 </FindBugsFilter>

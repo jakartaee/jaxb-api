@@ -24,7 +24,7 @@ import javax.xml.transform.Source;
  *
  * <p>
  * This annotation is used in conjunction with datatypes such as
- * {@link java.awt.Image} or {@link Source} that are bound to base64-encoded binary in XML.
+ * {@code java.awt.Image} or {@link Source} that are bound to base64-encoded binary in XML.
  *
  * <p>
  * If a property that has this annotation has a sibling property bound to

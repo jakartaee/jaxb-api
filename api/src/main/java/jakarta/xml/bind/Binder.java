@@ -49,7 +49,6 @@ import javax.xml.validation.Schema;
  * A Binder instance is created using the factory method
  * {@link JAXBContext#createBinder()} or {@link JAXBContext#createBinder(Class)}.
  *
- * <p>
  * @param <XmlNode> the template parameter, <code>XmlNode</code>, is the
  * root interface/class for the XML infoset preserving representation.
  * A Binder implementation is required to minimally support

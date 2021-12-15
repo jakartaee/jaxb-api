@@ -367,43 +367,6 @@ class ContextFinder {
         return value;
     }
 
-    private static Properties loadJAXBProperties(URL url) throws JAXBException {
-
-        try {
-            Properties props;
-            logger.log(Level.FINE, "loading props from {0}", url);
-            props = new Properties();
-            InputStream is = url.openStream();
-            props.load(is);
-            is.close();
-            return props;
-        } catch (IOException ioe) {
-            logger.log(Level.FINE, "Unable to load " + url.toString(), ioe);
-            throw new JAXBException(ioe.toString(), ioe);
-        }
-    }
-
-    /**
-     * If run on JPMS package containing resource must be open unconditionally.
-     *
-     * @param classLoader classloader to load resource with
-     * @param resourceName qualified name of the resource
-     * @return resource url if found
-     */
-    private static URL getResourceUrl(ClassLoader classLoader, String resourceName) {
-        URL url;
-        if (classLoader == null)
-            url = ClassLoader.getSystemResource(resourceName);
-        else
-            url = classLoader.getResource(resourceName);
-        return url;
-    }
-
-    private static URL getResourceUrl(Class<?> clazz, String resourceName) {
-        return clazz.getResource(resourceName);
-    }
-
-
     /**
      * Search the given ClassLoader for an instance of the specified class and
      * return a string representation of the URL that points to the resource.

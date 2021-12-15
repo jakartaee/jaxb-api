@@ -67,6 +67,9 @@
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <configuration>
+                        <failOnWarnings>true</failOnWarnings>
+                        <doclint>all,-missing</doclint>
+                        <quiet>true</quiet>
                         <nodeprecated>false</nodeprecated>
                         <notimestamp>true</notimestamp>
                         <nosince>true</nosince>
@@ -173,6 +176,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                 <configuration>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
+                        <arg>-Xdoclint:all,-missing</arg>
                     </compilerArgs>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
