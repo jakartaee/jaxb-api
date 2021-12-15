@@ -253,13 +253,12 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     @Override
     public boolean parseBoolean(String lexicalXSDBoolean) {
-        Boolean b = _parseBoolean(lexicalXSDBoolean);
-        return (b == null) ? false : b;
+        return _parseBoolean(lexicalXSDBoolean);
     }
 
     public static Boolean _parseBoolean(CharSequence literal) {
         if (literal == null) {
-            return null;
+            throw new IllegalArgumentException("String \"null\" is not valid boolean value.");
         }
 
         int i = 0;
@@ -268,7 +267,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         boolean value = false;
 
         if (literal.length() <= 0) {
-            return null;
+            throw new IllegalArgumentException("String \"\" is not valid boolean value.");
         }
 
         do {
@@ -293,9 +292,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                 if (strIndex == 3) {
                     value = true;
                 } else {
-                    return false;
+                    throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
                 }
-//                    throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
 
                 break;
             case 'f':
@@ -308,9 +306,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                 if (strIndex == 4) {
                     value = false;
                 } else {
-                    return false;
+                    throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
                 }
-//                    throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
 
                 break;
         }
@@ -323,10 +320,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
         if (i == len) {
             return value;
-        } else {
-            return null;
         }
-//            throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
+        throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
     }
 
     @Override
