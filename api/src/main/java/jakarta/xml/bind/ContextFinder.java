@@ -310,12 +310,11 @@ class ContextFinder {
             return obj.createContext(contextPath, classLoader, properties);
         }
 
-        @SuppressWarnings({ "rawtypes", "unchecked" })
-        Iterable<Class<?>> ctxFactories = (Iterable) ServiceLoaderUtil.lookupsUsingOSGiServiceLoader(
-                jakarta.xml.bind.JAXBContext.JAXB_CONTEXT_FACTORY, logger);
+        Iterable<Class<? extends JAXBContextFactory>> ctxFactories = ServiceLoaderUtil.lookupsUsingOSGiServiceLoader(
+                JAXBContext.JAXB_CONTEXT_FACTORY, logger);
 
         if (ctxFactories != null) {
-            for (Class<?> ctxFactory : ctxFactories) {
+            for (Class<? extends JAXBContextFactory> ctxFactory : ctxFactories) {
                 try {
                     return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
                 } catch (Throwable t) {

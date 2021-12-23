@@ -75,10 +75,10 @@ class ServiceLoaderUtil {
     }
 
     @SuppressWarnings("unchecked")
-    static Iterable<Object> lookupsUsingOSGiServiceLoader(String factoryId, Logger logger) {
+    static <T> Iterable<T> lookupsUsingOSGiServiceLoader(String factoryId, Logger logger) {
         try {
             // Use reflection to avoid having any dependency on ServiceLoader class
-            return (Iterable<Object>)
+            return (Iterable<T>)
                 Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME)
                      .getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class)
                      .invoke(null, Class.forName(factoryId));
