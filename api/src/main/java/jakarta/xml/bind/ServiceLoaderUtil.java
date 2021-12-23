@@ -10,6 +10,8 @@
 
 package jakarta.xml.bind;
 
+import static java.util.logging.Level.FINE;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -70,6 +72,25 @@ class ServiceLoaderUtil {
                 NoSuchMethodException ignored) {
 
             logger.log(Level.FINE, "Unable to find from OSGi: [" + factoryId + "]", ignored);
+            return null;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    static Iterable<Object> lookupsUsingOSGiServiceLoader(String factoryId, Logger logger) {
+        try {
+            // Use reflection to avoid having any dependency on ServiceLoader class
+            return (Iterable<Object>)
+                Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME)
+                     .getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class)
+                     .invoke(null, Class.forName(factoryId));
+
+        } catch (IllegalAccessException |
+                InvocationTargetException |
+                ClassNotFoundException |
+                NoSuchMethodException ignored) {
+
+            logger.log(FINE, ignored, () -> "Unable to find from OSGi: [" + factoryId + "]");
             return null;
         }
     }

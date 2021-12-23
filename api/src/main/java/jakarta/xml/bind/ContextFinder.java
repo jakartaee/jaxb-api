@@ -10,6 +10,9 @@
 
 package jakarta.xml.bind;
 
+import static jakarta.xml.bind.JAXBContext.JAXB_CONTEXT_FACTORY;
+import static java.util.logging.Level.FINE;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -19,6 +22,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.ConsoleHandler;
@@ -309,11 +313,18 @@ class ContextFinder {
             return obj.createContext(contextPath, classLoader, properties);
         }
 
-        Class<?> ctxFactory = (Class<?>) ServiceLoaderUtil.lookupUsingOSGiServiceLoader(
-                JAXBContext.JAXB_CONTEXT_FACTORY, logger);
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        Iterable<Class<?>> ctxFactories = (Iterable) ServiceLoaderUtil.lookupsUsingOSGiServiceLoader(
+                JAXB_CONTEXT_FACTORY, logger);
 
-        if (ctxFactory != null) {
-            return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
+        if (ctxFactories != null) {
+            for (Class<?> ctxFactory : ctxFactories) {
+                try {
+                    return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
+                } catch (Throwable t) {
+                    logger.log(FINE, t, () -> "Error instantiating provivder " + ctxFactory);
+                }
+            }
         }
 
         // else no provider found
