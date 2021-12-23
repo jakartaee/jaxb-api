@@ -243,5 +243,5 @@ schema customization @attachmentRef of <jaxb:property>, specified in
 
 .JAXB marshal/unmarshalling of optimized binary content.
 [[opbin]]
-image::images/xmlb-23.svg[image]
+image::xmlb-23.png[image]
 
