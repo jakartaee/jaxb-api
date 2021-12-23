@@ -10,9 +10,6 @@
 
 package jakarta.xml.bind;
 
-import static jakarta.xml.bind.JAXBContext.JAXB_CONTEXT_FACTORY;
-import static java.util.logging.Level.FINE;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -315,14 +312,14 @@ class ContextFinder {
 
         @SuppressWarnings({ "rawtypes", "unchecked" })
         Iterable<Class<?>> ctxFactories = (Iterable) ServiceLoaderUtil.lookupsUsingOSGiServiceLoader(
-                JAXB_CONTEXT_FACTORY, logger);
+                jakarta.xml.bind.JAXBContext.JAXB_CONTEXT_FACTORY, logger);
 
         if (ctxFactories != null) {
             for (Class<?> ctxFactory : ctxFactories) {
                 try {
                     return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
                 } catch (Throwable t) {
-                    logger.log(FINE, t, () -> "Error instantiating provivder " + ctxFactory);
+                    logger.log(Level.FINE, t, () -> "Error instantiating provivder " + ctxFactory);
                 }
             }
         }

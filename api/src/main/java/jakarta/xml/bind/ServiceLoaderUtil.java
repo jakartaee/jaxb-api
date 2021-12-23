@@ -10,8 +10,6 @@
 
 package jakarta.xml.bind;
 
-import static java.util.logging.Level.FINE;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -90,7 +88,7 @@ class ServiceLoaderUtil {
                 ClassNotFoundException |
                 NoSuchMethodException ignored) {
 
-            logger.log(FINE, ignored, () -> "Unable to find from OSGi: [" + factoryId + "]");
+            logger.log(Level.FINE, ignored, () -> "Unable to find from OSGi: [" + factoryId + "]");
             return null;
         }
     }
