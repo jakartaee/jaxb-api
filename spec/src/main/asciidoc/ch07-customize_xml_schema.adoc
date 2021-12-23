@@ -287,7 +287,7 @@ applies only to the schema element that was annotated with the binding
 declaration.
 
 .Scoping Inheritance and Overriding For Binding Declarations
-image:images/xmlb-18.png[image]
+image::xmlb-18.png[image]
 
 The different scopes form a taxonomy. The
 taxonomy defines both the inheritance and overriding semantics of

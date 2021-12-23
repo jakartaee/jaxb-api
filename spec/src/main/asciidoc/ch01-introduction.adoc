@@ -120,7 +120,7 @@ to check incoming XML documents for validity with respect to the
 schema. +
 
 .Binding XML to Java objects
-image::images/xmlb-2.png[image]
+image::xmlb-2.png[image]
 
 To sum up: Schemas describe the structure and
 meaning of an XML document, in much the same way that a class describes

@@ -107,7 +107,7 @@ The base type is derived upon the XML
 built-in type hierarchy [XSD PART2, Section 3] reproduced below.
 
 .XML Built-In Type Hierarchy
-image::images/xmlb-15.png[image]
+image::xmlb-15.png[image]
 
 
 The above diagram is the same as the one in
@@ -1045,7 +1045,7 @@ illustrated in <<a999>>.
 
 .Binding for a reference to a model group definition.
 [[a999]]
-image::images/xmlb-16.png[image]
+image::xmlb-16.png[image]
 
 This binding style results in the same
 properties occurring within both Java value class’s A and C to represent
@@ -1155,7 +1155,7 @@ is bound to a Java value class with the name _FooBar_. The following
 figure illustrates this example.
 
 .Default binding for anonymous type def within a model group definition.
-image::images/xmlb-17.png[image]
+image::xmlb-17.png[image]
 
 
 Note that even customization specified Java
