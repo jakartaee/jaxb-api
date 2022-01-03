@@ -70,7 +70,7 @@
 
     <properties>
         <copyright.exclude>${config.dir}/copyright-exclude</copyright.exclude>
-        <copyright.ignoreyear>false</copyright.ignoreyear>
+        <copyright.ignoreyear>true</copyright.ignoreyear>
         <copyright.scmonly>true</copyright.scmonly>
         <copyright.templatefile>${config.dir}/edl-copyright.txt</copyright.templatefile>
         <copyright.update>false</copyright.update>
