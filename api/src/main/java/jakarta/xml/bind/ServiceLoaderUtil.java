@@ -74,6 +74,25 @@ class ServiceLoaderUtil {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    static <T> Iterable<T> lookupsUsingOSGiServiceLoader(String factoryId, Logger logger) {
+        try {
+            // Use reflection to avoid having any dependency on ServiceLoader class
+            return (Iterable<T>)
+                Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME)
+                     .getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class)
+                     .invoke(null, Class.forName(factoryId));
+
+        } catch (IllegalAccessException |
+                InvocationTargetException |
+                ClassNotFoundException |
+                NoSuchMethodException ignored) {
+
+            logger.log(Level.FINE, ignored, () -> "Unable to find from OSGi: [" + factoryId + "]");
+            return null;
+        }
+    }
+
     static void checkPackageAccess(String className) {
         // make sure that the current thread has an access to the package of the given name.
         SecurityManager s = System.getSecurityManager();

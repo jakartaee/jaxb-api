@@ -19,6 +19,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.ConsoleHandler;
@@ -309,11 +310,17 @@ class ContextFinder {
             return obj.createContext(contextPath, classLoader, properties);
         }
 
-        Class<?> ctxFactory = (Class<?>) ServiceLoaderUtil.lookupUsingOSGiServiceLoader(
+        Iterable<Class<? extends JAXBContextFactory>> ctxFactories = ServiceLoaderUtil.lookupsUsingOSGiServiceLoader(
                 JAXBContext.JAXB_CONTEXT_FACTORY, logger);
 
-        if (ctxFactory != null) {
-            return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
+        if (ctxFactories != null) {
+            for (Class<? extends JAXBContextFactory> ctxFactory : ctxFactories) {
+                try {
+                    return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
+                } catch (Throwable t) {
+                    logger.log(Level.FINE, t, () -> "Error instantiating provivder " + ctxFactory);
+                }
+            }
         }
 
         // else no provider found
