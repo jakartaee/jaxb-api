@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 
-    Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -70,7 +70,7 @@
 
     <properties>
         <copyright.exclude>${config.dir}/copyright-exclude</copyright.exclude>
-        <copyright.ignoreyear>false</copyright.ignoreyear>
+        <copyright.ignoreyear>true</copyright.ignoreyear>
         <copyright.scmonly>true</copyright.scmonly>
         <copyright.templatefile>${config.dir}/edl-copyright.txt</copyright.templatefile>
         <copyright.update>false</copyright.update>
@@ -242,5 +242,4 @@
             </modules>
         </profile>
     </profiles>
-
 </project>

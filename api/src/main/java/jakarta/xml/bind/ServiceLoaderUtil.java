@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -48,16 +48,18 @@ class ServiceLoaderUtil {
         return null;
     }
 
-    static Object lookupUsingOSGiServiceLoader(String factoryId, Logger logger) {
+    static <T> T lookupUsingOSGiServiceLoader(String factoryId, Logger logger) {
 
         try {
             // Use reflection to avoid having any dependency on ServiceLoader class
-            Class<?> serviceClass = Class.forName(factoryId);
+            @SuppressWarnings("unchecked")
+            Class<? extends T> serviceClass = (Class<? extends T>) Class.forName(factoryId);
             Class<?> target = Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
             Method m = target.getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class);
-            Iterator<?> iter = ((Iterable) m.invoke(null, serviceClass)).iterator();
+            @SuppressWarnings("unchecked")
+            Iterator<? extends T> iter = ((Iterable<? extends T>) m.invoke(null, serviceClass)).iterator();
             if (iter.hasNext()) {
-                Object next = iter.next();
+                T next = iter.next();
                 logger.log(Level.FINE, "Found implementation using OSGi facility; returning object [{0}].",
                         next.getClass().getName());
                 return next;
@@ -67,9 +69,9 @@ class ServiceLoaderUtil {
         } catch (IllegalAccessException |
                 InvocationTargetException |
                 ClassNotFoundException |
-                NoSuchMethodException ignored) {
+                NoSuchMethodException ex) {
 
-            logger.log(Level.FINE, "Unable to find from OSGi: [" + factoryId + "]", ignored);
+            logger.log(Level.FINE, "Unable to find from OSGi: [" + factoryId + "]", ex);
             return null;
         }
     }
@@ -86,9 +88,9 @@ class ServiceLoaderUtil {
         } catch (IllegalAccessException |
                 InvocationTargetException |
                 ClassNotFoundException |
-                NoSuchMethodException ignored) {
+                NoSuchMethodException ex) {
 
-            logger.log(Level.FINE, ignored, () -> "Unable to find from OSGi: [" + factoryId + "]");
+            logger.log(Level.FINE, ex, () -> "Unable to find from OSGi: [" + factoryId + "]");
             return null;
         }
     }
