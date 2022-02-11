@@ -76,12 +76,12 @@
         <copyright.update>false</copyright.update>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.5.0.0</spotbugs.version>
+        <spotbugs.version>4.5.3.0</spotbugs.version>
 
         <maven.compiler.release>11</maven.compiler.release>
 
         <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
-        <release.spec.date>Jan 2022</release.spec.date>
+        <release.spec.date>Mar 2022</release.spec.date>
         <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>4.0</spec.version>
@@ -115,11 +115,11 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.9.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.glassfish.copyright</groupId>
@@ -141,16 +141,11 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.1</version>
-                    <configuration>
-                        <instructions>
-                            <_noextraheaders>true</_noextraheaders>
-                        </instructions>
-                    </configuration>
+                    <version>5.1.4</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.2.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
@@ -185,8 +180,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                     </compilerArgs>
