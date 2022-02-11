@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2022 Contributors to the Eclipse Foundation
 //
 
 [appendix]
@@ -14,6 +14,7 @@
 through `jaxb.properties` file, `jakarta.xml.bind.context.factory` and
 `jakarta.xml.bind.JAXBContext` properties and `/META-INF/services/jakarta.xml.bind.JAXBContext`
 resource file
+* dropped requirement on compatibility with JAXB 1.0
 
 === Changes in Version 3
 
