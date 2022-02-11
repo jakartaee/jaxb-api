@@ -23,7 +23,7 @@ jobs:
 
     strategy:
       matrix:
-        java_version: [ 11, 17-ea ]
+        java_version: [ 11, 17 ]
 
     steps:
     - name: Checkout for build
@@ -33,5 +33,6 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: ${{ matrix.java_version }}
+        cache: maven
     - name: Verify
-      run: mvn -B -V -U -C -Poss-release -Pstaging clean verify -Dgpg.skip=true
+      run: mvn -B -V -U -C -Poss-release -Pstaging clean verify -Dgpg.skip=true org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dcopyright.ignoreyear=true

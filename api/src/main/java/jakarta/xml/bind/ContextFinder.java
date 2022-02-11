@@ -342,7 +342,7 @@ class ContextFinder {
 
         logger.fine("Trying to create the platform default provider");
         Class<?> ctxFactoryClass =
-                (Class) ServiceLoaderUtil.lookupUsingOSGiServiceLoader(JAXBContext.JAXB_CONTEXT_FACTORY, logger);
+                ServiceLoaderUtil.lookupUsingOSGiServiceLoader(JAXBContext.JAXB_CONTEXT_FACTORY, logger);
 
         if (ctxFactoryClass != null) {
             return newInstance(classes, properties, ctxFactoryClass);
@@ -413,7 +413,6 @@ class ContextFinder {
         return which(clazz, getClassClassLoader(clazz));
     }
 
-    @SuppressWarnings("unchecked")
     private static ClassLoader getContextClassLoader() {
         if (System.getSecurityManager() == null) {
             return Thread.currentThread().getContextClassLoader();
@@ -428,7 +427,6 @@ class ContextFinder {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private static ClassLoader getClassClassLoader(final Class<?> c) {
         if (System.getSecurityManager() == null) {
             return c.getClassLoader();
