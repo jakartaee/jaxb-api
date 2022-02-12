@@ -879,7 +879,7 @@ image::images/xmlb-9.svg[image]
 image::images/xmlb-10.png[image]
 
 .Jakarta XML Binding: hasA Relationship between generated element class and its type as described in <<Java Element Class>>
-image::images/xmlb-11.png[image]
+image::images/xmlb-11.svg[image]
 
 While a JAXB 1.0 Element interface implemented its type’s interface,
 a Jakarta XML Binding Element instance has a
