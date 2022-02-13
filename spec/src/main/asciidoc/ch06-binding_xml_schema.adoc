@@ -1045,7 +1045,7 @@ illustrated in <<a999>>.
 
 .Binding for a reference to a model group definition.
 [[a999]]
-image::images/xmlb-16.png[image]
+image::images/xmlb-16.svg[image]
 
 This binding style results in the same
 properties occurring within both Java value class’s A and C to represent
@@ -1155,7 +1155,7 @@ is bound to a Java value class with the name _FooBar_. The following
 figure illustrates this example.
 
 .Default binding for anonymous type def within a model group definition.
-image::images/xmlb-17.png[image]
+image::images/xmlb-17.svg[image]
 
 
 Note that even customization specified Java
