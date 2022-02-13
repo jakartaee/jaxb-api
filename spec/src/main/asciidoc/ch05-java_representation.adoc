@@ -876,7 +876,7 @@ illustrate the binding changes for the following schema fragment:
 image::images/xmlb-9.svg[image]
 
 .Jakarta XML Binding: hasA Relationship between element instance and its type as described in <<Named Java Element instance>>
-image::images/xmlb-10.png[image]
+image::images/xmlb-10.svg[image]
 
 .Jakarta XML Binding: hasA Relationship between generated element class and its type as described in <<Java Element Class>>
 image::images/xmlb-11.svg[image]
