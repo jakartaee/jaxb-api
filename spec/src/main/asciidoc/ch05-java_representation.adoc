@@ -902,10 +902,10 @@ Java components introduced in this section are reflected in the
 following diagram.
 
 .UML diagram of Java Representationfootnote:[See next figure fordefault binding for anonymous type definition.]
-image::images/xmlb-12.png[image]
+image::images/xmlb-12.svg[image]
 
 .UML diagram when xs:element is bound to schema-derived Element class
-image::images/xmlb-13.png[image]
+image::images/xmlb-13.svg[image]
 
 See also <<table614>>.
 
