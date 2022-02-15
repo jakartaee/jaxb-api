@@ -181,12 +181,12 @@
 		</g>
 		<g id="shape67-83" v:mID="67" v:groupContext="shape" transform="translate(347.462,-193.273)">
 			<title>Foglio.67</title>
-			<desc>Package Javax.xml.bind</desc>
+			<desc>Package javax.xml.bind</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="30.7234" cy="296.243" width="61.45" height="34.0157"/>
 			<rect x="0" y="279.235" width="61.4468" height="34.0157" class="st4"/>
 			<text x="4" y="293.84" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>Package<v:newlineChar/><tspan x="4"
-						dy="1.2em" class="st7">Javax</tspan>.xml.bind</text>		</g>
+						dy="1.2em" class="st7">javax</tspan>.xml.bind</text>		</g>
 		<g id="shape68-87" v:mID="68" v:groupContext="shape" transform="translate(247.334,-85.7594)">
 			<title>Foglio.68</title>
 			<rect x="0" y="267.694" width="85.0394" height="45.5568" class="st3"/>
