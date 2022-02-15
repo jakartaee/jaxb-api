@@ -134,12 +134,12 @@
 		</g>
 		<g id="shape67-59" v:mID="67" v:groupContext="shape" transform="translate(349.163,-150.956)">
 			<title>Foglio.67</title>
-			<desc>Package Javax.xml.bind</desc>
+			<desc>Package javax.xml.bind</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="30.7234" cy="219.708" width="61.45" height="34.0157"/>
 			<rect x="0" y="202.7" width="61.4468" height="34.0157" class="st4"/>
 			<text x="4" y="217.31" class="st7" v:langID="1040"><v:paragraph/><v:tabList/>Package<v:newlineChar/><tspan x="4"
-						dy="1.2em" class="st6">Javax</tspan>.xml.bind</text>		</g>
+						dy="1.2em" class="st6">javax</tspan>.xml.bind</text>		</g>
 		<g id="shape68-63" v:mID="68" v:groupContext="shape" transform="translate(245.775,-48.909)">
 			<title>Foglio.68</title>
 			<rect x="0" y="163.015" width="101.055" height="73.7008" class="st3"/>
