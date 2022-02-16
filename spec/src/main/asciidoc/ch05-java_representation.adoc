@@ -636,7 +636,7 @@ value.
 
 .States of a Property Value
 [[a623]]
-image::images/xmlb-8.png[image]
+image::images/xmlb-8.svg[image]
 
 *_Example:_* +
 In the purchase order schema, the `partNum`
