@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2022 Contributors to the Eclipse Foundation
 //
 
 == The Binding Framework
@@ -795,6 +795,11 @@ specified (first successful resolution applies):
 . If the system property `jakarta.xml.bind.JAXBContextFactory` exists,
 then its value is assumed to be the provider factory class. This phase
 of the look up enables per-JVM override of the Jakarta XML Binding implementation.
+
+. If the property `jakarta.xml.bind.JAXBContextFactory` exists in the `Map<String, ?>`
+passed to `JAXBContext.newInstance(Class[], Map)` or to `JAXBContext.newInstance(String, ClassLoader, Map)`,
+then its value is assumed to be the fully qualified provider factory class name.
+This phase of the look up enables context sensitive selection of the Jakarta XML Binding implementation.
 
 . Provider of `jakarta.xml.bind.JAXBContextFactory` is loaded
 using the service-provider loading facilities, as defined by

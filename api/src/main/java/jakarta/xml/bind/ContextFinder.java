@@ -302,6 +302,18 @@ class ContextFinder {
         String factoryName = classNameFromSystemProperties();
         if (factoryName != null) return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
 
+        Object factory = properties.get(factoryId);
+        if (factory != null) {
+            if (factory instanceof String)  {
+                factoryName = (String) factory;
+            } else {
+                throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, factory.getClass().getName(), "String"));
+            }
+        }
+        if (factoryName != null) {
+            return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+        }
+
         JAXBContextFactory obj = ServiceLoaderUtil.firstByServiceLoader(
                 JAXBContextFactory.class, logger, EXCEPTION_HANDLER);
 
@@ -331,6 +343,18 @@ class ContextFinder {
     static JAXBContext find(Class<?>[] classes, Map<String, ?> properties) throws JAXBException {
         String factoryClassName = classNameFromSystemProperties();
         if (factoryClassName != null) return newInstance(classes, properties, factoryClassName);
+
+        Object ctxFactory = properties.get(JAXBContext.JAXB_CONTEXT_FACTORY);
+        if (ctxFactory != null) {
+            if (ctxFactory instanceof String)  {
+                factoryClassName = (String) ctxFactory;
+            } else {
+                throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, ctxFactory.getClass().getName(), "String"));
+            }
+        }
+        if (factoryClassName != null) {
+            return newInstance(classes, properties, factoryClassName);
+        }
 
         JAXBContextFactory factory =
                 ServiceLoaderUtil.firstByServiceLoader(JAXBContextFactory.class, logger, EXCEPTION_HANDLER);
