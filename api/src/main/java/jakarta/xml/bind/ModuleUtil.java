@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -111,6 +111,14 @@ class ModuleUtil {
         final Module implModule = factorySPI.getModule();
 
         Module jaxbModule = JAXBContext.class.getModule();
+
+        if (!jaxbModule.isNamed()) {
+            //we are not on the module path, so assume class-path mode
+            if (LOGGER.isLoggable(Level.FINE)) {
+                LOGGER.log(Level.FINE, "Using jakarta.xml.bind-api on the class path.");
+            }
+            return;
+        }
 
         for (Class<?> cls : classes) {
             Class<?> jaxbClass = cls.isArray() ?

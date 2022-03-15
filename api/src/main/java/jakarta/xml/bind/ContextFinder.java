@@ -302,16 +302,18 @@ class ContextFinder {
         String factoryName = classNameFromSystemProperties();
         if (factoryName != null) return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
 
-        Object factory = properties.get(factoryId);
-        if (factory != null) {
-            if (factory instanceof String)  {
-                factoryName = (String) factory;
-            } else {
-                throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, factory.getClass().getName(), "String"));
+        if (properties != null) {
+            Object factory = properties.get(factoryId);
+            if (factory != null) {
+                if (factory instanceof String) {
+                    factoryName = (String) factory;
+                } else {
+                    throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, factory.getClass().getName(), "String"));
+                }
             }
-        }
-        if (factoryName != null) {
-            return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+            if (factoryName != null) {
+                return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+            }
         }
 
         JAXBContextFactory obj = ServiceLoaderUtil.firstByServiceLoader(
@@ -344,16 +346,18 @@ class ContextFinder {
         String factoryClassName = classNameFromSystemProperties();
         if (factoryClassName != null) return newInstance(classes, properties, factoryClassName);
 
-        Object ctxFactory = properties.get(JAXBContext.JAXB_CONTEXT_FACTORY);
-        if (ctxFactory != null) {
-            if (ctxFactory instanceof String)  {
-                factoryClassName = (String) ctxFactory;
-            } else {
-                throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, ctxFactory.getClass().getName(), "String"));
+        if (properties != null) {
+            Object ctxFactory = properties.get(JAXBContext.JAXB_CONTEXT_FACTORY);
+            if (ctxFactory != null) {
+                if (ctxFactory instanceof String) {
+                    factoryClassName = (String) ctxFactory;
+                } else {
+                    throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, ctxFactory.getClass().getName(), "String"));
+                }
             }
-        }
-        if (factoryClassName != null) {
-            return newInstance(classes, properties, factoryClassName);
+            if (factoryClassName != null) {
+                return newInstance(classes, properties, factoryClassName);
+            }
         }
 
         JAXBContextFactory factory =
