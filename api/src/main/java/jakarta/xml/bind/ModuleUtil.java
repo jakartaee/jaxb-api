@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -27,6 +27,21 @@ import java.util.logging.Logger;
 class ModuleUtil {
 
     private static final Logger LOGGER = Logger.getLogger("jakarta.xml.bind");
+
+    //Android does not contain JPMS related methods added in SE 9+
+    private static final boolean JPMS_SUPPORTED;
+
+    static {
+        boolean b = false;
+        try {
+            JAXBContext.class.getModule();
+            b = true;
+        } catch (NoSuchMethodError nsme) {
+            //android
+            b = false;
+        }
+        JPMS_SUPPORTED = b;
+    }
 
     /**
      * Resolves classes from context path.
@@ -108,38 +123,44 @@ class ModuleUtil {
      * @throws JAXBException if ony of a classes package is not open to {@code jakarta.xml.bind} module.
      */
     public static void delegateAddOpensToImplModule(Class<?>[] classes, Class<?> factorySPI) throws JAXBException {
-        final Module implModule = factorySPI.getModule();
+        if (JPMS_SUPPORTED) {
+            final Module implModule = factorySPI.getModule();
 
-        Module jaxbModule = JAXBContext.class.getModule();
+            Module jaxbModule = JAXBContext.class.getModule();
 
-        if (!jaxbModule.isNamed()) {
-            //we are not on the module path, so assume class-path mode
+            if (!jaxbModule.isNamed()) {
+                //we are not on the module path, so assume class-path mode
+                if (LOGGER.isLoggable(Level.FINE)) {
+                    LOGGER.log(Level.FINE, "Using jakarta.xml.bind-api on the class path.");
+                }
+                return;
+            }
+
+            for (Class<?> cls : classes) {
+                Class<?> jaxbClass = cls.isArray() ?
+                        cls.getComponentType() : cls;
+
+                final Module classModule = jaxbClass.getModule();
+                final String packageName = jaxbClass.getPackageName();
+                //no need for unnamed and java.base types
+                if (!classModule.isNamed() || classModule.getName().equals("java.base")) {
+                    continue;
+                }
+                //report error if they are not open to jakarta.xml.bind
+                if (!classModule.isOpen(packageName, jaxbModule)) {
+                    throw new JAXBException(Messages.format(Messages.JAXB_CLASSES_NOT_OPEN,
+                            packageName, jaxbClass.getName(), classModule.getName()));
+                }
+                //propagate openness to impl module
+                classModule.addOpens(packageName, implModule);
+                if (LOGGER.isLoggable(Level.FINE)) {
+                    LOGGER.log(Level.FINE, "Propagating openness of package {0} in {1} to {2}.",
+                            new String[]{ packageName, classModule.getName(), implModule.getName() });
+                }
+            }
+        } else {
             if (LOGGER.isLoggable(Level.FINE)) {
-                LOGGER.log(Level.FINE, "Using jakarta.xml.bind-api on the class path.");
-            }
-            return;
-        }
-
-        for (Class<?> cls : classes) {
-            Class<?> jaxbClass = cls.isArray() ?
-                    cls.getComponentType() : cls;
-
-            final Module classModule = jaxbClass.getModule();
-            final String packageName = jaxbClass.getPackageName();
-            //no need for unnamed and java.base types
-            if (!classModule.isNamed() || classModule.getName().equals("java.base")) {
-                continue;
-            }
-            //report error if they are not open to jakarta.xml.bind
-            if (!classModule.isOpen(packageName, jaxbModule)) {
-                throw new JAXBException(Messages.format(Messages.JAXB_CLASSES_NOT_OPEN,
-                        packageName, jaxbClass.getName(), classModule.getName()));
-            }
-            //propagate openness to impl module
-            classModule.addOpens(packageName, implModule);
-            if (LOGGER.isLoggable(Level.FINE)) {
-                LOGGER.log(Level.FINE, "Propagating openness of package {0} in {1} to {2}.",
-                        new String[]{ packageName, classModule.getName(), implModule.getName() });
+                LOGGER.log(Level.FINE, "Using jakarta.xml.bind-api with no JPMS related APIs, such as Class::getModule.");
             }
         }
     }
