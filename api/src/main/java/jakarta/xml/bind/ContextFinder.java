@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,8 +10,6 @@
 
 package jakarta.xml.bind;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -19,12 +17,12 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
+import java.util.function.Predicate;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 
 /**
@@ -356,7 +354,14 @@ class ContextFinder {
                 }
             }
             if (factoryClassName != null) {
-                return newInstance(classes, properties, factoryClassName);
+                //Providers are not required to understand JAXB_CONTEXT_FACTORY property
+                //and they must throw a JAXBException if they see it, so we need to remove it
+                //from properties passed to them
+                Map<String, ?> props = properties.entrySet()
+                        .stream()
+                        .filter(Predicate.not(e -> JAXBContext.JAXB_CONTEXT_FACTORY.equals(e.getKey())))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                return newInstance(classes, props, factoryClassName);
             }
         }
 
