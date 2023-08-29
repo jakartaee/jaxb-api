@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2023 Contributors to the Eclipse Foundation
 //
 
 [appendix]
@@ -243,5 +243,5 @@ schema customization @attachmentRef of <jaxb:property>, specified in
 
 .JAXB marshal/unmarshalling of optimized binary content.
 [[opbin]]
-image::xmlb-23.png[image]
+image::xmlb-23.svg[image]
 

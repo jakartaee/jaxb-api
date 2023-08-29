@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2023 Contributors to the Eclipse Foundation
 //
 
 == Java Representation of XML Content
@@ -636,7 +636,7 @@ value.
 
 .States of a Property Value
 [[a623]]
-image::xmlb-8.png[image]
+image::xmlb-8.svg[image]
 
 *_Example:_* +
 In the purchase order schema, the `partNum`
@@ -873,13 +873,13 @@ illustrate the binding changes for the following schema fragment:
 ----
 
 .JAXB 1.0: isA Relationship between generated element interface and its type
-image::xmlb-9.png[image]
+image::xmlb-9.svg[image]
 
 .Jakarta XML Binding: hasA Relationship between element instance and its type as described in <<Named Java Element instance>>
-image::xmlb-10.png[image]
+image::xmlb-10.svg[image]
 
 .Jakarta XML Binding: hasA Relationship between generated element class and its type as described in <<Java Element Class>>
-image::xmlb-11.png[image]
+image::xmlb-11.svg[image]
 
 While a JAXB 1.0 Element interface implemented its type’s interface,
 a Jakarta XML Binding Element instance has a
@@ -902,10 +902,10 @@ Java components introduced in this section are reflected in the
 following diagram.
 
 .UML diagram of Java Representationfootnote:[See next figure fordefault binding for anonymous type definition.]
-image::xmlb-12.png[image]
+image::xmlb-12.svg[image]
 
 .UML diagram when xs:element is bound to schema-derived Element class
-image::xmlb-13.png[image]
+image::xmlb-13.svg[image]
 
 See also <<table614>>.
 

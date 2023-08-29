@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2023 Contributors to the Eclipse Foundation
 //
 
 == [[a2]]Introduction
@@ -120,7 +120,7 @@ to check incoming XML documents for validity with respect to the
 schema. +
 
 .Binding XML to Java objects
-image::xmlb-2.png[image]
+image::xmlb-2.svg[image]
 
 To sum up: Schemas describe the structure and
 meaning of an XML document, in much the same way that a class describes
