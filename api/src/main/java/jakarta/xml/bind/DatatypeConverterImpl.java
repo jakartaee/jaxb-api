@@ -289,7 +289,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                     ch = literal.charAt(i++);
                 } while ((strTrue.charAt(strIndex++) == ch) && i < len && strIndex < 3);
 
-                if (strIndex == 3) {
+                if (strIndex == 3 && strTrue.charAt(strIndex - 1) == ch) {
                     value = true;
                 } else {
                     throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
@@ -303,7 +303,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                 } while ((strFalse.charAt(strIndex++) == ch) && i < len && strIndex < 4);
 
 
-                if (strIndex == 4) {
+                if (strIndex == 4 && strFalse.charAt(strIndex - 1) == ch) {
                     value = false;
                 } else {
                     throw new IllegalArgumentException("String \"" + literal + "\" is not valid boolean value.");
@@ -312,10 +312,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                 break;
         }
 
-        if (i < len) {
-            do {
-                ch = literal.charAt(i++);
-            } while (WhiteSpaceProcessor.isWhiteSpace(ch) && i < len);
+        while (i < len && WhiteSpaceProcessor.isWhiteSpace(literal.charAt(i))) {
+            i++;
         }
 
         if (i == len) {
