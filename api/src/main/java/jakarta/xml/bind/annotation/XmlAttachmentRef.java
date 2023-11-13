@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,11 +10,15 @@
 
 package jakarta.xml.bind.annotation;
 
-import jakarta.activation.DataHandler;
-import static java.lang.annotation.ElementType.*;
-import java.lang.annotation.Retention;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
+import jakarta.activation.DataHandler;
 
 /**
  * Marks a field/property that its XML form is a uri reference to mime content.
@@ -48,7 +52,7 @@ import java.lang.annotation.Target;
  * }</pre>
  *
  * <p>
- * The above binding supports WS-I AP 1.0 <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html#Referencing_Attachments_from_the_SOAP_Envelope">WS-I Attachments Profile Version 1.0.</a>
+ * The above binding supports WS-I AP 1.0 <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html#Referencing_Attachments_from_the_SOAP_Envelope">WS-I Attachments Profile Version 1.0.</a>
  *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
