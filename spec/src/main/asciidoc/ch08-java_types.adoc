@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2023 Contributors to the Eclipse Foundation
 //
 
 == Java Types To XML
@@ -675,7 +675,7 @@ used only with the following other annotations: `@XmlType`,
 following annotations at the package level: `@XmlJavaTypeAdapter`.
 
 * If the value of `@XmlAccessorOrder.value()` is
-`XmlAccessOrder.ALHPHABETICAL`, then the default ordering of
+`XmlAccessOrder.ALPHABETICAL`, then the default ordering of
 fields/properties is lexicographic order as determined by
 `java.lang.String.CompareTo(String anotherString)`.
 
