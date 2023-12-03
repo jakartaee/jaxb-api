@@ -73,6 +73,19 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      */
     protected AbstractUnmarshallerImpl() {}
 
+    private SAXParserFactory parserFactory;
+
+    private SAXParserFactory getSAXParserFactory() {
+        if (null == parserFactory) {
+            parserFactory = SAXParserFactory.newInstance();
+            parserFactory.setNamespaceAware(true);
+            // there is no point in asking a validation because
+            // there is no guarantee that the document will come with
+            // a proper schemaLocation.
+            parserFactory.setValidating(false);
+        }
+        return parserFactory;
+    }
     /**
      * Obtains a configured XMLReader.
      *
@@ -85,14 +98,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     protected XMLReader getXMLReader() throws JAXBException {
         if(reader==null) {
             try {
-                SAXParserFactory parserFactory;
-                parserFactory = SAXParserFactory.newInstance();
-                parserFactory.setNamespaceAware(true);
-                // there is no point in asking a validation because
-                // there is no guarantee that the document will come with
-                // a proper schemaLocation.
-                parserFactory.setValidating(false);
-                reader = parserFactory.newSAXParser().getXMLReader();
+                reader = getSAXParserFactory().newSAXParser().getXMLReader();
             } catch( ParserConfigurationException | SAXException e ) {
                 throw new JAXBException(e);
             }
