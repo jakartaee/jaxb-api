@@ -55,4 +55,30 @@ public class DatatypeConverterTest {
         Assert.assertEquals(true, DatatypeConverter.parseBoolean("true "));
         Assert.assertEquals(true, DatatypeConverter.parseBoolean(" true "));
     }
+
+    @Test 
+    public void testJDate() { 
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printInteger(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDateTime(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printHexBinary(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printTime(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDate(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDecimal(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printBase64Binary(null));
+        
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printShort(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printFloat(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printBoolean(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printByte(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printUnsignedInt(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printString(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printInt(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printLong(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDouble(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printQName(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printUnsignedShort(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printAnySimpleType(null));
+        
+    } 
 }
+
