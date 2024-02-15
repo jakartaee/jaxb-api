@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -706,6 +706,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      */
     public static byte[] _parseBase64Binary(String text) {
         final int buflen = guessLength(text);
+        if (buflen < 3) {
+            throw new IllegalArgumentException("base64 text invalid.");
+        }
         final byte[] out = new byte[buflen];
         int o = 0;
 
@@ -725,6 +728,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
             }
 
             if (q == 4) {
+
                 // quadruplet is now filled.
                 out[o++] = (byte) ((quadruplet[0] << 2) | (quadruplet[1] >> 4));
                 if (quadruplet[2] != PADDING) {
