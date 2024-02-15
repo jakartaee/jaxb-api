@@ -1,4 +1,4 @@
-[//]: # " Copyright (c) 2018, 2022 Oracle and/or its affiliates. All rights reserved. "
+[//]: # " Copyright (c) 2018, 2024 Oracle and/or its affiliates. All rights reserved. "
 [//]: # "  "
 [//]: # " This program and the accompanying materials are made available under the "
 [//]: # " terms of the Eclipse Distribution License v. 1.0, which is available at "
@@ -8,14 +8,13 @@
 
 # Notices for Jakarta XML Binding
 
-This content is produced and maintained by the Jakarta XML Binding
-project.
+This content is produced and maintained by the Jakarta XML Binding project.
 
 * Project home: https://projects.eclipse.org/projects/ee4j.jaxb
 
 ## Trademarks
 
-Jakarta XML Binding is a trademark of the Eclipse Foundation.
+Jakarta XML Binding™ is a trademark of the Eclipse Foundation.
 
 ## Copyright
 
@@ -26,8 +25,8 @@ source code repository logs.
 ## Declared Project Licenses
 
 This program and the accompanying materials are made available under the terms
-of the Eclipse Distribution License v. 1.0 which is available at
-http://www.eclipse.org/org/documents/edl-v10.php.
+of the Eclipse Distribution License v1.0 which is available at
+https://www.eclipse.org/org/documents/edl-v10.php.
 
 SPDX-License-Identifier: BSD-3-Clause
 
@@ -35,37 +34,8 @@ SPDX-License-Identifier: BSD-3-Clause
 
 The project maintains the following source code repositories:
 
-* https://github.com/eclipse-ee4j/jaxb-api
-* https://github.com/eclipse-ee4j/jaxb-tck
-
-## Third-party Content
-
-This project leverages the following third party content.
-
-Apache River (3.0.0)
-
-* License: Apache-2.0 AND BSD-3-Clause
-
-ASM 7 (n/a)
-
-* License: BSD-3-Clause
-* Project: https://asm.ow2.io/
-* Source:
-   https://repository.ow2.org/nexus/#nexus-search;gav~org.ow2.asm~asm-commons~~~~kw,versionexpand
-
-JTHarness (5.0)
-
-* License: (GPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)	
-* Project: https://wiki.openjdk.java.net/display/CodeTools/JT+Harness
-* Source: http://hg.openjdk.java.net/code-tools/jtharness/
-
-normalize.css (3.0.2)
-
-* License: MIT
-
-SigTest (n/a)
-
-* License: GPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+* https://github.com/jakartaee/jaxb-api
+* https://github.com/jakartaee/jaxb-tck
 
 ## Cryptography
 
