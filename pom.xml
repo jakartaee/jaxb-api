@@ -31,9 +31,9 @@
     <url>https://github.com/eclipse-ee4j/jaxb-api</url>
 
     <scm>
-        <connection>scm:git:git://github.com/eclipse-ee4j/jaxb-api.git</connection>
-        <developerConnection>scm:git:git@github.com:eclipse-ee4j/jaxb-api.git</developerConnection>
-        <url>https://github.com/eclipse-ee4j/jaxb-api.git</url>
+        <connection>scm:git:git://github.com/jakartaee/jaxb-api</connection>
+        <developerConnection>scm:git:git@github.com:jakartaee/jaxb-api</developerConnection>
+        <url>https://github.com/jakartaee/jaxb-api</url>
         <tag>HEAD</tag>
     </scm>
 
