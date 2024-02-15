@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -34,7 +34,7 @@ import jakarta.activation.DataHandler;
  * <li>
  * For WS-I AP 1.0, the cid is identified as an element or attribute of
  * type {@code ref:swaRef} specified in
- * <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html#Referencing_Attachments_from_the_SOAP_Envelope">
+ * <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html#Referencing_Attachments_from_the_SOAP_Envelope">
  * Section 4.4 Referencing Attachments from the SOAP Envelope</a>
  * </li>
  * </ul>
@@ -48,7 +48,7 @@ import jakarta.activation.DataHandler;
  * @see jakarta.xml.bind.Unmarshaller#setAttachmentUnmarshaller(AttachmentUnmarshaller)
  *
  * @see <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">XML-binary Optimized Packaging</a>
- * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html">WS-I Attachments Profile Version 1.0.</a>
+ * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html">WS-I Attachments Profile Version 1.0.</a>
  * @see <a href="http://www.w3.org/TR/xml-media-types/">Describing Media Content of Binary Data in XML</a>
  */
 public abstract class AttachmentUnmarshaller {

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2021 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2023 Contributors to the Eclipse Foundation
 //
 
 == Java Types To XML
@@ -215,7 +215,7 @@ vice versa. It is the value type that is used for marshalling and
 unmarshalling. Use of this approach involves two steps:
 
 * provide an adapter class that extends the
-abstract class `@jakarta.xml.bind.annotation.adapters.XmlAdapter` that
+abstract class `jakarta.xml.bind.annotation.adapters.XmlAdapter` that
 defines two methods `unmarshal()` and `marshal()`. The methods are
 invoked by JAXB vendor implementation during unmarshalling and
 marshaling respectively to adapt between bound and value types.
@@ -675,7 +675,7 @@ used only with the following other annotations: `@XmlType`,
 following annotations at the package level: `@XmlJavaTypeAdapter`.
 
 * If the value of `@XmlAccessorOrder.value()` is
-`XmlAccessOrder.ALHPHABETICAL`, then the default ordering of
+`XmlAccessOrder.ALPHABETICAL`, then the default ordering of
 fields/properties is lexicographic order as determined by
 `java.lang.String.CompareTo(String anotherString)`.
 

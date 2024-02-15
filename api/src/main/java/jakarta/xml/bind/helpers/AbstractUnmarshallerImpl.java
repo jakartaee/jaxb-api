@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -73,6 +73,19 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      */
     protected AbstractUnmarshallerImpl() {}
 
+    private SAXParserFactory parserFactory;
+
+    private SAXParserFactory getSAXParserFactory() {
+        if (null == parserFactory) {
+            parserFactory = SAXParserFactory.newInstance();
+            parserFactory.setNamespaceAware(true);
+            // there is no point in asking a validation because
+            // there is no guarantee that the document will come with
+            // a proper schemaLocation.
+            parserFactory.setValidating(false);
+        }
+        return parserFactory;
+    }
     /**
      * Obtains a configured XMLReader.
      *
@@ -85,14 +98,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     protected XMLReader getXMLReader() throws JAXBException {
         if(reader==null) {
             try {
-                SAXParserFactory parserFactory;
-                parserFactory = SAXParserFactory.newInstance();
-                parserFactory.setNamespaceAware(true);
-                // there is no point in asking a validation because
-                // there is no guarantee that the document will come with
-                // a proper schemaLocation.
-                parserFactory.setValidating(false);
-                reader = parserFactory.newSAXParser().getXMLReader();
+                reader = getSAXParserFactory().newSAXParser().getXMLReader();
             } catch( ParserConfigurationException | SAXException e ) {
                 throw new JAXBException(e);
             }

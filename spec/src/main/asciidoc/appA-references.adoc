@@ -87,8 +87,8 @@ _http://www.w3.org/TR/2005/NOTE-xml-media-types-20050504_
 
 [WSIAP] Chris Ferris, Anish Karmarkar, and
 Canyang Kevin Liu. Attachments Profile Version 1.0. Final 1 Material,
-WS-I, August 2004. +
-_http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html_.
+WS-I, April 2006. +
+_http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html_.
 
 [WSIBP] WS-I Basic Profile 1.0, +
 _http://www.ws-i.org/Profile/Basic/2003-08/BasicProfile-1.0a.html_

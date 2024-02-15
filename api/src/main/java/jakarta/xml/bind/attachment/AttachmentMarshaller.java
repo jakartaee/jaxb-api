@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -40,7 +40,7 @@ import jakarta.xml.bind.Marshaller;
  * @see Marshaller#setAttachmentMarshaller(AttachmentMarshaller)
  *
  * @see <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">XML-binary Optimized Packaging</a>
- * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html">WS-I Attachments Profile Version 1.0.</a>
+ * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html">WS-I Attachments Profile Version 1.0.</a>
  */
 public abstract class AttachmentMarshaller {
 
@@ -184,7 +184,7 @@ public abstract class AttachmentMarshaller {
     *       represents the data to be attached. Must be non-null.
     * @return
     *       must be a valid URI used as cid. Must satisfy Conformance Requirement R2928 from
-    *       <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0-2004-08-24.html#Referencing_Attachments_from_the_SOAP_Envelope">WS-I Attachments Profile Version 1.0.</a>
+    *       <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html#Referencing_Attachments_from_the_SOAP_Envelope">WS-I Attachments Profile Version 1.0.</a>
     */
     public abstract String addSwaRefAttachment(DataHandler data);
 }

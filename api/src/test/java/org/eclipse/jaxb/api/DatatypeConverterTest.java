@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -57,7 +57,7 @@ public class DatatypeConverterTest {
     }
 
     @Test 
-    public void testJDate() { 
+    public void testPrint() { 
         Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printInteger(null));
         Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDateTime(null));
         Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printHexBinary(null));
@@ -80,5 +80,12 @@ public class DatatypeConverterTest {
         //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printAnySimpleType(null));
         
     } 
-}
 
+    @Test
+    public void testBase64() {
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.parseBase64Binary("Qxx=="));
+        Assert.assertNotEquals("Hello, world!", new String(DatatypeConverter.parseBase64Binary("SGVsbG8sIJdvcmxkIQ==")));
+
+        Assert.assertEquals("Hello, world!", new String(DatatypeConverter.parseBase64Binary("SGVsbG8sIHdvcmxkIQ==")));
+    }
+}
