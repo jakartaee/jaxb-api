@@ -66,6 +66,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printInteger(BigInteger val) {
+        if (null == val) throw new IllegalArgumentException("val is null");
         return val.toString();
     }
 
@@ -423,6 +424,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printDateTime(Calendar val) {
+        if (null == val) throw new IllegalArgumentException("val is null");
         return CalendarFormatter.doFormat("%Y-%M-%DT%h:%m:%s%z", val);
     }
 
@@ -471,6 +473,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     @Override
     public String printHexBinary(byte[] data) {
+        if (null == data) throw new IllegalArgumentException("data is null");
         StringBuilder r = new StringBuilder(data.length * 2);
         for (byte b : data) {
             r.append(hexCode[(b >> 4) & 0xF]);
@@ -501,6 +504,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     @Override
     public String printTime(Calendar val) {
+        if (null == val) throw new IllegalArgumentException("val is null");
         return CalendarFormatter.doFormat("%h:%m:%s%z", val);
     }
 
@@ -515,6 +519,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printDate(Calendar val) {
+        if (null == val) throw new IllegalArgumentException("val is null");
         return CalendarFormatter.doFormat((new StringBuilder("%Y-%M-%D").append("%z")).toString(),val);
     }
 
@@ -554,6 +559,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printDecimal(BigDecimal val) {
+        if (null == val) throw new IllegalArgumentException("val is null");
         return val.toPlainString();
     }
 
@@ -780,6 +786,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printBase64Binary(byte[] input) {
+        if (null == input) throw new IllegalArgumentException("input is null");
         return _printBase64Binary(input, 0, input.length);
     }
 

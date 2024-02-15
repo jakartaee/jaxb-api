@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -56,6 +56,31 @@ public class DatatypeConverterTest {
         Assert.assertEquals(true, DatatypeConverter.parseBoolean(" true "));
     }
 
+    @Test 
+    public void testPrint() { 
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printInteger(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDateTime(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printHexBinary(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printTime(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDate(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDecimal(null));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printBase64Binary(null));
+        
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printShort(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printFloat(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printBoolean(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printByte(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printUnsignedInt(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printString(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printInt(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printLong(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDouble(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printQName(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printUnsignedShort(null));
+        //Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printAnySimpleType(null));
+        
+    } 
+
     @Test
     public void testBase64() {
         Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.parseBase64Binary("Qxx=="));
@@ -63,5 +88,4 @@ public class DatatypeConverterTest {
 
         Assert.assertEquals("Hello, world!", new String(DatatypeConverter.parseBase64Binary("SGVsbG8sIHdvcmxkIQ==")));
     }
-
 }
