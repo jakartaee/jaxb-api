@@ -35,14 +35,14 @@
     <name>Jakarta XML Binding Specification</name>
 
     <scm>
-        <connection>scm:git:git://github.com/jakartaee/jaxb-api</connection>
-        <developerConnection>scm:git:git@github.com:jakartaee/jaxb-api</developerConnection>
-        <url>https://github.com/jakartaee/jaxb-api</url>
+        <connection>scm:git:git://github.com/jakartaee/jaxb-api.git</connection>
+        <developerConnection>scm:git:git@github.com:jakartaee/jaxb-api.git</developerConnection>
+        <url>https://github.com/jakartaee/jaxb-api.git</url>
         <tag>HEAD</tag>
     </scm>
     <distributionManagement>
         <site>
-            <url>scm:git:git@github.com:jakartaee/jaxb-api</url>
+            <url>scm:git:git@github.com:jakartaee/jaxb-api.git</url>
         </site>
     </distributionManagement>
 
