@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -144,7 +144,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * that doesn't have {@link XmlRootElement}. But they can't show up in an
  * XML instance (because they don't have XML element names).
  *
- * <p><b>Example 2: XML Schema Susbstitution group support</b>
+ * <p><b>Example 2: XML Schema substitution group support</b>
  * <p> The following example shows the annotations for XML Schema
  * substitution groups.  The annotations and the ObjectFactory are
  * derived from the schema.
