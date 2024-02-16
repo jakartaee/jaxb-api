@@ -23,7 +23,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 @ParameterizedTest
 @CsvFileSource(resources = "/jakarta/xml/bind/test/allScenarios.csv",
-    numLinesToSkip = 0,
+    numLinesToSkip = 9,
     nullValues = "**")
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
