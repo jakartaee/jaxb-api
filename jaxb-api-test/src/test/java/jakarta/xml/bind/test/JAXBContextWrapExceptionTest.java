@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,16 +10,13 @@
 
 package jakarta.xml.bind.test;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import java.util.Map;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertNull;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * regression test for
@@ -30,7 +27,7 @@ public class JAXBContextWrapExceptionTest {
 
     public static class Factory {
 
-        public static JAXBContext createContext(Class[] classesToBeBound, Map<String, ?> properties) throws JAXBException {
+        public static JAXBContext createContext(Class<?>[] classesToBeBound, Map<String, ?> properties) throws JAXBException {
             throw new JAXBException("test");
         }
 
@@ -45,23 +42,23 @@ public class JAXBContextWrapExceptionTest {
         try {
             JAXBContext.newInstance("whatever", ClassLoader.getSystemClassLoader());
         } catch (Throwable t) {
-            assertEquals("test", t.getMessage());
-            assertNull("Root cause must be null", t.getCause());
+            Assertions.assertEquals(t.getMessage(), "test");
+            Assertions.assertNull(t.getCause(), "Root cause must be null");
         }
     }
 
     @Test
     public void testClasses() {
         try {
-            JAXBContext.newInstance(new Class[0]);
-            assertTrue("This should fail", false);
+            JAXBContext.newInstance(new Class<?>[0]);
+            Assertions.assertTrue(false, "This should fail");
         } catch (Throwable t) {
-            assertEquals("test", t.getMessage());
-            assertNull("Root cause must be null", t.getCause());
+            Assertions.assertEquals(t.getMessage(), "test");
+            Assertions.assertNull(t.getCause(), "Root cause must be null");
         }
     }
 
-    @Before
+    @BeforeEach
     public void setup() {
         System.setProperty("jakarta.xml.bind.JAXBContextFactory", "jakarta.xml.bind.test.JAXBContextWrapExceptionTest$Factory");
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -73,7 +73,7 @@ public abstract class JAXBIntrospector {
      */
     public static Object getValue(Object jaxbElement) {
 	if (jaxbElement instanceof JAXBElement) {
-	    return ((JAXBElement)jaxbElement).getValue();
+	    return ((JAXBElement<?>)jaxbElement).getValue();
 	} else {
 	    // assume that class of this instance is
 	    // annotated with @XmlRootElement.

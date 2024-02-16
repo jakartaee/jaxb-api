@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,15 +10,12 @@
 
 package jakarta.xml.bind.test;
 
-
 import jaxb.test.usr.A;
-import junit.framework.AssertionFailedError;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import jakarta.xml.bind.JAXBContext;
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,8 +23,16 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
-import static junit.framework.TestCase.assertTrue;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.opentest4j.AssertionFailedError;
 
 /*
  * test for JDK-8131334: SAAJ Plugability Layer: using java.util.ServiceLoader
@@ -37,7 +42,6 @@ import static junit.framework.TestCase.assertTrue;
  *   1. allow java to write into $JAVA_HOME/conf: mkdir $JAVA_HOME/conf; chmod a+rw $JAVA_HOME/conf
  *   2. use "runUnsafe" property: mvn clean test -DrunUnsafe=true
  */
-@RunWith(Parameterized.class)
 public class JAXBContextTest {
 
     static final Logger logger = Logger.getLogger(JAXBContextTest.class.getName());
@@ -48,12 +52,6 @@ public class JAXBContextTest {
 
     // test-classes directory (required for setup and for security settings)
     static final String classesDir = JAXBContextTest.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-    private static final String FACTORY_ID_LEGACY = "jakarta.xml.bind.context.factory";
-    private static final String FACTORY_ID = "jakarta.xml.bind.JAXBContextFactory";
-    private static final String PACKAGE_LEGACY = "jaxb.factory.legacy."; // TODO: ???
-    private static final String PACKAGE_SPI = "jaxb.factory.spi."; // TODO: ???
-    private static final Object DEFAULT = "com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl";
-
 
     static {
         System.setProperty("classesDir", classesDir);
@@ -77,78 +75,12 @@ public class JAXBContextTest {
     private String expectedFactory;
     private Class<?> expectedException;
 
-    // Broken configurations were commented out.
-    @Parameterized.Parameters
-    public static Collection configurations() {
-        return Arrays.asList(new Object[][]{
-                // scenario-name, jaxb.properties, svc, arg1, arg2, system-props
-//                {"scenario-1", FACTORY_ID_LEGACY + "="+PACKAGE_LEGACY+"Valid", null, PACKAGE_LEGACY+"Valid$JAXBContext1", null, null},
-                {"scenario-3", FACTORY_ID_LEGACY + "=non.existing.FactoryClass", null, null, jakarta.xml.bind.JAXBException.class, null},
-                {"scenario-4", FACTORY_ID_LEGACY + "="+PACKAGE_LEGACY+"Invalid", null, null, jakarta.xml.bind.JAXBException.class, null},
-//                {"scenario-13", FACTORY_ID_LEGACY + "="+PACKAGE_LEGACY+"Valid", PACKAGE_LEGACY+"Valid2", PACKAGE_LEGACY+"Valid$JAXBContext1", null, PACKAGE_LEGACY+"Valid3"},
-
-//                {"scenario-1", FACTORY_ID_LEGACY + "="+PACKAGE_SPI+"Valid", null, PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-                {"scenario-3", FACTORY_ID_LEGACY + "=non.existing.FactoryClass", null, null, jakarta.xml.bind.JAXBException.class, null},
-                {"scenario-4", FACTORY_ID_LEGACY + "="+PACKAGE_SPI+"Invalid", null, null, jakarta.xml.bind.JAXBException.class, null},
-//                {"scenario-13", FACTORY_ID_LEGACY + "="+PACKAGE_SPI+"Valid", PACKAGE_SPI+"Valid2", PACKAGE_SPI+"Valid$JAXBContext1", null, PACKAGE_SPI+"Valid3"},
-
-//                {"scenario-1", FACTORY_ID + "="+PACKAGE_SPI+"Valid", null, PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-                {"scenario-3", FACTORY_ID + "=non.existing.FactoryClass", null, null, jakarta.xml.bind.JAXBException.class, null},
-                {"scenario-4", FACTORY_ID + "="+PACKAGE_SPI+"Invalid", null, null, jakarta.xml.bind.JAXBException.class, null},
-//                {"scenario-13", FACTORY_ID + "="+PACKAGE_SPI+"Valid", PACKAGE_SPI+"Valid2", PACKAGE_SPI+"Valid$JAXBContext1", null, PACKAGE_SPI+"Valid3"},
-
-//                {"scenario-1", FACTORY_ID + "="+PACKAGE_LEGACY+"Valid", null, PACKAGE_LEGACY+"Valid$JAXBContext1", null, null},
-                {"scenario-3", FACTORY_ID + "=non.existing.FactoryClass", null, null, jakarta.xml.bind.JAXBException.class, null},
-                {"scenario-4", FACTORY_ID + "="+PACKAGE_LEGACY+"Invalid", null, null, jakarta.xml.bind.JAXBException.class, null},
-//                {"scenario-13", FACTORY_ID + "="+PACKAGE_LEGACY+"Valid", PACKAGE_LEGACY+"Valid2", PACKAGE_LEGACY+"Valid$JAXBContext1", null, PACKAGE_LEGACY+"Valid3"},
-
-
-                {"scenario-2", "something=AnotherThing", null, null, jakarta.xml.bind.JAXBException.class, null},
-
-                // service loader
-                {"scenario-8", null, PACKAGE_SPI+"Valid\n", PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-                {"scenario-9", null, PACKAGE_SPI+"Valid", PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-                {"scenario-11", null, PACKAGE_SPI+"Invalid", null, jakarta.xml.bind.JAXBException.class, null},
-                {"scenario-15", null, PACKAGE_SPI+"Valid", PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-
-                // service loader - legacy
-//                {"scenario-8 legacy-svc", null, PACKAGE_SPI+"Valid\n", PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-//                {"scenario-9 legacy-svc", null, PACKAGE_SPI+"Valid", PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-                {"scenario-11 legacy-svc", null, PACKAGE_SPI+"Invalid", null, jakarta.xml.bind.JAXBException.class, null},
-//                {"scenario-15 legacy-svc", null, PACKAGE_SPI+"Valid", PACKAGE_SPI+"Valid$JAXBContext1", null, null},
-
-                // service loader - legacy
-//                {"scenario-8 legacy-svc", null, PACKAGE_LEGACY+"Valid\n", PACKAGE_LEGACY+"Valid$JAXBContext1", null, null},
-//                {"scenario-9 legacy-svc", null, PACKAGE_LEGACY+"Valid", PACKAGE_LEGACY+"Valid$JAXBContext1", null, null},
-                {"scenario-11 legacy-svc", null, PACKAGE_LEGACY+"Invalid", null, jakarta.xml.bind.JAXBException.class, null},
-//                {"scenario-15 legacy-svc", null, PACKAGE_LEGACY+"Valid", PACKAGE_LEGACY+"Valid$JAXBContext1", null, null},
-
-                // system property
-                {"scenario-5", null, null, PACKAGE_SPI+"Valid$JAXBContext1", null, PACKAGE_SPI+"Valid"},
-                {"scenario-7", null, null, null, jakarta.xml.bind.JAXBException.class, PACKAGE_SPI+"Invalid"},
-                {"scenario-14", null, PACKAGE_SPI+"Valid2", PACKAGE_SPI+"Valid$JAXBContext1", null, PACKAGE_SPI+"Valid"},
-
-                {"scenario-5", null, null, PACKAGE_LEGACY+"Valid$JAXBContext1", null, PACKAGE_LEGACY+"Valid"},
-                {"scenario-7", null, null, null, jakarta.xml.bind.JAXBException.class, PACKAGE_LEGACY+"Invalid"},
-                {"scenario-14", null, PACKAGE_LEGACY+"Valid2", PACKAGE_LEGACY+"Valid$JAXBContext1", null, PACKAGE_LEGACY+"Valid"},
-                {"scenario-6", null, null, null, jakarta.xml.bind.JAXBException.class, "jaxb.factory.NonExisting"},
-
-                {"scenario-10", null, "jaxb.factory.NonExisting", null, jakarta.xml.bind.JAXBException.class, null},
-
-                {"scenario-12", null, null, DEFAULT, jakarta.xml.bind.JAXBException.class, null},
-        });
-    }
-
-    // scenario-name, jaxb.properties, svc, arg1, arg2, system-props
-    public JAXBContextTest(
-            String scenario,
-            String jaxbPropertiesClass,
-            String spiClass,
-            String expectedFactory,
-            Class<?> expectedException,
-            String systemProperty
-    ) {
-
+    void setup(String scenario,
+        String jaxbPropertiesClass,
+        String spiClass,
+        String expectedFactory,
+        Class<?> expectedException,
+        String systemProperty) {
         // ensure setup may be done ...
         System.setSecurityManager(null);
 
@@ -170,8 +102,19 @@ public class JAXBContextTest {
         prepare(jaxbPropertiesClass, spiClass);
     }
 
-    @Test
-    public void testPath() throws IOException {
+    @JAXBContextOldParameterized
+    void testPath(String scenario,
+            String jaxbPropertiesClass,
+            String spiClass,
+            String expectedFactory,
+            Class<?> expectedException,
+            String systemProperty) throws IOException {
+        setup(scenario,
+            jaxbPropertiesClass,
+            spiClass,
+            expectedFactory,
+            expectedException,
+            systemProperty);
         logConfigurations();
         try {
             JAXBContext ctx = JAXBContext.newInstance("jaxb.test.usr");
@@ -183,8 +126,19 @@ public class JAXBContextTest {
         }
     }
 
-    @Test
-    public void testClasses() throws IOException {
+    @JAXBContextOldParameterized
+    public void testClasses(String scenario,
+            String jaxbPropertiesClass,
+            String spiClass,
+            String expectedFactory,
+            Class<?> expectedException,
+            String systemProperty) throws IOException {
+        setup(scenario,
+            jaxbPropertiesClass,
+            spiClass,
+            expectedFactory,
+            expectedException,
+            systemProperty);
         logConfigurations();
         try {
             JAXBContext ctx = JAXBContext.newInstance(new Class[] {A.class}, null);
@@ -196,8 +150,19 @@ public class JAXBContextTest {
         }
     }
 
-    @Test
-    public void testClass() throws IOException {
+    @JAXBContextOldParameterized
+    public void testClass(String scenario,
+            String jaxbPropertiesClass,
+            String spiClass,
+            String expectedFactory,
+            Class<?> expectedException,
+            String systemProperty) throws IOException {
+        setup(scenario,
+            jaxbPropertiesClass,
+            spiClass,
+            expectedFactory,
+            expectedException,
+            systemProperty);
         logConfigurations();
         try {
             JAXBContext ctx = JAXBContext.newInstance(A.class);
@@ -210,11 +175,11 @@ public class JAXBContextTest {
     }
 
     private void handleResult(JAXBContext ctx) {
-        assertTrue("No ctx found.", ctx != null);
+        Assertions.assertTrue(null != ctx, "No ctx found.");
         log("     TEST: context class = [" + ctx.getClass().getName() + "]\n");
         String className = ctx.getClass().getName();
-        assertTrue("Incorrect ctx: [" + className + "], Expected: [" + expectedFactory + "]",
-                className.equals(expectedFactory));
+        Assertions.assertTrue(className.equals(expectedFactory),
+            "Incorrect ctx: [" + className + "], Expected: [" + expectedFactory + "]");
 
         log(" TEST PASSED");
     }
@@ -229,8 +194,8 @@ public class JAXBContextTest {
         if (expectedException == null) {
             throw new AssertionFailedError("Unexpected exception:" + throwableClass);
         }
-        assertTrue("Got unexpected exception: [" + throwableClass + "], expected: [" + expectedException + "]",
-                correctException);
+        Assertions.assertTrue(correctException,
+            "Got unexpected exception: [" + throwableClass + "], expected: [" + expectedException + "]");
         log(" TEST PASSED");
     }
 
@@ -243,24 +208,53 @@ public class JAXBContextTest {
         System.setSecurityManager(null);
     }
 
-    @Test
-    public void testPathSM() throws IOException {
+    @JAXBContextOldParameterized
+    public void testPathSM(String scenario,
+        String jaxbPropertiesClass,
+        String spiClass,
+        String expectedFactory,
+        Class<?> expectedException,
+        String systemProperty) throws IOException {
         enableSM();
-        testPath();
+        testPath(scenario,
+        jaxbPropertiesClass,
+        spiClass,
+        expectedFactory,
+        expectedException,
+        systemProperty);
     }
 
-    @Test
-    public void testClassSM() throws IOException {
+    @JAXBContextOldParameterized
+    public void testClassSM(String scenario,
+            String jaxbPropertiesClass,
+            String spiClass,
+            String expectedFactory,
+            Class<?> expectedException,
+            String systemProperty) throws IOException {
         enableSM();
-        testClass();
+        testClass(scenario,
+        jaxbPropertiesClass,
+        spiClass,
+        expectedFactory,
+        expectedException,
+        systemProperty);
     }
 
-    @Test
-    public void testClassesSM() throws IOException {
+    @JAXBContextOldParameterized
+    public void testClassesSM(String scenario,
+            String jaxbPropertiesClass,
+            String spiClass,
+            String expectedFactory,
+            Class<?> expectedException,
+            String systemProperty) throws IOException {
         enableSM();
-        testClasses();
+        testClasses(scenario,
+        jaxbPropertiesClass,
+        spiClass,
+        expectedFactory,
+        expectedException,
+        systemProperty);
     }
-
 
     private void enableSM() {
         System.setSecurityManager(null);
