@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2023 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2024 Contributors to the Eclipse Foundation
 //
 
 == Customizing XML Schema to Java Representation Binding
@@ -2072,14 +2072,14 @@ print and parse methods.
 package pkg;
 import jakarta.xml.bind.DatatypeConverter;
 public class MyDatatypeConverter {
-public static long myParseDate(String s) {
-    java.util.Calendar d = DatatypeConverter.parse(s);
-    long result= cvtCalendarToLong(d) ; // userdefined method
-    return result;
+    public static long myParseDate(String s) {
+        java.util.Calendar d = DatatypeConverter.parseDateTime(s);
+        long result= cvtCalendarToLong(d) ; // user defined method
+        return result;
     }
     public static String myPrintDate(long l) {
-        java.util.Calendar d = cvtLongToCalendar(l);//user defined
-        return DatatypeConverter.print(d);
+        java.util.Calendar d = cvtLongToCalendar(l); //user defined method
+        return DatatypeConverter.printDateTime(d);
     }
 }
 ----
