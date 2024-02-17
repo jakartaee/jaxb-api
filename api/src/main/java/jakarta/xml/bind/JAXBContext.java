@@ -179,7 +179,7 @@ import java.util.Map;
  * factory class. This phase of the look up enables per-JVM override of the Jakarta XML Binding implementation.
  *
  * <li>
- * If the property {@link #JAXB_CONTEXT_FACTORY} exists in the {@code Map<String, ?>} passed to {@link #newInstance(Class[], Map)}
+ * If the property {@link #JAXB_CONTEXT_FACTORY} exists in the {@code Map<String, ?>} passed to {@link #newInstance(Class[], ClassLoader, Map)}
  * or to {@link #newInstance(String, ClassLoader, Map)}, then its value is assumed to be the fully qualified provider factory class name.
  * This phase of the look up enables context sensitive selection of the Jakarta XML Binding implementation.
  *
@@ -543,7 +543,12 @@ public abstract class JAXBContext {
     public static JAXBContext newInstance( Class<?> ... classesToBeBound )
             throws JAXBException {
 
-        return newInstance(classesToBeBound,Collections.<String,Object>emptyMap());
+        return newInstance(classesToBeBound, getContextClassLoader(), Collections.<String,Object>emptyMap());
+    }
+
+    public static JAXBContext newInstance( Class<?>[] classesToBeBound, ClassLoader classLoader)
+            throws JAXBException {
+        return newInstance(classesToBeBound, classLoader, Collections.<String,Object>emptyMap());
     }
 
     /**
@@ -588,7 +593,7 @@ public abstract class JAXBContext {
      *
      * @since 1.6, JAXB 2.0
      */
-    public static JAXBContext newInstance( Class<?>[] classesToBeBound, Map<String,?> properties )
+    public static JAXBContext newInstance( Class<?>[] classesToBeBound, ClassLoader classLoader, Map<String,?> properties )
             throws JAXBException {
 
         if (classesToBeBound == null) {
@@ -602,7 +607,7 @@ public abstract class JAXBContext {
             }
         }
 
-        return ContextFinder.find(classesToBeBound,properties);
+        return ContextFinder.find(classesToBeBound, classLoader, properties);
     }
 
     /**
