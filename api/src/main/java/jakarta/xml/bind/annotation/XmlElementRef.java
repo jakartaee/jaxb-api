@@ -144,7 +144,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * that doesn't have {@link XmlRootElement}. But they can't show up in an
  * XML instance (because they don't have XML element names).
  *
- * <p><b>Example 2: XML Schema substitution group support</b>
+ * <p><b>Example 2: XML Schema Substitution group support</b>
  * <p> The following example shows the annotations for XML Schema
  * substitution groups.  The annotations and the ObjectFactory are
  * derived from the schema.
