@@ -21,9 +21,9 @@ import java.lang.annotation.Target;
 import jakarta.activation.DataHandler;
 
 /**
- * Marks a field/property that its XML form is a uri reference to mime content.
+ * Marks a field/property that its XML form is a URI reference to mime content.
  * The mime content is optimally stored out-of-line as an attachment.
- *
+ * <p>
  * A field/property must always map to the {@link DataHandler} class.
  *
  * <h2>Usage</h2>

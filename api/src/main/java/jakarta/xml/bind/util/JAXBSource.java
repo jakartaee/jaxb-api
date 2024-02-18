@@ -56,7 +56,7 @@ import org.xml.sax.XMLFilter;
  *
  * <p>
  * The fact that JAXBSource derives from SAXSource is an implementation
- * detail. Thus in general applications are strongly discouraged from
+ * detail. Thus, in general applications are strongly discouraged from
  * accessing methods defined on SAXSource. In particular,
  * the setXMLReader and setInputSource methods shall never be called.
  * The XMLReader object obtained by the getXMLReader method shall
@@ -64,7 +64,7 @@ import org.xml.sax.XMLFilter;
  * the getInputSource method.
  *
  * <p>
- * Similarly the InputSource object obtained by the getInputSource
+ * Similarly, the InputSource object obtained by the getInputSource
  * method shall be used only for being parsed by the XMLReader object
  * returned by the getXMLReader.
  *
@@ -140,7 +140,7 @@ public class JAXBSource extends SAXSource {
 
     // this object will pretend as an XMLReader.
     // no matter what parameter is specified to the parse method,
-    // it just parse the contentObject.
+    // it just parses the contentObject.
     private final XMLReader pseudoParser = new XMLReader() {
         @Override
         public boolean getFeature(String name) throws SAXNotRecognizedException {
@@ -259,7 +259,7 @@ public class JAXBSource extends SAXSource {
     };
 
     /**
-     * Hook to throw exception from the middle of a contructor chained call
+     * Hook to throw exception from the middle of a constructor chained call
      * to this
      */
     private static Marshaller assertionFailed( String message )

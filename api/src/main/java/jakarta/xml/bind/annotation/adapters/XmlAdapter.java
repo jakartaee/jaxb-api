@@ -40,7 +40,7 @@ package jakarta.xml.bind.annotation.adapters;
  *        representation. </li> 
  *
  *   <li> <b> XmlAdapter.unmarshal(...): </b> During unmarshalling,
- *        Jakarta XML Binding binding framework first unmarshals XML representation
+ *        Jakarta XML Binding binding framework first unmarshalls XML representation
  *        to a value type and then invokes XmlAdapter.unmarshal(..) to
  *        adapt the value type to a bound type. </li> 
  * </ul>
@@ -166,7 +166,7 @@ public abstract class XmlAdapter<ValueType,BoundType> {
      * Convert a bound type to a value type.
      *
      * @param v
-     *      The value to be convereted. Can be null.
+     *      The value to be converted. Can be null.
      * @throws Exception
      *      if there's an error during the conversion. The caller is responsible for
      *      reporting the error to the user through {@link jakarta.xml.bind.ValidationEventHandler}.

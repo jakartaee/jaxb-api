@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
 /**
  * <p>
  * A container for multiple @{@link XmlElement} annotations.
- *
+ * <p>
  * Multiple annotations of the same type are not allowed on a program
  * element. This annotation therefore serves as a container annotation
  * for multiple {@code @XmlElements} as follows:
@@ -33,7 +33,7 @@ import java.lang.annotation.Target;
  * following program elements: </p>
  * <ul>
  *   <li> a JavaBean property </li>
- *   <li> non static, non transient field </li>
+ *   <li> non-static, non transient field </li>
  * </ul>
  *
  * This annotation is intended for annotation a JavaBean collection

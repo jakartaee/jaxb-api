@@ -21,7 +21,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * 
  * <p>
  * To preserve referential integrity of an object graph across XML
- * serialization followed by a XML deserialization, requires an object
+ * serialization followed by an XML deserialization, requires an object
  * reference to be marshaled by reference or containment
  * appropriately. Annotations {@code @XmlID} and {@code @XmlIDREF}
  * together allow a customized mapping of a JavaBean property's
@@ -32,7 +32,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * program elements: 
  * <ul> 
  *   <li> a JavaBean property </li>
- *   <li> non static, non transient field </li>
+ *   <li> non-static, non transient field </li>
  * </ul>
  * 
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
@@ -127,7 +127,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *  }
  * }
  * {@snippet lang="XML" :
- *  <!-- XML Schema mapping for above code frament -->
+ *  <!-- XML Schema mapping for above code fragment -->
  *
  *  <xs:complexType name="Invoice">
  *    <xs:complexContent>

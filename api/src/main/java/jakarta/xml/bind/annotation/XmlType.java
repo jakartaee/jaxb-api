@@ -17,10 +17,10 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * Maps a class or an enum type to a XML Schema type.
+ * Maps a class or an enum type to an XML Schema type.
  *
  * <p><b>Usage</b></p>
- * <p> The {@code @XmlType} annnotation can be used with the following program
+ * <p> The {@code @XmlType} annotation can be used with the following program
  * elements:
  * <ul>
  *   <li> a top level class </li>
@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
  *
  * <h2> Mapping a Class </h2>
  * <p>
- * A class maps to a XML Schema type. A class is a data container for
+ * A class maps to an XML Schema type. A class is a data container for
  * values represented by properties and fields. A schema type is a
  * data container for values represented by schema components within a
  * schema type's content model (e.g. model groups, attributes etc).
@@ -44,7 +44,7 @@ import java.lang.annotation.Target;
  * create an instance of this class. If both are present, the static
  * factory method overrides the no-arg constructor.
  * <p>
- * A class maps to either a XML Schema complex type or a XML Schema simple
+ * A class maps to either an XML Schema complex type or an XML Schema simple
  * type. The XML Schema type is derived based on the
  * mapping of JavaBean properties and fields contained within the
  * class. The schema type to which the class is mapped can either be
@@ -90,11 +90,11 @@ import java.lang.annotation.Target;
  * <p>
  * <b> Mapping class to XML Schema simple type </b>
  * <p>
- * A class can be mapped to a XML Schema simple type using the
+ * A class can be mapped to an XML Schema simple type using the
  * {@code @XmlValue} annotation. For additional details and examples,
  * see @{@link XmlValue} annotation type.
  * <p>
- * The following table shows the mapping of the class to a XML Schema
+ * The following table shows the mapping of the class to an XML Schema
  * complex type or simple type. The notational symbols used in the table are:
  * <ul>
  *   <li> {@literal ->}    : represents a mapping </li>
@@ -162,7 +162,7 @@ import java.lang.annotation.Target;
  *
  * <h3> Mapping an enum type </h3>
  *
- * An enum type maps to a XML schema simple type with enumeration
+ * An enum type maps to an XML schema simple type with enumeration
  * facets. The following annotation elements are ignored since they
  * are not meaningful: {@code propOrder()} , {@code factoryMethod()} ,
  * {@code factoryClass()} .
@@ -382,7 +382,7 @@ public @interface XmlType {
 
     /**
      * Specifies the order for XML Schema elements when class is
-     * mapped to a XML Schema complex type.
+     * mapped to an XML Schema complex type.
      *
      * <p> Refer to the table for how the propOrder affects the
      * mapping of class </p>
@@ -395,7 +395,7 @@ public @interface XmlType {
      * <p> All of the JavaBean properties being mapped to XML Schema elements
      *     must be listed.
      * <p> A JavaBean property or field listed in propOrder must not
-     *     be transient or annotated with } @XmlTransient}.
+     *     be transient or annotated with {@code @XmlTransient}.
      * <p> The default ordering of JavaBean properties is determined
      *     by @{@link XmlAccessorOrder}.
      */

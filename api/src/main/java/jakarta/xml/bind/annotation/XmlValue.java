@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 /**
  * <p>
  * Enables mapping a class to a  XML Schema complex type with a
- * simpleContent or a XML Schema simple type. 
+ * simpleContent or an XML Schema simple type. 
  * </p>
  *
  * <p>
@@ -28,7 +28,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * elements: 
  * <ul> 
  *   <li> a JavaBean property.</li>
- *   <li> non static, non transient field.</li>
+ *   <li> non-static, non transient field.</li>
  * </ul>
  * 
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
@@ -49,14 +49,14 @@ import static java.lang.annotation.RetentionPolicy.*;
  *       type.  </li>
  * 
  *   <li>If the type of the field or property is not a collection
- *       type, then the type must map to a XML Schema simple type. </li>
+ *       type, then the type must map to an XML Schema simple type. </li>
  *
  * </ul>
  * <p>
  * If the annotated JavaBean property is the sole class member being
  * mapped to XML Schema construct, then the class is mapped to a
  * simple type. 
- *
+ * <p>
  * If there are additional JavaBean properties (other than the
  * JavaBean property annotated with {@code @XmlValue} annotation)
  * that are mapped to XML attributes, then the class is mapped to a

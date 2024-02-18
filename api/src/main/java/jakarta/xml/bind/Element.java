@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -12,7 +12,7 @@ package jakarta.xml.bind;
 
 /**
  * This is an element marker interface.
- *
+ * <p>
  * Under certain circumstances, it is necessary for the binding compiler to 
  * generate derived java content classes that implement this interface.  In 
  * those cases, client applications must supply element instances rather than 

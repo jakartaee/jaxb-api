@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -77,7 +77,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     /**
      * Faster but less robust {@code String->int} conversion.
-     *
+     * <p>
      * Note that:
      * <ol>
      *  <li>XML Schema allows '+', but {@link Integer#valueOf(String)} is not.
@@ -175,7 +175,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
          * jfloat.valueOf ignores leading and trailing whitespaces,
         whereas this is not allowed in xfloat.
          * jfloat.valueOf allows "float type suffix" (f, F) to be
-        appended after float literal (e.g., 1.52e-2f), whereare
+        appended after float literal (e.g., 1.52e-2f), whereas
         this is not the case of xfloat.
 
         gray zone
@@ -195,7 +195,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
             return Float.NEGATIVE_INFINITY;
         }
 
-        if (s.length() == 0
+        if (s.isEmpty()
                 || !isDigitOrPeriodOrSign(s.charAt(0))
                 || !isDigitOrPeriodOrSign(s.charAt(s.length() - 1))) {
             throw new NumberFormatException();
@@ -241,7 +241,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
             return Double.NEGATIVE_INFINITY;
         }
 
-        if (val.length() == 0
+        if (val.isEmpty()
                 || !isDigitOrPeriodOrSign(val.charAt(0))
                 || !isDigitOrPeriodOrSign(val.charAt(val.length() - 1))) {
             throw new NumberFormatException(val);
@@ -398,7 +398,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
             uri = nsc.getNamespaceURI(prefix);
             // uri can never be null according to javadoc,
             // but some users reported that there are implementations that return null.
-            if (uri == null || uri.length() == 0) // crap. the NamespaceContext interface is broken.
+            if (uri == null || uri.isEmpty()) // crap. the NamespaceContext interface is broken.
             // error: unbound prefix
             {
                 throw new IllegalArgumentException("prefix " + prefix + " is not bound to a namespace");
@@ -520,7 +520,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     public static String _printDate(Calendar val) {
         if (null == val) throw new IllegalArgumentException("val is null");
-        return CalendarFormatter.doFormat((new StringBuilder("%Y-%M-%D").append("%z")).toString(),val);
+        return CalendarFormatter.doFormat("%Y-%M-%D%z",val);
     }
 
     @Override
@@ -592,7 +592,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         String prefix = nsc.getPrefix(val.getNamespaceURI());
         String localPart = val.getLocalPart();
 
-        if (prefix == null || prefix.length() == 0) { // be defensive
+        if (prefix == null || prefix.isEmpty()) { // be defensive
             qname = localPart;
         } else {
             qname = prefix + ':' + localPart;
@@ -706,7 +706,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      *      base64Binary data is likely to be long, and decoding requires
      *      each character to be accessed twice (once for counting length, another
      *      for decoding.)
-     *
+     * <p>
      *      A benchmark showed that taking {@link String} is faster, presumably
      *      because JIT can inline a lot of string access (with data of 1K chars, it was twice as fast)
      */
@@ -799,7 +799,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     /**
      * Encodes a byte array into a char array by doing base64 encoding.
-     *
+     * <p>
      * The caller must supply a big enough buffer.
      *
      * @return
@@ -841,7 +841,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     /**
      * Encodes a byte array into another byte array by first doing base64 encoding
      * then encoding the result in ASCII.
-     *
+     * <p>
      * The caller must supply a big enough buffer.
      *
      * @return
@@ -1050,7 +1050,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                 offset *= -1;
             }
 
-            offset /= 60 * 1000; // offset is in milli-seconds
+            offset /= 60 * 1000; // offset is in milliseconds
 
             formatTwoDigits(offset / 60, buf);
             buf.append(':');

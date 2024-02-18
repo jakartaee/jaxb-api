@@ -18,7 +18,7 @@ import javax.xml.transform.sax.SAXResult;
 
 /**
  * JAXP {@link javax.xml.transform.Result} implementation
- * that unmarshals a Jakarta XML Binding object.
+ * that unmarshalls a Jakarta XML Binding object.
  * 
  * <p>
  * This utility class is useful to combine Jakarta XML Binding with
@@ -45,11 +45,11 @@ import javax.xml.transform.sax.SAXResult;
  * 
  * <p>
  * The fact that JAXBResult derives from SAXResult is an implementation
- * detail. Thus in general applications are strongly discouraged from
+ * detail. Thus, in general applications are strongly discouraged from
  * accessing methods defined on SAXResult.
  * 
  * <p>
- * In particular it shall never attempt to call the setHandler, 
+ * In particular, it shall never attempt to call the setHandler,
  * setLexicalHandler, and setSystemId methods.
  * 
  * @author
@@ -125,7 +125,7 @@ public class JAXBResult extends SAXResult {
     }
     
     /**
-     * Hook to throw exception from the middle of a contructor chained call
+     * Hook to throw exception from the middle of a constructor chained call
      * to this
      */
     private static Unmarshaller assertionFailed() throws JAXBException {

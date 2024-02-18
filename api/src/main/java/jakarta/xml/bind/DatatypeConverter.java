@@ -17,7 +17,7 @@ import javax.xml.namespace.NamespaceContext;
  * The javaType binding declaration can be used to customize the binding of 
  * an XML schema datatype to a Java datatype. Customizations can involve 
  * writing a parse and print method for parsing and printing lexical 
- * representations of a XML schema datatype respectively. However, writing 
+ * representations of an XML schema datatype respectively. However, writing 
  * parse and print methods requires knowledge of the lexical representations ( 
  * <a href="http://www.w3.org/TR/xmlschema-2/"> XML Schema Part2: Datatypes 
  * specification </a>) and hence may be difficult to write. 
@@ -61,7 +61,7 @@ import javax.xml.namespace.NamespaceContext;
  * </p>
  * 
  * <p>
- * A print method for a XML schema datatype can output any lexical 
+ * A print method for an XML schema datatype can output any lexical 
  * representation that is valid with respect to the XML schema datatype.
  * If an error is encountered during conversion, then an IllegalArgumentException,
  * or a subclass of IllegalArgumentException must be thrown by the method.
@@ -158,7 +158,7 @@ final public class DatatypeConverter {
      *     A string containing a lexical representation of
      *     xsd:int.
      * @return
-     *     A int value represented by the string argument.
+     *     An int value represented by the string argument.
      * @throws NumberFormatException <code>lexicalXSDInt</code> is not a valid string representation of an <code>int</code> value.
      */ 
     public static int parseInt( String lexicalXSDInt ) {

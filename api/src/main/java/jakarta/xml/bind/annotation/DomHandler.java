@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -51,9 +51,9 @@ public interface DomHandler<ElementT,ResultT extends Result> {
      *      if any error happens between the invocation of this method
      *      and the invocation of {@link #getElement(Result)}, they
      *      must be reported to this handler.
-     *
+     * <p>
      *      The caller must provide a non-null error handler.
-     *
+     * <p>
      *      The {@link Result} object created from this method
      *      may hold a reference to this error handler.
      *
@@ -69,7 +69,7 @@ public interface DomHandler<ElementT,ResultT extends Result> {
      *
      * <p>
      * Multiple invocations of this method may return different objects.
-     * This method can be invoked only when the whole sub-tree are fed
+     * This method can be invoked only when the whole subtree are fed
      * to the {@link Result} object.
      *
      * @param rt
@@ -87,13 +87,13 @@ public interface DomHandler<ElementT,ResultT extends Result> {
      *
      * <p>
      * If non-null, the returned {@link Source} must contain a whole document
-     * rooted at one element, which will then be weaved into a bigger document
+     * rooted at one element, which will then be woven into a bigger document
      * that the Jakarta XML Binding provider is marshalling.
      *
      * @param errorHandler
      *      Receives any errors happened during the process of converting
      *      an element into a {@link Source}.
-     *
+     * <p>
      *      The caller must provide a non-null error handler.
      *
      * @return

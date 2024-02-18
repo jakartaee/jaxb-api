@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,7 +10,7 @@
 
 /**
  * {@link jakarta.xml.bind.annotation.adapters.XmlAdapter} and its spec-defined
- * sub-classes to allow arbitrary Java classes to be used with Jakarta XML Binding.
+ * subclasses to allow arbitrary Java classes to be used with Jakarta XML Binding.
  * 
  * <p>
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.

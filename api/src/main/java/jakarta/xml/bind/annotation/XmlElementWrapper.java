@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * following program elements: 
  * <ul> 
  *   <li> JavaBean property </li>
- *   <li> non static, non transient field </li>
+ *   <li> non-static, non transient field </li>
  * </ul>
  *
  * <p>The usage is subject to the following constraints:
