@@ -48,7 +48,7 @@ public interface UnmarshallerHandler extends ContentHandler
 {
     /**
      * Obtains the unmarshalled result.
-     * 
+     * <p>
      * This method can be called only after this handler
      * receives the endDocument SAX event.
      * 

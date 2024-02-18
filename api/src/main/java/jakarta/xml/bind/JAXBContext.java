@@ -57,7 +57,7 @@ import java.util.Map;
  * any global XML element declared in the schema to be unmarshalled as
  * the root of an instance document.
  * Additionally, the unmarshal method allows for an unrecognized root element that
- * has  an xsi:type attribute's value that references a type definition declared in
+ * has an xsi:type attribute's value that references a type definition declared in
  * the schema  to be unmarshalled as the root of an instance document.
  * The {@code JAXBContext} object
  * allows the merging of global elements and type definitions across a set of schemas (listed
@@ -97,7 +97,7 @@ import java.util.Map;
  * }
  *
  * <p>
- * Once the client application has an instance of the the schema derived object,
+ * Once the client application has an instance of the schema derived object,
  * it can use the mutator methods to set content on it.
  *
  * <p>
@@ -121,11 +121,11 @@ import java.util.Map;
  * marshalling process can alternatively produce SAX2 event streams to a
  * registered {@code ContentHandler} or produce a DOM Node object.
  * Client applications have control over the output encoding as well as
- * whether or not to marshal the XML data as a complete document or
+ * whether to marshal the XML data as a complete document or
  * as a fragment.
  *
  * <p>
- * Here is a simple example that unmarshals an XML document and then marshals
+ * Here is a simple example that unmarshalls an XML document and then marshals
  * it back out:
  *
  * {@snippet :
@@ -299,7 +299,7 @@ public abstract class JAXBContext {
      * are reachable, as defined in {@link #newInstance(Class...)}, from the
      * listed classes are also registered with JAXBContext.
      * <p>
-     * Constraints on class name occuring in a {@code jaxb.index} file are:
+     * Constraints on class name occurring in a {@code jaxb.index} file are:
      * <ul>
      *   <li>Must not end with ".class".</li>
      *   <li>Class names are resolved relative to package containing
@@ -346,7 +346,7 @@ public abstract class JAXBContext {
      */
     public static JAXBContext newInstance( String contextPath, ClassLoader classLoader ) throws JAXBException {
 
-        return newInstance(contextPath,classLoader,Collections.<String,Object>emptyMap());
+        return newInstance(contextPath,classLoader,Collections.emptyMap());
     }
 
     /**
@@ -481,13 +481,13 @@ public abstract class JAXBContext {
      * <p>
      * The client application must supply a list of classes that the new
      * context object needs to recognize.
-     *
+     * <p>
      * Not only the new context will recognize all the classes specified,
      * but it will also recognize any classes that are directly/indirectly
      * referenced statically from the specified classes. Subclasses of
      * referenced classes nor {@code @XmlTransient} referenced classes
      * are not registered with JAXBContext.
-     *
+     * <p>
      * For example, in the following Java code, if you do
      * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
      * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
@@ -543,7 +543,7 @@ public abstract class JAXBContext {
     public static JAXBContext newInstance( Class<?> ... classesToBeBound )
             throws JAXBException {
 
-        return newInstance(classesToBeBound,Collections.<String,Object>emptyMap());
+        return newInstance(classesToBeBound,Collections.emptyMap());
     }
 
     /**

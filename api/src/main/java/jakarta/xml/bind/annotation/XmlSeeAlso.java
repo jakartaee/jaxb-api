@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * Instructs Jakarta XML Binding to also bind other classes when binding this class.
  *
  * <p>
- * Java makes it impractical/impossible to list all sub-classes of
+ * Java makes it impractical/impossible to list all subclasses of
  * a given class. This often gets in a way of Jakarta XML Binding users, as it Jakarta XML Binding
  * cannot automatically list up the classes that need to be known
  * to {@link JAXBContext}.

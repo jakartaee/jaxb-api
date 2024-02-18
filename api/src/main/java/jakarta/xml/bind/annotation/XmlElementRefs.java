@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,9 +24,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p>
  * Compared to an element property (property with {@link XmlElement}
  * annotation), a reference property has a different substitution semantics.
- * When a sub-class is assigned to a property, an element property produces
+ * When a subclass is assigned to a property, an element property produces
  * the same tag name with @xsi:type, whereas a reference property produces
- * a different tag name (the tag name that's on the the sub-class.)
+ * a different tag name (the tag name that's on the subclass.)
  *
  * <p> This annotation can be used with the following annotations: 
  * {@link XmlJavaTypeAdapter}, {@link XmlElementWrapper}.

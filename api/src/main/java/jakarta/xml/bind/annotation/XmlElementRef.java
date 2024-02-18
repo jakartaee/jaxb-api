@@ -20,7 +20,7 @@ import static java.lang.annotation.ElementType.METHOD;
 
 /**
  * <p>
- * Maps a JavaBean property to a XML element derived from property's type.
+ * Maps a JavaBean property to an XML element derived from property's type.
  * <p>
  * <b>Usage</b>
  * <p>
@@ -35,7 +35,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * JavaBean property at runtime.
  *
  * <h2> XML Schema substitution group support </h2>
- * XML Schema allows a XML document author to use XML element names
+ * XML Schema allows an XML document author to use XML element names
  * that were not statically specified in the content model of a
  * schema using substitution groups. Schema derived code provides
  * support for substitution groups using an <i>element property</i>,
@@ -210,7 +210,7 @@ public @interface XmlElementRef {
     /**
      * The Java type being referenced.
      * <p>
-     * If the value is DEFAULT.class, the type is inferred from the
+     * If the value is DEFAULT.class, the type is inferred from
      * the type of the JavaBean property.
      */
     Class<?> type() default DEFAULT.class;

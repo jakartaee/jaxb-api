@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -109,7 +109,7 @@
  * mapping, there is no semantic difference between a field and
  * a JavaBean property. Thus, an annotation that can be applied
  * to a JavaBean property can always be applied to a
- * field. Hence in the Javadoc documentation, for brevity, the
+ * field. Hence, in the Javadoc documentation, for brevity, the
  * term JavaBean property or property is used to mean either JavaBean
  * property or a field. Where required, both are explicitly
  * mentioned.
@@ -118,7 +118,7 @@
  * no semantic difference between a top level class and a
  * static nested class. Thus, an annotation that can be applied
  * to a top level class, can always be applied to a nested
- * static class. Hence in the Javadoc documentation, for
+ * static class. Hence, in the Javadoc documentation, for
  * brevity, the term "top level class" or just class is used to
  * mean either a top level class or a nested static
  * class.

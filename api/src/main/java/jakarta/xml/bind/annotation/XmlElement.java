@@ -20,7 +20,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Maps a JavaBean property to a XML element derived from property name.
+ * Maps a JavaBean property to an XML element derived from property name.
  *
  * <p> <b>Usage</b>
  * <p>
@@ -28,7 +28,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * elements:
  * <ul>
  *   <li> a JavaBean property </li>
- *   <li> non static, non transient field </li>
+ *   <li> non-static, non transient field </li>
  *   <li> within {@link XmlElements}
  * </ul>
  *
@@ -58,7 +58,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * which the containing class is mapped.
  *
  * <p>
- * <b>Example 1: </b> Map a public non static non final field to local
+ * <b>Example 1: </b> Map a public non-static non-final field to local
  * element
  * {@snippet :
  *  //Example: Code fragment
@@ -131,7 +131,7 @@ public @interface XmlElement {
     /**
      * Customize the element declaration to be nillable.
      * <p>If nillable() is true, then the JavaBean property is
-     * mapped to a XML Schema nillable element declaration.
+     * mapped to an XML Schema nillable element declaration.
      */
     boolean nillable() default false;
 

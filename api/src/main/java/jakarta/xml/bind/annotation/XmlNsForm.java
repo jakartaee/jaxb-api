@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -19,7 +19,7 @@ package jakarta.xml.bind.annotation;
  * <p><b>Usage</b>  
  * <p>
  * The namespace qualification values are used in the annotations
- * defined in this packge. The enumeration values are mapped as follows:
+ * defined in this package. The enumeration values are mapped as follows:
  *
  * <table class="striped">
  *   <caption style="display:none">Mapping of enumeration values</caption>

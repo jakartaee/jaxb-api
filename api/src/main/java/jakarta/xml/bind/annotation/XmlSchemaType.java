@@ -89,7 +89,7 @@ public @interface XmlSchemaType {
      */
 
     final class DEFAULT {
-        private DEFAULT() {};
+        private DEFAULT() {}
     }
 
 }

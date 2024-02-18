@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -17,7 +17,7 @@ import jakarta.activation.DataHandler;
  *
  * <p>This API enables an efficient cooperative processing of optimized
  * binary data formats between a Jakarta XML Binding implementation and MIME-based package
- * processor (MTOM/XOP and WS-I AP 1.0). Jakarta XML Binding unmarshals the body of a package, delegating the
+ * processor (MTOM/XOP and WS-I AP 1.0). Jakarta XML Binding unmarshalls the body of a package, delegating the
  * understanding of the packaging format being used to a MIME-based
  * package processor that implements this abstract class.</p>
  *
@@ -62,7 +62,7 @@ public abstract class AttachmentUnmarshaller {
     * <p>Lookup MIME content by content-id, {@code cid}, and return as a {@link DataHandler}.</p>
     *
     * <p>The returned {@code DataHandler} instance must be configured
-    * to meet the following required mapping constaint.
+    * to meet the following required mapping constraint.
     * <table class="striped">
     *   <caption>Required Mappings between MIME and Java Types</caption>
     *   <thead>

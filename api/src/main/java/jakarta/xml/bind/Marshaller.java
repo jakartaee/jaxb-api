@@ -156,7 +156,7 @@ import java.io.File;
  * Jakarta XML Binding Providers will fully allow marshalling invalid content, others will fail
  * on the first validation error.
  * <p>
- * Even when schema validation is not explictly enabled for the marshal operation,
+ * Even when schema validation is not explicitly enabled for the marshal operation,
  * it is possible that certain types of validation events will be detected
  * during the operation.  Validation events will be reported to the registered
  * event handler.  If the client application has not registered an event handler
@@ -165,7 +165,6 @@ import java.io.File;
  * encountering the first error or fatal error. Note that for Jakarta XML Binding and
  * later versions, {@link jakarta.xml.bind.helpers.DefaultValidationEventHandler} is
  * no longer used.
- *
  * </blockquote>
  *
  * <p>
@@ -283,7 +282,7 @@ public interface Marshaller {
         "jaxb.encoding";
 
     /**
-     * The name of the property used to specify whether or not the marshalled
+     * The name of the property used to specify whether the marshalled
      * XML data is formatted with linefeeds and indentation.
      */
     String JAXB_FORMATTED_OUTPUT =
@@ -305,7 +304,7 @@ public interface Marshaller {
         "jaxb.noNamespaceSchemaLocation";
 
     /**
-     * The name of the property used to specify whether or not the marshaller
+     * The name of the property used to specify whether the marshaller
      * will generate document level events (ie calling startDocument or endDocument).
      */
     String JAXB_FRAGMENT =
@@ -506,7 +505,7 @@ public interface Marshaller {
 
     /**
      * Get a DOM tree view of the content tree(Optional).
-     *
+     * <p>
      * If the returned DOM tree is updated, these changes are also
      * visible in the content tree.
      * Use {@link #marshal(Object, org.w3c.dom.Node)} to force
@@ -581,7 +580,7 @@ public interface Marshaller {
      * the marshal operation after the first error or fatal error is encountered.
      * <p>
      * Calling this method with a null parameter will cause the Marshaller
-     * to revert back to the default default event handler.
+     * to revert back to the default event handler.
      *
      * @param handler the validation event handler
      * @throws JAXBException if an error was encountered while setting the
@@ -620,7 +619,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      if the adapter parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(A adapter);
@@ -651,7 +650,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter);
@@ -673,7 +672,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
@@ -707,7 +706,7 @@ public interface Marshaller {
      *
      * @param schema Schema object to validate marshal operations against or null to disable validation
      * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on an Marshaller created from a JAXBContext referencing
+     *         invoked on a Marshaller created from a JAXBContext referencing
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
@@ -722,7 +721,7 @@ public interface Marshaller {
      * @return the Schema object being used to perform marshal-time
      *      validation or null if not present.
      * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on an Marshaller created from a JAXBContext referencing
+     *         invoked on a Marshaller created from a JAXBContext referencing
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */

@@ -179,7 +179,7 @@ import java.io.Reader;
  * instance is the one that was used to create this {@code Unmarshaller}. The {@link JAXBContext}
  * instance maintains a mapping of globally declared XML element and type definition names to
  * Jakarta XML Binding mapped classes. The unmarshal method checks if {@link JAXBContext} has a mapping
- * from the root element's XML name and/or {@code @xsi:type} to a Jakarta XML Binding mapped class.  If it does, it umarshalls the
+ * from the root element's XML name and/or {@code @xsi:type} to a Jakarta XML Binding mapped class.  If it does, it unmarshalls the
  * XML data using the appropriate Jakarta XML Binding mapped class. Note that when the root element name is unknown and the root
  * element has an {@code @xsi:type}, the XML data is unmarshalled
  * using that Jakarta XML Binding mapped class as the value of a {@link JAXBElement}.
@@ -197,7 +197,7 @@ import java.io.Reader;
  * The unmarshal methods with a {@code declaredType} parameter enable an
  * application to deserialize a root element of XML data, even when
  * there is no mapping in {@link JAXBContext} of the root element's XML name.
- * The unmarshaller unmarshals the root element using the application provided
+ * The unmarshaller unmarshalls the root element using the application provided
  * mapping specified as the {@code declaredType} parameter.
  * Note that even when the root element's element name is mapped by {@link JAXBContext},
  * the {@code declaredType} parameter overrides that mapping for
@@ -311,7 +311,6 @@ import java.io.Reader;
  * For a Jakarta XML Binding client application, there is no explicitly defined default
  * validation handler and the default event handling only
  * terminates the unmarshal operation after encountering a fatal error.
- *
  * </blockquote>
  *
  * <p>
@@ -359,7 +358,6 @@ import java.io.Reader;
  * defined in {@link Listener#beforeUnmarshal(Object, Object)} and {@link Listener#afterUnmarshal(Object, Object)}.
 * <p>
  * An event callback method throwing an exception terminates the current unmarshal process.
- *
  * </blockquote>
  *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
@@ -576,7 +574,7 @@ public interface Unmarshaller {
      * The only way for a client application to specify an alternate parser
      * mechanism to be used during unmarshal is via the
      * {@code unmarshal(SAXSource)} API.  All other forms of the unmarshal
-     * method (File, URL, Node, etc) will use the Jakarta XML Binding provider's default
+     * method (File, URL, Node, etc.) will use the Jakarta XML Binding provider's default
      * parser and validator mechanisms.
      *
      * @param source the XML Source to unmarshal XML data from (providers are
@@ -910,7 +908,7 @@ public interface Unmarshaller {
      * @throws IllegalArgumentException
      *      if the adapter parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(A adapter);
@@ -942,7 +940,7 @@ public interface Unmarshaller {
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter);
@@ -965,7 +963,7 @@ public interface Unmarshaller {
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
@@ -979,7 +977,7 @@ public interface Unmarshaller {
      * @param au the attachment unmarshaller to be set
      *
      * @throws IllegalStateException if attempt to concurrently call this
-     *                               method during a unmarshal operation.
+     *                               method during an unmarshal operation.
      */
     void setAttachmentUnmarshaller(AttachmentUnmarshaller au);
 

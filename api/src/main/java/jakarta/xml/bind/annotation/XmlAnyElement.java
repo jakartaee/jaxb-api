@@ -10,14 +10,11 @@
 
 package jakarta.xml.bind.annotation;
 
-import org.w3c.dom.Element;
-
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-import java.util.List;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -223,10 +220,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  Foo foo = unmarshal();
  *  // 1 for 'unknown', another for 'foo'
  *  assert foo.others.length==2;
- *  // 'unknown' unmarshals to a DOM element
+ *  // 'unknown' unmarshalls to a DOM element
  *  assert foo.others[0] instanceof Element;
  *  // because of lax=true, the 'foo' element eagerly
- *  // unmarshals to a Foo object.
+ *  // unmarshalls to a Foo object.
  *  assert foo.others[1] instanceof Foo;
  * }
  *
@@ -256,7 +253,7 @@ public @interface XmlAnyElement {
      * {@link XmlElementDecl} that has the same tag name),
      * the unmarshaller will eagerly unmarshal this element to the Jakarta XML Binding object,
      * instead of unmarshalling it to DOM. Additionally, if the element is
-     * unknown but it has a known xsi:type, the unmarshaller eagerly unmarshals
+     * unknown but it has a known xsi:type, the unmarshaller eagerly unmarshalls
      * the element to a {@link JAXBElement}, with the unknown element name and
      * the JAXBElement value is set to an instance of the Jakarta XML Binding mapping of the
      * known xsi:type.

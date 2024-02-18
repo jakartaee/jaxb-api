@@ -66,7 +66,7 @@ import static java.lang.annotation.ElementType.TYPE;
  *  </point>
  * }
  *
- * The annotation causes an global element declaration to be produced
+ * The annotation causes a global element declaration to be produced
  * in the schema. The global element declaration is associated with
  * the XML schema type to which the class is mapped.
  *

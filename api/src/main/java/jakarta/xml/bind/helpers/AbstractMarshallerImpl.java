@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -90,11 +90,8 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     public void marshal(Object jaxbElement, File output) throws JAXBException {
         checkNotNull(jaxbElement, "jaxbElement", output, "output" );
         try {
-            OutputStream os = new BufferedOutputStream(new FileOutputStream(output));
-            try {
-                marshal( jaxbElement, new StreamResult(os) );
-            } finally {
-                os.close();
+            try (OutputStream os = new BufferedOutputStream(new FileOutputStream(output))) {
+                marshal(jaxbElement, new StreamResult(os));
             }
         } catch (IOException e) {
             throw new JAXBException(e);
@@ -128,7 +125,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * By default, the getNode method is unsupported and throw
      * an {@link java.lang.UnsupportedOperationException}.
-     *
+     * <p>
      * Implementations that choose to support this method must
      * override this method.
      */
@@ -279,7 +276,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
 
     /**
      * Gets the corresponding Java encoding name from an IANA name.
-     *
+     * <p>
      * This method is a helper method for the derived class to convert
      * encoding names.
      *

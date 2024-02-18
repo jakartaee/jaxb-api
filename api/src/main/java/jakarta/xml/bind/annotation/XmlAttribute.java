@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 
 /**
  * <p>
- * Maps a JavaBean property to a XML attribute. 
+ * Maps a JavaBean property to an XML attribute. 
  *
  * <p> <b>Usage</b> </p>
  * <p>
@@ -29,7 +29,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *   <li> field </li>
  * </ul>
  *
- * <p> A static final field is mapped to a XML fixed attribute.
+ * <p> A static final field is mapped to an XML fixed attribute.
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
@@ -122,9 +122,9 @@ public @interface XmlAttribute {
  
     /**
      * Specifies if the XML Schema attribute is optional or
-     * required. If true, then the JavaBean property is mapped to a
-     * XML Schema attribute that is required. Otherwise it is mapped
-     * to a XML Schema attribute that is optional.
+     * required. If true, then the JavaBean property is mapped to
+     * an XML Schema attribute that is required. Otherwise, it is mapped
+     * to an XML Schema attribute that is optional.
      *
      */
      boolean required() default false;
