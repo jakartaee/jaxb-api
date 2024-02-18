@@ -53,7 +53,7 @@ import javax.xml.transform.sax.SAXResult;
  * setLexicalHandler, and setSystemId methods.
  * 
  * @author
- * 	Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
+ *     Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  * @since 1.6
  */
 public class JAXBResult extends SAXResult {
@@ -113,7 +113,7 @@ public class JAXBResult extends SAXResult {
      *      Always return a non-null object.
      * 
      * @exception IllegalStateException
-     * 	if this method is called before an object is unmarshalled.
+     *      if this method is called before an object is unmarshalled.
      * 
      * @exception JAXBException
      *      if there is any unmarshalling error.

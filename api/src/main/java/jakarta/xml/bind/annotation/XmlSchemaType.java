@@ -70,7 +70,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({FIELD,METHOD,PACKAGE})
 public @interface XmlSchemaType {
     String name();

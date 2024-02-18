@@ -60,24 +60,24 @@ import jakarta.xml.bind.JAXBElement;
  *  import java.math.BigInteger;
  *  public class ObjectFactory {
  *      // element instance factories
- * 	    JAXBElement<LetterBody> createLetterBody(LetterBody value);
- * 	    JAXBElement<String>     createLetterBodyName(String value);
- * 	    JAXBElement<BigInteger> createLetterBodyQuantity(BigInteger value);
- * 	    JAXBElement<String>     createLetterBodyProductName(String value);
+ *      JAXBElement<LetterBody> createLetterBody(LetterBody value);
+ *      JAXBElement<String>     createLetterBodyName(String value);
+ *      JAXBElement<BigInteger> createLetterBodyQuantity(BigInteger value);
+ *      JAXBElement<String>     createLetterBodyProductName(String value);
  *      // type instance factory
- * 	    LetterBody createLetterBody();
+ *      LetterBody createLetterBody();
  *  }
  * }
  * {@snippet :
  *  public class LetterBody {
- * 	    // Mixed content can contain instances of Element classes
- * 	    // Name, Quantity and ProductName. Text data is represented as
+ *      // Mixed content can contain instances of Element classes
+ *      // Name, Quantity and ProductName. Text data is represented as
  *      // java.util.String for text.
  *      @XmlMixed
  *      @XmlElementRef(name="productName", type=JAXBElement.class)
  *      @XmlElementRef(name="quantity", type=JAXBElement.class)
  *      @XmlElementRef(name="name", type=JAXBElement.class)
- *      List getContent(){...}
+ *      List getContent() {...}
  *  }
  * }
  * The following is an XML instance document with mixed content
@@ -100,8 +100,7 @@ import jakarta.xml.bind.JAXBElement;
  *  gcl.add("Your order of "); // add text information item as a String
  * 
  *  // add children element information items
- *  gcl.add(ObjectFactory.
- * 	  		createLetterBodyQuantity(new BigInteger("1")));
+ *  gcl.add(ObjectFactory.createLetterBodyQuantity(new BigInteger("1")));
  *  gcl.add(ObjectFactory.createLetterBodyProductName("Baby Monitor"));
  *  gcl.add("shipped from our warehouse");  // add text information item
  * }

@@ -72,12 +72,12 @@ public abstract class JAXBIntrospector {
      * @return The element value of the <code>jaxbElement</code>.
      */
     public static Object getValue(Object jaxbElement) {
-	if (jaxbElement instanceof JAXBElement) {
-	    return ((JAXBElement<?>)jaxbElement).getValue();
-	} else {
-	    // assume that class of this instance is
-	    // annotated with @XmlRootElement.
-	    return jaxbElement;
-	}
+        if (jaxbElement instanceof JAXBElement) {
+            return ((JAXBElement<?>)jaxbElement).getValue();
+        } else {
+            // assume that class of this instance is
+            // annotated with @XmlRootElement.
+            return jaxbElement;
+        }
     }
 }

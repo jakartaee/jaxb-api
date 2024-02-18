@@ -146,9 +146,7 @@ public abstract class Binder<XmlNode> {
      *      If any of the input parameters are null
      * @since 1.6, JAXB 2.0
      */
-    public abstract <T> JAXBElement<T>
-	unmarshal( XmlNode xmlNode, Class<T> declaredType )
-	throws JAXBException;
+    public abstract <T> JAXBElement<T> unmarshal( XmlNode xmlNode, Class<T> declaredType ) throws JAXBException;
 
     /**
      * Marshal a Jakarta XML Binding object tree to a new XML document.

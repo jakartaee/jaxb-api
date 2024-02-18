@@ -289,7 +289,7 @@ final public class DatatypeConverter {
      *      if namespace prefix of {@code lexicalXSDQname} is not bound to a URI in NamespaceContext {@code nsc}.
      */ 
     public static javax.xml.namespace.QName parseQName( String lexicalXSDQName,
-    				                    NamespaceContext nsc) {
+                                                        NamespaceContext nsc) {
         if (theConverter == null) initConverter();
         return theConverter.parseQName( lexicalXSDQName, nsc );
     }
@@ -364,7 +364,7 @@ final public class DatatypeConverter {
      *     An int value represented by the string argument.
      * @throws NumberFormatException if string parameter can not be parsed into an {@code int} value.
      */ 
-    public static int	parseUnsignedShort( String lexicalXSDUnsignedShort ) {
+    public static int parseUnsignedShort( String lexicalXSDUnsignedShort ) {
         if (theConverter == null) initConverter();
         return theConverter.parseUnsignedShort( lexicalXSDUnsignedShort );
     }
@@ -423,7 +423,7 @@ final public class DatatypeConverter {
      */ 
      // also indicate the print methods produce a lexical
      // representation for given Java datatypes.
-	
+
     public static String printString( String val ) {
         if (theConverter == null) initConverter();
         return theConverter.printString( val );

@@ -177,11 +177,11 @@ import java.io.File;
  * <dl>
  *   <dt>{@code jaxb.encoding} - value must be a java.lang.String</dt>
  *   <dd>The output encoding to use when marshalling the XML data.  The
- * 		 Marshaller will use "UTF-8" by default if this property is not
- *  	 specified.</dd>
+ *       Marshaller will use "UTF-8" by default if this property is not
+ *       specified.</dd>
  *   <dt>{@code jaxb.formatted.output} - value must be a java.lang.Boolean</dt>
  *   <dd>This property controls whether or not the Marshaller will format
- * 	 the resulting XML data with line breaks and indentation.  A
+ *       the resulting XML data with line breaks and indentation.  A
  *       true value for this property indicates human readable indented
  *       xml data, while a false value indicates unformatted xml data.
  *       The Marshaller will default to false (unformatted) if this
