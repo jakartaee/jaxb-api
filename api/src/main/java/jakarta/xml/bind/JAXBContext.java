@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -57,7 +57,7 @@ import java.util.Map;
  * any global XML element declared in the schema to be unmarshalled as
  * the root of an instance document.
  * Additionally, the unmarshal method allows for an unrecognized root element that
- * has  an xsi:type attribute's value that references a type definition declared in
+ * has an xsi:type attribute's value that references a type definition declared in
  * the schema  to be unmarshalled as the root of an instance document.
  * The {@code JAXBContext} object
  * allows the merging of global elements and type definitions across a set of schemas (listed
@@ -67,13 +67,13 @@ import java.util.Map;
  * application is able to unmarshal XML documents that are instances of
  * any of the schemas listed in the {@code contextPath}.  For example:
  *
- * <pre>
- *      JAXBContext jc = JAXBContext.newInstance( "com.acme.foo:com.acme.bar" );
- *      Unmarshaller u = jc.createUnmarshaller();
- *      FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) ); // ok
- *      BarObject barObj = (BarObject)u.unmarshal( new File( "bar.xml" ) ); // ok
- *      BazObject bazObj = (BazObject)u.unmarshal( new File( "baz.xml" ) ); // error, "com.acme.baz" not in contextPath
- * </pre>
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo:com.acme.bar" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) ); // ok
+ *  BarObject barObj = (BarObject)u.unmarshal( new File( "bar.xml" ) ); // ok
+ *  BazObject bazObj = (BazObject)u.unmarshal( new File( "baz.xml" ) ); // error, "com.acme.baz" not in contextPath
+ * }
  *
  * <p>
  * The client application may also generate Java content trees explicitly rather
@@ -91,13 +91,13 @@ import java.util.Map;
  * order to create objects of that type, the client application would use the
  * factory method like this:
  *
- * <pre>
- *       com.acme.foo.PurchaseOrder po =
- *           com.acme.foo.ObjectFactory.createPurchaseOrder();
- * </pre>
+ * {@snippet :
+ *  com.acme.foo.PurchaseOrder po =
+ *      com.acme.foo.ObjectFactory.createPurchaseOrder();
+ * }
  *
  * <p>
- * Once the client application has an instance of the the schema derived object,
+ * Once the client application has an instance of the schema derived object,
  * it can use the mutator methods to set content on it.
  *
  * <p>
@@ -121,24 +121,24 @@ import java.util.Map;
  * marshalling process can alternatively produce SAX2 event streams to a
  * registered {@code ContentHandler} or produce a DOM Node object.
  * Client applications have control over the output encoding as well as
- * whether or not to marshal the XML data as a complete document or
+ * whether to marshal the XML data as a complete document or
  * as a fragment.
  *
  * <p>
- * Here is a simple example that unmarshals an XML document and then marshals
+ * Here is a simple example that unmarshalls an XML document and then marshals
  * it back out:
  *
- * <pre>
- *        JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *
- *        // unmarshal from foo.xml
- *        Unmarshaller u = jc.createUnmarshaller();
- *        FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) );
+ *  // unmarshal from foo.xml
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) );
  *
- *        // marshal to System.out
- *        Marshaller m = jc.createMarshaller();
- *        m.marshal( fooObj, System.out );
- * </pre>
+ *  // marshal to System.out
+ *  Marshaller m = jc.createMarshaller();
+ *  m.marshal( fooObj, System.out );
+ * }
  *
  *
  * <h3>Validation</h3>
@@ -299,7 +299,7 @@ public abstract class JAXBContext {
      * are reachable, as defined in {@link #newInstance(Class...)}, from the
      * listed classes are also registered with JAXBContext.
      * <p>
-     * Constraints on class name occuring in a {@code jaxb.index} file are:
+     * Constraints on class name occurring in a {@code jaxb.index} file are:
      * <ul>
      *   <li>Must not end with ".class".</li>
      *   <li>Class names are resolved relative to package containing
@@ -346,7 +346,7 @@ public abstract class JAXBContext {
      */
     public static JAXBContext newInstance( String contextPath, ClassLoader classLoader ) throws JAXBException {
 
-        return newInstance(contextPath,classLoader,Collections.<String,Object>emptyMap());
+        return newInstance(contextPath,classLoader,Collections.emptyMap());
     }
 
     /**
@@ -416,13 +416,13 @@ public abstract class JAXBContext {
 //     * For example, in the following Java code, if you do
 //     * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
 //     * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot}:
-//     * <pre>
-//     * class Foo {
-//     *      Bar b;
+//     * {@snippet :
+//     *  class Foo {
+//     *       Bar b;
+//     *  }
+//     *  class Bar { int x; }
+//     *  class Zot extends Bar { int y; }
 //     * }
-//     * class Bar { int x; }
-//     * class Zot extends Bar { int y; }
-//     * </pre>
 //     *
 //     * Therefore, a typical client application only needs to specify the
 //     * top-level classes, but it needs to be careful.
@@ -481,25 +481,25 @@ public abstract class JAXBContext {
      * <p>
      * The client application must supply a list of classes that the new
      * context object needs to recognize.
-     *
+     * <p>
      * Not only the new context will recognize all the classes specified,
      * but it will also recognize any classes that are directly/indirectly
      * referenced statically from the specified classes. Subclasses of
      * referenced classes nor {@code @XmlTransient} referenced classes
      * are not registered with JAXBContext.
-     *
+     * <p>
      * For example, in the following Java code, if you do
      * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
      * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
-     * <pre>
-     * class Foo {
-     *      &#64;XmlTransient FooBar c;
-     *      Bar b;
+     * {@snippet :
+     *  class Foo {
+     *       @XmlTransient FooBar c;
+     *       Bar b;
+     *  }
+     *  class Bar { int x; }
+     *  class Zot extends Bar { int y; }
+     *  class FooBar { }
      * }
-     * class Bar { int x; }
-     * class Zot extends Bar { int y; }
-     * class FooBar { }
-     * </pre>
      *
      * Therefore, a typical client application only needs to specify the
      * top-level classes, but it needs to be careful.
@@ -543,7 +543,7 @@ public abstract class JAXBContext {
     public static JAXBContext newInstance( Class<?> ... classesToBeBound )
             throws JAXBException {
 
-        return newInstance(classesToBeBound,Collections.<String,Object>emptyMap());
+        return newInstance(classesToBeBound,Collections.emptyMap());
     }
 
     /**

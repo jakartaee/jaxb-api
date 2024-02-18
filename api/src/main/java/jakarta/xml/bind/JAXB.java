@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2006, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -37,8 +37,8 @@ import java.net.URLConnection;
  * in the {@link JAXBContext}, {@link Unmarshaller}, and {@link Marshaller}.
  *
  * They are designed
- * to be the prefered methods for developers new to Jakarta XML Binding. They have
- * the following characterstics:
+ * to be the preferred methods for developers new to Jakarta XML Binding. They have
+ * the following characteristics:
  *
  * <ol>
  *  <li>Generally speaking, the performance is not necessarily optimal.
@@ -457,8 +457,8 @@ public final class JAXB {
      * <p>
      * This method is a convenience method that combines several basic operations
      * in the {@link JAXBContext} and {@link Marshaller}. This method is designed
-     * to be the prefered method for developers new to Jakarta XML Binding. This method
-     * has the following characterstics:
+     * to be the preferred method for developers new to Jakarta XML Binding. This method
+     * has the following characteristics:
      *
      * <ol>
      *  <li>Generally speaking, the performance is not necessarily optimal.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * Maps a factory method to a XML element.
+ * Maps a factory method to an XML element.
  *
  * <p> <b>Usage</b> </p>
  *
@@ -30,7 +30,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * declaration's target namespace. Thus, while the annotation syntax
  * allows &#64;XmlElementDecl to be used on any method, semantically
  * its use is restricted to annotation of element factory method.
- *
+ * <p>
  * The usage is subject to the following constraints:
  *
  * <ul>
@@ -42,32 +42,33 @@ import static java.lang.annotation.ElementType.METHOD;
  * </ul>
  *
  * <p><b>Example 1: </b>Annotation on a factory method
- * <pre>
- *     // Example: code fragment
- *     &#64;XmlRegistry
- *     class ObjectFactory {
- *         &#64;XmlElementDecl(name="foo")
- *         JAXBElement&lt;String&gt; createFoo(String s) { ... }
- *     }
- * </pre>
- * <pre> {@code
+ * {@snippet :
+ *  // Example: code fragment
+ *  @XmlRegistry
+ *  class ObjectFactory {
+ *      @XmlElementDecl(name="foo")
+ *      JAXBElement<String> createFoo(String s) { ... }
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML input -->
+ *  <foo>string</foo>
+ *}
+ * {@snippet :
+ *  // Example: code fragment corresponding to XML input
+ *  JAXBElement<String> o =
+ *      (JAXBElement<String>)unmarshaller.unmarshal(aboveDocument);
+ *  // print JAXBElement instance to show values
+ *  System.out.println(o.getName());   // prints  "{}foo"
+ *  System.out.println(o.getValue());  // prints  "string"
+ *  System.out.println(o.getValue().getClass()); // prints "java.lang.String"
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: XML schema definition -->
+ *  <xs:element name="foo" type="xs:string"/>
+ * }
  *
- *     <!-- XML input -->
- *     <foo>string</foo>
- *
- *     // Example: code fragment corresponding to XML input
- *     JAXBElement<String> o =
- *     (JAXBElement<String>)unmarshaller.unmarshal(aboveDocument);
- *     // print JAXBElement instance to show values
- *     System.out.println(o.getName());   // prints  "{}foo"
- *     System.out.println(o.getValue());  // prints  "string"
- *     System.out.println(o.getValue().getClass()); // prints "java.lang.String"
- *
- *     <!-- Example: XML schema definition -->
- *     <xs:element name="foo" type="xs:string"/>
- * }</pre>
- *
- * <p><b>Example 2: </b> Element declaration with non local scope
+ * <p><b>Example 2: </b> Element declaration with non-local scope
  * <p>
  * The following example illustrates the use of scope annotation
  * parameter in binding of element declaration in schema derived
@@ -76,7 +77,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * The following example may be replaced in a future revision of
  * this javadoc.
  *
- * <pre>{@code
+ * {@snippet lang="XML" :
  *     <!-- Example: XML schema definition -->
  *     <xs:schema>
  *       <xs:complexType name="pea">
@@ -87,32 +88,31 @@ import static java.lang.annotation.ElementType.METHOD;
  *       </xs:complexType>
  *       <xs:element name="foo" type="xs:int"/>
  *     </xs:schema>
- * }</pre>
- * <pre>
+ * }
+ * {@snippet :
  *     // Example: expected default binding
  *     class Pea {
- *         &#64;XmlElementRefs({
- *             &#64;XmlElementRef(name="foo",type=JAXBElement.class)
- *             &#64;XmlElementRef(name="bar",type=JAXBElement.class)
+ *         @XmlElementRefs({
+ *             @XmlElementRef(name="foo",type=JAXBElement.class)
+ *             @XmlElementRef(name="bar",type=JAXBElement.class)
  *         })
- *         List&lt;JAXBElement&lt;String&gt;&gt; fooOrBar;
+ *         List<JAXBElement<String>> fooOrBar;
  *     }
  *
- *     &#64;XmlRegistry
+ *     @XmlRegistry
  *     class ObjectFactory {
- *         &#64;XmlElementDecl(scope=Pea.class,name="foo")
- *         JAXBElement&lt;String&gt; createPeaFoo(String s);
+ *         @XmlElementDecl(scope=Pea.class,name="foo")
+ *         JAXBElement<String> createPeaFoo(String s);
  *
- *         &#64;XmlElementDecl(scope=Pea.class,name="bar")
- *         JAXBElement&lt;String&gt; createPeaBar(String s);
+ *         @XmlElementDecl(scope=Pea.class,name="bar")
+ *         JAXBElement<String> createPeaBar(String s);
  *
- *         &#64;XmlElementDecl(name="foo")
- *         JAXBElement&lt;Integer&gt; createFoo(Integer i);
+ *         @XmlElementDecl(name="foo")
+ *         JAXBElement<Integer> createFoo(Integer i);
  *     }
- *
- * </pre>
+ * }
  * Without scope createFoo and createPeaFoo would become ambiguous
- * since both of them map to a XML schema element with the same local
+ * since both of them map to an XML schema element with the same local
  * name "foo".
  *
  * @see XmlRegistry
@@ -158,7 +158,7 @@ public @interface XmlElementDecl {
      * name is specified by {@code substitutionHeadName()}.
      * <p>
      * If {@code susbtitutionHeadName()} is "", then this
-     * value can only be "##default". But the value is ignored since
+     * value can only be "##default". But the value is ignored
      * since this element is not part of susbtitution group when the
      * value of {@code susbstitutionHeadName()} is "".
      * <p>

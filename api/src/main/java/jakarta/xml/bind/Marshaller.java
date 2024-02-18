@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,114 +24,92 @@ import java.io.File;
  *
  * <p>
  * <i>Assume the following setup code for all following code fragments:</i>
- * <blockquote>
- *    <pre>
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
- *       Object element = u.unmarshal( new File( "foo.xml" ) );
- *       Marshaller m = jc.createMarshaller();
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  Object element = u.unmarshal( new File( "foo.xml" ) );
+ *  Marshaller m = jc.createMarshaller();
+ * }
  *
  * <p>
  * Marshalling to a File:
- * <blockquote>
- *    <pre>
- *       OutputStream os = new FileOutputStream( "nosferatu.xml" );
- *       m.marshal( element, os );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  OutputStream os = new FileOutputStream( "nosferatu.xml" );
+ *  m.marshal( element, os );
+ * }
  *
  * <p>
  * Marshalling to a SAX ContentHandler:
- * <blockquote>
- *    <pre>
- *       // assume MyContentHandler instanceof ContentHandler
- *       m.marshal( element, new MyContentHandler() );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  // assume MyContentHandler instanceof ContentHandler
+ *  m.marshal( element, new MyContentHandler() );
+ * }
  *
  * <p>
  * Marshalling to a DOM Node:
- * <blockquote>
- *    <pre>
- *       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
- *       dbf.setNamespaceAware(true);
- *       DocumentBuilder db = dbf.newDocumentBuilder();
- *       Document doc = db.newDocument();
+ * {@snippet :
+ *  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+ *  dbf.setNamespaceAware(true);
+ *  DocumentBuilder db = dbf.newDocumentBuilder();
+ *  Document doc = db.newDocument();
  *
- *       m.marshal( element, doc );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, doc );
+ * }
  *
  * <p>
  * Marshalling to a java.io.OutputStream:
- * <blockquote>
- *    <pre>
- *       m.marshal( element, System.out );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  m.marshal( element, System.out );
+ * }
  *
  * <p>
  * Marshalling to a java.io.Writer:
- * <blockquote>
- *    <pre>
- *       m.marshal( element, new PrintWriter( System.out ) );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  m.marshal( element, new PrintWriter( System.out ) );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.transform.SAXResult:
- * <blockquote>
- *    <pre>
- *       // assume MyContentHandler instanceof ContentHandler
- *       SAXResult result = new SAXResult( new MyContentHandler() );
+ * {@snippet :
+ *  // assume MyContentHandler instanceof ContentHandler
+ *  SAXResult result = new SAXResult( new MyContentHandler() );
  *
- *       m.marshal( element, result );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, result );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.transform.DOMResult:
- * <blockquote>
- *    <pre>
- *       DOMResult result = new DOMResult();
+ * {@snippet :
+ *  DOMResult result = new DOMResult();
  *
- *       m.marshal( element, result );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, result );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.transform.StreamResult:
- * <blockquote>
- *    <pre>
- *       StreamResult result = new StreamResult( System.out );
+ * {@snippet :
+ *  StreamResult result = new StreamResult( System.out );
  *
- *       m.marshal( element, result );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, result );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.stream.XMLStreamWriter:
- * <blockquote>
- *    <pre>
- *       XMLStreamWriter xmlStreamWriter =
- *           XMLOutputFactory.newInstance().createXMLStreamWriter( ... );
+ * {@snippet :
+ *  XMLStreamWriter xmlStreamWriter =
+ *      XMLOutputFactory.newInstance().createXMLStreamWriter( ... );
  *
- *       m.marshal( element, xmlStreamWriter );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, xmlStreamWriter );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.stream.XMLEventWriter:
- * <blockquote>
- *    <pre>
- *       XMLEventWriter xmlEventWriter =
- *           XMLOutputFactory.newInstance().createXMLEventWriter( ... );
+ * {@snippet :
+ *  XMLEventWriter xmlEventWriter =
+ *      XMLOutputFactory.newInstance().createXMLEventWriter( ... );
  *
- *       m.marshal( element, xmlEventWriter );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, xmlEventWriter );
+ * }
  *
  * <p>
  * <a id="elementMarshalling"></a>
@@ -178,7 +156,7 @@ import java.io.File;
  * Jakarta XML Binding Providers will fully allow marshalling invalid content, others will fail
  * on the first validation error.
  * <p>
- * Even when schema validation is not explictly enabled for the marshal operation,
+ * Even when schema validation is not explicitly enabled for the marshal operation,
  * it is possible that certain types of validation events will be detected
  * during the operation.  Validation events will be reported to the registered
  * event handler.  If the client application has not registered an event handler
@@ -187,7 +165,6 @@ import java.io.File;
  * encountering the first error or fatal error. Note that for Jakarta XML Binding and
  * later versions, {@link jakarta.xml.bind.helpers.DefaultValidationEventHandler} is
  * no longer used.
- *
  * </blockquote>
  *
  * <p>
@@ -269,15 +246,13 @@ import java.io.File;
  * <p>
  * Class defined event callback methods allow any Jakarta XML Binding mapped class to specify
  * its own specific callback methods by defining methods with the following method signatures:
- * <blockquote>
- * <pre>
- *   // Invoked by Marshaller after it has created an instance of this object.
- *   boolean beforeMarshal(Marshaller);
+ * {@snippet :
+ *  // Invoked by Marshaller after it has created an instance of this object.
+ *  boolean beforeMarshal(Marshaller);
  *
- *   // Invoked by Marshaller after it has marshalled all properties of this object.
- *   void afterMarshal(Marshaller);
- * </pre>
- * </blockquote>
+ *  // Invoked by Marshaller after it has marshalled all properties of this object.
+ *  void afterMarshal(Marshaller);
+ * }
  * The class defined event callback methods should be used when the callback method requires
  * access to non-public methods and/or fields of the class.
  * <p>
@@ -307,7 +282,7 @@ public interface Marshaller {
         "jaxb.encoding";
 
     /**
-     * The name of the property used to specify whether or not the marshalled
+     * The name of the property used to specify whether the marshalled
      * XML data is formatted with linefeeds and indentation.
      */
     String JAXB_FORMATTED_OUTPUT =
@@ -329,7 +304,7 @@ public interface Marshaller {
         "jaxb.noNamespaceSchemaLocation";
 
     /**
-     * The name of the property used to specify whether or not the marshaller
+     * The name of the property used to specify whether the marshaller
      * will generate document level events (ie calling startDocument or endDocument).
      */
     String JAXB_FRAGMENT =
@@ -530,7 +505,7 @@ public interface Marshaller {
 
     /**
      * Get a DOM tree view of the content tree(Optional).
-     *
+     * <p>
      * If the returned DOM tree is updated, these changes are also
      * visible in the content tree.
      * Use {@link #marshal(Object, org.w3c.dom.Node)} to force
@@ -605,7 +580,7 @@ public interface Marshaller {
      * the marshal operation after the first error or fatal error is encountered.
      * <p>
      * Calling this method with a null parameter will cause the Marshaller
-     * to revert back to the default default event handler.
+     * to revert back to the default event handler.
      *
      * @param handler the validation event handler
      * @throws JAXBException if an error was encountered while setting the
@@ -644,7 +619,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      if the adapter parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(A adapter);
@@ -675,7 +650,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter);
@@ -697,7 +672,7 @@ public interface Marshaller {
      * @throws IllegalArgumentException
      *      if the type parameter is null.
      * @throws UnsupportedOperationException
-     *      if invoked agains a JAXB 1.0 implementation.
+     *      if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
@@ -731,7 +706,7 @@ public interface Marshaller {
      *
      * @param schema Schema object to validate marshal operations against or null to disable validation
      * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on an Marshaller created from a JAXBContext referencing
+     *         invoked on a Marshaller created from a JAXBContext referencing
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
@@ -746,7 +721,7 @@ public interface Marshaller {
      * @return the Schema object being used to perform marshal-time
      *      validation or null if not present.
      * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on an Marshaller created from a JAXBContext referencing
+     *         invoked on a Marshaller created from a JAXBContext referencing
      *         JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */

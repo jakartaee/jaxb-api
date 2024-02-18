@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -18,7 +18,7 @@ import javax.xml.transform.sax.SAXResult;
 
 /**
  * JAXP {@link javax.xml.transform.Result} implementation
- * that unmarshals a Jakarta XML Binding object.
+ * that unmarshalls a Jakarta XML Binding object.
  * 
  * <p>
  * This utility class is useful to combine Jakarta XML Binding with
@@ -28,30 +28,28 @@ import javax.xml.transform.sax.SAXResult;
  * The following example shows how to use Jakarta XML Binding to unmarshal a document
  * resulting from an XSLT transformation.
  * 
- * <blockquote>
- *    <pre>
- *       JAXBResult result = new JAXBResult(
- *         JAXBContext.newInstance("org.acme.foo") );
+ * {@snippet :
+ *  JAXBResult result = new JAXBResult(
+ *    JAXBContext.newInstance("org.acme.foo") );
  *       
- *       // set up XSLT transformation
- *       TransformerFactory tf = TransformerFactory.newInstance();
- *       Transformer t = tf.newTransformer(new StreamSource("test.xsl"));
+ *  // set up XSLT transformation
+ *  TransformerFactory tf = TransformerFactory.newInstance();
+ *  Transformer t = tf.newTransformer(new StreamSource("test.xsl"));
  *       
- *       // run transformation
- *       t.transform(new StreamSource("document.xml"),result);
+ *  // run transformation
+ *  t.transform(new StreamSource("document.xml"),result);
  * 
- *       // obtain the unmarshalled content tree
- *       Object o = result.getResult();
- *    </pre>
- * </blockquote>
+ *  // obtain the unmarshalled content tree
+ *  Object o = result.getResult();
+ * }
  * 
  * <p>
  * The fact that JAXBResult derives from SAXResult is an implementation
- * detail. Thus in general applications are strongly discouraged from
+ * detail. Thus, in general applications are strongly discouraged from
  * accessing methods defined on SAXResult.
  * 
  * <p>
- * In particular it shall never attempt to call the setHandler, 
+ * In particular, it shall never attempt to call the setHandler,
  * setLexicalHandler, and setSystemId methods.
  * 
  * @author
@@ -127,7 +125,7 @@ public class JAXBResult extends SAXResult {
     }
     
     /**
-     * Hook to throw exception from the middle of a contructor chained call
+     * Hook to throw exception from the middle of a constructor chained call
      * to this
      */
     private static Unmarshaller assertionFailed() throws JAXBException {

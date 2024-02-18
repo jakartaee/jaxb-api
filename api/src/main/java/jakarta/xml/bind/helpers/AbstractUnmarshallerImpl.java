@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -44,10 +44,10 @@ import java.net.URL;
  *
  * <p>
  * This class provides a partial default implementation for the
- * {@link jakarta.xml.bind.Unmarshaller}interface.
+ * {@link jakarta.xml.bind.Unmarshaller} interface.
  *
  * <p>
- * A Jakarta XML Binding Provider has to implement five methods (getUnmarshallerHandler,
+ * A Jakarta XML Binding Provider has to implement five methods getUnmarshallerHandler(),
  * unmarshal(Node), unmarshal(XMLReader,InputSource),
  * unmarshal(XMLStreamReader), and unmarshal(XMLEventReader).
  *
@@ -88,10 +88,10 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     }
     /**
      * Obtains a configured XMLReader.
-     *
+     * <p>
      * This method is used when the client-specified
      * {@link SAXSource} object doesn't have XMLReader.
-     *
+     * <p>
      * {@link Unmarshaller} is not re-entrant, so we will
      * only use one instance of XMLReader.
      */
@@ -135,8 +135,8 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     }
 
     /**
-     * Unmarshals an object by using the specified XMLReader and the InputSource.
-     *
+     * Unmarshalls an object by using the specified XMLReader and the InputSource.
+     * <p>
      * The callee should call the setErrorHandler method of the XMLReader
      * so that errors are passed to the client-specified ValidationEventHandler.
      */
@@ -259,8 +259,8 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
 
     /**
      * Creates an UnmarshalException from a SAXException.
-     *
-     * This is an utility method provided for the derived classes.
+     * <p>
+     * This is a utility method provided for the derived classes.
      *
      * <p>
      * When a provider-implemented ContentHandler wants to throw a
@@ -271,7 +271,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * This is silly.
      *
      * <p>
-     * This method checks the nested exception of SAXException
+     * This method checks the nested exception to SAXException
      * and reduce those excessive wrapping.
      *
      * @return the resulting UnmarshalException

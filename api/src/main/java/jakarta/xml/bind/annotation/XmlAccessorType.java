@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -52,16 +52,16 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p>By default, if {@code @XmlAccessorType} on a package is absent,
  * then the following package level annotation is assumed.</p>
- * <pre>
- *   &#64;XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
- * </pre>
+ * {@snippet :
+ *  @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+ * }
  * <p> By default, if {@code @XmlAccessorType} on a class is absent,
  * and none of its super classes is annotated with
  * {@code @XmlAccessorType}, then the following default on the class
  * is assumed: </p>
- * <pre>
- *   &#64;XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
- * </pre>
+ * {@snippet :
+ *  @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+ * }
  * <p>This annotation can be used with the following annotations: 
  *    {@link XmlType}, {@link XmlRootElement}, {@link XmlAccessorOrder}, 
  *    {@link XmlSchema}, {@link XmlSchemaType}, {@link XmlSchemaTypes}, 
@@ -72,7 +72,6 @@ import static java.lang.annotation.RetentionPolicy.*;
  * @since 1.6, JAXB 2.0
  * @see XmlAccessType
  */
-
 @Inherited @Retention(RUNTIME) @Target({PACKAGE, TYPE})
 public @interface XmlAccessorType {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -21,7 +21,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p>
  * To preserve referential integrity of an object graph across XML
- * serialization followed by a XML deserialization, requires an object
+ * serialization followed by an XML deserialization, requires an object
  * reference to be marshalled by reference or containment
  * appropriately. Annotations {@code @XmlID} and {@code @XmlIDREF}
  * together allow a customized mapping of a JavaBean property's
@@ -32,7 +32,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * program elements: 
  * <ul> 
  *   <li> a JavaBean property </li>
- *   <li> non static, non transient field </li>
+ *   <li> non-static, non transient field </li>
  * </ul>
  * 
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
@@ -49,33 +49,32 @@ import static java.lang.annotation.RetentionPolicy.*;
  * </ul>
  * 
  * <p><b>Example</b>: Map a JavaBean property's type to {@code xs:ID}</p>
- * <pre>
- *    // Example: code fragment
- *    public class Customer {
- *        &#64;XmlAttribute
- *        &#64;XmlID
- *        public String getCustomerID();
- *        public void setCustomerID(String id);
- *        .... other properties not shown 
- *    }
- * {@code
- * 
- *    <!-- Example: XML Schema fragment -->
- *    <xs:complexType name="Customer">
- *      <xs:complexContent>
- *        <xs:sequence>
- *          ....
- *        </xs:sequence>
- *        <xs:attribute name="customerID" type="xs:ID"/>
- *      </xs:complexContent>
- *    </xs:complexType>
- * }</pre>
+ * {@snippet :
+ *  // Example: code fragment
+ *  public class Customer {
+ *      @XmlAttribute
+ *      @XmlID
+ *      public String getCustomerID();
+ *      public void setCustomerID(String id);
+ *      .... other properties not shown
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: XML Schema fragment -->
+ *  <xs:complexType name="Customer">
+ *    <xs:complexContent>
+ *      <xs:sequence>
+ *        ....
+ *      </xs:sequence>
+ *      <xs:attribute name="customerID" type="xs:ID"/>
+ *    </xs:complexContent>
+ *  </xs:complexType>
+ * }
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlIDREF
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({FIELD, METHOD})
 public @interface XmlID { }
 

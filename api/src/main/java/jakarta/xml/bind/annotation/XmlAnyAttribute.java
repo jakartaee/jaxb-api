@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -29,7 +29,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * following program elements: 
  * <ul> 
  *   <li> JavaBean property </li>
- *   <li> non static, non transient field </li>
+ *   <li> non-static, non transient field </li>
  * </ul>
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for

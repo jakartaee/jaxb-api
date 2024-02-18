@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -17,7 +17,7 @@ import javax.xml.namespace.NamespaceContext;
  * The javaType binding declaration can be used to customize the binding of 
  * an XML schema datatype to a Java datatype. Customizations can involve 
  * writing a parse and print method for parsing and printing lexical 
- * representations of a XML schema datatype respectively. However, writing 
+ * representations of an XML schema datatype respectively. However, writing 
  * parse and print methods requires knowledge of the lexical representations ( 
  * <a href="http://www.w3.org/TR/xmlschema-2/"> XML Schema Part2: Datatypes 
  * specification </a>) and hence may be difficult to write. 
@@ -28,23 +28,21 @@ import javax.xml.namespace.NamespaceContext;
  * implementation of parse and print methods. These methods are invoked by 
  * custom parse and print methods. For example, the binding of xsd:dateTime 
  * to a long can be customized using parse and print methods as follows:
- * <blockquote>
- *    <pre>
- *    // Customized parse method 
- *    public long myParseCal( String dateTimeString ) {
- *        java.util.Calendar cal = DatatypeConverter.parseDateTime(dateTimeString);
- *        long longval = convert_calendar_to_long(cal); //application specific
- *        return longval;
- *    }
- *     
- *    // Customized print method
- *    public String myPrintCal( Long longval ) {
- *        java.util.Calendar cal = convert_long_to_calendar(longval) ; //application specific
- *        String dateTimeString = DatatypeConverter.printDateTime(cal);
- *        return dateTimeString;
- *    }
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  // Customized parse method
+ *  public long myParseCal( String dateTimeString ) {
+ *      java.util.Calendar cal = DatatypeConverter.parseDateTime(dateTimeString);
+ *      long longval = convert_calendar_to_long(cal); //application specific
+ *      return longval;
+ *  }
+ *
+ *  // Customized print method
+ *  public String myPrintCal( Long longval ) {
+ *      java.util.Calendar cal = convert_long_to_calendar(longval) ; //application specific
+ *      String dateTimeString = DatatypeConverter.printDateTime(cal);
+ *      return dateTimeString;
+ *  }
+ * }
  * <p>
  * There is a static parse and print method corresponding to each parse and 
  * print method respectively in the {@link DatatypeConverterInterface 
@@ -63,7 +61,7 @@ import javax.xml.namespace.NamespaceContext;
  * </p>
  * 
  * <p>
- * A print method for a XML schema datatype can output any lexical 
+ * A print method for an XML schema datatype can output any lexical 
  * representation that is valid with respect to the XML schema datatype.
  * If an error is encountered during conversion, then an IllegalArgumentException,
  * or a subclass of IllegalArgumentException must be thrown by the method.
@@ -75,7 +73,6 @@ import javax.xml.namespace.NamespaceContext;
  * @see PrintConversionEvent
  * @since 1.6, JAXB 1.0
  */
-
 final public class DatatypeConverter {
 
     // delegate to this instance of DatatypeConverter
@@ -161,7 +158,7 @@ final public class DatatypeConverter {
      *     A string containing a lexical representation of
      *     xsd:int.
      * @return
-     *     A int value represented by the string argument.
+     *     An int value represented by the string argument.
      * @throws NumberFormatException <code>lexicalXSDInt</code> is not a valid string representation of an <code>int</code> value.
      */ 
     public static int parseInt( String lexicalXSDInt ) {

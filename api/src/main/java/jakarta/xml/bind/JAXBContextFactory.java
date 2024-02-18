@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * <p>Factory that creates new <code>JAXBContext</code> instances.
- *
+ * <p>
  * JAXBContextFactory can be located using {@link java.util.ServiceLoader#load(Class)}
  *
  * @since 9, JAXB 2.3
