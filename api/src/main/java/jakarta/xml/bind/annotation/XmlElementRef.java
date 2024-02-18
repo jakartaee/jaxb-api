@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -41,10 +41,10 @@ import static java.lang.annotation.ElementType.METHOD;
  * support for substitution groups using an <i>element property</i>,
  * (section 5.5.5, "Element Property" of Jakarta XML Binding specification). An
  * element property method signature is of the form:
- * <pre>{@code
- *     public void setTerm(JAXBElement<? extends Operator>);
- *     public JAXBElement<? extends Operator> getTerm();
- * }</pre>
+ * {@snippet :
+ *  public void setTerm(JAXBElement<? extends Operator>);
+ *  public JAXBElement<? extends Operator> getTerm();
+ * }
  * <p>
  * An element factory method annotated with  {@link XmlElementDecl} is
  * used to create a {@code JAXBElement} instance, containing an XML
@@ -83,62 +83,62 @@ import static java.lang.annotation.ElementType.METHOD;
  * The following Java class hierarchy models an Ant build
  * script.  An Ant task corresponds to a class in the class
  * hierarchy. The XML element name of an Ant task is indicated by the
- * &#64;XmlRootElement annotation on its corresponding class.
- * <pre>
- *     &#64;XmlRootElement(name="target")
- *     class Target {
- *         // The presence of &#64;XmlElementRef indicates that the XML
- *         // element name will be derived from the &#64;XmlRootElement
- *         // annotation on the type (for e.g. "jar" for JarTask).
- *         &#64;XmlElementRef
- *         List&lt;Task&gt; tasks;
- *     }
+ * XmlRootElement annotation on its corresponding class.
+ * {@snippet :
+ *  @XmlRootElement(name="target")
+ *  class Target {
+ *      // The presence of @XmlElementRef indicates that the XML
+ *      // element name will be derived from the @XmlRootElement
+ *      // annotation on the type (for e.g. "jar" for JarTask).
+ *      @XmlElementRef
+ *      List<Task> tasks;
+ *  }
  *
- *     abstract class Task {
- *     }
+ *  abstract class Task {
+ *  }
  *
- *     &#64;XmlRootElement(name="jar")
- *     class JarTask extends Task {
- *         ...
- *     }
+ *  @XmlRootElement(name="jar")
+ *  class JarTask extends Task {
+ *      ...
+ *  }
  *
- *     &#64;XmlRootElement(name="javac")
- *     class JavacTask extends Task {
- *         ...
- *     }
- * {@code
- *
- *     <!-- XML Schema fragment -->
- *     <xs:element name="target" type="Target">
- *     <xs:complexType name="Target">
- *       <xs:sequence>
- *         <xs:choice maxOccurs="unbounded">
- *           <xs:element ref="jar">
- *           <xs:element ref="javac">
- *         </xs:choice>
- *       </xs:sequence>
- *     </xs:complexType>
- *
- * }</pre>
+ *  @XmlRootElement(name="javac")
+ *  class JavacTask extends Task {
+ *      ...
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML Schema fragment -->
+ *  <xs:element name="target" type="Target">
+ *    <xs:complexType name="Target">
+ *      <xs:sequence>
+ *        <xs:choice maxOccurs="unbounded">
+ *          <xs:element ref="jar"/>
+ *          <xs:element ref="javac"/>
+ *        </xs:choice>
+ *      </xs:sequence>
+ *    </xs:complexType>
+ *  </xs:element>
+ * }
  * <p>
  * Thus the following code fragment:
- * <pre>
- *     Target target = new Target();
- *     target.tasks.add(new JarTask());
- *     target.tasks.add(new JavacTask());
- *     marshal(target);
- * </pre>
+ * {@snippet :
+ *  Target target = new Target();
+ *  target.tasks.add(new JarTask());
+ *  target.tasks.add(new JavacTask());
+ *  marshal(target);
+ * }
  * will produce the following XML output:
- * <pre>{@code
- *     <target>
- *       <jar>
- *         ....
- *       </jar>
- *       <javac>
- *         ....
- *       </javac>
- *     </target>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <target>
+ *    <jar>
+ *      ....
+ *    </jar>
+ *    <javac>
+ *      ....
+ *    </javac>
+ *  </target>
+ * }
  * <p>
  * It is not an error to have a class that extends {@code Task}
  * that doesn't have {@link XmlRootElement}. But they can't show up in an
@@ -149,55 +149,55 @@ import static java.lang.annotation.ElementType.METHOD;
  * substitution groups.  The annotations and the ObjectFactory are
  * derived from the schema.
  *
- * <pre>
- *     &#64;XmlElement
- *     class Math {
- *         //  The value of {@link #type()}is
- *         //  JAXBElement.class , which indicates the XML
- *         //  element name ObjectFactory - in general a class marked
- *         //  with &#64;XmlRegistry. (See ObjectFactory below)
- *         //
- *         //  The {@link #name()} is "operator", a pointer to a
- *         // factory method annotated with a
- *         //  {@link XmlElementDecl} with the name "operator". Since
- *         //  "operator" is the head of a substitution group that
- *         //  contains elements "add" and "sub" elements, "operator"
- *         //  element can be substituted in an instance document by
- *         //  elements "add" or "sub". At runtime, JAXBElement
- *         //  instance contains the element name that has been
- *         //  substituted in the XML document.
- *         //
- *         &#64;XmlElementRef(type=JAXBElement.class,name="operator")
- *         JAXBElement&lt;? extends Operator&gt; term;
- *     }
+ * {@snippet :
+ *  @XmlElement
+ *  class Math {
+ *      //  The value of type() is // @link substring="type()" target="#type()"
+ *      //  JAXBElement.class , which indicates the XML
+ *      //  element name ObjectFactory - in general a class marked
+ *      //  with @XmlRegistry. (See ObjectFactory below)
+ *      //
+ *      //  The name() is "operator", a pointer to a // @link substring="name()" target="#name()"
+ *      // factory method annotated with a
+ *      //  XmlElementDecl with the name "operator". Since //@link substring="XmlElementDecl" target="XmlElementDecl"
+ *      //  "operator" is the head of a substitution group that
+ *      //  contains elements "add" and "sub" elements, "operator"
+ *      //  element can be substituted in an instance document by
+ *      //  elements "add" or "sub". At runtime, JAXBElement
+ *      //  instance contains the element name that has been
+ *      //  substituted in the XML document.
+ *      //
+ *      @XmlElementRef(type=JAXBElement.class,name="operator")
+ *      JAXBElement<? extends Operator> term;
+ *  }
  *
- *     &#64;XmlRegistry
- *     class ObjectFactory {
- *         &#64;XmlElementDecl(name="operator")
- *         JAXBElement&lt;Operator&gt; createOperator(Operator o) {...}
- *         &#64;XmlElementDecl(name="add",substitutionHeadName="operator")
- *         JAXBElement&lt;Operator&gt; createAdd(Operator o) {...}
- *         &#64;XmlElementDecl(name="sub",substitutionHeadName="operator")
- *         JAXBElement&lt;Operator&gt; createSub(Operator o) {...}
- *     }
+ *  @XmlRegistry
+ *  class ObjectFactory {
+ *      @XmlElementDecl(name="operator")
+ *      JAXBElement<Operator> createOperator(Operator o) {...}
+ *      @XmlElementDecl(name="add",substitutionHeadName="operator")
+ *      JAXBElement<Operator> createAdd(Operator o) {...}
+ *      @XmlElementDecl(name="sub",substitutionHeadName="operator")
+ *      JAXBElement<Operator> createSub(Operator o) {...}
+ *  }
  *
- *     class Operator {
- *         ...
- *     }
- * </pre>
+ *  class Operator {
+ *      ...
+ *  }
+ * }
  * <p>
  * Thus, the following code fragment
- * <pre>
- *     Math m = new Math();
- *     m.term = new ObjectFactory().createAdd(new Operator());
- *     marshal(m);
- * </pre>
+ * {@snippet :
+ *  Math m = new Math();
+ *  m.term = new ObjectFactory().createAdd(new Operator());
+ *  marshal(m);
+ * }
  * will produce the following XML output:
- * <pre>{@code
- *     <math>
- *       <add>...</add>
- *     </math>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <math>
+ *    <add>...</add>
+ *  </math>
+ * }
  *
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems,Inc. </li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>

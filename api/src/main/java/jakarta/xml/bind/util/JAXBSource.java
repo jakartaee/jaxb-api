@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -40,21 +40,19 @@ import org.xml.sax.XMLFilter;
  * The following example shows how to use Jakarta XML Binding to marshal a document
  * for transformation by XSLT.
  *
- * <blockquote>
- *    <pre>
- *       MyObject o = // get JAXB content tree
+ * {@snippet :
+ *  MyObject o = // get JAXB content tree
  *
- *       // jaxbContext is a JAXBContext object from which 'o' is created.
- *       JAXBSource source = new JAXBSource( jaxbContext, o );
+ *  // jaxbContext is a JAXBContext object from which 'o' is created.
+ *  JAXBSource source = new JAXBSource( jaxbContext, o );
  *
- *       // set up XSLT transformation
- *       TransformerFactory tf = TransformerFactory.newInstance();
- *       Transformer t = tf.newTransformer(new StreamSource("test.xsl"));
+ *  // set up XSLT transformation
+ *  TransformerFactory tf = TransformerFactory.newInstance();
+ *  Transformer t = tf.newTransformer(new StreamSource("test.xsl"));
  *
- *       // run transformation
- *       t.transform(source,new StreamResult(System.out));
- *    </pre>
- * </blockquote>
+ *  // run transformation
+ *  t.transform(source,new StreamResult(System.out));
+ * }
  *
  * <p>
  * The fact that JAXBSource derives from SAXSource is an implementation

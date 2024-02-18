@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -28,23 +28,21 @@ import javax.xml.namespace.NamespaceContext;
  * implementation of parse and print methods. These methods are invoked by 
  * custom parse and print methods. For example, the binding of xsd:dateTime 
  * to a long can be customized using parse and print methods as follows:
- * <blockquote>
- *    <pre>
- *    // Customized parse method 
- *    public long myParseCal( String dateTimeString ) {
- *        java.util.Calendar cal = DatatypeConverter.parseDateTime(dateTimeString);
- *        long longval = convert_calendar_to_long(cal); //application specific
- *        return longval;
- *    }
- *     
- *    // Customized print method
- *    public String myPrintCal( Long longval ) {
- *        java.util.Calendar cal = convert_long_to_calendar(longval) ; //application specific
- *        String dateTimeString = DatatypeConverter.printDateTime(cal);
- *        return dateTimeString;
- *    }
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  // Customized parse method
+ *  public long myParseCal( String dateTimeString ) {
+ *      java.util.Calendar cal = DatatypeConverter.parseDateTime(dateTimeString);
+ *      long longval = convert_calendar_to_long(cal); //application specific
+ *      return longval;
+ *  }
+ *
+ *  // Customized print method
+ *  public String myPrintCal( Long longval ) {
+ *      java.util.Calendar cal = convert_long_to_calendar(longval) ; //application specific
+ *      String dateTimeString = DatatypeConverter.printDateTime(cal);
+ *      return dateTimeString;
+ *  }
+ * }
  * <p>
  * There is a static parse and print method corresponding to each parse and 
  * print method respectively in the {@link DatatypeConverterInterface 
@@ -75,7 +73,6 @@ import javax.xml.namespace.NamespaceContext;
  * @see PrintConversionEvent
  * @since 1.6, JAXB 1.0
  */
-
 final public class DatatypeConverter {
 
     // delegate to this instance of DatatypeConverter

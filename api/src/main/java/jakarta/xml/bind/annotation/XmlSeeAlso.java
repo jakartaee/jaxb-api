@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2006, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -28,11 +28,11 @@ import java.lang.annotation.Target;
  * <p>
  * For example, with the following class definitions:
  *
- * <pre>
- * class Animal {}
- * class Dog extends Animal {}
- * class Cat extends Animal {}
- * </pre>
+ * {@snippet :
+ *  class Animal {}
+ *  class Dog extends Animal {}
+ *  class Cat extends Animal {}
+ * }
  *
  * <p>
  * The user would be required to create {@link JAXBContext} as
@@ -42,12 +42,12 @@ import java.lang.annotation.Target;
  *
  * <p>
  * {@link XmlSeeAlso} annotation would allow you to write:
- * <pre>
- * &#64;XmlSeeAlso({Dog.class,Cat.class})
- * class Animal {}
- * class Dog extends Animal {}
- * class Cat extends Animal {}
- * </pre>
+ * {@snippet :
+ *  @XmlSeeAlso({Dog.class,Cat.class})
+ *  class Animal {}
+ *  class Dog extends Animal {}
+ *  class Cat extends Animal {}
+ * }
  *
  * <p>
  * This would allow you to do {@code JAXBContext.newInstance(Animal.class)}.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -34,42 +34,42 @@ import static java.lang.annotation.ElementType.PARAMETER;
  * each item in the collection will be wrapped by an element.
  * For example,
  *
- * <pre>
- * &#64;XmlRootElement
- * class Foo {
- *     &#64;XmlElement
- *     List&lt;String&gt; data;
+ * {@snippet :
+ *  @XmlRootElement
+ *  class Foo {
+ *      @XmlElement
+ *      List<String> data;
+ *  }
  * }
- * </pre>
  *
  * would produce XML like this:
  *
- * <pre>{@code
- * <foo>
- *   <data>abc</data>
- *   <data>def</data>
- * </foo>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <foo>
+ *    <data>abc</data>
+ *    <data>def</data>
+ *  </foo>
+ * }
  *
- * &#64;XmlList annotation, on the other hand, allows multiple values to be 
+ * XmlList annotation, on the other hand, allows multiple values to be
  * represented as whitespace-separated tokens in a single element. For example,
  *
- * <pre>
- * &#64;XmlRootElement
- * class Foo {
- *     &#64;XmlElement
- *     &#64;XmlList
- *     List&lt;String&gt; data;
+ * {@snippet :
+ *  @XmlRootElement
+ *  class Foo {
+ *      @XmlElement
+ *      @XmlList
+ *      List<String> data;
+ *  }
  * }
- * </pre>
  *
  * the above code will produce XML like this:
  *
- * <pre>{@code
- * <foo>
- *   <data>abc def</data>
- * </foo>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <foo>
+ *    <data>abc def</data>
+ *  </foo>
+ * }
  *
  * <p>This annotation can be used with the following annotations:
  *        {@link XmlElement}, 
