@@ -49,7 +49,6 @@ import java.lang.annotation.Target;
  *
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({TYPE})
 public @interface XmlEnum {
     /**

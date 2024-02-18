@@ -29,7 +29,6 @@ import java.lang.annotation.Target;
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({})
 public @interface XmlNs {
     /**

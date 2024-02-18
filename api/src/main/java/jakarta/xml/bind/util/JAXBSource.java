@@ -69,7 +69,7 @@ import org.xml.sax.XMLFilter;
  * returned by the getXMLReader.
  *
  * @author
- * 	Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
+ *     Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  * @since 1.6
  */
 public class JAXBSource extends SAXSource {

@@ -91,9 +91,9 @@ public class JAXBElement<T> implements Serializable {
      * @see #isTypeSubstituted()
      */
     public JAXBElement(QName name,
-		       Class<T> declaredType,
-		       Class<?> scope,
-		       T value) {
+                       Class<T> declaredType,
+                       Class<?> scope,
+                       T value) {
         if(declaredType==null || name==null)
             throw new IllegalArgumentException();
         this.declaredType = declaredType;

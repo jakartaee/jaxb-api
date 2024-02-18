@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -32,7 +32,7 @@ public class PropertyException extends JAXBException {
      * @param message a description of the exception
      */
     public PropertyException(String message) {
-    	super(message);
+        super(message);
     }
     
     /** 
@@ -43,7 +43,7 @@ public class PropertyException extends JAXBException {
      * @param errorCode a string specifying the vendor specific error code
      */
     public PropertyException(String message, String errorCode) {
-    	super(message, errorCode);
+        super(message, errorCode);
     }
     
     /** 
@@ -53,7 +53,7 @@ public class PropertyException extends JAXBException {
      * @param exception the linked exception
      */
     public PropertyException(Throwable exception) {
-    	super(exception);
+        super(exception);
     }
     
     /** 
@@ -64,7 +64,7 @@ public class PropertyException extends JAXBException {
      * @param exception the linked exception
      */
     public PropertyException(String message, Throwable exception) {
-    	super(message, exception);
+        super(message, exception);
     }
     
     /** 
@@ -75,11 +75,10 @@ public class PropertyException extends JAXBException {
      * @param errorCode a string specifying the vendor specific error code
      * @param exception the linked exception
      */
-    public PropertyException(
-    	String message,
-    	String errorCode,
-    	Throwable exception) {
-    	super(message, errorCode, exception);
+    public PropertyException(String message,
+                             String errorCode,
+                             Throwable exception) {
+        super(message, errorCode, exception);
     }
     
     /**
@@ -90,7 +89,7 @@ public class PropertyException extends JAXBException {
      * @param value the value of the property related to this exception
      */
     public PropertyException(String name, Object value) {
-    	super( Messages.format( Messages.NAME_VALUE, 
+        super( Messages.format( Messages.NAME_VALUE,
                                         name, 
                                         value.toString() ) );
     }

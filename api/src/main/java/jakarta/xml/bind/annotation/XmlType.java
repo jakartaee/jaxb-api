@@ -337,7 +337,7 @@ import java.lang.annotation.Target;
  *  }
  *
  *  public class USAddressFactory {
- *      public static USAddress getUSAddress(){
+ *      public static USAddress getUSAddress() {
  *          return new USAddress("Mark Baker", "23 Elm St",
  *                               "Dayton", "OH", 90952);
  *      }
@@ -359,7 +359,7 @@ import java.lang.annotation.Target;
  *
  *      private USAddress() {}
  *
- *      public static USAddress getNewInstance(){
+ *      public static USAddress getNewInstance() {
  *          return new USAddress();
  *      }
  *  }
@@ -372,7 +372,6 @@ import java.lang.annotation.Target;
  * @see XmlSchema
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({TYPE})
 public @interface XmlType {
     /**
