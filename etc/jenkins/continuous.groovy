@@ -1,4 +1,4 @@
-// Copyright (c) 2019, 2022 Oracle and/or its affiliates. All rights reserved.
+// Copyright (c) 2019, 2024 Oracle and/or its affiliates. All rights reserved.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -26,7 +26,7 @@ pipeline {
     agent any
 
     tools {
-        jdk 'openjdk-jdk11-latest'
+        jdk 'openjdk-jdk21-latest'
         maven 'apache-maven-latest'
     }
 
