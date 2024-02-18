@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -28,28 +28,28 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p>
  * This annotation serves as a "catch-all" property while unmarshalling
- * xml content into a instance of a Jakarta XML Binding annotated class. It typically
- * annotates a multi-valued JavaBean property, but it can occur on
+ * xml content into an instance of a Jakarta XML Binding annotated class. It typically
+ * annotates a multivalued JavaBean property, but it can occur on
  * single value JavaBean property. During unmarshalling, each xml element
  * that does not match a static &#64;XmlElement or &#64;XmlElementRef
  * annotation for the other JavaBean properties on the class, is added to this
  * "catch-all" property.
  *
  * <h2>Usages:</h2>
- * <pre>
- * &#64;XmlAnyElement
- * public {@link Element}[] others;
+ * {@snippet :
+ *  @XmlAnyElement
+ *  public Element[] others;
  *
- * // Collection of {@link Element} or JAXBElements.
- * &#64;XmlAnyElement(lax="true")
- * public {@link Object}[] others;
+ *  // Collection of Element or JAXBElements.
+ *  @XmlAnyElement(lax="true")
+ *  public Object[] others;
  *
- * &#64;XmlAnyElement
- * private List&lt;{@link Element}&gt; nodes;
+ *  @XmlAnyElement
+ *  private List<Element> nodes;
  *
- * &#64;XmlAnyElement
- * private {@link Element} node;
- * </pre>
+ *  @XmlAnyElement
+ *  private Element node;
+ * }
  *
  * <h2>Restriction usage constraints</h2>
  * <p>
@@ -69,82 +69,84 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p>
  * This annotation can be used with {@link XmlMixed} like this:
- * <pre>
- * // List of java.lang.String or DOM nodes.
- * &#64;XmlAnyElement &#64;XmlMixed
- * List&lt;Object&gt; others;
- * </pre>
+ * {@snippet :
+ *  // List of java.lang.String or DOM nodes.
+ *  @XmlAnyElement
+ *  @XmlMixed
+ *  List<Object> others;
+ * }
  *
  *
  * <h2>Schema To Java example</h2>
  *
  * The following schema would produce the following Java class:
- * <pre>{@code
- * <xs:complexType name="foo">
- *   <xs:sequence>
- *     <xs:element name="a" type="xs:int" />
- *     <xs:element name="b" type="xs:int" />
- *     <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
- *   </xs:sequence>
- * </xs:complexType>
- * }</pre>
- *
- * <pre>
- * class Foo {
- *   int a;
- *   int b;
- *   &#64;{@link XmlAnyElement}
- *   List&lt;Element&gt; any;
+ * {@snippet lang="XML" :
+ *  <xs:complexType name="foo">
+ *    <xs:sequence>
+ *      <xs:element name="a" type="xs:int" />
+ *      <xs:element name="b" type="xs:int" />
+ *      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+ *    </xs:sequence>
+ *  </xs:complexType>
  * }
- * </pre>
+ *
+ * {@snippet :
+ *  class Foo {
+ *      int a;
+ *      int b;
+ *      @XmlAnyElement
+ *      List<Element> any;
+ *  }
+ * }
  *
  * It can unmarshal instances like
  *
- * <pre>{@code
- * <foo xmlns:e="extra">
- *   <a>1</a>
- *   <e:other />  // this will be bound to DOM, because unmarshalling is orderless
- *   <b>3</b>
- *   <e:other />
- *   <c>5</c>     // this will be bound to DOM, because the annotation doesn't remember namespaces.
- * </foo>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <foo xmlns:e="extra">
+ *    <a>1</a>
+ *    <e:other />  <!-- this will be bound to DOM, because unmarshalling is orderless -->
+ *    <b>3</b>
+ *    <e:other />
+ *    <c>5</c>     <!-- this will be bound to DOM, because the annotation doesn't remember namespaces -->
+ *  </foo>
+ * }
  *
  *
  *
  * The following schema would produce the following Java class:
- * <pre>{@code
- * <xs:complexType name="bar">
- *   <xs:complexContent>
- *   <xs:extension base="foo">
- *     <xs:sequence>
- *       <xs:element name="c" type="xs:int" />
- *       <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
- *     </xs:sequence>
- *   </xs:extension>
- * </xs:complexType>
- * }</pre>
- *
- * <pre>
- * class Bar extends Foo {
- *   int c;
- *   // Foo.getAny() also represents wildcard content for type definition bar.
+ * {@snippet lang="XML" :
+ *  <xs:complexType name="bar">
+ *    <xs:complexContent>
+ *      <xs:extension base="foo">
+ *        <xs:sequence>
+ *          <xs:element name="c" type="xs:int" />
+ *          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+ *        </xs:sequence>
+ *      </xs:extension>
+ *    </xs:complexContent>
+ *  </xs:complexType>
  * }
- * </pre>
+ *
+ * {@snippet :
+ *  class Bar extends Foo {
+ *      int c;
+ *      // Foo.getAny() also represents wildcard content for type definition bar.
+ *  }
+ * }
  *
  *
  * It can unmarshal instances like
  *
- * <pre>{@code
- * <bar xmlns:e="extra">
- *   <a>1</a>
- *   <e:other />  // this will be bound to DOM, because unmarshalling is orderless
- *   <b>3</b>
- *   <e:other />
- *   <c>5</c>     // this now goes to Bar.c
- *   <e:other />  // this will go to Foo.any
- * </bar>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <bar xmlns:e="extra">
+ *    <a>1</a>
+ *    <e:other />  <!-- this will be bound to DOM, because unmarshalling is orderless -->
+ *    <b>3</b>
+ *    <e:other />
+ *    <c>5</c>     <!-- this now goes to Bar.c -->
+ *    <e:other />  <!-- this will go to Foo.any -->
+ *  </bar>
+ * }
  *
  *
  *
@@ -156,45 +158,46 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p>
  * The following schema would produce the following Java class:
- * <pre>{@code
- * <xs:complexType name="foo">
- *   <xs:choice maxOccurs="unbounded" minOccurs="0">
- *     <xs:element name="a" type="xs:int" />
- *     <xs:element name="b" type="xs:int" />
- *     <xs:any namespace="##other" processContents="lax" />
- *   </xs:choice>
- * </xs:complexType>
- * }</pre>
- *
- * <pre>
- * class Foo {
- *   &#64;{@link XmlAnyElement}(lax="true")
- *   &#64;{@link XmlElementRefs}({
- *     &#64;{@link XmlElementRef}(name="a", type="JAXBElement.class")
- *     &#64;{@link XmlElementRef}(name="b", type="JAXBElement.class")
- *   })
- *   {@link List}&lt;{@link Object}&gt; others;
+ * {@snippet lang="XML" :
+ *  <xs:complexType name="foo">
+ *    <xs:choice maxOccurs="unbounded" minOccurs="0">
+ *      <xs:element name="a" type="xs:int" />
+ *      <xs:element name="b" type="xs:int" />
+ *      <xs:any namespace="##other" processContents="lax" />
+ *    </xs:choice>
+ *  </xs:complexType>
  * }
  *
- * &#64;XmlRegistry
- * class ObjectFactory {
- *   ...
- *   &#64;XmlElementDecl(name = "a", namespace = "", scope = Foo.class)
- *   {@link JAXBElement}&lt;Integer&gt; createFooA( Integer i ) { ... }
+ * {@snippet :
+ *  class Foo {
+ *      @XmlAnyElement(lax="true")
+ *      @XmlElementRefs({
+ *          @XmlElementRef(name="a", type="JAXBElement.class"),
+ *          @XmlElementRef(name="b", type="JAXBElement.class")
+ *      })
+ *      List<Object> others;
+ *  }
  *
- *   &#64;XmlElementDecl(name = "b", namespace = "", scope = Foo.class)
- *   {@link JAXBElement}&lt;Integer&gt; createFooB( Integer i ) { ... }
- * </pre>
+ *  @XmlRegistry
+ *  class ObjectFactory {
+ *      ...
+ *      @XmlElementDecl(name = "a", namespace = "", scope = Foo.class)
+ *      JAXBElement<Integer> createFooA( Integer i ) { ... }
+ *
+ *      @XmlElementDecl(name = "b", namespace = "", scope = Foo.class)
+ *      JAXBElement<Integer> createFooB( Integer i ) { ... }
+ *  }
+ * }
  *
  * It can unmarshal instances like
  *
- * <pre>
- *{@code <foo xmlns:e="extra">}
- *{@code   <a>1</a>}     // this will unmarshal to a {@link JAXBElement} instance whose value is 1.
- *{@code   <e:other />}  // this will unmarshal to a DOM {@link Element}.
- *{@code   <b>3</b>}     // this will unmarshal to a {@link JAXBElement} instance whose value is 1.
- *{@code </foo>}
- * </pre>
+ * {@snippet lang="XML" :
+ *  <foo xmlns:e="extra">
+ *    <a>1</a>     <!-- this will unmarshal to a JAXBElement instance whose value is 1. -->
+ *    <e:other />  <!-- this will unmarshal to a DOM Element. -->
+ *    <b>3</b>     <!-- this will unmarshal to a JAXBElement instance whose value is 1. -->
+ *  </foo>
+ * }
  *
  *
  *
@@ -202,29 +205,30 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <h2>W3C XML Schema "lax" wildcard emulation</h2>
  * The lax element of the annotation enables the emulation of the "lax" wildcard semantics.
  * For example, when the Java source code is annotated like this:
- * <pre>
- * &#64;{@link XmlRootElement}
- * class Foo {
- *   &#64;XmlAnyElement(lax=true)
- *   public {@link Object}[] others;
+ * {@snippet :
+ *  @XmlRootElement
+ *  class Foo {
+ *      @XmlAnyElement(lax=true)
+ *      public Object[] others;
+ *  }
  * }
- * </pre>
  * then the following document will unmarshal like this:
- * <pre>{@code
- * <foo>
- *   <unknown />
- *   <foo />
- * </foo>
- *
- * Foo foo = unmarshal();
- * // 1 for 'unknown', another for 'foo'
- * assert foo.others.length==2;
- * // 'unknown' unmarshals to a DOM element
- * assert foo.others[0] instanceof Element;
- * // because of lax=true, the 'foo' element eagerly
- * // unmarshals to a Foo object.
- * assert foo.others[1] instanceof Foo;
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <foo>
+ *    <unknown />
+ *    <foo />
+ *  </foo>
+ * }
+ * {@snippet :
+ *  Foo foo = unmarshal();
+ *  // 1 for 'unknown', another for 'foo'
+ *  assert foo.others.length==2;
+ *  // 'unknown' unmarshals to a DOM element
+ *  assert foo.others[0] instanceof Element;
+ *  // because of lax=true, the 'foo' element eagerly
+ *  // unmarshals to a Foo object.
+ *  assert foo.others[1] instanceof Foo;
+ * }
  *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0

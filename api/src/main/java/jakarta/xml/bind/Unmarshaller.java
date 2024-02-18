@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -23,144 +23,128 @@ import java.io.Reader;
  *
  * <p>
  * Unmarshalling from a File:
- * <blockquote>
- *    <pre>
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
- *       Object o = u.unmarshal( new File( "nosferatu.xml" ) );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  Object o = u.unmarshal( new File( "nosferatu.xml" ) );
+ * }
  *
  *
  * <p>
  * Unmarshalling from an InputStream:
- * <blockquote>
- *    <pre>
- *       InputStream is = new FileInputStream( "nosferatu.xml" );
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
- *       Object o = u.unmarshal( is );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  InputStream is = new FileInputStream( "nosferatu.xml" );
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  Object o = u.unmarshal( is );
+ * }
  *
  * <p>
  * Unmarshalling from a URL:
- * <blockquote>
- *    <pre>
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
- *       URL url = new URL( "http://beaker.east/nosferatu.xml" );
- *       Object o = u.unmarshal( url );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  URL url = new URL( "http://beaker.east/nosferatu.xml" );
+ *  Object o = u.unmarshal( url );
+ * }
  *
  * <p>
  * Unmarshalling from a StringBuffer using a
  * {@code javax.xml.transform.stream.StreamSource}:
- * <blockquote>
- *    <pre>{@code
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
- *       StringBuffer xmlStr = new StringBuffer( "<?xml version="1.0"?>..." );
- *       Object o = u.unmarshal( new StreamSource( new StringReader( xmlStr.toString() ) ) );
- *    }</pre>
- * </blockquote>
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  StringBuffer xmlStr = new StringBuffer( "<?xml version="1.0"?>..." );
+ *  Object o = u.unmarshal( new StreamSource( new StringReader( xmlStr.toString() ) ) );
+ * }
  *
  * <p>
  * Unmarshalling from a {@code org.w3c.dom.Node}:
- * <blockquote>
- *    <pre>
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
  *
- *       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
- *       dbf.setNamespaceAware(true);
- *       DocumentBuilder db = dbf.newDocumentBuilder();
- *       Document doc = db.parse(new File( "nosferatu.xml"));
+ *  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+ *  dbf.setNamespaceAware(true);
+ *  DocumentBuilder db = dbf.newDocumentBuilder();
+ *  Document doc = db.parse(new File( "nosferatu.xml"));
 
- *       Object o = u.unmarshal( doc );
- *    </pre>
- * </blockquote>
+ *  Object o = u.unmarshal( doc );
+ * }
  *
  * <p>
  * Unmarshalling from a {@code javax.xml.transform.sax.SAXSource} using a
  * client specified validating SAX2.0 parser:
- * <blockquote>
- *    <pre>
- *       // configure a validating SAX2.0 parser (Xerces2)
- *       static final String JAXP_SCHEMA_LANGUAGE =
- *           "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
- *       static final String JAXP_SCHEMA_LOCATION =
- *           "http://java.sun.com/xml/jaxp/properties/schemaSource";
- *       static final String W3C_XML_SCHEMA =
- *           "http://www.w3.org/2001/XMLSchema";
+ * {@snippet :
+ *  // configure a validating SAX2.0 parser (Xerces2)
+ *  static final String JAXP_SCHEMA_LANGUAGE =
+ *       "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
+ *  static final String JAXP_SCHEMA_LOCATION =
+ *       "http://java.sun.com/xml/jaxp/properties/schemaSource";
+ *  static final String W3C_XML_SCHEMA =
+ *       "http://www.w3.org/2001/XMLSchema";
  *
- *       System.setProperty( "javax.xml.parsers.SAXParserFactory",
- *                           "org.apache.xerces.jaxp.SAXParserFactoryImpl" );
+ *  System.setProperty( "javax.xml.parsers.SAXParserFactory",
+ *                      "org.apache.xerces.jaxp.SAXParserFactoryImpl" );
  *
- *       SAXParserFactory spf = SAXParserFactory.newInstance();
- *       spf.setNamespaceAware(true);
- *       spf.setValidating(true);
- *       SAXParser saxParser = spf.newSAXParser();
+ *  SAXParserFactory spf = SAXParserFactory.newInstance();
+ *  spf.setNamespaceAware(true);
+ *  spf.setValidating(true);
+ *  SAXParser saxParser = spf.newSAXParser();
  *
- *       try {
- *           saxParser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
- *           saxParser.setProperty(JAXP_SCHEMA_LOCATION, "http://....");
- *       } catch (SAXNotRecognizedException x) {
- *           // exception handling omitted
- *       }
+ *  try {
+ *      saxParser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
+ *      saxParser.setProperty(JAXP_SCHEMA_LOCATION, "http://....");
+ *  } catch (SAXNotRecognizedException x) {
+ *      // exception handling omitted
+ *  }
  *
- *       XMLReader xmlReader = saxParser.getXMLReader();
- *       SAXSource source =
- *           new SAXSource( xmlReader, new InputSource( "http://..." ) );
+ *  XMLReader xmlReader = saxParser.getXMLReader();
+ *  SAXSource source =
+ *      new SAXSource( xmlReader, new InputSource( "http://..." ) );
  *
- *       // Setup Jakarta XML Binding to unmarshal
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
- *       ValidationEventCollector vec = new ValidationEventCollector();
- *       u.setEventHandler( vec );
+ *  // Setup Jakarta XML Binding to unmarshal
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  ValidationEventCollector vec = new ValidationEventCollector();
+ *  u.setEventHandler( vec );
  *
- *       // turn off the Jakarta XML Binding provider's default validation mechanism to
- *       // avoid duplicate validation
- *       u.setValidating( false )
+ *  // turn off the Jakarta XML Binding provider's default validation mechanism to
+ *  // avoid duplicate validation
+ *  u.setValidating( false )
  *
- *       // unmarshal
- *       Object o = u.unmarshal( source );
+ *  // unmarshal
+ *  Object o = u.unmarshal( source );
  *
- *       // check for events
- *       if( vec.hasEvents() ) {
- *          // iterate over events
- *       }
- *    </pre>
- * </blockquote>
+ *  // check for events
+ *  if( vec.hasEvents() ) {
+ *      // iterate over events
+ *  }
+ * }
  *
  * <p>
  * Unmarshalling from a StAX XMLStreamReader:
- * <blockquote>
- *    <pre>
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
  *
- *       javax.xml.stream.XMLStreamReader xmlStreamReader =
- *           javax.xml.stream.XMLInputFactory().newInstance().createXMLStreamReader( ... );
+ *  javax.xml.stream.XMLStreamReader xmlStreamReader =
+ *      javax.xml.stream.XMLInputFactory().newInstance().createXMLStreamReader( ... );
  *
- *       Object o = u.unmarshal( xmlStreamReader );
- *    </pre>
- * </blockquote>
+ *  Object o = u.unmarshal( xmlStreamReader );
+ * }
  *
  * <p>
  * Unmarshalling from a StAX XMLEventReader:
- * <blockquote>
- *    <pre>
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
  *
- *       javax.xml.stream.XMLEventReader xmlEventReader =
- *           javax.xml.stream.XMLInputFactory().newInstance().createXMLEventReader( ... );
+ *  javax.xml.stream.XMLEventReader xmlEventReader =
+ *      javax.xml.stream.XMLInputFactory().newInstance().createXMLEventReader( ... );
  *
- *       Object o = u.unmarshal( xmlEventReader );
- *    </pre>
- * </blockquote>
+ * Object o = u.unmarshal( xmlEventReader );
+ * }
  *
  * <p>
  * <a id="unmarshalEx"></a>
@@ -262,37 +246,36 @@ import java.io.Reader;
  * <a href="#unmarshalByDeclaredType">unmarshal by declaredType method</a>.
  * <p>
  * Unmarshal by declaredType from a {@code org.w3c.dom.Node}:
- * <blockquote>
- *    <pre>{@code
- *       Schema fragment for example
- *       <xs:schema>
- *          <xs:complexType name="FooType">...<\xs:complexType>
- *          <!-- global element declaration "PurchaseOrder" -->
- *          <xs:element name="PurchaseOrder">
- *              <xs:complexType>
- *                 <xs:sequence>
- *                    <!-- local element declaration "foo" -->
- *                    <xs:element name="foo" type="FooType"/>
- *                    ...
- *                 </xs:sequence>
- *              </xs:complexType>
- *          </xs:element>
- *       </xs:schema>
+ * {@snippet lang="XML" :
+ *   <!-- Schema fragment for example -->
+ *   <xs:schema>
+ *     <xs:complexType name="FooType">...</xs:complexType>
+ *     <!-- global element declaration "PurchaseOrder" -->
+ *     <xs:element name="PurchaseOrder">
+ *       <xs:complexType>
+ *         <xs:sequence>
+ *           <!-- local element declaration "foo" -->
+ *           <xs:element name="foo" type="FooType"/>
+ *           ...
+ *         </xs:sequence>
+ *       </xs:complexType>
+ *     </xs:element>
+ *   </xs:schema>
+ * }
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
  *
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
+ *  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+ *  dbf.setNamespaceAware(true);
+ *  DocumentBuilder db = dbf.newDocumentBuilder();
+ *  Document doc = db.parse(new File( "nosferatu.xml"));
+ *  Element  fooSubtree = ...; // traverse DOM till reach xml element foo, constrained by a
+ *                             // local element declaration in schema.
  *
- *       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
- *       dbf.setNamespaceAware(true);
- *       DocumentBuilder db = dbf.newDocumentBuilder();
- *       Document doc = db.parse(new File( "nosferatu.xml"));
- *       Element  fooSubtree = ...; // traverse DOM till reach xml element foo, constrained by a
- *                                  // local element declaration in schema.
- *
- *       // FooType is the Jakarta XML Binding mapping of the type of local element declaration foo.
- *       JAXBElement<FooType> foo = u.unmarshal( fooSubtree, FooType.class);
- *    }</pre>
- * </blockquote>
+ *  // FooType is the Jakarta XML Binding mapping of the type of local element declaration foo.
+ *  JAXBElement<FooType> foo = u.unmarshal( fooSubtree, FooType.class);
+ * }
  *
  * <p>
  * <b>Support for SAX2.0 Compliant Parsers</b><br>
@@ -354,17 +337,15 @@ import java.io.Reader;
  * <p>
  * 'Class defined' event callback methods allow any Jakarta XML Binding mapped class to specify
  * its own specific callback methods by defining methods with the following method signature:
- * <blockquote>
- * <pre>
- *   // This method is called immediately after the object is created and before the unmarshalling of this
- *   // object begins. The callback provides an opportunity to initialize JavaBean properties prior to unmarshalling.
- *   void beforeUnmarshal(Unmarshaller, Object parent);
+ * {@snippet :
+ *  // This method is called immediately after the object is created and before the unmarshalling of this
+ *  // object begins. The callback provides an opportunity to initialize JavaBean properties prior to unmarshalling.
+ *  void beforeUnmarshal(Unmarshaller, Object parent);
  *
- *   //This method is called after all the properties (except IDREF) are unmarshalled for this object,
- *   //but before this object is set to the parent object.
- *   void afterUnmarshal(Unmarshaller, Object parent);
- * </pre>
- * </blockquote>
+ *  //This method is called after all the properties (except IDREF) are unmarshalled for this object,
+ *  //but before this object is set to the parent object.
+ *  void afterUnmarshal(Unmarshaller, Object parent);
+ * }
  * The class defined callback methods should be used when the callback method requires
  * access to non-public methods and/or fields of the class.
  * <p>

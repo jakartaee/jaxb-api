@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -42,30 +42,31 @@ import static java.lang.annotation.ElementType.METHOD;
  * </ul>
  *
  * <p><b>Example 1: </b>Annotation on a factory method
- * <pre>
- *     // Example: code fragment
- *     &#64;XmlRegistry
- *     class ObjectFactory {
- *         &#64;XmlElementDecl(name="foo")
- *         JAXBElement&lt;String&gt; createFoo(String s) { ... }
- *     }
- * </pre>
- * <pre> {@code
- *
- *     <!-- XML input -->
- *     <foo>string</foo>
- *
- *     // Example: code fragment corresponding to XML input
- *     JAXBElement<String> o =
- *     (JAXBElement<String>)unmarshaller.unmarshal(aboveDocument);
- *     // print JAXBElement instance to show values
- *     System.out.println(o.getName());   // prints  "{}foo"
- *     System.out.println(o.getValue());  // prints  "string"
- *     System.out.println(o.getValue().getClass()); // prints "java.lang.String"
- *
- *     <!-- Example: XML schema definition -->
- *     <xs:element name="foo" type="xs:string"/>
- * }</pre>
+ * {@snippet :
+ *  // Example: code fragment
+ *  @XmlRegistry
+ *  class ObjectFactory {
+ *      @XmlElementDecl(name="foo")
+ *      JAXBElement<String> createFoo(String s) { ... }
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML input -->
+ *  <foo>string</foo>
+ *}
+ * {@snippet :
+ *  // Example: code fragment corresponding to XML input
+ *  JAXBElement<String> o =
+ *      (JAXBElement<String>)unmarshaller.unmarshal(aboveDocument);
+ *  // print JAXBElement instance to show values
+ *  System.out.println(o.getName());   // prints  "{}foo"
+ *  System.out.println(o.getValue());  // prints  "string"
+ *  System.out.println(o.getValue().getClass()); // prints "java.lang.String"
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: XML schema definition -->
+ *  <xs:element name="foo" type="xs:string"/>
+ * }
  *
  * <p><b>Example 2: </b> Element declaration with non local scope
  * <p>
@@ -76,7 +77,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * The following example may be replaced in a future revision of
  * this javadoc.
  *
- * <pre>{@code
+ * {@snippet lang="XML" :
  *     <!-- Example: XML schema definition -->
  *     <xs:schema>
  *       <xs:complexType name="pea">
@@ -87,8 +88,8 @@ import static java.lang.annotation.ElementType.METHOD;
  *       </xs:complexType>
  *       <xs:element name="foo" type="xs:int"/>
  *     </xs:schema>
- * }</pre>
- * <pre>
+ * }
+ * {@snippet :
  *     // Example: expected default binding
  *     class Pea {
  *         &#64;XmlElementRefs({
@@ -109,8 +110,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *         &#64;XmlElementDecl(name="foo")
  *         JAXBElement&lt;Integer&gt; createFoo(Integer i);
  *     }
- *
- * </pre>
+ * }
  * Without scope createFoo and createPeaFoo would become ambiguous
  * since both of them map to a XML schema element with the same local
  * name "foo".

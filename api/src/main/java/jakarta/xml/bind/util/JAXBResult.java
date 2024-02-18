@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -28,22 +28,20 @@ import javax.xml.transform.sax.SAXResult;
  * The following example shows how to use Jakarta XML Binding to unmarshal a document
  * resulting from an XSLT transformation.
  * 
- * <blockquote>
- *    <pre>
- *       JAXBResult result = new JAXBResult(
- *         JAXBContext.newInstance("org.acme.foo") );
+ * {@snippet :
+ *  JAXBResult result = new JAXBResult(
+ *    JAXBContext.newInstance("org.acme.foo") );
  *       
- *       // set up XSLT transformation
- *       TransformerFactory tf = TransformerFactory.newInstance();
- *       Transformer t = tf.newTransformer(new StreamSource("test.xsl"));
+ *  // set up XSLT transformation
+ *  TransformerFactory tf = TransformerFactory.newInstance();
+ *  Transformer t = tf.newTransformer(new StreamSource("test.xsl"));
  *       
- *       // run transformation
- *       t.transform(new StreamSource("document.xml"),result);
+ *  // run transformation
+ *  t.transform(new StreamSource("document.xml"),result);
  * 
- *       // obtain the unmarshalled content tree
- *       Object o = result.getResult();
- *    </pre>
- * </blockquote>
+ *  // obtain the unmarshalled content tree
+ *  Object o = result.getResult();
+ * }
  * 
  * <p>
  * The fact that JAXBResult derives from SAXResult is an implementation

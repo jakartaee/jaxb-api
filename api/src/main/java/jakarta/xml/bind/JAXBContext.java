@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -67,13 +67,13 @@ import java.util.Map;
  * application is able to unmarshal XML documents that are instances of
  * any of the schemas listed in the {@code contextPath}.  For example:
  *
- * <pre>
- *      JAXBContext jc = JAXBContext.newInstance( "com.acme.foo:com.acme.bar" );
- *      Unmarshaller u = jc.createUnmarshaller();
- *      FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) ); // ok
- *      BarObject barObj = (BarObject)u.unmarshal( new File( "bar.xml" ) ); // ok
- *      BazObject bazObj = (BazObject)u.unmarshal( new File( "baz.xml" ) ); // error, "com.acme.baz" not in contextPath
- * </pre>
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo:com.acme.bar" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) ); // ok
+ *  BarObject barObj = (BarObject)u.unmarshal( new File( "bar.xml" ) ); // ok
+ *  BazObject bazObj = (BazObject)u.unmarshal( new File( "baz.xml" ) ); // error, "com.acme.baz" not in contextPath
+ * }
  *
  * <p>
  * The client application may also generate Java content trees explicitly rather
@@ -91,10 +91,10 @@ import java.util.Map;
  * order to create objects of that type, the client application would use the
  * factory method like this:
  *
- * <pre>
- *       com.acme.foo.PurchaseOrder po =
- *           com.acme.foo.ObjectFactory.createPurchaseOrder();
- * </pre>
+ * {@snippet :
+ *  com.acme.foo.PurchaseOrder po =
+ *      com.acme.foo.ObjectFactory.createPurchaseOrder();
+ * }
  *
  * <p>
  * Once the client application has an instance of the the schema derived object,
@@ -128,17 +128,17 @@ import java.util.Map;
  * Here is a simple example that unmarshals an XML document and then marshals
  * it back out:
  *
- * <pre>
- *        JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *
- *        // unmarshal from foo.xml
- *        Unmarshaller u = jc.createUnmarshaller();
- *        FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) );
+ *  // unmarshal from foo.xml
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) );
  *
- *        // marshal to System.out
- *        Marshaller m = jc.createMarshaller();
- *        m.marshal( fooObj, System.out );
- * </pre>
+ *  // marshal to System.out
+ *  Marshaller m = jc.createMarshaller();
+ *  m.marshal( fooObj, System.out );
+ * }
  *
  *
  * <h3>Validation</h3>
@@ -416,13 +416,13 @@ public abstract class JAXBContext {
 //     * For example, in the following Java code, if you do
 //     * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
 //     * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot}:
-//     * <pre>
-//     * class Foo {
-//     *      Bar b;
+//     * {@snippet :
+//     *  class Foo {
+//     *       Bar b;
+//     *  }
+//     *  class Bar { int x; }
+//     *  class Zot extends Bar { int y; }
 //     * }
-//     * class Bar { int x; }
-//     * class Zot extends Bar { int y; }
-//     * </pre>
 //     *
 //     * Therefore, a typical client application only needs to specify the
 //     * top-level classes, but it needs to be careful.
@@ -491,15 +491,15 @@ public abstract class JAXBContext {
      * For example, in the following Java code, if you do
      * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
      * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
-     * <pre>
-     * class Foo {
-     *      &#64;XmlTransient FooBar c;
-     *      Bar b;
+     * {@snippet :
+     *  class Foo {
+     *       @XmlTransient FooBar c;
+     *       Bar b;
+     *  }
+     *  class Bar { int x; }
+     *  class Zot extends Bar { int y; }
+     *  class FooBar { }
      * }
-     * class Bar { int x; }
-     * class Zot extends Bar { int y; }
-     * class FooBar { }
-     * </pre>
      *
      * Therefore, a typical client application only needs to specify the
      * top-level classes, but it needs to be careful.

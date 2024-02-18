@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,114 +24,92 @@ import java.io.File;
  *
  * <p>
  * <i>Assume the following setup code for all following code fragments:</i>
- * <blockquote>
- *    <pre>
- *       JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
- *       Unmarshaller u = jc.createUnmarshaller();
- *       Object element = u.unmarshal( new File( "foo.xml" ) );
- *       Marshaller m = jc.createMarshaller();
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
+ *  Unmarshaller u = jc.createUnmarshaller();
+ *  Object element = u.unmarshal( new File( "foo.xml" ) );
+ *  Marshaller m = jc.createMarshaller();
+ * }
  *
  * <p>
  * Marshalling to a File:
- * <blockquote>
- *    <pre>
- *       OutputStream os = new FileOutputStream( "nosferatu.xml" );
- *       m.marshal( element, os );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  OutputStream os = new FileOutputStream( "nosferatu.xml" );
+ *  m.marshal( element, os );
+ * }
  *
  * <p>
  * Marshalling to a SAX ContentHandler:
- * <blockquote>
- *    <pre>
- *       // assume MyContentHandler instanceof ContentHandler
- *       m.marshal( element, new MyContentHandler() );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  // assume MyContentHandler instanceof ContentHandler
+ *  m.marshal( element, new MyContentHandler() );
+ * }
  *
  * <p>
  * Marshalling to a DOM Node:
- * <blockquote>
- *    <pre>
- *       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
- *       dbf.setNamespaceAware(true);
- *       DocumentBuilder db = dbf.newDocumentBuilder();
- *       Document doc = db.newDocument();
+ * {@snippet :
+ *  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+ *  dbf.setNamespaceAware(true);
+ *  DocumentBuilder db = dbf.newDocumentBuilder();
+ *  Document doc = db.newDocument();
  *
- *       m.marshal( element, doc );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, doc );
+ * }
  *
  * <p>
  * Marshalling to a java.io.OutputStream:
- * <blockquote>
- *    <pre>
- *       m.marshal( element, System.out );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  m.marshal( element, System.out );
+ * }
  *
  * <p>
  * Marshalling to a java.io.Writer:
- * <blockquote>
- *    <pre>
- *       m.marshal( element, new PrintWriter( System.out ) );
- *    </pre>
- * </blockquote>
+ * {@snippet :
+ *  m.marshal( element, new PrintWriter( System.out ) );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.transform.SAXResult:
- * <blockquote>
- *    <pre>
- *       // assume MyContentHandler instanceof ContentHandler
- *       SAXResult result = new SAXResult( new MyContentHandler() );
+ * {@snippet :
+ *  // assume MyContentHandler instanceof ContentHandler
+ *  SAXResult result = new SAXResult( new MyContentHandler() );
  *
- *       m.marshal( element, result );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, result );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.transform.DOMResult:
- * <blockquote>
- *    <pre>
- *       DOMResult result = new DOMResult();
+ * {@snippet :
+ *  DOMResult result = new DOMResult();
  *
- *       m.marshal( element, result );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, result );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.transform.StreamResult:
- * <blockquote>
- *    <pre>
- *       StreamResult result = new StreamResult( System.out );
+ * {@snippet :
+ *  StreamResult result = new StreamResult( System.out );
  *
- *       m.marshal( element, result );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, result );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.stream.XMLStreamWriter:
- * <blockquote>
- *    <pre>
- *       XMLStreamWriter xmlStreamWriter =
- *           XMLOutputFactory.newInstance().createXMLStreamWriter( ... );
+ * {@snippet :
+ *  XMLStreamWriter xmlStreamWriter =
+ *      XMLOutputFactory.newInstance().createXMLStreamWriter( ... );
  *
- *       m.marshal( element, xmlStreamWriter );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, xmlStreamWriter );
+ * }
  *
  * <p>
  * Marshalling to a javax.xml.stream.XMLEventWriter:
- * <blockquote>
- *    <pre>
- *       XMLEventWriter xmlEventWriter =
- *           XMLOutputFactory.newInstance().createXMLEventWriter( ... );
+ * {@snippet :
+ *  XMLEventWriter xmlEventWriter =
+ *      XMLOutputFactory.newInstance().createXMLEventWriter( ... );
  *
- *       m.marshal( element, xmlEventWriter );
- *    </pre>
- * </blockquote>
+ *  m.marshal( element, xmlEventWriter );
+ * }
  *
  * <p>
  * <a id="elementMarshalling"></a>
@@ -269,15 +247,13 @@ import java.io.File;
  * <p>
  * Class defined event callback methods allow any Jakarta XML Binding mapped class to specify
  * its own specific callback methods by defining methods with the following method signatures:
- * <blockquote>
- * <pre>
- *   // Invoked by Marshaller after it has created an instance of this object.
- *   boolean beforeMarshal(Marshaller);
+ * {@snippet :
+ *  // Invoked by Marshaller after it has created an instance of this object.
+ *  boolean beforeMarshal(Marshaller);
  *
- *   // Invoked by Marshaller after it has marshalled all properties of this object.
- *   void afterMarshal(Marshaller);
- * </pre>
- * </blockquote>
+ *  // Invoked by Marshaller after it has marshalled all properties of this object.
+ *  void afterMarshal(Marshaller);
+ * }
  * The class defined event callback methods should be used when the callback method requires
  * access to non-public methods and/or fields of the class.
  * <p>

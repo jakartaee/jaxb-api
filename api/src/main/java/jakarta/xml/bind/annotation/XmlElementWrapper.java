@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,21 +24,22 @@ import java.lang.annotation.Target;
  * XML element around collections. The annotation therefore supports
  * two forms of serialization shown below. 
  *
- * <pre>{@code
- *    //Example: code fragment
- *      int[] names;
- *
- *    // XML Serialization Form 1 (Unwrapped collection)
- *    <names> ... </names>
- *    <names> ... </names>
+ * {@snippet :
+ *  //Example: code fragment
+ *  int[] names;
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML Serialization Form 1 (Unwrapped collection) -->
+ *  <names> ... </names>
+ *  <names> ... </names>
  * 
- *    // XML Serialization Form 2 ( Wrapped collection )
- *    <wrapperElement>
- *       <names> value-of-item </names>
- *       <names> value-of-item </names>
- *       ....
- *    </wrapperElement>
- * }</pre>
+ *  <!-- XML Serialization Form 2 ( Wrapped collection ) -->
+ *  <wrapperElement>
+ *     <names> value-of-item </names>
+ *     <names> value-of-item </names>
+ *     ....
+ *  </wrapperElement>
+ * }
  *
  * <p> The two serialized XML forms allow a null collection to be
  * represented either by absence or presence of an element with a
@@ -75,7 +76,6 @@ import java.lang.annotation.Target;
  * @since 1.6, JAXB 2.0
  *
  */
-
 @Retention(RUNTIME) @Target({FIELD, METHOD})
 public @interface XmlElementWrapper {
     /**

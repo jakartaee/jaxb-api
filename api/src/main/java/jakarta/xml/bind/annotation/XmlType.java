@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -178,156 +178,156 @@ import java.lang.annotation.Target;
  *   xs:sequence with a customized ordering of JavaBean properties.
  * </p>
  *
- * <pre>
- *   &#64;XmlType(propOrder={"street", "city" , "state", "zip", "name" })
- *   public class USAddress {
- *     String getName() {..};
- *     void setName(String) {..};
+ * {@snippet :
+ *  @XmlType(propOrder={"street", "city" , "state", "zip", "name" })
+ *  public class USAddress {
+ *      String getName() {..};
+ *      void setName(String) {..};
  *
- *     String getStreet() {..};
- *     void setStreet(String) {..};
+ *      String getStreet() {..};
+ *      void setStreet(String) {..};
  *
- *     String getCity() {..};
- *     void setCity(String) {..};
+ *      String getCity() {..};
+ *      void setCity(String) {..};
  *
- *     String getState() {..};
- *     void setState(String) {..};
+ *      String getState() {..};
+ *      void setState(String) {..};
  *
- *     java.math.BigDecimal getZip() {..};
- *     void setZip(java.math.BigDecimal) {..};
- *   }
- * {@code
- *
- *   <!-- XML Schema mapping for USAddress -->
- *   <xs:complexType name="USAddress">
- *     <xs:sequence>
- *       <xs:element name="street" type="xs:string"/>
- *       <xs:element name="city" type="xs:string"/>
- *       <xs:element name="state" type="xs:string"/>
- *       <xs:element name="zip" type="xs:decimal"/>
- *       <xs:element name="name" type="xs:string"/>
- *     </xs:all>
- *   </xs:complexType>
- * }</pre>
+ *      java.math.BigDecimal getZip() {..};
+ *      void setZip(java.math.BigDecimal) {..};
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML Schema mapping for USAddress -->
+ *  <xs:complexType name="USAddress">
+ *    <xs:sequence>
+ *      <xs:element name="street" type="xs:string"/>
+ *      <xs:element name="city" type="xs:string"/>
+ *      <xs:element name="state" type="xs:string"/>
+ *      <xs:element name="zip" type="xs:decimal"/>
+ *      <xs:element name="name" type="xs:string"/>
+ *    </xs:all>
+ *  </xs:complexType>
+ * }
  * <p> <b> Example 2: </b> Map a class to a complex type with
  *     xs:all </p>
- * <pre>
- * &#64;XmlType(propOrder={})
- * public class USAddress { ...}
- * {@code
- *
- * <!-- XML Schema mapping for USAddress -->
- * <xs:complexType name="USAddress">
- *   <xs:all>
- *     <xs:element name="name" type="xs:string"/>
- *     <xs:element name="street" type="xs:string"/>
- *     <xs:element name="city" type="xs:string"/>
- *     <xs:element name="state" type="xs:string"/>
- *     <xs:element name="zip" type="xs:decimal"/>
- *   </xs:sequence>
- * </xs:complexType>
- *}</pre>
+ * {@snippet :
+ *  @XmlType(propOrder={})
+ *  public class USAddress { ...}
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML Schema mapping for USAddress -->
+ *  <xs:complexType name="USAddress">
+ *    <xs:all>
+ *      <xs:element name="name" type="xs:string"/>
+ *      <xs:element name="street" type="xs:string"/>
+ *      <xs:element name="city" type="xs:string"/>
+ *      <xs:element name="state" type="xs:string"/>
+ *      <xs:element name="zip" type="xs:decimal"/>
+ *    </xs:sequence>
+ *  </xs:complexType>
+ * }
  * <p> <b> Example 3: </b> Map a class to a global element with an
  * anonymous type.
  * </p>
- * <pre>
- *   &#64;XmlRootElement
- *   &#64;XmlType(name="")
- *   public class USAddress { ...}
- * {@code
- *
- *   <!-- XML Schema mapping for USAddress -->
- *   <xs:element name="USAddress">
- *     <xs:complexType>
- *       <xs:sequence>
- *         <xs:element name="name" type="xs:string"/>
- *         <xs:element name="street" type="xs:string"/>
- *         <xs:element name="city" type="xs:string"/>
- *         <xs:element name="state" type="xs:string"/>
- *         <xs:element name="zip" type="xs:decimal"/>
- *       </xs:sequence>
- *     </xs:complexType>
- *   </xs:element>
- * }</pre>
+ * {@snippet :
+ *  @XmlRootElement
+ *  @XmlType(name="")
+ *  public class USAddress { ...}
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML Schema mapping for USAddress -->
+ *  <xs:element name="USAddress">
+ *    <xs:complexType>
+ *      <xs:sequence>
+ *        <xs:element name="name" type="xs:string"/>
+ *        <xs:element name="street" type="xs:string"/>
+ *        <xs:element name="city" type="xs:string"/>
+ *        <xs:element name="state" type="xs:string"/>
+ *        <xs:element name="zip" type="xs:decimal"/>
+ *      </xs:sequence>
+ *    </xs:complexType>
+ *  </xs:element>
+ * }
  *
  * <p> <b> Example 4: </b> Map a property to a local element with
  * anonymous type.
- * <pre>
- *   //Example: Code fragment
- *   public class Invoice {
- *       USAddress addr;
- *           ...
- *       }
+ * {@snippet :
+ *  //Example: Code fragment
+ *  public class Invoice {
+ *      USAddress addr;
+ *      ...
+ *  }
  *
- *   &#64;XmlType(name="")
- *   public class USAddress { ... }
- *   }
- * {@code
- *
- *   <!-- XML Schema mapping for USAddress -->
- *   <xs:complexType name="Invoice">
- *     <xs:sequence>
- *       <xs:element name="addr">
- *         <xs:complexType>
- *           <xs:element name="name", type="xs:string"/>
- *           <xs:element name="city", type="xs:string"/>
- *           <xs:element name="city" type="xs:string"/>
- *           <xs:element name="state" type="xs:string"/>
- *           <xs:element name="zip" type="xs:decimal"/>
- *         </xs:complexType>
- *       ...
- *     </xs:sequence>
- *   </xs:complexType>
- * }</pre>
+ *  @XmlType(name="")
+ *  public class USAddress { ... }
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- XML Schema mapping for USAddress -->
+ *  <xs:complexType name="Invoice">
+ *    <xs:sequence>
+ *      <xs:element name="addr">
+ *        <xs:complexType>
+ *          <xs:element name="name", type="xs:string"/>
+ *          <xs:element name="city", type="xs:string"/>
+ *          <xs:element name="city" type="xs:string"/>
+ *          <xs:element name="state" type="xs:string"/>
+ *          <xs:element name="zip" type="xs:decimal"/>
+ *        </xs:complexType>
+ *       </xs:element>
+ *      ...
+ *    </xs:sequence>
+ *  </xs:complexType>
+ * }
  *
  * <p> <b> Example 5: </b> Map a property to an attribute with
  * anonymous type.
  *
- * <pre>
+ * {@snippet :
+ *  //Example: Code fragment
+ *  public class Item {
+ *      public String name;
+ *      @XmlAttribute
+ *      public USPrice price;
+ *  }
  *
- *     //Example: Code fragment
- *     public class Item {
- *         public String name;
- *         &#64;XmlAttribute
- *         public USPrice price;
- *     }
- *
- *     // map class to anonymous simple type.
- *     &#64;XmlType(name="")
- *     public class USPrice {
- *         &#64;XmlValue
- *         public java.math.BigDecimal price;
- *     }
- * {@code
- *
- *     <!-- Example: XML Schema fragment -->
- *     <xs:complexType name="Item">
- *       <xs:sequence>
- *         <xs:element name="name" type="xs:string"/>
- *         <xs:attribute name="price">
- *           <xs:simpleType>
- *             <xs:restriction base="xs:decimal"/>
- *           </xs:simpleType>
- *         </xs:attribute>
- *       </xs:sequence>
- *     </xs:complexType>
- * }</pre>
+ *  // map class to anonymous simple type.
+ *  @XmlType(name="")
+ *  public class USPrice {
+ *      @XmlValue
+ *      public java.math.BigDecimal price;
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: XML Schema fragment -->
+ *  <xs:complexType name="Item">
+ *    <xs:sequence>
+ *      <xs:element name="name" type="xs:string"/>
+ *      <xs:attribute name="price">
+ *        <xs:simpleType>
+ *          <xs:restriction base="xs:decimal"/>
+ *        </xs:simpleType>
+ *      </xs:attribute>
+ *    </xs:sequence>
+ *  </xs:complexType>
+ * }
  *
  *  <p> <b> Example 6: </b> Define a factoryClass and factoryMethod
  *
- * <pre>
- *      &#64;XmlType(name="USAddressType", factoryClass=USAddressFactory.class,
- *      factoryMethod="getUSAddress")
- *      public class USAddress {
+ * {@snippet :
+ *  @XmlType(name="USAddressType", factoryClass=USAddressFactory.class,
+ *           factoryMethod="getUSAddress")
+ *  public class USAddress {
  *
- *          private String city;
- *          private String name;
- *          private String state;
- *          private String street;
- *          private int    zip;
+ *      private String city;
+ *      private String name;
+ *      private String state;
+ *      private String street;
+ *      private int    zip;
  *
  *      public USAddress(String name, String street, String city,
- *          String state, int zip) {
+ *              String state, int zip) {
  *          this.name = name;
  *          this.street = street;
  *          this.city = city;
@@ -338,31 +338,32 @@ import java.lang.annotation.Target;
  *
  *  public class USAddressFactory {
  *      public static USAddress getUSAddress(){
- *       return new USAddress("Mark Baker", "23 Elm St",
- *          "Dayton", "OH", 90952);
- *  }
+ *          return new USAddress("Mark Baker", "23 Elm St",
+ *                               "Dayton", "OH", 90952);
+ *      }
  *
- * </pre>
+ *  }
+ * }
  *
  *  <p> <b> Example 7: </b> Define factoryMethod and use the default factoryClass
  *
- * <pre>
- *      &#64;XmlType(name="USAddressType", factoryMethod="getNewInstance")
- *      public class USAddress {
+ * {@snippet :
+ *  @XmlType(name="USAddressType", factoryMethod="getNewInstance")
+ *  public class USAddress {
  *
- *          private String city;
- *          private String name;
- *          private String state;
- *          private String street;
- *          private int    zip;
+ *      private String city;
+ *      private String name;
+ *      private String state;
+ *      private String street;
+ *      private int    zip;
  *
- *          private USAddress() {}
+ *      private USAddress() {}
  *
- *          public static USAddress getNewInstance(){
- *              return new USAddress();
- *          }
+ *      public static USAddress getNewInstance(){
+ *          return new USAddress();
  *      }
- * </pre>
+ *  }
+ * }
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlElement
@@ -394,7 +395,7 @@ public @interface XmlType {
      * <p> All of the JavaBean properties being mapped to XML Schema elements
      *     must be listed.
      * <p> A JavaBean property or field listed in propOrder must not
-     *     be transient or annotated with {@code @XmlTransient}.
+     *     be transient or annotated with } @XmlTransient}.
      * <p> The default ordering of JavaBean properties is determined
      *     by @{@link XmlAccessorOrder}.
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -39,20 +39,20 @@ import static java.lang.annotation.RetentionPolicy.*;
  *   <li> If type of the field or the property is a collection
  *        type, then the collection item type must be mapped to schema
  *        simple type.
- * <pre>
- *     // Examples
- *     &#64;XmlAttribute List&lt;Integer&gt; items; //legal
- *     &#64;XmlAttribute List&lt;Bar&gt; foo; // illegal if Bar does not map to a schema simple type
- * </pre> 
+ * {@snippet :
+ *  // Examples
+ *  @XmlAttribute List<Integer> items; //legal
+ *  @XmlAttribute List<Bar> foo; // illegal if Bar does not map to a schema simple type
+ * }
  *   </li>
  *   <li> If the type of the field or the property is a non
  *         collection type, then the type of the property or field
  *         must map to a simple schema type.
- * <pre>
- *     // Examples
- *     &#64;XmlAttribute int foo; // legal
- *     &#64;XmlAttribute Foo foo; // illegal if Foo does not map to a schema simple type
- * </pre>
+ * {@snippet :
+ *  // Examples
+ *  @XmlAttribute int foo; // legal
+ *  @XmlAttribute Foo foo; // illegal if Foo does not map to a schema simple type
+ * }
  *   </li>
  *   <li> This annotation can be used with the following annotations:
  *            {@link XmlID}, 
@@ -67,50 +67,50 @@ import static java.lang.annotation.RetentionPolicy.*;
  * </ul>
  *
  * <p> <b>Example 1: </b>Map a JavaBean property to an XML attribute.</p>
- * <pre>
- *     //Example: Code fragment
- *     public class USPrice { 
- *         &#64;XmlAttribute
- *         public java.math.BigDecimal getPrice() {...} ;
- *         public void setPrice(java.math.BigDecimal ) {...};
- *     }
- * {@code
- * 
- *     <!-- Example: XML Schema fragment -->
- *     <xs:complexType name="USPrice">
- *       <xs:sequence>
- *       </xs:sequence>
- *       <xs:attribute name="price" type="xs:decimal"/>
- *     </xs:complexType>
- * }</pre>
+ * {@snippet :
+ *  //Example: Code fragment
+ *  public class USPrice {
+ *      @XmlAttribute
+ *      public java.math.BigDecimal getPrice() {...} ;
+ *      public void setPrice(java.math.BigDecimal ) {...};
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: XML Schema fragment -->
+ *  <xs:complexType name="USPrice">
+ *    <xs:sequence>
+ *    </xs:sequence>
+ *    <xs:attribute name="price" type="xs:decimal"/>
+ *  </xs:complexType>
+ * }
  *
  * <p> <b>Example 2: </b>Map a JavaBean property to an XML attribute with anonymous type.</p>
  * See Example 7 in @{@link XmlType}.
  *
  * <p> <b>Example 3: </b>Map a JavaBean collection property to an XML attribute.</p>
- * <pre>
- *     // Example: Code fragment
- *     class Foo {
- *         ...
- *         &#64;XmlAttribute List&lt;Integer&gt; items;
- *     } 
- * {@code
- * 
- *     <!-- Example: XML Schema fragment -->
- *     <xs:complexType name="foo">
- *     	 ...
- *       <xs:attribute name="items">
- *         <xs:simpleType>
- *           <xs:list itemType="xs:int"/>
- *         </xs:simpleType>
- *     </xs:complexType>
- *
- * }</pre>
+ * {@snippet :
+ *  // Example: Code fragment
+ *  class Foo {
+ *      ...
+ *      @XmlAttribute
+ *      List<Integer> items;
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: XML Schema fragment -->
+ *  <xs:complexType name="foo">
+ *    ...
+ *    <xs:attribute name="items">
+ *      <xs:simpleType>
+ *        <xs:list itemType="xs:int"/>
+ *      </xs:simpleType>
+      </xs:attribute>
+ *  </xs:complexType>
+ * }
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlType
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({FIELD, METHOD})
 public @interface XmlAttribute {
     /**

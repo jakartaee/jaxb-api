@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -51,32 +51,30 @@ import static java.lang.annotation.RetentionPolicy.*;
  * <p><b>Example:</b> Resolve name collision between JavaBean property and
  *     field name </p>
  * 
- * <pre>
- *   // Example: Code fragment
- *   public class USAddress {
+ * {@snippet :
+ *  // Example: Code fragment
+ *  public class USAddress {
  *
- *       // The field name "name" collides with the property name 
- *       // obtained by bean decapitalization of getName() below
- *       &#64;XmlTransient public String name;
+ *      // The field name "name" collides with the property name
+ *      // obtained by bean decapitalization of getName() below
+ *      @XmlTransient public String name;
  *
- *       String getName() {..};
- *       String setName() {..};
- *   }
- *
- * {@code   
- * 
- *   <!-- Example: XML Schema fragment -->
- *   <xs:complexType name="USAddress">
- *     <xs:sequence>
- *       <xs:element name="name" type="xs:string"/>
- *     </xs:sequence>
- *   </xs:complexType>
- * }</pre>
+ *      String getName() {..};
+ *      String setName() {..};
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: XML Schema fragment -->
+ *  <xs:complexType name="USAddress">
+ *    <xs:sequence>
+ *      <xs:element name="name" type="xs:string"/>
+ *    </xs:sequence>
+ *  </xs:complexType>
+ * }
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({FIELD, METHOD, TYPE})
 public @interface XmlTransient {}
    
