@@ -74,9 +74,11 @@ import jakarta.xml.bind.JAXBElement;
  *      // Name, Quantity and ProductName. Text data is represented as
  *      // java.util.String for text.
  *      @XmlMixed
- *      @XmlElementRef(name="productName", type=JAXBElement.class)
- *      @XmlElementRef(name="quantity", type=JAXBElement.class)
- *      @XmlElementRef(name="name", type=JAXBElement.class)
+ *      @XmlElementRefs({
+ *         @XmlElementRef(name="productName", type=JAXBElement.class)
+ *         @XmlElementRef(name="quantity", type=JAXBElement.class)
+ *         @XmlElementRef(name="name", type=JAXBElement.class)
+ *      })
  *      List getContent() {...}
  *  }
  * }
@@ -98,7 +100,7 @@ import jakarta.xml.bind.JAXBElement;
  *  // add child element information item
  *  gcl.add(ObjectFactory.createLetterBodyName("Robert Smith"));
  *  gcl.add("Your order of "); // add text information item as a String
- * 
+ *
  *  // add children element information items
  *  gcl.add(ObjectFactory.createLetterBodyQuantity(new BigInteger("1")));
  *  gcl.add(ObjectFactory.createLetterBodyProductName("Baby Monitor"));
