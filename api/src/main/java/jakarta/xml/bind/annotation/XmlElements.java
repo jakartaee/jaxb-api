@@ -37,7 +37,7 @@ import java.lang.annotation.Target;
  * </ul>
  *
  * This annotation is intended for annotation a JavaBean collection
- * property (e.g. List). 
+ * property (e.g. List).
  *
  * <p><b>Usage</b></p>
  *
@@ -54,7 +54,7 @@ import java.lang.annotation.Target;
  * additional common information.</p>
  *
  * <hr>
- * 
+ *
  * <p><b>Example 1:</b> Map to a list of elements</p>
  * {@snippet :
  *  // Mapped code fragment
@@ -62,7 +62,7 @@ import java.lang.annotation.Target;
  *      @XmlElements({
  *          @XmlElement(name="A", type=Integer.class),
  *          @XmlElement(name="B", type=Float.class)
- *       })
+ *      })
  *      public List items;
  *  }
  * }
@@ -114,7 +114,7 @@ import java.lang.annotation.Target;
  *  </xs:complexType>
  * }
  *
- * <p><b>Example 3:</b> Change element name based on type using an adapter. 
+ * <p><b>Example 3:</b> Change element name based on type using an adapter.
  * </p>
  * {@snippet :
  *  class Foo {
@@ -125,7 +125,7 @@ import java.lang.annotation.Target;
  *      })
  *      Q bar;
  *  }
- * 
+ *
  *  @XmlType abstract class P {...}
  *  @XmlType(name="PX") class PX extends P {...}
  *  @XmlType(name="PY") class PY extends P {...}
@@ -145,9 +145,9 @@ import java.lang.annotation.Target;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- * 
+ *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
- * @see XmlElement 
+ * @see XmlElement
  * @see XmlElementRef
  * @see XmlElementRefs
  * @see XmlJavaTypeAdapter
