@@ -10,15 +10,18 @@
 
 package jakarta.xml.bind.test;
 
-import org.junit.Before;
-import org.junit.Test;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBContextFactory;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
-import jakarta.xml.bind.*;
 import java.util.Map;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.TestCase.fail;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * regression test for
@@ -57,27 +60,27 @@ public class JAXBContextServiceProviderNPETest {
     public void testContextPath() {
         try {
             JAXBContext ctx = JAXBContext.newInstance("whatever", ClassLoader.getSystemClassLoader());
-            assertNotNull("Expected non-null instance to be returned from the test Factory", ctx);
-            assertEquals("Expected MyContext instance to be returned from the test Factory", MyContext.class, ctx.getClass());
+            Assertions.assertNotNull(ctx,"Expected non-null instance to be returned from the test Factory");
+            Assertions.assertEquals(MyContext.class, ctx.getClass(), "Expected MyContext instance to be returned from the test Factory");
         } catch (Throwable t) {
             t.printStackTrace();
-            fail("Not expected to fail!");
+            Assertions.fail("Not expected to fail!");
         }
     }
 
     @Test
     public void testClasses() {
         try {
-            JAXBContext ctx = JAXBContext.newInstance(new Class[0]);
-            assertNotNull("Expected non-null instance to be returned from the test Factory", ctx);
-            assertEquals("Expected MyContext instance to be returned from the test Factory", MyContext.class, ctx.getClass());
+            JAXBContext ctx = JAXBContext.newInstance(new Class<?>[0]);
+            Assertions.assertNotNull(ctx, "Expected non-null instance to be returned from the test Factory");
+            Assertions.assertEquals(MyContext.class, ctx.getClass(), "Expected MyContext instance to be returned from the test Factory");
         } catch (Throwable t) {
             t.printStackTrace();
-            fail("Not expected to fail!");
+            Assertions.fail("Not expected to fail!");
         }
     }
 
-    @Before
+    @BeforeEach
     public void setup() {
         System.setProperty("jakarta.xml.bind.JAXBContextFactory", "jakarta.xml.bind.test.JAXBContextServiceProviderNPETest$Factory");
     }
