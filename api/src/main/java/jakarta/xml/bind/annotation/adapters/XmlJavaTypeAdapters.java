@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -23,9 +23,9 @@ import java.lang.annotation.Target;
  * element. This annotation therefore serves as a container annotation
  * for multiple &#64;XmlJavaTypeAdapter as follows:
  *
- * <pre>
- * &#64;XmlJavaTypeAdapters ({ @XmlJavaTypeAdapter(...),@XmlJavaTypeAdapter(...) })
- * </pre>
+ * {@snippet :
+ *  @XmlJavaTypeAdapters ({ @XmlJavaTypeAdapter(...), @XmlJavaTypeAdapter(...) })
+ * }
  *
  * <p>The {@code @XmlJavaTypeAdapters} annotation is useful for
  * defining {@link XmlJavaTypeAdapter} annotations for different types

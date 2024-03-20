@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -43,35 +43,33 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <b>Example 1: </b> Customize mapping of XMLGregorianCalendar on the
  *  field.
  *
- * <pre>
- *     //Example: Code fragment
- *     public class USPrice {
- *         &#64;XmlElement
- *         &#64;XmlSchemaType(name="date")
- *         public XMLGregorianCalendar date;
- *     }
- * {@code
- *
- *     <!-- Example: Local XML Schema element -->
- *     <xs:complexType name="USPrice"/>
- *       <xs:sequence>
- *         <xs:element name="date" type="xs:date"/>
- *       </sequence>
- *     </xs:complexType>
- * }</pre>
+ * {@snippet :
+ *  //Example: Code fragment
+ *  public class USPrice {
+ *      @XmlElement
+ *      @XmlSchemaType(name="date")
+ *      public XMLGregorianCalendar date;
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example: Local XML Schema element -->
+ *  <xs:complexType name="USPrice">
+ *    <xs:sequence>
+ *      <xs:element name="date" type="xs:date"/>
+ *    </sequence>
+ *  </xs:complexType>
+ * }
  *
  * <p> <b> Example 2: </b> Customize mapping of XMLGregorianCalendar at package
  *     level </p>
- * <pre>
- *     package foo;
- *     &#64;jakarta.xml.bind.annotation.XmlSchemaType(
- *          name="date", type=javax.xml.datatype.XMLGregorianCalendar.class)
- *     }
- * </pre>
+ * {@snippet :
+ *  @jakarta.xml.bind.annotation.XmlSchemaType(
+ *      name="date", type=javax.xml.datatype.XMLGregorianCalendar.class)
+ *  package foo;
+ * }
  *
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({FIELD,METHOD,PACKAGE})
 public @interface XmlSchemaType {
     String name();
@@ -90,7 +88,7 @@ public @interface XmlSchemaType {
      */
 
     final class DEFAULT {
-        private DEFAULT() {};
+        private DEFAULT() {}
     }
 
 }

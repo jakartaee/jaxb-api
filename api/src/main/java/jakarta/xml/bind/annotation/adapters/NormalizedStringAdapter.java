@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -56,11 +56,10 @@ public final class NormalizedStringAdapter extends XmlAdapter<String,String> {
 
     /**
      * No-op.
-     *
      * Just return the same string given as the parameter.
      */
     @Override
-        public String marshal(String s) {
+    public String marshal(String s) {
             return s;
         }
 

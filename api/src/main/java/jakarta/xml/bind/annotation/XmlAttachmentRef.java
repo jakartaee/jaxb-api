@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -21,35 +21,35 @@ import java.lang.annotation.Target;
 import jakarta.activation.DataHandler;
 
 /**
- * Marks a field/property that its XML form is a uri reference to mime content.
+ * Marks a field/property that its XML form is a URI reference to mime content.
  * The mime content is optimally stored out-of-line as an attachment.
- *
+ * <p>
  * A field/property must always map to the {@link DataHandler} class.
  *
  * <h2>Usage</h2>
- * <pre>
- * &#64;{@link XmlRootElement}
- * class Foo {
- *   &#64;{@link XmlAttachmentRef}
- *   &#64;{@link XmlAttribute}
- *   {@link DataHandler} data;
+ * {@snippet :
+ *  @XmlRootElement
+ *  class Foo {
+ *      @XmlAttachmentRef
+ *      @XmlAttribute
+ *      DataHandler data;
  *
- *   &#64;{@link XmlAttachmentRef}
- *   &#64;{@link XmlElement}
- *   {@link DataHandler} body;
+ *      @XmlAttachmentRef
+ *      @XmlElement
+ *      DataHandler body;
+ *  }
  * }
- * </pre>
  * The above code maps to the following XML:
- * <pre>{@code
- * <xs:element name="foo" xmlns:ref="http://ws-i.org/profiles/basic/1.1/xsd">
- *   <xs:complexType>
- *     <xs:sequence>
- *       <xs:element name="body" type="ref:swaRef" minOccurs="0" />
- *     </xs:sequence>
- *     <xs:attribute name="data" type="ref:swaRef" use="optional" />
- *   </xs:complexType>
- * </xs:element>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <xs:element name="foo" xmlns:ref="http://ws-i.org/profiles/basic/1.1/xsd">
+ *    <xs:complexType>
+ *      <xs:sequence>
+ *        <xs:element name="body" type="ref:swaRef" minOccurs="0" />
+ *      </xs:sequence>
+ *      <xs:attribute name="data" type="ref:swaRef" use="optional" />
+ *    </xs:complexType>
+ *  </xs:element>
+ * }
  *
  * <p>
  * The above binding supports WS-I AP 1.0 <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html#Referencing_Attachments_from_the_SOAP_Envelope">WS-I Attachments Profile Version 1.0.</a>

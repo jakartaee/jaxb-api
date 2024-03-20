@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 /**
  * <p>
  * Enables mapping a class to a  XML Schema complex type with a
- * simpleContent or a XML Schema simple type. 
+ * simpleContent or an XML Schema simple type. 
  * </p>
  *
  * <p>
@@ -28,7 +28,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * elements: 
  * <ul> 
  *   <li> a JavaBean property.</li>
- *   <li> non static, non transient field.</li>
+ *   <li> non-static, non transient field.</li>
  * </ul>
  * 
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
@@ -49,14 +49,14 @@ import static java.lang.annotation.RetentionPolicy.*;
  *       type.  </li>
  * 
  *   <li>If the type of the field or property is not a collection
- *       type, then the type must map to a XML Schema simple type. </li>
+ *       type, then the type must map to an XML Schema simple type. </li>
  *
  * </ul>
  * <p>
  * If the annotated JavaBean property is the sole class member being
  * mapped to XML Schema construct, then the class is mapped to a
  * simple type. 
- *
+ * <p>
  * If there are additional JavaBean properties (other than the
  * JavaBean property annotated with {@code @XmlValue} annotation)
  * that are mapped to XML attributes, then the class is mapped to a
@@ -65,52 +65,47 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p> <b> Example 1: </b> Map a class to XML Schema simpleType</p>
  *
- *   <pre>
- * 
- *     // Example 1: Code fragment
- *     public class USPrice {
- *         &#64;XmlValue
- *         public java.math.BigDecimal price;
- *     }
- * {@code
- * 
- *     <!-- Example 1: XML Schema fragment -->
- *     <xs:simpleType name="USPrice">
- *       <xs:restriction base="xs:decimal"/>
- *     </xs:simpleType>
- *
- * }</pre>
+ * {@snippet :
+ *  // Example 1: Code fragment
+ *  public class USPrice {
+ *      @XmlValue
+ *      public java.math.BigDecimal price;
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example 1: XML Schema fragment -->
+ *  <xs:simpleType name="USPrice">
+ *    <xs:restriction base="xs:decimal"/>
+ *  </xs:simpleType>
+ * }
  * 
  * <p><b> Example 2: </b> Map a class to XML Schema complexType with
  *        with simpleContent.</p>
- * 
- *   <pre>
  *
- *   // Example 2: Code fragment
- *   public class InternationalPrice {
- *       &#64;XmlValue
- *       public java.math.BigDecimal price;
+ * {@snippet :
+ *  // Example 2: Code fragment
+ *  public class InternationalPrice {
+ *      @XmlValue
+ *      public java.math.BigDecimal price;
  * 
- *       &#64;XmlAttribute
- *       public String currency;
- *   }
- * {@code
- * 
- *   <!-- Example 2: XML Schema fragment -->
- *   <xs:complexType name="InternationalPrice">
- *     <xs:simpleContent>
- *       <xs:extension base="xs:decimal">
- *         <xs:attribute name="currency" type="xs:string"/>
- *       </xs:extension>
- *     </xs:simpleContent>
- *   </xs:complexType>
- *
- * }</pre>
+ *      @XmlAttribute
+ *      public String currency;
+ *  }
+ * }
+ * {@snippet lang="XML" :
+ *  <!-- Example 2: XML Schema fragment -->
+ *  <xs:complexType name="InternationalPrice">
+ *    <xs:simpleContent>
+ *      <xs:extension base="xs:decimal">
+ *        <xs:attribute name="currency" type="xs:string"/>
+ *      </xs:extension>
+ *    </xs:simpleContent>
+ *  </xs:complexType>
+ * }
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlType
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({FIELD, METHOD})
 public @interface XmlValue {}

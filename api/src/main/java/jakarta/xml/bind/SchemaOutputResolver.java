@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -22,7 +22,7 @@ import java.io.IOException;
  * application to generate schemas.
  *
  * <p>
- * This is a class, not an interface so as to allow future versions to evolve
+ * This is a class, not an interface to allow future versions to evolve
  * without breaking the compatibility.
  *
  * @author
@@ -49,7 +49,7 @@ public abstract class SchemaOutputResolver {
      *      The namespace URI that the schema declares.
      *      Can be the empty string, but never be null.
      * @param suggestedFileName
-     *      A Jakarta XML Binding implementation generates an unique file name (like "schema1.xsd")
+     *      A Jakarta XML Binding implementation generates a unique file name (like "schema1.xsd")
      *      for the convenience of the callee. This name can be
      *      used for the file name of the schema, or the callee can just
      *      ignore this name and come up with its own name.
@@ -58,15 +58,15 @@ public abstract class SchemaOutputResolver {
      * @return
      *      a {@link Result} object that encapsulates the actual destination
      *      of the schema.
-     *
+     * <p>
      *      If the {@link Result} object has a system ID, it must be an
      *      absolute system ID. Those system IDs are relativized by the caller and used
      *      for {@literal <xs:import>} statements.
-     *
+     * <p>
      *      If the {@link Result} object does not have a system ID, a schema
      *      for the namespace URI is generated but it won't be explicitly
      *      {@literal <xs:import>}ed from other schemas.
-     *
+     * <p>
      *      If {@code null} is returned, the schema generation for this
      *      namespace URI will be skipped.
      */

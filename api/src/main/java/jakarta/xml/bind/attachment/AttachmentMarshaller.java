@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -62,7 +62,7 @@ public abstract class AttachmentMarshaller {
      * The method implementor determines whether {@code data} shall be attached separately
      * or inlined as base64Binary data. If the implementation chooses to optimize the storage
      * of the binary data as a MIME part, it is responsible for attaching {@code data} to the
-     * MIME-based package, and then assigning an unique content-id, cid, that identifies
+     * MIME-based package, and then assigning a unique content-id, cid, that identifies
      * the MIME part within the MIME message. This method returns the cid,
      * which enables the Jakarta XML Binding marshaller to marshal a XOP element that refers to that cid in place
      * of marshalling the binary data. When the method returns null, the Jakarta XML Binding marshaller
@@ -152,7 +152,7 @@ public abstract class AttachmentMarshaller {
      *
      * <p>Marshaller.marshal() must throw IllegalStateException if this value is {@code true}
      * and the XML content to be marshalled violates Step 1 in
-     * <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages">Creating XOP Pacakges</a>
+     * <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages">Creating XOP Packages</a>
      * http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages.
      * <i>"Ensure the Original XML Infoset contains no element information item with a
      * [namespace name] of "http://www.w3.org/2004/08/xop/include" and a [local name] of Include"</i>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * This class is package private and therefore is not exposed as part of the
  * Jakarta XML Binding API.
- *
+ * <p>
  * This code is designed to implement the XML Binding spec pluggability feature
  *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
@@ -77,7 +77,7 @@ class ContextFinder {
     }
 
     private static ServiceLoaderUtil.ExceptionHandler<JAXBException> EXCEPTION_HANDLER =
-            new ServiceLoaderUtil.ExceptionHandler<JAXBException>() {
+            new ServiceLoaderUtil.ExceptionHandler<>() {
                 @Override
                 public JAXBException createException(Throwable throwable, String message) {
                     return new JAXBException(message, throwable);
@@ -86,7 +86,7 @@ class ContextFinder {
 
     /**
      * If the {@link InvocationTargetException} wraps an exception that shouldn't be wrapped,
-     * throw the wrapped exception. Otherwise returns exception to be wrapped for further processing.
+     * throw the wrapped exception. Otherwise, returns exception to be wrapped for further processing.
      */
     private static Throwable handleInvocationTargetException(InvocationTargetException x) throws JAXBException {
         Throwable t = x.getTargetException();
@@ -107,7 +107,7 @@ class ContextFinder {
 
     /**
      * Determine if two types (JAXBContext in this case) will generate a ClassCastException.
-     *
+     * <p>
      * For example, (targetType)originalType
      *
      * @param originalType
@@ -217,7 +217,7 @@ class ContextFinder {
     private static Object instantiateProviderIfNecessary(final Class<?> implClass) throws JAXBException {
         try {
             if (JAXBContextFactory.class.isAssignableFrom(implClass)) {
-                return AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+                return AccessController.doPrivileged(new PrivilegedExceptionAction<>() {
                     @Override
                     public Object run() throws Exception {
                         return implClass.getConstructor().newInstance();
@@ -330,7 +330,7 @@ class ContextFinder {
                 try {
                     return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
                 } catch (Throwable t) {
-                    logger.log(Level.FINE, t, () -> "Error instantiating provivder " + ctxFactory);
+                    logger.log(Level.FINE, t, () -> "Error instantiating provider " + ctxFactory);
                 }
             }
         }
@@ -432,9 +432,9 @@ class ContextFinder {
 
     /**
      * Get the URL for the Class from it's ClassLoader.
-     *
+     * <p>
      * Convenience method for {@link #which(Class, ClassLoader)}.
-     *
+     * <p>
      * Equivalent to calling: which(clazz, clazz.getClassLoader())
      *
      * @param clazz
@@ -451,7 +451,7 @@ class ContextFinder {
             return Thread.currentThread().getContextClassLoader();
         } else {
             return AccessController.doPrivileged(
-                    new PrivilegedAction<ClassLoader>() {
+                    new PrivilegedAction<>() {
                         @Override
                         public ClassLoader run() {
                             return Thread.currentThread().getContextClassLoader();
@@ -465,7 +465,7 @@ class ContextFinder {
             return c.getClassLoader();
         } else {
             return AccessController.doPrivileged(
-                    new PrivilegedAction<ClassLoader>() {
+                    new PrivilegedAction<>() {
                         @Override
                         public ClassLoader run() {
                             return c.getClassLoader();
@@ -479,7 +479,7 @@ class ContextFinder {
             return ClassLoader.getSystemClassLoader();
         } else {
             return AccessController.doPrivileged(
-                    new PrivilegedAction<ClassLoader>() {
+                    new PrivilegedAction<>() {
                         @Override
                         public ClassLoader run() {
                             return ClassLoader.getSystemClassLoader();

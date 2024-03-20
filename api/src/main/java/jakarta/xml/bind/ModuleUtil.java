@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -93,11 +94,11 @@ class ModuleUtil {
             return null;
         }
 
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(resourceAsStream, "UTF-8"))) {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8))) {
             String className = in.readLine();
             while (className != null) {
                 className = className.trim();
-                if (className.startsWith("#") || (className.length() == 0)) {
+                if (className.startsWith("#") || (className.isEmpty())) {
                     className = in.readLine();
                     continue;
                 }

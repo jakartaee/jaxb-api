@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -105,9 +105,9 @@ public class DefaultValidationEventHandler implements ValidationEventHandler {
                 if( url!=null )
                     msg.append(" of ").append(url);
             } else if( obj != null ) {
-                msg.append(" obj: ").append(obj.toString());
+                msg.append(" obj: ").append(obj);
             } else if( node != null ) {
-                msg.append(" node: ").append(node.toString());
+                msg.append(" node: ").append(node);
             }
         } else {
             msg.append( Messages.format( Messages.LOCATION_UNAVAILABLE ) );

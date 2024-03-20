@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -22,7 +22,7 @@ import jakarta.xml.bind.attachment.AttachmentMarshaller;
 import jakarta.activation.DataHandler;
 
 /**
- * Disable consideration of XOP encoding for datatypes that are bound to 
+ * Disable consideration of XOP encoding for datatypes that are bound to
  * base64-encoded binary data in XML.
  *
  * <p>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * Associates a namespace prefix with a XML namespace URI.
+ * Associates a namespace prefix with an XML namespace URI.
  *
  * <p><b>Usage</b></p>
  * <p>{@code @XmlNs} annotation is intended for use from other
@@ -29,7 +29,6 @@ import java.lang.annotation.Target;
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */
-
 @Retention(RUNTIME) @Target({})
 public @interface XmlNs {
     /**

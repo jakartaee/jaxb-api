@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -19,22 +19,22 @@ import org.xml.sax.ContentHandler;
  * Applications can use this interface to use their Jakarta XML Binding provider as a component 
  * in an XML pipeline.  For example:
  * 
- * <pre>
- *       JAXBContext context = JAXBContext.newInstance( "org.acme.foo" );
+ * {@snippet :
+ *  JAXBContext context = JAXBContext.newInstance( "org.acme.foo" );
  *
- *       Unmarshaller unmarshaller = context.createUnmarshaller();
+ *  Unmarshaller unmarshaller = context.createUnmarshaller();
  * 
- *       UnmarshallerHandler unmarshallerHandler = unmarshaller.getUnmarshallerHandler();
+ *  UnmarshallerHandler unmarshallerHandler = unmarshaller.getUnmarshallerHandler();
  *
- *       SAXParserFactory spf = SAXParserFactory.newInstance();
- *       spf.setNamespaceAware( true );
+ *  SAXParserFactory spf = SAXParserFactory.newInstance();
+ *  spf.setNamespaceAware( true );
  * 
- *       XMLReader xmlReader = spf.newSAXParser().getXMLReader();
- *       xmlReader.setContentHandler( unmarshallerHandler );
- *       xmlReader.parse(new InputSource( new FileInputStream( XML_FILE ) ) );
+ *  XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+ *  xmlReader.setContentHandler( unmarshallerHandler );
+ *  xmlReader.parse(new InputSource( new FileInputStream( XML_FILE ) ) );
  *
- *       MyObject myObject= (MyObject)unmarshallerHandler.getResult();                          
- * </pre>
+ *  MyObject myObject= (MyObject)unmarshallerHandler.getResult();
+ * }
  * 
  * <p>
  * This interface is reusable: even if the user fails to unmarshal
@@ -48,7 +48,7 @@ public interface UnmarshallerHandler extends ContentHandler
 {
     /**
      * Obtains the unmarshalled result.
-     * 
+     * <p>
      * This method can be called only after this handler
      * receives the endDocument SAX event.
      * 

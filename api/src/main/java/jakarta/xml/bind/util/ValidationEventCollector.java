@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -46,7 +46,7 @@ public class ValidationEventCollector implements ValidationEventHandler
      *      if there weren't any
      */
     public ValidationEvent[] getEvents() {
-        return events.toArray(new ValidationEvent[events.size()]);
+        return events.toArray(new ValidationEvent[0]);
     }
 
     /**
@@ -74,8 +74,6 @@ public class ValidationEventCollector implements ValidationEventHandler
         boolean retVal = true;
         switch( event.getSeverity() ) {
             case ValidationEvent.WARNING:
-                retVal = true; // continue validation
-                break;
             case ValidationEvent.ERROR:
                 retVal = true; // continue validation
                 break;

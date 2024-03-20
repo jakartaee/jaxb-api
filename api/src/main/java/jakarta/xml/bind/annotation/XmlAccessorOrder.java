@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -51,7 +51,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * <p>This annotation can be used with the following annotations:
  *    {@link XmlType}, {@link XmlRootElement}, {@link XmlAccessorType},
  *    {@link XmlSchema}, {@link XmlSchemaType}, {@link XmlSchemaTypes},
- *    , {@link XmlJavaTypeAdapter}. It can also be used with the
+ *    {@link XmlJavaTypeAdapter}. It can also be used with the
  *    following annotations at the package level: {@link XmlJavaTypeAdapter}.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
@@ -61,5 +61,5 @@ import static java.lang.annotation.RetentionPolicy.*;
 
 @Inherited @Retention(RUNTIME) @Target({PACKAGE, TYPE})
 public @interface XmlAccessorOrder {
-	XmlAccessOrder value() default XmlAccessOrder.UNDEFINED;
+    XmlAccessOrder value() default XmlAccessOrder.UNDEFINED;
 }

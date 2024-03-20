@@ -22,7 +22,7 @@ import  javax.xml.namespace.QName;
  * Since accessing the XML element name related to a Jakarta XML Binding element is
  * a highly requested feature, demonstrate access to this
  * binding information.
- *
+ * <p>
  * The factory method to get a <code>JAXBIntrospector</code> instance is
  * {@link JAXBContext#createJAXBIntrospector()}.
  *
