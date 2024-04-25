@@ -711,6 +711,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      *      because JIT can inline a lot of string access (with data of 1K chars, it was twice as fast)
      */
     public static byte[] _parseBase64Binary(String text) {
+        if(text.isEmpty()) {
+            return new byte[0];
+        }
         final int buflen = guessLength(text);
         if (buflen < 3) {
             throw new IllegalArgumentException("base64 text invalid.");

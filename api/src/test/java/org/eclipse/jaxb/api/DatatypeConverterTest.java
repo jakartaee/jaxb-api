@@ -84,6 +84,9 @@ public class DatatypeConverterTest {
     @Test
     public void testBase64() {
         Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.parseBase64Binary("Qxx=="));
+
+        Assert.assertEquals("", new String(DatatypeConverter.parseBase64Binary("")));
+
         Assert.assertNotEquals("Hello, world!", new String(DatatypeConverter.parseBase64Binary("SGVsbG8sIJdvcmxkIQ==")));
 
         Assert.assertEquals("Hello, world!", new String(DatatypeConverter.parseBase64Binary("SGVsbG8sIHdvcmxkIQ==")));
