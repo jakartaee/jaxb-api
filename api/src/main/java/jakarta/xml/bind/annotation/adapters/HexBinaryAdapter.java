@@ -28,7 +28,7 @@ public final class HexBinaryAdapter extends XmlAdapter<String,byte[]> {
     @Override
     public byte[] unmarshal(String s) {
         if(s==null)     return null;
-        return DatatypeConverter.parseHexBinary(s);
+        return DatatypeConverter.parseHexBinary(s.trim());
     }
 
     @Override
