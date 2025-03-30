@@ -24,11 +24,17 @@ public class Valid3 implements JAXBContextFactory {
 
     @Override
     public JAXBContext createContext(Class<?>[] classesToBeBound, Map<String, ?> properties) throws JAXBException {
+        if (properties != null && properties.containsKey("jakarta.xml.bind.JAXBContextFactory")) {
+            throw new JAXBException("property \"jakarta.xml.bind.JAXBContextFactory\" is not supported");
+        }
         return new JAXBContext1();
     }
 
     @Override
     public JAXBContext createContext(String contextPath, ClassLoader classLoader, Map<String, ?> properties) throws JAXBException {
+        if (properties != null && properties.containsKey("jakarta.xml.bind.JAXBContextFactory")) {
+            throw new JAXBException("property \"jakarta.xml.bind.JAXBContextFactory\" is not supported");
+        }
         return new JAXBContext1();
     }
 
