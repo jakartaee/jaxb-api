@@ -310,7 +310,7 @@ class ContextFinder {
                 }
             }
             if (factoryName != null) {
-                return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+                return newInstance(contextPath, contextPathClasses, factoryName, classLoader, cleanProperties(properties));
             }
         }
 
@@ -354,14 +354,7 @@ class ContextFinder {
                 }
             }
             if (factoryClassName != null) {
-                //Providers are not required to understand JAXB_CONTEXT_FACTORY property
-                //and they must throw a JAXBException if they see it, so we need to remove it
-                //from properties passed to them
-                Map<String, ?> props = properties.entrySet()
-                        .stream()
-                        .filter(Predicate.not(e -> JAXBContext.JAXB_CONTEXT_FACTORY.equals(e.getKey())))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-                return newInstance(classes, props, factoryClassName);
+                return newInstance(classes, cleanProperties(properties), factoryClassName);
             }
         }
 
@@ -394,6 +387,16 @@ class ContextFinder {
         }
 
         return null;
+    }
+
+    private static Map<String, ?> cleanProperties(Map<String, ?> properties) {
+        // Providers are not required to understand JAXB_CONTEXT_FACTORY property,
+        // and they must throw a JAXBException if they see it, so we need to remove it
+        // from properties passed to them
+        return properties.entrySet()
+                .stream()
+                .filter(Predicate.not(e -> JAXBContext.JAXB_CONTEXT_FACTORY.equals(e.getKey())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     private static String getSystemProperty(String property) {
