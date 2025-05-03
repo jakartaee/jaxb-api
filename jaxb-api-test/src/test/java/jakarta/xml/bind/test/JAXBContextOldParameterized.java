@@ -22,11 +22,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 @ParameterizedTest
-@CsvFileSource(resources = "/jakarta/xml/bind/test/allScenarios.csv",
-    numLinesToSkip = 9,
-    nullValues = "**")
+@CsvFileSource(resources = "/jakarta/xml/bind/test/allScenarios.csv", numLinesToSkip = 9, nullValues = "**")
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JAXBContextOldParameterized {
-    
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2025 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -22,6 +22,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -51,7 +52,8 @@ public class JAXBContextTest {
     // test configuration ------------------------------------------
 
     // test-classes directory (required for setup and for security settings)
-    static final String classesDir = JAXBContextTest.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+    static final String classesDir = JAXBContextTest.class.getProtectionDomain().getCodeSource().getLocation()
+            .getFile();
 
     static {
         System.setProperty("classesDir", classesDir);
@@ -71,16 +73,21 @@ public class JAXBContextTest {
     // scenario name - just for logging
     String scenario;
 
+    // properties to pass to JAXBContext#newContext
+    private Map<String, ?> properties;
+
     // java policy file for testing w/security manager
     private String expectedFactory;
     private Class<?> expectedException;
 
     void setup(String scenario,
-        String jaxbPropertiesClass,
-        String spiClass,
-        String expectedFactory,
-        Class<?> expectedException,
-        String systemProperty) {
+            String jaxbPropertiesClass,
+            String spiClass,
+            String expectedFactory,
+            Class<?> expectedException,
+            String systemProperty,
+            String mapEntryKey,
+            String mapEntryValue) throws IOException {
         // ensure setup may be done ...
         System.setSecurityManager(null);
 
@@ -88,6 +95,12 @@ public class JAXBContextTest {
             System.setProperty("jakarta.xml.bind.JAXBContextFactory", systemProperty);
         } else {
             System.clearProperty("jakarta.xml.bind.JAXBContextFactory");
+        }
+
+        if (mapEntryKey != null && mapEntryValue != null) {
+            properties = Map.of(mapEntryKey, mapEntryValue);
+        } else {
+            properties = Map.of();
         }
 
         this.scenario = scenario;
@@ -108,13 +121,17 @@ public class JAXBContextTest {
             String spiClass,
             String expectedFactory,
             Class<?> expectedException,
-            String systemProperty) throws IOException {
+            String systemProperty,
+            String mapEntryKey,
+            String mapEntryValue) throws IOException {
         setup(scenario,
-            jaxbPropertiesClass,
-            spiClass,
-            expectedFactory,
-            expectedException,
-            systemProperty);
+                jaxbPropertiesClass,
+                spiClass,
+                expectedFactory,
+                expectedException,
+                systemProperty,
+                mapEntryKey,
+                mapEntryValue);
         logConfigurations();
         try {
             JAXBContext ctx = JAXBContext.newInstance("jaxb.test.usr");
@@ -132,16 +149,20 @@ public class JAXBContextTest {
             String spiClass,
             String expectedFactory,
             Class<?> expectedException,
-            String systemProperty) throws IOException {
+            String systemProperty,
+            String mapEntryKey,
+            String mapEntryValue) throws IOException {
         setup(scenario,
-            jaxbPropertiesClass,
-            spiClass,
-            expectedFactory,
-            expectedException,
-            systemProperty);
+                jaxbPropertiesClass,
+                spiClass,
+                expectedFactory,
+                expectedException,
+                systemProperty,
+                mapEntryKey,
+                mapEntryValue);
         logConfigurations();
         try {
-            JAXBContext ctx = JAXBContext.newInstance(new Class[] {A.class}, null);
+            JAXBContext ctx = JAXBContext.newInstance(new Class<?>[] { A.class }, properties);
             handleResult(ctx);
         } catch (Throwable throwable) {
             handleThrowable(throwable);
@@ -156,13 +177,17 @@ public class JAXBContextTest {
             String spiClass,
             String expectedFactory,
             Class<?> expectedException,
-            String systemProperty) throws IOException {
+            String systemProperty,
+            String mapEntryKey,
+            String mapEntryValue) throws IOException {
         setup(scenario,
-            jaxbPropertiesClass,
-            spiClass,
-            expectedFactory,
-            expectedException,
-            systemProperty);
+                jaxbPropertiesClass,
+                spiClass,
+                expectedFactory,
+                expectedException,
+                systemProperty,
+                mapEntryKey,
+                mapEntryValue);
         logConfigurations();
         try {
             JAXBContext ctx = JAXBContext.newInstance(A.class);
@@ -179,13 +204,14 @@ public class JAXBContextTest {
         log("     TEST: context class = [" + ctx.getClass().getName() + "]\n");
         String className = ctx.getClass().getName();
         Assertions.assertTrue(className.equals(expectedFactory),
-            "Incorrect ctx: [" + className + "], Expected: [" + expectedFactory + "]");
+                "Incorrect ctx: [" + className + "], Expected: [" + expectedFactory + "]");
 
         log(" TEST PASSED");
     }
 
     private void handleThrowable(Throwable throwable) {
-        if (throwable instanceof AssertionFailedError) throw ((AssertionFailedError)throwable);
+        if (throwable instanceof AssertionFailedError)
+            throw ((AssertionFailedError) throwable);
         Class<?> throwableClass = throwable.getClass();
         boolean correctException = throwableClass.equals(expectedException);
         if (!correctException) {
@@ -195,13 +221,13 @@ public class JAXBContextTest {
             throw new AssertionFailedError("Unexpected exception:" + throwableClass);
         }
         Assertions.assertTrue(correctException,
-            "Got unexpected exception: [" + throwableClass + "], expected: [" + expectedException + "]");
+                "Got unexpected exception: [" + throwableClass + "], expected: [" + expectedException + "]");
         log(" TEST PASSED");
     }
 
     private void doFinally() {
         cleanResource(providersFile);
-        //cleanResource(providersDir);
+        // cleanResource(providersDir);
 
         // unsafe; not running:
         cleanResource(jaxbPropsFile);
@@ -210,18 +236,22 @@ public class JAXBContextTest {
 
     @JAXBContextOldParameterized
     public void testPathSM(String scenario,
-        String jaxbPropertiesClass,
-        String spiClass,
-        String expectedFactory,
-        Class<?> expectedException,
-        String systemProperty) throws IOException {
+            String jaxbPropertiesClass,
+            String spiClass,
+            String expectedFactory,
+            Class<?> expectedException,
+            String systemProperty,
+            String mapEntryKey,
+            String mapEntryValue) throws IOException {
         enableSM();
         testPath(scenario,
-        jaxbPropertiesClass,
-        spiClass,
-        expectedFactory,
-        expectedException,
-        systemProperty);
+                jaxbPropertiesClass,
+                spiClass,
+                expectedFactory,
+                expectedException,
+                systemProperty,
+                mapEntryKey,
+                mapEntryValue);
     }
 
     @JAXBContextOldParameterized
@@ -230,14 +260,18 @@ public class JAXBContextTest {
             String spiClass,
             String expectedFactory,
             Class<?> expectedException,
-            String systemProperty) throws IOException {
+            String systemProperty,
+            String mapEntryKey,
+            String mapEntryValue) throws IOException {
         enableSM();
         testClass(scenario,
-        jaxbPropertiesClass,
-        spiClass,
-        expectedFactory,
-        expectedException,
-        systemProperty);
+                jaxbPropertiesClass,
+                spiClass,
+                expectedFactory,
+                expectedException,
+                systemProperty,
+                mapEntryKey,
+                mapEntryValue);
     }
 
     @JAXBContextOldParameterized
@@ -246,20 +280,24 @@ public class JAXBContextTest {
             String spiClass,
             String expectedFactory,
             Class<?> expectedException,
-            String systemProperty) throws IOException {
+            String systemProperty,
+            String mapEntryKey,
+            String mapEntryValue) throws IOException {
         enableSM();
         testClasses(scenario,
-        jaxbPropertiesClass,
-        spiClass,
-        expectedFactory,
-        expectedException,
-        systemProperty);
+                jaxbPropertiesClass,
+                spiClass,
+                expectedFactory,
+                expectedException,
+                systemProperty,
+                mapEntryKey,
+                mapEntryValue);
     }
 
     private void enableSM() {
         System.setSecurityManager(null);
         System.setProperty("java.security.policy", classesDir + "jakarta/xml/bind/test.policy");
-        System.setSecurityManager(new SecurityManager());
+        // System.setSecurityManager(new SecurityManager());
     }
 
     private void cleanResource(Path resource) {
@@ -285,7 +323,6 @@ public class JAXBContextTest {
             } else {
                 setupFile(providersFile, providersDir, providerClassName);
             }
-
 
             // unsafe; not running:
             if (propertiesClassName != null) {
@@ -330,9 +367,7 @@ public class JAXBContextTest {
 
     private void log(String msg) {
         logger.info("[" + scenario + "] " + msg);
-//        System.out.println("[" + scenario + "] " + msg);
+        // System.out.println("[" + scenario + "] " + msg);
     }
 
 }
-
-

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2024 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2025 Oracle and/or its affiliates. All rights reserved.
 #
 # This program and the accompanying materials are made available under the
 # terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -7,27 +7,28 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #
-scenario-3, jakarta.xml.bind.context.factory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-4, jakarta.xml.bind.context.factory=jaxb.factory.legacy.Invalid, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-3, jakarta.xml.bind.context.factory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-4, jakarta.xml.bind.context.factory=jaxb.factory.spi.Invalid, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-3, jakarta.xml.bind.JAXBContextFactory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-4, jakarta.xml.bind.JAXBContextFactory=jaxb.factory.spi.Invalid, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-3, jakarta.xml.bind.JAXBContextFactory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-4, jakarta.xml.bind.JAXBContextFactory=jaxb.factory.legacy.Invalid, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-2, something=AnotherThing, null, null, "jakarta.xml.bind.JAXBException", null
-scenario-8, null, jaxb.factory.spi.Valid\n, jaxb.factory.spi.Valid$JAXBContext1, "jakarta.xml.bind.JAXBException", null
-scenario-9, null, jaxb.factory.spi.Valid, jaxb.factory.spi.Valid$JAXBContext1, "jakarta.xml.bind.JAXBException", null
-scenario-11, null, jaxb.factory.spi.Invalid, null, "jakarta.xml.bind.JAXBException", null
-scenario-15, null, jaxb.factory.spi.Valid, jaxb.factory.spi.Valid$JAXBContext1, "jakarta.xml.bind.JAXBException", null
-scenario-11 legacy-svc, null, jaxb.factory.spi.Invalid, null, "jakarta.xml.bind.JAXBException", null
-scenario-11 legacy-svc, null, jaxb.factory.legacy.Invalid, null, "jakarta.xml.bind.JAXBException", null
-scenario-5, null, null, jaxb.factory.spi.Valid$JAXBContext1, "**", jaxb.factory.spi.Valid
-scenario-7, null, null, null, "jakarta.xml.bind.JAXBException", jaxb.factory.spi.Invalid
-scenario-14, null, jaxb.factory.spi.Valid2, jaxb.factory.spi.Valid$JAXBContext1, "**", jaxb.factory.spi.Valid
-scenario-5, null, null, jaxb.factory.legacy.Valid$JAXBContext1, "**", jaxb.factory.legacy.Valid
-scenario-7, null, null, null, "jakarta.xml.bind.JAXBException", jaxb.factory.legacy.Invalid
-scenario-14, null, jaxb.factory.legacy.Valid2, jaxb.factory.legacy.Valid$JAXBContext1, "**", jaxb.factory.legacy.Valid
-scenario-6, null, null, null, "jakarta.xml.bind.JAXBException", jaxb.factory.NonExisting
-scenario-10, null, jaxb.factory.NonExisting, null, "jakarta.xml.bind.JAXBException", null
-scenario-12, null, null, DEFAULT, "jakarta.xml.bind.JAXBException", null
+scenario-3, jakarta.xml.bind.context.factory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-4, jakarta.xml.bind.context.factory=jaxb.factory.legacy.Invalid, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-3, jakarta.xml.bind.context.factory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-4, jakarta.xml.bind.context.factory=jaxb.factory.spi.Invalid, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-3, jakarta.xml.bind.JAXBContextFactory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-4, jakarta.xml.bind.JAXBContextFactory=jaxb.factory.spi.Invalid, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-3, jakarta.xml.bind.JAXBContextFactory=non.existing.FactoryClass, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-4, jakarta.xml.bind.JAXBContextFactory=jaxb.factory.legacy.Invalid, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-2, something=AnotherThing, null, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-8, null, jaxb.factory.spi.Valid\n, jaxb.factory.spi.Valid$JAXBContext1, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-9, null, jaxb.factory.spi.Valid, jaxb.factory.spi.Valid$JAXBContext1, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-11, null, jaxb.factory.spi.Invalid, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-15, null, jaxb.factory.spi.Valid, jaxb.factory.spi.Valid$JAXBContext1, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-11 legacy-svc, null, jaxb.factory.spi.Invalid, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-11 legacy-svc, null, jaxb.factory.legacy.Invalid, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-5, null, null, jaxb.factory.spi.Valid$JAXBContext1, "**", jaxb.factory.spi.Valid, null, null
+scenario-7, null, null, null, "jakarta.xml.bind.JAXBException", jaxb.factory.spi.Invalid, null, null
+scenario-14, null, jaxb.factory.spi.Valid2, jaxb.factory.spi.Valid$JAXBContext1, "**", jaxb.factory.spi.Valid, null, null
+scenario-5, null, null, jaxb.factory.legacy.Valid$JAXBContext1, "**", jaxb.factory.legacy.Valid, null, null
+scenario-7, null, null, null, "jakarta.xml.bind.JAXBException", jaxb.factory.legacy.Invalid, null, null
+scenario-14, null, jaxb.factory.legacy.Valid2, jaxb.factory.legacy.Valid$JAXBContext1, "**", jaxb.factory.legacy.Valid, null, null
+scenario-6, null, null, null, "jakarta.xml.bind.JAXBException", jaxb.factory.NonExisting, null, null
+scenario-10, null, jaxb.factory.NonExisting, null, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-12, null, null, DEFAULT, "jakarta.xml.bind.JAXBException", null, null, null
+scenario-17, null, jaxb.factory.spi.Valid, jaxb.factory.spi.Valid$JAXBContext1, "jakarta.xml.bind.JAXBException", null, "jakarta.xml.bind.JAXBContextFactory", "jaxb.factory.spi.Valid"
