@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -74,7 +74,6 @@ import static java.lang.annotation.ElementType.PACKAGE;
  * @since 1.6, JAXB 2.0
  * @see XmlAdapter
  */
-
 @Retention(RUNTIME) @Target({PACKAGE,FIELD,METHOD,TYPE,PARAMETER})
 public @interface XmlJavaTypeAdapter {
     /**

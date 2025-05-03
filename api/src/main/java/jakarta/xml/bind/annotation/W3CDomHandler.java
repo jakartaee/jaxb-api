@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -33,7 +33,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
 
     /**
      * Default constructor.
-     *
+     * <p>
      * It is up to a Jakarta XML Binding provider to decide which DOM implementation
      * to use or how that is configured.
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -40,7 +40,7 @@ package jakarta.xml.bind.annotation.adapters;
  *        representation. </li> 
  *
  *   <li> <b> XmlAdapter.unmarshal(...): </b> During unmarshalling,
- *        Jakarta XML Binding binding framework first unmarshals XML representation
+ *        Jakarta XML Binding binding framework first unmarshalls XML representation
  *        to a value type and then invokes XmlAdapter.unmarshal(..) to
  *        adapt the value type to a bound type. </li> 
  * </ul>
@@ -60,81 +60,78 @@ package jakarta.xml.bind.annotation.adapters;
  *
  * <p> <b> Step 1: </b> Determine the desired XML representation for HashMap.
  *
- * <pre>{@code
- *     <hashmap>
- *         <entry key="id123">this is a value</entry>
- *         <entry key="id312">this is another value</entry>
- *         ...
- *     </hashmap>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <hashmap>
+ *    <entry key="id123">this is a value</entry>
+ *    <entry key="id312">this is another value</entry>
+ *    ...
+ *  </hashmap>
+ * }
  *
  * <p> <b> Step 2: </b> Determine the schema definition that the
  * desired XML representation shown above should follow.
  *
- * <pre>{@code
- *     
- *     <xs:complexType name="myHashMapType">
- *       <xs:sequence>
- *         <xs:element name="entry" type="myHashMapEntryType"
- *                        minOccurs = "0" maxOccurs="unbounded"/>
- *       </xs:sequence>
- *     </xs:complexType>
+ * {@snippet lang="XML" :
+ *  <xs:complexType name="myHashMapType">
+ *    <xs:sequence>
+ *      <xs:element name="entry" type="myHashMapEntryType"
+ *                     minOccurs = "0" maxOccurs="unbounded"/>
+ *    </xs:sequence>
+ *  </xs:complexType>
  *
- *     <xs:complexType name="myHashMapEntryType">
- *       <xs:simpleContent>
- *         <xs:extension base="xs:string">
- *           <xs:attribute name="key" type="xs:int"/>
- *         </xs:extension>
- *       </xs:simpleContent>
- *     </xs:complexType>
- *
- * }</pre>
+ *  <xs:complexType name="myHashMapEntryType">
+ *    <xs:simpleContent>
+ *      <xs:extension base="xs:string">
+ *        <xs:attribute name="key" type="xs:int"/>
+ *      </xs:extension>
+ *    </xs:simpleContent>
+ *  </xs:complexType>
+ * }
  *
  * <p> <b> Step 3: </b> Write value types that can generate the above
  * schema definition.
  *
- * <pre>
- *     public class MyHashMapType {
- *         List&lt;MyHashMapEntryType&gt; entry;
- *     }
+ * {@snippet :
+ *  public class MyHashMapType {
+ *      List&lt;MyHashMapEntryType&gt; entry;
+ *  }
  *
- *     public class MyHashMapEntryType {
- *         &#64;XmlAttribute
- *         public Integer key; 
+ *  public class MyHashMapEntryType {
+ *      @XmlAttribute
+ *      public Integer key;
  *
- *         &#64;XmlValue
- *         public String value;
- *     }
- * </pre>
+ *      @XmlValue
+ *      public String value;
+ *  }
+ * }
  * 
  * <p> <b> Step 4: </b> Write the adapter that adapts the value type,
  * MyHashMapType to a bound type, HashMap, used by the application.
  *
- * <pre>{@code
- *     public final class MyHashMapAdapter extends
- *                        XmlAdapter<MyHashMapType,HashMap> { ... }
- *      
- * }</pre>
+ * {@snippet :
+ *  public final class MyHashMapAdapter extends
+ *                     XmlAdapter<MyHashMapType,HashMap> { ... }
+ * }
  *
  * <p> <b> Step 5: </b> Use the adapter.
  *
- * <pre>
- *     public class Foo {
- *         &#64;XmlJavaTypeAdapter(MyHashMapAdapter.class)
- *         HashMap hashmap;
- *         ...
- *     }
- * </pre>
+ * {@snippet :
+ *  public class Foo {
+ *      @XmlJavaTypeAdapter(MyHashMapAdapter.class)
+ *      HashMap hashmap;
+ *      ...
+ *  }
+ * }
  *
  * The above code fragment will map to the following schema:
  * 
- * <pre>{@code
- *     <xs:complexType name="Foo">
- *       <xs:sequence>
- *         <xs:element name="hashmap" type="myHashMapType">
- *       </xs:sequence>
- *     </xs:complexType>
- * }</pre>
+ * {@snippet lang="XML" :
+ *  <xs:complexType name="Foo">
+ *    <xs:sequence>
+ *      <xs:element name="hashmap" type="myHashMapType">
+ *    </xs:sequence>
+ *  </xs:complexType>
+ * }
  *
  * @param <BoundType>
  *      The type that Jakarta XML Binding doesn't know how to handle. An adapter is written
@@ -169,7 +166,7 @@ public abstract class XmlAdapter<ValueType,BoundType> {
      * Convert a bound type to a value type.
      *
      * @param v
-     *      The value to be convereted. Can be null.
+     *      The value to be converted. Can be null.
      * @throws Exception
      *      if there's an error during the conversion. The caller is responsible for
      *      reporting the error to the user through {@link jakarta.xml.bind.ValidationEventHandler}.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2025 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,14 +24,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-
 /**
  * This class is package private and therefore is not exposed as part of the
  * Jakarta XML Binding API.
- *
+ * <p>
  * This code is designed to implement the XML Binding spec pluggability feature
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
+ * @author
+ *         <ul>
+ *         <li>Ryan Shoemaker, Sun Microsystems, Inc.</li>
+ *         </ul>
  * @see JAXBContext
  */
 class ContextFinder {
@@ -41,17 +43,20 @@ class ContextFinder {
     /**
      * When JAXB is in J2SE, rt.jar has to have a JAXB implementation.
      * However, rt.jar cannot have META-INF/services/jakarta.xml.bind.JAXBContext
-     * because if it has, it will take precedence over any file that applications have
+     * because if it has, it will take precedence over any file that applications
+     * have
      * in their jar files.
      *
      * <p>
-     * When the user bundles his own Jakarta XML Binding implementation, we'd like to use it, and we
-     * want the platform default to be used only when there's no other Jakarta XML Binding provider.
+     * When the user bundles his own Jakarta XML Binding implementation, we'd like
+     * to use it, and we
+     * want the platform default to be used only when there's no other Jakarta XML
+     * Binding provider.
      *
      * <p>
      * For this reason, we have to hard-code the class name into the API.
      */
-    //XXX: should we define and rely on "default" in jakarta?
+    // XXX: should we define and rely on "default" in jakarta?
     static final String DEFAULT_FACTORY_CLASS = "org.glassfish.jaxb.runtime.v2.ContextFactory";
 
     static {
@@ -76,17 +81,18 @@ class ContextFinder {
         }
     }
 
-    private static ServiceLoaderUtil.ExceptionHandler<JAXBException> EXCEPTION_HANDLER =
-            new ServiceLoaderUtil.ExceptionHandler<JAXBException>() {
-                @Override
-                public JAXBException createException(Throwable throwable, String message) {
-                    return new JAXBException(message, throwable);
-                }
-            };
+    private static ServiceLoaderUtil.ExceptionHandler<JAXBException> EXCEPTION_HANDLER = new ServiceLoaderUtil.ExceptionHandler<>() {
+        @Override
+        public JAXBException createException(Throwable throwable, String message) {
+            return new JAXBException(message, throwable);
+        }
+    };
 
     /**
-     * If the {@link InvocationTargetException} wraps an exception that shouldn't be wrapped,
-     * throw the wrapped exception. Otherwise returns exception to be wrapped for further processing.
+     * If the {@link InvocationTargetException} wraps an exception that shouldn't be
+     * wrapped,
+     * throw the wrapped exception. Otherwise, returns exception to be wrapped for
+     * further processing.
      */
     private static Throwable handleInvocationTargetException(InvocationTargetException x) throws JAXBException {
         Throwable t = x.getTargetException();
@@ -104,23 +110,24 @@ class ContextFinder {
         return x;
     }
 
-
     /**
-     * Determine if two types (JAXBContext in this case) will generate a ClassCastException.
-     *
+     * Determine if two types (JAXBContext in this case) will generate a
+     * ClassCastException.
+     * <p>
      * For example, (targetType)originalType
      *
      * @param originalType
-     *          The Class object of the type being cast
+     *                     The Class object of the type being cast
      * @param targetType
-     *          The Class object of the type that is being cast to
+     *                     The Class object of the type that is being cast to
      * @return JAXBException to be thrown.
      */
     private static JAXBException handleClassCastException(Class<?> originalType, Class<?> targetType) {
         final URL targetTypeURL = which(targetType);
 
         return new JAXBException(Messages.format(Messages.ILLEGAL_CAST,
-                // we don't care where the impl class is, we want to know where JAXBContext lives in the impl
+                // we don't care where the impl class is, we want to know where JAXBContext
+                // lives in the impl
                 // class' ClassLoader
                 getClassClassLoader(originalType).getResource("jakarta/xml/bind/JAXBContext.class"),
                 targetTypeURL));
@@ -130,10 +137,10 @@ class ContextFinder {
      * Create an instance of a class using the specified ClassLoader
      */
     static JAXBContext newInstance(String contextPath,
-                                   Class<?>[] contextPathClasses,
-                                   String className,
-                                   ClassLoader classLoader,
-                                   Map<String, ?> properties) throws JAXBException {
+            Class<?>[] contextPathClasses,
+            String className,
+            ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
 
         try {
             Class<?> spFactory = ServiceLoaderUtil.safeLoadClass(className, DEFAULT_FACTORY_CLASS, classLoader);
@@ -148,7 +155,7 @@ class ContextFinder {
             throw x;
         } catch (Exception x) {
             // can't catch JAXBException because the method is hidden behind
-            // reflection.  Root element collisions detected in the call to
+            // reflection. Root element collisions detected in the call to
             // createContext() are reported as JAXBExceptions - just re-throw it
             // some other type of exception - just wrap it
             throw new JAXBException(Messages.format(Messages.COULD_NOT_INSTANTIATE, className, x), x);
@@ -156,10 +163,10 @@ class ContextFinder {
     }
 
     static JAXBContext newInstance(String contextPath,
-                                   Class<?>[] contextPathClasses,
-                                   Class<?> spFactory,
-                                   ClassLoader classLoader,
-                                   Map<String, ?> properties) throws JAXBException {
+            Class<?>[] contextPathClasses,
+            Class<?> spFactory,
+            ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
 
         try {
 
@@ -186,7 +193,8 @@ class ContextFinder {
 
             if (context == null) {
                 // try the old method that doesn't take properties. compatible with 1.0.
-                // it is an error for an implementation not to have both forms of the createContext method.
+                // it is an error for an implementation not to have both forms of the
+                // createContext method.
                 Method m = spFactory.getMethod("createContext", String.class, ClassLoader.class);
                 Object obj = instantiateProviderIfNecessary(spFactory);
                 // any failure in invoking this method would be considered fatal
@@ -207,7 +215,7 @@ class ContextFinder {
 
         } catch (Exception x) {
             // can't catch JAXBException because the method is hidden behind
-            // reflection.  Root element collisions detected in the call to
+            // reflection. Root element collisions detected in the call to
             // createContext() are reported as JAXBExceptions - just re-throw it
             // some other type of exception - just wrap it
             throw new JAXBException(Messages.format(Messages.COULD_NOT_INSTANTIATE, spFactory, x), x);
@@ -217,7 +225,7 @@ class ContextFinder {
     private static Object instantiateProviderIfNecessary(final Class<?> implClass) throws JAXBException {
         try {
             if (JAXBContextFactory.class.isAssignableFrom(implClass)) {
-                return AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+                return AccessController.doPrivileged(new PrivilegedExceptionAction<>() {
                     @Override
                     public Object run() throws Exception {
                         return implClass.getConstructor().newInstance();
@@ -234,7 +242,8 @@ class ContextFinder {
     /**
      * Create an instance of a class using passed in ClassLoader
      */
-    private static JAXBContext newInstance(Class<?>[] classes, Map<String, ?> properties, String className, ClassLoader loader) throws JAXBException {
+    private static JAXBContext newInstance(Class<?>[] classes, Map<String, ?> properties, String className,
+            ClassLoader loader) throws JAXBException {
 
         Class<?> spi;
         try {
@@ -245,17 +254,17 @@ class ContextFinder {
 
         if (logger.isLoggable(Level.FINE)) {
             // extra check to avoid costly which operation if not logged
-            logger.log(Level.FINE, "loaded {0} from {1}", new Object[]{className, which(spi)});
+            logger.log(Level.FINE, "loaded {0} from {1}", new Object[] { className, which(spi) });
         }
 
         return newInstance(classes, properties, spi);
     }
 
     static JAXBContext newInstance(Class<?>[] classes,
-                                   Map<String, ?> properties,
-                                   Class<?> spFactory) throws JAXBException {
+            Map<String, ?> properties,
+            Class<?> spFactory) throws JAXBException {
         try {
-            ModuleUtil.delegateAddOpensToImplModule(classes,  spFactory);
+            ModuleUtil.delegateAddOpensToImplModule(classes, spFactory);
 
             Method m = spFactory.getMethod("createContext", Class[].class, Map.class);
             Object obj = instantiateProviderIfNecessary(spFactory);
@@ -278,20 +287,22 @@ class ContextFinder {
     }
 
     static JAXBContext find(String factoryId,
-                            String contextPath,
-                            ClassLoader classLoader,
-                            Map<String, ?> properties) throws JAXBException {
+            String contextPath,
+            ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
 
         if (contextPath == null || contextPath.isEmpty()) {
             // no context is specified
             throw new JAXBException(Messages.format(Messages.NO_PACKAGE_IN_CONTEXTPATH));
         }
 
-        //ModuleUtil is mr-jar class, scans context path for jaxb classes on jdk9 and higher
+        // ModuleUtil is mr-jar class, scans context path for jaxb classes on jdk9 and
+        // higher
         Class<?>[] contextPathClasses = ModuleUtil.getClassesFromContextPath(contextPath, classLoader);
 
         String factoryName = classNameFromSystemProperties();
-        if (factoryName != null) return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+        if (factoryName != null)
+            return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
 
         if (properties != null) {
             Object factory = properties.get(factoryId);
@@ -299,11 +310,13 @@ class ContextFinder {
                 if (factory instanceof String) {
                     factoryName = (String) factory;
                 } else {
-                    throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, factory.getClass().getName(), "String"));
+                    throw new JAXBException(
+                            Messages.format(Messages.ILLEGAL_CAST, factory.getClass().getName(), "String"));
                 }
             }
             if (factoryName != null) {
-                return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+                return newInstance(contextPath, contextPathClasses, factoryName, classLoader,
+                        cleanProperties(properties));
             }
         }
 
@@ -323,7 +336,7 @@ class ContextFinder {
                 try {
                     return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
                 } catch (Throwable t) {
-                    logger.log(Level.FINE, t, () -> "Error instantiating provivder " + ctxFactory);
+                    logger.log(Level.FINE, t, () -> "Error instantiating provider " + ctxFactory);
                 }
             }
         }
@@ -337,9 +350,11 @@ class ContextFinder {
         return find(classes, getContextClassLoader(), properties);
     }
 
-    static JAXBContext find(Class<?>[] classes, ClassLoader classLoader, Map<String, ?> properties) throws JAXBException {
+    static JAXBContext find(Class<?>[] classes, ClassLoader classLoader, Map<String, ?> properties)
+            throws JAXBException {
         String factoryClassName = classNameFromSystemProperties();
-        if (factoryClassName != null) return newInstance(classes, properties, factoryClassName, classLoader);
+        if (factoryClassName != null)
+            return newInstance(classes, properties, factoryClassName, classLoader);
 
         if (properties != null) {
             Object ctxFactory = properties.get(JAXBContext.JAXB_CONTEXT_FACTORY);
@@ -347,23 +362,17 @@ class ContextFinder {
                 if (ctxFactory instanceof String) {
                     factoryClassName = (String) ctxFactory;
                 } else {
-                    throw new JAXBException(Messages.format(Messages.ILLEGAL_CAST, ctxFactory.getClass().getName(), "String"));
+                    throw new JAXBException(
+                            Messages.format(Messages.ILLEGAL_CAST, ctxFactory.getClass().getName(), "String"));
                 }
             }
             if (factoryClassName != null) {
-                //Providers are not required to understand JAXB_CONTEXT_FACTORY property
-                //and they must throw a JAXBException if they see it, so we need to remove it
-                //from properties passed to them
-                Map<String, ?> props = properties.entrySet()
-                        .stream()
-                        .filter(Predicate.not(e -> JAXBContext.JAXB_CONTEXT_FACTORY.equals(e.getKey())))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-                return newInstance(classes, props, factoryClassName, classLoader);
+                return newInstance(classes, cleanProperties(properties), factoryClassName, classLoader);
             }
         }
 
-        JAXBContextFactory factory =
-                ServiceLoaderUtil.firstByServiceLoader(JAXBContextFactory.class, logger, EXCEPTION_HANDLER, classLoader);
+        JAXBContextFactory factory = ServiceLoaderUtil.firstByServiceLoader(JAXBContextFactory.class, logger,
+                EXCEPTION_HANDLER, classLoader);
 
         if (factory != null) {
             ModuleUtil.delegateAddOpensToImplModule(classes, factory.getClass());
@@ -371,8 +380,8 @@ class ContextFinder {
         }
 
         logger.fine("Trying to create the platform default provider");
-        Class<?> ctxFactoryClass =
-                ServiceLoaderUtil.lookupUsingOSGiServiceLoader(JAXBContext.JAXB_CONTEXT_FACTORY, logger);
+        Class<?> ctxFactoryClass = ServiceLoaderUtil.lookupUsingOSGiServiceLoader(JAXBContext.JAXB_CONTEXT_FACTORY,
+                logger);
 
         if (ctxFactoryClass != null) {
             return newInstance(classes, properties, ctxFactoryClass.toString(), classLoader);
@@ -393,6 +402,16 @@ class ContextFinder {
         return null;
     }
 
+    private static Map<String, ?> cleanProperties(Map<String, ?> properties) {
+        // Providers are not required to understand JAXB_CONTEXT_FACTORY property,
+        // and they must throw a JAXBException if they see it, so we need to remove it
+        // from properties passed to them
+        return properties.entrySet()
+                .stream()
+                .filter(Predicate.not(e -> JAXBContext.JAXB_CONTEXT_FACTORY.equals(e.getKey())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
     private static String getSystemProperty(String property) {
         logger.log(Level.FINE, "Checking system property {0}", property);
         String value = AccessController.doPrivileged(new GetPropertyAction(property));
@@ -409,12 +428,12 @@ class ContextFinder {
      * return a string representation of the URL that points to the resource.
      *
      * @param clazz
-     *          The class to search for
+     *               The class to search for
      * @param loader
-     *          The ClassLoader to search.  If this parameter is null, then the
-     *          system class loader will be searched
+     *               The ClassLoader to search. If this parameter is null, then the
+     *               system class loader will be searched
      * @return
-     *          the URL for the class or null if it wasn't found
+     *         the URL for the class or null if it wasn't found
      */
     static URL which(Class<?> clazz, ClassLoader loader) {
 
@@ -429,15 +448,15 @@ class ContextFinder {
 
     /**
      * Get the URL for the Class from it's ClassLoader.
-     *
+     * <p>
      * Convenience method for {@link #which(Class, ClassLoader)}.
-     *
+     * <p>
      * Equivalent to calling: which(clazz, clazz.getClassLoader())
      *
      * @param clazz
-     *          The class to search for
+     *              The class to search for
      * @return
-     *          the URL for the class or null if it wasn't found
+     *         the URL for the class or null if it wasn't found
      */
     static URL which(Class<?> clazz) {
         return which(clazz, getClassClassLoader(clazz));
@@ -448,7 +467,7 @@ class ContextFinder {
             return Thread.currentThread().getContextClassLoader();
         } else {
             return AccessController.doPrivileged(
-                    new PrivilegedAction<ClassLoader>() {
+                    new PrivilegedAction<>() {
                         @Override
                         public ClassLoader run() {
                             return Thread.currentThread().getContextClassLoader();
@@ -462,7 +481,7 @@ class ContextFinder {
             return c.getClassLoader();
         } else {
             return AccessController.doPrivileged(
-                    new PrivilegedAction<ClassLoader>() {
+                    new PrivilegedAction<>() {
                         @Override
                         public ClassLoader run() {
                             return c.getClassLoader();
@@ -476,7 +495,7 @@ class ContextFinder {
             return ClassLoader.getSystemClassLoader();
         } else {
             return AccessController.doPrivileged(
-                    new PrivilegedAction<ClassLoader>() {
+                    new PrivilegedAction<>() {
                         @Override
                         public ClassLoader run() {
                             return ClassLoader.getSystemClassLoader();

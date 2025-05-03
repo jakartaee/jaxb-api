@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2022 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -97,7 +97,7 @@ class ServiceLoaderUtil {
     }
 
     static void checkPackageAccess(String className) {
-        // make sure that the current thread has an access to the package of the given name.
+        // make sure that the current thread has the access to the package of the given name.
         SecurityManager s = System.getSecurityManager();
         if (s != null) {
             int i = className.lastIndexOf('.');

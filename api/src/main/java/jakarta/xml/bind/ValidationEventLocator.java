@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -20,7 +20,7 @@ package jakarta.xml.bind;
  * For example, on-demand validation would produce locators that contained 
  * references to objects in the Java content tree while unmarshal-time 
  * validation would produce locators containing information appropriate to the 
- * source of the XML data (file, url, Node, etc).
+ * source of the XML data (file, url, Node, etc.).
  *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li>
  *             <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>

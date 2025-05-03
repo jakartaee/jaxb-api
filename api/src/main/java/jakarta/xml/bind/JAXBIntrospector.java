@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -22,7 +22,7 @@ import  javax.xml.namespace.QName;
  * Since accessing the XML element name related to a Jakarta XML Binding element is
  * a highly requested feature, demonstrate access to this
  * binding information.
- *
+ * <p>
  * The factory method to get a <code>JAXBIntrospector</code> instance is
  * {@link JAXBContext#createJAXBIntrospector()}.
  *
@@ -72,12 +72,12 @@ public abstract class JAXBIntrospector {
      * @return The element value of the <code>jaxbElement</code>.
      */
     public static Object getValue(Object jaxbElement) {
-	if (jaxbElement instanceof JAXBElement) {
-	    return ((JAXBElement)jaxbElement).getValue();
-	} else {
-	    // assume that class of this instance is
-	    // annotated with @XmlRootElement.
-	    return jaxbElement;
-	}
+        if (jaxbElement instanceof JAXBElement) {
+            return ((JAXBElement<?>)jaxbElement).getValue();
+        } else {
+            // assume that class of this instance is
+            // annotated with @XmlRootElement.
+            return jaxbElement;
+        }
     }
 }

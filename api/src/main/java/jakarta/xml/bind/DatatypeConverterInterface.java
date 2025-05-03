@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -35,7 +35,7 @@ package jakarta.xml.bind;
  * class.
  *
  * <p>
- * A parse method for a XML schema datatype must be capable of converting any
+ * A parse method for an XML schema datatype must be capable of converting any
  * lexical representation of the XML schema datatype ( specified by the
  * <a href="http://www.w3.org/TR/xmlschema-2/"> XML Schema Part2: Datatypes
  * specification</a> into a value in the value space of the XML schema datatype.
@@ -43,7 +43,7 @@ package jakarta.xml.bind;
  * or a subclass of IllegalArgumentException must be thrown by the method.
  *
  * <p>
- * A print method for a XML schema datatype can output any lexical
+ * A print method for an XML schema datatype can output any lexical
  * representation that is valid with respect to the XML schema datatype.
  * If an error is encountered during conversion, then an IllegalArgumentException,
  * or a subclass of IllegalArgumentException must be thrown by the method.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -146,9 +146,7 @@ public abstract class Binder<XmlNode> {
      *      If any of the input parameters are null
      * @since 1.6, JAXB 2.0
      */
-    public abstract <T> JAXBElement<T>
-	unmarshal( XmlNode xmlNode, Class<T> declaredType )
-	throws JAXBException;
+    public abstract <T> JAXBElement<T> unmarshal( XmlNode xmlNode, Class<T> declaredType ) throws JAXBException;
 
     /**
      * Marshal a Jakarta XML Binding object tree to a new XML document.
@@ -237,14 +235,14 @@ public abstract class Binder<XmlNode> {
     public abstract Object getJAXBNode( XmlNode xmlNode );
 
     /**
-     * Takes an Jakarta XML Binding object and updates
+     * Takes a Jakarta XML Binding object and updates
      * its associated XML node and its descendants.
      *
      * <p>
      * This is a convenience method of:
-     * <pre>
-     * updateXML( jaxbObject, getXMLNode(jaxbObject));
-     * </pre>
+     * {@snippet :
+     *  updateXML( jaxbObject, getXMLNode(jaxbObject));
+     * }
      *
      * @param jaxbObject the XML Binding object
      *
@@ -272,7 +270,7 @@ public abstract class Binder<XmlNode> {
      * would create a new tree that doesn't contain any of those.)
      *
      * <p>
-     * As a side-effect, this operation updates the association between
+     * As a side effect, this operation updates the association between
      * XML nodes and Jakarta XML Binding objects.
      *
      * @param jaxbObject root of potentially modified Jakarta XML Binding object tree
@@ -301,7 +299,7 @@ public abstract class Binder<XmlNode> {
      * as possible.
      *
      * <p>
-     * As a side-effect, this operation updates the association between
+     * As a side effect, this operation updates the association between
      * XML nodes and Jakarta XML Binding objects.
      *
      * @param xmlNode the XML node
@@ -350,7 +348,7 @@ public abstract class Binder<XmlNode> {
      *
      * <p>
      * Calling this method with a null parameter will cause the Binder
-     * to revert back to the default default event handler.
+     * to revert back to the default event handler.
      *
      * @param handler the validation event handler
      * @throws JAXBException if an error was encountered while setting the

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -58,7 +58,7 @@ public class JAXBElement<T> implements Serializable {
      *  Can be one of the following values:
      *  - {@link GlobalScope} for global xml element declaration.
      *  - local element declaration has a scope set to the Java class
-     *     representation of complex type defintion containing
+     *     representation of complex type definition containing
      *     xml element declaration.
      */
     final protected Class<?> scope;
@@ -91,9 +91,9 @@ public class JAXBElement<T> implements Serializable {
      * @see #isTypeSubstituted()
      */
     public JAXBElement(QName name,
-		       Class<T> declaredType,
-		       Class<?> scope,
-		       T value) {
+                       Class<T> declaredType,
+                       Class<?> scope,
+                       T value) {
         if(declaredType==null || name==null)
             throw new IllegalArgumentException();
         this.declaredType = declaredType;
@@ -105,7 +105,7 @@ public class JAXBElement<T> implements Serializable {
 
     /**
      * Construct an xml element instance.
-     *
+     * <p>
      * This is just a convenience method for {@code new JAXBElement(name,declaredType,GlobalScope.class,value)}
      */
     public JAXBElement(QName name, Class<T> declaredType, T value ) {

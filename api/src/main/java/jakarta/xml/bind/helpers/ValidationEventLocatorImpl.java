@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -43,7 +43,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
 
     /**
      * Constructs an object from an org.xml.sax.Locator.
-     *
+     * <p>
      * The object's ColumnNumber, LineNumber, and URL become available from the
      * values returned by the locator's getColumnNumber(), getLineNumber(), and
      * getSystemId() methods respectively. Node, Object, and Offset are not
@@ -66,7 +66,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
 
     /**
      * Constructs an object from the location information of a SAXParseException.
-     *
+     * <p>
      * The object's ColumnNumber, LineNumber, and URL become available from the
      * values returned by the locator's getColumnNumber(), getLineNumber(), and
      * getSystemId() methods respectively. Node, Object, and Offset are not
@@ -89,7 +89,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
 
     /**
      * Constructs an object that points to a DOM Node.
-     *
+     * <p>
      * The object's Node becomes available.  ColumnNumber, LineNumber, Object,
      * Offset, and URL are not available.
      *
@@ -108,7 +108,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
 
     /**
      * Constructs an object that points to a Jakarta XML Binding content object.
-     *
+     * <p>
      * The object's Object becomes available. ColumnNumber, LineNumber, Node,
      * Offset, and URL are not available.
      *
@@ -125,7 +125,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator
         this.object = _object;
     }
 
-    /** Converts a system ID to an URL object. */
+    /** Converts a system ID to a URL object. */
     private static URL toURL( String systemId ) {
         try {
             return new URL(systemId);

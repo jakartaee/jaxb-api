@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -17,16 +17,16 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * A container for multiple @{@link XmlSchemaType} annotations.
+ * A container for multiple {@link XmlSchemaType} annotations.
  *
  * <p> Multiple annotations of the same type are not allowed on a program
  * element. This annotation therefore serves as a container annotation
- * for multiple &#64;XmlSchemaType annotations as follows:
+ * for multiple {@link XmlSchemaType} annotations as follows:
  *
- * <pre>
- * &#64;XmlSchemaTypes({ @XmlSchemaType(...), @XmlSchemaType(...) })
- * </pre>
- * <p>The {@code @XmlSchemaTypes} annnotation can be used to
+ * {@snippet :
+ *  @XmlSchemaTypes({ @XmlSchemaType(...), @XmlSchemaType(...) })
+ * }
+ * <p>The {@code @XmlSchemaTypes} annotation can be used to
  * define {@link XmlSchemaType} for different types at the
  * package level.
  *
