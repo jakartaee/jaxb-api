@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004, 2025 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -28,7 +28,7 @@ public final class HexBinaryAdapter extends XmlAdapter<String,byte[]> {
     @Override
     public byte[] unmarshal(String s) {
         if(s==null)     return null;
-        return DatatypeConverter.parseHexBinary(s);
+        return DatatypeConverter.parseHexBinary(s.trim());
     }
 
     @Override
