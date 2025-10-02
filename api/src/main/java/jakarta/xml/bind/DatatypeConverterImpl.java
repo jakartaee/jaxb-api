@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2007, 2024 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025 Contributors to the Eclipse Foundation. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -711,8 +712,8 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      *      because JIT can inline a lot of string access (with data of 1K chars, it was twice as fast)
      */
     public static byte[] _parseBase64Binary(String text) {
-        if (null == text || text.length() % 4 != 0) {
-            throw new IllegalArgumentException("base64 text invalid.");
+        if (null == text) {
+            throw new IllegalArgumentException("base64 \"null\" text invalid.");
         }
         final int buflen = guessLength(text);
         final byte[] out = new byte[buflen];
@@ -738,9 +739,15 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                 // quadruplet is now filled.
                 out[o++] = (byte) ((quadruplet[0] << 2) | (quadruplet[1] >> 4));
                 if (quadruplet[2] != PADDING) {
+                    if (buflen == o) {
+                        throw new IllegalArgumentException("base64 text invalid.");
+                    }
                     out[o++] = (byte) ((quadruplet[1] << 4) | (quadruplet[2] >> 2));
                 }
                 if (quadruplet[3] != PADDING) {
+                    if (buflen == o) {
+                        throw new IllegalArgumentException("base64 text invalid.");
+                    }
                     out[o++] = (byte) ((quadruplet[2] << 6) | (quadruplet[3]));
                 }
                 q = 0;
