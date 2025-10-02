@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2023, 2024 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025 Contributors to the Eclipse Foundation. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -84,6 +85,8 @@ public class DatatypeConverterTest {
     @Test
     public void testBase64() {
         Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.parseBase64Binary("Qxx=="));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.parseBase64Binary("SGVsbG8sIJdvcmxkIQQxx=="));
+        Assert.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.parseBase64Binary("dGhpcyBpcyB\nhbiBleGFtcGxl=="));
 
         Assert.assertEquals("", new String(DatatypeConverter.parseBase64Binary("")));
         Assert.assertEquals("f", new String(DatatypeConverter.parseBase64Binary("Zg==")));
@@ -92,6 +95,9 @@ public class DatatypeConverterTest {
         Assert.assertEquals("foob", new String(DatatypeConverter.parseBase64Binary("Zm9vYg==")));
         Assert.assertEquals("fooba", new String(DatatypeConverter.parseBase64Binary("Zm9vYmE=")));
         Assert.assertEquals("foobar", new String(DatatypeConverter.parseBase64Binary("Zm9vYmFy")));
+        Assert.assertEquals("this is an example", new String(DatatypeConverter.parseBase64Binary("dGhpcyBpcyB hbiBleGFtcGxl")));
+        Assert.assertEquals("this is an example", new String(DatatypeConverter.parseBase64Binary("dGhpcyBpcyB\nhbiBleGFtcGxl")));
+        Assert.assertEquals("this is an example", new String(DatatypeConverter.parseBase64Binary("dGhpcyBpcyB\thbiBleGFtcGxl")));
 
         Assert.assertNotEquals("Hello, world!", new String(DatatypeConverter.parseBase64Binary("SGVsbG8sIJdvcmxkIQ==")));
 
