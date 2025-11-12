@@ -57,7 +57,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static BigInteger _parseInteger(CharSequence s) {
-        return new BigInteger(removeOptionalPlus(WhiteSpaceProcessor.trim(s)).toString());
+        return new BigInteger(WhiteSpaceProcessor.trim(s).toString());
     }
 
     @Override
@@ -115,7 +115,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static long _parseLong(CharSequence s) {
-        return Long.parseLong(removeOptionalPlus(WhiteSpaceProcessor.trim(s)).toString());
+        return Long.parseLong(WhiteSpaceProcessor.trim(s).toString());
     }
 
     @Override
@@ -880,25 +880,6 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         }
 
         return ptr;
-    }
-
-    private static CharSequence removeOptionalPlus(CharSequence s) {
-        int len = s.length();
-
-        if (len <= 1 || s.charAt(0) != '+') {
-            return s;
-        }
-
-        s = s.subSequence(1, len);
-        char ch = s.charAt(0);
-        if ('0' <= ch && ch <= '9') {
-            return s;
-        }
-        if ('.' == ch) {
-            return s;
-        }
-
-        throw new NumberFormatException();
     }
 
     private static boolean isDigitOrPeriodOrSign(char ch) {
