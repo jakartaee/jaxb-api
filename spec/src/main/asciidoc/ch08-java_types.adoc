@@ -1842,7 +1842,7 @@ then the particle obtained by mapping as specified in <<xmlanyelement>>
 
 [source,java,indent=4]
 ----
-@Retention(RUNTIME) @Target({FIELD, METHOD}
+@Retention(RUNTIME) @Target({FIELD, METHOD})
 public @interface XmlElementWrapper {
     String name() default "##default" ; // name for XML element
     String namespace() default "##default";
