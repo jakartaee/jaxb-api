@@ -24,7 +24,7 @@
 
     <groupId>jakarta.xml.bind</groupId>
     <artifactId>jakarta.xml.bind-api-parent</artifactId>
-    <version>4.0.5-SNAPSHOT</version>
+    <version>4.0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Jakarta XML Binding</name>
     <description>Jakarta XML Binding API</description>
