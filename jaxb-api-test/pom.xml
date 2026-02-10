@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.10.2</version>
+            <version>5.14.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -103,7 +103,6 @@
                             src/test/resources/logging.properties
                         </java.util.logging.config.file>
                     </systemPropertyVariables>
-                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
             <plugin>

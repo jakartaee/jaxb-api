@@ -297,7 +297,6 @@ public class JAXBContextTest {
     private void enableSM() {
         System.setSecurityManager(null);
         System.setProperty("java.security.policy", classesDir + "jakarta/xml/bind/test.policy");
-        // System.setSecurityManager(new SecurityManager());
     }
 
     private void cleanResource(Path resource) {
@@ -367,7 +366,6 @@ public class JAXBContextTest {
 
     private void log(String msg) {
         logger.info("[" + scenario + "] " + msg);
-        // System.out.println("[" + scenario + "] " + msg);
     }
 
 }
