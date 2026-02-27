@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2015, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015, 2024 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -27,7 +28,7 @@ public class Valid2 {
         return new JAXBContext1();
     }
 
-    public static JAXBContext createContext(Class[] classes, Map<String, Object> properties) throws JAXBException {
+    public static JAXBContext createContext(Class<?>[] classes, Map<String, Object> properties) throws JAXBException {
         return new JAXBContext1();
     }
 

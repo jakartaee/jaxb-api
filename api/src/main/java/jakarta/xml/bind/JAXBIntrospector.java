@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -7,7 +8,6 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-
 package jakarta.xml.bind;
 
 import  javax.xml.namespace.QName;
@@ -72,12 +72,12 @@ public abstract class JAXBIntrospector {
      * @return The element value of the <code>jaxbElement</code>.
      */
     public static Object getValue(Object jaxbElement) {
-        if (jaxbElement instanceof JAXBElement) {
-            return ((JAXBElement<?>)jaxbElement).getValue();
-        } else {
-            // assume that class of this instance is
-            // annotated with @XmlRootElement.
-            return jaxbElement;
-        }
+	    if (jaxbElement instanceof JAXBElement) {
+	        return ((JAXBElement<?>)jaxbElement).getValue();
+	    } else {
+	        // assume that class of this instance is
+	        // annotated with @XmlRootElement.
+	        return jaxbElement;
+	    }
     }
 }
