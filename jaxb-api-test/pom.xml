@@ -16,7 +16,7 @@
     <parent>
         <artifactId>jakarta.xml.bind-api-parent</artifactId>
         <groupId>jakarta.xml.bind</groupId>
-        <version>4.0.3-SNAPSHOT</version>
+        <version>4.0.6-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
