@@ -31,10 +31,11 @@ class ServiceLoaderUtil {
 
     static <P, T extends Exception> P firstByServiceLoader(Class<P> spiClass,
                                                            Logger logger,
-                                                           ExceptionHandler<T> handler) throws T {
+                                                           ExceptionHandler<T> handler,
+                                                           ClassLoader classLoader) throws T {
         // service discovery
         try {
-            ServiceLoader<P> serviceLoader = ServiceLoader.load(spiClass);
+            ServiceLoader<P> serviceLoader = ServiceLoader.load(spiClass, classLoader);
 
             for (P impl : serviceLoader) {
                 logger.log(Level.FINE, "ServiceProvider loading Facility used; returning object [{0}]",
@@ -122,6 +123,19 @@ class ServiceLoaderUtil {
                                                     final ExceptionHandler<T> handler) throws T {
         try {
             return safeLoadClass(className, defaultImplClassName, contextClassLoader(handler)).getConstructor().newInstance();
+        } catch (ClassNotFoundException x) {
+            throw handler.createException(x, "Provider " + className + " not found");
+        } catch (Exception x) {
+            throw handler.createException(x, "Provider " + className + " could not be instantiated: " + x);
+        }
+    }
+
+    static <T extends Exception> Object newInstance(String className,
+                                                    String defaultImplClassName,
+                                                    ClassLoader classLoader,
+                                                    final ExceptionHandler<T> handler) throws T {
+        try {
+            return safeLoadClass(className, defaultImplClassName, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException x) {
             throw handler.createException(x, "Provider " + className + " not found");
         } catch (Exception x) {
