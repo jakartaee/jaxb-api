@@ -59,7 +59,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  * </ul>
  * <p><b>Example:</b> Map a JavaBean property to {@code xs:IDREF}
  *   (i.e. by reference rather than by containment)</p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  //EXAMPLE: Code fragment
  *  public class Shipping {
  *      @XmlIDREF public Customer getCustomer();
@@ -67,7 +68,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      ....
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="Shipping">
  *    <xs:complexContent>
@@ -78,12 +82,13 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    </xs:complexContent>
  *  </xs:complexType>
  * }
- *
- *
+ * </pre>
+ * 
  * <p><b>Example 2: </b> The following is a complete example of
  * containment versus reference.
  * 
- * {@snippet :
+ * <pre>
+ * {@code
  *  // By default, Customer maps to complex type {@code xs:Customer}
  *  public class Customer {
  *        
@@ -126,7 +131,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      public Invoice getInvoice();     
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema mapping for above code fragment -->
  *
  *  <xs:complexType name="Invoice">
@@ -183,9 +191,11 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    </invoice>
  *  </customerData>
  * }
- *
+ * </pre>
+ * 
  * <p><b>Example 3: </b> Mapping List to repeating element of type IDREF
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Code fragment
  *  public class Shipping {
  *      @XmlIDREF
@@ -193,7 +203,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      public List customers;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML schema fragment -->
  *  <xs:complexType name="Shipping">
  *    <xs:sequence>
@@ -203,9 +216,11 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p><b>Example 4: </b> Mapping a List to a list of elements of type IDREF.
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Code fragment
  *  public class Shipping {
  *      @XmlIDREF
@@ -214,7 +229,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      public List customers;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema fragment -->
  *  <xs:complexType name="Shipping">
  *    <xs:sequence>
@@ -225,6 +243,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
+ * </pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc. 
  * @see XmlID
  * @since 1.6, JAXB 2.0

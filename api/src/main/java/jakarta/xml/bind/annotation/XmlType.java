@@ -178,7 +178,8 @@ import java.lang.annotation.Target;
  *   xs:sequence with a customized ordering of JavaBean properties.
  * </p>
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlType(propOrder={"street", "city" , "state", "zip", "name" })
  *  public class USAddress {
  *      String getName() {..};
@@ -197,7 +198,10 @@ import java.lang.annotation.Target;
  *      void setZip(java.math.BigDecimal) {..};
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:complexType name="USAddress">
  *    <xs:sequence>
@@ -209,13 +213,19 @@ import java.lang.annotation.Target;
  *    </xs:all>
  *  </xs:complexType>
  * }
+ * </pre>
+ * 
  * <p> <b> Example 2: </b> Map a class to a complex type with
  *     xs:all </p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlType(propOrder={})
  *  public class USAddress { ...}
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:complexType name="USAddress">
  *    <xs:all>
@@ -227,15 +237,21 @@ import java.lang.annotation.Target;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
+ * </pre>
+ * 
  * <p> <b> Example 3: </b> Map a class to a global element with an
  * anonymous type.
  * </p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlRootElement
  *  @XmlType(name="")
  *  public class USAddress { ...}
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:element name="USAddress">
  *    <xs:complexType>
@@ -249,10 +265,12 @@ import java.lang.annotation.Target;
  *    </xs:complexType>
  *  </xs:element>
  * }
- *
+ * </pre>
+ * 
  * <p> <b> Example 4: </b> Map a property to a local element with
  * anonymous type.
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  public class Invoice {
  *      USAddress addr;
@@ -263,7 +281,10 @@ import java.lang.annotation.Target;
  *  public class USAddress { ... }
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:complexType name="Invoice">
  *    <xs:sequence>
@@ -280,11 +301,13 @@ import java.lang.annotation.Target;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p> <b> Example 5: </b> Map a property to an attribute with
  * anonymous type.
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  public class Item {
  *      public String name;
@@ -299,7 +322,10 @@ import java.lang.annotation.Target;
  *      public java.math.BigDecimal price;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="Item">
  *    <xs:sequence>
@@ -312,10 +338,12 @@ import java.lang.annotation.Target;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  *  <p> <b> Example 6: </b> Define a factoryClass and factoryMethod
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlType(name="USAddressType", factoryClass=USAddressFactory.class,
  *           factoryMethod="getUSAddress")
  *  public class USAddress {
@@ -344,10 +372,12 @@ import java.lang.annotation.Target;
  *
  *  }
  * }
- *
+ * </pre>
+ * 
  *  <p> <b> Example 7: </b> Define factoryMethod and use the default factoryClass
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlType(name="USAddressType", factoryMethod="getNewInstance")
  *  public class USAddress {
  *
@@ -364,7 +394,8 @@ import java.lang.annotation.Target;
  *      }
  *  }
  * }
- *
+ * </pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlElement
  * @see XmlAttribute

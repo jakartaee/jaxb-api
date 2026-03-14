@@ -51,7 +51,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  * <p><b>Example:</b> Resolve name collision between JavaBean property and
  *     field name </p>
  * 
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example: Code fragment
  *  public class USAddress {
  *
@@ -63,7 +64,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      String setName() {..};
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="USAddress">
  *    <xs:sequence>
@@ -71,7 +75,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */

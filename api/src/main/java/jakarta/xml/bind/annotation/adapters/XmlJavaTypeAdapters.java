@@ -23,10 +23,12 @@ import java.lang.annotation.Target;
  * element. This annotation therefore serves as a container annotation
  * for multiple &#64;XmlJavaTypeAdapter as follows:
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlJavaTypeAdapters ({ @XmlJavaTypeAdapter(...), @XmlJavaTypeAdapter(...) })
  * }
- *
+ * </pre>
+ * 
  * <p>The {@code @XmlJavaTypeAdapters} annotation is useful for
  * defining {@link XmlJavaTypeAdapter} annotations for different types
  * at the package level.

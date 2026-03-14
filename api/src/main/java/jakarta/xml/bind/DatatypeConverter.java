@@ -28,7 +28,8 @@ import javax.xml.namespace.NamespaceContext;
  * implementation of parse and print methods. These methods are invoked by 
  * custom parse and print methods. For example, the binding of xsd:dateTime 
  * to a long can be customized using parse and print methods as follows:
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Customized parse method
  *  public long myParseCal( String dateTimeString ) {
  *      java.util.Calendar cal = DatatypeConverter.parseDateTime(dateTimeString);
@@ -43,6 +44,8 @@ import javax.xml.namespace.NamespaceContext;
  *      return dateTimeString;
  *  }
  * }
+ * </pre>
+ * 
  * <p>
  * There is a static parse and print method corresponding to each parse and 
  * print method respectively in the {@link DatatypeConverterInterface 

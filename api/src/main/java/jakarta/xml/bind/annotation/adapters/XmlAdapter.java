@@ -60,18 +60,21 @@ package jakarta.xml.bind.annotation.adapters;
  *
  * <p> <b> Step 1: </b> Determine the desired XML representation for HashMap.
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <hashmap>
  *    <entry key="id123">this is a value</entry>
  *    <entry key="id312">this is another value</entry>
  *    ...
  *  </hashmap>
  * }
- *
+ * </pre>
+ * 
  * <p> <b> Step 2: </b> Determine the schema definition that the
  * desired XML representation shown above should follow.
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <xs:complexType name="myHashMapType">
  *    <xs:sequence>
  *      <xs:element name="entry" type="myHashMapEntryType"
@@ -87,11 +90,13 @@ package jakarta.xml.bind.annotation.adapters;
  *    </xs:simpleContent>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p> <b> Step 3: </b> Write value types that can generate the above
  * schema definition.
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  public class MyHashMapType {
  *      List&lt;MyHashMapEntryType&gt; entry;
  *  }
@@ -104,35 +109,42 @@ package jakarta.xml.bind.annotation.adapters;
  *      public String value;
  *  }
  * }
+ * </pre>
  * 
  * <p> <b> Step 4: </b> Write the adapter that adapts the value type,
  * MyHashMapType to a bound type, HashMap, used by the application.
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  public final class MyHashMapAdapter extends
  *                     XmlAdapter<MyHashMapType,HashMap> { ... }
  * }
- *
+ * </pre>
+ * 
  * <p> <b> Step 5: </b> Use the adapter.
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  public class Foo {
  *      @XmlJavaTypeAdapter(MyHashMapAdapter.class)
  *      HashMap hashmap;
  *      ...
  *  }
  * }
- *
+ * </pre>
+ * 
  * The above code fragment will map to the following schema:
  * 
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <xs:complexType name="Foo">
  *    <xs:sequence>
  *      <xs:element name="hashmap" type="myHashMapType">
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * @param <BoundType>
  *      The type that Jakarta XML Binding doesn't know how to handle. An adapter is written
  *      to allow this type to be used as an in-memory representation through

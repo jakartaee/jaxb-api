@@ -23,44 +23,53 @@ import java.io.Reader;
  *
  * <p>
  * Unmarshalling from a File:
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *  Object o = u.unmarshal( new File( "nosferatu.xml" ) );
  * }
- *
+ * </pre>
+ * 
  *
  * <p>
  * Unmarshalling from an InputStream:
- * {@snippet :
+ * <pre>
+ * {@code
  *  InputStream is = new FileInputStream( "nosferatu.xml" );
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *  Object o = u.unmarshal( is );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Unmarshalling from a URL:
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *  URL url = new URL( "http://beaker.east/nosferatu.xml" );
  *  Object o = u.unmarshal( url );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Unmarshalling from a StringBuffer using a
  * {@code javax.xml.transform.stream.StreamSource}:
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *  StringBuffer xmlStr = new StringBuffer( "<?xml version="1.0"?>..." );
  *  Object o = u.unmarshal( new StreamSource( new StringReader( xmlStr.toString() ) ) );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Unmarshalling from a {@code org.w3c.dom.Node}:
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *
@@ -71,11 +80,13 @@ import java.io.Reader;
 
  *  Object o = u.unmarshal( doc );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Unmarshalling from a {@code javax.xml.transform.sax.SAXSource} using a
  * client specified validating SAX2.0 parser:
- * {@snippet :
+ * <pre>
+ * {@code
  *  // configure a validating SAX2.0 parser (Xerces2)
  *  static final String JAXP_SCHEMA_LANGUAGE =
  *       "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
@@ -121,10 +132,12 @@ import java.io.Reader;
  *      // iterate over events
  *  }
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Unmarshalling from a StAX XMLStreamReader:
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *
@@ -133,10 +146,12 @@ import java.io.Reader;
  *
  *  Object o = u.unmarshal( xmlStreamReader );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Unmarshalling from a StAX XMLEventReader:
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *
@@ -145,7 +160,8 @@ import java.io.Reader;
  *
  * Object o = u.unmarshal( xmlEventReader );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * <a id="unmarshalEx"></a>
  * <b>Unmarshalling XML Data</b><br>
@@ -246,7 +262,8 @@ import java.io.Reader;
  * <a href="#unmarshalByDeclaredType">unmarshal by declaredType method</a>.
  * <p>
  * Unmarshal by declaredType from a {@code org.w3c.dom.Node}:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *   <!-- Schema fragment for example -->
  *   <xs:schema>
  *     <xs:complexType name="FooType">...</xs:complexType>
@@ -262,7 +279,10 @@ import java.io.Reader;
  *     </xs:element>
  *   </xs:schema>
  * }
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *
@@ -276,7 +296,8 @@ import java.io.Reader;
  *  // FooType is the Jakarta XML Binding mapping of the type of local element declaration foo.
  *  JAXBElement<FooType> foo = u.unmarshal( fooSubtree, FooType.class);
  * }
- *
+ * </pre>
+ * 
  * <p>
  * <b>Support for SAX2.0 Compliant Parsers</b><br>
  * <blockquote>
@@ -336,7 +357,8 @@ import java.io.Reader;
  * <p>
  * 'Class defined' event callback methods allow any Jakarta XML Binding mapped class to specify
  * its own specific callback methods by defining methods with the following method signature:
- * {@snippet :
+ * <pre>
+ * {@code
  *  // This method is called immediately after the object is created and before the unmarshalling of this
  *  // object begins. The callback provides an opportunity to initialize JavaBean properties prior to unmarshalling.
  *  void beforeUnmarshal(Unmarshaller, Object parent);
@@ -345,6 +367,8 @@ import java.io.Reader;
  *  //but before this object is set to the parent object.
  *  void afterUnmarshal(Unmarshaller, Object parent);
  * }
+ * </pre>
+ * 
  * The class defined callback methods should be used when the callback method requires
  * access to non-public methods and/or fields of the class.
  * <p>

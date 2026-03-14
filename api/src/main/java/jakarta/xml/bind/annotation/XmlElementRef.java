@@ -41,10 +41,13 @@ import static java.lang.annotation.ElementType.METHOD;
  * support for substitution groups using an <i>element property</i>,
  * (section 5.5.5, "Element Property" of Jakarta XML Binding specification). An
  * element property method signature is of the form:
- * {@snippet :
+ * <pre>
+ * {@code
  *  public void setTerm(JAXBElement<? extends Operator>);
  *  public JAXBElement<? extends Operator> getTerm();
  * }
+ * </pre>
+ * 
  * <p>
  * An element factory method annotated with  {@link XmlElementDecl} is
  * used to create a {@code JAXBElement} instance, containing an XML
@@ -84,7 +87,8 @@ import static java.lang.annotation.ElementType.METHOD;
  * script.  An Ant task corresponds to a class in the class
  * hierarchy. The XML element name of an Ant task is indicated by the
  * XmlRootElement annotation on its corresponding class.
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlRootElement(name="target")
  *  class Target {
  *      // The presence of @XmlElementRef indicates that the XML
@@ -107,7 +111,10 @@ import static java.lang.annotation.ElementType.METHOD;
  *      ...
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema fragment -->
  *  <xs:element name="target" type="Target">
  *    <xs:complexType name="Target">
@@ -120,16 +127,22 @@ import static java.lang.annotation.ElementType.METHOD;
  *    </xs:complexType>
  *  </xs:element>
  * }
+ * </pre>
+ * 
  * <p>
  * Thus the following code fragment:
- * {@snippet :
+ * <pre>
+ * {@code
  *  Target target = new Target();
  *  target.tasks.add(new JarTask());
  *  target.tasks.add(new JavacTask());
  *  marshal(target);
  * }
+ * </pre>
+ * 
  * will produce the following XML output:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <target>
  *    <jar>
  *      ....
@@ -139,6 +152,8 @@ import static java.lang.annotation.ElementType.METHOD;
  *    </javac>
  *  </target>
  * }
+ * </pre>
+ * 
  * <p>
  * It is not an error to have a class that extends {@code Task}
  * that doesn't have {@link XmlRootElement}. But they can't show up in an
@@ -149,7 +164,8 @@ import static java.lang.annotation.ElementType.METHOD;
  * substitution groups.  The annotations and the ObjectFactory are
  * derived from the schema.
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlElement
  *  class Math {
  *      //  The value of type() is // @link substring="type()" target="#type()"
@@ -185,20 +201,27 @@ import static java.lang.annotation.ElementType.METHOD;
  *      ...
  *  }
  * }
+ * </pre>
+ * 
  * <p>
  * Thus, the following code fragment
- * {@snippet :
+ * <pre>
+ * {@code
  *  Math m = new Math();
  *  m.term = new ObjectFactory().createAdd(new Operator());
  *  marshal(m);
  * }
+ * </pre>
+ * 
  * will produce the following XML output:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <math>
  *    <add>...</add>
  *  </math>
  * }
- *
+ * </pre>
+ * 
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems,Inc. </li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElementRefs

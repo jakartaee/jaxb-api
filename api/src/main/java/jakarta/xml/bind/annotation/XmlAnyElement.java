@@ -33,7 +33,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * "catch-all" property.
  *
  * <h2>Usages:</h2>
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlAnyElement
  *  public Element[] others;
  *
@@ -47,7 +48,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  @XmlAnyElement
  *  private Element node;
  * }
- *
+ * </pre>
+ * 
  * <h2>Restriction usage constraints</h2>
  * <p>
  * This annotation is mutually exclusive with
@@ -66,18 +68,21 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p>
  * This annotation can be used with {@link XmlMixed} like this:
- * {@snippet :
+ * <pre>
+ * {@code
  *  // List of java.lang.String or DOM nodes.
  *  @XmlAnyElement
  *  @XmlMixed
  *  List<Object> others;
  * }
- *
+ * </pre>
+ * 
  *
  * <h2>Schema To Java example</h2>
  *
  * The following schema would produce the following Java class:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <xs:complexType name="foo">
  *    <xs:sequence>
  *      <xs:element name="a" type="xs:int" />
@@ -86,8 +91,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  class Foo {
  *      int a;
  *      int b;
@@ -95,10 +102,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      List<Element> any;
  *  }
  * }
- *
+ * </pre>
+ * 
  * It can unmarshal instances like
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <foo xmlns:e="extra">
  *    <a>1</a>
  *    <e:other />  <!-- this will be bound to DOM, because unmarshalling is orderless -->
@@ -107,11 +116,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    <c>5</c>     <!-- this will be bound to DOM, because the annotation doesn't remember namespaces -->
  *  </foo>
  * }
- *
+ * </pre>
+ * 
  *
  *
  * The following schema would produce the following Java class:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <xs:complexType name="bar">
  *    <xs:complexContent>
  *      <xs:extension base="foo">
@@ -123,18 +134,22 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </xs:complexContent>
  *  </xs:complexType>
  * }
- *
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  class Bar extends Foo {
  *      int c;
  *      // Foo.getAny() also represents wildcard content for type definition bar.
  *  }
  * }
- *
+ * </pre>
+ * 
  *
  * It can unmarshal instances like
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <bar xmlns:e="extra">
  *    <a>1</a>
  *    <e:other />  <!-- this will be bound to DOM, because unmarshalling is orderless -->
@@ -144,7 +159,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    <e:other />  <!-- this will go to Foo.any -->
  *  </bar>
  * }
- *
+ * </pre>
+ * 
  *
  *
  *
@@ -155,7 +171,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p>
  * The following schema would produce the following Java class:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <xs:complexType name="foo">
  *    <xs:choice maxOccurs="unbounded" minOccurs="0">
  *      <xs:element name="a" type="xs:int" />
@@ -164,8 +181,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </xs:choice>
  *  </xs:complexType>
  * }
- *
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  class Foo {
  *      @XmlAnyElement(lax="true")
  *      @XmlElementRefs({
@@ -185,38 +204,48 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      JAXBElement<Integer> createFooB( Integer i ) { ... }
  *  }
  * }
- *
+ * </pre>
+ * 
  * It can unmarshal instances like
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <foo xmlns:e="extra">
  *    <a>1</a>     <!-- this will unmarshal to a JAXBElement instance whose value is 1. -->
  *    <e:other />  <!-- this will unmarshal to a DOM Element. -->
  *    <b>3</b>     <!-- this will unmarshal to a JAXBElement instance whose value is 1. -->
  *  </foo>
  * }
- *
+ * </pre>
+ * 
  *
  *
  *
  * <h2>W3C XML Schema "lax" wildcard emulation</h2>
  * The lax element of the annotation enables the emulation of the "lax" wildcard semantics.
  * For example, when the Java source code is annotated like this:
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlRootElement
  *  class Foo {
  *      @XmlAnyElement(lax=true)
  *      public Object[] others;
  *  }
  * }
+ * </pre>
+ * 
  * then the following document will unmarshal like this:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <foo>
  *    <unknown />
  *    <foo />
  *  </foo>
  * }
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  Foo foo = unmarshal();
  *  // 1 for 'unknown', another for 'foo'
  *  assert foo.others.length==2;
@@ -226,7 +255,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  // unmarshalls to a Foo object.
  *  assert foo.others[1] instanceof Foo;
  * }
- *
+ * </pre>
+ * 
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
  */

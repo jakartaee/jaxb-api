@@ -52,16 +52,22 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p>By default, if {@code @XmlAccessorType} on a package is absent,
  * then the following package level annotation is assumed.</p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
  * }
+ * </pre>
+ * 
  * <p> By default, if {@code @XmlAccessorType} on a class is absent,
  * and none of its super classes is annotated with
  * {@code @XmlAccessorType}, then the following default on the class
  * is assumed: </p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
  * }
+ * </pre>
+ * 
  * <p>This annotation can be used with the following annotations: 
  *    {@link XmlType}, {@link XmlRootElement}, {@link XmlAccessorOrder}, 
  *    {@link XmlSchema}, {@link XmlSchemaType}, {@link XmlSchemaTypes}, 

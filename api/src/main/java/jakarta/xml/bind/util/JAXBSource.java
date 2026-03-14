@@ -40,7 +40,8 @@ import org.xml.sax.XMLFilter;
  * The following example shows how to use Jakarta XML Binding to marshal a document
  * for transformation by XSLT.
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  MyObject o = // get JAXB content tree
  *
  *  // jaxbContext is a JAXBContext object from which 'o' is created.
@@ -53,7 +54,8 @@ import org.xml.sax.XMLFilter;
  *  // run transformation
  *  t.transform(source,new StreamResult(System.out));
  * }
- *
+ * </pre>
+ * 
  * <p>
  * The fact that JAXBSource derives from SAXSource is an implementation
  * detail. Thus, in general applications are strongly discouraged from

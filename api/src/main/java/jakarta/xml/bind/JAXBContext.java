@@ -67,14 +67,16 @@ import java.util.Map;
  * application is able to unmarshal XML documents that are instances of
  * any of the schemas listed in the {@code contextPath}.  For example:
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo:com.acme.bar" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *  FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) ); // ok
  *  BarObject barObj = (BarObject)u.unmarshal( new File( "bar.xml" ) ); // ok
  *  BazObject bazObj = (BazObject)u.unmarshal( new File( "baz.xml" ) ); // error, "com.acme.baz" not in contextPath
  * }
- *
+ * </pre>
+ * 
  * <p>
  * The client application may also generate Java content trees explicitly rather
  * than unmarshalling existing XML data.  For all Jakarta XML Binding-annotated value classes,
@@ -91,11 +93,13 @@ import java.util.Map;
  * order to create objects of that type, the client application would use the
  * factory method like this:
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  com.acme.foo.PurchaseOrder po =
  *      com.acme.foo.ObjectFactory.createPurchaseOrder();
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Once the client application has an instance of the schema derived object,
  * it can use the mutator methods to set content on it.
@@ -128,7 +132,8 @@ import java.util.Map;
  * Here is a simple example that unmarshalls an XML document and then marshals
  * it back out:
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *
  *  // unmarshal from foo.xml
@@ -139,7 +144,8 @@ import java.util.Map;
  *  Marshaller m = jc.createMarshaller();
  *  m.marshal( fooObj, System.out );
  * }
- *
+ * </pre>
+ * 
  *
  * <h3>Validation</h3>
  * <p>
@@ -416,14 +422,16 @@ public abstract class JAXBContext {
 //     * For example, in the following Java code, if you do
 //     * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
 //     * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot}:
-//     * {@snippet :
+//     * <pre>
+// * {@code
 //     *  class Foo {
 //     *       Bar b;
 //     *  }
 //     *  class Bar { int x; }
 //     *  class Zot extends Bar { int y; }
 //     * }
-//     *
+//     * </pre>
+//     * 
 //     * Therefore, a typical client application only needs to specify the
 //     * top-level classes, but it needs to be careful.
 //     *
@@ -491,7 +499,8 @@ public abstract class JAXBContext {
      * For example, in the following Java code, if you do
      * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
      * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
-     * {@snippet :
+     * <pre>
+     * {@code
      *  class Foo {
      *       @XmlTransient FooBar c;
      *       Bar b;
@@ -500,7 +509,8 @@ public abstract class JAXBContext {
      *  class Zot extends Bar { int y; }
      *  class FooBar { }
      * }
-     *
+     * </pre>
+     * 
      * Therefore, a typical client application only needs to specify the
      * top-level classes, but it needs to be careful.
      *

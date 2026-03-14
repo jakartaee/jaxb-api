@@ -24,11 +24,15 @@ import java.lang.annotation.Target;
  * XML element around collections. The annotation therefore supports
  * two forms of serialization shown below. 
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: code fragment
  *  int[] names;
  * }
- * {@snippet lang="XML" :
+  * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Serialization Form 1 (Unwrapped collection) -->
  *  <names> ... </names>
  *  <names> ... </names>
@@ -40,7 +44,8 @@ import java.lang.annotation.Target;
  *     ....
  *  </wrapperElement>
  * }
- *
+ * </pre>
+ * 
  * <p> The two serialized XML forms allow a null collection to be
  * represented either by absence or presence of an element with a
  * nillable attribute.

@@ -25,10 +25,12 @@ import java.lang.annotation.Target;
  * element. This annotation therefore serves as a container annotation
  * for multiple {@code @XmlElements} as follows:
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlElements({ @XmlElement(...), @XmlElement(...) })
  * }
- *
+ * </pre>
+ * 
  * <p>The {@code @XmlElements} annotation can be used with the
  * following program elements: </p>
  * <ul>
@@ -56,7 +58,8 @@ import java.lang.annotation.Target;
  * <hr>
  *
  * <p><b>Example 1:</b> Map to a list of elements</p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Mapped code fragment
  *  public class Foo {
  *      @XmlElements({
@@ -66,7 +69,10 @@ import java.lang.annotation.Target;
  *      public List items;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Representation for a List of {1,2.5}
  *          XML output is not wrapped using another element -->
  *  ...
@@ -84,10 +90,12 @@ import java.lang.annotation.Target;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p><b>Example 2:</b> Map to a list of elements wrapped with another element
  * </p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Mapped code fragment
  *  public class Foo {
  *      @XmlElementWrapper(name="bar")
@@ -98,7 +106,10 @@ import java.lang.annotation.Target;
  *      public List items;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema fragment -->
  *  <xs:complexType name="Foo">
  *    <xs:sequence>
@@ -113,10 +124,12 @@ import java.lang.annotation.Target;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p><b>Example 3:</b> Change element name based on type using an adapter.
  * </p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  class Foo {
  *      @XmlJavaTypeAdapter(QtoPAdapter.class)
  *      @XmlElements({
@@ -130,7 +143,10 @@ import java.lang.annotation.Target;
  *  @XmlType(name="PX") class PX extends P {...}
  *  @XmlType(name="PY") class PY extends P {...}
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML Schema fragment -->
  *  <xs:complexType name="Foo">
  *    <xs:sequence>
@@ -145,7 +161,8 @@ import java.lang.annotation.Target;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElement
  * @see XmlElementRef

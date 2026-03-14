@@ -43,7 +43,8 @@ import static java.lang.annotation.ElementType.TYPE;
 
  * <p>
  * <b>Example 1: </b> Associate an element with XML Schema type
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example: Code fragment
  *  @XmlRootElement
  *  class Point {
@@ -52,25 +53,31 @@ import static java.lang.annotation.ElementType.TYPE;
  *      Point(int _x,int _y) {x=_x;y=_y;}
  *  }
  * }
- *
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  //Example: Code fragment corresponding to XML output
  *  marshal( new Point(3,5), System.out);
  * }
- *
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML output -->
  *  <point>
  *    <x> 3 </x>
  *    <y> 5 </y>
  *  </point>
  * }
- *
+ * </pre>
+ * 
  * The annotation causes a global element declaration to be produced
  * in the schema. The global element declaration is associated with
  * the XML schema type to which the class is mapped.
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <!-- Example: XML schema definition -->
  *  <xs:element name="point" type="point">
  *    <xs:complexType name="point">
@@ -81,7 +88,8 @@ import static java.lang.annotation.ElementType.TYPE;
  *    </xs:complexType>
  *  </xs:element>
  * }
- *
+ * </pre>
+ * 
  * <p>
  *
  * <b>Example 2: Orthogonality to type inheritance </b>
@@ -89,7 +97,8 @@ import static java.lang.annotation.ElementType.TYPE;
  * <p>
  * An element declaration annotated on a type is not inherited by its
  * derived types. The following example shows this.
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example: Code fragment
  *  @XmlRootElement
  *  class Point3D extends Point {
@@ -100,7 +109,10 @@ import static java.lang.annotation.ElementType.TYPE;
  *  //Example: Code fragment corresponding to XML output *
  *  marshal( new Point3D(3,5,0), System.out );
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML output -->
  *  <!-- The element name is point3D not point -->
  *  <point3D>
@@ -121,10 +133,12 @@ import static java.lang.annotation.ElementType.TYPE;
  *    </xs:complexContent>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <b>Example 3: </b> Associate a global element with XML Schema type
  * to which the class is mapped.
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  @XmlRootElement(name="PriceElement")
  *  public class USPrice {
@@ -132,7 +146,10 @@ import static java.lang.annotation.ElementType.TYPE;
  *      public java.math.BigDecimal price;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML schema definition -->
  *  <xs:element name="PriceElement" type="USPrice">
  *    <xs:complexType name="USPrice">
@@ -142,7 +159,8 @@ import static java.lang.annotation.ElementType.TYPE;
  *    </xs:complexType>
     </xs:element>
  * }
- *
+ * </pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */

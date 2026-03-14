@@ -34,27 +34,32 @@ import static java.lang.annotation.ElementType.PARAMETER;
  * each item in the collection will be wrapped by an element.
  * For example,
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlRootElement
  *  class Foo {
  *      @XmlElement
  *      List<String> data;
  *  }
  * }
- *
+ * </pre>
+ * 
  * would produce XML like this:
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <foo>
  *    <data>abc</data>
  *    <data>def</data>
  *  </foo>
  * }
- *
+ * </pre>
+ * 
  * XmlList annotation, on the other hand, allows multiple values to be
  * represented as whitespace-separated tokens in a single element. For example,
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlRootElement
  *  class Foo {
  *      @XmlElement
@@ -62,15 +67,18 @@ import static java.lang.annotation.ElementType.PARAMETER;
  *      List<String> data;
  *  }
  * }
- *
+ * </pre>
+ * 
  * the above code will produce XML like this:
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <foo>
  *    <data>abc def</data>
  *  </foo>
  * }
- *
+ * </pre>
+ * 
  * <p>This annotation can be used with the following annotations:
  *        {@link XmlElement}, 
  *        {@link XmlAttribute},

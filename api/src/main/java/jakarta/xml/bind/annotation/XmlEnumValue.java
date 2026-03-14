@@ -42,12 +42,16 @@ import static java.lang.annotation.ElementType.FIELD;
  * as the XML representation.
  *
  * <p> <b>Example 1: </b>Map enum constant name {@literal ->} enumeration facet</p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  @XmlEnum(String.class)
  *  public enum Card { CLUBS, DIAMONDS, HEARTS, SPADES }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:simpleType name="Card">
  *    <xs:restriction base="xs:string">
@@ -58,9 +62,11 @@ import static java.lang.annotation.ElementType.FIELD;
       </xs:restriction>
  *  </xs:simpleType>
  * }
- *
+ * </pre>
+ * 
  * <p><b>Example 2: </b>Map enum constant name(value) {@literal ->} enumeration facet </p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: code fragment
  *  @XmlType
  *  @XmlEnum(Integer.class)
@@ -71,7 +77,10 @@ import static java.lang.annotation.ElementType.FIELD;
  *      @XmlEnumValue("25") QUARTER(25)
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:simpleType name="Coin">
  *    <xs:restriction base="xs:int">
@@ -82,10 +91,12 @@ import static java.lang.annotation.ElementType.FIELD;
  *    </xs:restriction>
  *  </xs:simpleType>
  * }
- *
+ * </pre>
+ * 
  * <p><b>Example 3: </b>Map enum constant name {@literal ->} enumeration facet </p>
  * 
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Code fragment
  *  @XmlType
  *  @XmlEnum(Integer.class)
@@ -94,7 +105,10 @@ import static java.lang.annotation.ElementType.FIELD;
  *      @XmlEnumValue("2") TWO
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:simpleType name="Code">
  *    <xs:restriction base="xs:int">
@@ -103,7 +117,8 @@ import static java.lang.annotation.ElementType.FIELD;
  *    </xs:restriction>
  *  </xs:simpleType>
  * }
- *
+ * </pre>
+ * 
  * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)

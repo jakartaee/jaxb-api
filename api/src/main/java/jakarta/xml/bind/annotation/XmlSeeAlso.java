@@ -28,12 +28,14 @@ import java.lang.annotation.Target;
  * <p>
  * For example, with the following class definitions:
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  class Animal {}
  *  class Dog extends Animal {}
  *  class Cat extends Animal {}
  * }
- *
+ * </pre>
+ * 
  * <p>
  * The user would be required to create {@link JAXBContext} as
  * {@code JAXBContext.newInstance(Dog.class,Cat.class)}
@@ -42,13 +44,15 @@ import java.lang.annotation.Target;
  *
  * <p>
  * {@link XmlSeeAlso} annotation would allow you to write:
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlSeeAlso({Dog.class,Cat.class})
  *  class Animal {}
  *  class Dog extends Animal {}
  *  class Cat extends Animal {}
  * }
- *
+ * </pre>
+ * 
  * <p>
  * This would allow you to do {@code JAXBContext.newInstance(Animal.class)}.
  * By the help of this annotation, Jakarta XML Binding implementations will be able to

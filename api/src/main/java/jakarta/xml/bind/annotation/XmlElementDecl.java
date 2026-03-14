@@ -42,7 +42,8 @@ import static java.lang.annotation.ElementType.METHOD;
  * </ul>
  *
  * <p><b>Example 1: </b>Annotation on a factory method
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example: code fragment
  *  @XmlRegistry
  *  class ObjectFactory {
@@ -50,11 +51,17 @@ import static java.lang.annotation.ElementType.METHOD;
  *      JAXBElement<String> createFoo(String s) { ... }
  *  }
  * }
- * {@snippet lang="XML" :
+  * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- XML input -->
  *  <foo>string</foo>
  *}
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  // Example: code fragment corresponding to XML input
  *  JAXBElement<String> o =
  *      (JAXBElement<String>)unmarshaller.unmarshal(aboveDocument);
@@ -63,11 +70,15 @@ import static java.lang.annotation.ElementType.METHOD;
  *  System.out.println(o.getValue());  // prints  "string"
  *  System.out.println(o.getValue().getClass()); // prints "java.lang.String"
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML schema definition -->
  *  <xs:element name="foo" type="xs:string"/>
  * }
- *
+ * </pre>
+ * 
  * <p><b>Example 2: </b> Element declaration with non-local scope
  * <p>
  * The following example illustrates the use of scope annotation
@@ -77,7 +88,8 @@ import static java.lang.annotation.ElementType.METHOD;
  * The following example may be replaced in a future revision of
  * this javadoc.
  *
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *     <!-- Example: XML schema definition -->
  *     <xs:schema>
  *       <xs:complexType name="pea">
@@ -89,7 +101,10 @@ import static java.lang.annotation.ElementType.METHOD;
  *       <xs:element name="foo" type="xs:int"/>
  *     </xs:schema>
  * }
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *     // Example: expected default binding
  *     class Pea {
  *         @XmlElementRefs({
@@ -111,6 +126,8 @@ import static java.lang.annotation.ElementType.METHOD;
  *         JAXBElement<Integer> createFoo(Integer i);
  *     }
  * }
+ * </pre>
+ * 
  * Without scope createFoo and createPeaFoo would become ambiguous
  * since both of them map to an XML schema element with the same local
  * name "foo".

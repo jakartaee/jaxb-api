@@ -24,30 +24,37 @@ import java.io.File;
  *
  * <p>
  * <i>Assume the following setup code for all following code fragments:</i>
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *  Object element = u.unmarshal( new File( "foo.xml" ) );
  *  Marshaller m = jc.createMarshaller();
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a File:
- * {@snippet :
+ * <pre>
+ * {@code
  *  OutputStream os = new FileOutputStream( "nosferatu.xml" );
  *  m.marshal( element, os );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a SAX ContentHandler:
- * {@snippet :
+ * <pre>
+ * {@code
  *  // assume MyContentHandler instanceof ContentHandler
  *  m.marshal( element, new MyContentHandler() );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a DOM Node:
- * {@snippet :
+ * <pre>
+ * {@code
  *  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
  *  dbf.setNamespaceAware(true);
  *  DocumentBuilder db = dbf.newDocumentBuilder();
@@ -55,62 +62,77 @@ import java.io.File;
  *
  *  m.marshal( element, doc );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a java.io.OutputStream:
- * {@snippet :
+ * <pre>
+ * {@code
  *  m.marshal( element, System.out );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a java.io.Writer:
- * {@snippet :
+ * <pre>
+ * {@code
  *  m.marshal( element, new PrintWriter( System.out ) );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a javax.xml.transform.SAXResult:
- * {@snippet :
+ * <pre>
+ * {@code
  *  // assume MyContentHandler instanceof ContentHandler
  *  SAXResult result = new SAXResult( new MyContentHandler() );
  *
  *  m.marshal( element, result );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a javax.xml.transform.DOMResult:
- * {@snippet :
+ * <pre>
+ * {@code
  *  DOMResult result = new DOMResult();
  *
  *  m.marshal( element, result );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a javax.xml.transform.StreamResult:
- * {@snippet :
+ * <pre>
+ * {@code
  *  StreamResult result = new StreamResult( System.out );
  *
  *  m.marshal( element, result );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a javax.xml.stream.XMLStreamWriter:
- * {@snippet :
+ * <pre>
+ * {@code
  *  XMLStreamWriter xmlStreamWriter =
  *      XMLOutputFactory.newInstance().createXMLStreamWriter( ... );
  *
  *  m.marshal( element, xmlStreamWriter );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * Marshalling to a javax.xml.stream.XMLEventWriter:
- * {@snippet :
+ * <pre>
+ * {@code
  *  XMLEventWriter xmlEventWriter =
  *      XMLOutputFactory.newInstance().createXMLEventWriter( ... );
  *
  *  m.marshal( element, xmlEventWriter );
  * }
- *
+ * </pre>
+ * 
  * <p>
  * <a id="elementMarshalling"></a>
  * <b>Marshalling content tree rooted by a Jakarta XML Binding element</b><br>
@@ -246,13 +268,16 @@ import java.io.File;
  * <p>
  * Class defined event callback methods allow any Jakarta XML Binding mapped class to specify
  * its own specific callback methods by defining methods with the following method signatures:
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Invoked by Marshaller after it has created an instance of this object.
  *  boolean beforeMarshal(Marshaller);
  *
  *  // Invoked by Marshaller after it has marshalled all properties of this object.
  *  void afterMarshal(Marshaller);
  * }
+ * </pre>
+ * 
  * The class defined event callback methods should be used when the callback method requires
  * access to non-public methods and/or fields of the class.
  * <p>

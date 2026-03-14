@@ -49,7 +49,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  * </ul>
  * 
  * <p><b>Example</b>: Map a JavaBean property's type to {@code xs:ID}</p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example: code fragment
  *  public class Customer {
  *      @XmlAttribute
@@ -59,7 +60,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      .... other properties not shown
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="Customer">
  *    <xs:complexContent>
@@ -70,7 +74,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    </xs:complexContent>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlIDREF
  * @since 1.6, JAXB 2.0

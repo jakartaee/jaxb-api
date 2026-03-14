@@ -240,10 +240,12 @@ public abstract class Binder<XmlNode> {
      *
      * <p>
      * This is a convenience method of:
-     * {@snippet :
+     * <pre>
+     * {@code
      *  updateXML( jaxbObject, getXMLNode(jaxbObject));
      * }
-     *
+     * </pre>
+     * 
      * @param jaxbObject the XML Binding object
      *
      * @return the XML node associated with XML Binding object

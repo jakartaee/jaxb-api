@@ -27,7 +27,8 @@ import jakarta.activation.DataHandler;
  * A field/property must always map to the {@link DataHandler} class.
  *
  * <h2>Usage</h2>
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlRootElement
  *  class Foo {
  *      @XmlAttachmentRef
@@ -39,8 +40,11 @@ import jakarta.activation.DataHandler;
  *      DataHandler body;
  *  }
  * }
+  * </pre>
+ * 
  * The above code maps to the following XML:
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <xs:element name="foo" xmlns:ref="http://ws-i.org/profiles/basic/1.1/xsd">
  *    <xs:complexType>
  *      <xs:sequence>
@@ -50,7 +54,8 @@ import jakarta.activation.DataHandler;
  *    </xs:complexType>
  *  </xs:element>
  * }
- *
+ * </pre>
+ * 
  * <p>
  * The above binding supports WS-I AP 1.0 <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html#Referencing_Attachments_from_the_SOAP_Envelope">WS-I Attachments Profile Version 1.0.</a>
  *

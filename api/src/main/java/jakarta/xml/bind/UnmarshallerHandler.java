@@ -19,7 +19,8 @@ import org.xml.sax.ContentHandler;
  * Applications can use this interface to use their Jakarta XML Binding provider as a component 
  * in an XML pipeline.  For example:
  * 
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBContext context = JAXBContext.newInstance( "org.acme.foo" );
  *
  *  Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -35,6 +36,7 @@ import org.xml.sax.ContentHandler;
  *
  *  MyObject myObject= (MyObject)unmarshallerHandler.getResult();
  * }
+ * </pre>
  * 
  * <p>
  * This interface is reusable: even if the user fails to unmarshal

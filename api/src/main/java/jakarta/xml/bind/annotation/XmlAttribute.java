@@ -39,20 +39,26 @@ import static java.lang.annotation.RetentionPolicy.*;
  *   <li> If type of the field or the property is a collection
  *        type, then the collection item type must be mapped to schema
  *        simple type.
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Examples
  *  @XmlAttribute List<Integer> items; //legal
  *  @XmlAttribute List<Bar> foo; // illegal if Bar does not map to a schema simple type
  * }
+ * </pre>
+ * 
  *   </li>
  *   <li> If the type of the field or the property is a non
  *         collection type, then the type of the property or field
  *         must map to a simple schema type.
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Examples
  *  @XmlAttribute int foo; // legal
  *  @XmlAttribute Foo foo; // illegal if Foo does not map to a schema simple type
  * }
+ * </pre>
+ * 
  *   </li>
  *   <li> This annotation can be used with the following annotations:
  *            {@link XmlID}, 
@@ -67,7 +73,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  * </ul>
  *
  * <p> <b>Example 1: </b>Map a JavaBean property to an XML attribute.</p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  public class USPrice {
  *      @XmlAttribute
@@ -75,7 +82,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      public void setPrice(java.math.BigDecimal ) {...};
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
@@ -83,12 +93,14 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    <xs:attribute name="price" type="xs:decimal"/>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p> <b>Example 2: </b>Map a JavaBean property to an XML attribute with anonymous type.</p>
  * See Example 7 in @{@link XmlType}.
  *
  * <p> <b>Example 3: </b>Map a JavaBean collection property to an XML attribute.</p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example: Code fragment
  *  class Foo {
  *      ...
@@ -96,7 +108,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      List<Integer> items;
  *  }
  * }
- * {@snippet lang="XML" :
+  * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="foo">
  *    ...
@@ -107,6 +122,8 @@ import static java.lang.annotation.RetentionPolicy.*;
       </xs:attribute>
  *  </xs:complexType>
  * }
+ * </pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlType
  * @since 1.6, JAXB 2.0

@@ -43,7 +43,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <b>Example 1: </b> Customize mapping of XMLGregorianCalendar on the
  *  field.
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  public class USPrice {
  *      @XmlElement
@@ -51,7 +52,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      public XMLGregorianCalendar date;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
@@ -59,15 +63,18 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p> <b> Example 2: </b> Customize mapping of XMLGregorianCalendar at package
  *     level </p>
- * {@snippet :
+ * <pre>
+ * {@code
  *  @jakarta.xml.bind.annotation.XmlSchemaType(
  *      name="date", type=javax.xml.datatype.XMLGregorianCalendar.class)
  *  package foo;
  * }
- *
+ * </pre>
+ * 
  * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME) @Target({FIELD,METHOD,PACKAGE})

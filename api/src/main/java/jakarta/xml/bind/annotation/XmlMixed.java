@@ -41,7 +41,8 @@ import jakarta.xml.bind.JAXBElement;
  * </ul>
  *
  * Below is an example of binding and creation of mixed content.
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <!-- schema fragment having  mixed content -->
  *  <xs:complexType name="letterBody" mixed="true">
  *    <xs:sequence>
@@ -53,7 +54,10 @@ import jakarta.xml.bind.JAXBElement;
  *  </xs:complexType>
  *  <xs:element name="letterBody" type="letterBody"/>
  * }
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  // Schema-derived Java code: 
  *  // (Only annotations relevant to mixed content are shown below, 
  *  //  others are omitted.)
@@ -68,7 +72,10 @@ import jakarta.xml.bind.JAXBElement;
  *      LetterBody createLetterBody();
  *  }
  * }
- * {@snippet :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  public class LetterBody {
  *      // Mixed content can contain instances of Element classes
  *      // Name, Quantity and ProductName. Text data is represented as
@@ -82,16 +89,22 @@ import jakarta.xml.bind.JAXBElement;
  *      List getContent() {...}
  *  }
  * }
+ * </pre>
+ * 
  * The following is an XML instance document with mixed content
- * {@snippet lang="XML" :
+ * <pre>
+ * {@code
  *  <letterBody>
  *    Dear Mr.<name>Robert Smith</name>
  *    Your order of <quantity>1</quantity> <productName>Baby
  *    Monitor</productName> shipped from our warehouse. ....
  *  </letterBody>
  * }
+ * </pre>
+ * 
  * that can be constructed using following Jakarta XML Binding API calls.
- * {@snippet :
+ * <pre>
+ * {@code
  *  LetterBody lb = ObjectFactory.createLetterBody();
  *  JAXBElement<LetterBody> lbe = ObjectFactory.createLetterBody(lb);
  *  List gcl = lb.getContent();  //add mixed content to general content property.
@@ -106,7 +119,8 @@ import jakarta.xml.bind.JAXBElement;
  *  gcl.add(ObjectFactory.createLetterBodyProductName("Baby Monitor"));
  *  gcl.add("shipped from our warehouse");  // add text information item
  * }
- *
+ * </pre>
+ * 
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
  * @author Kohsuke Kawaguchi

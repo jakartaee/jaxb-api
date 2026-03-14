@@ -28,7 +28,8 @@ import javax.xml.transform.sax.SAXResult;
  * The following example shows how to use Jakarta XML Binding to unmarshal a document
  * resulting from an XSLT transformation.
  * 
- * {@snippet :
+ * <pre>
+ * {@code
  *  JAXBResult result = new JAXBResult(
  *    JAXBContext.newInstance("org.acme.foo") );
  *       
@@ -42,6 +43,7 @@ import javax.xml.transform.sax.SAXResult;
  *  // obtain the unmarshalled content tree
  *  Object o = result.getResult();
  * }
+ * </pre>
  * 
  * <p>
  * The fact that JAXBResult derives from SAXResult is an implementation

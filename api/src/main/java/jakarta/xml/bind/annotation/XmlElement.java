@@ -60,14 +60,18 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p>
  * <b>Example 1: </b> Map a public non-static non-final field to local
  * element
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  public class USPrice {
  *      @XmlElement(name="itemprice")
  *      public java.math.BigDecimal price;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
@@ -75,17 +79,23 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </sequence>
  *  </xs:complexType>
  * }
+ * </pre>
+ * 
  * <p>
  *
  * <b> Example 2: </b> Map a field to a nillable element.
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  public class USPrice {
  *      @XmlElement(nillable=true)
  *      public java.math.BigDecimal price;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
@@ -93,16 +103,22 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
+ * </pre>
+ * 
  * <p>
  * <b> Example 3: </b> Map a field to a nillable, required element.
- * {@snippet :
+ * <pre>
+ * {@code
  *  //Example: Code fragment
  *  public class USPrice {
  *      @XmlElement(nillable=true, required=true)
  *      public java.math.BigDecimal price;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
@@ -110,7 +126,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </xs:sequence>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * <p> <b>Example 4: </b>Map a JavaBean property to an XML element
  * with anonymous type.</p>
  * <p>

@@ -23,9 +23,12 @@ import java.lang.annotation.Target;
  * element. This annotation therefore serves as a container annotation
  * for multiple {@link XmlSchemaType} annotations as follows:
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  @XmlSchemaTypes({ @XmlSchemaType(...), @XmlSchemaType(...) })
  * }
+ * </pre>
+ * 
  * <p>The {@code @XmlSchemaTypes} annotation can be used to
  * define {@link XmlSchemaType} for different types at the
  * package level.

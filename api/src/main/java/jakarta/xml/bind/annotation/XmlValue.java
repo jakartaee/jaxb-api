@@ -65,24 +65,30 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p> <b> Example 1: </b> Map a class to XML Schema simpleType</p>
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example 1: Code fragment
  *  public class USPrice {
  *      @XmlValue
  *      public java.math.BigDecimal price;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example 1: XML Schema fragment -->
  *  <xs:simpleType name="USPrice">
  *    <xs:restriction base="xs:decimal"/>
  *  </xs:simpleType>
  * }
+ * </pre>
  * 
  * <p><b> Example 2: </b> Map a class to XML Schema complexType with
  *        with simpleContent.</p>
  *
- * {@snippet :
+ * <pre>
+ * {@code
  *  // Example 2: Code fragment
  *  public class InternationalPrice {
  *      @XmlValue
@@ -92,7 +98,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      public String currency;
  *  }
  * }
- * {@snippet lang="XML" :
+ * </pre>
+ * 
+ * <pre>
+ * {@code
  *  <!-- Example 2: XML Schema fragment -->
  *  <xs:complexType name="InternationalPrice">
  *    <xs:simpleContent>
@@ -102,7 +111,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    </xs:simpleContent>
  *  </xs:complexType>
  * }
- *
+ * </pre>
+ * 
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlType
  * @since 1.6, JAXB 2.0
