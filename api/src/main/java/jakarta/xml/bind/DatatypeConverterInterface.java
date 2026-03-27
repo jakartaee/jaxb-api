@@ -296,7 +296,6 @@ public interface DatatypeConverterInterface {
      */
     String printInt(int val);
 
-
     /**
      * Converts a long value into a string.
      *

@@ -125,5 +125,3 @@ public abstract class AttachmentUnmarshaller {
         return false;
     }
 }
-
-

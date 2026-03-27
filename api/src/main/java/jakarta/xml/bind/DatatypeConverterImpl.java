@@ -253,7 +253,6 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
             throw new NumberFormatException(val);
         }
 
-
         // these screening process is necessary due to the wobble of Float.valueOf method
         return Double.parseDouble(val);
     }
@@ -308,7 +307,6 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
                 do {
                     ch = literal.charAt(i++);
                 } while ((strFalse.charAt(strIndex++) == ch) && i < len && strIndex < 4);
-
 
                 if (strIndex == 4 && strFalse.charAt(strIndex - 1) == ch) {
                     value = false;
@@ -381,7 +379,6 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         if (end == start) {
             throw new IllegalArgumentException("input is empty");
         }
-
 
         String uri;
         String localPart;

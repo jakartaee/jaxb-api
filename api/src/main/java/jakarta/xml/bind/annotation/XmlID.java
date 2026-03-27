@@ -79,6 +79,3 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({FIELD, METHOD})
 public @interface XmlID {
 }
-
-
-

@@ -439,5 +439,3 @@ public @interface XmlType {
      */
     String factoryMethod() default "";
 }
-
-

@@ -98,6 +98,25 @@
                         <version>${asciidoctorj.pdf.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <sourceDocumentName>${project.artifactId}.adoc</sourceDocumentName>
+                    <attributes>
+                        <data-uri />
+                        <docinfo1>true</docinfo1>
+                        <doctype>book</doctype>
+                        <icons>font</icons>
+                        <idprefix />
+                        <idseparator>-</idseparator>
+                        <imagesdir>images</imagesdir>
+                        <revremark>${status}</revremark>
+                        <revdate>${revisiondate}</revdate>
+                        <revnumber>${project.version}</revnumber>
+                        <sectanchors>true</sectanchors>
+                        <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
+                        <status>${status}</status>
+                        <source-highlighter>coderay</source-highlighter>
+                    </attributes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>asciidoc-to-html</id>
@@ -109,16 +128,8 @@
                             <backend>html5</backend>
                             <outputFile>${project.build.directory}/generated-docs/${spec.name}.html</outputFile>
                             <attributes>
-                                <doctype>book</doctype>
-                                <status>${status}</status>
-                                <data-uri />
-                                <icons>font</icons>
+                                <docinfo>private-head</docinfo>
                                 <toc>left</toc>
-                                <icons>font</icons>
-                                <sectanchors>true</sectanchors>
-                                <idprefix />
-                                <idseparator>-</idseparator>
-                                <docinfo1>true</docinfo1>
                             </attributes>
                         </configuration>
                     </execution>
@@ -132,35 +143,15 @@
                             <backend>pdf</backend>
                             <outputFile>${project.build.directory}/generated-docs/${spec.name}.pdf</outputFile>
                             <attributes>
+                                <embedAssets>true</embedAssets>
+                                <pagenums />
                                 <pdf-stylesdir>${project.basedir}/src/theme</pdf-stylesdir>
                                 <pdf-style>jakartaee</pdf-style>
-                                <doctype>book</doctype>
-                                <status>${status}</status>
-                                <data-uri />
-                                <icons>font</icons>
-                                <pagenums />
                                 <toc />
-                                <icons>font</icons>
-                                <sectanchors>true</sectanchors>
-                                <idprefix />
-                                <idseparator>-</idseparator>
-                                <docinfo1>true</docinfo1>
-                                <embedAssets>true</embedAssets>
                             </attributes>
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <sourceDocumentName>${project.artifactId}.adoc</sourceDocumentName>
-                    <attributes>
-                        <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
-                        <imagesdir>images</imagesdir>
-                        <source-highlighter>coderay</source-highlighter>
-                        <revremark>${status}</revremark>
-                        <revdate>${revisiondate}</revdate>
-                        <revnumber>${project.version}</revnumber>
-                    </attributes>
-                </configuration>
             </plugin>
             <!--
                 This is the rule that builds the zip file for download.

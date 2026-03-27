@@ -71,7 +71,6 @@ public final class NormalizedStringAdapter extends XmlAdapter<String, String> {
         return s;
     }
 
-
     /**
      * Returns true if the specified char is a white space character but not 0x20.
      */

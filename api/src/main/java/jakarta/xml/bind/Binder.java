@@ -57,7 +57,6 @@ import org.w3c.dom.Node;
  */
 public abstract class Binder<XmlNode> {
 
-
     /**
      * Do-nothing constructor for the derived classes.
      */
@@ -247,7 +246,6 @@ public abstract class Binder<XmlNode> {
      */
     public abstract Object updateJAXB(XmlNode xmlNode) throws JAXBException;
 
-
     /**
      * Specifies whether marshal, unmarshal and update methods performs validation on their XML content.
      *
@@ -303,7 +301,6 @@ public abstract class Binder<XmlNode> {
      * @throws IllegalArgumentException If the name parameter is null
      */
     abstract public void setProperty(String name, Object value) throws PropertyException;
-
 
     /**
      * Get the particular property in the underlying implementation of {@code Binder}.  This method can only be used to

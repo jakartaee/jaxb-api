@@ -536,7 +536,6 @@ public interface Unmarshaller {
     Object unmarshal(javax.xml.transform.Source source)
             throws JAXBException;
 
-
     /**
      * Unmarshal XML data from the specified XML Source by {@code declaredType} and return the resulting content tree.
      *

@@ -95,6 +95,4 @@ public class PropertyException extends JAXBException {
                 name,
                 value.toString()));
     }
-
-
 }

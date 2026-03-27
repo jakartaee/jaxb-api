@@ -158,7 +158,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller {
         return unmarshal(getXMLReader(), source);
     }
 
-
     private Object unmarshal(String url) throws JAXBException {
         return unmarshal(new InputSource(url));
     }
@@ -211,7 +210,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller {
         return unmarshal(isrc);
     }
 
-
     private static InputSource streamSourceToInputSource(StreamSource ss) {
         InputSource is = new InputSource();
         is.setSystemId(ss.getSystemId());
@@ -220,7 +218,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller {
 
         return is;
     }
-
 
     /**
      * Allow an application to register a validation event handler.
@@ -241,7 +238,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller {
         eventHandler = Objects.requireNonNullElseGet(handler, DefaultValidationEventHandler::new);
     }
 
-
     /**
      * Return the current event handler or the default event handler if one hasn't been set.
      *
@@ -252,7 +248,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller {
     public ValidationEventHandler getEventHandler() throws JAXBException {
         return eventHandler;
     }
-
 
     /**
      * Creates an UnmarshalException from a SAXException.
@@ -283,7 +278,6 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller {
         {
             throw (RuntimeException) nested;
         }
-
 
         // otherwise simply wrap it
         return new UnmarshalException(Objects.requireNonNullElse(nested, e));

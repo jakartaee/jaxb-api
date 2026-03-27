@@ -223,7 +223,6 @@ public abstract class AbstractMarshallerImpl implements Marshaller {
         formattedOutput = v;
     }
 
-
     /**
      * Convenience method for getting the fragment flag.
      *
@@ -241,7 +240,6 @@ public abstract class AbstractMarshallerImpl implements Marshaller {
     protected void setFragment(boolean v) {
         fragment = v;
     }
-
 
     static String[] aliases = {
             "UTF-8", "UTF8",
@@ -403,7 +401,6 @@ public abstract class AbstractMarshallerImpl implements Marshaller {
 
         eventHandler = Objects.requireNonNullElseGet(handler, DefaultValidationEventHandler::new);
     }
-
 
     /*
      * assert that the given object is a Boolean
