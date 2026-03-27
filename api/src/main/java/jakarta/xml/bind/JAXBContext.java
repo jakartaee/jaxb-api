@@ -227,7 +227,6 @@ public abstract class JAXBContext {
     protected JAXBContext() {
     }
 
-
     /**
      * Create a new instance of a {@code JAXBContext} class.
      *
@@ -564,7 +563,6 @@ public abstract class JAXBContext {
      */
     public abstract Unmarshaller createUnmarshaller() throws JAXBException;
 
-
     /**
      * Create a {@code Marshaller} object that can be used to convert a java content tree into XML data.
      *
@@ -572,7 +570,6 @@ public abstract class JAXBContext {
      * @throws JAXBException if an error was encountered while creating the {@code Marshaller} object
      */
     public abstract Marshaller createMarshaller() throws JAXBException;
-
 
     /**
      * Creates a {@code Binder} object that can be used for associative/in-place unmarshalling/marshalling.

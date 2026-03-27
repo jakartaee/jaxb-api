@@ -62,7 +62,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @see XmlAccessOrder
  */
-
 @Inherited
 @Retention(RUNTIME)
 @Target({PACKAGE, TYPE})

@@ -92,8 +92,4 @@ public @interface XmlSchemaType {
         private DEFAULT() {
         }
     }
-
 }
-
-
-

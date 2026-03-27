@@ -103,7 +103,6 @@ public class CollapsedStringAdapter extends XmlAdapter<String, String> {
         return s;
     }
 
-
     /**
      * returns true if the specified char is a white space character.
      */

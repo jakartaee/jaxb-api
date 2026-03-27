@@ -80,7 +80,6 @@ public class ValidationEventImpl implements ValidationEvent {
         return severity;
     }
 
-
     /**
      * Set the severity field of this event.
      *

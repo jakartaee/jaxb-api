@@ -229,7 +229,6 @@ public final class JAXB {
         }
     }
 
-
     /**
      * Creates {@linkplain Source} from various XML representation. See {@linkplain #unmarshal} for the conversion
      * rules.
@@ -533,5 +532,4 @@ public final class JAXB {
         }
         throw new IllegalArgumentException("I don't understand how to handle " + xml.getClass());
     }
-
 }

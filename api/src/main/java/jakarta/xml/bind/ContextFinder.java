@@ -28,7 +28,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-
 /**
  * This class is package private and therefore is not exposed as part of the Jakarta XML Binding API.
  * <p>
@@ -109,7 +108,6 @@ class ContextFinder {
         }
         return x;
     }
-
 
     /**
      * Determine if two types (JAXBContext in this case) will generate a ClassCastException.

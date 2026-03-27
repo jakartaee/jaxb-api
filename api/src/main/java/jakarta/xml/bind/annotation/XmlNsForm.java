@@ -52,6 +52,3 @@ package jakarta.xml.bind.annotation;
  * </table>
  */
 public enum XmlNsForm {UNQUALIFIED, QUALIFIED, UNSET}
-
-
-

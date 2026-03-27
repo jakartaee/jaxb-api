@@ -9,10 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-package jakarta.xml.bind.annotation;
-
 // Contributor(s):
 //     Sekhar Vajjhala
+
+package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -45,5 +45,3 @@ public @interface XmlNs {
      */
     String namespaceURI();
 }
-
-

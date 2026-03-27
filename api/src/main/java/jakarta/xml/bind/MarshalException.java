@@ -85,7 +85,4 @@ public class MarshalException extends JAXBException {
     public MarshalException(String message, String errorCode, Throwable exception) {
         super(message, errorCode, exception);
     }
-
 }
-
-

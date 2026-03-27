@@ -519,7 +519,6 @@ public interface Marshaller {
     ValidationEventHandler getEventHandler()
             throws JAXBException;
 
-
     /**
      * Associates a configured instance of {@linkplain XmlAdapter} with this marshaller.
      *
@@ -573,7 +572,6 @@ public interface Marshaller {
      * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
      */
     <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
-
 
     /**
      * Associate a context that enables binary data within an XML document to be transmitted as XML-binary optimized
