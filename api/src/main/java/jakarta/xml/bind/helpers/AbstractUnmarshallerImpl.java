@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -38,6 +39,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * Partial default {@code Unmarshaller} implementation.
@@ -234,11 +236,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
     public void setEventHandler(ValidationEventHandler handler)
         throws JAXBException {
 
-        if( handler == null ) {
-            eventHandler = new DefaultValidationEventHandler();
-        } else {
-            eventHandler = handler;
-        }
+        eventHandler = Objects.requireNonNullElseGet(handler, DefaultValidationEventHandler::new);
     }
 
 
@@ -290,10 +288,7 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
 
 
         // otherwise simply wrap it
-        if(nested!=null)
-            return new UnmarshalException(nested);
-        else
-            return new UnmarshalException(e);
+        return new UnmarshalException(Objects.requireNonNullElse(nested, e));
     }
 
     /**

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -28,6 +29,7 @@ import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 // J2SE1.4 feature
 // import java.nio.charset.Charset;
 // import java.nio.charset.UnsupportedCharsetException;
@@ -323,30 +325,32 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         }
 
         // recognize and handle four pre-defined properties.
-        if( JAXB_ENCODING.equals(name) ) {
-            checkString( name, value );
-            setEncoding( (String)value );
-            return;
-        }
-        if( JAXB_FORMATTED_OUTPUT.equals(name) ) {
-            checkBoolean( name, value );
-            setFormattedOutput((Boolean) value );
-            return;
-        }
-        if( JAXB_NO_NAMESPACE_SCHEMA_LOCATION.equals(name) ) {
-            checkString( name, value );
-            setNoNSSchemaLocation( (String)value );
-            return;
-        }
-        if( JAXB_SCHEMA_LOCATION.equals(name) ) {
-            checkString( name, value );
-            setSchemaLocation( (String)value );
-            return;
-        }
-        if( JAXB_FRAGMENT.equals(name) )  {
-            checkBoolean(name, value);
-            setFragment((Boolean) value );
-            return;
+        switch (name) {
+            case JAXB_ENCODING -> {
+                checkString(name, value);
+                setEncoding((String) value);
+                return;
+            }
+            case JAXB_FORMATTED_OUTPUT -> {
+                checkBoolean(name, value);
+                setFormattedOutput((Boolean) value);
+                return;
+            }
+            case JAXB_NO_NAMESPACE_SCHEMA_LOCATION -> {
+                checkString(name, value);
+                setNoNSSchemaLocation((String) value);
+                return;
+            }
+            case JAXB_SCHEMA_LOCATION -> {
+                checkString(name, value);
+                setSchemaLocation((String) value);
+                return;
+            }
+            case JAXB_FRAGMENT -> {
+                checkBoolean(name, value);
+                setFragment((Boolean) value);
+                return;
+            }
         }
 
         throw new PropertyException(name, value);
@@ -368,18 +372,15 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         }
 
         // recognize and handle four pre-defined properties.
-        if( JAXB_ENCODING.equals(name) )
-            return getEncoding();
-        if( JAXB_FORMATTED_OUTPUT.equals(name) )
-            return isFormattedOutput()?Boolean.TRUE:Boolean.FALSE;
-        if( JAXB_NO_NAMESPACE_SCHEMA_LOCATION.equals(name) )
-            return getNoNSSchemaLocation();
-        if( JAXB_SCHEMA_LOCATION.equals(name) )
-            return getSchemaLocation();
-        if( JAXB_FRAGMENT.equals(name) )
-            return isFragment()?Boolean.TRUE:Boolean.FALSE;
+        return switch (name) {
+            case JAXB_ENCODING -> getEncoding();
+            case JAXB_FORMATTED_OUTPUT -> isFormattedOutput() ? Boolean.TRUE : Boolean.FALSE;
+            case JAXB_NO_NAMESPACE_SCHEMA_LOCATION -> getNoNSSchemaLocation();
+            case JAXB_SCHEMA_LOCATION -> getSchemaLocation();
+            case JAXB_FRAGMENT -> isFragment() ? Boolean.TRUE : Boolean.FALSE;
+            default -> throw new PropertyException(name);
+        };
 
-        throw new PropertyException(name);
     }
     /**
      * @see jakarta.xml.bind.Marshaller#getEventHandler()
@@ -396,11 +397,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     public void setEventHandler(ValidationEventHandler handler)
         throws JAXBException {
 
-        if( handler == null ) {
-            eventHandler = new DefaultValidationEventHandler();
-        } else {
-            eventHandler = handler;
-        }
+        eventHandler = Objects.requireNonNullElseGet(handler, DefaultValidationEventHandler::new);
     }
 
 

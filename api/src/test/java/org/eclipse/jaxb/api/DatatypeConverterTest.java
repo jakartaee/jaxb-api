@@ -39,22 +39,22 @@ public class DatatypeConverterTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.parseBoolean("oui"));
 
 
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean("0"));
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean(" 0"));
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean(" 0 "));
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean("0 "));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean("1"));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean(" 1"));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean(" 1 "));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean("1 "));
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean("false"));
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean(" false"));
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean("false "));
-        Assertions.assertEquals(false, DatatypeConverter.parseBoolean(" false "));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean("true"));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean(" true"));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean("true "));
-        Assertions.assertEquals(true, DatatypeConverter.parseBoolean(" true "));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean("0"));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean(" 0"));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean(" 0 "));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean("0 "));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean("1"));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean(" 1"));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean(" 1 "));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean("1 "));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean("false"));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean(" false"));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean("false "));
+        Assertions.assertFalse(DatatypeConverter.parseBoolean(" false "));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean("true"));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean(" true"));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean("true "));
+        Assertions.assertTrue(DatatypeConverter.parseBoolean(" true "));
     }
 
     @Test 

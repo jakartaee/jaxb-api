@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2007, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -10,6 +11,7 @@
 
 package jakarta.xml.bind;
 
+import java.io.Serial;
 import java.security.BasicPermission;
 
 /**
@@ -78,5 +80,6 @@ public final class JAXBPermission extends BasicPermission {
         super(name);
     }
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

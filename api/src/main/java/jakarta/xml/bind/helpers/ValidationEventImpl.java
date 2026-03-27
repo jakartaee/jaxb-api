@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -147,13 +148,12 @@ public class ValidationEventImpl implements ValidationEvent
      */
     @Override
     public String toString() {
-        String s;
-        switch(getSeverity()) {
-        case WARNING:   s="WARNING";break;
-        case ERROR: s="ERROR";break;
-        case FATAL_ERROR: s="FATAL_ERROR";break;
-        default: s=String.valueOf(getSeverity());break;
-        }
+        String s = switch (getSeverity()) {
+            case WARNING -> "WARNING";
+            case ERROR -> "ERROR";
+            case FATAL_ERROR -> "FATAL_ERROR";
+            default -> String.valueOf(getSeverity());
+        };
         return MessageFormat.format("[severity={0},message={1},locator={2}]",
                 s,
                 getMessage(),

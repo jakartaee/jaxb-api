@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -11,6 +12,7 @@
 package jakarta.xml.bind;
 
 
+import java.io.Serial;
 
 /**
  * This exception indicates that an error was encountered while getting or
@@ -23,6 +25,7 @@ package jakarta.xml.bind;
  */
 public class PropertyException extends JAXBException {
 
+    @Serial
     private static final long serialVersionUID = 3159963351607157477L;
 
     /**

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -9,6 +10,8 @@
  */
 
 package jakarta.xml.bind;
+
+import java.io.Serial;
 
 /**
  * This exception indicates that a violation of a dynamically checked type
@@ -44,7 +47,8 @@ public class TypeConstraintException extends java.lang.RuntimeException {
      */
     private volatile Throwable linkedException;
 
-    static final long serialVersionUID = -3059799699420143848L;
+    @Serial
+    private static final long serialVersionUID = -3059799699420143848L;
 
     /**
      * Construct a TypeConstraintException with the specified detail message.  The

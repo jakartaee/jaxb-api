@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -130,7 +131,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator {
 
     /** Converts a system ID to a URL object. */
     private static URL toURL(String systemId) {
-        if (systemId == null || systemId.length() == 0) {
+        if (systemId == null || systemId.isEmpty()) {
             return null; // null or empty system ID
         }
 
