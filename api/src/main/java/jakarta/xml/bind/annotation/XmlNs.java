@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -11,8 +12,9 @@
 package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
@@ -26,10 +28,12 @@ import java.lang.annotation.Target;
  * additional common information.</p>
  *
  * <p><b>Example:</b>See {@code XmlSchema} annotation type for an example.
+ *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({})
+@Retention(RUNTIME)
+@Target({})
 public @interface XmlNs {
     /**
      * Namespace prefix
@@ -39,7 +43,7 @@ public @interface XmlNs {
     /**
      * Namespace URI
      */
-    String namespaceURI(); 
+    String namespaceURI();
 }
 
 

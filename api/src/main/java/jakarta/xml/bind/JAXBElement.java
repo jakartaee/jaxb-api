@@ -11,17 +11,16 @@
 
 package jakarta.xml.bind;
 
-import javax.xml.namespace.QName;
-
 import java.io.Serial;
 import java.io.Serializable;
+
+import javax.xml.namespace.QName;
 
 /**
  * <p>Jakarta XML Binding representation of an Xml Element.</p>
  *
  * <p>This class represents information about an Xml Element from both the element
- * declaration within a schema and the element instance value within an xml document
- * with the following properties
+ * declaration within a schema and the element instance value within an xml document with the following properties
  * <ul>
  *   <li>element's xml tag <b>{@code name}</b></li>
  *   <li><b>{@code value}</b> represents the element instance's attribute(s) and content model</li>
@@ -51,45 +50,50 @@ import java.io.Serializable;
 
 public class JAXBElement<T> implements Serializable {
 
-    /** xml element tag name */
+    /**
+     * xml element tag name
+     */
     final protected QName name;
 
-    /** Java datatype binding for xml element declaration's type. */
+    /**
+     * Java datatype binding for xml element declaration's type.
+     */
     final protected Class<T> declaredType;
 
-    /** Scope of xml element declaration representing this xml element instance.
-     *  Can be one of the following values:
-     *  - {@linkplain GlobalScope} for global xml element declaration.
-     *  - local element declaration has a scope set to the Java class
-     *     representation of complex type definition containing
-     *     xml element declaration.
+    /**
+     * Scope of xml element declaration representing this xml element instance. Can be one of the following values: -
+     * {@linkplain GlobalScope} for global xml element declaration. - local element declaration has a scope set to the
+     * Java class representation of complex type definition containing xml element declaration.
      */
     final protected Class<?> scope;
 
-    /** xml element value.
-        Represents content model and attributes of an xml element instance. */
+    /**
+     * xml element value. Represents content model and attributes of an xml element instance.
+     */
     protected T value;
 
-    /** true iff the xml element instance has xsi:nil="true". */
+    /**
+     * true iff the xml element instance has xsi:nil="true".
+     */
     protected boolean nil = false;
 
     /**
      * Designates global scope for an xml element.
      */
     public static final class GlobalScope {
-        private GlobalScope() {}
+        private GlobalScope() {
+        }
     }
 
     /**
      * <p>Construct an xml element instance.</p>
      *
-     * @param name          Java binding of xml element tag name
-     * @param declaredType  Java binding of xml element declaration's type
-     * @param scope
-     *      Java binding of scope of xml element declaration.
-     *      Passing null is the same as passing {@code GlobalScope.class}
-     * @param value
-     *      Java instance representing xml element's value.
+     * @param name         Java binding of xml element tag name
+     * @param declaredType Java binding of xml element declaration's type
+     * @param scope        Java binding of scope of xml element declaration. Passing null is the same as passing
+     *                     {@code GlobalScope.class}
+     * @param value        Java instance representing xml element's value.
+     *
      * @see #getScope()
      * @see #isTypeSubstituted()
      */
@@ -97,10 +101,13 @@ public class JAXBElement<T> implements Serializable {
                        Class<T> declaredType,
                        Class<?> scope,
                        T value) {
-        if(declaredType==null || name==null)
+        if (declaredType == null || name == null) {
             throw new IllegalArgumentException();
+        }
         this.declaredType = declaredType;
-        if(scope==null)     scope = GlobalScope.class;
+        if (scope == null) {
+            scope = GlobalScope.class;
+        }
         this.scope = scope;
         this.name = name;
         setValue(value);
@@ -111,8 +118,8 @@ public class JAXBElement<T> implements Serializable {
      * <p>
      * This is just a convenience method for {@code new JAXBElement(name,declaredType,GlobalScope.class,value)}
      */
-    public JAXBElement(QName name, Class<T> declaredType, T value ) {
-        this(name,declaredType,GlobalScope.class,value);
+    public JAXBElement(QName name, Class<T> declaredType, T value) {
+        this(name, declaredType, GlobalScope.class, value);
     }
 
     /**
@@ -133,7 +140,7 @@ public class JAXBElement<T> implements Serializable {
      * <p>Set the content model and attributes of this xml element.</p>
      *
      * <p>When this property is set to {@code null}, {@code isNil()} must by {@code true}.
-     *    Details of constraint are described at {@linkplain #isNil()}.</p>
+     * Details of constraint are described at {@linkplain #isNil()}.</p>
      *
      * @see #isTypeSubstituted()
      */
@@ -154,8 +161,8 @@ public class JAXBElement<T> implements Serializable {
     /**
      * Returns scope of xml element declaration.
      *
-     * @see #isGlobalScope()
      * @return {@code GlobalScope.class} if this element is of global scope.
+     * @see #isGlobalScope()
      */
     public Class<?> getScope() {
         return scope;
@@ -166,9 +173,8 @@ public class JAXBElement<T> implements Serializable {
      * is nil.</p>
      *
      * <p>This property always returns {@code true} when {@linkplain #getValue()} is null.
-     * Note that the converse is not true, when this property is {@code true},
-     * {@linkplain #getValue()} can contain a non-null value for attribute(s). It is
-     * valid for a nil xml element to have attribute(s).</p>
+     * Note that the converse is not true, when this property is {@code true}, {@linkplain #getValue()} can contain a
+     * non-null value for attribute(s). It is valid for a nil xml element to have attribute(s).</p>
      */
     public boolean isNil() {
         return (value == null) || nil;
@@ -196,11 +202,13 @@ public class JAXBElement<T> implements Serializable {
     }
 
     /**
-     * Returns true iff this xml element instance's value has a different
-     * type than xml element declaration's declared type.
+     * Returns true iff this xml element instance's value has a different type than xml element declaration's declared
+     * type.
      */
     public boolean isTypeSubstituted() {
-        if(value==null)     return false;
+        if (value == null) {
+            return false;
+        }
         return value.getClass() != declaredType;
     }
 

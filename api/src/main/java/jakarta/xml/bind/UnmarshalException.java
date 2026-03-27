@@ -14,16 +14,14 @@ package jakarta.xml.bind;
 import java.io.Serial;
 
 /**
- * This exception indicates that an error has occurred while performing
- * an unmarshal operation that prevents the Jakarta XML Binding Provider from completing
- * the operation.
- * 
+ * This exception indicates that an error has occurred while performing an unmarshal operation that prevents the Jakarta
+ * XML Binding Provider from completing the operation.
+ *
  * <p>
- * The {@code ValidationEventHandler} can cause this exception to be thrown
- * during the unmarshal operations.  See 
+ * The {@code ValidationEventHandler} can cause this exception to be thrown during the unmarshal operations.  See
  * {@linkplain ValidationEventHandler#handleEvent(ValidationEvent)
  * ValidationEventHandler.handleEvent(ValidationEvent)}.
- * 
+ *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see JAXBException
  * @see Unmarshaller
@@ -35,58 +33,58 @@ public class UnmarshalException extends JAXBException {
     @Serial
     private static final long serialVersionUID = 6121932693435295453L;
 
-    /** 
-     * Construct an UnmarshalException with the specified detail message.  The 
-     * errorCode and linkedException will default to null.
+    /**
+     * Construct an UnmarshalException with the specified detail message.  The errorCode and linkedException will
+     * default to null.
      *
      * @param message a description of the exception
      */
-    public UnmarshalException( String message ) {
-        this( message, null, null );
+    public UnmarshalException(String message) {
+        this(message, null, null);
     }
 
-    /** 
-     * Construct an UnmarshalException with the specified detail message and vendor 
-     * specific errorCode.  The linkedException will default to null.
+    /**
+     * Construct an UnmarshalException with the specified detail message and vendor specific errorCode.  The
+     * linkedException will default to null.
      *
-     * @param message a description of the exception
+     * @param message   a description of the exception
      * @param errorCode a string specifying the vendor specific error code
      */
-    public UnmarshalException( String message, String errorCode ) {
-        this( message, errorCode, null );
+    public UnmarshalException(String message, String errorCode) {
+        this(message, errorCode, null);
     }
 
-    /** 
-     * Construct an UnmarshalException with a linkedException.  The detail message and
-     * vendor specific errorCode will default to null.
+    /**
+     * Construct an UnmarshalException with a linkedException.  The detail message and vendor specific errorCode will
+     * default to null.
      *
      * @param exception the linked exception
      */
-    public UnmarshalException( Throwable exception ) {
-        this( null, null, exception );
+    public UnmarshalException(Throwable exception) {
+        this(null, null, exception);
     }
-    
-    /** 
-     * Construct an UnmarshalException with the specified detail message and 
-     * linkedException.  The errorCode will default to null.
+
+    /**
+     * Construct an UnmarshalException with the specified detail message and linkedException.  The errorCode will
+     * default to null.
      *
-     * @param message a description of the exception
+     * @param message   a description of the exception
      * @param exception the linked exception
      */
-    public UnmarshalException( String message, Throwable exception ) {
-        this( message, null, exception );
+    public UnmarshalException(String message, Throwable exception) {
+        this(message, null, exception);
     }
-    
-    /** 
-     * Construct an UnmarshalException with the specified detail message, vendor 
-     * specific errorCode, and linkedException.
+
+    /**
+     * Construct an UnmarshalException with the specified detail message, vendor specific errorCode, and
+     * linkedException.
      *
-     * @param message a description of the exception
+     * @param message   a description of the exception
      * @param errorCode a string specifying the vendor specific error code
      * @param exception the linked exception
      */
-    public UnmarshalException( String message, String errorCode, Throwable exception ) {
-        super( message, errorCode, exception );
+    public UnmarshalException(String message, String errorCode, Throwable exception) {
+        super(message, errorCode, exception);
     }
 
 }

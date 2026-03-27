@@ -15,6 +15,7 @@ import java.security.PrivilegedAction;
 
 /**
  * {@linkplain PrivilegedAction} that gets the system property value.
+ *
  * @author Kohsuke Kawaguchi
  */
 final class GetPropertyAction implements PrivilegedAction<String> {

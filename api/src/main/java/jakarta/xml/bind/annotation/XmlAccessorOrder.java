@@ -12,12 +12,14 @@
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.lang.annotation.Target;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Inherited;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p> Controls the ordering of fields and properties in a class. </p>
@@ -56,11 +58,13 @@ import static java.lang.annotation.RetentionPolicy.*;
  *    following annotations at the package level: {@linkplain XmlJavaTypeAdapter}.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
- * @since 1.6, JAXB 2.0
  * @see XmlAccessOrder
+ * @since 1.6, JAXB 2.0
  */
 
-@Inherited @Retention(RUNTIME) @Target({PACKAGE, TYPE})
+@Inherited
+@Retention(RUNTIME)
+@Target({PACKAGE, TYPE})
 public @interface XmlAccessorOrder {
     XmlAccessOrder value() default XmlAccessOrder.UNDEFINED;
 }

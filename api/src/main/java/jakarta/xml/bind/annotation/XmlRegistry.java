@@ -13,6 +13,7 @@ package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -20,8 +21,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Marks a class that has {@linkplain XmlElementDecl}s.
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
- * @since 1.6, JAXB 2.0
  * @see XmlElementDecl
+ * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({TYPE})

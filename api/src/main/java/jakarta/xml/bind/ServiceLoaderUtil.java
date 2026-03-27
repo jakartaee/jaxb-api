@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2015, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -18,9 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Shared ServiceLoader/FactoryFinder Utils shared among Jakarta SOAP with Attachments, Jakarta XML Binding
- * and Jakarta XML Web Services.
- * Class duplicated to all those projects.
+ * Shared ServiceLoader/FactoryFinder Utils shared among Jakarta SOAP with Attachments, Jakarta XML Binding and Jakarta
+ * XML Web Services. Class duplicated to all those projects.
  *
  * @author Miroslav.Kos@oracle.com
  */
@@ -67,9 +67,9 @@ class ServiceLoaderUtil {
                 return null;
             }
         } catch (IllegalAccessException |
-                InvocationTargetException |
-                ClassNotFoundException |
-                NoSuchMethodException ex) {
+                 InvocationTargetException |
+                 ClassNotFoundException |
+                 NoSuchMethodException ex) {
 
             logger.log(Level.FINE, "Unable to find from OSGi: [" + factoryId + "]", ex);
             return null;
@@ -81,14 +81,14 @@ class ServiceLoaderUtil {
         try {
             // Use reflection to avoid having any dependency on ServiceLoader class
             return (Iterable<T>)
-                Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME)
-                     .getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class)
-                     .invoke(null, Class.forName(factoryId));
+                    Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME)
+                            .getMethod(OSGI_SERVICE_LOADER_METHOD_NAME, Class.class)
+                            .invoke(null, Class.forName(factoryId));
 
         } catch (IllegalAccessException |
-                InvocationTargetException |
-                ClassNotFoundException |
-                NoSuchMethodException ex) {
+                 InvocationTargetException |
+                 ClassNotFoundException |
+                 NoSuchMethodException ex) {
 
             logger.log(Level.FINE, ex, () -> "Unable to find from OSGi: [" + factoryId + "]");
             return null;
@@ -130,8 +130,8 @@ class ServiceLoaderUtil {
     }
 
     static Class<?> safeLoadClass(String className,
-                               String defaultImplClassName,
-                               ClassLoader classLoader) throws ClassNotFoundException {
+                                  String defaultImplClassName,
+                                  ClassLoader classLoader) throws ClassNotFoundException {
 
         try {
             checkPackageAccess(className);

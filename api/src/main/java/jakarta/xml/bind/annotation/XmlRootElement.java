@@ -14,34 +14,33 @@ package jakarta.xml.bind.annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Maps a class or an enum type to an XML element.
  *
  * <p> <b>Usage</b> </p>
  * <p>
- * The XmlRootElement annotation can be used with the following program
- * elements: 
- * <ul> 
+ * The XmlRootElement annotation can be used with the following program elements:
+ * <ul>
  *   <li> a top level class </li>
  *   <li> an enum type </li>
  * </ul>
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
- * 
+ *
  * <p>
- * When a top level class or an enum type is annotated with the 
+ * When a top level class or an enum type is annotated with the
  * XmlRootElement annotation, then its value is represented
  * as XML element in an XML document.
  *
  * <p> This annotation can be used with the following annotations:
- * {@linkplain XmlType}, {@linkplain XmlEnum}, {@linkplain XmlAccessorType}, 
+ * {@linkplain XmlType}, {@linkplain XmlEnum}, {@linkplain XmlAccessorType},
  * {@linkplain XmlAccessorOrder}.
  * </p>
-
+ *
  * <p>
  * <b>Example 1: </b> Associate an element with XML Schema type
  * {@snippet :
@@ -52,26 +51,26 @@ import static java.lang.annotation.ElementType.TYPE;
  *      int y;
  *      Point(int _x,int _y) {x=_x;y=_y;}
  *  }
- * }
- *
+ *}
+ * <p>
  * {@snippet :
  *  //Example: Code fragment corresponding to XML output
  *  marshal( new Point(3,5), System.out);
- * }
- *
- * {@snippet lang="XML" :
+ *}
+ * <p>
+ * {@snippet lang = "XML":
  *  <!-- Example: XML output -->
  *  <point>
  *    <x> 3 </x>
  *    <y> 5 </y>
  *  </point>
- * }
- *
+ *}
+ * <p>
  * The annotation causes a global element declaration to be produced
  * in the schema. The global element declaration is associated with
  * the XML schema type to which the class is mapped.
- *
- * {@snippet lang="XML" :
+ * <p>
+ * {@snippet lang = "XML":
  *  <!-- Example: XML schema definition -->
  *  <xs:element name="point" type="point">
  *    <xs:complexType name="point">
@@ -81,12 +80,12 @@ import static java.lang.annotation.ElementType.TYPE;
  *      </xs:sequence>
  *    </xs:complexType>
  *  </xs:element>
- * }
+ *}
  *
  * <p>
  *
  * <b>Example 2: Orthogonality to type inheritance </b>
- * 
+ *
  * <p>
  * An element declaration annotated on a type is not inherited by its
  * derived types. The following example shows this.
@@ -100,8 +99,8 @@ import static java.lang.annotation.ElementType.TYPE;
  *
  *  //Example: Code fragment corresponding to XML output *
  *  marshal( new Point3D(3,5,0), System.out );
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML output -->
  *  <!-- The element name is point3D not point -->
  *  <point3D>
@@ -121,7 +120,7 @@ import static java.lang.annotation.ElementType.TYPE;
  *      </xs:extension>
  *    </xs:complexContent>
  *  </xs:complexType>
- * }
+ *}
  *
  * <b>Example 3: </b> Associate a global element with XML Schema type
  * to which the class is mapped.
@@ -132,8 +131,8 @@ import static java.lang.annotation.ElementType.TYPE;
  *      @XmlElement
  *      public java.math.BigDecimal price;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML schema definition -->
  *  <xs:element name="PriceElement" type="USPrice">
  *    <xs:complexType name="USPrice">
@@ -141,8 +140,8 @@ import static java.lang.annotation.ElementType.TYPE;
  *        <xs:element name="price" type="xs:decimal"/>
  *      </sequence>
  *    </xs:complexType>
-    </xs:element>
- * }
+ * </xs:element>
+ *}
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
@@ -153,18 +152,15 @@ public @interface XmlRootElement {
     /**
      * namespace name of the XML element.
      * <p>
-     * If the value is "##default", then the XML namespace name is derived
-     * from the package of the class ( {@linkplain XmlSchema} ). If the
-     * package is unnamed, then the XML namespace is the default empty
-     * namespace.
+     * If the value is "##default", then the XML namespace name is derived from the package of the class (
+     * {@linkplain XmlSchema} ). If the package is unnamed, then the XML namespace is the default empty namespace.
      */
     String namespace() default "##default";
 
     /**
      * local name of the XML element.
      * <p>
-     * If the value is "##default", then the name is derived from the
-     * class name. 
+     * If the value is "##default", then the name is derived from the class name.
      *
      */
     String name() default "##default";

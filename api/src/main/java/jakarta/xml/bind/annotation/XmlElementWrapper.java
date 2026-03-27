@@ -12,45 +12,44 @@
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 /**
  * Generates a wrapper element around XML representation.
- *
- * This is primarily intended to be used to produce a wrapper
- * XML element around collections. The annotation therefore supports
- * two forms of serialization shown below. 
- *
+ * <p>
+ * This is primarily intended to be used to produce a wrapper XML element around collections. The annotation therefore
+ * supports two forms of serialization shown below.
+ * <p>
  * {@snippet :
  *  //Example: code fragment
  *  int[] names;
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Serialization Form 1 (Unwrapped collection) -->
  *  <names> ... </names>
  *  <names> ... </names>
- * 
+ *
  *  <!-- XML Serialization Form 2 ( Wrapped collection ) -->
  *  <wrapperElement>
  *     <names> value-of-item </names>
  *     <names> value-of-item </names>
  *     ....
  *  </wrapperElement>
- * }
+ *}
  *
  * <p> The two serialized XML forms allow a null collection to be
- * represented either by absence or presence of an element with a
- * nillable attribute.
- * 
+ * represented either by absence or presence of an element with a nillable attribute.
+ *
  * <p> <b>Usage</b> </p>
  * <p>
- * The {@code @XmlElementWrapper} annotation can be used with the
- * following program elements: 
- * <ul> 
+ * The {@code @XmlElementWrapper} annotation can be used with the following program elements:
+ * <ul>
  *   <li> JavaBean property </li>
  *   <li> non-static, non transient field </li>
  * </ul>
@@ -59,7 +58,7 @@ import java.lang.annotation.Target;
  * <ul>
  *   <li> The property must be a collection property </li>
  *   <li> This annotation can be used with the following annotations:
- *            {@linkplain XmlElement}, 
+ *            {@linkplain XmlElement},
  *            {@linkplain XmlElements},
  *            {@linkplain XmlElementRef},
  *            {@linkplain XmlElementRefs},
@@ -70,26 +69,26 @@ import java.lang.annotation.Target;
  * additional common information.</p>
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
- * @see XmlElement 
+ * @see XmlElement
  * @see XmlElements
  * @see XmlElementRef
  * @see XmlElementRefs
  * @since 1.6, JAXB 2.0
  *
  */
-@Retention(RUNTIME) @Target({FIELD, METHOD})
+@Retention(RUNTIME)
+@Target({FIELD, METHOD})
 public @interface XmlElementWrapper {
     /**
-     * Name of the XML wrapper element. By default, the XML wrapper
-     * element name is derived from the JavaBean property name.
+     * Name of the XML wrapper element. By default, the XML wrapper element name is derived from the JavaBean property
+     * name.
      */
     String name() default "##default";
 
     /**
      * XML target namespace of the XML wrapper element.
      * <p>
-     * If the value is "##default", then the namespace is determined
-     * as follows:
+     * If the value is "##default", then the namespace is determined as follows:
      * <ol>
      *  <li>
      *  If the enclosing package has {@linkplain XmlSchema} annotation,
@@ -105,9 +104,8 @@ public @interface XmlElementWrapper {
     String namespace() default "##default";
 
     /**
-     * If true, the absence of the collection is represented by
-     * using {@code xsi:nil='true'}. Otherwise, it is represented by
-     * the absence of the element.
+     * If true, the absence of the collection is represented by using {@code xsi:nil='true'}. Otherwise, it is
+     * represented by the absence of the element.
      */
     boolean nillable() default false;
 
@@ -115,15 +113,12 @@ public @interface XmlElementWrapper {
      * Customize the wrapper element declaration to be required.
      *
      * <p>
-     * If required() is true, then the corresponding generated
-     * XML schema element declaration will have {@code minOccurs="1"},
-     * to indicate that the wrapper element is always expected.
+     * If required() is true, then the corresponding generated XML schema element declaration will have
+     * {@code minOccurs="1"}, to indicate that the wrapper element is always expected.
      *
      * <p>
-     * Note that this only affects the schema generation, and
-     * not the unmarshalling or marshalling capability. This is
-     * simply a mechanism to let users express their application constraints
-     * better.
+     * Note that this only affects the schema generation, and not the unmarshalling or marshalling capability. This is
+     * simply a mechanism to let users express their application constraints better.
      *
      * @since 1.6, JAXB 2.1
      */

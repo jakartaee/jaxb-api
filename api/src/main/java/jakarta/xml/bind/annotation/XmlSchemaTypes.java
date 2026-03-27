@@ -11,25 +11,25 @@
 
 package jakarta.xml.bind.annotation;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import static java.lang.annotation.ElementType.PACKAGE;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
  * A container for multiple {@linkplain XmlSchemaType} annotations.
  *
  * <p> Multiple annotations of the same type are not allowed on a program
- * element. This annotation therefore serves as a container annotation
- * for multiple {@linkplain XmlSchemaType} annotations as follows:
- *
+ * element. This annotation therefore serves as a container annotation for multiple {@linkplain XmlSchemaType}
+ * annotations as follows:
+ * <p>
  * {@snippet :
  *  @XmlSchemaTypes({ @XmlSchemaType(...), @XmlSchemaType(...) })
- * }
+ *}
  * <p>The {@code @XmlSchemaTypes} annotation can be used to
- * define {@linkplain XmlSchemaType} for different types at the
- * package level.
+ * define {@linkplain XmlSchemaType} for different types at the package level.
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
@@ -38,7 +38,8 @@ import java.lang.annotation.Target;
  * @see XmlSchemaType
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({PACKAGE})
+@Retention(RUNTIME)
+@Target({PACKAGE})
 public @interface XmlSchemaTypes {
     /**
      * Collection of @{@linkplain XmlSchemaType} annotations

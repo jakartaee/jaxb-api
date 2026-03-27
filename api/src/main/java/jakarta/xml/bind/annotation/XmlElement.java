@@ -27,14 +27,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p> <b>Usage</b>
  * <p>
- * {@code @XmlElement} annotation can be used with the following program
- * elements:
+ * {@code @XmlElement} annotation can be used with the following program elements:
  * <ul>
  *   <li> a JavaBean property </li>
  *   <li> non-static, non transient field </li>
  *   <li> within {@linkplain XmlElements}
  * </ul>
- *
+ * <p>
  * The usage is subject to the following constraints:
  * <ul>
  *   <li> This annotation can be used with following annotations:
@@ -69,15 +68,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      @XmlElement(name="itemprice")
  *      public java.math.BigDecimal price;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
  *      <xs:element name="itemprice" type="xs:decimal" minOccurs="0"/>
  *    </sequence>
  *  </xs:complexType>
- * }
+ *}
  * <p>
  *
  * <b> Example 2: </b> Map a field to a nillable element.
@@ -87,15 +86,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      @XmlElement(nillable=true)
  *      public java.math.BigDecimal price;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
  *      <xs:element name="price" type="xs:decimal" nillable="true" minOccurs="0"/>
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  * <p>
  * <b> Example 3: </b> Map a field to a nillable, required element.
  * {@snippet :
@@ -104,15 +103,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      @XmlElement(nillable=true, required=true)
  *      public java.math.BigDecimal price;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
  *      <xs:element name="price" type="xs:decimal" nillable="true" minOccurs="1"/>
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  *
  * <p> <b>Example 4: </b>Map a JavaBean property to an XML element
  * with anonymous type.</p>
@@ -122,7 +121,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({FIELD, METHOD, PARAMETER})
+@Retention(RUNTIME)
+@Target({FIELD, METHOD, PARAMETER})
 @Repeatable(XmlElements.class)
 public @interface XmlElement {
     /**
@@ -142,13 +142,11 @@ public @interface XmlElement {
     /**
      * Customize the element declaration to be required.
      * <p>If required() is true, then Javabean property is mapped to
-     * an XML schema element declaration with minOccurs="1".
-     * maxOccurs is "1" for a single valued property and "unbounded"
-     * for a multivalued property.
+     * an XML schema element declaration with minOccurs="1". maxOccurs is "1" for a single valued property and
+     * "unbounded" for a multivalued property.
      * <p>If required() is false, then the Javabean property is mapped
-     * to XML Schema element declaration with minOccurs="0".
-     * maxOccurs is "1" for a single valued property and "unbounded"
-     * for a multivalued property.
+     * to XML Schema element declaration with minOccurs="0". maxOccurs is "1" for a single valued property and
+     * "unbounded" for a multivalued property.
      */
 
     boolean required() default false;
@@ -156,8 +154,7 @@ public @interface XmlElement {
     /**
      * XML target namespace of the XML Schema element.
      * <p>
-     * If the value is "##default", then the namespace is determined
-     * as follows:
+     * If the value is "##default", then the namespace is determined as follows:
      * <ol>
      *  <li>
      *  If the enclosing package has {@linkplain XmlSchema} annotation,
@@ -176,9 +173,8 @@ public @interface XmlElement {
      * Default value of this element.
      *
      * <p>
-     * The <pre>'\u0000'</pre> value specified as a default of this annotation element
-     * is used as a poor-man's substitute for null to allow implementations
-     * to recognize the 'no default value' state.
+     * The <pre>'\u0000'</pre> value specified as a default of this annotation element is used as a poor-man's
+     * substitute for null to allow implementations to recognize the 'no default value' state.
      */
     String defaultValue() default "\u0000";
 
@@ -188,11 +184,10 @@ public @interface XmlElement {
     Class<?> type() default DEFAULT.class;
 
     /**
-     * Used in {@linkplain XmlElement#type()} to
-     * signal that the type be inferred from the signature
-     * of the property.
+     * Used in {@linkplain XmlElement#type()} to signal that the type be inferred from the signature of the property.
      */
     final class DEFAULT {
-        private DEFAULT() {}
+        private DEFAULT() {
+        }
     }
 }

@@ -10,17 +10,15 @@
  */
 package jakarta.xml.bind;
 
-import  javax.xml.namespace.QName;
+import javax.xml.namespace.QName;
 
 /**
  * Provide access to Jakarta XML Binding xml binding data for a Jakarta XML Binding object.
  *
  * <p>
- * Initially, the intent of this class is to just conceptualize how
- * a Jakarta XML Binding application developer can access xml binding information,
- * independent if binding model is java to schema or schema to java.
- * Since accessing the XML element name related to a Jakarta XML Binding element is
- * a highly requested feature, demonstrate access to this
+ * Initially, the intent of this class is to just conceptualize how a Jakarta XML Binding application developer can
+ * access xml binding information, independent if binding model is java to schema or schema to java. Since accessing the
+ * XML element name related to a Jakarta XML Binding element is a highly requested feature, demonstrate access to this
  * binding information.
  * <p>
  * The factory method to get a <code>JAXBIntrospector</code> instance is
@@ -34,7 +32,8 @@ public abstract class JAXBIntrospector {
     /**
      * Do-nothing constructor for the derived classes.
      */
-    protected JAXBIntrospector() {}
+    protected JAXBIntrospector() {
+    }
 
     /**
      * <p>Return true if <code>object</code> represents a Jakarta XML Binding element.</p>
@@ -55,8 +54,7 @@ public abstract class JAXBIntrospector {
      *
      * @param jaxbElement is an object that {@linkplain #isElement(Object)} returned true.
      *
-     * @return xml element qname associated with jaxbElement;
-     *         null if <code>jaxbElement</code> is not a JAXBElement.
+     * @return xml element qname associated with jaxbElement; null if <code>jaxbElement</code> is not a JAXBElement.
      */
     public abstract QName getElementName(Object jaxbElement);
 
@@ -64,20 +62,19 @@ public abstract class JAXBIntrospector {
      * <p>Get the element value of a Jakarta XML Binding element.</p>
      *
      * <p>Convenience method to abstract whether working with either
-     *    a jakarta.xml.bind.JAXBElement instance or an instance of
-     *    {@code @XmlRootElement} annotated Java class.</p>
+     * a jakarta.xml.bind.JAXBElement instance or an instance of {@code @XmlRootElement} annotated Java class.</p>
      *
-     * @param jaxbElement  object that #isElement(Object) returns true.
+     * @param jaxbElement object that #isElement(Object) returns true.
      *
      * @return The element value of the <code>jaxbElement</code>.
      */
     public static Object getValue(Object jaxbElement) {
-	    if (jaxbElement instanceof JAXBElement) {
-	        return ((JAXBElement<?>)jaxbElement).getValue();
-	    } else {
-	        // assume that class of this instance is
-	        // annotated with @XmlRootElement.
-	        return jaxbElement;
-	    }
+        if (jaxbElement instanceof JAXBElement) {
+            return ((JAXBElement<?>) jaxbElement).getValue();
+        } else {
+            // assume that class of this instance is
+            // annotated with @XmlRootElement.
+            return jaxbElement;
+        }
     }
 }

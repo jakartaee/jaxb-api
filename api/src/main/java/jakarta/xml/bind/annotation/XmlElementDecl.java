@@ -14,23 +14,19 @@ package jakarta.xml.bind.annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Maps a factory method to an XML element.
  *
  * <p> <b>Usage</b> </p>
- *
- * The annotation creates a mapping between an XML schema element
- * declaration and a <i> element factory method </i> that returns a
- * JAXBElement instance representing the element
- * declaration. Typically, the element factory method is generated
- * (and annotated) from a schema into the ObjectFactory class in a
- * Java package that represents the binding of the element
- * declaration's target namespace. Thus, while the annotation syntax
- * allows &#64;XmlElementDecl to be used on any method, semantically
- * its use is restricted to annotation of element factory method.
+ * <p>
+ * The annotation creates a mapping between an XML schema element declaration and a <i> element factory method </i> that
+ * returns a JAXBElement instance representing the element declaration. Typically, the element factory method is
+ * generated (and annotated) from a schema into the ObjectFactory class in a Java package that represents the binding of
+ * the element declaration's target namespace. Thus, while the annotation syntax allows &#64;XmlElementDecl to be used
+ * on any method, semantically its use is restricted to annotation of element factory method.
  * <p>
  * The usage is subject to the following constraints:
  *
@@ -50,8 +46,8 @@ import static java.lang.annotation.ElementType.METHOD;
  *      @XmlElementDecl(name="foo")
  *      JAXBElement<String> createFoo(String s) { ... }
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML input -->
  *  <foo>string</foo>
  *}
@@ -63,11 +59,11 @@ import static java.lang.annotation.ElementType.METHOD;
  *  System.out.println(o.getName());   // prints  "{}foo"
  *  System.out.println(o.getValue());  // prints  "string"
  *  System.out.println(o.getValue().getClass()); // prints "java.lang.String"
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML schema definition -->
  *  <xs:element name="foo" type="xs:string"/>
- * }
+ *}
  *
  * <p><b>Example 2: </b> Element declaration with non-local scope
  * <p>
@@ -77,8 +73,8 @@ import static java.lang.annotation.ElementType.METHOD;
  * <p>
  * The following example may be replaced in a future revision of
  * this javadoc.
- *
- * {@snippet lang="XML" :
+ * <p>
+ * {@snippet lang = "XML":
  *     <!-- Example: XML schema definition -->
  *     <xs:schema>
  *       <xs:complexType name="pea">
@@ -89,7 +85,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *       </xs:complexType>
  *       <xs:element name="foo" type="xs:int"/>
  *     </xs:schema>
- * }
+ *}
  * {@snippet :
  *     // Example: expected default binding
  *     class Pea {
@@ -111,7 +107,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *         @XmlElementDecl(name="foo")
  *         JAXBElement<Integer> createFoo(Integer i);
  *     }
- * }
+ *}
  * Without scope createFoo and createPeaFoo would become ambiguous
  * since both of them map to an XML schema element with the same local
  * name "foo".
@@ -126,16 +122,16 @@ public @interface XmlElementDecl {
      * scope of the mapping.
      *
      * <p>
-     * If this is not {@linkplain XmlElementDecl.GLOBAL}, then this element
-     * declaration mapping is only active within the specified class.
+     * If this is not {@linkplain XmlElementDecl.GLOBAL}, then this element declaration mapping is only active within
+     * the specified class.
      */
     Class<?> scope() default GLOBAL.class;
 
     /**
      * namespace name of the XML element.
      * <p>
-     * If the value is "##default", then the value is the namespace
-     * name for the package of the class containing this factory method.
+     * If the value is "##default", then the value is the namespace name for the package of the class containing this
+     * factory method.
      *
      * @see #name()
      */
@@ -146,8 +142,9 @@ public @interface XmlElementDecl {
      *
      * <p>
      * <b> Note to reviewers: </b> There is no default name; since
-     * the annotation is on a factory method, it is not clear that the
-     * method name can be derived from the factory method name.
+     * the annotation is on a factory method, it is not clear that the method name can be derived from the factory
+     * method name.
+     *
      * @see #namespace()
      */
     String name();
@@ -155,21 +152,17 @@ public @interface XmlElementDecl {
     /**
      * namespace name of a substitution group's head XML element.
      * <p>
-     * This specifies the namespace name of the XML element whose local
-     * name is specified by {@code substitutionHeadName()}.
+     * This specifies the namespace name of the XML element whose local name is specified by
+     * {@code substitutionHeadName()}.
      * <p>
-     * If {@code substitutionHeadName()} is "", then this
-     * value can only be "##default". But the value is ignored
-     * since this element is not part of substitution group when the
-     * value of {@code substitutionHeadName()} is "".
+     * If {@code substitutionHeadName()} is "", then this value can only be "##default". But the value is ignored since
+     * this element is not part of substitution group when the value of {@code substitutionHeadName()} is "".
      * <p>
-     * If {@code substitutionHeadName()} is not "" and the value is
-     * "##default", then the namespace name is the namespace name to
-     * which the package of the containing class, marked with {@link
-     * XmlRegistry }, is mapped.
+     * If {@code substitutionHeadName()} is not "" and the value is "##default", then the namespace name is the
+     * namespace name to which the package of the containing class, marked with {@link XmlRegistry }, is mapped.
      * <p>
-     * If {@code substitutionHeadName()} is not "" and the value is
-     * not "##default", then the value is the namespace name.
+     * If {@code substitutionHeadName()} is not "" and the value is not "##default", then the value is the namespace
+     * name.
      *
      * @see #substitutionHeadName()
      */
@@ -178,8 +171,7 @@ public @interface XmlElementDecl {
     /**
      * XML local name of a substitution group's head element.
      * <p>
-     * If the value is "", then this element is not part of any
-     * substitution group.
+     * If the value is "", then this element is not part of any substitution group.
      *
      * @see #substitutionHeadNamespace()
      */
@@ -189,17 +181,16 @@ public @interface XmlElementDecl {
      * Default value of this element.
      *
      * <p>
-     * The <pre>'\u0000'</pre> value specified as a default of this annotation element
-     * is used as a poor-man's substitute for null to allow implementations
-     * to recognize the 'no default value' state.
+     * The <pre>'\u0000'</pre> value specified as a default of this annotation element is used as a poor-man's
+     * substitute for null to allow implementations to recognize the 'no default value' state.
      */
     String defaultValue() default "\u0000";
 
     /**
-     * Used in {@linkplain XmlElementDecl#scope()} to
-     * signal that the declaration is in the global scope.
+     * Used in {@linkplain XmlElementDecl#scope()} to signal that the declaration is in the global scope.
      */
     final class GLOBAL {
-        private GLOBAL() {}
+        private GLOBAL() {
+        }
     }
 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -12,9 +13,8 @@ package jakarta.xml.bind;
 
 /**
  * This event indicates that a problem was encountered resolving an ID/IDREF.
- * 
- * 
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul> 
+ *
+ * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see ValidationEventHandler
  * @since 1.6, JAXB 1.0
  */

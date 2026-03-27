@@ -11,11 +11,12 @@
 
 package jakarta.xml.bind.helpers;
 
-import java.net.URL;
+import jakarta.xml.bind.ValidationEventLocator;
+
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.MessageFormat;
 
-import jakarta.xml.bind.ValidationEventLocator;
 import org.w3c.dom.Node;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXParseException;
@@ -24,13 +25,10 @@ import org.xml.sax.SAXParseException;
  * Default implementation of the ValidationEventLocator interface.
  *
  * <p>
- * Jakarta XML Binding providers are allowed to use whatever class that
- * implements
- * the ValidationEventLocator interface. This class is just provided for a
- * convenience.
+ * Jakarta XML Binding providers are allowed to use whatever class that implements the ValidationEventLocator interface.
+ * This class is just provided for a convenience.
  *
- * @author
- *         <ul>
+ * @author <ul>
  *         <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
  *         </ul>
  * @see jakarta.xml.bind.ValidationEventHandler
@@ -48,13 +46,12 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator {
     /**
      * Constructs an object from an org.xml.sax.Locator.
      * <p>
-     * The object's ColumnNumber, LineNumber, and URL become available from the
-     * values returned by the locator's getColumnNumber(), getLineNumber(), and
-     * getSystemId() methods respectively. Node, Object, and Offset are not
+     * The object's ColumnNumber, LineNumber, and URL become available from the values returned by the locator's
+     * getColumnNumber(), getLineNumber(), and getSystemId() methods respectively. Node, Object, and Offset are not
      * available.
      *
-     * @param loc the SAX Locator object that will be used to populate this
-     *            event locator.
+     * @param loc the SAX Locator object that will be used to populate this event locator.
+     *
      * @throws IllegalArgumentException if the Locator is null
      */
     public ValidationEventLocatorImpl(Locator loc) {
@@ -71,13 +68,12 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator {
     /**
      * Constructs an object from the location information of a SAXParseException.
      * <p>
-     * The object's ColumnNumber, LineNumber, and URL become available from the
-     * values returned by the locator's getColumnNumber(), getLineNumber(), and
-     * getSystemId() methods respectively. Node, Object, and Offset are not
+     * The object's ColumnNumber, LineNumber, and URL become available from the values returned by the locator's
+     * getColumnNumber(), getLineNumber(), and getSystemId() methods respectively. Node, Object, and Offset are not
      * available.
      *
-     * @param e the SAXParseException object that will be used to populate this
-     *          event locator.
+     * @param e the SAXParseException object that will be used to populate this event locator.
+     *
      * @throws IllegalArgumentException if the SAXParseException is null
      */
     public ValidationEventLocatorImpl(SAXParseException e) {
@@ -94,11 +90,10 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator {
     /**
      * Constructs an object that points to a DOM Node.
      * <p>
-     * The object's Node becomes available. ColumnNumber, LineNumber, Object,
-     * Offset, and URL are not available.
+     * The object's Node becomes available. ColumnNumber, LineNumber, Object, Offset, and URL are not available.
      *
-     * @param _node the DOM Node object that will be used to populate this
-     *              event locator.
+     * @param _node the DOM Node object that will be used to populate this event locator.
+     *
      * @throws IllegalArgumentException if the Node is null
      */
     public ValidationEventLocatorImpl(Node _node) {
@@ -113,11 +108,10 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator {
     /**
      * Constructs an object that points to a Jakarta XML Binding content object.
      * <p>
-     * The object's Object becomes available. ColumnNumber, LineNumber, Node,
-     * Offset, and URL are not available.
+     * The object's Object becomes available. ColumnNumber, LineNumber, Node, Offset, and URL are not available.
      *
-     * @param _object the Object that will be used to populate this
-     *                event locator.
+     * @param _object the Object that will be used to populate this event locator.
+     *
      * @throws IllegalArgumentException if the Object is null
      */
     public ValidationEventLocatorImpl(Object _object) {
@@ -129,7 +123,9 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator {
         this.object = _object;
     }
 
-    /** Converts a system ID to a URL object. */
+    /**
+     * Converts a system ID to a URL object.
+     */
     private static URL toURL(String systemId) {
         if (systemId == null || systemId.isEmpty()) {
             return null; // null or empty system ID
@@ -254,8 +250,7 @@ public class ValidationEventLocatorImpl implements ValidationEventLocator {
     }
 
     /**
-     * Returns a string representation of this object in a format
-     * helpful to debugging.
+     * Returns a string representation of this object in a format helpful to debugging.
      *
      * @see Object#equals(Object)
      */

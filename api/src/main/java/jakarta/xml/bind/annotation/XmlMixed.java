@@ -11,15 +11,16 @@
 
 package jakarta.xml.bind.annotation;
 
+import jakarta.xml.bind.JAXBElement;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import org.w3c.dom.Element;
+
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
-
-import org.w3c.dom.Element;
-import jakarta.xml.bind.JAXBElement;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
@@ -40,9 +41,9 @@ import jakarta.xml.bind.JAXBElement;
  * <li>Unknown content that is not be bound to a Jakarta XML Binding mapped class is inserted
  * as {@linkplain Element}. (Assumes property annotated with &#64;XmlAnyElement)</li>
  * </ul>
- *
+ * <p>
  * Below is an example of binding and creation of mixed content.
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <!-- schema fragment having  mixed content -->
  *  <xs:complexType name="letterBody" mixed="true">
  *    <xs:sequence>
@@ -53,10 +54,10 @@ import jakarta.xml.bind.JAXBElement;
  *    </xs:sequence>
  *  </xs:complexType>
  *  <xs:element name="letterBody" type="letterBody"/>
- * }
+ *}
  * {@snippet :
- *  // Schema-derived Java code: 
- *  // (Only annotations relevant to mixed content are shown below, 
+ *  // Schema-derived Java code:
+ *  // (Only annotations relevant to mixed content are shown below,
  *  //  others are omitted.)
  *  import java.math.BigInteger;
  *  public class ObjectFactory {
@@ -68,7 +69,7 @@ import jakarta.xml.bind.JAXBElement;
  *      // type instance factory
  *      LetterBody createLetterBody();
  *  }
- * }
+ *}
  * {@snippet :
  *  public class LetterBody {
  *      // Mixed content can contain instances of Element classes
@@ -82,15 +83,15 @@ import jakarta.xml.bind.JAXBElement;
  *      })
  *      List getContent() {...}
  *  }
- * }
+ *}
  * The following is an XML instance document with mixed content
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <letterBody>
  *    Dear Mr.<name>Robert Smith</name>
  *    Your order of <quantity>1</quantity> <productName>Baby
  *    Monitor</productName> shipped from our warehouse. ....
  *  </letterBody>
- * }
+ *}
  * that can be constructed using following Jakarta XML Binding API calls.
  * {@snippet :
  *  LetterBody lb = ObjectFactory.createLetterBody();
@@ -106,14 +107,15 @@ import jakarta.xml.bind.JAXBElement;
  *  gcl.add(ObjectFactory.createLetterBodyQuantity(new BigInteger("1")));
  *  gcl.add(ObjectFactory.createLetterBodyProductName("Baby Monitor"));
  *  gcl.add("shipped from our warehouse");  // add text information item
- * }
+ *}
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
+ *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
-@Target({FIELD,METHOD})
+@Target({FIELD, METHOD})
 public @interface XmlMixed {
 }

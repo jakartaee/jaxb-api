@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -10,36 +11,34 @@
 
 package jakarta.xml.bind.annotation;
 
-import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
  * Maps a JavaBean property to XML ID.
  *
  * <p>
- * To preserve referential integrity of an object graph across XML
- * serialization followed by an XML deserialization, requires an object
- * reference to be marshalled by reference or containment
- * appropriately. Annotations {@code @XmlID} and {@code @XmlIDREF}
- * together allow a customized mapping of a JavaBean property's
- * type by containment or reference. 
+ * To preserve referential integrity of an object graph across XML serialization followed by an XML deserialization,
+ * requires an object reference to be marshalled by reference or containment appropriately. Annotations {@code @XmlID}
+ * and {@code @XmlIDREF} together allow a customized mapping of a JavaBean property's type by containment or reference.
  *
  * <p><b>Usage</b> </p>
- * The {@code @XmlID} annotation can be used with the following
- * program elements: 
- * <ul> 
+ * The {@code @XmlID} annotation can be used with the following program elements:
+ * <ul>
  *   <li> a JavaBean property </li>
  *   <li> non-static, non transient field </li>
  * </ul>
- * 
+ *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
- *
+ * <p>
  * The usage is subject to the following constraints:
- * <ul> 
+ * <ul>
  *   <li> At most one field or property in a class can be annotated
  *        with {@code @XmlID}.  </li>
  *   <li> The JavaBean property's type must be {@code java.lang.String}.</li>
@@ -47,7 +46,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *        with {@code @XmlID}
  *        are: {@code @XmlElement} and {@code @XmlAttribute}.</li>
  * </ul>
- * 
+ *
  * <p><b>Example</b>: Map a JavaBean property's type to {@code xs:ID}</p>
  * {@snippet :
  *  // Example: code fragment
@@ -58,8 +57,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      public void setCustomerID(String id);
  *      .... other properties not shown
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="Customer">
  *    <xs:complexContent>
@@ -69,14 +68,16 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      <xs:attribute name="customerID" type="xs:ID"/>
  *    </xs:complexContent>
  *  </xs:complexType>
- * }
+ *}
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlIDREF
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({FIELD, METHOD})
-public @interface XmlID { }
+@Retention(RUNTIME)
+@Target({FIELD, METHOD})
+public @interface XmlID {
+}
 
 
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -11,15 +12,15 @@
 package jakarta.xml.bind.annotation;
 
 /**
- * Enumeration of XML Schema namespace qualifications. 
+ * Enumeration of XML Schema namespace qualifications.
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
  *
- * <p><b>Usage</b>  
+ * <p><b>Usage</b>
  * <p>
- * The namespace qualification values are used in the annotations
- * defined in this package. The enumeration values are mapped as follows:
+ * The namespace qualification values are used in the annotations defined in this package. The enumeration values are
+ * mapped as follows:
  *
  * <table class="striped">
  *   <caption style="display:none">Mapping of enumeration values</caption>
@@ -29,7 +30,7 @@ package jakarta.xml.bind.annotation;
  *       <th scope="col">XML Schema Value</th>
  *     </tr>
  *   </thead>
- * 
+ *
  *   <tbody>
  *     <tr>
  *       <th scope="row">UNQUALIFIED</th>
@@ -46,7 +47,7 @@ package jakarta.xml.bind.annotation;
  *     </tr>
  *   </tbody>
  * </table>
- * 
+ *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
  */

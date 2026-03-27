@@ -17,9 +17,8 @@ import java.io.Serial;
  * Exception that represents a failure in a Jakarta XML Binding operation.
  *
  * <p>
- * This exception differs from {@linkplain JAXBException} in that
- * this is an unchecked exception, while {@code JAXBException}
- * is a checked exception.
+ * This exception differs from {@linkplain JAXBException} in that this is an unchecked exception, while
+ * {@code JAXBException} is a checked exception.
  *
  * @see JAXB
  * @since 1.6, JAXB 2.1

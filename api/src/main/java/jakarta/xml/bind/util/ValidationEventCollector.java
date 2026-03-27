@@ -13,18 +13,17 @@ package jakarta.xml.bind.util;
 
 import jakarta.xml.bind.ValidationEvent;
 import jakarta.xml.bind.ValidationEventHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@linkplain jakarta.xml.bind.ValidationEventHandler ValidationEventHandler}
- * implementation that collects all events.
+ * {@linkplain jakarta.xml.bind.ValidationEventHandler ValidationEventHandler} implementation that collects all events.
  *
  * <p>
- * To use this class, create a new instance and pass it to the setEventHandler
- * method of the Unmarshaller, Marshaller class.  After the call to
- * validate or unmarshal completes, call the getEvents method to retrieve all
- * the reported errors and warnings.
+ * To use this class, create a new instance and pass it to the setEventHandler method of the Unmarshaller, Marshaller
+ * class.  After the call to validate or unmarshal completes, call the getEvents method to retrieve all the reported
+ * errors and warnings.
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.ValidationEventHandler
@@ -32,19 +31,16 @@ import java.util.List;
  * @see jakarta.xml.bind.ValidationEventLocator
  * @since 1.6, JAXB 1.0
  */
-public class ValidationEventCollector implements ValidationEventHandler
-{
+public class ValidationEventCollector implements ValidationEventHandler {
     private final List<ValidationEvent> events = new ArrayList<>();
 
-    public ValidationEventCollector() {}
+    public ValidationEventCollector() {
+    }
 
     /**
-     * Return an array of ValidationEvent objects containing a copy of each of
-     * the collected errors and warnings.
+     * Return an array of ValidationEvent objects containing a copy of each of the collected errors and warnings.
      *
-     * @return
-     *      a copy of all the collected errors and warnings or an empty array
-     *      if there weren't any
+     * @return a copy of all the collected errors and warnings or an empty array if there weren't any
      */
     public ValidationEvent[] getEvents() {
         return events.toArray(new ValidationEvent[0]);
@@ -58,22 +54,20 @@ public class ValidationEventCollector implements ValidationEventHandler
     }
 
     /**
-     * Returns true if this event collector contains at least one
-     * ValidationEvent.
+     * Returns true if this event collector contains at least one ValidationEvent.
      *
-     * @return true if this event collector contains at least one
-     *         ValidationEvent, false otherwise
+     * @return true if this event collector contains at least one ValidationEvent, false otherwise
      */
     public boolean hasEvents() {
         return !events.isEmpty();
     }
 
     @Override
-    public boolean handleEvent( ValidationEvent event ) {
+    public boolean handleEvent(ValidationEvent event) {
         events.add(event);
 
         boolean retVal = true;
-        switch( event.getSeverity() ) {
+        switch (event.getSeverity()) {
             case ValidationEvent.WARNING:
             case ValidationEvent.ERROR:
                 retVal = true; // continue validation
@@ -82,18 +76,18 @@ public class ValidationEventCollector implements ValidationEventHandler
                 retVal = false; // halt validation
                 break;
             default:
-                _assert( false,
-                         Messages.format( Messages.UNRECOGNIZED_SEVERITY,
-                                 event.getSeverity() ) );
+                _assert(false,
+                        Messages.format(Messages.UNRECOGNIZED_SEVERITY,
+                                event.getSeverity()));
                 break;
         }
 
         return retVal;
     }
 
-    private static void _assert( boolean b, String msg ) {
-        if( !b ) {
-            throw new InternalError( msg );
+    private static void _assert(boolean b, String msg) {
+        if (!b) {
+            throw new InternalError(msg);
         }
     }
 }

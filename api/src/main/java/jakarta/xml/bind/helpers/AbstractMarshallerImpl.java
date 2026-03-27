@@ -17,19 +17,21 @@ import jakarta.xml.bind.PropertyException;
 import jakarta.xml.bind.ValidationEventHandler;
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.attachment.AttachmentMarshaller;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.Objects;
+
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
-import java.io.UnsupportedEncodingException;
-import java.io.File;
-import java.io.OutputStream;
-import java.io.FileOutputStream;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.util.Objects;
 // J2SE1.4 feature
 // import java.nio.charset.Charset;
 // import java.nio.charset.UnsupportedCharsetException;
@@ -38,8 +40,7 @@ import java.util.Objects;
  * Partial default {@code Marshaller} implementation.
  *
  * <p>
- * This class provides a partial default implementation for the
- * {@linkplain jakarta.xml.bind.Marshaller} interface.
+ * This class provides a partial default implementation for the {@linkplain jakarta.xml.bind.Marshaller} interface.
  *
  * <p>
  * The only methods that a Jakarta XML Binding Provider has to implement are
@@ -51,46 +52,58 @@ import java.util.Objects;
  * @see jakarta.xml.bind.Marshaller
  * @since 1.6, JAXB 1.0
  */
-public abstract class AbstractMarshallerImpl implements Marshaller
-{
-    /** handler that will be used to process errors and warnings during marshal */
+public abstract class AbstractMarshallerImpl implements Marshaller {
+    /**
+     * handler that will be used to process errors and warnings during marshal
+     */
     private ValidationEventHandler eventHandler =
-        new DefaultValidationEventHandler();
+            new DefaultValidationEventHandler();
 
     //J2SE1.4 feature
     //private Charset encoding = null;
 
-    /** store the value of the encoding property. */
+    /**
+     * store the value of the encoding property.
+     */
     private String encoding = "UTF-8";
 
-    /** store the value of the schemaLocation property. */
+    /**
+     * store the value of the schemaLocation property.
+     */
     private String schemaLocation = null;
 
-    /** store the value of the noNamespaceSchemaLocation property. */
+    /**
+     * store the value of the noNamespaceSchemaLocation property.
+     */
     private String noNSSchemaLocation = null;
 
-    /** store the value of the formattedOutput property. */
+    /**
+     * store the value of the formattedOutput property.
+     */
     private boolean formattedOutput = false;
 
-    /** store the value of the fragment property. */
+    /**
+     * store the value of the fragment property.
+     */
     private boolean fragment = false;
 
     /**
      * Do-nothing constructor for the derived classes.
      */
-    protected AbstractMarshallerImpl() {}
+    protected AbstractMarshallerImpl() {
+    }
 
     @Override
-    public final void marshal( Object obj, java.io.OutputStream os )
-        throws JAXBException {
+    public final void marshal(Object obj, java.io.OutputStream os)
+            throws JAXBException {
 
-        checkNotNull( obj, "obj", os, "os" );
-        marshal( obj, new StreamResult(os) );
+        checkNotNull(obj, "obj", os, "os");
+        marshal(obj, new StreamResult(os));
     }
 
     @Override
     public void marshal(Object jaxbElement, File output) throws JAXBException {
-        checkNotNull(jaxbElement, "jaxbElement", output, "output" );
+        checkNotNull(jaxbElement, "jaxbElement", output, "output");
         try {
             try (OutputStream os = new BufferedOutputStream(new FileOutputStream(output))) {
                 marshal(jaxbElement, new StreamResult(os));
@@ -101,40 +114,38 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     }
 
     @Override
-    public final void marshal( Object obj, java.io.Writer w )
-        throws JAXBException {
+    public final void marshal(Object obj, java.io.Writer w)
+            throws JAXBException {
 
-        checkNotNull( obj, "obj", w, "writer" );
-        marshal( obj, new StreamResult(w) );
+        checkNotNull(obj, "obj", w, "writer");
+        marshal(obj, new StreamResult(w));
     }
 
     @Override
-    public final void marshal( Object obj, org.xml.sax.ContentHandler handler )
-        throws JAXBException {
+    public final void marshal(Object obj, org.xml.sax.ContentHandler handler)
+            throws JAXBException {
 
-        checkNotNull( obj, "obj", handler, "handler" );
-        marshal( obj, new SAXResult(handler) );
+        checkNotNull(obj, "obj", handler, "handler");
+        marshal(obj, new SAXResult(handler));
     }
 
     @Override
-    public final void marshal( Object obj, org.w3c.dom.Node node )
-        throws JAXBException {
+    public final void marshal(Object obj, org.w3c.dom.Node node)
+            throws JAXBException {
 
-        checkNotNull( obj, "obj", node, "node" );
-        marshal( obj, new DOMResult(node) );
+        checkNotNull(obj, "obj", node, "node");
+        marshal(obj, new DOMResult(node));
     }
 
     /**
-     * By default, the getNode method is unsupported and throw
-     * an {@linkplain java.lang.UnsupportedOperationException}.
+     * By default, the getNode method is unsupported and throw an {@linkplain java.lang.UnsupportedOperationException}.
      * <p>
-     * Implementations that choose to support this method must
-     * override this method.
+     * Implementations that choose to support this method must override this method.
      */
     @Override
-    public org.w3c.dom.Node getNode( Object obj ) throws JAXBException {
+    public org.w3c.dom.Node getNode(Object obj) throws JAXBException {
 
-        checkNotNull( obj, "obj", Boolean.TRUE, "foo" );
+        checkNotNull(obj, "obj", Boolean.TRUE, "foo");
 
         throw new UnsupportedOperationException();
     }
@@ -151,10 +162,9 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for setting the output encoding.
      *
-     * @param encoding a valid encoding as specified in the Marshaller class
-     * documentation
+     * @param encoding a valid encoding as specified in the Marshaller class documentation
      */
-    protected void setEncoding( String encoding ) {
+    protected void setEncoding(String encoding) {
         this.encoding = encoding;
     }
 
@@ -172,15 +182,14 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      *
      * @param location the schemaLocation value
      */
-    protected void setSchemaLocation( String location ) {
+    protected void setSchemaLocation(String location) {
         schemaLocation = location;
     }
 
     /**
      * Convenience method for getting the current noNamespaceSchemaLocation.
      *
-     * @return the current noNamespaceSchemaLocation or null if it hasn't
-     * been set
+     * @return the current noNamespaceSchemaLocation or null if it hasn't been set
      */
     protected String getNoNSSchemaLocation() {
         return noNSSchemaLocation;
@@ -191,15 +200,14 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      *
      * @param location the noNamespaceSchemaLocation value
      */
-    protected void setNoNSSchemaLocation( String location ) {
+    protected void setNoNSSchemaLocation(String location) {
         noNSSchemaLocation = location;
     }
 
     /**
      * Convenience method for getting the formatted output flag.
      *
-     * @return the current value of the formatted output flag or false if
-     * it hasn't been set.
+     * @return the current value of the formatted output flag or false if it hasn't been set.
      */
     protected boolean isFormattedOutput() {
         return formattedOutput;
@@ -210,7 +218,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      *
      * @param v value of the formatted output flag.
      */
-    protected void setFormattedOutput( boolean v ) {
+    protected void setFormattedOutput(boolean v) {
         formattedOutput = v;
     }
 
@@ -218,8 +226,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     /**
      * Convenience method for getting the fragment flag.
      *
-     * @return the current value of the fragment flag or false if
-     * it hasn't been set.
+     * @return the current value of the fragment flag or false if it hasn't been set.
      */
     protected boolean isFragment() {
         return fragment;
@@ -230,71 +237,69 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      *
      * @param v value of the fragment flag.
      */
-    protected void setFragment( boolean v ) {
+    protected void setFragment(boolean v) {
         fragment = v;
     }
 
 
     static String[] aliases = {
-        "UTF-8", "UTF8",
-        "UTF-16", "Unicode",
-        "UTF-16BE", "UnicodeBigUnmarked",
-        "UTF-16LE", "UnicodeLittleUnmarked",
-        "US-ASCII", "ASCII",
-        "TIS-620", "TIS620",
+            "UTF-8", "UTF8",
+            "UTF-16", "Unicode",
+            "UTF-16BE", "UnicodeBigUnmarked",
+            "UTF-16LE", "UnicodeLittleUnmarked",
+            "US-ASCII", "ASCII",
+            "TIS-620", "TIS620",
 
-        // taken from the project-X parser
-        "ISO-10646-UCS-2", "Unicode",
+            // taken from the project-X parser
+            "ISO-10646-UCS-2", "Unicode",
 
-        "EBCDIC-CP-US", "cp037",
-        "EBCDIC-CP-CA", "cp037",
-        "EBCDIC-CP-NL", "cp037",
-        "EBCDIC-CP-WT", "cp037",
+            "EBCDIC-CP-US", "cp037",
+            "EBCDIC-CP-CA", "cp037",
+            "EBCDIC-CP-NL", "cp037",
+            "EBCDIC-CP-WT", "cp037",
 
-        "EBCDIC-CP-DK", "cp277",
-        "EBCDIC-CP-NO", "cp277",
-        "EBCDIC-CP-FI", "cp278",
-        "EBCDIC-CP-SE", "cp278",
+            "EBCDIC-CP-DK", "cp277",
+            "EBCDIC-CP-NO", "cp277",
+            "EBCDIC-CP-FI", "cp278",
+            "EBCDIC-CP-SE", "cp278",
 
-        "EBCDIC-CP-IT", "cp280",
-        "EBCDIC-CP-ES", "cp284",
-        "EBCDIC-CP-GB", "cp285",
-        "EBCDIC-CP-FR", "cp297",
+            "EBCDIC-CP-IT", "cp280",
+            "EBCDIC-CP-ES", "cp284",
+            "EBCDIC-CP-GB", "cp285",
+            "EBCDIC-CP-FR", "cp297",
 
-        "EBCDIC-CP-AR1", "cp420",
-        "EBCDIC-CP-HE", "cp424",
-        "EBCDIC-CP-BE", "cp500",
-        "EBCDIC-CP-CH", "cp500",
+            "EBCDIC-CP-AR1", "cp420",
+            "EBCDIC-CP-HE", "cp424",
+            "EBCDIC-CP-BE", "cp500",
+            "EBCDIC-CP-CH", "cp500",
 
-        "EBCDIC-CP-ROECE", "cp870",
-        "EBCDIC-CP-YU", "cp870",
-        "EBCDIC-CP-IS", "cp871",
-        "EBCDIC-CP-AR2", "cp918",
+            "EBCDIC-CP-ROECE", "cp870",
+            "EBCDIC-CP-YU", "cp870",
+            "EBCDIC-CP-IS", "cp871",
+            "EBCDIC-CP-AR2", "cp918",
 
-        // IANA also defines two that JDK 1.2 doesn't handle:
-        //  EBCDIC-CP-GR        --> CP423
-        //  EBCDIC-CP-TR        --> CP905
+            // IANA also defines two that JDK 1.2 doesn't handle:
+            //  EBCDIC-CP-GR        --> CP423
+            //  EBCDIC-CP-TR        --> CP905
     };
 
     /**
      * Gets the corresponding Java encoding name from an IANA name.
      * <p>
-     * This method is a helper method for the derived class to convert
-     * encoding names.
+     * This method is a helper method for the derived class to convert encoding names.
      *
-     * @exception UnsupportedEncodingException
-     *      If this implementation couldn't find the Java encoding name.
+     * @throws UnsupportedEncodingException If this implementation couldn't find the Java encoding name.
      */
-    protected String getJavaEncoding( String encoding ) throws UnsupportedEncodingException {
+    protected String getJavaEncoding(String encoding) throws UnsupportedEncodingException {
         try {
             "1".getBytes(encoding);
             return encoding;
-        } catch( UnsupportedEncodingException e ) {
+        } catch (UnsupportedEncodingException e) {
             // try known alias
-            for( int i=0; i<aliases.length; i+=2 ) {
-                if(encoding.equals(aliases[i])) {
-                    "1".getBytes(aliases[i+1]);
-                    return aliases[i+1];
+            for (int i = 0; i < aliases.length; i += 2) {
+                if (encoding.equals(aliases[i])) {
+                    "1".getBytes(aliases[i + 1]);
+                    return aliases[i + 1];
                 }
             }
 
@@ -310,18 +315,16 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     }
 
     /**
-     * Default implementation of the setProperty method handles
-     * the four defined properties in Marshaller. If a provider
-     * needs to handle additional properties, it should override
-     * this method in a derived class.
+     * Default implementation of the setProperty method handles the four defined properties in Marshaller. If a provider
+     * needs to handle additional properties, it should override this method in a derived class.
      */
     @Override
-    public void setProperty( String name, Object value )
-        throws PropertyException {
+    public void setProperty(String name, Object value)
+            throws PropertyException {
 
-        if( name == null ) {
+        if (name == null) {
             throw new IllegalArgumentException(
-                Messages.format( Messages.MUST_NOT_BE_NULL, "name" ) );
+                    Messages.format(Messages.MUST_NOT_BE_NULL, "name"));
         }
 
         // recognize and handle four pre-defined properties.
@@ -357,18 +360,17 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     }
 
     /**
-     * Default implementation of the getProperty method handles
-     * the four defined properties in Marshaller.  If a provider
-     * needs to support additional provider specific properties,
-     * it should override this method in a derived class.
+     * Default implementation of the getProperty method handles the four defined properties in Marshaller.  If a
+     * provider needs to support additional provider specific properties, it should override this method in a derived
+     * class.
      */
     @Override
-    public Object getProperty( String name )
-        throws PropertyException {
+    public Object getProperty(String name)
+            throws PropertyException {
 
-        if( name == null ) {
+        if (name == null) {
             throw new IllegalArgumentException(
-                Messages.format( Messages.MUST_NOT_BE_NULL, "name" ) );
+                    Messages.format(Messages.MUST_NOT_BE_NULL, "name"));
         }
 
         // recognize and handle four pre-defined properties.
@@ -382,6 +384,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
         };
 
     }
+
     /**
      * @see jakarta.xml.bind.Marshaller#getEventHandler()
      */
@@ -395,58 +398,58 @@ public abstract class AbstractMarshallerImpl implements Marshaller
      */
     @Override
     public void setEventHandler(ValidationEventHandler handler)
-        throws JAXBException {
+            throws JAXBException {
 
         eventHandler = Objects.requireNonNullElseGet(handler, DefaultValidationEventHandler::new);
     }
 
 
-
-
     /*
      * assert that the given object is a Boolean
      */
-    private void checkBoolean( String name, Object value ) throws PropertyException {
-        if(!(value instanceof Boolean))
+    private void checkBoolean(String name, Object value) throws PropertyException {
+        if (!(value instanceof Boolean)) {
             throw new PropertyException(
-                Messages.format( Messages.MUST_BE_BOOLEAN, name ) );
+                    Messages.format(Messages.MUST_BE_BOOLEAN, name));
+        }
     }
 
     /*
      * assert that the given object is a String
      */
-    private void checkString( String name, Object value ) throws PropertyException {
-        if(!(value instanceof String))
+    private void checkString(String name, Object value) throws PropertyException {
+        if (!(value instanceof String)) {
             throw new PropertyException(
-                Messages.format( Messages.MUST_BE_STRING, name ) );
+                    Messages.format(Messages.MUST_BE_STRING, name));
+        }
     }
 
     /*
      * assert that the parameters are not null
      */
-    private void checkNotNull( Object o1, String o1Name,
-                               Object o2, String o2Name ) {
+    private void checkNotNull(Object o1, String o1Name,
+                              Object o2, String o2Name) {
 
-        if( o1 == null ) {
+        if (o1 == null) {
             throw new IllegalArgumentException(
-                Messages.format( Messages.MUST_NOT_BE_NULL, o1Name ) );
+                    Messages.format(Messages.MUST_NOT_BE_NULL, o1Name));
         }
-        if( o2 == null ) {
+        if (o2 == null) {
             throw new IllegalArgumentException(
-                Messages.format( Messages.MUST_NOT_BE_NULL, o2Name ) );
+                    Messages.format(Messages.MUST_NOT_BE_NULL, o2Name));
         }
     }
 
     @Override
     public void marshal(Object obj, XMLEventWriter writer)
-        throws JAXBException {
+            throws JAXBException {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void marshal(Object obj, XMLStreamWriter writer)
-        throws JAXBException {
+            throws JAXBException {
 
         throw new UnsupportedOperationException();
     }
@@ -464,10 +467,10 @@ public abstract class AbstractMarshallerImpl implements Marshaller
     @Override
     @SuppressWarnings("unchecked")
     public <A extends XmlAdapter<?, ?>> void setAdapter(A adapter) {
-        if (adapter==null) {
+        if (adapter == null) {
             throw new IllegalArgumentException();
         }
-        setAdapter((Class<A>)adapter.getClass(),adapter);
+        setAdapter((Class<A>) adapter.getClass(), adapter);
     }
 
     @Override

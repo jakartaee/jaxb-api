@@ -14,14 +14,15 @@ package jakarta.xml.bind;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.attachment.AttachmentMarshaller;
-import javax.xml.validation.Schema;
+
 import java.io.File;
+
+import javax.xml.validation.Schema;
 
 /**
  * <p>
- * The {@code Marshaller} class is responsible for governing the process
- * of serializing Java content trees back into XML data.  It provides the basic
- * marshalling methods:
+ * The {@code Marshaller} class is responsible for governing the process of serializing Java content trees back into XML
+ * data.  It provides the basic marshalling methods:
  *
  * <p>
  * <i>Assume the following setup code for all following code fragments:</i>
@@ -30,21 +31,21 @@ import java.io.File;
  *  Unmarshaller u = jc.createUnmarshaller();
  *  Object element = u.unmarshal( new File( "foo.xml" ) );
  *  Marshaller m = jc.createMarshaller();
- * }
+ *}
  *
  * <p>
  * Marshalling to a File:
  * {@snippet :
  *  OutputStream os = new FileOutputStream( "nosferatu.xml" );
  *  m.marshal( element, os );
- * }
+ *}
  *
  * <p>
  * Marshalling to a SAX ContentHandler:
  * {@snippet :
  *  // assume MyContentHandler instanceof ContentHandler
  *  m.marshal( element, new MyContentHandler() );
- * }
+ *}
  *
  * <p>
  * Marshalling to a DOM Node:
@@ -55,19 +56,19 @@ import java.io.File;
  *  Document doc = db.newDocument();
  *
  *  m.marshal( element, doc );
- * }
+ *}
  *
  * <p>
  * Marshalling to a java.io.OutputStream:
  * {@snippet :
  *  m.marshal( element, System.out );
- * }
+ *}
  *
  * <p>
  * Marshalling to a java.io.Writer:
  * {@snippet :
  *  m.marshal( element, new PrintWriter( System.out ) );
- * }
+ *}
  *
  * <p>
  * Marshalling to a javax.xml.transform.SAXResult:
@@ -76,7 +77,7 @@ import java.io.File;
  *  SAXResult result = new SAXResult( new MyContentHandler() );
  *
  *  m.marshal( element, result );
- * }
+ *}
  *
  * <p>
  * Marshalling to a javax.xml.transform.DOMResult:
@@ -84,7 +85,7 @@ import java.io.File;
  *  DOMResult result = new DOMResult();
  *
  *  m.marshal( element, result );
- * }
+ *}
  *
  * <p>
  * Marshalling to a javax.xml.transform.StreamResult:
@@ -92,7 +93,7 @@ import java.io.File;
  *  StreamResult result = new StreamResult( System.out );
  *
  *  m.marshal( element, result );
- * }
+ *}
  *
  * <p>
  * Marshalling to a javax.xml.stream.XMLStreamWriter:
@@ -101,7 +102,7 @@ import java.io.File;
  *      XMLOutputFactory.newInstance().createXMLStreamWriter( ... );
  *
  *  m.marshal( element, xmlStreamWriter );
- * }
+ *}
  *
  * <p>
  * Marshalling to a javax.xml.stream.XMLEventWriter:
@@ -110,34 +111,28 @@ import java.io.File;
  *      XMLOutputFactory.newInstance().createXMLEventWriter( ... );
  *
  *  m.marshal( element, xmlEventWriter );
- * }
+ *}
  *
  * <p>
  * <a id="elementMarshalling"></a>
  * <b>Marshalling content tree rooted by a Jakarta XML Binding element</b><br>
  * <blockquote>
- * The first parameter of the overloaded
- * {@code Marshaller.marshal(java.lang.Object, ...)} methods must be a
- * Jakarta XML Binding element as computed by
- * {@linkplain JAXBIntrospector#isElement(java.lang.Object)};
- * otherwise, a {@code Marshaller.marshal} method must throw a
- * {@linkplain MarshalException}. There exist two mechanisms
- * to enable marshalling an instance that is not a Jakarta XML Binding element.
- * One method is to wrap the instance as a value of a {@linkplain JAXBElement},
- * and pass the wrapper element as the first parameter to
- * a {@code Marshaller.marshal} method. For java to schema binding, it
- * is also possible to simply annotate the instance's class with
+ * The first parameter of the overloaded {@code Marshaller.marshal(java.lang.Object, ...)} methods must be a Jakarta XML
+ * Binding element as computed by {@linkplain JAXBIntrospector#isElement(java.lang.Object)}; otherwise, a
+ * {@code Marshaller.marshal} method must throw a {@linkplain MarshalException}. There exist two mechanisms to enable
+ * marshalling an instance that is not a Jakarta XML Binding element. One method is to wrap the instance as a value of a
+ * {@linkplain JAXBElement}, and pass the wrapper element as the first parameter to a {@code Marshaller.marshal} method.
+ * For java to schema binding, it is also possible to simply annotate the instance's class with
  * &#64;{@linkplain XmlRootElement}.
  * </blockquote>
  *
  * <p>
  * <b>Encoding</b><br>
  * <blockquote>
- * By default, the Marshaller will use UTF-8 encoding when generating XML data
- * to a {@code java.io.OutputStream}, or a {@code java.io.Writer}.  Use the
- * {@linkplain #setProperty(String,Object) setProperty} API to change the output
- * encoding used during these marshal operations.  Client applications are
- * expected to supply a valid character encoding name as defined in the
+ * By default, the Marshaller will use UTF-8 encoding when generating XML data to a {@code java.io.OutputStream}, or a
+ * {@code java.io.Writer}.  Use the {@linkplain #setProperty(String, Object) setProperty} API to change the output
+ * encoding used during these marshal operations.  Client applications are expected to supply a valid character encoding
+ * name as defined in the
  * <a href="http://www.w3.org/TR/2000/REC-xml-20001006#charencoding">W3C XML 1.0
  * Recommendation</a> and supported by your Java Platform.
  * </blockquote>
@@ -146,26 +141,20 @@ import java.io.File;
  * <b>Validation and Well-Formedness</b><br>
  * <blockquote>
  * <p>
- * Client applications are not required to validate the Java content tree prior
- * to calling any of the marshal API's.  Furthermore, there is no requirement
- * that the Java content tree be valid with respect to its original schema in
- * order to marshal it back into XML data.  Different Jakarta XML Binding Providers will
- * support marshalling invalid Java content trees at varying levels, however
- * all Jakarta XML Binding Providers must be able to marshal a valid content tree back to
- * XML data.  A Jakarta XML Binding Provider must throw a {@code MarshalException} when it
- * is unable to complete the marshal operation due to invalid content.  Some
- * Jakarta XML Binding Providers will fully allow marshalling invalid content, others will fail
- * on the first validation error.
+ * Client applications are not required to validate the Java content tree prior to calling any of the marshal API's.
+ * Furthermore, there is no requirement that the Java content tree be valid with respect to its original schema in order
+ * to marshal it back into XML data.  Different Jakarta XML Binding Providers will support marshalling invalid Java
+ * content trees at varying levels, however all Jakarta XML Binding Providers must be able to marshal a valid content
+ * tree back to XML data.  A Jakarta XML Binding Provider must throw a {@code MarshalException} when it is unable to
+ * complete the marshal operation due to invalid content.  Some Jakarta XML Binding Providers will fully allow
+ * marshalling invalid content, others will fail on the first validation error.
  * <p>
- * Even when schema validation is not explicitly enabled for the marshal operation,
- * it is possible that certain types of validation events will be detected
- * during the operation.  Validation events will be reported to the registered
- * event handler.  If the client application has not registered an event handler
- * prior to invoking one of the marshal API's, then events will be delivered to
- * a default event handler which will terminate the marshal operation after
- * encountering the first error or fatal error. Note that for Jakarta XML Binding and
- * later versions, {@linkplain jakarta.xml.bind.helpers.DefaultValidationEventHandler} is
- * no longer used.
+ * Even when schema validation is not explicitly enabled for the marshal operation, it is possible that certain types of
+ * validation events will be detected during the operation.  Validation events will be reported to the registered event
+ * handler.  If the client application has not registered an event handler prior to invoking one of the marshal API's,
+ * then events will be delivered to a default event handler which will terminate the marshal operation after
+ * encountering the first error or fatal error. Note that for Jakarta XML Binding and later versions,
+ * {@linkplain jakarta.xml.bind.helpers.DefaultValidationEventHandler} is no longer used.
  * </blockquote>
  *
  * <p>
@@ -173,8 +162,8 @@ import java.io.File;
  * <b>Supported Properties</b><br>
  * <blockquote>
  * <p>
- * All Jakarta XML Binding Providers are required to support the following set of properties.
- * Some providers may support additional properties.
+ * All Jakarta XML Binding Providers are required to support the following set of properties. Some providers may support
+ * additional properties.
  * <dl>
  *   <dt>{@code jaxb.encoding} - value must be a java.lang.String</dt>
  *   <dd>The output encoding to use when marshalling the XML data.  The
@@ -211,21 +200,21 @@ import java.io.File;
  *       default is {@code false}. This property has different implications depending
  *       on which marshal api you are using - when this property is set to true:<br>
  *       <ul>
- *         <li>{@linkplain #marshal(Object,org.xml.sax.ContentHandler) marshal(Object,ContentHandler)} - the Marshaller won't
+ *         <li>{@linkplain #marshal(Object, org.xml.sax.ContentHandler) marshal(Object,ContentHandler)} - the Marshaller won't
  *             invoke {@linkplain org.xml.sax.ContentHandler#startDocument()} and
  *             {@linkplain org.xml.sax.ContentHandler#endDocument()}.</li>
- *         <li>{@linkplain #marshal(Object,org.w3c.dom.Node) marshal(Object,Node)} - the property has no effect on this
+ *         <li>{@linkplain #marshal(Object, org.w3c.dom.Node) marshal(Object,Node)} - the property has no effect on this
  *             API.</li>
- *         <li>{@linkplain #marshal(Object,java.io.OutputStream) marshal(Object,OutputStream)} - the Marshaller won't
+ *         <li>{@linkplain #marshal(Object, java.io.OutputStream) marshal(Object,OutputStream)} - the Marshaller won't
  *             generate an xml declaration.</li>
- *         <li>{@linkplain #marshal(Object,java.io.Writer) marshal(Object,Writer)} - the Marshaller won't
+ *         <li>{@linkplain #marshal(Object, java.io.Writer) marshal(Object,Writer)} - the Marshaller won't
  *             generate an xml declaration.</li>
- *         <li>{@linkplain #marshal(Object,javax.xml.transform.Result) marshal(Object,Result)} - depends on the kind of
+ *         <li>{@linkplain #marshal(Object, javax.xml.transform.Result) marshal(Object,Result)} - depends on the kind of
  *             Result object, see semantics for Node, ContentHandler, and Stream APIs</li>
- *         <li>{@linkplain #marshal(Object,javax.xml.stream.XMLEventWriter) marshal(Object,XMLEventWriter)} - the
+ *         <li>{@linkplain #marshal(Object, javax.xml.stream.XMLEventWriter) marshal(Object,XMLEventWriter)} - the
  *             Marshaller will not generate {@linkplain javax.xml.stream.events.XMLEvent#START_DOCUMENT} and
  *             {@linkplain javax.xml.stream.events.XMLEvent#END_DOCUMENT} events.</li>
- *         <li>{@linkplain #marshal(Object,javax.xml.stream.XMLStreamWriter) marshal(Object,XMLStreamWriter)} - the
+ *         <li>{@linkplain #marshal(Object, javax.xml.stream.XMLStreamWriter) marshal(Object,XMLStreamWriter)} - the
  *             Marshaller will not generate {@linkplain javax.xml.stream.events.XMLEvent#START_DOCUMENT} and
  *             {@linkplain javax.xml.stream.events.XMLEvent#END_DOCUMENT} events.</li>
  *       </ul>
@@ -253,7 +242,7 @@ import java.io.File;
  *
  *  // Invoked by Marshaller after it has marshalled all properties of this object.
  *  void afterMarshal(Marshaller);
- * }
+ *}
  * The class defined event callback methods should be used when the callback method requires
  * access to non-public methods and/or fields of the class.
  * <p>
@@ -276,332 +265,259 @@ import java.io.File;
 public interface Marshaller {
 
     /**
-     * The name of the property used to specify the output encoding in
-     * the marshalled XML data.
+     * The name of the property used to specify the output encoding in the marshalled XML data.
      */
     String JAXB_ENCODING =
-        "jaxb.encoding";
+            "jaxb.encoding";
 
     /**
-     * The name of the property used to specify whether the marshalled
-     * XML data is formatted with linefeeds and indentation.
+     * The name of the property used to specify whether the marshalled XML data is formatted with linefeeds and
+     * indentation.
      */
     String JAXB_FORMATTED_OUTPUT =
-        "jaxb.formatted.output";
+            "jaxb.formatted.output";
 
     /**
-     * The name of the property used to specify the xsi:schemaLocation
-     * attribute value to place in the marshalled XML output.
+     * The name of the property used to specify the xsi:schemaLocation attribute value to place in the marshalled XML
+     * output.
      */
     String JAXB_SCHEMA_LOCATION =
-        "jaxb.schemaLocation";
+            "jaxb.schemaLocation";
 
     /**
-     * The name of the property used to specify the
-     * xsi:noNamespaceSchemaLocation attribute value to place in the marshalled
-     * XML output.
+     * The name of the property used to specify the xsi:noNamespaceSchemaLocation attribute value to place in the
+     * marshalled XML output.
      */
     String JAXB_NO_NAMESPACE_SCHEMA_LOCATION =
-        "jaxb.noNamespaceSchemaLocation";
+            "jaxb.noNamespaceSchemaLocation";
 
     /**
-     * The name of the property used to specify whether the marshaller
-     * will generate document level events (ie calling startDocument or endDocument).
+     * The name of the property used to specify whether the marshaller will generate document level events (ie calling
+     * startDocument or endDocument).
      */
     String JAXB_FRAGMENT =
-        "jaxb.fragment";
+            "jaxb.fragment";
 
     /**
-     * Marshal the content tree rooted at {@code jaxbElement} into the specified
-     * {@code javax.xml.transform.Result}.
+     * Marshal the content tree rooted at {@code jaxbElement} into the specified {@code javax.xml.transform.Result}.
      *
      * <p>
-     * All Jakarta XML Binding Providers must at least support
-     * {@linkplain javax.xml.transform.dom.DOMResult},
-     * {@linkplain javax.xml.transform.sax.SAXResult}, and
-     * {@linkplain javax.xml.transform.stream.StreamResult}. It can
+     * All Jakarta XML Binding Providers must at least support {@linkplain javax.xml.transform.dom.DOMResult},
+     * {@linkplain javax.xml.transform.sax.SAXResult}, and {@linkplain javax.xml.transform.stream.StreamResult}. It can
      * support other derived classes of {@code Result} as well.
      *
-     * @param jaxbElement
-     *      The root of content tree to be marshalled.
-     * @param result
-     *      XML will be sent to this Result
+     * @param jaxbElement The root of content tree to be marshalled.
+     * @param result      XML will be sent to this Result
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      */
     void marshal(Object jaxbElement, javax.xml.transform.Result result)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
      * Marshal the content tree rooted at {@code jaxbElement} into an output stream.
      *
-     * @param jaxbElement
-     *      The root of content tree to be marshalled.
-     * @param os
-     *      XML will be added to this stream.
+     * @param jaxbElement The root of content tree to be marshalled.
+     * @param os          XML will be added to this stream.
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      */
     void marshal(Object jaxbElement, java.io.OutputStream os)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
      * Marshal the content tree rooted at {@code jaxbElement} into a file.
      *
-     * @param jaxbElement
-     *      The root of content tree to be marshalled.
-     * @param output
-     *      File to be written. If this file already exists, it will be overwritten.
+     * @param jaxbElement The root of content tree to be marshalled.
+     * @param output      File to be written. If this file already exists, it will be overwritten.
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      * @since 1.6, JAXB 2.1
      */
     void marshal(Object jaxbElement, File output)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
      * Marshal the content tree rooted at {@code jaxbElement} into a Writer.
      *
-     * @param jaxbElement
-     *      The root of content tree to be marshalled.
-     * @param writer
-     *      XML will be sent to this writer.
+     * @param jaxbElement The root of content tree to be marshalled.
+     * @param writer      XML will be sent to this writer.
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      */
     void marshal(Object jaxbElement, java.io.Writer writer)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
      * Marshal the content tree rooted at {@code jaxbElement} into SAX2 events.
      *
-     * @param jaxbElement
-     *      The root of content tree to be marshalled.
-     * @param handler
-     *      XML will be sent to this handler as SAX2 events.
+     * @param jaxbElement The root of content tree to be marshalled.
+     * @param handler     XML will be sent to this handler as SAX2 events.
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      */
     void marshal(Object jaxbElement, org.xml.sax.ContentHandler handler)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
      * Marshal the content tree rooted at {@code jaxbElement} into a DOM tree.
      *
-     * @param jaxbElement
-     *      The content tree to be marshalled.
-     * @param node
-     *      DOM nodes will be added as children of this node.
-     *      This parameter must be a Node that accepts children
-     *      ({@linkplain org.w3c.dom.Document},
-     *      {@linkplain  org.w3c.dom.DocumentFragment}, or
-     *      {@linkplain  org.w3c.dom.Element})
+     * @param jaxbElement The content tree to be marshalled.
+     * @param node        DOM nodes will be added as children of this node. This parameter must be a Node that accepts
+     *                    children ({@linkplain org.w3c.dom.Document}, {@linkplain  org.w3c.dom.DocumentFragment}, or
+     *                    {@linkplain  org.w3c.dom.Element})
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      */
     void marshal(Object jaxbElement, org.w3c.dom.Node node)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
-     * Marshal the content tree rooted at {@code jaxbElement} into a
-     * {@linkplain javax.xml.stream.XMLStreamWriter}.
+     * Marshal the content tree rooted at {@code jaxbElement} into a {@linkplain javax.xml.stream.XMLStreamWriter}.
      *
-     * @param jaxbElement
-     *      The content tree to be marshalled.
-     * @param writer
-     *      XML will be sent to this writer.
+     * @param jaxbElement The content tree to be marshalled.
+     * @param writer      XML will be sent to this writer.
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      * @since 1.6, JAXB 2.0
      */
     void marshal(Object jaxbElement, javax.xml.stream.XMLStreamWriter writer)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
-     * Marshal the content tree rooted at {@code jaxbElement} into a
-     * {@linkplain javax.xml.stream.XMLEventWriter}.
+     * Marshal the content tree rooted at {@code jaxbElement} into a {@linkplain javax.xml.stream.XMLEventWriter}.
      *
-     * @param jaxbElement
-     *      The content tree rooted at jaxbElement to be marshalled.
-     * @param writer
-     *      XML will be sent to this writer.
+     * @param jaxbElement The content tree rooted at jaxbElement to be marshalled.
+     * @param writer      XML will be sent to this writer.
      *
-     * @throws JAXBException
-     *      If any unexpected problem occurs during the marshalling.
-     * @throws MarshalException
-     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
-     *      returns false from its {@code handleEvent} method or the
-     *      {@code Marshaller} is unable to marshal {@code jaxbElement} (or any
-     *      object reachable from {@code jaxbElement}).
-     *      See {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
+     * @throws JAXBException            If any unexpected problem occurs during the marshalling.
+     * @throws MarshalException         If the {@linkplain ValidationEventHandler ValidationEventHandler} returns false
+     *                                  from its {@code handleEvent} method or the {@code Marshaller} is unable to
+     *                                  marshal {@code jaxbElement} (or any object reachable from {@code jaxbElement}).
+     *                                  See
+     *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
+     * @throws IllegalArgumentException If any of the method parameters are null
      * @since 1.6, JAXB 2.0
      */
     void marshal(Object jaxbElement, javax.xml.stream.XMLEventWriter writer)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
      * Get a DOM tree view of the content tree(Optional).
      * <p>
-     * If the returned DOM tree is updated, these changes are also
-     * visible in the content tree.
-     * Use {@linkplain #marshal(Object, org.w3c.dom.Node)} to force
-     * a deep copy of the content tree to a DOM representation.
+     * If the returned DOM tree is updated, these changes are also visible in the content tree. Use
+     * {@linkplain #marshal(Object, org.w3c.dom.Node)} to force a deep copy of the content tree to a DOM
+     * representation.
      *
      * @param contentTree - Jakarta XML Binding Java representation of XML content
      *
      * @return the DOM tree view of the contentTree
-     *
-     * @throws UnsupportedOperationException
-     *      If the Jakarta XML Binding provider implementation does not support a
-     *      DOM view of the content tree
-     *
-     * @throws IllegalArgumentException
-     *      If any of the method parameters are null
-     *
-     * @throws JAXBException
-     *      If any unexpected problem occurs
+     * @throws UnsupportedOperationException If the Jakarta XML Binding provider implementation does not support a DOM
+     *                                       view of the content tree
+     * @throws IllegalArgumentException      If any of the method parameters are null
+     * @throws JAXBException                 If any unexpected problem occurs
      *
      */
     org.w3c.dom.Node getNode(java.lang.Object contentTree)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
-     * Set the particular property in the underlying implementation of
-     * {@code Marshaller}.  This method can only be used to set one of
-     * the standard Jakarta XML Binding defined properties above or a provider specific
-     * property.  Attempting to set an undefined property will result in
-     * a PropertyException being thrown.
-     * See {@linkplain ##supportedProps Supported Properties}.
+     * Set the particular property in the underlying implementation of {@code Marshaller}.  This method can only be used
+     * to set one of the standard Jakarta XML Binding defined properties above or a provider specific property.
+     * Attempting to set an undefined property will result in a PropertyException being thrown. See
+     * {@linkplain ##supportedProps Supported Properties}.
      *
-     * @param name the name of the property to be set. This value can either
-     *              be specified using one of the constant fields or a user
-     *              supplied string.
+     * @param name  the name of the property to be set. This value can either be specified using one of the constant
+     *              fields or a user supplied string.
      * @param value the value of the property to be set
      *
-     * @throws PropertyException when there is an error processing the given
-     *                            property or value
-     * @throws IllegalArgumentException
-     *      If the name parameter is null
+     * @throws PropertyException        when there is an error processing the given property or value
+     * @throws IllegalArgumentException If the name parameter is null
      */
     void setProperty(String name, Object value)
-        throws PropertyException;
+            throws PropertyException;
 
     /**
-     * Get the particular property in the underlying implementation of
-     * {@code Marshaller}.  This method can only be used to get one of
-     * the standard Jakarta XML Binding defined properties above or a provider specific
-     * property.  Attempting to get an undefined property will result in
-     * a PropertyException being thrown.
-     * See {@linkplain ##supportedProps Supported Properties}.
+     * Get the particular property in the underlying implementation of {@code Marshaller}.  This method can only be used
+     * to get one of the standard Jakarta XML Binding defined properties above or a provider specific property.
+     * Attempting to get an undefined property will result in a PropertyException being thrown. See
+     * {@linkplain ##supportedProps Supported Properties}.
      *
      * @param name the name of the property to retrieve
-     * @return the value of the requested property
      *
-     * @throws PropertyException
-     *      when there is an error retrieving the given property or value
-     *      property name
-     * @throws IllegalArgumentException
-     *      If the name parameter is null
+     * @return the value of the requested property
+     * @throws PropertyException        when there is an error retrieving the given property or value property name
+     * @throws IllegalArgumentException If the name parameter is null
      */
     Object getProperty(String name) throws PropertyException;
 
     /**
      * Allow an application to register a validation event handler.
      * <p>
-     * The validation event handler will be called by the Jakarta XML Binding Provider if any
-     * validation errors are encountered during calls to any of the marshal
-     * API's.  If the client application does not register a validation event
-     * handler before invoking one of the marshal methods, then validation
-     * events will be handled by the default event handler which will terminate
-     * the marshal operation after the first error or fatal error is encountered.
+     * The validation event handler will be called by the Jakarta XML Binding Provider if any validation errors are
+     * encountered during calls to any of the marshal API's.  If the client application does not register a validation
+     * event handler before invoking one of the marshal methods, then validation events will be handled by the default
+     * event handler which will terminate the marshal operation after the first error or fatal error is encountered.
      * <p>
-     * Calling this method with a null parameter will cause the Marshaller
-     * to revert back to the default event handler.
+     * Calling this method with a null parameter will cause the Marshaller to revert back to the default event handler.
      *
      * @param handler the validation event handler
-     * @throws JAXBException if an error was encountered while setting the
-     *         event handler
+     *
+     * @throws JAXBException if an error was encountered while setting the event handler
      */
     void setEventHandler(ValidationEventHandler handler)
-        throws JAXBException;
+            throws JAXBException;
 
     /**
-     * Return the current event handler or the default event handler if one
-     * hasn't been set.
+     * Return the current event handler or the default event handler if one hasn't been set.
      *
-     * @return the current ValidationEventHandler or the default event handler
-     *         if it hasn't been set
-     * @throws JAXBException if an error was encountered while getting the
-     *         current event handler
+     * @return the current ValidationEventHandler or the default event handler if it hasn't been set
+     * @throws JAXBException if an error was encountered while getting the current event handler
      */
     ValidationEventHandler getEventHandler()
-        throws JAXBException;
-
+            throws JAXBException;
 
 
     /**
@@ -610,17 +526,13 @@ public interface Marshaller {
      * <p>
      * This is a convenience method that invokes {@code setAdapter(adapter.getClass(),adapter);}.
      *
-     * @param adapter
-     *      The instance of the adapter to be used. If null, it will un-register
-     *      the current adapter set for this type.
+     * @param adapter The instance of the adapter to be used. If null, it will un-register the current adapter set for
+     *                this type.
+     * @param <A>     the type of the adapter
      *
-     * @param <A> the type of the adapter
-     *
-     * @see #setAdapter(Class,XmlAdapter)
-     * @throws IllegalArgumentException
-     *      if the adapter parameter is null.
-     * @throws UnsupportedOperationException
-     *      if invoked against a JAXB 1.0 implementation.
+     * @throws IllegalArgumentException      if the adapter parameter is null.
+     * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
+     * @see #setAdapter(Class, XmlAdapter)
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(A adapter);
@@ -630,74 +542,58 @@ public interface Marshaller {
      *
      * <p>
      * Every marshaller internally maintains a
-     * {@linkplain java.util.Map}&lt;{@linkplain Class},{@linkplain XmlAdapter}&gt;,
-     * which it uses for marshalling classes whose fields/methods are annotated
-     * with {@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}.
+     * {@linkplain java.util.Map}&lt;{@linkplain Class},{@linkplain XmlAdapter}&gt;, which it uses for marshalling
+     * classes whose fields/methods are annotated with
+     * {@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}.
      *
      * <p>
-     * This method allows applications to use a configured instance of {@linkplain XmlAdapter}.
-     * When an instance of an adapter is not given, a marshaller will create
-     * one by invoking its default constructor.
+     * This method allows applications to use a configured instance of {@linkplain XmlAdapter}. When an instance of an
+     * adapter is not given, a marshaller will create one by invoking its default constructor.
      *
-     * @param type
-     *      The type of the adapter. The specified instance will be used when
-     *      {@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter#value()}
-     *      refers to this type.
-     * @param adapter
-     *      The instance of the adapter to be used. If null, it will un-register
-     *      the current adapter set for this type.
-     * @param <A> the type of the adapter
+     * @param type    The type of the adapter. The specified instance will be used when
+     *                {@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter#value()} refers to this type.
+     * @param adapter The instance of the adapter to be used. If null, it will un-register the current adapter set for
+     *                this type.
+     * @param <A>     the type of the adapter
      *
-     * @throws IllegalArgumentException
-     *      if the type parameter is null.
-     * @throws UnsupportedOperationException
-     *      if invoked against a JAXB 1.0 implementation.
+     * @throws IllegalArgumentException      if the type parameter is null.
+     * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter);
 
     /**
-     * Gets the adapter associated with the specified type.
-     * This is the reverse operation of the {@linkplain #setAdapter} method.
+     * Gets the adapter associated with the specified type. This is the reverse operation of the
+     * {@linkplain #setAdapter} method.
      *
-     * @param type
-     *      The type of the adapter. The specified instance will be used when
-     *      {@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter#value()}
-     *      refers to this type.
+     * @param type The type of the adapter. The specified instance will be used when
+     *             {@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter#value()} refers to this type.
+     * @param <A>  the type of the adapter
      *
-     * @param <A> the type of the adapter
-     *
-     * @return
-     *      The adapter associated with the specified type.
-     *
-     * @throws IllegalArgumentException
-     *      if the type parameter is null.
-     * @throws UnsupportedOperationException
-     *      if invoked against a JAXB 1.0 implementation.
+     * @return The adapter associated with the specified type.
+     * @throws IllegalArgumentException      if the type parameter is null.
+     * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
      * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
 
 
     /**
-     * Associate a context that enables binary data within an XML document
-     * to be transmitted as XML-binary optimized attachment.
-     * The attachment is referenced from the XML document content model
-     * by content-id URIs(cid) references stored within the xml document.
+     * Associate a context that enables binary data within an XML document to be transmitted as XML-binary optimized
+     * attachment. The attachment is referenced from the XML document content model by content-id URIs(cid) references
+     * stored within the xml document.
      *
      * @param am the attachment marshaller to be set
      *
-     * @throws IllegalStateException if attempt to concurrently call this
-     *                               method during a marshal operation.
+     * @throws IllegalStateException if attempt to concurrently call this method during a marshal operation.
      */
     void setAttachmentMarshaller(AttachmentMarshaller am);
 
     AttachmentMarshaller getAttachmentMarshaller();
 
     /**
-     * Specify the JAXP {@linkplain javax.xml.validation.Schema Schema}
-     * object that should be used to validate subsequent marshal operations
-     * against.  Passing null into this method will disable validation.
+     * Specify the JAXP {@linkplain javax.xml.validation.Schema Schema} object that should be used to validate
+     * subsequent marshal operations against.  Passing null into this method will disable validation.
      *
      * <p>
      * This method allows the caller to validate the marshalled XML as it's marshalled.
@@ -706,42 +602,38 @@ public interface Marshaller {
      * Initially this property is set to {@code null}.
      *
      * @param schema Schema object to validate marshal operations against or null to disable validation
-     * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on a Marshaller created from a JAXBContext referencing
-     *         JAXB 1.0 mapped classes
+     *
+     * @throws UnsupportedOperationException could be thrown if this method is invoked on a Marshaller created from a
+     *                                       JAXBContext referencing JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
     void setSchema(Schema schema);
 
     /**
-     * Get the JAXP {@linkplain javax.xml.validation.Schema Schema} object
-     * being used to perform marshal-time validation.  If there is no
-     * Schema set on the marshaller, then this method will return null
-     * indicating that marshal-time validation will not be performed.
+     * Get the JAXP {@linkplain javax.xml.validation.Schema Schema} object being used to perform marshal-time
+     * validation.  If there is no Schema set on the marshaller, then this method will return null indicating that
+     * marshal-time validation will not be performed.
      *
-     * @return the Schema object being used to perform marshal-time
-     *      validation or null if not present.
-     * @throws UnsupportedOperationException could be thrown if this method is
-     *         invoked on a Marshaller created from a JAXBContext referencing
-     *         JAXB 1.0 mapped classes
+     * @return the Schema object being used to perform marshal-time validation or null if not present.
+     * @throws UnsupportedOperationException could be thrown if this method is invoked on a Marshaller created from a
+     *                                       JAXBContext referencing JAXB 1.0 mapped classes
      * @since 1.6, JAXB 2.0
      */
     Schema getSchema();
 
     /**
      * <p>
-     * Register an instance of an implementation of this class with a {@linkplain Marshaller} to externally listen
-     * for marshal events.
+     * Register an instance of an implementation of this class with a {@linkplain Marshaller} to externally listen for
+     * marshal events.
      * </p>
      * <p>
-     * This class enables pre and post processing of each marshalled object.
-     * The event callbacks are called when marshalling from an instance that maps to an xml element or
-     * complex type definition. The event callbacks are not called when marshalling from an instance of a
-     * Java datatype that represents a simple type definition.
+     * This class enables pre and post processing of each marshalled object. The event callbacks are called when
+     * marshalling from an instance that maps to an xml element or complex type definition. The event callbacks are not
+     * called when marshalling from an instance of a Java datatype that represents a simple type definition.
      * </p>
      * <p>
-     * External listener is one of two different mechanisms for defining marshal event callbacks.
-     * See {@linkplain Marshaller##marshalEventCallback Marshal Event Callbacks} for an overview.
+     * External listener is one of two different mechanisms for defining marshal event callbacks. See
+     * {@linkplain Marshaller##marshalEventCallback Marshal Event Callbacks} for an overview.
      *
      * @see Marshaller#setListener(Listener)
      * @see Marshaller#getListener()
@@ -760,9 +652,9 @@ public interface Marshaller {
          * Callback method invoked before marshalling from {@code source} to XML.
          * </p>
          * <p>
-         * This method is invoked just before marshalling process starts to marshal {@code source}.
-         * Note that if the class of {@code source} defines its own {@code beforeMarshal} method,
-         * the class specific callback method is invoked just before this method is invoked.
+         * This method is invoked just before marshalling process starts to marshal {@code source}. Note that if the
+         * class of {@code source} defines its own {@code beforeMarshal} method, the class specific callback method is
+         * invoked just before this method is invoked.
          *
          * @param source instance of Jakarta XML Binding mapped class prior to marshalling from it.
          */
@@ -774,9 +666,9 @@ public interface Marshaller {
          * Callback method invoked after marshalling {@code source} to XML.
          * </p>
          * <p>
-         * This method is invoked after {@code source} and all its descendants have been marshalled.
-         * Note that if the class of {@code source} defines its own {@code afterMarshal} method,
-         * the class specific callback method is invoked just before this method is invoked.
+         * This method is invoked after {@code source} and all its descendants have been marshalled. Note that if the
+         * class of {@code source} defines its own {@code afterMarshal} method, the class specific callback method is
+         * invoked just before this method is invoked.
          *
          * @param source instance of Jakarta XML Binding mapped class after marshalling it.
          */
@@ -789,10 +681,11 @@ public interface Marshaller {
      * Register marshal event callback {@linkplain Listener} with this {@linkplain Marshaller}.
      *
      * <p>
-     * There is only one Listener per Marshaller. Setting a Listener replaces the previous set Listener.
-     * One can unregister current Listener by setting listener to {@code null}.
+     * There is only one Listener per Marshaller. Setting a Listener replaces the previous set Listener. One can
+     * unregister current Listener by setting listener to {@code null}.
      *
      * @param listener an instance of a class that implements {@linkplain Listener}
+     *
      * @since 1.6, JAXB 2.0
      */
     void setListener(Listener listener);
@@ -800,8 +693,7 @@ public interface Marshaller {
     /**
      * <p>Return {@linkplain Listener} registered with this {@linkplain Marshaller}.
      *
-     * @return registered {@linkplain Listener} or {@code null}
-     *         if no Listener is registered with this Marshaller.
+     * @return registered {@linkplain Listener} or {@code null} if no Listener is registered with this Marshaller.
      * @since 1.6, JAXB 2.0
      */
     Listener getListener();

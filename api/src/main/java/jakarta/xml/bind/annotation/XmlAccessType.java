@@ -12,45 +12,41 @@
 package jakarta.xml.bind.annotation;
 
 
-
 /**
- * Used by XmlAccessorType to control serialization of fields or
- * properties. 
+ * Used by XmlAccessorType to control serialization of fields or properties.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
- * @since 1.6, JAXB 2.0
  * @see XmlAccessorType
+ * @since 1.6, JAXB 2.0
  */
 
 public enum XmlAccessType {
     /**
-     * Every getter/setter pair in a Jakarta XML Binding-bound class will be automatically
-     * bound to XML, unless annotated by {@linkplain XmlTransient}.
+     * Every getter/setter pair in a Jakarta XML Binding-bound class will be automatically bound to XML, unless
+     * annotated by {@linkplain XmlTransient}.
      * <p>
-     * Fields are bound to XML only when they are explicitly annotated
-     * by some of the Jakarta XML Binding annotations.
+     * Fields are bound to XML only when they are explicitly annotated by some of the Jakarta XML Binding annotations.
      */
     PROPERTY,
     /**
-     * Every non-static, non-transient field in a Jakarta XML Binding-bound class will be automatically
-     * bound to XML, unless annotated by {@linkplain XmlTransient}.
+     * Every non-static, non-transient field in a Jakarta XML Binding-bound class will be automatically bound to XML,
+     * unless annotated by {@linkplain XmlTransient}.
      * <p>
-     * Getter/setter pairs are bound to XML only when they are explicitly annotated
-     * by some of the Jakarta XML Binding annotations.
+     * Getter/setter pairs are bound to XML only when they are explicitly annotated by some of the Jakarta XML Binding
+     * annotations.
      */
     FIELD,
     /**
-     * Every public getter/setter pair and every public field will be
-     * automatically bound to XML, unless annotated by {@linkplain XmlTransient}.
+     * Every public getter/setter pair and every public field will be automatically bound to XML, unless annotated by
+     * {@linkplain XmlTransient}.
      * <p>
-     * Fields or getter/setter pairs that are private, protected, or 
-     * defaulted to package-only access are bound to XML only when they are
-     * explicitly annotated by the appropriate Jakarta XML Binding annotations.
+     * Fields or getter/setter pairs that are private, protected, or defaulted to package-only access are bound to XML
+     * only when they are explicitly annotated by the appropriate Jakarta XML Binding annotations.
      */
     PUBLIC_MEMBER,
     /**
-     * None of the fields or properties is bound to XML unless they
-     * are specifically  annotated with some of the Jakarta XML Binding annotations.
+     * None of the fields or properties is bound to XML unless they are specifically  annotated with some of the Jakarta
+     * XML Binding annotations.
      */
     NONE
 }

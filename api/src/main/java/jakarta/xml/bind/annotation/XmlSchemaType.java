@@ -25,8 +25,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p> <b>Usage</b> </p>
  * <p>
- * {@code @XmlSchemaType} annotation can be used with the following program
- * elements:
+ * {@code @XmlSchemaType} annotation can be used with the following program elements:
  * <ul>
  *   <li> a JavaBean property </li>
  *   <li> field </li>
@@ -44,7 +43,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p>
  * <b>Example 1: </b> Customize mapping of XMLGregorianCalendar on the
  *  field.
- *
+ * <p>
  * {@snippet :
  *  //Example: Code fragment
  *  public class USPrice {
@@ -52,15 +51,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      @XmlSchemaType(name="date")
  *      public XMLGregorianCalendar date;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: Local XML Schema element -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
  *      <xs:element name="date" type="xs:date"/>
  *    </sequence>
  *  </xs:complexType>
- * }
+ *}
  *
  * <p> <b> Example 2: </b> Customize mapping of XMLGregorianCalendar at package
  *     level </p>
@@ -68,30 +67,32 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  @jakarta.xml.bind.annotation.XmlSchemaType(
  *      name="date", type=javax.xml.datatype.XMLGregorianCalendar.class)
  *  package foo;
- * }
+ *}
  *
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({FIELD,METHOD,PACKAGE})
+@Retention(RUNTIME)
+@Target({FIELD, METHOD, PACKAGE})
 @Repeatable(XmlSchemaTypes.class)
 public @interface XmlSchemaType {
     String name();
+
     String namespace() default "http://www.w3.org/2001/XMLSchema";
+
     /**
-     * If this annotation is used at the package level, then value of
-     * the type() must be specified.
+     * If this annotation is used at the package level, then value of the type() must be specified.
      */
 
     Class<?> type() default DEFAULT.class;
 
     /**
-     * Used in {@linkplain XmlSchemaType#type()} to
-     * signal that the type be inferred from the signature
-     * of the property.
+     * Used in {@linkplain XmlSchemaType#type()} to signal that the type be inferred from the signature of the
+     * property.
      */
 
     final class DEFAULT {
-        private DEFAULT() {}
+        private DEFAULT() {
+        }
     }
 
 }

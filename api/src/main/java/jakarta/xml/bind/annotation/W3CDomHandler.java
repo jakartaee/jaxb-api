@@ -11,16 +11,17 @@
 
 package jakarta.xml.bind.annotation;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 import jakarta.xml.bind.ValidationEventHandler;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * {@linkplain DomHandler} implementation for W3C DOM (<code>org.w3c.dom</code> package.)
@@ -28,31 +29,29 @@ import javax.xml.transform.dom.DOMSource;
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
  */
-public class W3CDomHandler implements DomHandler<Element,DOMResult> {
+public class W3CDomHandler implements DomHandler<Element, DOMResult> {
 
     private DocumentBuilder builder;
 
     /**
      * Default constructor.
      * <p>
-     * It is up to a Jakarta XML Binding provider to decide which DOM implementation
-     * to use or how that is configured.
+     * It is up to a Jakarta XML Binding provider to decide which DOM implementation to use or how that is configured.
      */
     public W3CDomHandler() {
         this.builder = null;
     }
 
     /**
-     * Constructor that allows applications to specify which DOM implementation
-     * to be used.
+     * Constructor that allows applications to specify which DOM implementation to be used.
      *
-     * @param builder
-     *      must not be null. Jakarta XML Binding uses this {@linkplain DocumentBuilder} to create
-     *      a new element.
+     * @param builder must not be null. Jakarta XML Binding uses this {@linkplain DocumentBuilder} to create a new
+     *                element.
      */
     public W3CDomHandler(DocumentBuilder builder) {
-        if(builder==null)
+        if (builder == null) {
             throw new IllegalArgumentException();
+        }
         this.builder = builder;
     }
 
@@ -66,10 +65,11 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
 
     @Override
     public DOMResult createUnmarshaller(ValidationEventHandler errorHandler) {
-        if(builder==null)
+        if (builder == null) {
             return new DOMResult();
-        else
+        } else {
             return new DOMResult(builder.newDocument());
+        }
     }
 
     @Override
@@ -77,13 +77,15 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
         // JAXP spec is ambiguous about what really happens in this case,
         // so work defensively
         Node n = r.getNode();
-        if( n instanceof Document ) {
-            return ((Document)n).getDocumentElement();
+        if (n instanceof Document) {
+            return ((Document) n).getDocumentElement();
         }
-        if( n instanceof Element )
-            return (Element)n;
-        if( n instanceof DocumentFragment )
-            return (Element)n.getChildNodes().item(0);
+        if (n instanceof Element) {
+            return (Element) n;
+        }
+        if (n instanceof DocumentFragment) {
+            return (Element) n.getChildNodes().item(0);
+        }
 
         // if the result object contains something strange,
         // it is not a user problem, but it is a Jakarta XML Binding provider's problem.

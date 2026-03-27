@@ -11,10 +11,11 @@
 
 package jakarta.xml.bind.annotation;
 
-import static java.lang.annotation.ElementType.TYPE;
 import java.lang.annotation.Retention;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
@@ -162,7 +163,7 @@ import java.lang.annotation.Target;
  * </blockquote>
  *
  * <h3> Mapping an enum type </h3>
- *
+ * <p>
  * An enum type maps to an XML schema simple type with enumeration
  * facets. The following annotation elements are ignored since they
  * are not meaningful: {@code propOrder()} , {@code factoryMethod()} ,
@@ -178,7 +179,7 @@ import java.lang.annotation.Target;
  * <p> <b> Example 1: </b> Map a class to a complex type with
  *   xs:sequence with a customized ordering of JavaBean properties.
  * </p>
- *
+ * <p>
  * {@snippet :
  *  @XmlType(propOrder={"street", "city" , "state", "zip", "name" })
  *  public class USAddress {
@@ -197,8 +198,8 @@ import java.lang.annotation.Target;
  *      java.math.BigDecimal getZip() {..};
  *      void setZip(java.math.BigDecimal) {..};
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:complexType name="USAddress">
  *    <xs:sequence>
@@ -209,14 +210,14 @@ import java.lang.annotation.Target;
  *      <xs:element name="name" type="xs:string"/>
  *    </xs:all>
  *  </xs:complexType>
- * }
+ *}
  * <p> <b> Example 2: </b> Map a class to a complex type with
  *     xs:all </p>
  * {@snippet :
  *  @XmlType(propOrder={})
  *  public class USAddress { ...}
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:complexType name="USAddress">
  *    <xs:all>
@@ -227,7 +228,7 @@ import java.lang.annotation.Target;
  *      <xs:element name="zip" type="xs:decimal"/>
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  * <p> <b> Example 3: </b> Map a class to a global element with an
  * anonymous type.
  * </p>
@@ -235,8 +236,8 @@ import java.lang.annotation.Target;
  *  @XmlRootElement
  *  @XmlType(name="")
  *  public class USAddress { ...}
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:element name="USAddress">
  *    <xs:complexType>
@@ -249,7 +250,7 @@ import java.lang.annotation.Target;
  *      </xs:sequence>
  *    </xs:complexType>
  *  </xs:element>
- * }
+ *}
  *
  * <p> <b> Example 4: </b> Map a property to a local element with
  * anonymous type.
@@ -262,9 +263,9 @@ import java.lang.annotation.Target;
  *
  *  @XmlType(name="")
  *  public class USAddress { ... }
- *  }
+ *}
  * }
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <!-- XML Schema mapping for USAddress -->
  *  <xs:complexType name="Invoice">
  *    <xs:sequence>
@@ -280,11 +281,11 @@ import java.lang.annotation.Target;
  *      ...
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  *
  * <p> <b> Example 5: </b> Map a property to an attribute with
  * anonymous type.
- *
+ * <p>
  * {@snippet :
  *  //Example: Code fragment
  *  public class Item {
@@ -299,8 +300,8 @@ import java.lang.annotation.Target;
  *      @XmlValue
  *      public java.math.BigDecimal price;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="Item">
  *    <xs:sequence>
@@ -312,10 +313,10 @@ import java.lang.annotation.Target;
  *      </xs:attribute>
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  *
  *  <p> <b> Example 6: </b> Define a factoryClass and factoryMethod
- *
+ * <p>
  * {@snippet :
  *  @XmlType(name="USAddressType", factoryClass=USAddressFactory.class,
  *           factoryMethod="getUSAddress")
@@ -344,10 +345,10 @@ import java.lang.annotation.Target;
  *      }
  *
  *  }
- * }
+ *}
  *
  *  <p> <b> Example 7: </b> Define factoryMethod and use the default factoryClass
- *
+ * <p>
  * {@snippet :
  *  @XmlType(name="USAddressType", factoryMethod="getNewInstance")
  *  public class USAddress {
@@ -364,7 +365,7 @@ import java.lang.annotation.Target;
  *          return new USAddress();
  *      }
  *  }
- * }
+ *}
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlElement
@@ -373,72 +374,66 @@ import java.lang.annotation.Target;
  * @see XmlSchema
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({TYPE})
+@Retention(RUNTIME)
+@Target({TYPE})
 public @interface XmlType {
     /**
      * Name of the XML Schema type which the class is mapped.
      */
-    String name() default "##default" ;
+    String name() default "##default";
 
     /**
-     * Specifies the order for XML Schema elements when class is
-     * mapped to an XML Schema complex type.
+     * Specifies the order for XML Schema elements when class is mapped to an XML Schema complex type.
      *
      * <p> Refer to the table for how the propOrder affects the
      * mapping of class </p>
      *
      * <p> The propOrder is a list of names of JavaBean properties in
-     *     the class. Each name in the list is the name of a Java
-     *     identifier of the JavaBean property. The order in which
-     *     JavaBean properties are listed is the order of XML Schema
-     *     elements to which the JavaBean properties are mapped. </p>
+     * the class. Each name in the list is the name of a Java identifier of the JavaBean property. The order in which
+     * JavaBean properties are listed is the order of XML Schema elements to which the JavaBean properties are mapped.
+     * </p>
      * <p> All of the JavaBean properties being mapped to XML Schema elements
-     *     must be listed.
+     * must be listed.
      * <p> A JavaBean property or field listed in propOrder must not
-     *     be transient or annotated with {@code @XmlTransient}.
+     * be transient or annotated with {@code @XmlTransient}.
      * <p> The default ordering of JavaBean properties is determined
-     *     by @{@linkplain XmlAccessorOrder}.
+     * by @{@linkplain XmlAccessorOrder}.
      */
     String[] propOrder() default {""};
 
     /**
-     * Name of the target namespace of the XML Schema type. By
-     * default, this is the target namespace to which the package
-     * containing the class is mapped.
+     * Name of the target namespace of the XML Schema type. By default, this is the target namespace to which the
+     * package containing the class is mapped.
      */
-    String namespace() default "##default" ;
+    String namespace() default "##default";
 
     /**
-     * Class containing a no-arg factory method for creating an
-     * instance of this class. The default is this class.
+     * Class containing a no-arg factory method for creating an instance of this class. The default is this class.
      *
      * <p>If {@code factoryClass} is DEFAULT.class and
-     * {@code factoryMethod} is "", then there is no static factory
-     * method.
+     * {@code factoryMethod} is "", then there is no static factory method.
      *
      * <p>If {@code factoryClass} is DEFAULT.class and
-     * {@code factoryMethod} is not "", then
-     * {@code factoryMethod} is the name of a static factory method
-     * in this class.
+     * {@code factoryMethod} is not "", then {@code factoryMethod} is the name of a static factory method in this
+     * class.
      *
      * <p>If {@code factoryClass} is not DEFAULT.class, then
-     * {@code factoryMethod} must not be "" and must be the name of
-     * a static factory method specified in {@code factoryClass}.
+     * {@code factoryMethod} must not be "" and must be the name of a static factory method specified in
+     * {@code factoryClass}.
      */
     Class<?> factoryClass() default DEFAULT.class;
 
     /**
-     * Used in {@linkplain XmlType#factoryClass()} to
-     * signal that either factory mehod is not used or
-     * that it's in the class with this {@linkplain XmlType} itself.
+     * Used in {@linkplain XmlType#factoryClass()} to signal that either factory mehod is not used or that it's in the
+     * class with this {@linkplain XmlType} itself.
      */
     final class DEFAULT {
-        private DEFAULT() {}
+        private DEFAULT() {
+        }
     }
 
     /**
-     * Name of a no-arg factory method in the class specified in
-     * {@code factoryClass} factoryClass().
+     * Name of a no-arg factory method in the class specified in {@code factoryClass} factoryClass().
      *
      */
     String factoryMethod() default "";

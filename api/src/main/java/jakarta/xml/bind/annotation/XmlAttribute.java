@@ -14,18 +14,18 @@ package jakarta.xml.bind.annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
- * Maps a JavaBean property to an XML attribute. 
+ * Maps a JavaBean property to an XML attribute.
  *
  * <p> <b>Usage</b> </p>
  * <p>
- * The {@code @XmlAttribute} annotation can be used with the
- * following program elements: 
- * <ul> 
+ * The {@code @XmlAttribute} annotation can be used with the following program elements:
+ * <ul>
  *   <li> JavaBean property </li>
  *   <li> field </li>
  * </ul>
@@ -34,7 +34,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
- *
+ * <p>
  * The usage is subject to the following constraints:
  * <ul>
  *   <li> If type of the field or the property is a collection
@@ -44,7 +44,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *  // Examples
  *  @XmlAttribute List<Integer> items; //legal
  *  @XmlAttribute List<Bar> foo; // illegal if Bar does not map to a schema simple type
- * }
+ *}
  *   </li>
  *   <li> If the type of the field or the property is a non
  *         collection type, then the type of the property or field
@@ -53,10 +53,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *  // Examples
  *  @XmlAttribute int foo; // legal
  *  @XmlAttribute Foo foo; // illegal if Foo does not map to a schema simple type
- * }
+ *}
  *   </li>
  *   <li> This annotation can be used with the following annotations:
- *            {@linkplain XmlID}, 
+ *            {@linkplain XmlID},
  *            {@linkplain XmlIDREF},
  *            {@linkplain XmlList},
  *            {@linkplain XmlSchemaType},
@@ -75,15 +75,15 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      public java.math.BigDecimal getPrice() {...} ;
  *      public void setPrice(java.math.BigDecimal ) {...};
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="USPrice">
  *    <xs:sequence>
  *    </xs:sequence>
  *    <xs:attribute name="price" type="xs:decimal"/>
  *  </xs:complexType>
- * }
+ *}
  *
  * <p> <b>Example 2: </b>Map a JavaBean property to an XML attribute with anonymous type.</p>
  * See Example 7 in @{@linkplain XmlType}.
@@ -96,8 +96,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      @XmlAttribute
  *      List<Integer> items;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML Schema fragment -->
  *  <xs:complexType name="foo">
  *    ...
@@ -105,35 +105,34 @@ import static java.lang.annotation.RetentionPolicy.*;
  *      <xs:simpleType>
  *        <xs:list itemType="xs:int"/>
  *      </xs:simpleType>
-      </xs:attribute>
+ * </xs:attribute>
  *  </xs:complexType>
- * }
+ *}
+ *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlType
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({FIELD, METHOD})
+@Retention(RUNTIME)
+@Target({FIELD, METHOD})
 public @interface XmlAttribute {
     /**
-     * Name of the XML Schema attribute. By default, the XML Schema
-     * attribute name is derived from the JavaBean property name.
+     * Name of the XML Schema attribute. By default, the XML Schema attribute name is derived from the JavaBean property
+     * name.
      *
      */
     String name() default "##default";
- 
-    /**
-     * Specifies if the XML Schema attribute is optional or
-     * required. If true, then the JavaBean property is mapped to
-     * an XML Schema attribute that is required. Otherwise, it is mapped
-     * to an XML Schema attribute that is optional.
-     *
-     */
-     boolean required() default false;
 
     /**
-     * Specifies the XML target namespace of the XML Schema
-     * attribute.
-     * 
+     * Specifies if the XML Schema attribute is optional or required. If true, then the JavaBean property is mapped to
+     * an XML Schema attribute that is required. Otherwise, it is mapped to an XML Schema attribute that is optional.
+     *
      */
-    String namespace() default "##default" ;
+    boolean required() default false;
+
+    /**
+     * Specifies the XML target namespace of the XML Schema attribute.
+     *
+     */
+    String namespace() default "##default";
 }

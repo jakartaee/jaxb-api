@@ -22,19 +22,24 @@ import jakarta.xml.bind.DatatypeConverter;
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
  */
-public final class HexBinaryAdapter extends XmlAdapter<String,byte[]> {
+public final class HexBinaryAdapter extends XmlAdapter<String, byte[]> {
 
-    public HexBinaryAdapter() {}
+    public HexBinaryAdapter() {
+    }
 
     @Override
     public byte[] unmarshal(String s) {
-        if(s==null)     return null;
+        if (s == null) {
+            return null;
+        }
         return DatatypeConverter.parseHexBinary(s.trim());
     }
 
     @Override
     public String marshal(byte[] bytes) {
-        if(bytes==null)     return null;
+        if (bytes == null) {
+            return null;
+        }
         return DatatypeConverter.printHexBinary(bytes);
     }
 }
