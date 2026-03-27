@@ -79,7 +79,8 @@
         <spotbugs.threshold>Low</spotbugs.threshold>
         <spotbugs.version>4.9.8.2</spotbugs.version>
 
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
 
         <release.spec.feedback>jaxb-dev@eclipse.org</release.spec.feedback>
         <release.spec.date>Mar 2022</release.spec.date>
@@ -87,6 +88,7 @@
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>4.1</spec.version>
         <activation.version>2.1.4</activation.version>
+        <junit.version>6.0.3</junit.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
     </properties>
@@ -101,6 +103,13 @@
                 <groupId>jakarta.activation</groupId>
                 <artifactId>jakarta.activation-api</artifactId>
                 <version>${activation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
