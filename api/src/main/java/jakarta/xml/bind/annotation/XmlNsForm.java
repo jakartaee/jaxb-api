@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 /**
@@ -47,9 +50,6 @@ package jakarta.xml.bind.annotation;
  *     </tr>
  *   </tbody>
  * </table>
- *
- * @author Sekhar Vajjhala, Sun Microsystems, Inc.
- * @since 1.6, JAXB 2.0
  */
 public enum XmlNsForm {UNQUALIFIED, QUALIFIED, UNSET}
 

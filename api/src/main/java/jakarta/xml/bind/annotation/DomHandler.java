@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.ValidationEventHandler;
@@ -30,9 +33,6 @@ import javax.xml.transform.Source;
  * <p>
  * This interface is intended to be implemented by library writers and consumed by Jakarta XML Binding providers. None
  * of those methods are intended to be called from applications.
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 public interface DomHandler<ElementT, ResultT extends Result> {
     /**

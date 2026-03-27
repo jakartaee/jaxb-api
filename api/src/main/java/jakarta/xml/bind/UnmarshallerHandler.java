@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind;
 
 import org.xml.sax.ContentHandler;
@@ -41,9 +44,7 @@ import org.xml.sax.ContentHandler;
  * This interface is reusable: even if the user fails to unmarshal an object, s/he can still start a new round of
  * unmarshalling.
  *
- * @author <ul><li>Kohsuke KAWAGUCHI, Sun Microsystems, Inc.</li></ul>
  * @see Unmarshaller#getUnmarshallerHandler()
- * @since 1.6, JAXB 1.0
  */
 public interface UnmarshallerHandler extends ContentHandler {
     /**

@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Martin Grebac
+
 package jakarta.xml.bind.annotation.adapters;
 
 /**
@@ -17,9 +21,6 @@ package jakarta.xml.bind.annotation.adapters;
  * <p>
  * Replaces any tab, CR, and LF by a whitespace character ' ', as specified in <a
  * href="http://www.w3.org/TR/xmlschema-2/#rf-whiteSpace">the whitespace facet 'replace'</a>
- *
- * @author Kohsuke Kawaguchi, Martin Grebac
- * @since 1.6, JAXB 2.0
  */
 public final class NormalizedStringAdapter extends XmlAdapter<String, String> {
 

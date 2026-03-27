@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation.adapters;
 
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -31,7 +35,6 @@ import static java.lang.annotation.ElementType.PACKAGE;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 
 /**
  * Use an adapter that implements {@linkplain XmlAdapter} for custom marshaling.
@@ -73,9 +76,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p><b> Example: </b> See example in {@linkplain XmlAdapter}
  *
- * @author <ul><li>Sekhar Vajjhala, Sun Microsystems Inc.</li> <li> Kohsuke Kawaguchi, Sun Microsystems Inc.</li></ul>
  * @see XmlAdapter
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({PACKAGE, FIELD, METHOD, TYPE, PARAMETER})

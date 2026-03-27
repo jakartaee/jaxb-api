@@ -9,6 +9,12 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+//     Joe Fialli
+//     Kohsuke Kawaguchi
+//     Ryan Shoemaker
+
 package jakarta.xml.bind;
 
 /**
@@ -46,18 +52,10 @@ package jakarta.xml.bind;
  * <a href="http://www.w3.org/TR/xmlschema-2/"> XML Schema Part2: Datatypes
  * specification.</a>
  *
- * @author <ul>
- * <li>Sekhar Vajjhala, Sun Microsystems, Inc.</li>
- * <li>Joe Fialli, Sun Microsystems Inc.</li>
- * <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
- * <li>Ryan Shoemaker,Sun Microsystems Inc.</li>
- * </ul>
  * @see DatatypeConverter
  * @see ParseConversionEvent
  * @see PrintConversionEvent
- * @since 1.6, JAXB 1.0
  */
-
 public interface DatatypeConverterInterface {
     /**
      * Convert the string argument into a string.

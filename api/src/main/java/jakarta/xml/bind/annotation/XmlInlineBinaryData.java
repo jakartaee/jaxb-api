@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Joseph Fialli
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.activation.DataHandler;
@@ -35,9 +38,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * {@linkplain AttachmentMarshaller#addMtomAttachment(DataHandler, String, String)} nor
  * {@linkplain AttachmentMarshaller#addMtomAttachment(byte[], int, int, String, String, String)} is ever called for the
  * property. The binary data will always be inlined.
- *
- * @author Joseph Fialli
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD, TYPE})

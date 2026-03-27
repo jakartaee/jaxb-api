@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+//     Kohsuke Kawaguchi
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 /**
@@ -16,9 +21,7 @@ package jakarta.xml.bind;
  * operation, while performing on-demand validation of the Java content tree, or while marshalling the Java content tree
  * back to XML data.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see ValidationEventHandler
- * @since 1.6, JAXB 1.0
  */
 public interface ValidationEvent {
 

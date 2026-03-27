@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+//     Kohsuke Kawaguchi
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 /**
@@ -21,11 +26,7 @@ package jakarta.xml.bind;
  * unmarshal-time validation would produce locators containing information appropriate to the source of the XML data
  * (file, url, Node, etc.).
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li>
- * <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
- * <li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see ValidationEvent
- * @since 1.6, JAXB 1.0
  */
 public interface ValidationEventLocator {
 

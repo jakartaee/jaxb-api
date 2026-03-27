@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+
 package jakarta.xml.bind;
 
 import java.math.BigDecimal;
@@ -32,8 +35,6 @@ import javax.xml.namespace.QName;
  * <p>
  * This class is responsible for whitespace normalization.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
- * @since JAXB 2.1
  */
 final class DatatypeConverterImpl implements DatatypeConverterInterface {
 

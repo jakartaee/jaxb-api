@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 import java.io.Serial;
@@ -43,11 +47,7 @@ import javax.xml.namespace.QName;
  * that {@code value} is non-null so it can hold the value of the attributes
  * associated with a nil element.
  * </p>
- *
- * @author Kohsuke Kawaguchi, Joe Fialli
- * @since 1.6, JAXB 2.0
  */
-
 public class JAXBElement<T> implements Serializable {
 
     /**

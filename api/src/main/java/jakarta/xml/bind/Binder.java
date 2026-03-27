@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Joseph Fialli
+
 package jakarta.xml.bind;
 
 import javax.xml.validation.Schema;
@@ -50,11 +54,9 @@ import org.w3c.dom.Node;
  *                  preserving representation. A Binder implementation is required to minimally support an
  *                  <code>XmlNode</code> value of <code>org.w3c.dom.Node.class</code>. A Binder implementation can
  *                  support alternative XML infoset preserving representations.
- *
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com) Joseph Fialli
- * @since 1.6, JAXB 2.0
  */
 public abstract class Binder<XmlNode> {
+
 
     /**
      * Do-nothing constructor for the derived classes.
@@ -116,7 +118,6 @@ public abstract class Binder<XmlNode> {
      *                                  from its {@code handleEvent} method or the {@code Binder} is unable to perform
      *                                  the XML to Java binding.
      * @throws IllegalArgumentException If any of the input parameters are null
-     * @since 1.6, JAXB 2.0
      */
     public abstract <T> JAXBElement<T> unmarshal(XmlNode xmlNode, Class<T> declaredType) throws JAXBException;
 

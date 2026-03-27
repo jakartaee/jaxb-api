@@ -9,17 +9,16 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-package jakarta.xml.bind.annotation;
+// Contributor(s):
+//     Sekhar Vajjhala
 
+package jakarta.xml.bind.annotation;
 
 /**
  * Used by XmlAccessorType to control serialization of fields or properties.
  *
- * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlAccessorType
- * @since 1.6, JAXB 2.0
  */
-
 public enum XmlAccessType {
     /**
      * Every getter/setter pair in a Jakarta XML Binding-bound class will be automatically bound to XML, unless

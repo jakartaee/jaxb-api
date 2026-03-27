@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+//     Kohsuke Kawaguchi
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 import java.io.IOException;
@@ -204,16 +209,12 @@ import org.w3c.dom.Node;
  * Once the provider factory class is discovered, context creation is delegated to one of its
  * {@code createContext(...)} methods.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li>
- *             <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
- *             <li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @implNote Within the last step, if Glassfish AS environment detected, its specific service loader is used to find
  * factory class.
  * @see Marshaller
  * @see Unmarshaller
  * @see <a href="https://docs.oracle.com/javase/specs/jls/se17/html/jls-7.html#jls-7.4.1">S 7.4.1 "Named Packages"
  * in Java Language Specification</a>
- * @since 1.6, JAXB 1.0
  */
 public abstract class JAXBContext {
 
@@ -358,7 +359,6 @@ public abstract class JAXBContext {
      *                         <li>mixing schema derived packages from different providers on the same contextPath</li>
      *                         <li>packages are not open to {@code jakarta.xml.bind} module</li>
      *                       </ol>
-     * @since 1.6, JAXB 2.0
      */
     public static JAXBContext newInstance(String contextPath,
                                           ClassLoader classLoader,
@@ -499,7 +499,6 @@ public abstract class JAXBContext {
      *                                   <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
      *                                  </ol>
      * @throws IllegalArgumentException if the parameter contains {@code null} (i.e., {@code newInstance(null);})
-     * @since 1.6, JAXB 2.0
      */
     public static JAXBContext newInstance(Class<?>... classesToBeBound)
             throws JAXBException {
@@ -539,7 +538,6 @@ public abstract class JAXBContext {
      *                                  </ol>
      * @throws IllegalArgumentException if the parameter contains {@code null} (i.e.,
      *                                  {@code newInstance(null,someMap);})
-     * @since 1.6, JAXB 2.0
      */
     public static JAXBContext newInstance(Class<?>[] classesToBeBound, Map<String, ?> properties)
             throws JAXBException {
@@ -585,7 +583,6 @@ public abstract class JAXBContext {
      * @return always a new valid {@code Binder} object.
      * @throws UnsupportedOperationException if DOM API corresponding to {@code domType} is not supported by the
      *                                       implementation.
-     * @since 1.6, JAXB 2.0
      */
     public <T> Binder<T> createBinder(Class<T> domType) {
         // to make JAXB 1.0 implementations work, this method must not be
@@ -597,7 +594,6 @@ public abstract class JAXBContext {
      * Creates a {@code Binder} for W3C DOM.
      *
      * @return always a new valid {@code Binder} object.
-     * @since 1.6, JAXB 2.0
      */
     public Binder<Node> createBinder() {
         return createBinder(Node.class);
@@ -609,7 +605,6 @@ public abstract class JAXBContext {
      * @return always return a non-null valid {@code JAXBIntrospector} object.
      * @throws UnsupportedOperationException Calling this method on JAXB 1.0 implementations will throw an
      *                                       UnsupportedOperationException.
-     * @since 1.6, JAXB 2.0
      */
     public JAXBIntrospector createJAXBIntrospector() {
         // to make JAXB 1.0 implementations work, this method must not be
@@ -625,7 +620,6 @@ public abstract class JAXBContext {
      * @throws IOException                   if {@linkplain SchemaOutputResolver} throws an {@linkplain IOException}.
      * @throws UnsupportedOperationException Calling this method on JAXB 1.0 implementations will throw an
      *                                       UnsupportedOperationException.
-     * @since 1.6, JAXB 2.0
      */
     public void generateSchema(SchemaOutputResolver outputResolver) throws IOException {
         // to make JAXB 1.0 implementations work, this method must not be

@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.ValidationEventHandler;
@@ -25,9 +28,6 @@ import org.w3c.dom.Node;
 
 /**
  * {@linkplain DomHandler} implementation for W3C DOM (<code>org.w3c.dom</code> package.)
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 public class W3CDomHandler implements DomHandler<Element, DOMResult> {
 

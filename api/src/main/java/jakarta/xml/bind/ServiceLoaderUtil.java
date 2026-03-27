@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Miroslav Kos
+
 package jakarta.xml.bind;
 
 import java.lang.reflect.InvocationTargetException;
@@ -21,8 +24,6 @@ import java.util.logging.Logger;
 /**
  * Shared ServiceLoader/FactoryFinder Utils shared among Jakarta SOAP with Attachments, Jakarta XML Binding and Jakarta
  * XML Web Services. Class duplicated to all those projects.
- *
- * @author Miroslav.Kos@oracle.com
  */
 class ServiceLoaderUtil {
 

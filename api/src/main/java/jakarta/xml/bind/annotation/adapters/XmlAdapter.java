@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation.adapters;
 
 /**
@@ -132,9 +136,7 @@ package jakarta.xml.bind.annotation.adapters;
  *                    type to be used as an in-memory representation through the {@code ValueType}.
  * @param <ValueType> The type that Jakarta XML Binding knows how to handle out of the box.
  *
- * @author <ul><li>Sekhar Vajjhala, Sun Microsystems Inc.</li> <li> Kohsuke Kawaguchi, Sun Microsystems Inc.</li></ul>
  * @see XmlJavaTypeAdapter
- * @since 1.6, JAXB 2.0
  */
 public abstract class XmlAdapter<ValueType, BoundType> {
 

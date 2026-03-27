@@ -13,8 +13,6 @@ package jakarta.xml.bind;
 
 /**
  * Processes white space normalization.
- *
- * @since 1.0
  */
 abstract class WhiteSpaceProcessor {
 
@@ -40,9 +38,6 @@ abstract class WhiteSpaceProcessor {
         return replace((CharSequence) text).toString();
     }
 
-    /**
-     * @since 2.0
-     */
     public static CharSequence replace(CharSequence text) {
         int i = text.length() - 1;
 
@@ -72,8 +67,6 @@ abstract class WhiteSpaceProcessor {
 
     /**
      * Equivalent of {@linkplain String#trim()}.
-     *
-     * @since 2.0
      */
     public static CharSequence trim(CharSequence text) {
         int len = text.length();
@@ -102,8 +95,6 @@ abstract class WhiteSpaceProcessor {
 
     /**
      * This is usually the biggest processing bottleneck.
-     *
-     * @since 2.0
      */
     public static CharSequence collapse(CharSequence text) {
         int len = text.length();

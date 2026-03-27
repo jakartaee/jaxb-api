@@ -9,6 +9,12 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+//     Joe Fialli
+//     Kohsuke Kawaguchi
+//     Ryan Shoemaker
+
 package jakarta.xml.bind;
 
 import javax.xml.namespace.NamespaceContext;
@@ -62,11 +68,9 @@ import javax.xml.namespace.NamespaceContext;
  * IllegalArgumentException must be thrown by the method.
  * </p>
  *
- * @author <ul><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker,Sun Microsystems Inc.</li></ul>
  * @see DatatypeConverterInterface
  * @see ParseConversionEvent
  * @see PrintConversionEvent
- * @since 1.6, JAXB 1.0
  */
 final public class DatatypeConverter {
 

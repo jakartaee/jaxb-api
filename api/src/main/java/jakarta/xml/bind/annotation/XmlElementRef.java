@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -195,9 +199,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  </math>
  *}
  *
- * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems,Inc. </li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElementRefs
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD})
@@ -258,8 +260,6 @@ public @interface XmlElementRef {
      * <p>
      * For compatibility with Jakarta XML Binding, this property defaults to {@code true}, despite the fact that
      * {@linkplain XmlElement#required()} defaults to false.
-     *
-     * @since 1.7, JAXB 2.2
      */
     boolean required() default true;
 }

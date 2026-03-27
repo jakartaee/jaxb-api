@@ -21,7 +21,6 @@ import java.io.Serial;
  * {@code JAXBException} is a checked exception.
  *
  * @see JAXB
- * @since 1.6, JAXB 2.1
  */
 public class DataBindingException extends RuntimeException {
 

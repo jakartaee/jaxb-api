@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Marc Hadley
+//     Kohsuke Kawaguchi
+//     Joseph Fialli
+
 package jakarta.xml.bind.attachment;
 
 import jakarta.activation.DataHandler;
@@ -39,14 +44,10 @@ import jakarta.activation.DataHandler;
  * </li>
  * </ul>
  *
- * @author Marc Hadley
- * @author Kohsuke Kawaguchi
- * @author Joseph Fialli
  * @see jakarta.xml.bind.Unmarshaller#setAttachmentUnmarshaller(AttachmentUnmarshaller)
  * @see <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">XML-binary Optimized Packaging</a>
  * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html">WS-I Attachments Profile Version 1.0.</a>
  * @see <a href="http://www.w3.org/TR/xml-media-types/">Describing Media Content of Binary Data in XML</a>
- * @since 1.6, JAXB 2.0
  */
 public abstract class AttachmentUnmarshaller {
 

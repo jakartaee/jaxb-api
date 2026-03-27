@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+//     Kohsuke Kawaguchi
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 /**
@@ -43,14 +48,10 @@ package jakarta.xml.bind;
  * the first error or fatal error (but will attempt to continue after receiving warnings).
  * </blockquote>
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li>
- * <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
- * <li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see Unmarshaller
  * @see Marshaller
  * @see ValidationEvent
  * @see jakarta.xml.bind.util.ValidationEventCollector
- * @since 1.6, JAXB 1.0
  */
 public interface ValidationEventHandler {
     /**

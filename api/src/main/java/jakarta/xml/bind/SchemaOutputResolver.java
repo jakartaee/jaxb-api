@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind;
 
 import java.io.IOException;
@@ -24,8 +27,6 @@ import javax.xml.transform.Result;
  * <p>
  * This is a class, not an interface to allow future versions to evolve without breaking the compatibility.
  *
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
- * @since 1.6
  */
 public abstract class SchemaOutputResolver {
 

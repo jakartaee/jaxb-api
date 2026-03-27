@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -68,13 +72,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
  *
- * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElement
  * @see XmlElements
  * @see XmlElementRef
  * @see XmlElementRefs
- * @since 1.6, JAXB 2.0
- *
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD})
@@ -119,8 +120,6 @@ public @interface XmlElementWrapper {
      * <p>
      * Note that this only affects the schema generation, and not the unmarshalling or marshalling capability. This is
      * simply a mechanism to let users express their application constraints better.
-     *
-     * @since 1.6, JAXB 2.1
      */
     boolean required() default false;
 }

@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.activation.DataHandler;
@@ -55,9 +58,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * The above binding supports WS-I AP 1.0 <a
  * href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html#Referencing_Attachments_from_the_SOAP_Envelope">WS-I
  * Attachments Profile Version 1.0.</a>
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD, PARAMETER})

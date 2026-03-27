@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+
 package jakarta.xml.bind.helpers;
 
 import jakarta.xml.bind.PrintConversionEvent;
@@ -21,12 +24,10 @@ import jakarta.xml.bind.ValidationEventLocator;
  * Jakarta XML Binding providers are allowed to use whatever class that implements the ValidationEvent interface. This
  * class is just provided for a convenience.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.PrintConversionEvent
  * @see jakarta.xml.bind.ValidationEventHandler
  * @see jakarta.xml.bind.ValidationEvent
  * @see jakarta.xml.bind.ValidationEventLocator
- * @since 1.6, JAXB 1.0
  */
 public class PrintConversionEventImpl
         extends ValidationEventImpl

@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.helpers;
 
 import jakarta.xml.bind.JAXBException;
@@ -48,9 +51,7 @@ import javax.xml.validation.Schema;
  * {@linkplain Marshaller#marshal(Object, XMLStreamWriter) marshal(Object, javax.xml.stream.XMLStreamWriter)}, and
  * {@linkplain Marshaller#marshal(Object, XMLEventWriter)  marshal(Object, javax.xml.stream.XMLEventWriter)}.
  *
- * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.Marshaller
- * @since 1.6, JAXB 1.0
  */
 public abstract class AbstractMarshallerImpl implements Marshaller {
     /**

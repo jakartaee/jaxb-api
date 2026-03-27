@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.util;
 
 import jakarta.xml.bind.JAXBContext;
@@ -50,8 +53,6 @@ import javax.xml.transform.sax.SAXResult;
  * <p>
  * In particular, it shall never attempt to call the setHandler, setLexicalHandler, and setSystemId methods.
  *
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
- * @since 1.6
  */
 public class JAXBResult extends SAXResult {
 

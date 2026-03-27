@@ -9,16 +9,16 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 /**
  * Used by XmlAccessorOrder to control the ordering of properties and fields in a Jakarta XML Binding bound class.
  *
- * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlAccessorOrder
- * @since 1.6, JAXB 2.0
  */
-
 public enum XmlAccessOrder {
     /**
      * The ordering of fields and properties in a class is undefined.

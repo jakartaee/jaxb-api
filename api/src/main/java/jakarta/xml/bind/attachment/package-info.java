@@ -36,6 +36,5 @@
  * @see <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">[2]XML-binary Optimized Packaging</a>
  * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html">[3]WS-I Attachments Profile Version 1.0.</a>
  * @see <a href="http://www.w3.org/TR/xml-media-types/">[4]Describing Media Content of Binary Data in XML</a>
- * @since JAXB 2.0
  */
 package jakarta.xml.bind.attachment;

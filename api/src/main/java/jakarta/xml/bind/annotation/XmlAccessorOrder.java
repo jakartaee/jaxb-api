@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -57,9 +60,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    {@linkplain XmlJavaTypeAdapter}. It can also be used with the
  *    following annotations at the package level: {@linkplain XmlJavaTypeAdapter}.
  *
- * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @see XmlAccessOrder
- * @since 1.6, JAXB 2.0
  */
 
 @Inherited

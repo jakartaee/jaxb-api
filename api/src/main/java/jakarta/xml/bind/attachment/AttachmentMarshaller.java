@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Marc Hadley
+//     Kohsuke Kawaguchi
+//     Joseph Fialli
+
 package jakarta.xml.bind.attachment;
 
 import jakarta.activation.DataHandler;
@@ -30,13 +35,9 @@ import jakarta.xml.bind.Marshaller;
  * {@linkplain #addSwaRefAttachment(DataHandler)} being called by the marshaller for each Jakarta XML Binding property
  * related to {http://ws-i.org/profiles/basic/1.1/xsd}swaRef.
  *
- * @author Marc Hadley
- * @author Kohsuke Kawaguchi
- * @author Joseph Fialli
  * @see Marshaller#setAttachmentMarshaller(AttachmentMarshaller)
  * @see <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">XML-binary Optimized Packaging</a>
  * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html">WS-I Attachments Profile Version 1.0.</a>
- * @since 1.6, JAXB 2.0
  */
 public abstract class AttachmentMarshaller {
 

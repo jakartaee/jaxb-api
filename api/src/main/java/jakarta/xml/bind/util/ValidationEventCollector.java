@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Ryan Shoemaker
+//     Joe Fialli
+
 package jakarta.xml.bind.util;
 
 import jakarta.xml.bind.ValidationEvent;
@@ -25,11 +30,9 @@ import java.util.List;
  * class.  After the call to validate or unmarshal completes, call the getEvents method to retrieve all the reported
  * errors and warnings.
  *
- * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.ValidationEventHandler
  * @see jakarta.xml.bind.ValidationEvent
  * @see jakarta.xml.bind.ValidationEventLocator
- * @since 1.6, JAXB 1.0
  */
 public class ValidationEventCollector implements ValidationEventHandler {
     private final List<ValidationEvent> events = new ArrayList<>();

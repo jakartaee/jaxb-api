@@ -11,6 +11,9 @@
 
 package jakarta.xml.bind.annotation;
 
+// Contributor(s):
+//     Sekhar Vajjhala
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -28,9 +31,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * additional common information.</p>
  *
  * <p><b>Example:</b>See {@code XmlSchema} annotation type for an example.
- *
- * @author Sekhar Vajjhala, Sun Microsystems, Inc.
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({})

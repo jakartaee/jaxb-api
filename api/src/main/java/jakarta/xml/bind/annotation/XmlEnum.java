@@ -47,8 +47,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * {@code @XmlEnum.value()}.
  *
  * <p><b>Examples:</b> See examples in {@linkplain XmlEnumValue}
- *
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({TYPE})

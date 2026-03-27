@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -76,9 +79,6 @@ import javax.xml.transform.stream.StreamSource;
  * All the methods on this class require non-null arguments to all parameters.
  * The {@code unmarshal} methods either fail with an exception or return
  * a non-null value.
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.1
  */
 public final class JAXB {
     /**

@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+
 package jakarta.xml.bind.helpers;
 
 import jakarta.xml.bind.ValidationEvent;
@@ -32,10 +35,8 @@ import org.w3c.dom.Node;
  * versions. Default validation event handling has changed and is specified in
  * {@linkplain jakarta.xml.bind.Unmarshaller} and {@linkplain jakarta.xml.bind.Marshaller}.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.Unmarshaller
  * @see jakarta.xml.bind.ValidationEventHandler
- * @since 1.6, JAXB 1.0
  */
 public class DefaultValidationEventHandler implements ValidationEventHandler {
 

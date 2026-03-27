@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation.adapters;
 
 import jakarta.xml.bind.DatatypeConverter;
@@ -18,9 +21,6 @@ import jakarta.xml.bind.DatatypeConverter;
  *
  * <p>
  * This {@linkplain XmlAdapter} binds {@code byte[]} to the hexBinary representation in XML.
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 public final class HexBinaryAdapter extends XmlAdapter<String, byte[]> {
 

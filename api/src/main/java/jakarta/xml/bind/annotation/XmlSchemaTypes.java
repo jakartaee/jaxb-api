@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
@@ -34,9 +37,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
  *
- * @author <ul><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlSchemaType
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({PACKAGE})

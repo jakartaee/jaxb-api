@@ -68,8 +68,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      name="date", type=javax.xml.datatype.XMLGregorianCalendar.class)
  *  package foo;
  *}
- *
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD, PACKAGE})
