@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2026 Contributors to the Eclipse Foundation
 //
 
 [appendix]
@@ -32,7 +32,7 @@ External binding declarations file:
 ----
 <jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
-               version="3.0">
+               version="4.1">
   <jaxb:bindings schemaLocation="A.xsd">
     <jaxb:bindings node="//xs:complexType[@name=’aType’]">
       <jaxb:class name="customNameType"/>
@@ -57,7 +57,7 @@ following inline annotated schema.
            xmlns:ens="http://example.com/ns"
            targetNamespace="http://example.com/ns"
            xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
-           jaxb:version="3.0">
+           jaxb:version="4.1">
   <xs:complexType name="aType">
     <xs:annotation>
       <xs:appinfo>

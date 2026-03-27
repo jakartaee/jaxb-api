@@ -167,7 +167,7 @@ global `version` attribute. It is used to identify the version of the
 binding declarations. For example, a future version of this
 specification may use the version attribute to specify backward
 compatibility. To indicate this version of the specification, the
-`version should` be `"3.0"`.
+`version should` be `"4.1"`.
 If any other version is specified, it must result in an invalid
 customization as specified in <<Invalid Customizations>>.
 
@@ -180,7 +180,7 @@ element of the source schema. For example,
 +
 [source,xml,indent=4]
 ----
- <xs:schema jaxb:version="3.0">
+ <xs:schema jaxb:version="4.1">
 ----
 
 * If customizations are specified in an
@@ -191,13 +191,13 @@ version can be specified either as
 +
 [source,xml,indent=4]
 ----
- <jaxb:bindings version="3.0" ... />
+ <jaxb:bindings version="4.1" ... />
 ----
 or
 +
 [source,xml,indent=4]
 ----
- <jaxb:bindings jaxb:version="3.0" ... />
+ <jaxb:bindings jaxb:version="4.1" ... />
 ----
 +
 Specification of both `version` and

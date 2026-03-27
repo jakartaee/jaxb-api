@@ -7,9 +7,9 @@
 
 === XML Binding Schema
 
-Online version of XML Binding Schema is available at `https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd`.
+Online version of XML Binding Schema is available at `https://jakarta.ee/xml/ns/jaxb/bindingschema_4_1.xsd`.
 
 [source,xml]
 ----
-include::../../../../api/src/main/resources/jakarta/xml/bind/bindingschema_3_0.xsd[lines=1;14..-1]
+include::../../../../api/src/main/resources/jakarta/xml/bind/bindingschema_4_1.xsd[lines=1;15..-1]
 ----
