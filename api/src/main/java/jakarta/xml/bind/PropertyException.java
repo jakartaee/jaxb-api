@@ -9,18 +9,20 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-package jakarta.xml.bind;
+// Contributor(s):
+//     Ryan Shoemaker
+//     Kohsuke Kawaguchi
+//     Joe Fialli
 
+package jakarta.xml.bind;
 
 import java.io.Serial;
 
 /**
  * This exception indicates that an error was encountered while getting or setting a property.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  * @see Unmarshaller
- * @since 1.6, JAXB 1.0
  */
 public class PropertyException extends JAXBException {
 

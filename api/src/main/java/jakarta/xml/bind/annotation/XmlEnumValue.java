@@ -105,8 +105,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    </xs:restriction>
  *  </xs:simpleType>
  *}
- *
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD})

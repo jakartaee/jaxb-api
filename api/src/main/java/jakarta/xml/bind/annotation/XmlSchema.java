@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
@@ -96,9 +99,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    elementFormDefault="unqualified">
  *    ...
  *}
- *
- * @author Sekhar Vajjhala, Sun Microsystems, Inc.
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target(PACKAGE)
@@ -165,8 +165,6 @@ public @interface XmlSchema {
      * empty string is specified.) However, the schema generator is allowed to use a different value in the
      * {@code schemaLocation} attribute (including not generating such attribute), for example so that the user can
      * specify a local copy of the resource through the command line interface.
-     *
-     * @since 1.6, JAXB 2.1
      */
     String location() default NO_LOCATION;
 

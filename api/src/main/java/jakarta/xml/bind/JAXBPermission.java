@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 import java.io.Serial;
@@ -54,15 +57,12 @@ import java.security.BasicPermission;
  * </tbody>
  * </table>
  *
- * @author Joe Fialli
  * @see java.security.BasicPermission
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
  * @see java.lang.SecurityManager
- * @since 1.7, JAXB 2.2
  */
-
 /* code was borrowed originally from java.lang.RuntimePermission. */
 public final class JAXBPermission extends BasicPermission {
     /**

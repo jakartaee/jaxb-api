@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.JAXBElement;
@@ -111,9 +114,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD})

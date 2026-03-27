@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.JAXBContext;
@@ -138,9 +141,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  </bar>
  *}
  *
- *
- *
- *
  * <h2>Using {@linkplain XmlAnyElement} with {@linkplain XmlElementRef}</h2>
  * <p>
  * The {@linkplain XmlAnyElement} annotation can be used with {@linkplain XmlElementRef}s to designate additional
@@ -189,9 +189,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  </foo>
  *}
  *
- *
- *
- *
  * <h2>W3C XML Schema "lax" wildcard emulation</h2>
  * The lax element of the annotation enables the emulation of the "lax" wildcard semantics. For example, when the Java
  * source code is annotated like this:
@@ -218,9 +215,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  // unmarshalls to a Foo object.
  *  assert foo.others[1] instanceof Foo;
  *}
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD})

@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Sekhar Vajjhala
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -148,12 +152,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  </xs:complexType>
  *}
  *
- * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElement
  * @see XmlElementRef
  * @see XmlElementRefs
  * @see XmlJavaTypeAdapter
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD})

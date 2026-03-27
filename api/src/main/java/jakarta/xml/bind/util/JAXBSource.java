@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.util;
 
 import jakarta.xml.bind.JAXBContext;
@@ -63,8 +66,6 @@ import org.xml.sax.helpers.XMLFilterImpl;
  * Similarly, the InputSource object obtained by the getInputSource method shall be used only for being parsed by the
  * XMLReader object returned by the getXMLReader.
  *
- * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
- * @since 1.6
  */
 public class JAXBSource extends SAXSource {
 

@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+//     Kohsuke Kawaguchi
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 /**
@@ -19,9 +24,6 @@ package jakarta.xml.bind;
  * elements.  For more detail, see section 5.7 "Element Declaration" and 5.7.1 "Bind to Java Element Interface" of the
  * specification.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
- * @since 1.6, JAXB 1.0
  */
-
 public interface Element {
 }

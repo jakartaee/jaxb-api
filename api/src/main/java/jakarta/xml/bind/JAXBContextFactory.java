@@ -17,8 +17,6 @@ import java.util.Map;
  * <p>Factory that creates new <code>JAXBContext</code> instances.
  * <p>
  * JAXBContextFactory can be located using {@linkplain java.util.ServiceLoader#load(Class)}
- *
- * @since 9, JAXB 2.3
  */
 public interface JAXBContextFactory {
 
@@ -50,7 +48,6 @@ public interface JAXBContextFactory {
      *                                  </ol>
      * @throws IllegalArgumentException if the parameter contains {@code null} (i.e.,
      *                                  {@code newInstance(null,someMap);})
-     * @since 9, JAXB 2.3
      */
     JAXBContext createContext(Class<?>[] classesToBeBound,
                               Map<String, ?> properties) throws JAXBException;
@@ -82,7 +79,6 @@ public interface JAXBContextFactory {
      *                         <li>mixing schema derived packages from different providers on the same contextPath</li>
      *                         <li>packages are not open to {@code jakarta.xml.bind} module</li>
      *                       </ol>
-     * @since 9, JAXB 2.3
      */
     JAXBContext createContext(String contextPath,
                               ClassLoader classLoader,

@@ -9,6 +9,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 import java.io.Serial;
@@ -25,11 +29,8 @@ import java.io.Serial;
  * If this exception is throw while invoking a fail-fast setter, the value of the property is guaranteed to remain
  * unchanged, as if the setter were never called.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see ValidationEvent
- * @since 1.6, JAXB 1.0
  */
-
 public class TypeConstraintException extends java.lang.RuntimeException {
 
     /**

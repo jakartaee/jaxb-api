@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+
 package jakarta.xml.bind;
 
 import java.lang.reflect.InvocationTargetException;
@@ -31,7 +34,6 @@ import java.util.stream.Collectors;
  * <p>
  * This code is designed to implement the XML Binding spec pluggability feature
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  */
 class ContextFinder {

@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+
 package jakarta.xml.bind;
 
 import java.io.PrintWriter;
@@ -17,11 +20,9 @@ import java.io.Serial;
 /**
  * This is the root exception class for all Jakarta XML Binding exceptions.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  * @see Marshaller
  * @see Unmarshaller
- * @since 1.6, JAXB 1.0
  */
 public class JAXBException extends Exception {
 

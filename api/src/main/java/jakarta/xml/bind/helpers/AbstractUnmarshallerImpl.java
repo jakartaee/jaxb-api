@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.helpers;
 
 import jakarta.xml.bind.JAXBElement;
@@ -53,11 +56,7 @@ import org.xml.sax.XMLReader;
  * A Jakarta XML Binding Provider has to implement five methods getUnmarshallerHandler(), unmarshal(Node),
  * unmarshal(XMLReader,InputSource), unmarshal(XMLStreamReader), and unmarshal(XMLEventReader).
  *
- * @author <ul>
- * <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
- * </ul>
  * @see jakarta.xml.bind.Unmarshaller
- * @since 1.6, JAXB 1.0
  */
 public abstract class AbstractUnmarshallerImpl implements Unmarshaller {
     /**

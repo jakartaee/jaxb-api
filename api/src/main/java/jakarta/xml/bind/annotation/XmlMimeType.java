@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
@@ -32,9 +35,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * If a property that has this annotation has a sibling property bound to the xmime:contentType attribute, and if in the
  * instance the property has a value, the value of the attribute takes precedence and that will control the
  * marshalling.
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD, PARAMETER})

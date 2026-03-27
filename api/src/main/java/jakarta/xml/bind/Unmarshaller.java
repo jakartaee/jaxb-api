@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+//     Kohsuke Kawaguchi
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
@@ -345,10 +350,8 @@ import javax.xml.validation.Schema;
  * An event callback method throwing an exception terminates the current unmarshal process.
  * </blockquote>
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  * @see Marshaller
- * @since 1.6, JAXB 1.0
  */
 public interface Unmarshaller {
 
@@ -406,7 +409,6 @@ public interface Unmarshaller {
      *                                  perform the XML to Java binding. See
      *                                  {@linkplain ##unmarshalEx Unmarshalling XML Data}.
      * @throws IllegalArgumentException If the InputStream parameter is null
-     * @since 1.6, JAXB 2.0
      */
     Object unmarshal(Reader reader) throws JAXBException;
 
@@ -484,7 +486,6 @@ public interface Unmarshaller {
      *                                  perform the XML to Java binding. See
      *                                  {@linkplain ##unmarshalEx Unmarshalling XML Data}.
      * @throws IllegalArgumentException If any parameter is null
-     * @since 1.6, JAXB 2.0
      */
     <T> JAXBElement<T> unmarshal(org.w3c.dom.Node node, Class<T> declaredType) throws JAXBException;
 
@@ -557,7 +558,6 @@ public interface Unmarshaller {
      *                                  perform the XML to Java binding. See
      *                                  {@linkplain ##unmarshalEx Unmarshalling XML Data}.
      * @throws IllegalArgumentException If any parameter is null
-     * @since 1.6, JAXB 2.0
      */
     <T> JAXBElement<T> unmarshal(javax.xml.transform.Source source, Class<T> declaredType)
             throws JAXBException;
@@ -584,7 +584,6 @@ public interface Unmarshaller {
      * @throws IllegalArgumentException If the {@code reader} parameter is null
      * @throws IllegalStateException    If {@code reader} is not pointing to a START_DOCUMENT or START_ELEMENT  event.
      * @see #unmarshal(javax.xml.stream.XMLStreamReader, Class)
-     * @since 1.6, JAXB 2.0
      */
     Object unmarshal(javax.xml.stream.XMLStreamReader reader)
             throws JAXBException;
@@ -611,7 +610,6 @@ public interface Unmarshaller {
      *                                  perform the XML to Java binding. See
      *                                  {@linkplain ##unmarshalEx Unmarshalling XML Data}.
      * @throws IllegalArgumentException If any parameter is null
-     * @since 1.6, JAXB 2.0
      */
     <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLStreamReader reader, Class<T> declaredType) throws JAXBException;
 
@@ -637,7 +635,6 @@ public interface Unmarshaller {
      * @throws IllegalArgumentException If the {@code reader} parameter is null
      * @throws IllegalStateException    If {@code reader} is not pointing to a START_DOCUMENT or START_ELEMENT event.
      * @see #unmarshal(javax.xml.stream.XMLEventReader, Class)
-     * @since 1.6, JAXB 2.0
      */
     Object unmarshal(javax.xml.stream.XMLEventReader reader)
             throws JAXBException;
@@ -665,7 +662,6 @@ public interface Unmarshaller {
      *                                  perform the XML to Java binding. See
      *                                  {@linkplain ##unmarshalEx Unmarshalling XML Data}.
      * @throws IllegalArgumentException If any parameter is null
-     * @since 1.6, JAXB 2.0
      */
     <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLEventReader reader, Class<T> declaredType) throws JAXBException;
 
@@ -752,7 +748,6 @@ public interface Unmarshaller {
      *
      * @throws UnsupportedOperationException could be thrown if this method is invoked on an Unmarshaller created from a
      *                                       JAXBContext referencing JAXB 1.0 mapped classes
-     * @since 1.6, JAXB 2.0
      */
     void setSchema(Schema schema);
 
@@ -764,7 +759,6 @@ public interface Unmarshaller {
      * @return the Schema object being used to perform unmarshal-time validation or null if not present
      * @throws UnsupportedOperationException could be thrown if this method is invoked on an Unmarshaller created from a
      *                                       JAXBContext referencing JAXB 1.0 mapped classes
-     * @since 1.6, JAXB 2.0
      */
     Schema getSchema();
 
@@ -780,7 +774,6 @@ public interface Unmarshaller {
      * @throws IllegalArgumentException      if the adapter parameter is null.
      * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
      * @see #setAdapter(Class, XmlAdapter)
-     * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(A adapter);
 
@@ -805,7 +798,6 @@ public interface Unmarshaller {
      *
      * @throws IllegalArgumentException      if the type parameter is null.
      * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
-     * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter);
 
@@ -820,7 +812,6 @@ public interface Unmarshaller {
      * @return The adapter associated with the specified type.
      * @throws IllegalArgumentException      if the type parameter is null.
      * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
-     * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
 
@@ -853,8 +844,6 @@ public interface Unmarshaller {
      * {@linkplain Unmarshaller##unmarshalEventCallback Unmarshal Event Callbacks} for an overview.
      * </p>
      * {@linkplain Unmarshaller#setListener(Listener)} {@linkplain Unmarshaller#getListener()}
-     *
-     * @since 1.6, JAXB 2.0
      */
     abstract class Listener {
 
@@ -908,7 +897,6 @@ public interface Unmarshaller {
      *
      * @param listener provides unmarshal event callbacks for this {@linkplain Unmarshaller}
      *
-     * @since 1.6, JAXB 2.0
      */
     void setListener(Listener listener);
 
@@ -916,7 +904,6 @@ public interface Unmarshaller {
      * <p>Return {@linkplain Listener} registered with this {@linkplain Unmarshaller}.
      *
      * @return registered {@linkplain Listener} or {@code null} if no Listener is registered with this Unmarshaller.
-     * @since 1.6, JAXB 2.0
      */
     Listener getListener();
 }

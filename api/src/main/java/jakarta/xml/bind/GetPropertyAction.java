@@ -9,14 +9,15 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind;
 
 import java.security.PrivilegedAction;
 
 /**
  * {@linkplain PrivilegedAction} that gets the system property value.
- *
- * @author Kohsuke Kawaguchi
  */
 final class GetPropertyAction implements PrivilegedAction<String> {
     private final String propertyName;

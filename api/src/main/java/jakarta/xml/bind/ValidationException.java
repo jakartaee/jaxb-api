@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Ryan Shoemaker
+
 package jakarta.xml.bind;
 
 import java.io.Serial;
@@ -21,9 +24,7 @@ import java.io.Serial;
  * {@linkplain ValidationEventHandler#handleEvent(ValidationEvent)
  * ValidationEventHandler.handleEvent(ValidationEvent)}.
  *
- * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see JAXBException
- * @since 1.6, JAXB 1.0
  */
 public class ValidationException extends JAXBException {
 

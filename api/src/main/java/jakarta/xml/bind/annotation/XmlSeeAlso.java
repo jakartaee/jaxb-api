@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.JAXBContext;
@@ -52,9 +55,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p>
  * This would allow you to do {@code JAXBContext.newInstance(Animal.class)}. By the help of this annotation, Jakarta XML
  * Binding implementations will be able to correctly bind {@code Dog} and {@code Cat}.
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.1
  */
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)

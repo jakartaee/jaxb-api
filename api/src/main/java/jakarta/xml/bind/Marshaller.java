@@ -9,6 +9,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+//     Ryan Shoemaker
+//     Joe Fialli
+
 package jakarta.xml.bind;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -257,10 +262,8 @@ import javax.xml.validation.Schema;
  * An event callback method throwing an exception terminates the current marshal process.
  * </blockquote>
  *
- * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Ryan Shoemaker, Sun Microsystems, Inc.</li><li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
  * @see JAXBContext
  * @see Unmarshaller
- * @since 1.6, JAXB 1.0
  */
 public interface Marshaller {
 
@@ -350,7 +353,6 @@ public interface Marshaller {
      *                                  See
      *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
      * @throws IllegalArgumentException If any of the method parameters are null
-     * @since 1.6, JAXB 2.1
      */
     void marshal(Object jaxbElement, File output)
             throws JAXBException;
@@ -421,7 +423,6 @@ public interface Marshaller {
      *                                  See
      *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
      * @throws IllegalArgumentException If any of the method parameters are null
-     * @since 1.6, JAXB 2.0
      */
     void marshal(Object jaxbElement, javax.xml.stream.XMLStreamWriter writer)
             throws JAXBException;
@@ -439,7 +440,6 @@ public interface Marshaller {
      *                                  See
      *                                  {@linkplain ##elementMarshalling Marshalling a Jakarta XML Binding element}.
      * @throws IllegalArgumentException If any of the method parameters are null
-     * @since 1.6, JAXB 2.0
      */
     void marshal(Object jaxbElement, javax.xml.stream.XMLEventWriter writer)
             throws JAXBException;
@@ -533,7 +533,6 @@ public interface Marshaller {
      * @throws IllegalArgumentException      if the adapter parameter is null.
      * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
      * @see #setAdapter(Class, XmlAdapter)
-     * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(A adapter);
 
@@ -558,7 +557,6 @@ public interface Marshaller {
      *
      * @throws IllegalArgumentException      if the type parameter is null.
      * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
-     * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> void setAdapter(Class<A> type, A adapter);
 
@@ -573,7 +571,6 @@ public interface Marshaller {
      * @return The adapter associated with the specified type.
      * @throws IllegalArgumentException      if the type parameter is null.
      * @throws UnsupportedOperationException if invoked against a JAXB 1.0 implementation.
-     * @since 1.6, JAXB 2.0
      */
     <A extends XmlAdapter<?, ?>> A getAdapter(Class<A> type);
 
@@ -605,7 +602,6 @@ public interface Marshaller {
      *
      * @throws UnsupportedOperationException could be thrown if this method is invoked on a Marshaller created from a
      *                                       JAXBContext referencing JAXB 1.0 mapped classes
-     * @since 1.6, JAXB 2.0
      */
     void setSchema(Schema schema);
 
@@ -617,7 +613,6 @@ public interface Marshaller {
      * @return the Schema object being used to perform marshal-time validation or null if not present.
      * @throws UnsupportedOperationException could be thrown if this method is invoked on a Marshaller created from a
      *                                       JAXBContext referencing JAXB 1.0 mapped classes
-     * @since 1.6, JAXB 2.0
      */
     Schema getSchema();
 
@@ -637,7 +632,6 @@ public interface Marshaller {
      *
      * @see Marshaller#setListener(Listener)
      * @see Marshaller#getListener()
-     * @since 1.6, JAXB 2.0
      */
     abstract class Listener {
 
@@ -686,7 +680,6 @@ public interface Marshaller {
      *
      * @param listener an instance of a class that implements {@linkplain Listener}
      *
-     * @since 1.6, JAXB 2.0
      */
     void setListener(Listener listener);
 
@@ -694,7 +687,6 @@ public interface Marshaller {
      * <p>Return {@linkplain Listener} registered with this {@linkplain Marshaller}.
      *
      * @return registered {@linkplain Listener} or {@code null} if no Listener is registered with this Marshaller.
-     * @since 1.6, JAXB 2.0
      */
     Listener getListener();
 }

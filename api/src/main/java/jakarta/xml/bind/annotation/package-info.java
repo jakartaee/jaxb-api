@@ -170,7 +170,5 @@
  *     </tr>
  *   </tbody>
  * </table>
- *
- * @since 1.6, JAXB 2.0
  */
 package jakarta.xml.bind.annotation;

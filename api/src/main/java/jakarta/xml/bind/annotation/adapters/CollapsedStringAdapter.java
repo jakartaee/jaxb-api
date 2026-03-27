@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation.adapters;
 
 /**
@@ -17,9 +20,6 @@ package jakarta.xml.bind.annotation.adapters;
  * <p>
  * This adapter removes leading and trailing whitespaces, then truncate any sequence of tab, CR, LF, and SP by a single
  * whitespace character ' '.
- *
- * @author Kohsuke Kawaguchi
- * @since 1.6, JAXB 2.0
  */
 public class CollapsedStringAdapter extends XmlAdapter<String, String> {
 

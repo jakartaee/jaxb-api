@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Kohsuke Kawaguchi
+
 package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
@@ -50,9 +53,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * wildcard attribute map represented by
  * {@linkplain Map}&lt;{@linkplain QName},{@linkplain Object}&gt;. The attribute QName is the
  * map's key. The key's value is the String value of the attribute.
- *
- * @author Kohsuke Kawaguchi, Sun Microsystems, Inc.
- * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
 @Target({FIELD, METHOD})

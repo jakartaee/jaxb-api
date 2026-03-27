@@ -9,6 +9,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Contributor(s):
+//     Roman Grigoriadi
+
 package jakarta.xml.bind;
 
 import java.io.BufferedReader;
@@ -24,7 +27,6 @@ import java.util.logging.Logger;
 /**
  * Propagates openness of Jakarta XML Binding annotated classes packages to Jakarta XML Binding impl module.
  *
- * @author Roman Grigoriadi
  */
 class ModuleUtil {
 
