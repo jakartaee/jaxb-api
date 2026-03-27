@@ -136,7 +136,7 @@
       <xs:sequence minOccurs = "0">
         <xs:element ref = "jaxb:javaType" minOccurs = "0" maxOccurs = "unbounded"/>
         <xs:element ref = "jaxb:serializable" minOccurs = "0"/>
-        <xs:any namespace = "##other" processContents = "lax">
+        <xs:any namespace = "##other" processContents = "lax" minOccurs  ="0" maxOccurs = "unbounded">
           <xs:annotation> 
             <xs:documentation>allows extension binding declarations to be specified.</xs:documentation>
           </xs:annotation>
