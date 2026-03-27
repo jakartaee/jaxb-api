@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -19,6 +20,8 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlSchema;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlSchemaTypes;
+
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
 
@@ -75,6 +78,7 @@ import static java.lang.annotation.ElementType.PACKAGE;
  * @see XmlAdapter
  */
 @Retention(RUNTIME) @Target({PACKAGE,FIELD,METHOD,TYPE,PARAMETER})
+@Repeatable(XmlJavaTypeAdapters.class)
 public @interface XmlJavaTypeAdapter {
     /**
      * Points to the class that converts a value type to a bound type or vice versa.

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -10,6 +11,7 @@
 
 package jakarta.xml.bind.annotation;
 
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -71,6 +73,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME) @Target({FIELD,METHOD,PACKAGE})
+@Repeatable(XmlSchemaTypes.class)
 public @interface XmlSchemaType {
     String name();
     String namespace() default "http://www.w3.org/2001/XMLSchema";
