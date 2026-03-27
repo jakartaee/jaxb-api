@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -92,7 +93,7 @@ import java.lang.annotation.Target;
  * <p>
  * A class can be mapped to an XML Schema simple type using the
  * {@code @XmlValue} annotation. For additional details and examples,
- * see @{@link XmlValue} annotation type.
+ * see @{@linkplain XmlValue} annotation type.
  * <p>
  * The following table shows the mapping of the class to an XML Schema
  * complex type or simple type. The notational symbols used in the table are:
@@ -169,9 +170,9 @@ import java.lang.annotation.Target;
  *
  *  <h3> Usage with other annotations </h3>
  * <p> This annotation can be used with the following annotations:
- * {@link XmlRootElement}, {@link XmlAccessorOrder}, {@link XmlAccessorType},
- * {@link XmlEnum}. However, {@link
- * XmlAccessorOrder} and {@link XmlAccessorType} are ignored when this
+ * {@linkplain XmlRootElement}, {@linkplain XmlAccessorOrder}, {@linkplain XmlAccessorType},
+ * {@linkplain XmlEnum}. However, {@link
+ * XmlAccessorOrder} and {@linkplain XmlAccessorType} are ignored when this
  * annotation is used on an enum type.
  *
  * <p> <b> Example 1: </b> Map a class to a complex type with
@@ -396,7 +397,7 @@ public @interface XmlType {
      * <p> A JavaBean property or field listed in propOrder must not
      *     be transient or annotated with {@code @XmlTransient}.
      * <p> The default ordering of JavaBean properties is determined
-     *     by @{@link XmlAccessorOrder}.
+     *     by @{@linkplain XmlAccessorOrder}.
      */
     String[] propOrder() default {""};
 
@@ -427,9 +428,9 @@ public @interface XmlType {
     Class<?> factoryClass() default DEFAULT.class;
 
     /**
-     * Used in {@link XmlType#factoryClass()} to
+     * Used in {@linkplain XmlType#factoryClass()} to
      * signal that either factory mehod is not used or
-     * that it's in the class with this {@link XmlType} itself.
+     * that it's in the class with this {@linkplain XmlType} itself.
      */
     final class DEFAULT {
         private DEFAULT() {}

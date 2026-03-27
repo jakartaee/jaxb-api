@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -15,7 +16,7 @@ package jakarta.xml.bind;
  * The DatatypeConverterInterface is for Jakarta XML Binding provider use only. A
  * Jakarta XML Binding provider must supply a class that implements this interface.
  * Jakarta XML Binding Providers are required to call the
- * {@link DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface)
+ * {@linkplain DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface)
  * DatatypeConverter.setDatatypeConverter} api at
  * some point before the first marshal or unmarshal operation (perhaps during
  * the call to JAXBContext.newInstance).  This step is necessary to configure
@@ -31,7 +32,7 @@ package jakarta.xml.bind;
  *
  * <p>
  * The parse and print methods defined here are invoked by the static parse
- * and print methods defined in the {@link DatatypeConverter DatatypeConverter}
+ * and print methods defined in the {@linkplain DatatypeConverter DatatypeConverter}
  * class.
  *
  * <p>
@@ -82,7 +83,7 @@ public interface DatatypeConverterInterface {
      *     xsd:integer.
      * @return
      *     A BigInteger value represented by the string argument.
-     * @throws NumberFormatException {@code lexicalXSDInteger} is not a valid string representation of a {@link java.math.BigInteger} value.
+     * @throws NumberFormatException {@code lexicalXSDInteger} is not a valid string representation of a {@linkplain java.math.BigInteger} value.
      */
     java.math.BigInteger parseInteger(String lexicalXSDInteger);
 
@@ -126,7 +127,7 @@ public interface DatatypeConverterInterface {
      *     xsd:decimal.
      * @return
      *     A BigDecimal value represented by the string argument.
-     * @throws NumberFormatException {@code lexicalXSDDecimal} is not a valid string representation of {@link java.math.BigDecimal}.
+     * @throws NumberFormatException {@code lexicalXSDDecimal} is not a valid string representation of {@linkplain java.math.BigDecimal}.
      */
     java.math.BigDecimal parseDecimal(String lexicalXSDDecimal);
 

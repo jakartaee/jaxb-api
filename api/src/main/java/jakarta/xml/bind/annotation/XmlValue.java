@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -40,9 +41,9 @@ import static java.lang.annotation.RetentionPolicy.*;
  *       {@code @XmlValue} annotation. </li>
  *
  *   <li>{@code @XmlValue} can be used with the following
- *   annotations: {@link XmlList}. However this is redundant since
- *   {@link XmlList} maps a type to a simple schema type that derives by
- *   list just as {@link XmlValue} would. </li>
+ *   annotations: {@linkplain XmlList}. However this is redundant since
+ *   {@linkplain XmlList} maps a type to a simple schema type that derives by
+ *   list just as {@linkplain XmlValue} would. </li>
  *
  *   <li>If the type of the field or property is a collection type,
  *       then the collection item type must map to a simple schema

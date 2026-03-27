@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -24,7 +25,7 @@ package jakarta.xml.bind.annotation;
 public enum XmlAccessType {
     /**
      * Every getter/setter pair in a Jakarta XML Binding-bound class will be automatically
-     * bound to XML, unless annotated by {@link XmlTransient}.
+     * bound to XML, unless annotated by {@linkplain XmlTransient}.
      * <p>
      * Fields are bound to XML only when they are explicitly annotated
      * by some of the Jakarta XML Binding annotations.
@@ -32,7 +33,7 @@ public enum XmlAccessType {
     PROPERTY,
     /**
      * Every non-static, non-transient field in a Jakarta XML Binding-bound class will be automatically
-     * bound to XML, unless annotated by {@link XmlTransient}.
+     * bound to XML, unless annotated by {@linkplain XmlTransient}.
      * <p>
      * Getter/setter pairs are bound to XML only when they are explicitly annotated
      * by some of the Jakarta XML Binding annotations.
@@ -40,7 +41,7 @@ public enum XmlAccessType {
     FIELD,
     /**
      * Every public getter/setter pair and every public field will be
-     * automatically bound to XML, unless annotated by {@link XmlTransient}.
+     * automatically bound to XML, unless annotated by {@linkplain XmlTransient}.
      * <p>
      * Fields or getter/setter pairs that are private, protected, or 
      * defaulted to package-only access are bound to XML only when they are

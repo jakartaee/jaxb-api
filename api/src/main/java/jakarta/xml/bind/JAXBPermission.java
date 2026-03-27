@@ -42,12 +42,12 @@ import java.security.BasicPermission;
  * <tr>
  *   <th scope="row">setDatatypeConverter</th>
  *   <td>
- *     Allows the code to set VM-wide {@link DatatypeConverterInterface}
- *     via {@link DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface) the setDatatypeConverter method}
- *     that all the methods on {@link DatatypeConverter} uses.
+ *     Allows the code to set VM-wide {@linkplain DatatypeConverterInterface}
+ *     via {@linkplain DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface) the setDatatypeConverter method}
+ *     that all the methods on {@linkplain DatatypeConverter} uses.
  *   </td>
  *   <td>
- *     Malicious code can set {@link DatatypeConverterInterface}, which has
+ *     Malicious code can set {@linkplain DatatypeConverterInterface}, which has
  *     VM-wide singleton semantics,  before a genuine Jakarta XML Binding implementation sets one.
  *     This allows malicious code to gain access to objects that it may otherwise
  *     not have access to, such as {@code java.awt.Frame#getFrames()} that belongs to

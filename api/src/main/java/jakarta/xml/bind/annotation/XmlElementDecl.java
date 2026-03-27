@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -38,7 +39,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *        with &#64;XmlElementDecl must be marked with {@link
  *        XmlRegistry}. </li>
  *   <li> The element factory method must take one parameter
- *        assignable to {@link Object}.</li>
+ *        assignable to {@linkplain Object}.</li>
  * </ul>
  *
  * <p><b>Example 1: </b>Annotation on a factory method
@@ -125,7 +126,7 @@ public @interface XmlElementDecl {
      * scope of the mapping.
      *
      * <p>
-     * If this is not {@link XmlElementDecl.GLOBAL}, then this element
+     * If this is not {@linkplain XmlElementDecl.GLOBAL}, then this element
      * declaration mapping is only active within the specified class.
      */
     Class<?> scope() default GLOBAL.class;
@@ -195,7 +196,7 @@ public @interface XmlElementDecl {
     String defaultValue() default "\u0000";
 
     /**
-     * Used in {@link XmlElementDecl#scope()} to
+     * Used in {@linkplain XmlElementDecl#scope()} to
      * signal that the declaration is in the global scope.
      */
     final class GLOBAL {

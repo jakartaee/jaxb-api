@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -45,7 +46,7 @@ import javax.xml.namespace.NamespaceContext;
  * }
  * <p>
  * There is a static parse and print method corresponding to each parse and 
- * print method respectively in the {@link DatatypeConverterInterface 
+ * print method respectively in the {@linkplain DatatypeConverterInterface 
  * DatatypeConverterInterface}. 
  * <p>
  * The static methods defined in the class can also be used to specify
@@ -53,7 +54,7 @@ import javax.xml.namespace.NamespaceContext;
  * </p>
  * <p>
  * Jakarta XML Binding Providers are required to call the 
- * {@link #setDatatypeConverter(DatatypeConverterInterface) 
+ * {@linkplain #setDatatypeConverter(DatatypeConverterInterface) 
  * setDatatypeConverter} api at some point before the first marshal or unmarshal 
  * operation (perhaps during the call to JAXBContext.newInstance).  This step is 
  * necessary to configure the converter that should be used to perform the 
@@ -102,7 +103,7 @@ final public class DatatypeConverter {
      * DatatypeConverterInterface class - this parameter must not be null.
      * @throws IllegalArgumentException if the parameter is null
      * @throws SecurityException
-     *      If the {@link SecurityManager} in charge denies the access to
+     *      If the {@linkplain SecurityManager} in charge denies the access to
      *      set the datatype converter. 
      * @see JAXBPermission
      */
@@ -144,7 +145,7 @@ final public class DatatypeConverter {
      *     xsd:integer.
      * @return
      *     A BigInteger value represented by the string argument.
-     * @throws NumberFormatException <code>lexicalXSDInteger</code> is not a valid string representation of a {@link java.math.BigInteger} value.
+     * @throws NumberFormatException <code>lexicalXSDInteger</code> is not a valid string representation of a {@linkplain java.math.BigInteger} value.
      */ 
     public static java.math.BigInteger parseInteger( String lexicalXSDInteger ) {
         if (theConverter == null) initConverter();
@@ -204,7 +205,7 @@ final public class DatatypeConverter {
      *     xsd:decimal.
      * @return
      *     A BigDecimal value represented by the string argument.
-     * @throws NumberFormatException <code>lexicalXSDDecimal</code> is not a valid string representation of {@link java.math.BigDecimal}.
+     * @throws NumberFormatException <code>lexicalXSDDecimal</code> is not a valid string representation of {@linkplain java.math.BigDecimal}.
      */ 
     public static java.math.BigDecimal parseDecimal( String lexicalXSDDecimal ) {
         if (theConverter == null) initConverter();

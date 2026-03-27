@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -63,10 +64,10 @@ import static java.lang.annotation.RetentionPolicy.*;
  *  @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
  * }
  * <p>This annotation can be used with the following annotations: 
- *    {@link XmlType}, {@link XmlRootElement}, {@link XmlAccessorOrder}, 
- *    {@link XmlSchema}, {@link XmlSchemaType}, {@link XmlSchemaTypes}, 
- *    , {@link XmlJavaTypeAdapter}. It can also be used with the
- *    following annotations at the package level: {@link XmlJavaTypeAdapter}.
+ *    {@linkplain XmlType}, {@linkplain XmlRootElement}, {@linkplain XmlAccessorOrder}, 
+ *    {@linkplain XmlSchema}, {@linkplain XmlSchemaType}, {@linkplain XmlSchemaTypes}, 
+ *    {@linkplain XmlJavaTypeAdapter}. It can also be used with the
+ *    following annotations at the package level: {@linkplain XmlJavaTypeAdapter}.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0

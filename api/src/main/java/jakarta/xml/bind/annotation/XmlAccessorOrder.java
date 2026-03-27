@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -34,7 +35,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * <p> See "Package Specification" in {@code jakarta.xml.bind} package javadoc for
  * additional common information.</p>
  *
- * <p>The effective {@link XmlAccessOrder} on a class is determined
+ * <p>The effective {@linkplain XmlAccessOrder} on a class is determined
  * as follows:
  *
  * <ul>
@@ -42,17 +43,17 @@ import static java.lang.annotation.RetentionPolicy.*;
  *        it is used. </li>
  *   <li> Otherwise, if a {@code @XmlAccessorOrder} exists on one of
  *        its super classes, then it is inherited (by the virtue of
- *        {@link Inherited})
+ *        {@linkplain Inherited})
  *   <li> Otherwise, the {@code @XmlAccessorOrder} on the package
  *        of the class is used, if it's there.
- *   <li> Otherwise {@link XmlAccessOrder#UNDEFINED}.
+ *   <li> Otherwise {@linkplain XmlAccessOrder#UNDEFINED}.
  * </ul>
  *
  * <p>This annotation can be used with the following annotations:
- *    {@link XmlType}, {@link XmlRootElement}, {@link XmlAccessorType},
- *    {@link XmlSchema}, {@link XmlSchemaType}, {@link XmlSchemaTypes},
- *    {@link XmlJavaTypeAdapter}. It can also be used with the
- *    following annotations at the package level: {@link XmlJavaTypeAdapter}.
+ *    {@linkplain XmlType}, {@linkplain XmlRootElement}, {@linkplain XmlAccessorType},
+ *    {@linkplain XmlSchema}, {@linkplain XmlSchemaType}, {@linkplain XmlSchemaTypes},
+ *    {@linkplain XmlJavaTypeAdapter}. It can also be used with the
+ *    following annotations at the package level: {@linkplain XmlJavaTypeAdapter}.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2017, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -46,7 +47,7 @@ class ModuleUtil {
 
     /**
      * Resolves classes from context path.
-     * Only one class per package is needed to access its {@link java.lang.Module}
+     * Only one class per package is needed to access its {@linkplain java.lang.Module}
      */
     static Class<?>[] getClassesFromContextPath(String contextPath, ClassLoader classLoader) throws JAXBException {
         List<Class<?>> classes = new ArrayList<>();
@@ -119,7 +120,7 @@ class ModuleUtil {
      * {@linkplain Module#isOpen open} of classes should be delegated to implementation module.
      *
      * @param classes used to resolve module for {@linkplain Module#addOpens(String, Module)}
-     * @param factorySPI used to resolve {@link Module} of the implementation.
+     * @param factorySPI used to resolve {@linkplain Module} of the implementation.
      *
      * @throws JAXBException if ony of a classes package is not open to {@code jakarta.xml.bind} module.
      */

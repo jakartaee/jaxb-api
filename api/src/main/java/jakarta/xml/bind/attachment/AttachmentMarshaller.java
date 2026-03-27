@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -22,12 +23,12 @@ import jakarta.xml.bind.Marshaller;
  * delegating the creation of referenceable MIME parts to
  * the MIME-based package processor that implements this abstraction.
  *
- * <p>XOP processing is enabled when {@link #isXOPPackage()} is true.
- *    See {@link #addMtomAttachment(DataHandler, String, String)} for details.
+ * <p>XOP processing is enabled when {@linkplain #isXOPPackage()} is true.
+ *    See {@linkplain #addMtomAttachment(DataHandler, String, String)} for details.
  *
  *
  * <p>WS-I Attachment Profile 1.0 is supported by
- * {@link #addSwaRefAttachment(DataHandler)} being called by the
+ * {@linkplain #addSwaRefAttachment(DataHandler)} being called by the
  * marshaller for each Jakarta XML Binding property related to
  * {http://ws-i.org/profiles/basic/1.1/xsd}swaRef.
  *
@@ -53,7 +54,7 @@ public abstract class AttachmentMarshaller {
      * <p>Consider MIME content {@code data} for optimized binary storage as an attachment.
      *
      * <p>
-     * This method is called by Jakarta XML Binding marshal process when {@link #isXOPPackage()} is
+     * This method is called by Jakarta XML Binding marshal process when {@linkplain #isXOPPackage()} is
      * {@code true}, for each element whose datatype is "base64Binary", as described in
      * Step 3 in
      * <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/#creating_xop_packages">Creating XOP Packages</a>.

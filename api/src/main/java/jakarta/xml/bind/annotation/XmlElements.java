@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -19,7 +20,7 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * A container for multiple @{@link XmlElement} annotations.
+ * A container for multiple @{@linkplain XmlElement} annotations.
  * <p>
  * Multiple annotations of the same type are not allowed on a program
  * element. This annotation therefore serves as a container annotation
@@ -44,7 +45,7 @@ import java.lang.annotation.Target;
  * <p>The usage is subject to the following constraints:
  * <ul>
  *   <li> This annotation can be used with the following
- *        annotations: @{@link XmlIDREF}, @{@link XmlElementWrapper}. </li>
+ *        annotations: @{@linkplain XmlIDREF}, @{@linkplain XmlElementWrapper}. </li>
  *   <li> If @XmlIDREF is also specified on the JavaBean property,
  *        then each @XmlElement.type() must contain a JavaBean
  *        property annotated with {@code @XmlID}.</li>
@@ -156,7 +157,7 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME) @Target({FIELD,METHOD})
 public @interface XmlElements {
     /**
-     * Collection of @{@link XmlElement} annotations
+     * Collection of @{@linkplain XmlElement} annotations
      */
     XmlElement[] value();
 }

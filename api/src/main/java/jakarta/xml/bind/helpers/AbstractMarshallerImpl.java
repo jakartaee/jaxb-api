@@ -39,13 +39,13 @@ import java.util.Objects;
  *
  * <p>
  * This class provides a partial default implementation for the
- * {@link jakarta.xml.bind.Marshaller} interface.
+ * {@linkplain jakarta.xml.bind.Marshaller} interface.
  *
  * <p>
  * The only methods that a Jakarta XML Binding Provider has to implement are
- * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.transform.Result)},
- * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.stream.XMLStreamWriter)}, and
- * {@link Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.stream.XMLEventWriter)}.
+ * {@linkplain Marshaller#marshal(Object, javax.xml.transform.Result) marshal(Object, javax.xml.transform.Result)},
+ * {@linkplain Marshaller#marshal(Object, XMLStreamWriter) marshal(Object, javax.xml.stream.XMLStreamWriter)}, and
+ * {@linkplain Marshaller#marshal(Object, XMLEventWriter)  marshal(Object, javax.xml.stream.XMLEventWriter)}.
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.Marshaller
@@ -126,7 +126,7 @@ public abstract class AbstractMarshallerImpl implements Marshaller
 
     /**
      * By default, the getNode method is unsupported and throw
-     * an {@link java.lang.UnsupportedOperationException}.
+     * an {@linkplain java.lang.UnsupportedOperationException}.
      * <p>
      * Implementations that choose to support this method must
      * override this method.

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -26,15 +27,15 @@ import jakarta.activation.DataHandler;
  * base64-encoded binary data in XML.
  *
  * <p>
- * When XOP encoding is enabled as described in {@link AttachmentMarshaller#isXOPPackage()},
- * this annotation disables datatypes such as {@code java.awt.Image} or {@link Source}
+ * When XOP encoding is enabled as described in {@linkplain AttachmentMarshaller#isXOPPackage()},
+ * this annotation disables datatypes such as {@code java.awt.Image} or {@linkplain Source}
  * or {@code byte[]} that are bound to base64-encoded binary from being considered for
  * XOP encoding. If a Jakarta XML Binding property is annotated with this annotation or if
  * the Jakarta XML Binding property's base type is annotated with this annotation, 
  * neither 
- * {@link AttachmentMarshaller#addMtomAttachment(DataHandler, String, String)}
+ * {@linkplain AttachmentMarshaller#addMtomAttachment(DataHandler, String, String)}
  * nor 
- * {@link AttachmentMarshaller#addMtomAttachment(byte[], int, int, String, String, String)} is 
+ * {@linkplain AttachmentMarshaller#addMtomAttachment(byte[], int, int, String, String, String)} is 
  * ever called for the property. The binary data will always be inlined.
  *
  * @author Joseph Fialli

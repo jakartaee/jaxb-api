@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -51,21 +52,21 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <h2>Restriction usage constraints</h2>
  * <p>
  * This annotation is mutually exclusive with
- * {@link XmlElement}, {@link XmlAttribute}, {@link XmlValue},
- * {@link XmlElements}, {@link XmlID}, and {@link XmlIDREF}.
+ * {@linkplain XmlElement}, {@linkplain XmlAttribute}, {@linkplain XmlValue},
+ * {@linkplain XmlElements}, {@linkplain XmlID}, and {@linkplain XmlIDREF}.
  *
  * <p>
- * There can be only one {@link XmlAnyElement} annotated JavaBean property
+ * There can be only one {@linkplain XmlAnyElement} annotated JavaBean property
  * in a class and its super classes.
  *
  * <h2>Relationship to other annotations</h2>
  * <p>
- * This annotation can be used with {@link XmlJavaTypeAdapter}, so that users
+ * This annotation can be used with {@linkplain XmlJavaTypeAdapter}, so that users
  * can map their own data structure to DOM, which in turn can be composed
  * into XML.
  *
  * <p>
- * This annotation can be used with {@link XmlMixed} like this:
+ * This annotation can be used with {@linkplain XmlMixed} like this:
  * {@snippet :
  *  // List of java.lang.String or DOM nodes.
  *  @XmlAnyElement
@@ -148,9 +149,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  *
  *
- * <h2>Using {@link XmlAnyElement} with {@link XmlElementRef}</h2>
+ * <h2>Using {@linkplain XmlAnyElement} with {@linkplain XmlElementRef}</h2>
  * <p>
- * The {@link XmlAnyElement} annotation can be used with {@link XmlElementRef}s to
+ * The {@linkplain XmlAnyElement} annotation can be used with {@linkplain XmlElementRef}s to
  * designate additional elements that can participate in the content tree.
  *
  * <p>
@@ -236,7 +237,7 @@ public @interface XmlAnyElement {
 
     /**
      * Controls the unmarshaller behavior when it sees elements
-     * known to the current {@link JAXBContext}.
+     * known to the current {@linkplain JAXBContext}.
      *
      * <dl>
      * <dt>When false</dt>
@@ -247,14 +248,14 @@ public @interface XmlAnyElement {
      *
      * <dt>When true</dt>
      * <dd>
-     * If true, when an element matches a property marked with {@link XmlAnyElement}
-     * is known to {@link JAXBContext} (for example, there's a class with
-     * {@link XmlRootElement} that has the same tag name, or there's
-     * {@link XmlElementDecl} that has the same tag name),
+     * If true, when an element matches a property marked with {@linkplain XmlAnyElement}
+     * is known to {@linkplain JAXBContext} (for example, there's a class with
+     * {@linkplain XmlRootElement} that has the same tag name, or there's
+     * {@linkplain XmlElementDecl} that has the same tag name),
      * the unmarshaller will eagerly unmarshal this element to the Jakarta XML Binding object,
      * instead of unmarshalling it to DOM. Additionally, if the element is
      * unknown but it has a known xsi:type, the unmarshaller eagerly unmarshalls
-     * the element to a {@link JAXBElement}, with the unknown element name and
+     * the element to a {@linkplain JAXBElement}, with the unknown element name and
      * the JAXBElement value is set to an instance of the Jakarta XML Binding mapping of the
      * known xsi:type.
      * </dd>
@@ -270,7 +271,7 @@ public @interface XmlAnyElement {
     boolean lax() default false;
 
     /**
-     * Specifies the {@link DomHandler} which is responsible for actually
+     * Specifies the {@linkplain DomHandler} which is responsible for actually
      * converting XML from/to a DOM-like data structure.
      */
     Class<? extends DomHandler<?, ?>> value() default W3CDomHandler.class;

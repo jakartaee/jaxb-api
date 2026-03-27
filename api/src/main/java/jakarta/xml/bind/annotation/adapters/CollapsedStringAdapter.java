@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -11,7 +12,7 @@
 package jakarta.xml.bind.annotation.adapters;
 
 /**
- * Built-in {@link XmlAdapter} to handle {@code xs:token} and its derived types.
+ * Built-in {@linkplain XmlAdapter} to handle {@code xs:token} and its derived types.
  *
  * <p>
  * This adapter removes leading and trailing whitespaces, then truncate any

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -20,7 +21,7 @@ import javax.xml.transform.Source;
  *
  * <p>
  * Implementations of this interface will be used in conjunction with
- * {@link XmlAnyElement} annotation to map an element of XML into a representation
+ * {@linkplain XmlAnyElement} annotation to map an element of XML into a representation
  * of infoset such as W3C DOM.
  *
  * <p>
@@ -40,7 +41,7 @@ public interface DomHandler<ElementT,ResultT extends Result> {
     /**
      * When a Jakarta XML Binding provider needs to unmarshal a part of a document into an
      * infoset representation, it first calls this method to create a
-     * {@link Result} object.
+     * {@linkplain Result} object.
      *
      * <p>
      * A Jakarta XML Binding provider will then send a portion of the XML
@@ -49,12 +50,12 @@ public interface DomHandler<ElementT,ResultT extends Result> {
      *
      * @param errorHandler
      *      if any error happens between the invocation of this method
-     *      and the invocation of {@link #getElement(Result)}, they
+     *      and the invocation of {@linkplain #getElement(Result)}, they
      *      must be reported to this handler.
      * <p>
      *      The caller must provide a non-null error handler.
      * <p>
-     *      The {@link Result} object created from this method
+     *      The {@linkplain Result} object created from this method
      *      may hold a reference to this error handler.
      *
      * @return
@@ -64,16 +65,16 @@ public interface DomHandler<ElementT,ResultT extends Result> {
     ResultT createUnmarshaller( ValidationEventHandler errorHandler );
 
     /**
-     * Once the portion is sent to the {@link Result}. This method is called
+     * Once the portion is sent to the {@linkplain Result}. This method is called
      * by a Jakarta XML Binding provider to obtain the unmarshalled element representation.
      *
      * <p>
      * Multiple invocations of this method may return different objects.
      * This method can be invoked only when the whole subtree are fed
-     * to the {@link Result} object.
+     * to the {@linkplain Result} object.
      *
      * @param rt
-     *      The {@link Result} object created by {@link #createUnmarshaller(ValidationEventHandler)}.
+     *      The {@linkplain Result} object created by {@linkplain #createUnmarshaller(ValidationEventHandler)}.
      *
      * @return
      *      null if the operation fails. The error must have been reported
@@ -86,13 +87,13 @@ public interface DomHandler<ElementT,ResultT extends Result> {
      * to XML.
      *
      * <p>
-     * If non-null, the returned {@link Source} must contain a whole document
+     * If non-null, the returned {@linkplain Source} must contain a whole document
      * rooted at one element, which will then be woven into a bigger document
      * that the Jakarta XML Binding provider is marshalling.
      *
      * @param errorHandler
      *      Receives any errors happened during the process of converting
-     *      an element into a {@link Source}.
+     *      an element into a {@linkplain Source}.
      * <p>
      *      The caller must provide a non-null error handler.
      *

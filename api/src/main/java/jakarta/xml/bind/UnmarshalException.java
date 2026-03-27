@@ -21,7 +21,7 @@ import java.io.Serial;
  * <p>
  * The {@code ValidationEventHandler} can cause this exception to be thrown
  * during the unmarshal operations.  See 
- * {@link ValidationEventHandler#handleEvent(ValidationEvent)
+ * {@linkplain ValidationEventHandler#handleEvent(ValidationEvent)
  * ValidationEventHandler.handleEvent(ValidationEvent)}.
  * 
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>

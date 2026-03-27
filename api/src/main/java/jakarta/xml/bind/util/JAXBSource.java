@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -29,7 +30,7 @@ import javax.xml.transform.sax.SAXSource;
 import org.xml.sax.XMLFilter;
 
 /**
- * JAXP {@link javax.xml.transform.Source} implementation
+ * JAXP {@linkplain javax.xml.transform.Source} implementation
  * that marshals a Jakarta XML Binding-generated object.
  *
  * <p>
@@ -75,7 +76,7 @@ import org.xml.sax.XMLFilter;
 public class JAXBSource extends SAXSource {
 
     /**
-     * Creates a new {@link javax.xml.transform.Source} for the given content object.
+     * Creates a new {@linkplain javax.xml.transform.Source} for the given content object.
      *
      * @param   context
      *      JAXBContext that was used to create
@@ -83,7 +84,7 @@ public class JAXBSource extends SAXSource {
      *      to create a new instance of marshaller and must not be null.
      * @param   contentObject
      *      An instance of a Jakarta XML Binding-generated class, which will be
-     *      used as a {@link javax.xml.transform.Source} (by marshalling it into XML).  It must
+     *      used as a {@linkplain javax.xml.transform.Source} (by marshalling it into XML).  It must
      *      not be null.
      * @throws JAXBException if an error is encountered while creating the
      * JAXBSource or if either of the parameters are null.
@@ -102,7 +103,7 @@ public class JAXBSource extends SAXSource {
     }
 
     /**
-     * Creates a new {@link javax.xml.transform.Source} for the given content object.
+     * Creates a new {@linkplain javax.xml.transform.Source} for the given content object.
      *
      * @param   marshaller
      *      A marshaller instance that will be used to marshal
@@ -111,7 +112,7 @@ public class JAXBSource extends SAXSource {
      *      <code>contentObject</code> and must not be null.
      * @param   contentObject
      *      An instance of a Jakarta XML Binding-generated class, which will be
-     *      used as a {@link javax.xml.transform.Source} (by marshalling it into XML).  It must
+     *      used as a {@linkplain javax.xml.transform.Source} (by marshalling it into XML).  It must
      *      not be null.
      * @throws JAXBException if an error is encountered while creating the
      * JAXBSource or if either of the parameters are null.

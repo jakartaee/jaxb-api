@@ -40,7 +40,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * specified at the package level.
  *
  * <p> This annotation can be used with the following annotations:
- * {@link XmlElement},  {@link XmlAttribute}.
+ * {@linkplain XmlElement},  {@linkplain XmlAttribute}.
  * <p>
  * <b>Example 1: </b> Customize mapping of XMLGregorianCalendar on the
  *  field.
@@ -85,7 +85,7 @@ public @interface XmlSchemaType {
     Class<?> type() default DEFAULT.class;
 
     /**
-     * Used in {@link XmlSchemaType#type()} to
+     * Used in {@linkplain XmlSchemaType#type()} to
      * signal that the type be inferred from the signature
      * of the property.
      */

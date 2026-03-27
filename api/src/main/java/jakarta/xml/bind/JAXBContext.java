@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -27,23 +28,23 @@ import java.util.Map;
  * specialized forms of the method available:
  *
  * <ul>
- * <li>{@link #newInstance(String, ClassLoader) JAXBContext.newInstance( "com.acme.foo:com.acme.bar" )} <br>
+ * <li>{@linkplain #newInstance(String, ClassLoader) JAXBContext.newInstance( "com.acme.foo:com.acme.bar" )} <br>
  * The JAXBContext instance is initialized from a list of colon
  * separated Java package names. Each java package contains
  * Jakarta XML Binding mapped classes, schema-derived classes and/or user annotated
  * classes. Additionally, the java package may contain Jakarta XML Binding package annotations
  * that must be processed. (see JLS, Section 7.4.1 "Named Packages").
  * </li>
- * <li>{@link #newInstance(Class...) JAXBContext.newInstance( com.acme.foo.Foo.class )} <br>
+ * <li>{@linkplain #newInstance(Class...) JAXBContext.newInstance( com.acme.foo.Foo.class )} <br>
  * The JAXBContext instance is initialized with class(es)
  * passed as parameter(s) and classes that are statically reachable from
- * these class(es). See {@link #newInstance(Class...)} for details.
+ * these class(es). See {@linkplain #newInstance(Class...)} for details.
  * </li>
  * </ul>
  *
  * <p><i>
  * The provider must call the
- * {@link DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface)
+ * {@linkplain DatatypeConverter#setDatatypeConverter(DatatypeConverterInterface)
  * DatatypeConverter.setDatatypeConverter} api prior to any client
  * invocations of the marshal and unmarshal methods.  This is necessary to
  * configure the datatype converter that will be used during these operations.</i>
@@ -51,7 +52,7 @@ import java.util.Map;
  * <a id="Unmarshalling"></a>
  * <h2>Unmarshalling</h2>
  * <p>
- * The {@link Unmarshaller} class provides the client application the ability
+ * The {@linkplain Unmarshaller} class provides the client application the ability
  * to convert XML data into a tree of Java content objects.
  * The unmarshal method allows for
  * any global XML element declared in the schema to be unmarshalled as
@@ -112,7 +113,7 @@ import java.util.Map;
  *
  * <h3>Marshalling</h3>
  * <p>
- * The {@link Marshaller} class provides the client application the ability
+ * The {@linkplain Marshaller} class provides the client application the ability
  * to convert a Java content tree back into XML data.  There is no difference
  * between marshalling a content tree that is created manually using the factory
  * methods and marshalling a content tree that is the result an {@code unmarshal}
@@ -143,9 +144,9 @@ import java.util.Map;
  *
  * <h3>Validation</h3>
  * <p>
- * In Jakarta XML Binding, the {@link Unmarshaller} has included convenience methods that expose
- * the JAXP {@link javax.xml.validation} framework.  Please refer to the
- * {@link Unmarshaller#setSchema(javax.xml.validation.Schema)} API for more
+ * In Jakarta XML Binding, the {@linkplain Unmarshaller} has included convenience methods that expose
+ * the JAXP {@linkplain javax.xml.validation} framework.  Please refer to the
+ * {@linkplain Unmarshaller#setSchema(javax.xml.validation.Schema)} API for more
  * information.
  *
  *
@@ -163,7 +164,7 @@ import java.util.Map;
  *
  * <h3>Discovery of Jakarta XML Binding implementation</h3>
  * <p>
- * To create an instance of {@link JAXBContext}, one of {@code JAXBContext.newInstance(...)} methods is invoked. After
+ * To create an instance of {@linkplain JAXBContext}, one of {@code JAXBContext.newInstance(...)} methods is invoked. After
  * JAX-B implementation is discovered, call is delegated to appropriate provider's method {@code createContext(...)}
  * passing parameters from the original call.
  * <p>
@@ -175,25 +176,25 @@ import java.util.Map;
  * <ol>
  *
  * <li>
- * If the system property {@link #JAXB_CONTEXT_FACTORY} exists, then its value is assumed to be the provider
+ * If the system property {@linkplain #JAXB_CONTEXT_FACTORY} exists, then its value is assumed to be the provider
  * factory class. This phase of the look up enables per-JVM override of the Jakarta XML Binding implementation.
  *
  * <li>
- * If the property {@link #JAXB_CONTEXT_FACTORY} exists in the {@code Map<String, ?>} passed to {@link #newInstance(Class[], Map)}
- * or to {@link #newInstance(String, ClassLoader, Map)}, then its value is assumed to be the fully qualified provider factory class name.
+ * If the property {@linkplain #JAXB_CONTEXT_FACTORY} exists in the {@code Map<String, ?>} passed to {@linkplain #newInstance(Class[], Map)}
+ * or to {@linkplain #newInstance(String, ClassLoader, Map)}, then its value is assumed to be the fully qualified provider factory class name.
  * This phase of the look up enables context sensitive selection of the Jakarta XML Binding implementation.
  *
  * <li>
- * Provider of {@link jakarta.xml.bind.JAXBContextFactory} is loaded using the service-provider loading
- * facilities, defined by the {@link java.util.ServiceLoader} class, to attempt
+ * Provider of {@linkplain jakarta.xml.bind.JAXBContextFactory} is loaded using the service-provider loading
+ * facilities, defined by the {@linkplain java.util.ServiceLoader} class, to attempt
  * to locate and load an implementation of the service using the {@linkplain
  * java.util.ServiceLoader#load(java.lang.Class) default loading mechanism}: the service-provider loading facility
  * will use the {@linkplain java.lang.Thread#getContextClassLoader() current thread's context class loader}
  * to attempt to load the context factory. If the context class loader is null, the
  * {@linkplain ClassLoader#getSystemClassLoader() system class loader} will be used.
  * <br>
- * In case of {@link java.util.ServiceConfigurationError service
- * configuration error} a {@link jakarta.xml.bind.JAXBException} will be thrown.
+ * In case of {@linkplain java.util.ServiceConfigurationError service
+ * configuration error} a {@linkplain jakarta.xml.bind.JAXBException} will be thrown.
  *
  * <li>
  * Finally, if all the steps above fail, then the rest of the look up is unspecified. That said,
@@ -214,7 +215,7 @@ import java.util.Map;
  *
  * @see Marshaller
  * @see Unmarshaller
- * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-7.html#jls-7.4.1">S 7.4.1 "Named Packages"
+ * @see <a href="https://docs.oracle.com/javase/specs/jls/se17/html/jls-7.html#jls-7.4.1">S 7.4.1 "Named Packages"
  *      in Java Language Specification</a>
  *
  * @since 1.6, JAXB 1.0
@@ -236,7 +237,7 @@ public abstract class JAXBContext {
      *
      * <p>
      * This is a convenience method to invoke the
-     * {@link #newInstance(String,ClassLoader)} method with
+     * {@linkplain #newInstance(String,ClassLoader)} method with
      * the context class loader of the current thread.
      *
      * @param contextPath the context path
@@ -296,7 +297,7 @@ public abstract class JAXBContext {
      * lines, are ignored. The comment character
      * is '#' (0x23); on each line all characters following the first comment
      * character are ignored. The file must be encoded in UTF-8. Classes that
-     * are reachable, as defined in {@link #newInstance(Class...)}, from the
+     * are reachable, as defined in {@linkplain #newInstance(Class...)}, from the
      * listed classes are also registered with JAXBContext.
      * <p>
      * Constraints on class name occurring in a {@code jaxb.index} file are:
@@ -353,9 +354,9 @@ public abstract class JAXBContext {
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * This is mostly the same as {@link JAXBContext#newInstance(String, ClassLoader)},
+     * This is mostly the same as {@linkplain JAXBContext#newInstance(String, ClassLoader)},
      * but this version allows you to pass in provider-specific properties to configure
-     * the instantiation of {@link JAXBContext}.
+     * the instantiation of {@linkplain JAXBContext}.
      *
      * <p>
      * The interpretation of properties is up to implementations. Implementations must
@@ -414,7 +415,7 @@ public abstract class JAXBContext {
 //     * referenced statically from the specified classes.
 //     *
 //     * For example, in the following Java code, if you do
-//     * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
+//     * {@code newInstance(Foo.class)}, the newly created {@linkplain JAXBContext}
 //     * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot}:
 //     * {@snippet :
 //     *  class Foo {
@@ -434,8 +435,8 @@ public abstract class JAXBContext {
 //     *      when specified, those files determine how the classes are bound.
 //     *
 //     * @param classesToBeBound
-//     *      list of java classes to be recognized by the new {@link JAXBContext}.
-//     *      Can be empty, in which case a {@link JAXBContext} that only knows about
+//     *      list of java classes to be recognized by the new {@linkplain JAXBContext}.
+//     *      Can be empty, in which case a {@linkplain JAXBContext} that only knows about
 //     *      spec-defined classes will be returned.
 //     *
 //     * @return
@@ -489,7 +490,7 @@ public abstract class JAXBContext {
      * are not registered with JAXBContext.
      * <p>
      * For example, in the following Java code, if you do
-     * {@code newInstance(Foo.class)}, the newly created {@link JAXBContext}
+     * {@code newInstance(Foo.class)}, the newly created {@linkplain JAXBContext}
      * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
      * {@snippet :
      *  class Foo {
@@ -513,10 +514,10 @@ public abstract class JAXBContext {
      * The steps involved in discovering the Jakarta XML Binding implementation is discussed in the class javadoc.
      *
      * @param classesToBeBound
-     *      List of java classes to be recognized by the new {@link JAXBContext}.
+     *      List of java classes to be recognized by the new {@linkplain JAXBContext}.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
      *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
-     *      Can be empty, in which case a {@link JAXBContext} that only knows about
+     *      Can be empty, in which case a {@linkplain JAXBContext} that only knows about
      *      spec-defined classes will be returned.
      *
      * @return
@@ -550,18 +551,18 @@ public abstract class JAXBContext {
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * An overloading of {@link JAXBContext#newInstance(Class...)}
-     * to configure 'properties' for this instantiation of {@link JAXBContext}.
+     * An overloading of {@linkplain JAXBContext#newInstance(Class...)}
+     * to configure 'properties' for this instantiation of {@linkplain JAXBContext}.
      *
      * <p>
      * The interpretation of properties is up to implementations. Implementations must
      * throw {@code JAXBException} if it finds properties that it doesn't understand.
      *
      * @param classesToBeBound
-     *      List of java classes to be recognized by the new {@link JAXBContext}.
+     *      List of java classes to be recognized by the new {@linkplain JAXBContext}.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
      *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
-     *      Can be empty, in which case a {@link JAXBContext} that only knows about
+     *      Can be empty, in which case a {@linkplain JAXBContext} that only knows about
      *      spec-defined classes will be returned.
      * @param properties
      *      provider-specific or provider selection-specific properties.
@@ -689,7 +690,7 @@ public abstract class JAXBContext {
      *      will be sent.
      *
      * @throws IOException
-     *      if {@link SchemaOutputResolver} throws an {@link IOException}.
+     *      if {@linkplain SchemaOutputResolver} throws an {@linkplain IOException}.
      *
      * @throws UnsupportedOperationException
      *      Calling this method on JAXB 1.0 implementations will throw

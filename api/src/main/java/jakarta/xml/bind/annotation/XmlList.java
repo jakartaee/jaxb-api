@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -72,20 +73,20 @@ import static java.lang.annotation.ElementType.PARAMETER;
  * }
  *
  * <p>This annotation can be used with the following annotations:
- *        {@link XmlElement}, 
- *        {@link XmlAttribute},
- *        {@link XmlValue},
- *        {@link XmlIDREF}.
+ *        {@linkplain XmlElement}, 
+ *        {@linkplain XmlAttribute},
+ *        {@linkplain XmlValue},
+ *        {@linkplain XmlIDREF}.
  *  <ul>
- *    <li> The use of {@code @XmlList} with {@link XmlValue} while
- *         allowed, is redundant since  {@link XmlList} maps a
+ *    <li> The use of {@code @XmlList} with {@linkplain XmlValue} while
+ *         allowed, is redundant since  {@linkplain XmlList} maps a
  *         collection type to a simple schema type that derives by
- *         list just as {@link XmlValue} would. </li> 
+ *         list just as {@linkplain XmlValue} would. </li> 
  *
- *    <li> The use of {@code @XmlList} with {@link XmlAttribute} while
- *         allowed, is redundant since  {@link XmlList} maps a
+ *    <li> The use of {@code @XmlList} with {@linkplain XmlAttribute} while
+ *         allowed, is redundant since  {@linkplain XmlList} maps a
  *         collection type to a simple schema type that derives by
- *         list just as {@link XmlAttribute} would. </li> 
+ *         list just as {@linkplain XmlAttribute} would. </li> 
  *  </ul>
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>

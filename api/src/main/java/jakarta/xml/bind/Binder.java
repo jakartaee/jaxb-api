@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -22,32 +23,32 @@ import javax.xml.validation.Schema;
  * An instance of this class maintains the association between XML nodes of
  * an infoset preserving view and a Jakarta XML Binding representation of an XML document.
  * Navigation between the two views is provided by the methods
- * {@link #getXMLNode(Object)} and {@link #getJAXBNode(Object)}.
+ * {@linkplain #getXMLNode(Object)} and {@linkplain #getJAXBNode(Object)}.
  *
  * <p>
  * Modifications can be made to either the infoset preserving view or the
  * Jakarta XML Binding representation of the document while the other view remains
  * unmodified. The binder is able to synchronize the changes made in the
  * modified view back into the other view using the appropriate
- * Binder update methods, {@link #updateXML(Object, Object)} or
- * {@link #updateJAXB(Object)}.
+ * Binder update methods, {@linkplain #updateXML(Object, Object)} or
+ * {@linkplain #updateJAXB(Object)}.
  *
  * <p>
  * A typical usage scenario is the following:
  * <ul>
  *   <li>load XML document into an XML infoset representation</li>
- *   <li>{@link #unmarshal(Object)} XML infoset view to Jakarta XML Binding view.
+ *   <li>{@linkplain #unmarshal(Object)} XML infoset view to Jakarta XML Binding view.
  *       (Note to conserve resources, it is possible to only unmarshal a
  *       subtree of the XML infoset view to the Jakarta XML Binding view.)</li>
  *   <li>application access/updates Jakarta XML Binding view of XML document.</li>
- *   <li>{@link #updateXML(Object)} synchronizes modifications to Jakarta XML Binding view
+ *   <li>{@linkplain #updateXML(Object)} synchronizes modifications to Jakarta XML Binding view
  *       back into the XML infoset view. Update operation preserves as
  *       much of original XML infoset as possible (i.e. comments, PI, ...)</li>
  * </ul>
  *
  * <p>
  * A Binder instance is created using the factory method
- * {@link JAXBContext#createBinder()} or {@link JAXBContext#createBinder(Class)}.
+ * {@linkplain JAXBContext#createBinder()} or {@linkplain JAXBContext#createBinder(Class)}.
  *
  * @param <XmlNode> the template parameter, <code>XmlNode</code>, is the
  * root interface/class for the XML infoset preserving representation.
@@ -73,20 +74,20 @@ public abstract class Binder<XmlNode> {
      * Unmarshal XML infoset view to a Jakarta XML Binding object tree.
      *
      * <p>
-     * This method is similar to {@link Unmarshaller#unmarshal(Node)}
+     * This method is similar to {@linkplain Unmarshaller#unmarshal(Node)}
      * with the addition of maintaining the association between XML nodes
      * and the produced Jakarta XML Binding objects, enabling future update operations,
-     * {@link #updateXML(Object, Object)} or {@link #updateJAXB(Object)}.
+     * {@linkplain #updateXML(Object, Object)} or {@linkplain #updateJAXB(Object)}.
      *
      * <p>
-     * When {@link #getSchema()} is non-null, <code>xmlNode</code>
+     * When {@linkplain #getSchema()} is non-null, <code>xmlNode</code>
      * and its descendants is validated during this operation.
      *
      * <p>
-     * This method throws {@link UnmarshalException} when the Binder's
-     * {@link JAXBContext} does not have a mapping for the XML element name
+     * This method throws {@linkplain UnmarshalException} when the Binder's
+     * {@linkplain JAXBContext} does not have a mapping for the XML element name
      * or the type, specifiable via {@code @xsi:type}, of {@code xmlNode}
-     * to a Jakarta XML Binding mapped class. The method {@link #unmarshal(Object, Class)}
+     * to a Jakarta XML Binding mapped class. The method {@linkplain #unmarshal(Object, Class)}
      * enables an application to specify the Jakarta XML Binding mapped class that
      * the {@code xmlNode} should be mapped to.
      *
@@ -99,7 +100,7 @@ public abstract class Binder<XmlNode> {
      * @throws JAXBException
      *      If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
-     *     If the {@link ValidationEventHandler ValidationEventHandler}
+     *     If the {@linkplain ValidationEventHandler ValidationEventHandler}
      *     returns false from its {@code handleEvent} method or the
      *     {@code Binder} is unable to perform the XML to Java
      *     binding.
@@ -113,16 +114,16 @@ public abstract class Binder<XmlNode> {
      * to a Jakarta XML Binding object tree.
      *
      * <p>
-     * Implements <a href="Unmarshaller.html#unmarshalByDeclaredType">Unmarshal by Declared Type</a>
+     * Implements {@linkplain Unmarshaller##unmarshalByDeclaredType Unmarshal by Declared Type}
      *
      * <p>
-     * This method is similar to {@link Unmarshaller#unmarshal(Node, Class)}
+     * This method is similar to {@linkplain Unmarshaller#unmarshal(Node, Class)}
      * with the addition of maintaining the association between XML nodes
      * and the produced Jakarta XML Binding objects, enabling future update operations,
-     * {@link #updateXML(Object, Object)} or {@link #updateJAXB(Object)}.
+     * {@linkplain #updateXML(Object, Object)} or {@linkplain #updateJAXB(Object)}.
      *
      * <p>
-     * When {@link #getSchema()} is non-null, <code>xmlNode</code>
+     * When {@linkplain #getSchema()} is non-null, <code>xmlNode</code>
      * and its descendants is validated during this operation.
      *
      * @param xmlNode
@@ -132,13 +133,13 @@ public abstract class Binder<XmlNode> {
      * @param <T> the declared type
      *
      * @return
-     * <a href="JAXBElement.html">JAXBElement</a> representation
+     * {@linkplain JAXBElement} representation
      * of {@code node}
      *
      * @throws JAXBException
      *      If any unexpected errors occur while unmarshalling
      * @throws UnmarshalException
-     *     If the {@link ValidationEventHandler ValidationEventHandler}
+     *     If the {@linkplain ValidationEventHandler ValidationEventHandler}
      *     returns false from its {@code handleEvent} method or the
      *     {@code Binder} is unable to perform the XML to Java
      *     binding.
@@ -152,14 +153,14 @@ public abstract class Binder<XmlNode> {
      * Marshal a Jakarta XML Binding object tree to a new XML document.
      *
      * <p>
-     * This method is similar to {@link Marshaller#marshal(Object, Node)}
+     * This method is similar to {@linkplain Marshaller#marshal(Object, Node)}
      * with the addition of maintaining the association between Jakarta XML Binding objects
      * and the produced XML nodes,
      * enabling future update operations such as
-     * {@link #updateXML(Object, Object)} or {@link #updateJAXB(Object)}.
+     * {@linkplain #updateXML(Object, Object)} or {@linkplain #updateJAXB(Object)}.
      *
      * <p>
-     * When {@link #getSchema()} is non-null, the marshalled
+     * When {@linkplain #getSchema()} is non-null, the marshalled
      * xml content is validated during this operation.
      *
      * @param jaxbObject
@@ -170,7 +171,7 @@ public abstract class Binder<XmlNode> {
      * @throws JAXBException
      *      If any unexpected problem occurs during the marshalling.
      * @throws MarshalException
-     *      If the {@link ValidationEventHandler ValidationEventHandler}
+     *      If the {@linkplain ValidationEventHandler ValidationEventHandler}
      *      returns false from its {@code handleEvent} method or the
      *      {@code Binder} is unable to marshal {@code jaxbObject} (or any
      *      object reachable from {@code jaxbObject}).
@@ -200,7 +201,7 @@ public abstract class Binder<XmlNode> {
      *
      * @return
      *      null if the specified Jakarta XML Binding object is not known to this
-     *      {@link Binder}, or if it is not associated with an
+     *      {@linkplain Binder}, or if it is not associated with an
      *      XML element.
      *
      * @throws IllegalArgumentException
@@ -226,7 +227,7 @@ public abstract class Binder<XmlNode> {
      *
      * @return
      *      null if the specified XML node is not known to this
-     *      {@link Binder}, or if it is not associated with a
+     *      {@linkplain Binder}, or if it is not associated with a
      *      Jakarta XML Binding object.
      *
      * @throws IllegalArgumentException
@@ -307,8 +308,8 @@ public abstract class Binder<XmlNode> {
      * @return
      *      Returns the updated Jakarta XML Binding object. Typically, this is the same
      *      object that was returned from earlier
-     *      {@link #marshal(Object,Object)} or
-     *      {@link #updateJAXB(Object)} method invocation,
+     *      {@linkplain #marshal(Object,Object)} or
+     *      {@linkplain #updateJAXB(Object)} method invocation,
      *      but it maybe
      *      a different object, for example when the name of the XML
      *      element has changed.
@@ -332,8 +333,8 @@ public abstract class Binder<XmlNode> {
     public abstract void setSchema( Schema schema );
 
     /**
-     * Gets the last {@link Schema} object (including null) set by the
-     * {@link #setSchema(Schema)} method.
+     * Gets the last {@linkplain Schema} object (including null) set by the
+     * {@linkplain #setSchema(Schema)} method.
      *
      * @return the Schema object for validation or null if not present
      */
@@ -375,9 +376,9 @@ public abstract class Binder<XmlNode> {
      * or a provider specific property for binder, unmarshal or marshal.
      * Attempting to set an undefined property will result in
      * a PropertyException being thrown.  See
-     * <a href="Unmarshaller.html#supportedProps">Supported Unmarshal Properties</a>
+     * {@linkplain Unmarshaller##supportedProps Supported Unmarshal Properties}
      * and
-     * <a href="Marshaller.html#supportedProps">Supported Marshal Properties</a>.
+     * {@linkplain Marshaller##supportedProps Supported Marshaller Properties}.
      *
      * @param name the name of the property to be set. This value can either
      *              be specified using one of the constant fields or a user
@@ -400,9 +401,9 @@ public abstract class Binder<XmlNode> {
      * or a provider specific property for binder, unmarshal or marshal.
      * Attempting to get an undefined property will result in
      * a PropertyException being thrown.  See
-     * <a href="Unmarshaller.html#supportedProps">Supported Unmarshal Properties</a>
+     * {@linkplain Unmarshaller##supportedProps Supported Unmarshal Properties}
      * and
-     * <a href="Marshaller.html#supportedProps">Supported Marshal Properties</a>.
+     * {@linkplain Marshaller##supportedProps Supported Marshaller Properties}.
      *
      * @param name the name of the property to retrieve
      * @return the value of the requested property

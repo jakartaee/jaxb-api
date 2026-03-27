@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -18,18 +19,18 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Marks a property that refers to classes with {@link XmlElement}
+ * Marks a property that refers to classes with {@linkplain XmlElement}
  * or JAXBElement.
  *
  * <p>
- * Compared to an element property (property with {@link XmlElement}
+ * Compared to an element property (property with {@linkplain XmlElement}
  * annotation), a reference property has a different substitution semantics.
  * When a subclass is assigned to a property, an element property produces
  * the same tag name with @xsi:type, whereas a reference property produces
  * a different tag name (the tag name that's on the subclass.)
  *
  * <p> This annotation can be used with the following annotations: 
- * {@link XmlJavaTypeAdapter}, {@link XmlElementWrapper}.
+ * {@linkplain XmlJavaTypeAdapter}, {@linkplain XmlElementWrapper}.
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  *

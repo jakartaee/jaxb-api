@@ -24,11 +24,11 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 /**
  * This class is the Jakarta XML Binding CI's default implementation of the
- * {@link DatatypeConverterInterface}.
+ * {@linkplain DatatypeConverterInterface}.
  *
  * <p>
  * When client applications specify the use of the static print/parse
- * methods in {@link DatatypeConverter}, it will delegate
+ * methods in {@linkplain DatatypeConverter}, it will delegate
  * to this class.
  *
  * <p>
@@ -81,9 +81,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      * <p>
      * Note that:
      * <ol>
-     *  <li>XML Schema allows '+', but {@link Integer#valueOf(String)} is not.
+     *  <li>XML Schema allows '+', but {@linkplain Integer#valueOf(String)} is not.
      *  <li>XML Schema allows leading and trailing (but not in-between) whitespaces.
-     *      {@link Integer#valueOf(String)} doesn't allow any.
+     *      {@linkplain Integer#valueOf(String)} doesn't allow any.
      * </ol>
      */
     public static int _parseInt(CharSequence s) {
@@ -712,7 +712,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      *      each character to be accessed twice (once for counting length, another
      *      for decoding.)
      * <p>
-     *      A benchmark showed that taking {@link String} is faster, presumably
+     *      A benchmark showed that taking {@linkplain String} is faster, presumably
      *      because JIT can inline a lot of string access (with data of 1K chars, it was twice as fast)
      */
     public static byte[] _parseBase64Binary(String text) {

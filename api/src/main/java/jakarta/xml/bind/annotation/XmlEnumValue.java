@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -16,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.FIELD;
 
 /**
- * Maps an enum constant in {@link Enum} type to XML representation.  
+ * Maps an enum constant in {@linkplain Enum} type to XML representation.  
  * 
  * <p> <b>Usage</b> </p>
  *
@@ -29,7 +30,7 @@ import static java.lang.annotation.ElementType.FIELD;
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
  *
- * <p>This annotation, together with {@link XmlEnum} provides a
+ * <p>This annotation, together with {@linkplain XmlEnum} provides a
  * mapping of enum type to XML representation.
  *
  * <p>An enum type is mapped to a schema simple type with enumeration
@@ -38,7 +39,7 @@ import static java.lang.annotation.ElementType.FIELD;
  * must have a valid lexical representation for the type
  * {@code @XmlEnum.value()}
  *
- * <p> In the absence of this annotation, {@link Enum#name()} is used
+ * <p> In the absence of this annotation, {@linkplain Enum#name()} is used
  * as the XML representation.
  *
  * <p> <b>Example 1: </b>Map enum constant name {@literal ->} enumeration facet</p>

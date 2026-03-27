@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -17,7 +18,7 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * A container for multiple @{@link XmlJavaTypeAdapter} annotations.
+ * A container for multiple @{@linkplain XmlJavaTypeAdapter} annotations.
  *
  * <p> Multiple annotations of the same type are not allowed on a program
  * element. This annotation therefore serves as a container annotation
@@ -28,7 +29,7 @@ import java.lang.annotation.Target;
  * }
  *
  * <p>The {@code @XmlJavaTypeAdapters} annotation is useful for
- * defining {@link XmlJavaTypeAdapter} annotations for different types
+ * defining {@linkplain XmlJavaTypeAdapter} annotations for different types
  * at the package level.
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
@@ -41,7 +42,7 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME) @Target({PACKAGE})
 public @interface XmlJavaTypeAdapters {
     /**
-     * Collection of @{@link XmlJavaTypeAdapter} annotations
+     * Collection of @{@linkplain XmlJavaTypeAdapter} annotations
      */
     XmlJavaTypeAdapter[] value();
 }

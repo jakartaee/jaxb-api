@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -30,8 +31,8 @@ import java.net.URL;
  * <p>
  * This handler is not the default handler for Jakarta XML Binding mapped classes following
  * Jakarta XML Binding or later versions. Default validation event handling has changed
- * and is specified in  {@link jakarta.xml.bind.Unmarshaller} and
- * {@link jakarta.xml.bind.Marshaller}.
+ * and is specified in  {@linkplain jakarta.xml.bind.Unmarshaller} and
+ * {@linkplain jakarta.xml.bind.Marshaller}.
  *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li></ul>
  * @see jakarta.xml.bind.Unmarshaller

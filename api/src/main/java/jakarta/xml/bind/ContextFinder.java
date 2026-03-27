@@ -86,7 +86,7 @@ class ContextFinder {
             };
 
     /**
-     * If the {@link InvocationTargetException} wraps an exception that shouldn't be wrapped,
+     * If the {@linkplain InvocationTargetException} wraps an exception that shouldn't be wrapped,
      * throw the wrapped exception. Otherwise, returns exception to be wrapped for further processing.
      */
     private static Throwable handleInvocationTargetException(InvocationTargetException x) throws JAXBException {
@@ -432,7 +432,7 @@ class ContextFinder {
     /**
      * Get the URL for the Class from it's ClassLoader.
      * <p>
-     * Convenience method for {@link #which(Class, ClassLoader)}.
+     * Convenience method for {@linkplain #which(Class, ClassLoader)}.
      * <p>
      * Equivalent to calling: which(clazz, clazz.getClassLoader())
      *

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -58,11 +59,11 @@ import java.lang.annotation.Target;
  * <ul>
  *   <li> The property must be a collection property </li>
  *   <li> This annotation can be used with the following annotations:
- *            {@link XmlElement}, 
- *            {@link XmlElements},
- *            {@link XmlElementRef},
- *            {@link XmlElementRefs},
- *            {@link XmlJavaTypeAdapter}.</li>
+ *            {@linkplain XmlElement}, 
+ *            {@linkplain XmlElements},
+ *            {@linkplain XmlElementRef},
+ *            {@linkplain XmlElementRefs},
+ *            {@linkplain XmlJavaTypeAdapter}.</li>
  * </ul>
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
@@ -91,9 +92,9 @@ public @interface XmlElementWrapper {
      * as follows:
      * <ol>
      *  <li>
-     *  If the enclosing package has {@link XmlSchema} annotation,
-     *  and its {@link XmlSchema#elementFormDefault() elementFormDefault}
-     *  is {@link XmlNsForm#QUALIFIED QUALIFIED}, then the namespace of
+     *  If the enclosing package has {@linkplain XmlSchema} annotation,
+     *  and its {@linkplain XmlSchema#elementFormDefault() elementFormDefault}
+     *  is {@linkplain XmlNsForm#QUALIFIED QUALIFIED}, then the namespace of
      *  the enclosing class.
      *
      *  <li>

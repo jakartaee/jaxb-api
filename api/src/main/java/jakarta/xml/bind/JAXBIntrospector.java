@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
+ * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -24,7 +24,7 @@ import  javax.xml.namespace.QName;
  * binding information.
  * <p>
  * The factory method to get a <code>JAXBIntrospector</code> instance is
- * {@link JAXBContext#createJAXBIntrospector()}.
+ * {@linkplain JAXBContext#createJAXBIntrospector()}.
  *
  * @see JAXBContext#createJAXBIntrospector()
  * @since 1.6, JAXB 2.0
@@ -53,7 +53,7 @@ public abstract class JAXBIntrospector {
     /**
      * <p>Get xml element qname for <code>jaxbElement</code>.</p>
      *
-     * @param jaxbElement is an object that {@link #isElement(Object)} returned true.
+     * @param jaxbElement is an object that {@linkplain #isElement(Object)} returned true.
      *
      * @return xml element qname associated with jaxbElement;
      *         null if <code>jaxbElement</code> is not a JAXBElement.
