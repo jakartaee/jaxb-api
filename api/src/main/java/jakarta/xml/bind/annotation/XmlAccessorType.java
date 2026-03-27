@@ -12,21 +12,23 @@
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.lang.annotation.Target;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Inherited;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p> Controls whether fields or Javabean properties are serialized by default. </p>
- * 
+ *
  * <p> <b> Usage </b> </p>
  *
  * <p> {@code @XmlAccessorType} annotation can be used with the following program elements:</p>
- * 
- * <ul> 
+ *
+ * <ul>
  *   <li> package</li>
  *   <li> a top level class </li>
  * </ul>
@@ -36,14 +38,14 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p>This annotation provides control over the default serialization
  * of properties and fields in a class.
- * 
+ *
  * <p>The annotation {@code @XmlAccessorType} on a package applies to
  * all classes in the package. The following inheritance
  * semantics apply:
  *
  * <ul>
  *   <li> If there is a {@code @XmlAccessorType} on a class, then it
- *        is used. </li>  
+ *        is used. </li>
  *   <li> Otherwise, if a {@code @XmlAccessorType} exists on one of
  *        its super classes, then it is inherited.
  *   <li> Otherwise, the {@code @XmlAccessorType} on a package is
@@ -55,30 +57,32 @@ import static java.lang.annotation.RetentionPolicy.*;
  * then the following package level annotation is assumed.</p>
  * {@snippet :
  *  @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
- * }
+ *}
  * <p> By default, if {@code @XmlAccessorType} on a class is absent,
  * and none of its super classes is annotated with
  * {@code @XmlAccessorType}, then the following default on the class
  * is assumed: </p>
  * {@snippet :
  *  @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
- * }
- * <p>This annotation can be used with the following annotations: 
- *    {@linkplain XmlType}, {@linkplain XmlRootElement}, {@linkplain XmlAccessorOrder}, 
- *    {@linkplain XmlSchema}, {@linkplain XmlSchemaType}, {@linkplain XmlSchemaTypes}, 
+ *}
+ * <p>This annotation can be used with the following annotations:
+ *    {@linkplain XmlType}, {@linkplain XmlRootElement}, {@linkplain XmlAccessorOrder},
+ *    {@linkplain XmlSchema}, {@linkplain XmlSchemaType}, {@linkplain XmlSchemaTypes},
  *    {@linkplain XmlJavaTypeAdapter}. It can also be used with the
  *    following annotations at the package level: {@linkplain XmlJavaTypeAdapter}.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
- * @since 1.6, JAXB 2.0
  * @see XmlAccessType
+ * @since 1.6, JAXB 2.0
  */
-@Inherited @Retention(RUNTIME) @Target({PACKAGE, TYPE})
+@Inherited
+@Retention(RUNTIME)
+@Target({PACKAGE, TYPE})
 public @interface XmlAccessorType {
 
     /**
-     * Specifies whether fields or properties are serialized. 
-     * 
+     * Specifies whether fields or properties are serialized.
+     *
      * @see XmlAccessType
      */
     XmlAccessType value() default XmlAccessType.PUBLIC_MEMBER;

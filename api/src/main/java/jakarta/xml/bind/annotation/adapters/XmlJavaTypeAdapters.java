@@ -11,26 +11,25 @@
 
 package jakarta.xml.bind.annotation.adapters;
 
-import static java.lang.annotation.ElementType.PACKAGE;
 import java.lang.annotation.Retention;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
  * A container for multiple @{@linkplain XmlJavaTypeAdapter} annotations.
  *
  * <p> Multiple annotations of the same type are not allowed on a program
- * element. This annotation therefore serves as a container annotation
- * for multiple &#64;XmlJavaTypeAdapter as follows:
- *
+ * element. This annotation therefore serves as a container annotation for multiple &#64;XmlJavaTypeAdapter as follows:
+ * <p>
  * {@snippet :
  *  @XmlJavaTypeAdapters ({ @XmlJavaTypeAdapter(...), @XmlJavaTypeAdapter(...) })
- * }
+ *}
  *
  * <p>The {@code @XmlJavaTypeAdapters} annotation is useful for
- * defining {@linkplain XmlJavaTypeAdapter} annotations for different types
- * at the package level.
+ * defining {@linkplain XmlJavaTypeAdapter} annotations for different types at the package level.
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information.</p>
@@ -39,7 +38,8 @@ import java.lang.annotation.Target;
  * @see XmlJavaTypeAdapter
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({PACKAGE})
+@Retention(RUNTIME)
+@Target({PACKAGE})
 public @interface XmlJavaTypeAdapters {
     /**
      * Collection of @{@linkplain XmlJavaTypeAdapter} annotations

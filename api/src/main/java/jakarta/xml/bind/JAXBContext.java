@@ -11,21 +11,19 @@
 
 package jakarta.xml.bind;
 
-import org.w3c.dom.Node;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+import org.w3c.dom.Node;
+
 /**
- * The {@code JAXBContext} class provides the client's entry point to the
- * Jakarta XML Binding API. It provides an abstraction for managing the XML/Java binding
- * information necessary to implement the Jakarta XML Binding binding framework operations:
- * unmarshal, marshal and validate.
+ * The {@code JAXBContext} class provides the client's entry point to the Jakarta XML Binding API. It provides an
+ * abstraction for managing the XML/Java binding information necessary to implement the Jakarta XML Binding binding
+ * framework operations: unmarshal, marshal and validate.
  *
  * <p>A client application normally obtains new instances of this class using
- * one of these two styles for newInstance methods, although there are other
- * specialized forms of the method available:
+ * one of these two styles for newInstance methods, although there are other specialized forms of the method available:
  *
  * <ul>
  * <li>{@linkplain #newInstance(String, ClassLoader) JAXBContext.newInstance( "com.acme.foo:com.acme.bar" )} <br>
@@ -67,14 +65,14 @@ import java.util.Map;
  * context must be namespace independent.  This means that a client
  * application is able to unmarshal XML documents that are instances of
  * any of the schemas listed in the {@code contextPath}.  For example:
- *
+ * <p>
  * {@snippet :
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo:com.acme.bar" );
  *  Unmarshaller u = jc.createUnmarshaller();
  *  FooObject fooObj = (FooObject)u.unmarshal( new File( "foo.xml" ) ); // ok
  *  BarObject barObj = (BarObject)u.unmarshal( new File( "bar.xml" ) ); // ok
  *  BazObject bazObj = (BazObject)u.unmarshal( new File( "baz.xml" ) ); // error, "com.acme.baz" not in contextPath
- * }
+ *}
  *
  * <p>
  * The client application may also generate Java content trees explicitly rather
@@ -91,11 +89,11 @@ import java.util.Map;
  * that contains a schema derived interface named {@code PurchaseOrder}.  In
  * order to create objects of that type, the client application would use the
  * factory method like this:
- *
+ * <p>
  * {@snippet :
  *  com.acme.foo.PurchaseOrder po =
  *      com.acme.foo.ObjectFactory.createPurchaseOrder();
- * }
+ *}
  *
  * <p>
  * Once the client application has an instance of the schema derived object,
@@ -128,7 +126,7 @@ import java.util.Map;
  * <p>
  * Here is a simple example that unmarshalls an XML document and then marshals
  * it back out:
- *
+ * <p>
  * {@snippet :
  *  JAXBContext jc = JAXBContext.newInstance( "com.acme.foo" );
  *
@@ -139,7 +137,7 @@ import java.util.Map;
  *  // marshal to System.out
  *  Marshaller m = jc.createMarshaller();
  *  m.marshal( fooObj, System.out );
- * }
+ *}
  *
  *
  * <h3>Validation</h3>
@@ -206,25 +204,22 @@ import java.util.Map;
  * Once the provider factory class is discovered, context creation is delegated to one of its
  * {@code createContext(...)} methods.
  *
- * @implNote
- * Within the last step, if Glassfish AS environment detected, its specific service loader is used to find factory class.
- *
  * @author <ul><li>Ryan Shoemaker, Sun Microsystems, Inc.</li>
  *             <li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li>
  *             <li>Joe Fialli, Sun Microsystems, Inc.</li></ul>
- *
+ * @implNote Within the last step, if Glassfish AS environment detected, its specific service loader is used to find
+ * factory class.
  * @see Marshaller
  * @see Unmarshaller
  * @see <a href="https://docs.oracle.com/javase/specs/jls/se17/html/jls-7.html#jls-7.4.1">S 7.4.1 "Named Packages"
- *      in Java Language Specification</a>
- *
+ * in Java Language Specification</a>
  * @since 1.6, JAXB 1.0
  */
 public abstract class JAXBContext {
 
     /**
-     * The name of the property that contains the name of the class capable
-     * of creating new {@code JAXBContext} objects.
+     * The name of the property that contains the name of the class capable of creating new {@code JAXBContext}
+     * objects.
      */
     public static final String JAXB_CONTEXT_FACTORY = "jakarta.xml.bind.JAXBContextFactory";
 
@@ -236,53 +231,45 @@ public abstract class JAXBContext {
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * This is a convenience method to invoke the
-     * {@linkplain #newInstance(String,ClassLoader)} method with
-     * the context class loader of the current thread.
+     * This is a convenience method to invoke the {@linkplain #newInstance(String, ClassLoader)} method with the context
+     * class loader of the current thread.
      *
      * @param contextPath the context path
      *
      * @return the new instance of a {@code JAXBContext} class
-     *
-     * @throws JAXBException if an error was encountered while creating the
-     *                       {@code JAXBContext} such as
-     * <ol>
-     *   <li>failure to locate either ObjectFactory.class or jaxb.index in the packages</li>
-     *   <li>an ambiguity among global elements contained in the contextPath</li>
-     *   <li>failure to locate a value for the context factory provider property</li>
-     *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     *   <li>packages are not open to {@code jakarta.xml.bind} module</li>
-     * </ol>
+     * @throws JAXBException if an error was encountered while creating the {@code JAXBContext} such as
+     *                       <ol>
+     *                         <li>failure to locate either ObjectFactory.class or jaxb.index in the packages</li>
+     *                         <li>an ambiguity among global elements contained in the contextPath</li>
+     *                         <li>failure to locate a value for the context factory provider property</li>
+     *                         <li>mixing schema derived packages from different providers on the same contextPath</li>
+     *                         <li>packages are not open to {@code jakarta.xml.bind} module</li>
+     *                       </ol>
      */
-    public static JAXBContext newInstance( String contextPath )
+    public static JAXBContext newInstance(String contextPath)
             throws JAXBException {
 
         //return newInstance( contextPath, JAXBContext.class.getClassLoader() );
-        return newInstance( contextPath, getContextClassLoader());
+        return newInstance(contextPath, getContextClassLoader());
     }
 
     /**
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * The client application must supply a context path which is a list of
-     * colon (':', \u005Cu003A) separated java package names that contain
-     * schema-derived classes and/or fully qualified Jakarta XML Binding-annotated classes.
-     * Schema-derived
-     * code is registered with the JAXBContext by the
-     * ObjectFactory.class generated per package.
-     * Alternatively than being listed in the context path, programmer
-     * annotated Jakarta XML Binding mapped classes can be listed in a
-     * {@code jaxb.index} resource file, format described below.
-     * Note that a java package can contain both schema-derived classes and
-     * user annotated Jakarta XML Binding classes. Additionally, the java package may
-     * contain Jakarta XML Binding package annotations  that must be processed. (see JLS,
-     * Section 7.4.1 "Named Packages").
+     * The client application must supply a context path which is a list of colon (':', \u005Cu003A) separated java
+     * package names that contain schema-derived classes and/or fully qualified Jakarta XML Binding-annotated classes.
+     * Schema-derived code is registered with the JAXBContext by the ObjectFactory.class generated per package.
+     * Alternatively than being listed in the context path, programmer annotated Jakarta XML Binding mapped classes can
+     * be listed in a {@code jaxb.index} resource file, format described below. Note that a java package can contain
+     * both schema-derived classes and user annotated Jakarta XML Binding classes. Additionally, the java package may
+     * contain Jakarta XML Binding package annotations  that must be processed. (see JLS, Section 7.4.1 "Named
+     * Packages").
      * </p>
      *
      * <p>
-     * Every package listed on the contextPath must meet <b>one or both</b> of the
-     * following conditions otherwise a {@code JAXBException} will be thrown:
+     * Every package listed on the contextPath must meet <b>one or both</b> of the following conditions otherwise a
+     * {@code JAXBException} will be thrown:
      * </p>
      * <ol>
      *   <li>it must contain ObjectFactory.class</li>
@@ -324,82 +311,69 @@ public abstract class JAXBContext {
      * <p>
      * The steps involved in discovering the Jakarta XML Binding implementation is discussed in the class javadoc.
      *
-     * @param contextPath
-     *      List of java package names that contain schema
-     *      derived class and/or java to schema (Jakarta XML Binding-annotated)
-     *      mapped classes.
-     *      Packages in {@code contextPath} that are in named modules must be
-     *      {@code open} to at least the {@code jakarta.xml.bind} module.
-     * @param classLoader
-     *      This class loader will be used to locate the implementation
-     *      classes.
+     * @param contextPath List of java package names that contain schema derived class and/or java to schema (Jakarta
+     *                    XML Binding-annotated) mapped classes. Packages in {@code contextPath} that are in named
+     *                    modules must be {@code open} to at least the {@code jakarta.xml.bind} module.
+     * @param classLoader This class loader will be used to locate the implementation classes.
      *
      * @return a new instance of a {@code JAXBContext}
-     * @throws JAXBException if an error was encountered while creating the
-     *                       {@code JAXBContext} such as
-     * <ol>
-     *   <li>failure to locate either ObjectFactory.class or jaxb.index in the packages</li>
-     *   <li>an ambiguity among global elements contained in the contextPath</li>
-     *   <li>failure to locate a value for the context factory provider property</li>
-     *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     *   <li>packages are not open to {@code jakarta.xml.bind} module</li>
-     * </ol>
+     * @throws JAXBException if an error was encountered while creating the {@code JAXBContext} such as
+     *                       <ol>
+     *                         <li>failure to locate either ObjectFactory.class or jaxb.index in the packages</li>
+     *                         <li>an ambiguity among global elements contained in the contextPath</li>
+     *                         <li>failure to locate a value for the context factory provider property</li>
+     *                         <li>mixing schema derived packages from different providers on the same contextPath</li>
+     *                         <li>packages are not open to {@code jakarta.xml.bind} module</li>
+     *                       </ol>
      */
-    public static JAXBContext newInstance( String contextPath, ClassLoader classLoader ) throws JAXBException {
+    public static JAXBContext newInstance(String contextPath, ClassLoader classLoader) throws JAXBException {
 
-        return newInstance(contextPath,classLoader,Collections.emptyMap());
+        return newInstance(contextPath, classLoader, Collections.emptyMap());
     }
 
     /**
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * This is mostly the same as {@linkplain JAXBContext#newInstance(String, ClassLoader)},
-     * but this version allows you to pass in provider-specific properties to configure
-     * the instantiation of {@linkplain JAXBContext}.
+     * This is mostly the same as {@linkplain JAXBContext#newInstance(String, ClassLoader)}, but this version allows you
+     * to pass in provider-specific properties to configure the instantiation of {@linkplain JAXBContext}.
      *
      * <p>
-     * The interpretation of properties is up to implementations. Implementations must
-     * throw {@code JAXBException} if it finds properties that it doesn't understand.
+     * The interpretation of properties is up to implementations. Implementations must throw {@code JAXBException} if it
+     * finds properties that it doesn't understand.
      *
-     * @param contextPath
-     *      List of java package names that contain schema
-     *      derived class and/or java to schema (Jakarta XML Binding-annotated)
-     *      mapped classes.
-     *      Packages in {@code contextPath} that are in named modules must be
-     *      {@code open} to at least the {@code jakarta.xml.bind} module.
-     * @param classLoader
-     *      This class loader will be used to locate the implementation classes.
-     * @param properties
-     *      provider-specific or provider selection-specific properties.
-     *      Can be null, which means the same thing as passing in an empty map.
+     * @param contextPath List of java package names that contain schema derived class and/or java to schema (Jakarta
+     *                    XML Binding-annotated) mapped classes. Packages in {@code contextPath} that are in named
+     *                    modules must be {@code open} to at least the {@code jakarta.xml.bind} module.
+     * @param classLoader This class loader will be used to locate the implementation classes.
+     * @param properties  provider-specific or provider selection-specific properties. Can be null, which means the same
+     *                    thing as passing in an empty map.
      *
      * @return a new instance of a {@code JAXBContext}
-     * @throws JAXBException if an error was encountered while creating the
-     *                       {@code JAXBContext} such as
-     * <ol>
-     *   <li>failure to locate either ObjectFactory.class or jaxb.index in the packages</li>
-     *   <li>an ambiguity among global elements contained in the contextPath</li>
-     *   <li>failure to locate a value for the context factory provider property</li>
-     *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     *   <li>packages are not open to {@code jakarta.xml.bind} module</li>
-     * </ol>
+     * @throws JAXBException if an error was encountered while creating the {@code JAXBContext} such as
+     *                       <ol>
+     *                         <li>failure to locate either ObjectFactory.class or jaxb.index in the packages</li>
+     *                         <li>an ambiguity among global elements contained in the contextPath</li>
+     *                         <li>failure to locate a value for the context factory provider property</li>
+     *                         <li>mixing schema derived packages from different providers on the same contextPath</li>
+     *                         <li>packages are not open to {@code jakarta.xml.bind} module</li>
+     *                       </ol>
      * @since 1.6, JAXB 2.0
      */
-    public static JAXBContext newInstance( String contextPath,
-                                           ClassLoader classLoader,
-                                           Map<String,?>  properties  ) throws JAXBException {
+    public static JAXBContext newInstance(String contextPath,
+                                          ClassLoader classLoader,
+                                          Map<String, ?> properties) throws JAXBException {
 
         return ContextFinder.find(
-                        /* The default property name according to the Jakarta XML Binding spec */
+                /* The default property name according to the Jakarta XML Binding spec */
                 JAXB_CONTEXT_FACTORY,
 
-                        /* the context path supplied by the client app */
+                /* the context path supplied by the client app */
                 contextPath,
 
-                        /* class loader to be used */
+                /* class loader to be used */
                 classLoader,
-                properties );
+                properties);
     }
 
 // TODO: resurrect this once we introduce external annotations
@@ -480,18 +454,14 @@ public abstract class JAXBContext {
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * The client application must supply a list of classes that the new
-     * context object needs to recognize.
+     * The client application must supply a list of classes that the new context object needs to recognize.
      * <p>
-     * Not only the new context will recognize all the classes specified,
-     * but it will also recognize any classes that are directly/indirectly
-     * referenced statically from the specified classes. Subclasses of
-     * referenced classes nor {@code @XmlTransient} referenced classes
-     * are not registered with JAXBContext.
+     * Not only the new context will recognize all the classes specified, but it will also recognize any classes that
+     * are directly/indirectly referenced statically from the specified classes. Subclasses of referenced classes nor
+     * {@code @XmlTransient} referenced classes are not registered with JAXBContext.
      * <p>
-     * For example, in the following Java code, if you do
-     * {@code newInstance(Foo.class)}, the newly created {@linkplain JAXBContext}
-     * will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
+     * For example, in the following Java code, if you do {@code newInstance(Foo.class)}, the newly created
+     * {@linkplain JAXBContext} will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
      * {@snippet :
      *  class Foo {
      *       @XmlTransient FooBar c;
@@ -499,97 +469,79 @@ public abstract class JAXBContext {
      *  }
      *  class Bar { int x; }
      *  class Zot extends Bar { int y; }
-     *  class FooBar { }
-     * }
-     *
-     * Therefore, a typical client application only needs to specify the
-     * top-level classes, but it needs to be careful.
+     *  class FooBar {}
+     *}
+     * <p>
+     * Therefore, a typical client application only needs to specify the top-level classes, but it needs to be careful.
      *
      * <p>
-     * Note that for each java package registered with JAXBContext,
-     * when the optional package annotations exist, they must be processed.
-     * (see JLS, Section 7.4.1 "Named Packages").
+     * Note that for each java package registered with JAXBContext, when the optional package annotations exist, they
+     * must be processed. (see JLS, Section 7.4.1 "Named Packages").
      *
      * <p>
      * The steps involved in discovering the Jakarta XML Binding implementation is discussed in the class javadoc.
      *
-     * @param classesToBeBound
-     *      List of java classes to be recognized by the new {@linkplain JAXBContext}.
-     *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
-     *      Can be empty, in which case a {@linkplain JAXBContext} that only knows about
-     *      spec-defined classes will be returned.
+     * @param classesToBeBound List of java classes to be recognized by the new {@linkplain JAXBContext}. Classes in
+     *                         {@code classesToBeBound} that are in named modules must be in a package that is
+     *                         {@code open} to at least the {@code jakarta.xml.bind} module. Can be empty, in which case
+     *                         a {@linkplain JAXBContext} that only knows about spec-defined classes will be returned.
      *
-     * @return
-     *      A new instance of a {@code JAXBContext}.
-     *
-     * @throws JAXBException
-     *      if an error was encountered while creating the
-     *      {@code JAXBContext}, such as (but not limited to):
-     * <ol>
-     *  <li>No Jakarta XML Binding implementation was discovered
-     *  <li>Classes use Jakarta XML Binding annotations incorrectly
-     *  <li>Classes have colliding annotations (i.e., two classes with the same type name)
-     *  <li>The Jakarta XML Binding implementation was unable to locate
-     *      provider-specific out-of-band information (such as additional
-     *      files generated at the development time.)
-     *  <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
-     * </ol>
-     *
-     * @throws IllegalArgumentException
-     *      if the parameter contains {@code null} (i.e., {@code newInstance(null);})
-     *
+     * @return A new instance of a {@code JAXBContext}.
+     * @throws JAXBException            if an error was encountered while creating the {@code JAXBContext}, such as (but
+     *                                  not limited to):
+     *                                  <ol>
+     *                                   <li>No Jakarta XML Binding implementation was discovered
+     *                                   <li>Classes use Jakarta XML Binding annotations incorrectly
+     *                                   <li>Classes have colliding annotations (i.e., two classes with the same type name)
+     *                                   <li>The Jakarta XML Binding implementation was unable to locate
+     *                                       provider-specific out-of-band information (such as additional
+     *                                       files generated at the development time.)
+     *                                   <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
+     *                                  </ol>
+     * @throws IllegalArgumentException if the parameter contains {@code null} (i.e., {@code newInstance(null);})
      * @since 1.6, JAXB 2.0
      */
-    public static JAXBContext newInstance( Class<?> ... classesToBeBound )
+    public static JAXBContext newInstance(Class<?>... classesToBeBound)
             throws JAXBException {
 
-        return newInstance(classesToBeBound,Collections.emptyMap());
+        return newInstance(classesToBeBound, Collections.emptyMap());
     }
 
     /**
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * An overloading of {@linkplain JAXBContext#newInstance(Class...)}
-     * to configure 'properties' for this instantiation of {@linkplain JAXBContext}.
+     * An overloading of {@linkplain JAXBContext#newInstance(Class...)} to configure 'properties' for this instantiation
+     * of {@linkplain JAXBContext}.
      *
      * <p>
-     * The interpretation of properties is up to implementations. Implementations must
-     * throw {@code JAXBException} if it finds properties that it doesn't understand.
+     * The interpretation of properties is up to implementations. Implementations must throw {@code JAXBException} if it
+     * finds properties that it doesn't understand.
      *
-     * @param classesToBeBound
-     *      List of java classes to be recognized by the new {@linkplain JAXBContext}.
-     *      Classes in {@code classesToBeBound} that are in named modules must be in a package
-     *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
-     *      Can be empty, in which case a {@linkplain JAXBContext} that only knows about
-     *      spec-defined classes will be returned.
-     * @param properties
-     *      provider-specific or provider selection-specific properties.
-     *      Can be null, which means the same thing as passing in an empty map.
+     * @param classesToBeBound List of java classes to be recognized by the new {@linkplain JAXBContext}. Classes in
+     *                         {@code classesToBeBound} that are in named modules must be in a package that is
+     *                         {@code open} to at least the {@code jakarta.xml.bind} module. Can be empty, in which case
+     *                         a {@linkplain JAXBContext} that only knows about spec-defined classes will be returned.
+     * @param properties       provider-specific or provider selection-specific properties. Can be null, which means the
+     *                         same thing as passing in an empty map.
      *
-     * @return
-     *      A new instance of a {@code JAXBContext}.
-     *
-     * @throws JAXBException
-     *      if an error was encountered while creating the
-     *      {@code JAXBContext}, such as (but not limited to):
-     * <ol>
-     *  <li>No Jakarta XML Binding implementation was discovered
-     *  <li>Classes use Jakarta XML Binding annotations incorrectly
-     *  <li>Classes have colliding annotations (i.e., two classes with the same type name)
-     *  <li>The Jakarta XML Binding implementation was unable to locate
-     *      provider-specific out-of-band information (such as additional
-     *      files generated at the development time.)
-     *  <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
-     * </ol>
-     *
-     * @throws IllegalArgumentException
-     *      if the parameter contains {@code null} (i.e., {@code newInstance(null,someMap);})
-     *
+     * @return A new instance of a {@code JAXBContext}.
+     * @throws JAXBException            if an error was encountered while creating the {@code JAXBContext}, such as (but
+     *                                  not limited to):
+     *                                  <ol>
+     *                                   <li>No Jakarta XML Binding implementation was discovered
+     *                                   <li>Classes use Jakarta XML Binding annotations incorrectly
+     *                                   <li>Classes have colliding annotations (i.e., two classes with the same type name)
+     *                                   <li>The Jakarta XML Binding implementation was unable to locate
+     *                                       provider-specific out-of-band information (such as additional
+     *                                       files generated at the development time.)
+     *                                   <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
+     *                                  </ol>
+     * @throws IllegalArgumentException if the parameter contains {@code null} (i.e.,
+     *                                  {@code newInstance(null,someMap);})
      * @since 1.6, JAXB 2.0
      */
-    public static JAXBContext newInstance( Class<?>[] classesToBeBound, Map<String,?> properties )
+    public static JAXBContext newInstance(Class<?>[] classesToBeBound, Map<String, ?> properties)
             throws JAXBException {
 
         if (classesToBeBound == null) {
@@ -603,47 +555,36 @@ public abstract class JAXBContext {
             }
         }
 
-        return ContextFinder.find(classesToBeBound,properties);
+        return ContextFinder.find(classesToBeBound, properties);
     }
 
     /**
-     * Create an {@code Unmarshaller} object that can be used to convert XML
-     * data into a java content tree.
+     * Create an {@code Unmarshaller} object that can be used to convert XML data into a java content tree.
      *
      * @return an {@code Unmarshaller} object
-     *
-     * @throws JAXBException if an error was encountered while creating the
-     *                       {@code Unmarshaller} object
+     * @throws JAXBException if an error was encountered while creating the {@code Unmarshaller} object
      */
     public abstract Unmarshaller createUnmarshaller() throws JAXBException;
 
 
     /**
-     * Create a {@code Marshaller} object that can be used to convert a
-     * java content tree into XML data.
+     * Create a {@code Marshaller} object that can be used to convert a java content tree into XML data.
      *
      * @return a {@code Marshaller} object
-     *
-     * @throws JAXBException if an error was encountered while creating the
-     *                       {@code Marshaller} object
+     * @throws JAXBException if an error was encountered while creating the {@code Marshaller} object
      */
     public abstract Marshaller createMarshaller() throws JAXBException;
 
 
     /**
-     * Creates a {@code Binder} object that can be used for
-     * associative/in-place unmarshalling/marshalling.
+     * Creates a {@code Binder} object that can be used for associative/in-place unmarshalling/marshalling.
      *
      * @param domType select the DOM API to use by passing in its DOM Node class
-     *
-     * @param <T> the DOM API type
+     * @param <T>     the DOM API type
      *
      * @return always a new valid {@code Binder} object.
-     *
-     * @throws UnsupportedOperationException
-     *      if DOM API corresponding to {@code domType} is not supported by
-     *      the implementation.
-     *
+     * @throws UnsupportedOperationException if DOM API corresponding to {@code domType} is not supported by the
+     *                                       implementation.
      * @since 1.6, JAXB 2.0
      */
     public <T> Binder<T> createBinder(Class<T> domType) {
@@ -656,7 +597,6 @@ public abstract class JAXBContext {
      * Creates a {@code Binder} for W3C DOM.
      *
      * @return always a new valid {@code Binder} object.
-     *
      * @since 1.6, JAXB 2.0
      */
     public Binder<Node> createBinder() {
@@ -664,16 +604,11 @@ public abstract class JAXBContext {
     }
 
     /**
-     * Creates a {@code JAXBIntrospector} object that can be used to
-     * introspect Jakarta XML Binding objects.
+     * Creates a {@code JAXBIntrospector} object that can be used to introspect Jakarta XML Binding objects.
      *
-     * @return
-     *      always return a non-null valid {@code JAXBIntrospector} object.
-     *
-     * @throws UnsupportedOperationException
-     *      Calling this method on JAXB 1.0 implementations will throw
-     *      an UnsupportedOperationException.
-     *
+     * @return always return a non-null valid {@code JAXBIntrospector} object.
+     * @throws UnsupportedOperationException Calling this method on JAXB 1.0 implementations will throw an
+     *                                       UnsupportedOperationException.
      * @since 1.6, JAXB 2.0
      */
     public JAXBIntrospector createJAXBIntrospector() {
@@ -685,20 +620,14 @@ public abstract class JAXBContext {
     /**
      * Generates the schema documents for this context.
      *
-     * @param outputResolver
-     *      this object controls the output to which schemas
-     *      will be sent.
+     * @param outputResolver this object controls the output to which schemas will be sent.
      *
-     * @throws IOException
-     *      if {@linkplain SchemaOutputResolver} throws an {@linkplain IOException}.
-     *
-     * @throws UnsupportedOperationException
-     *      Calling this method on JAXB 1.0 implementations will throw
-     *      an UnsupportedOperationException.
-     *
+     * @throws IOException                   if {@linkplain SchemaOutputResolver} throws an {@linkplain IOException}.
+     * @throws UnsupportedOperationException Calling this method on JAXB 1.0 implementations will throw an
+     *                                       UnsupportedOperationException.
      * @since 1.6, JAXB 2.0
      */
-    public void generateSchema(SchemaOutputResolver outputResolver) throws IOException  {
+    public void generateSchema(SchemaOutputResolver outputResolver) throws IOException {
         // to make JAXB 1.0 implementations work, this method must not be
         // abstract
         throw new UnsupportedOperationException();

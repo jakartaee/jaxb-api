@@ -11,26 +11,26 @@
 
 package jakarta.xml.bind.annotation.adapters;
 
-import jakarta.xml.bind.annotation.XmlAnyElement;
-import jakarta.xml.bind.annotation.XmlElementRefs;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlSchemaType;
-import jakarta.xml.bind.annotation.XmlElementRef;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlSchema;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlSchemaTypes;
 
 import java.lang.annotation.Repeatable;
-import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
@@ -74,34 +74,34 @@ import static java.lang.annotation.ElementType.PACKAGE;
  * <p><b> Example: </b> See example in {@linkplain XmlAdapter}
  *
  * @author <ul><li>Sekhar Vajjhala, Sun Microsystems Inc.</li> <li> Kohsuke Kawaguchi, Sun Microsystems Inc.</li></ul>
- * @since 1.6, JAXB 2.0
  * @see XmlAdapter
+ * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({PACKAGE,FIELD,METHOD,TYPE,PARAMETER})
+@Retention(RUNTIME)
+@Target({PACKAGE, FIELD, METHOD, TYPE, PARAMETER})
 @Repeatable(XmlJavaTypeAdapters.class)
 public @interface XmlJavaTypeAdapter {
     /**
-     * Points to the class that converts a value type to a bound type or vice versa.
-     * See {@linkplain XmlAdapter} for more details.
+     * Points to the class that converts a value type to a bound type or vice versa. See {@linkplain XmlAdapter} for
+     * more details.
      */
     @SuppressWarnings({"rawtypes"})
     Class<? extends XmlAdapter> value();
 
     /**
-     * If this annotation is used at the package level, then value of
-     * the type() must be specified.
+     * If this annotation is used at the package level, then value of the type() must be specified.
      */
 
     Class<?> type() default DEFAULT.class;
 
     /**
-     * Used in {@linkplain XmlJavaTypeAdapter#type()} to
-     * signal that the type be inferred from the signature
-     * of the field, property, parameter or the class.
+     * Used in {@linkplain XmlJavaTypeAdapter#type()} to signal that the type be inferred from the signature of the
+     * field, property, parameter or the class.
      */
 
     final class DEFAULT {
-        private DEFAULT() {}
+        private DEFAULT() {
+        }
     }
 
 }

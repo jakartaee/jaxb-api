@@ -11,23 +11,20 @@
 
 package jakarta.xml.bind;
 
-import javax.xml.transform.Result;
 import java.io.IOException;
 
+import javax.xml.transform.Result;
+
 /**
- * Controls where a Jakarta XML Binding implementation puts the generates
- * schema files.
+ * Controls where a Jakarta XML Binding implementation puts the generates schema files.
  *
  * <p>
- * An implementation of this abstract class has to be provided by the calling
- * application to generate schemas.
+ * An implementation of this abstract class has to be provided by the calling application to generate schemas.
  *
  * <p>
- * This is a class, not an interface to allow future versions to evolve
- * without breaking the compatibility.
+ * This is a class, not an interface to allow future versions to evolve without breaking the compatibility.
  *
- * @author
- *     Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
+ * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
  * @since 1.6
  */
 public abstract class SchemaOutputResolver {
@@ -35,41 +32,32 @@ public abstract class SchemaOutputResolver {
     /**
      * Do-nothing constructor for the derived classes.
      */
-    protected SchemaOutputResolver() {}
+    protected SchemaOutputResolver() {
+    }
 
     /**
-     * Decides where the schema file (of the given namespace URI)
-     * will be written, and return it as a {@linkplain Result} object.
+     * Decides where the schema file (of the given namespace URI) will be written, and return it as a
+     * {@linkplain Result} object.
      *
      * <p>
-     * This method is called only once for any given namespace.
-     * IOW, all the components in one namespace is always written
-     * into the same schema document.
+     * This method is called only once for any given namespace. IOW, all the components in one namespace is always
+     * written into the same schema document.
      *
-     * @param namespaceUri
-     *      The namespace URI that the schema declares.
-     *      Can be the empty string, but never be null.
-     * @param suggestedFileName
-     *      A Jakarta XML Binding implementation generates a unique file name (like "schema1.xsd")
-     *      for the convenience of the callee. This name can be
-     *      used for the file name of the schema, or the callee can just
-     *      ignore this name and come up with its own name.
-     *      This is just a hint.
+     * @param namespaceUri      The namespace URI that the schema declares. Can be the empty string, but never be null.
+     * @param suggestedFileName A Jakarta XML Binding implementation generates a unique file name (like "schema1.xsd")
+     *                          for the convenience of the callee. This name can be used for the file name of the
+     *                          schema, or the callee can just ignore this name and come up with its own name. This is
+     *                          just a hint.
      *
-     * @return
-     *      a {@linkplain Result} object that encapsulates the actual destination
-     *      of the schema.
+     * @return a {@linkplain Result} object that encapsulates the actual destination of the schema.
      * <p>
-     *      If the {@linkplain Result} object has a system ID, it must be an
-     *      absolute system ID. Those system IDs are relativized by the caller and used
-     *      for {@literal <xs:import>} statements.
+     * If the {@linkplain Result} object has a system ID, it must be an absolute system ID. Those system IDs are
+     * relativized by the caller and used for {@literal <xs:import>} statements.
      * <p>
-     *      If the {@linkplain Result} object does not have a system ID, a schema
-     *      for the namespace URI is generated but it won't be explicitly
-     *      {@literal <xs:import>}ed from other schemas.
+     * If the {@linkplain Result} object does not have a system ID, a schema for the namespace URI is generated but it
+     * won't be explicitly {@literal <xs:import>}ed from other schemas.
      * <p>
-     *      If {@code null} is returned, the schema generation for this
-     *      namespace URI will be skipped.
+     * If {@code null} is returned, the schema generation for this namespace URI will be skipped.
      */
-    public abstract Result createOutput( String namespaceUri, String suggestedFileName ) throws IOException;
+    public abstract Result createOutput(String namespaceUri, String suggestedFileName) throws IOException;
 }

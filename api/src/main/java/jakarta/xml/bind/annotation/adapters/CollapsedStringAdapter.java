@@ -15,69 +15,77 @@ package jakarta.xml.bind.annotation.adapters;
  * Built-in {@linkplain XmlAdapter} to handle {@code xs:token} and its derived types.
  *
  * <p>
- * This adapter removes leading and trailing whitespaces, then truncate any
- * sequence of tab, CR, LF, and SP by a single whitespace character ' '.
+ * This adapter removes leading and trailing whitespaces, then truncate any sequence of tab, CR, LF, and SP by a single
+ * whitespace character ' '.
  *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
  */
-public class CollapsedStringAdapter extends XmlAdapter<String,String> {
+public class CollapsedStringAdapter extends XmlAdapter<String, String> {
 
-    public CollapsedStringAdapter() {}
+    public CollapsedStringAdapter() {
+    }
 
     /**
-     * Removes leading and trailing whitespaces of the string
-     * given as the parameter, then truncate any
-     * sequence of tab, CR, LF, and SP by a single whitespace character ' '.
+     * Removes leading and trailing whitespaces of the string given as the parameter, then truncate any sequence of tab,
+     * CR, LF, and SP by a single whitespace character ' '.
      */
     @Override
     public String unmarshal(String text) {
-        if(text==null)  return null;        // be defensive
+        if (text == null) {
+            return null;        // be defensive
+        }
 
         int len = text.length();
 
         // most of the texts are already in the collapsed form.
         // so look for the first whitespace in the hope that we will
         // never see it.
-        int s=0;
-        while(s<len) {
-            if(isWhiteSpace(text.charAt(s)))
+        int s = 0;
+        while (s < len) {
+            if (isWhiteSpace(text.charAt(s))) {
                 break;
+            }
             s++;
         }
-        if(s==len)
-            // the input happens to be already collapsed.
+        if (s == len)
+        // the input happens to be already collapsed.
+        {
             return text;
+        }
 
         // we now know that the input contains spaces.
         // let's sit down and do the collapsing normally.
 
-        StringBuilder result = new StringBuilder(len /*allocate enough size to avoid re-allocation*/ );
+        StringBuilder result = new StringBuilder(len /*allocate enough size to avoid re-allocation*/);
 
-        if(s!=0) {
-            for( int i=0; i<s; i++ )
+        if (s != 0) {
+            for (int i = 0; i < s; i++)
                 result.append(text.charAt(i));
             result.append(' ');
         }
 
         boolean inStripMode = true;
-        for (int i = s+1; i < len; i++) {
+        for (int i = s + 1; i < len; i++) {
             char ch = text.charAt(i);
             boolean b = isWhiteSpace(ch);
-            if (inStripMode && b)
+            if (inStripMode && b) {
                 continue; // skip this character
+            }
 
             inStripMode = b;
-            if (inStripMode)
+            if (inStripMode) {
                 result.append(' ');
-            else
+            } else {
                 result.append(ch);
+            }
         }
 
         // remove trailing whitespaces
         len = result.length();
-        if (len > 0 && result.charAt(len - 1) == ' ')
+        if (len > 0 && result.charAt(len - 1) == ' ') {
             result.setLength(len - 1);
+        }
         // whitespaces are already collapsed,
         // so all we have to do is to remove the last one character
         // if it's a whitespace.
@@ -96,11 +104,15 @@ public class CollapsedStringAdapter extends XmlAdapter<String,String> {
     }
 
 
-    /** returns true if the specified char is a white space character. */
+    /**
+     * returns true if the specified char is a white space character.
+     */
     protected static boolean isWhiteSpace(char ch) {
         // most of the characters are non-control characters.
         // so check that first to quickly return false for most of the cases.
-        if( ch>0x20 )   return false;
+        if (ch > 0x20) {
+            return false;
+        }
 
         // other than we have to do four comparisons.
         return ch == 0x9 || ch == 0xA || ch == 0xD || ch == 0x20;

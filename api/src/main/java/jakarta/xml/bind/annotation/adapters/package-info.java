@@ -10,20 +10,20 @@
  */
 
 /**
- * {@linkplain jakarta.xml.bind.annotation.adapters.XmlAdapter} and its spec-defined
- * subclasses to allow arbitrary Java classes to be used with Jakarta XML Binding.
- * 
+ * {@linkplain jakarta.xml.bind.annotation.adapters.XmlAdapter} and its spec-defined subclasses to allow arbitrary Java
+ * classes to be used with Jakarta XML Binding.
+ *
  * <p>
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
  *
  * <h2>Package Specification</h2>
- * 
+ *
  * <ul>
  * <li><a href="https://projects.eclipse.org/projects/ee4j.jaxb">Jakarta XML Binding Specification project</a>
  * </ul>
- * 
+ *
  * <h2>Related Documentation</h2>
- * 
+ * <p>
  * For overviews, tutorials, examples, guides, and tool documentation,
  * please see:
  * <ul>

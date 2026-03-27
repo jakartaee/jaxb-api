@@ -12,23 +12,24 @@
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
  * A container for multiple @{@linkplain XmlElement} annotations.
  * <p>
- * Multiple annotations of the same type are not allowed on a program
- * element. This annotation therefore serves as a container annotation
- * for multiple {@code @XmlElements} as follows:
- *
+ * Multiple annotations of the same type are not allowed on a program element. This annotation therefore serves as a
+ * container annotation for multiple {@code @XmlElements} as follows:
+ * <p>
  * {@snippet :
  *  @XmlElements({ @XmlElement(...), @XmlElement(...) })
- * }
+ *}
  *
  * <p>The {@code @XmlElements} annotation can be used with the
  * following program elements: </p>
@@ -36,7 +37,7 @@ import java.lang.annotation.Target;
  *   <li> a JavaBean property </li>
  *   <li> non-static, non transient field </li>
  * </ul>
- *
+ * <p>
  * This annotation is intended for annotation a JavaBean collection
  * property (e.g. List).
  *
@@ -66,8 +67,8 @@ import java.lang.annotation.Target;
  *      })
  *      public List items;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Representation for a List of {1,2.5}
  *          XML output is not wrapped using another element -->
  *  ...
@@ -84,7 +85,7 @@ import java.lang.annotation.Target;
  *      </xs:choice>
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  *
  * <p><b>Example 2:</b> Map to a list of elements wrapped with another element
  * </p>
@@ -98,8 +99,8 @@ import java.lang.annotation.Target;
  *      })
  *      public List items;
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Schema fragment -->
  *  <xs:complexType name="Foo">
  *    <xs:sequence>
@@ -113,7 +114,7 @@ import java.lang.annotation.Target;
  *      </xs:element>
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  *
  * <p><b>Example 3:</b> Change element name based on type using an adapter.
  * </p>
@@ -130,8 +131,8 @@ import java.lang.annotation.Target;
  *  @XmlType abstract class P {...}
  *  @XmlType(name="PX") class PX extends P {...}
  *  @XmlType(name="PY") class PY extends P {...}
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Schema fragment -->
  *  <xs:complexType name="Foo">
  *    <xs:sequence>
@@ -145,7 +146,7 @@ import java.lang.annotation.Target;
  *      </xs:element>
  *    </xs:sequence>
  *  </xs:complexType>
- * }
+ *}
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElement
@@ -154,7 +155,8 @@ import java.lang.annotation.Target;
  * @see XmlJavaTypeAdapter
  * @since 1.6, JAXB 2.0
  */
-@Retention(RUNTIME) @Target({FIELD,METHOD})
+@Retention(RUNTIME)
+@Target({FIELD, METHOD})
 public @interface XmlElements {
     /**
      * Collection of @{@linkplain XmlElement} annotations

@@ -13,17 +13,18 @@ package jakarta.xml.bind.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Maps an enum constant in {@linkplain Enum} type to XML representation.  
- * 
+ * Maps an enum constant in {@linkplain Enum} type to XML representation.
+ *
  * <p> <b>Usage</b> </p>
  *
  * <p> The {@code @XmlEnumValue} annotation can be used with the
- *     following program elements:  
- * <ul> 
+ * following program elements:
+ * <ul>
  *   <li>enum constant</li>
  * </ul>
  *
@@ -47,8 +48,8 @@ import static java.lang.annotation.ElementType.FIELD;
  *  //Example: Code fragment
  *  @XmlEnum(String.class)
  *  public enum Card { CLUBS, DIAMONDS, HEARTS, SPADES }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML Schema fragment -->
  *  <xs:simpleType name="Card">
  *    <xs:restriction base="xs:string">
@@ -56,9 +57,9 @@ import static java.lang.annotation.ElementType.FIELD;
  *      <xs:enumeration value="DIAMONDS"/>
  *      <xs:enumeration value="HEARTS"/>
  *      <xs:enumeration value="SPADES"/>
-      </xs:restriction>
+ * </xs:restriction>
  *  </xs:simpleType>
- * }
+ *}
  *
  * <p><b>Example 2: </b>Map enum constant name(value) {@literal ->} enumeration facet </p>
  * {@snippet :
@@ -71,8 +72,8 @@ import static java.lang.annotation.ElementType.FIELD;
  *      @XmlEnumValue("10") DIME(10),
  *      @XmlEnumValue("25") QUARTER(25)
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML Schema fragment -->
  *  <xs:simpleType name="Coin">
  *    <xs:restriction base="xs:int">
@@ -82,10 +83,10 @@ import static java.lang.annotation.ElementType.FIELD;
  *      <xs:enumeration value="25"/>
  *    </xs:restriction>
  *  </xs:simpleType>
- * }
+ *}
  *
  * <p><b>Example 3: </b>Map enum constant name {@literal ->} enumeration facet </p>
- * 
+ * <p>
  * {@snippet :
  *  //Code fragment
  *  @XmlType
@@ -94,8 +95,8 @@ import static java.lang.annotation.ElementType.FIELD;
  *      @XmlEnumValue("1") ONE,
  *      @XmlEnumValue("2") TWO
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- Example: XML Schema fragment -->
  *  <xs:simpleType name="Code">
  *    <xs:restriction base="xs:int">
@@ -103,7 +104,7 @@ import static java.lang.annotation.ElementType.FIELD;
  *      <xs:enumeration value="2"/>
  *    </xs:restriction>
  *  </xs:simpleType>
- * }
+ *}
  *
  * @since 1.6, JAXB 2.0
  */

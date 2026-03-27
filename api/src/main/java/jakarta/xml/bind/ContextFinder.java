@@ -27,8 +27,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * This class is package private and therefore is not exposed as part of the
- * Jakarta XML Binding API.
+ * This class is package private and therefore is not exposed as part of the Jakarta XML Binding API.
  * <p>
  * This code is designed to implement the XML Binding spec pluggability feature
  *
@@ -40,14 +39,13 @@ class ContextFinder {
     private static final Logger logger;
 
     /**
-     * When JAXB is in J2SE, rt.jar has to have a JAXB implementation.
-     * However, rt.jar cannot have META-INF/services/jakarta.xml.bind.JAXBContext
-     * because if it has, it will take precedence over any file that applications have
-     * in their jar files.
+     * When JAXB is in J2SE, rt.jar has to have a JAXB implementation. However, rt.jar cannot have
+     * META-INF/services/jakarta.xml.bind.JAXBContext because if it has, it will take precedence over any file that
+     * applications have in their jar files.
      *
      * <p>
-     * When the user bundles his own Jakarta XML Binding implementation, we'd like to use it, and we
-     * want the platform default to be used only when there's no other Jakarta XML Binding provider.
+     * When the user bundles his own Jakarta XML Binding implementation, we'd like to use it, and we want the platform
+     * default to be used only when there's no other Jakarta XML Binding provider.
      *
      * <p>
      * For this reason, we have to hard-code the class name into the API.
@@ -86,20 +84,25 @@ class ContextFinder {
             };
 
     /**
-     * If the {@linkplain InvocationTargetException} wraps an exception that shouldn't be wrapped,
-     * throw the wrapped exception. Otherwise, returns exception to be wrapped for further processing.
+     * If the {@linkplain InvocationTargetException} wraps an exception that shouldn't be wrapped, throw the wrapped
+     * exception. Otherwise, returns exception to be wrapped for further processing.
      */
     private static Throwable handleInvocationTargetException(InvocationTargetException x) throws JAXBException {
         Throwable t = x.getTargetException();
         if (t != null) {
             if (t instanceof JAXBException)
-                // one of our exceptions, just re-throw
+            // one of our exceptions, just re-throw
+            {
                 throw (JAXBException) t;
+            }
             if (t instanceof RuntimeException)
-                // avoid wrapping exceptions unnecessarily
+            // avoid wrapping exceptions unnecessarily
+            {
                 throw (RuntimeException) t;
-            if (t instanceof Error)
+            }
+            if (t instanceof Error) {
                 throw (Error) t;
+            }
             return t;
         }
         return x;
@@ -111,10 +114,9 @@ class ContextFinder {
      * <p>
      * For example, (targetType)originalType
      *
-     * @param originalType
-     *          The Class object of the type being cast
-     * @param targetType
-     *          The Class object of the type that is being cast to
+     * @param originalType The Class object of the type being cast
+     * @param targetType   The Class object of the type that is being cast to
+     *
      * @return JAXBException to be thrown.
      */
     private static JAXBException handleClassCastException(Class<?> originalType, Class<?> targetType) {
@@ -263,7 +265,7 @@ class ContextFinder {
                                    Map<String, ?> properties,
                                    Class<?> spFactory) throws JAXBException {
         try {
-            ModuleUtil.delegateAddOpensToImplModule(classes,  spFactory);
+            ModuleUtil.delegateAddOpensToImplModule(classes, spFactory);
 
             Method m = spFactory.getMethod("createContext", Class[].class, Map.class);
             Object obj = instantiateProviderIfNecessary(spFactory);
@@ -299,7 +301,9 @@ class ContextFinder {
         Class<?>[] contextPathClasses = ModuleUtil.getClassesFromContextPath(contextPath, classLoader);
 
         String factoryName = classNameFromSystemProperties();
-        if (factoryName != null) return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+        if (factoryName != null) {
+            return newInstance(contextPath, contextPathClasses, factoryName, classLoader, properties);
+        }
 
         if (properties != null) {
             Object factory = properties.get(factoryId);
@@ -343,7 +347,9 @@ class ContextFinder {
 
     static JAXBContext find(Class<?>[] classes, Map<String, ?> properties) throws JAXBException {
         String factoryClassName = classNameFromSystemProperties();
-        if (factoryClassName != null) return newInstance(classes, properties, factoryClassName);
+        if (factoryClassName != null) {
+            return newInstance(classes, properties, factoryClassName);
+        }
 
         if (properties != null) {
             Object ctxFactory = properties.get(JAXBContext.JAXB_CONTEXT_FACTORY);
@@ -407,16 +413,14 @@ class ContextFinder {
     }
 
     /**
-     * Search the given ClassLoader for an instance of the specified class and
-     * return a string representation of the URL that points to the resource.
+     * Search the given ClassLoader for an instance of the specified class and return a string representation of the URL
+     * that points to the resource.
      *
-     * @param clazz
-     *          The class to search for
-     * @param loader
-     *          The ClassLoader to search.  If this parameter is null, then the
-     *          system class loader will be searched
-     * @return
-     *          the URL for the class or null if it wasn't found
+     * @param clazz  The class to search for
+     * @param loader The ClassLoader to search.  If this parameter is null, then the system class loader will be
+     *               searched
+     *
+     * @return the URL for the class or null if it wasn't found
      */
     static URL which(Class<?> clazz, ClassLoader loader) {
 
@@ -436,10 +440,9 @@ class ContextFinder {
      * <p>
      * Equivalent to calling: which(clazz, clazz.getClassLoader())
      *
-     * @param clazz
-     *          The class to search for
-     * @return
-     *          the URL for the class or null if it wasn't found
+     * @param clazz The class to search for
+     *
+     * @return the URL for the class or null if it wasn't found
      */
     static URL which(Class<?> clazz) {
         return which(clazz, getClassClassLoader(clazz));

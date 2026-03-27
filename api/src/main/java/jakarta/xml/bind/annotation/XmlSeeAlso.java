@@ -12,34 +12,33 @@
 package jakarta.xml.bind.annotation;
 
 import jakarta.xml.bind.JAXBContext;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Instructs Jakarta XML Binding to also bind other classes when binding this class.
  *
  * <p>
- * Java makes it impractical/impossible to list all subclasses of
- * a given class. This often gets in a way of Jakarta XML Binding users, as it Jakarta XML Binding
- * cannot automatically list up the classes that need to be known
- * to {@linkplain JAXBContext}.
+ * Java makes it impractical/impossible to list all subclasses of a given class. This often gets in a way of Jakarta XML
+ * Binding users, as it Jakarta XML Binding cannot automatically list up the classes that need to be known to
+ * {@linkplain JAXBContext}.
  *
  * <p>
  * For example, with the following class definitions:
- *
+ * <p>
  * {@snippet :
  *  class Animal {}
  *  class Dog extends Animal {}
  *  class Cat extends Animal {}
- * }
+ *}
  *
  * <p>
- * The user would be required to create {@linkplain JAXBContext} as
- * {@code JAXBContext.newInstance(Dog.class,Cat.class)}
- * ({@code Animal} will be automatically picked up since {@code Dog}
- * and {@code Cat} refers to it.)
+ * The user would be required to create {@linkplain JAXBContext} as {@code JAXBContext.newInstance(Dog.class,Cat.class)}
+ * ({@code Animal} will be automatically picked up since {@code Dog} and {@code Cat} refers to it.)
  *
  * <p>
  * {@linkplain XmlSeeAlso} annotation would allow you to write:
@@ -48,12 +47,11 @@ import java.lang.annotation.Target;
  *  class Animal {}
  *  class Dog extends Animal {}
  *  class Cat extends Animal {}
- * }
+ *}
  *
  * <p>
- * This would allow you to do {@code JAXBContext.newInstance(Animal.class)}.
- * By the help of this annotation, Jakarta XML Binding implementations will be able to
- * correctly bind {@code Dog} and {@code Cat}.
+ * This would allow you to do {@code JAXBContext.newInstance(Animal.class)}. By the help of this annotation, Jakarta XML
+ * Binding implementations will be able to correctly bind {@code Dog} and {@code Cat}.
  *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.1

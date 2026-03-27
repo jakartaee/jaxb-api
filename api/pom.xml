@@ -12,7 +12,8 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>jakarta.xml.bind-api-parent</artifactId>
         <groupId>jakarta.xml.bind</groupId>
@@ -57,7 +58,7 @@
                             <requireMavenVersion>
                                 <version>[3.6.0,)</version>
                             </requireMavenVersion>
-                            <DependencyConvergence />
+                            <DependencyConvergence/>
                         </rules>
                     </configuration>
                 </plugin>
@@ -88,7 +89,7 @@
                         <header><![CDATA[Jakarta XML Binding<br>v${project.version}]]>
                         </header>
                         <bottom>
-                        <![CDATA[
+                            <![CDATA[
 Comments to : <a href="mailto:${release.spec.feedback}">${release.spec.feedback}</a>.<br>
 Copyright &#169; 2019, ${current.year} Eclipse Foundation. All rights reserved.<br>
 Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">license terms</a>.]]>

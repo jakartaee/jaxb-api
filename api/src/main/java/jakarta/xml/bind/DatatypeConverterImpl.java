@@ -17,19 +17,17 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import javax.xml.namespace.QName;
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.namespace.QName;
 
 /**
- * This class is the Jakarta XML Binding CI's default implementation of the
- * {@linkplain DatatypeConverterInterface}.
+ * This class is the Jakarta XML Binding CI's default implementation of the {@linkplain DatatypeConverterInterface}.
  *
  * <p>
- * When client applications specify the use of the static print/parse
- * methods in {@linkplain DatatypeConverter}, it will delegate
- * to this class.
+ * When client applications specify the use of the static print/parse methods in {@linkplain DatatypeConverter}, it will
+ * delegate to this class.
  *
  * <p>
  * This class is responsible for whitespace normalization.
@@ -67,7 +65,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printInteger(BigInteger val) {
-        if (null == val) throw new IllegalArgumentException("val is null");
+        if (null == val) {
+            throw new IllegalArgumentException("val is null");
+        }
         return val.toString();
     }
 
@@ -429,7 +429,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printDateTime(Calendar val) {
-        if (null == val) throw new IllegalArgumentException("val is null");
+        if (null == val) {
+            throw new IllegalArgumentException("val is null");
+        }
         return CalendarFormatter.doFormat("%Y-%M-%DT%h:%m:%s%z", val);
     }
 
@@ -474,11 +476,14 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         }
         return -1;
     }
+
     private static final char[] hexCode = "0123456789ABCDEF".toCharArray();
 
     @Override
     public String printHexBinary(byte[] data) {
-        if (null == data) throw new IllegalArgumentException("data is null");
+        if (null == data) {
+            throw new IllegalArgumentException("data is null");
+        }
         StringBuilder r = new StringBuilder(data.length * 2);
         for (byte b : data) {
             r.append(hexCode[(b >> 4) & 0xF]);
@@ -509,7 +514,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     @Override
     public String printTime(Calendar val) {
-        if (null == val) throw new IllegalArgumentException("val is null");
+        if (null == val) {
+            throw new IllegalArgumentException("val is null");
+        }
         return CalendarFormatter.doFormat("%h:%m:%s%z", val);
     }
 
@@ -524,8 +531,10 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printDate(Calendar val) {
-        if (null == val) throw new IllegalArgumentException("val is null");
-        return CalendarFormatter.doFormat("%Y-%M-%D%z",val);
+        if (null == val) {
+            throw new IllegalArgumentException("val is null");
+        }
+        return CalendarFormatter.doFormat("%Y-%M-%D%z", val);
     }
 
     @Override
@@ -564,7 +573,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printDecimal(BigDecimal val) {
-        if (null == val) throw new IllegalArgumentException("val is null");
+        if (null == val) {
+            throw new IllegalArgumentException("val is null");
+        }
         return val.toPlainString();
     }
 
@@ -622,15 +633,15 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     /**
-     * Just return the string passed as a parameter but
-     * installs an instance of this class as the DatatypeConverter
+     * Just return the string passed as a parameter but installs an instance of this class as the DatatypeConverter
      * implementation. Used from static fixed value initializers.
      */
     public static String installHook(String s) {
         DatatypeConverter.setDatatypeConverter(theInstance);
         return s;
     }
-// base64 decoder
+
+    // base64 decoder
     private static final byte[] decodeMap = initDecodeMap();
     private static final byte PADDING = 127;
 
@@ -661,21 +672,18 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      * computes the length of binary data speculatively.
      *
      * <p>
-     * Our requirement is to create byte[] of the exact length to store the binary data.
-     * If we do this in a straight-forward way, it takes two passes over the data.
-     * Experiments show that this is a non-trivial overhead (35% or so is spent on
-     * the first pass in calculating the length.)
+     * Our requirement is to create byte[] of the exact length to store the binary data. If we do this in a
+     * straight-forward way, it takes two passes over the data. Experiments show that this is a non-trivial overhead
+     * (35% or so is spent on the first pass in calculating the length.)
      *
      * <p>
-     * So the approach here is that we compute the length speculatively, without looking
-     * at the whole contents. The obtained speculative value is never less than the
-     * actual length of the binary data, but it may be bigger. So if the speculation
-     * goes wrong, we'll pay the cost of reallocation and buffer copying.
+     * So the approach here is that we compute the length speculatively, without looking at the whole contents. The
+     * obtained speculative value is never less than the actual length of the binary data, but it may be bigger. So if
+     * the speculation goes wrong, we'll pay the cost of reallocation and buffer copying.
      *
      * <p>
-     * If the base64 text is tightly packed with no indentation nor illegal char
-     * (like what most web services produce), then the speculation of this method
-     * will be correct, so we get the performance benefit.
+     * If the base64 text is tightly packed with no indentation nor illegal char (like what most web services produce),
+     * then the speculation of this method will be correct, so we get the performance benefit.
      */
     private static int guessLength(String text) {
         final int len = text.length();
@@ -707,13 +715,11 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     /**
-     * @param text
-     *      base64Binary data is likely to be long, and decoding requires
-     *      each character to be accessed twice (once for counting length, another
-     *      for decoding.)
-     * <p>
-     *      A benchmark showed that taking {@linkplain String} is faster, presumably
-     *      because JIT can inline a lot of string access (with data of 1K chars, it was twice as fast)
+     * @param text base64Binary data is likely to be long, and decoding requires each character to be accessed twice
+     *             (once for counting length, another for decoding.)
+     *             <p>
+     *             A benchmark showed that taking {@linkplain String} is faster, presumably because JIT can inline a lot
+     *             of string access (with data of 1K chars, it was twice as fast)
      */
     public static byte[] _parseBase64Binary(String text) {
         if (null == text) {
@@ -768,6 +774,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         System.arraycopy(out, 0, nb, 0, o);
         return nb;
     }
+
     private static final char[] encodeMap = initEncodeMap();
 
     private static char[] initEncodeMap() {
@@ -797,7 +804,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     public static String _printBase64Binary(byte[] input) {
-        if (null == input) throw new IllegalArgumentException("input is null");
+        if (null == input) {
+            throw new IllegalArgumentException("input is null");
+        }
         return _printBase64Binary(input, 0, input.length);
     }
 
@@ -813,22 +822,21 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
      * <p>
      * The caller must supply a big enough buffer.
      *
-     * @return
-     *      the value of {@code ptr+((len+2)/3)*4}, which is the new offset
-     *      in the output buffer where the further bytes should be placed.
+     * @return the value of {@code ptr+((len+2)/3)*4}, which is the new offset in the output buffer where the further
+     * bytes should be placed.
      */
     public static int _printBase64Binary(byte[] input, int offset, int len, char[] buf, int ptr) {
         // encode elements until only 1 or 2 elements are left to encode
         int remaining = len;
         int i;
-        for (i = offset;remaining >= 3; remaining -= 3, i += 3) {
+        for (i = offset; remaining >= 3; remaining -= 3, i += 3) {
             buf[ptr++] = encode(input[i] >> 2);
             buf[ptr++] = encode(
                     ((input[i] & 0x3) << 4)
-                    | ((input[i + 1] >> 4) & 0xF));
+                            | ((input[i + 1] >> 4) & 0xF));
             buf[ptr++] = encode(
                     ((input[i + 1] & 0xF) << 2)
-                    | ((input[i + 2] >> 6) & 0x3));
+                            | ((input[i + 2] >> 6) & 0x3));
             buf[ptr++] = encode(input[i + 2] & 0x3F);
         }
         // encode when exactly 1 element (left) to encode
@@ -850,43 +858,41 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     }
 
     /**
-     * Encodes a byte array into another byte array by first doing base64 encoding
-     * then encoding the result in ASCII.
+     * Encodes a byte array into another byte array by first doing base64 encoding then encoding the result in ASCII.
      * <p>
      * The caller must supply a big enough buffer.
      *
-     * @return
-     *      the value of {@code ptr+((len+2)/3)*4}, which is the new offset
-     *      in the output buffer where the further bytes should be placed.
+     * @return the value of {@code ptr+((len+2)/3)*4}, which is the new offset in the output buffer where the further
+     * bytes should be placed.
      */
     public static int _printBase64Binary(byte[] input, int offset, int len, byte[] out, int ptr) {
         byte[] buf = out;
         int remaining = len;
         int i;
-        for (i=offset; remaining >= 3; remaining -= 3, i += 3 ) {
-            buf[ptr++] = encodeByte(input[i]>>2);
+        for (i = offset; remaining >= 3; remaining -= 3, i += 3) {
+            buf[ptr++] = encodeByte(input[i] >> 2);
             buf[ptr++] = encodeByte(
-                        ((input[i]&0x3)<<4) |
-                        ((input[i+1]>>4)&0xF));
+                    ((input[i] & 0x3) << 4) |
+                            ((input[i + 1] >> 4) & 0xF));
             buf[ptr++] = encodeByte(
-                        ((input[i+1]&0xF)<<2)|
-                        ((input[i+2]>>6)&0x3));
-            buf[ptr++] = encodeByte(input[i+2]&0x3F);
+                    ((input[i + 1] & 0xF) << 2) |
+                            ((input[i + 2] >> 6) & 0x3));
+            buf[ptr++] = encodeByte(input[i + 2] & 0x3F);
         }
         // encode when exactly 1 element (left) to encode
         if (remaining == 1) {
-            buf[ptr++] = encodeByte(input[i]>>2);
-            buf[ptr++] = encodeByte(((input[i])&0x3)<<4);
+            buf[ptr++] = encodeByte(input[i] >> 2);
+            buf[ptr++] = encodeByte(((input[i]) & 0x3) << 4);
             buf[ptr++] = '=';
             buf[ptr++] = '=';
         }
         // encode when exactly 2 elements (left) to encode
         if (remaining == 2) {
-            buf[ptr++] = encodeByte(input[i]>>2);
+            buf[ptr++] = encodeByte(input[i] >> 2);
             buf[ptr++] = encodeByte(
-                        ((input[i]&0x3)<<4) |
-                        ((input[i+1]>>4)&0xF));
-            buf[ptr++] = encodeByte((input[i+1]&0xF)<<2);
+                    ((input[i] & 0x3) << 4) |
+                            ((input[i + 1] >> 4) & 0xF));
+            buf[ptr++] = encodeByte((input[i + 1] & 0xF) << 2);
             buf[ptr++] = '=';
         }
 
@@ -921,6 +927,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         }
         return false;
     }
+
     private static final DatatypeFactory datatypeFactory;
 
     static {
@@ -1038,7 +1045,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
             }
         }
 
-        /** formats time zone specifier. */
+        /**
+         * formats time zone specifier.
+         */
         private static void formatTimeZone(Calendar cal, StringBuilder buf) {
             TimeZone tz = cal.getTimeZone();
 
@@ -1068,7 +1077,9 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
             formatTwoDigits(offset % 60, buf);
         }
 
-        /** formats Integer into two-character-wide string. */
+        /**
+         * formats Integer into two-character-wide string.
+         */
         private static void formatTwoDigits(int n, StringBuilder buf) {
             // n is always non-negative.
             if (n < 10) {

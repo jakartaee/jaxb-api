@@ -17,9 +17,9 @@ import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>
@@ -27,34 +27,27 @@ import static java.lang.annotation.ElementType.METHOD;
  * <p>
  * <b>Usage</b>
  * <p>
- * {@code @XmlElementRef} annotation can be used with a
- * JavaBean property or from within {@linkplain XmlElementRefs}
+ * {@code @XmlElementRef} annotation can be used with a JavaBean property or from within {@linkplain XmlElementRefs}
  * <p>
- * This annotation dynamically associates an XML element name with the JavaBean
- * property. When a JavaBean property is annotated with {@link
- * XmlElement}, the XML element name is statically derived from the
- * JavaBean property name. However, when this annotation is used, the
- * XML element name is derived from the instance of the type of the
- * JavaBean property at runtime.
+ * This annotation dynamically associates an XML element name with the JavaBean property. When a JavaBean property is
+ * annotated with {@link XmlElement}, the XML element name is statically derived from the JavaBean property name.
+ * However, when this annotation is used, the XML element name is derived from the instance of the type of the JavaBean
+ * property at runtime.
  *
  * <h2> XML Schema substitution group support </h2>
- * XML Schema allows an XML document author to use XML element names
- * that were not statically specified in the content model of a
- * schema using substitution groups. Schema derived code provides
- * support for substitution groups using an <i>element property</i>,
- * (section 5.5.5, "Element Property" of Jakarta XML Binding specification). An
- * element property method signature is of the form:
+ * XML Schema allows an XML document author to use XML element names that were not statically specified in the content
+ * model of a schema using substitution groups. Schema derived code provides support for substitution groups using an
+ * <i>element property</i>, (section 5.5.5, "Element Property" of Jakarta XML Binding specification). An element
+ * property method signature is of the form:
  * {@snippet :
  *  public void setTerm(JAXBElement<? extends Operator>);
  *  public JAXBElement<? extends Operator> getTerm();
- * }
+ *}
  * <p>
- * An element factory method annotated with  {@linkplain XmlElementDecl} is
- * used to create a {@code JAXBElement} instance, containing an XML
- * element name. The presence of {@code @XmlElementRef} annotation on an
- * element property indicates that the element name from {@code JAXBElement}
- * instance be used instead of deriving an XML element name from the
- * JavaBean property name.
+ * An element factory method annotated with  {@linkplain XmlElementDecl} is used to create a {@code JAXBElement}
+ * instance, containing an XML element name. The presence of {@code @XmlElementRef} annotation on an element property
+ * indicates that the element name from {@code JAXBElement} instance be used instead of deriving an XML element name
+ * from the JavaBean property name.
  *
  * <p>
  * The usage is subject to the following constraints:
@@ -109,8 +102,8 @@ import static java.lang.annotation.ElementType.METHOD;
  *  class JavacTask extends Task {
  *      ...
  *  }
- * }
- * {@snippet lang="XML" :
+ *}
+ * {@snippet lang = "XML":
  *  <!-- XML Schema fragment -->
  *  <xs:element name="target" type="Target">
  *    <xs:complexType name="Target">
@@ -122,7 +115,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *      </xs:sequence>
  *    </xs:complexType>
  *  </xs:element>
- * }
+ *}
  * <p>
  * Thus the following code fragment:
  * {@snippet :
@@ -130,9 +123,9 @@ import static java.lang.annotation.ElementType.METHOD;
  *  target.tasks.add(new JarTask());
  *  target.tasks.add(new JavacTask());
  *  marshal(target);
- * }
+ *}
  * will produce the following XML output:
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <target>
  *    <jar>
  *      ....
@@ -141,7 +134,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *      ....
  *    </javac>
  *  </target>
- * }
+ *}
  * <p>
  * It is not an error to have a class that extends {@code Task}
  * that doesn't have {@linkplain XmlRootElement}. But they can't show up in an
@@ -151,7 +144,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * <p> The following example shows the annotations for XML Schema
  * substitution groups.  The annotations and the ObjectFactory are
  * derived from the schema.
- *
+ * <p>
  * {@snippet :
  *  @XmlElement
  *  class Math {
@@ -187,62 +180,56 @@ import static java.lang.annotation.ElementType.METHOD;
  *  class Operator {
  *      ...
  *  }
- * }
+ *}
  * <p>
  * Thus, the following code fragment
  * {@snippet :
  *  Math m = new Math();
  *  m.term = new ObjectFactory().createAdd(new Operator());
  *  marshal(m);
- * }
+ *}
  * will produce the following XML output:
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <math>
  *    <add>...</add>
  *  </math>
- * }
- *
+ *}
  *
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems,Inc. </li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  * @see XmlElementRefs
  * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
-@Target({FIELD,METHOD})
+@Target({FIELD, METHOD})
 @Repeatable(XmlElementRefs.class)
 public @interface XmlElementRef {
     /**
      * The Java type being referenced.
      * <p>
-     * If the value is DEFAULT.class, the type is inferred from
-     * the type of the JavaBean property.
+     * If the value is DEFAULT.class, the type is inferred from the type of the JavaBean property.
      */
     Class<?> type() default DEFAULT.class;
 
     /**
-     * This parameter and {@linkplain #name()} are used to determine the
-     * XML element for the JavaBean property.
+     * This parameter and {@linkplain #name()} are used to determine the XML element for the JavaBean property.
      *
      * <p> If {@code type()} is {@code JAXBElement.class} , then
-     * {@code namespace()} and {@code name()}
-     * point to a factory method with {@linkplain XmlElementDecl}. The XML
-     * element name is the element name from the factory method's
-     * {@linkplain XmlElementDecl} annotation or if an element from its
-     * substitution group (of which it is a head element) has been
-     * substituted in the XML document, then the element name is from the
-     * {@linkplain XmlElementDecl} on the substituted element.
+     * {@code namespace()} and {@code name()} point to a factory method with {@linkplain XmlElementDecl}. The XML
+     * element name is the element name from the factory method's {@linkplain XmlElementDecl} annotation or if an
+     * element from its substitution group (of which it is a head element) has been substituted in the XML document,
+     * then the element name is from the {@linkplain XmlElementDecl} on the substituted element.
      *
      * <p> If {@linkplain #type()} is not {@code JAXBElement.class}, then
-     * the XML element name is the XML element name statically
-     * associated with the type using the annotation {@link
-     * XmlRootElement} on the type. If the type is not annotated with
-     * an {@linkplain XmlElementDecl}, then it is an error.
+     * the XML element name is the XML element name statically associated with the type using the annotation
+     * {@link XmlRootElement} on the type. If the type is not annotated with an {@linkplain XmlElementDecl}, then it is
+     * an error.
      *
      * <p> If {@code type()} is not {@code JAXBElement.class}, then
      * this value must be "".
      *
      */
     String namespace() default "";
+
     /**
      *
      * @see #namespace()
@@ -250,31 +237,27 @@ public @interface XmlElementRef {
     String name() default "##default";
 
     /**
-     * Used in {@linkplain XmlElementRef#type()} to
-     * signal that the type be inferred from the signature
-     * of the property.
+     * Used in {@linkplain XmlElementRef#type()} to signal that the type be inferred from the signature of the
+     * property.
      */
     final class DEFAULT {
-        private DEFAULT() {}
+        private DEFAULT() {
+        }
     }
 
     /**
      * Customize the element declaration to be required.
      * <p>
-     * If required() is true, then Javabean property is mapped to
-     * an XML schema element declaration with minOccurs="1".
-     * maxOccurs is "1" for a single valued property and "unbounded"
-     * for a multivalued property.
+     * If required() is true, then Javabean property is mapped to an XML schema element declaration with minOccurs="1".
+     * maxOccurs is "1" for a single valued property and "unbounded" for a multivalued property.
      *
      * <p>
-     * If required() is false, then the Javabean property is mapped
-     * to XML Schema element declaration with minOccurs="0".
-     * maxOccurs is "1" for a single valued property and "unbounded"
-     * for a multivalued property.
+     * If required() is false, then the Javabean property is mapped to XML Schema element declaration with
+     * minOccurs="0". maxOccurs is "1" for a single valued property and "unbounded" for a multivalued property.
      *
      * <p>
-     * For compatibility with Jakarta XML Binding, this property defaults to {@code true},
-     * despite the fact that {@linkplain XmlElement#required()} defaults to false.
+     * For compatibility with Jakarta XML Binding, this property defaults to {@code true}, despite the fact that
+     * {@linkplain XmlElement#required()} defaults to false.
      *
      * @since 1.7, JAXB 2.2
      */

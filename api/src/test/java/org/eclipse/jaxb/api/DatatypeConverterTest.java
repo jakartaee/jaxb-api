@@ -12,6 +12,7 @@
 package org.eclipse.jaxb.api;
 
 import jakarta.xml.bind.DatatypeConverter;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -57,8 +58,8 @@ public class DatatypeConverterTest {
         Assertions.assertTrue(DatatypeConverter.parseBoolean(" true "));
     }
 
-    @Test 
-    public void testPrint() { 
+    @Test
+    public void testPrint() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printInteger(null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDateTime(null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printHexBinary(null));
@@ -66,7 +67,7 @@ public class DatatypeConverterTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDate(null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printDecimal(null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printBase64Binary(null));
-        
+
         //Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printShort(null));
         //Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printFloat(null));
         //Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printBoolean(null));
@@ -79,8 +80,8 @@ public class DatatypeConverterTest {
         //Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printQName(null));
         //Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printUnsignedShort(null));
         //Assertions.assertThrows(IllegalArgumentException.class, () -> DatatypeConverter.printAnySimpleType(null));
-        
-    } 
+
+    }
 
     @Test
     public void testBase64() {

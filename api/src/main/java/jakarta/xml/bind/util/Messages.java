@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -16,53 +17,54 @@ import java.util.ResourceBundle;
 /**
  * Formats error messages.
  */
-class Messages
-{
-    static String format( String property ) {
-        return format( property, null );
+class Messages {
+    static String format(String property) {
+        return format(property, null);
     }
-    
-    static String format( String property, Object arg1 ) {
-        return format( property, new Object[]{arg1} );
+
+    static String format(String property, Object arg1) {
+        return format(property, new Object[]{arg1});
     }
-    
-    static String format( String property, Object arg1, Object arg2 ) {
-        return format( property, new Object[]{arg1,arg2} );
+
+    static String format(String property, Object arg1, Object arg2) {
+        return format(property, new Object[]{arg1, arg2});
     }
-    
-    static String format( String property, Object arg1, Object arg2, Object arg3 ) {
-        return format( property, new Object[]{arg1,arg2,arg3} );
+
+    static String format(String property, Object arg1, Object arg2, Object arg3) {
+        return format(property, new Object[]{arg1, arg2, arg3});
     }
-    
+
     // add more if necessary.
-    
-    /** Loads a string resource and formats it with specified arguments. */
-    static String format( String property, Object[] args ) {
+
+    /**
+     * Loads a string resource and formats it with specified arguments.
+     */
+    static String format(String property, Object[] args) {
         String text = ResourceBundle.getBundle(Messages.class.getName()).getString(property);
-        return MessageFormat.format(text,args);
+        return MessageFormat.format(text, args);
     }
-    
-//
+
+    //
 //
 // Message resources
 //
 //
     static final String UNRECOGNIZED_SEVERITY = // 1 arg
-        "ValidationEventCollector.UnrecognizedSeverity";
+            "ValidationEventCollector.UnrecognizedSeverity";
 
     static final String RESULT_NULL_CONTEXT = // 0 args
-        "JAXBResult.NullContext";
+            "JAXBResult.NullContext";
 
     static final String RESULT_NULL_UNMARSHALLER = // 0 arg
-        "JAXBResult.NullUnmarshaller";
-        
+            "JAXBResult.NullUnmarshaller";
+
     static final String SOURCE_NULL_CONTEXT = // 0 args
-        "JAXBSource.NullContext";
+            "JAXBSource.NullContext";
 
     static final String SOURCE_NULL_CONTENT = // 0 arg
-        "JAXBSource.NullContent";
-        
+            "JAXBSource.NullContent";
+
     static final String SOURCE_NULL_MARSHALLER = // 0 arg
-        "JAXBSource.NullMarshaller";
-        
+            "JAXBSource.NullMarshaller";
+
 }

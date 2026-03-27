@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2023 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -9,15 +10,12 @@
  */
 
 /**
- * This package is implemented by a MIME-based package processor that
- * enables the interpretation and creation of optimized binary data
- * within an MIME-based package format.
+ * This package is implemented by a MIME-based package processor that enables the interpretation and creation of
+ * optimized binary data within an MIME-based package format.
  * <p>
- * Soap MTOM[1], XOP([2][3]) and WS-I AP[4] standardize approaches to
- * optimized transmission of binary datatypes as an attachment.
- * To optimally support these standards within a message passing
- * environment, this package enables an integrated solution between
- * a MIME-based package processor and Jakarta XML Binding unmarshall/marshal processes.
+ * Soap MTOM[1], XOP([2][3]) and WS-I AP[4] standardize approaches to optimized transmission of binary datatypes as an
+ * attachment. To optimally support these standards within a message passing environment, this package enables an
+ * integrated solution between a MIME-based package processor and Jakarta XML Binding unmarshall/marshal processes.
  * <p>
  * References in this document to JAXB refer to the Jakarta XML Binding unless otherwise noted.
  *
@@ -33,7 +31,8 @@
  * <li><a href="http://www.w3.org/TR/xml-media-types/">[4]Describing Media Content of Binary Data in XML</a></li>
  * </ul>
  *
- * @see <a href="http://www.w3.org/TR/2004/WD-soap12-mtom-20040608/">[1]SOAP Message Transmission Optimization Mechanism</a>
+ * @see <a href="http://www.w3.org/TR/2004/WD-soap12-mtom-20040608/">[1]SOAP Message Transmission Optimization
+ * Mechanism</a>
  * @see <a href="http://www.w3.org/TR/2005/REC-xop10-20050125/">[2]XML-binary Optimized Packaging</a>
  * @see <a href="http://www.ws-i.org/Profiles/AttachmentsProfile-1.0.html">[3]WS-I Attachments Profile Version 1.0.</a>
  * @see <a href="http://www.w3.org/TR/xml-media-types/">[4]Describing Media Content of Binary Data in XML</a>

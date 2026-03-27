@@ -46,21 +46,21 @@ class ModuleUtil {
     }
 
     /**
-     * Resolves classes from context path.
-     * Only one class per package is needed to access its {@linkplain java.lang.Module}
+     * Resolves classes from context path. Only one class per package is needed to access its
+     * {@linkplain java.lang.Module}
      */
     static Class<?>[] getClassesFromContextPath(String contextPath, ClassLoader classLoader) throws JAXBException {
         List<Class<?>> classes = new ArrayList<>();
-        if (contextPath == null || contextPath.isEmpty()){
+        if (contextPath == null || contextPath.isEmpty()) {
             return classes.toArray(new Class<?>[]{});
         }
 
-        String [] tokens = contextPath.split(":");
-        for (String pkg : tokens){
+        String[] tokens = contextPath.split(":");
+        for (String pkg : tokens) {
 
             // look for ObjectFactory and load it
             try {
-                final Class<?> o = classLoader.loadClass(pkg+".ObjectFactory");
+                final Class<?> o = classLoader.loadClass(pkg + ".ObjectFactory");
                 classes.add(o);
                 continue;
             } catch (ClassNotFoundException e) {
@@ -119,7 +119,7 @@ class ModuleUtil {
      * Implementation may be defined in other module than {@code jakarta.xml.bind}. In that case openness
      * {@linkplain Module#isOpen open} of classes should be delegated to implementation module.
      *
-     * @param classes used to resolve module for {@linkplain Module#addOpens(String, Module)}
+     * @param classes    used to resolve module for {@linkplain Module#addOpens(String, Module)}
      * @param factorySPI used to resolve {@linkplain Module} of the implementation.
      *
      * @throws JAXBException if ony of a classes package is not open to {@code jakarta.xml.bind} module.
@@ -157,7 +157,7 @@ class ModuleUtil {
                 classModule.addOpens(packageName, implModule);
                 if (LOGGER.isLoggable(Level.FINE)) {
                     LOGGER.log(Level.FINE, "Propagating openness of package {0} in {1} to {2}.",
-                            new String[]{ packageName, classModule.getName(), implModule.getName() });
+                            new String[]{packageName, classModule.getName(), implModule.getName()});
                 }
             }
         } else {

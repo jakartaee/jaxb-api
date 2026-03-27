@@ -14,6 +14,7 @@ package jakarta.xml.bind.annotation;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -25,13 +26,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Maps a JavaBean property to XML infoset representation and/or JAXBElement.
  *
  * <p>
- * This annotation serves as a "catch-all" property while unmarshalling
- * xml content into an instance of a Jakarta XML Binding annotated class. It typically
- * annotates a multivalued JavaBean property, but it can occur on
- * single value JavaBean property. During unmarshalling, each xml element
- * that does not match a static &#64;XmlElement or &#64;XmlElementRef
- * annotation for the other JavaBean properties on the class, is added to this
- * "catch-all" property.
+ * This annotation serves as a "catch-all" property while unmarshalling xml content into an instance of a Jakarta XML
+ * Binding annotated class. It typically annotates a multivalued JavaBean property, but it can occur on single value
+ * JavaBean property. During unmarshalling, each xml element that does not match a static &#64;XmlElement or
+ * &#64;XmlElementRef annotation for the other JavaBean properties on the class, is added to this "catch-all" property.
  *
  * <h2>Usages:</h2>
  * {@snippet :
@@ -47,23 +45,20 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  *  @XmlAnyElement
  *  private Element node;
- * }
+ *}
  *
  * <h2>Restriction usage constraints</h2>
  * <p>
- * This annotation is mutually exclusive with
- * {@linkplain XmlElement}, {@linkplain XmlAttribute}, {@linkplain XmlValue},
+ * This annotation is mutually exclusive with {@linkplain XmlElement}, {@linkplain XmlAttribute}, {@linkplain XmlValue},
  * {@linkplain XmlElements}, {@linkplain XmlID}, and {@linkplain XmlIDREF}.
  *
  * <p>
- * There can be only one {@linkplain XmlAnyElement} annotated JavaBean property
- * in a class and its super classes.
+ * There can be only one {@linkplain XmlAnyElement} annotated JavaBean property in a class and its super classes.
  *
  * <h2>Relationship to other annotations</h2>
  * <p>
- * This annotation can be used with {@linkplain XmlJavaTypeAdapter}, so that users
- * can map their own data structure to DOM, which in turn can be composed
- * into XML.
+ * This annotation can be used with {@linkplain XmlJavaTypeAdapter}, so that users can map their own data structure to
+ * DOM, which in turn can be composed into XML.
  *
  * <p>
  * This annotation can be used with {@linkplain XmlMixed} like this:
@@ -72,13 +67,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  @XmlAnyElement
  *  @XmlMixed
  *  List<Object> others;
- * }
+ *}
  *
  *
  * <h2>Schema To Java example</h2>
- *
+ * <p>
  * The following schema would produce the following Java class:
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <xs:complexType name="foo">
  *    <xs:sequence>
  *      <xs:element name="a" type="xs:int" />
@@ -86,8 +81,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
  *    </xs:sequence>
  *  </xs:complexType>
- * }
- *
+ *}
+ * <p>
  * {@snippet :
  *  class Foo {
  *      int a;
@@ -95,11 +90,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      @XmlAnyElement
  *      List<Element> any;
  *  }
- * }
- *
+ *}
+ * <p>
  * It can unmarshal instances like
- *
- * {@snippet lang="XML" :
+ * <p>
+ * {@snippet lang = "XML":
  *  <foo xmlns:e="extra">
  *    <a>1</a>
  *    <e:other />  <!-- this will be bound to DOM, because unmarshalling is orderless -->
@@ -107,12 +102,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    <e:other />
  *    <c>5</c>     <!-- this will be bound to DOM, because the annotation doesn't remember namespaces -->
  *  </foo>
- * }
- *
- *
- *
+ *}
+ * <p>
  * The following schema would produce the following Java class:
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <xs:complexType name="bar">
  *    <xs:complexContent>
  *      <xs:extension base="foo">
@@ -123,19 +116,18 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      </xs:extension>
  *    </xs:complexContent>
  *  </xs:complexType>
- * }
- *
+ *}
+ * <p>
  * {@snippet :
  *  class Bar extends Foo {
  *      int c;
  *      // Foo.getAny() also represents wildcard content for type definition bar.
  *  }
- * }
- *
- *
+ *}
+ * <p>
  * It can unmarshal instances like
- *
- * {@snippet lang="XML" :
+ * <p>
+ * {@snippet lang = "XML":
  *  <bar xmlns:e="extra">
  *    <a>1</a>
  *    <e:other />  <!-- this will be bound to DOM, because unmarshalling is orderless -->
@@ -144,19 +136,19 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *    <c>5</c>     <!-- this now goes to Bar.c -->
  *    <e:other />  <!-- this will go to Foo.any -->
  *  </bar>
- * }
+ *}
  *
  *
  *
  *
  * <h2>Using {@linkplain XmlAnyElement} with {@linkplain XmlElementRef}</h2>
  * <p>
- * The {@linkplain XmlAnyElement} annotation can be used with {@linkplain XmlElementRef}s to
- * designate additional elements that can participate in the content tree.
+ * The {@linkplain XmlAnyElement} annotation can be used with {@linkplain XmlElementRef}s to designate additional
+ * elements that can participate in the content tree.
  *
  * <p>
  * The following schema would produce the following Java class:
- * {@snippet lang="XML" :
+ * {@snippet lang = "XML":
  *  <xs:complexType name="foo">
  *    <xs:choice maxOccurs="unbounded" minOccurs="0">
  *      <xs:element name="a" type="xs:int" />
@@ -164,8 +156,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      <xs:any namespace="##other" processContents="lax" />
  *    </xs:choice>
  *  </xs:complexType>
- * }
- *
+ *}
+ * <p>
  * {@snippet :
  *  class Foo {
  *      @XmlAnyElement(lax="true")
@@ -185,38 +177,37 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *      @XmlElementDecl(name = "b", namespace = "", scope = Foo.class)
  *      JAXBElement<Integer> createFooB( Integer i ) { ... }
  *  }
- * }
- *
+ *}
+ * <p>
  * It can unmarshal instances like
- *
- * {@snippet lang="XML" :
+ * <p>
+ * {@snippet lang = "XML":
  *  <foo xmlns:e="extra">
  *    <a>1</a>     <!-- this will unmarshal to a JAXBElement instance whose value is 1. -->
  *    <e:other />  <!-- this will unmarshal to a DOM Element. -->
  *    <b>3</b>     <!-- this will unmarshal to a JAXBElement instance whose value is 1. -->
  *  </foo>
- * }
+ *}
  *
  *
  *
  *
  * <h2>W3C XML Schema "lax" wildcard emulation</h2>
- * The lax element of the annotation enables the emulation of the "lax" wildcard semantics.
- * For example, when the Java source code is annotated like this:
+ * The lax element of the annotation enables the emulation of the "lax" wildcard semantics. For example, when the Java
+ * source code is annotated like this:
  * {@snippet :
  *  @XmlRootElement
  *  class Foo {
  *      @XmlAnyElement(lax=true)
  *      public Object[] others;
  *  }
- * }
- * then the following document will unmarshal like this:
- * {@snippet lang="XML" :
+ *} then the following document will unmarshal like this:
+ * {@snippet lang = "XML":
  *  <foo>
  *    <unknown />
  *    <foo />
  *  </foo>
- * }
+ *}
  * {@snippet :
  *  Foo foo = unmarshal();
  *  // 1 for 'unknown', another for 'foo'
@@ -226,18 +217,17 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  // because of lax=true, the 'foo' element eagerly
  *  // unmarshalls to a Foo object.
  *  assert foo.others[1] instanceof Foo;
- * }
+ *}
  *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
  */
 @Retention(RUNTIME)
-@Target({FIELD,METHOD})
+@Target({FIELD, METHOD})
 public @interface XmlAnyElement {
 
     /**
-     * Controls the unmarshaller behavior when it sees elements
-     * known to the current {@linkplain JAXBContext}.
+     * Controls the unmarshaller behavior when it sees elements known to the current {@linkplain JAXBContext}.
      *
      * <dl>
      * <dt>When false</dt>
@@ -271,8 +261,8 @@ public @interface XmlAnyElement {
     boolean lax() default false;
 
     /**
-     * Specifies the {@linkplain DomHandler} which is responsible for actually
-     * converting XML from/to a DOM-like data structure.
+     * Specifies the {@linkplain DomHandler} which is responsible for actually converting XML from/to a DOM-like data
+     * structure.
      */
     Class<? extends DomHandler<?, ?>> value() default W3CDomHandler.class;
 }
