@@ -17,6 +17,7 @@ import jakarta.xml.bind.JAXBContext;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.System.Logger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,7 +25,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
@@ -46,7 +46,7 @@ import org.opentest4j.AssertionFailedError;
  */
 public class JAXBContextTest {
 
-    static final Logger logger = Logger.getLogger(JAXBContextTest.class.getName());
+    static final Logger logger = System.getLogger(JAXBContextTest.class.getName());
 
     static final Boolean skipUnsafe = !Boolean.getBoolean("runUnsafe");
 
