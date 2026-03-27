@@ -18,11 +18,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Propagates openness of Jakarta XML Binding annotated classes packages to Jakarta XML Binding impl module.
@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  */
 class ModuleUtil {
 
-    private static final Logger LOGGER = Logger.getLogger("jakarta.xml.bind");
+    private static final Logger LOGGER = System.getLogger("jakarta.xml.bind");
 
     //Android does not contain JPMS related methods added in SE 9+
     private static final boolean JPMS_SUPPORTED;
@@ -80,8 +80,8 @@ class ModuleUtil {
             }
         }
 
-        if (LOGGER.isLoggable(Level.FINE)) {
-            LOGGER.log(Level.FINE, "Resolved classes from context path: {0}", classes);
+        if (LOGGER.isLoggable(Level.DEBUG)) {
+            LOGGER.log(Level.DEBUG, "Resolved classes from context path: {0}", classes);
         }
         return classes.toArray(new Class<?>[]{});
     }
@@ -134,8 +134,8 @@ class ModuleUtil {
 
             if (!jaxbModule.isNamed()) {
                 //we are not on the module path, so assume class-path mode
-                if (LOGGER.isLoggable(Level.FINE)) {
-                    LOGGER.log(Level.FINE, "Using jakarta.xml.bind-api on the class path.");
+                if (LOGGER.isLoggable(Level.DEBUG)) {
+                    LOGGER.log(Level.DEBUG, "Using jakarta.xml.bind-api on the class path.");
                 }
                 return;
             }
@@ -157,14 +157,14 @@ class ModuleUtil {
                 }
                 //propagate openness to impl module
                 classModule.addOpens(packageName, implModule);
-                if (LOGGER.isLoggable(Level.FINE)) {
-                    LOGGER.log(Level.FINE, "Propagating openness of package {0} in {1} to {2}.",
-                            new String[]{packageName, classModule.getName(), implModule.getName()});
+                if (LOGGER.isLoggable(Level.DEBUG)) {
+                    LOGGER.log(Level.DEBUG, "Propagating openness of package {0} in {1} to {2}.",
+                            packageName, classModule.getName(), implModule.getName());
                 }
             }
         } else {
-            if (LOGGER.isLoggable(Level.FINE)) {
-                LOGGER.log(Level.FINE, "Using jakarta.xml.bind-api with no JPMS related APIs, such as Class::getModule.");
+            if (LOGGER.isLoggable(Level.DEBUG)) {
+                LOGGER.log(Level.DEBUG, "Using jakarta.xml.bind-api with no JPMS related APIs, such as Class::getModule.");
             }
         }
     }

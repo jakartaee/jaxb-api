@@ -16,10 +16,10 @@ package jakarta.xml.bind;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.Iterator;
 import java.util.ServiceLoader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Shared ServiceLoader/FactoryFinder Utils shared among Jakarta SOAP with Attachments, Jakarta XML Binding and Jakarta
@@ -38,7 +38,7 @@ class ServiceLoaderUtil {
             ServiceLoader<P> serviceLoader = ServiceLoader.load(spiClass);
 
             for (P impl : serviceLoader) {
-                logger.log(Level.FINE, "ServiceProvider loading Facility used; returning object [{0}]",
+                logger.log(Level.DEBUG, "ServiceProvider loading Facility used; returning object [{0}]",
                         impl.getClass().getName());
 
                 return impl;
@@ -61,7 +61,7 @@ class ServiceLoaderUtil {
             Iterator<? extends T> iter = ((Iterable<? extends T>) m.invoke(null, serviceClass)).iterator();
             if (iter.hasNext()) {
                 T next = iter.next();
-                logger.log(Level.FINE, "Found implementation using OSGi facility; returning object [{0}].",
+                logger.log(Level.DEBUG, "Found implementation using OSGi facility; returning object [{0}].",
                         next.getClass().getName());
                 return next;
             } else {
@@ -72,7 +72,7 @@ class ServiceLoaderUtil {
                  ClassNotFoundException |
                  NoSuchMethodException ex) {
 
-            logger.log(Level.FINE, "Unable to find from OSGi: [" + factoryId + "]", ex);
+            logger.log(Level.DEBUG, "Unable to find from OSGi: [" + factoryId + "]", ex);
             return null;
         }
     }
@@ -91,7 +91,7 @@ class ServiceLoaderUtil {
                  ClassNotFoundException |
                  NoSuchMethodException ex) {
 
-            logger.log(Level.FINE, ex, () -> "Unable to find from OSGi: [" + factoryId + "]");
+            logger.log(Level.DEBUG, () -> "Unable to find from OSGi: [" + factoryId + "]", ex);
             return null;
         }
     }

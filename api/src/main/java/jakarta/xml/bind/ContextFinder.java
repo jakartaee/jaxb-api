@@ -16,6 +16,8 @@ package jakarta.xml.bind;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -23,9 +25,6 @@ import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -37,7 +36,7 @@ import java.util.stream.Collectors;
  */
 class ContextFinder {
 
-    private static final Logger logger;
+    private static final Logger logger = System.getLogger("jakarta.xml.bind");
 
     /**
      * When JAXB is in J2SE, rt.jar has to have a JAXB implementation. However, rt.jar cannot have
@@ -53,28 +52,6 @@ class ContextFinder {
      */
     //XXX: should we define and rely on "default" in jakarta?
     static final String DEFAULT_FACTORY_CLASS = "org.glassfish.jaxb.runtime.v2.ContextFactory";
-
-    static {
-        logger = Logger.getLogger("jakarta.xml.bind");
-        try {
-            if (AccessController.doPrivileged(new GetPropertyAction("jaxb.debug")) != null) {
-                // disconnect the logger from a bigger framework (if any)
-                // and take the matters into our own hands
-                logger.setUseParentHandlers(false);
-                logger.setLevel(Level.ALL);
-                ConsoleHandler handler = new ConsoleHandler();
-                handler.setLevel(Level.ALL);
-                logger.addHandler(handler);
-            } else {
-                // don't change the setting of this logger
-                // to honor what other frameworks
-                // have done on configurations.
-            }
-        } catch (Throwable t) {
-            // just to be extra safe. in particular System.getProperty may throw
-            // SecurityException.
-        }
-    }
 
     private static ServiceLoaderUtil.ExceptionHandler<JAXBException> EXCEPTION_HANDLER =
             new ServiceLoaderUtil.ExceptionHandler<>() {
@@ -253,9 +230,9 @@ class ContextFinder {
             throw new JAXBException(Messages.format(Messages.DEFAULT_PROVIDER_NOT_FOUND), e);
         }
 
-        if (logger.isLoggable(Level.FINE)) {
+        if (logger.isLoggable(Level.DEBUG)) {
             // extra check to avoid costly which operation if not logged
-            logger.log(Level.FINE, "loaded {0} from {1}", new Object[]{className, which(spi)});
+            logger.log(Level.DEBUG, "loaded {0} from {1}", new Object[]{className, which(spi)});
         }
 
         return newInstance(classes, properties, spi);
@@ -335,13 +312,13 @@ class ContextFinder {
                 try {
                     return newInstance(contextPath, contextPathClasses, ctxFactory, classLoader, properties);
                 } catch (Throwable t) {
-                    logger.log(Level.FINE, t, () -> "Error instantiating provider " + ctxFactory);
+                    logger.log(Level.DEBUG, () -> "Error instantiating provider " + ctxFactory, t);
                 }
             }
         }
 
         // else no provider found
-        logger.fine("Trying to create the platform default provider");
+        logger.log(Level.DEBUG, "Trying to create the platform default provider");
         return newInstance(contextPath, contextPathClasses, DEFAULT_FACTORY_CLASS, classLoader, properties);
     }
 
@@ -373,7 +350,7 @@ class ContextFinder {
             return factory.createContext(classes, properties);
         }
 
-        logger.fine("Trying to create the platform default provider");
+        logger.log(Level.DEBUG, "Trying to create the platform default provider");
         Class<?> ctxFactoryClass =
                 ServiceLoaderUtil.lookupUsingOSGiServiceLoader(JAXBContext.JAXB_CONTEXT_FACTORY, logger);
 
@@ -382,7 +359,7 @@ class ContextFinder {
         }
 
         // else no provider found
-        logger.fine("Trying to create the platform default provider");
+        logger.log(Level.DEBUG, "Trying to create the platform default provider");
         return newInstance(classes, properties, DEFAULT_FACTORY_CLASS);
     }
 
@@ -402,12 +379,12 @@ class ContextFinder {
     }
 
     private static String getSystemProperty(String property) {
-        logger.log(Level.FINE, "Checking system property {0}", property);
+        logger.log(Level.DEBUG, "Checking system property {0}", property);
         String value = AccessController.doPrivileged(new GetPropertyAction(property));
         if (value != null) {
-            logger.log(Level.FINE, "  found {0}", value);
+            logger.log(Level.DEBUG, "  found {0}", value);
         } else {
-            logger.log(Level.FINE, "  not found");
+            logger.log(Level.DEBUG, "  not found");
         }
         return value;
     }
