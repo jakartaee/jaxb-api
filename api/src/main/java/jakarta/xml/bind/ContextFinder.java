@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2025 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -381,12 +382,7 @@ class ContextFinder {
 
     private static String classNameFromSystemProperties() throws JAXBException {
 
-        String factoryClassName = getSystemProperty(JAXBContext.JAXB_CONTEXT_FACTORY);
-        if (factoryClassName != null) {
-            return factoryClassName;
-        }
-
-        return null;
+        return getSystemProperty(JAXBContext.JAXB_CONTEXT_FACTORY);
     }
 
     private static Map<String, ?> cleanProperties(Map<String, ?> properties) {

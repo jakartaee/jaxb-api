@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2006, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -9,6 +10,8 @@
  */
 
 package jakarta.xml.bind;
+
+import java.io.Serial;
 
 /**
  * Exception that represents a failure in a Jakarta XML Binding operation.
@@ -23,6 +26,7 @@ package jakarta.xml.bind;
  */
 public class DataBindingException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = 4743686626270704879L;
 
     public DataBindingException(String message, Throwable cause) {

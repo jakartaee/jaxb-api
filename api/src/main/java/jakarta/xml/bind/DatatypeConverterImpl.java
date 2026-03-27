@@ -1,6 +1,6 @@
 /*
+ * Copyright (c) 2025, 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2007, 2024 Oracle and/or its affiliates. All rights reserved.
- * Copyright (c) 2025 Contributors to the Eclipse Foundation. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -145,7 +145,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     public static BigDecimal _parseDecimal(CharSequence content) {
         content = WhiteSpaceProcessor.trim(content);
 
-        if (content.length() <= 0) {
+        if (content.isEmpty()) {
             return null;
         }
 
@@ -186,14 +186,16 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
          *
          */
 
-        if (s.equals("NaN")) {
-            return Float.NaN;
-        }
-        if (s.equals("INF")) {
-            return Float.POSITIVE_INFINITY;
-        }
-        if (s.equals("-INF")) {
-            return Float.NEGATIVE_INFINITY;
+        switch (s) {
+            case "NaN" -> {
+                return Float.NaN;
+            }
+            case "INF" -> {
+                return Float.POSITIVE_INFINITY;
+            }
+            case "-INF" -> {
+                return Float.NEGATIVE_INFINITY;
+            }
         }
 
         if (s.isEmpty()
@@ -232,14 +234,16 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
     public static double _parseDouble(CharSequence _val) {
         String val = WhiteSpaceProcessor.trim(_val).toString();
 
-        if (val.equals("NaN")) {
-            return Double.NaN;
-        }
-        if (val.equals("INF")) {
-            return Double.POSITIVE_INFINITY;
-        }
-        if (val.equals("-INF")) {
-            return Double.NEGATIVE_INFINITY;
+        switch (val) {
+            case "NaN" -> {
+                return Double.NaN;
+            }
+            case "INF" -> {
+                return Double.POSITIVE_INFINITY;
+            }
+            case "-INF" -> {
+                return Double.NEGATIVE_INFINITY;
+            }
         }
 
         if (val.isEmpty()
@@ -268,7 +272,7 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
         char ch;
         boolean value = false;
 
-        if (literal.length() <= 0) {
+        if (literal.isEmpty()) {
             throw new IllegalArgumentException("String \"\" is not valid boolean value.");
         }
 
@@ -326,11 +330,11 @@ final class DatatypeConverterImpl implements DatatypeConverterInterface {
 
     @Override
     public String printBoolean(boolean val) {
-        return val ? "true" : "false";
+        return Boolean.toString(val);
     }
 
     public static String _printBoolean(boolean val) {
-        return val ? "true" : "false";
+        return Boolean.toString(val);
     }
 
     @Override

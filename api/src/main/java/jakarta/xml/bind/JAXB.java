@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2006, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -254,24 +255,19 @@ public final class JAXB {
                 xml=new File((String)xml);
             }
         }
-        if (xml instanceof File) {
-            File file = (File) xml;
+        if (xml instanceof File file) {
             return new StreamSource(file);
         }
-        if (xml instanceof URI) {
-            URI uri = (URI) xml;
+        if (xml instanceof URI uri) {
             xml=uri.toURL();
         }
-        if (xml instanceof URL) {
-            URL url = (URL) xml;
+        if (xml instanceof URL url) {
             return new StreamSource(url.toExternalForm());
         }
-        if (xml instanceof InputStream) {
-            InputStream in = (InputStream) xml;
+        if (xml instanceof InputStream in) {
             return new StreamSource(in);
         }
-        if (xml instanceof Reader) {
-            Reader r = (Reader) xml;
+        if (xml instanceof Reader r) {
             return new StreamSource(r);
         }
         if (xml instanceof Source) {
@@ -581,28 +577,23 @@ public final class JAXB {
                 xml=new File((String)xml);
             }
         }
-        if (xml instanceof File) {
-            File file = (File) xml;
+        if (xml instanceof File file) {
             return new StreamResult(file);
         }
-        if (xml instanceof URI) {
-            URI uri = (URI) xml;
+        if (xml instanceof URI uri) {
             xml=uri.toURL();
         }
-        if (xml instanceof URL) {
-            URL url = (URL) xml;
+        if (xml instanceof URL url) {
             URLConnection con = url.openConnection();
             con.setDoOutput(true);
             con.setDoInput(false);
             con.connect();
             return new StreamResult(con.getOutputStream());
         }
-        if (xml instanceof OutputStream) {
-            OutputStream os = (OutputStream) xml;
+        if (xml instanceof OutputStream os) {
             return new StreamResult(os);
         }
-        if (xml instanceof Writer) {
-            Writer w = (Writer)xml;
+        if (xml instanceof Writer w) {
             return new StreamResult(w);
         }
         if (xml instanceof Result) {

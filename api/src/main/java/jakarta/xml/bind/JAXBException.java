@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -11,6 +12,7 @@
 package jakarta.xml.bind;
 
 import java.io.PrintWriter;
+import java.io.Serial;
 
 /**
  * This is the root exception class for all Jakarta XML Binding exceptions.
@@ -35,7 +37,8 @@ public class JAXBException extends Exception {
      */
     private volatile Throwable linkedException;
 
-    static final long serialVersionUID = -5621384651494307979L;
+    @Serial
+    private static final long serialVersionUID = -5621384651494307979L;
 
     /**
      * Construct a JAXBException with the specified detail message.  The
