@@ -32,25 +32,25 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <ul>
  *   <li> a JavaBean property </li>
  *   <li> non-static, non transient field </li>
- *   <li> within {@link XmlElements}
+ *   <li> within {@linkplain XmlElements}
  * </ul>
  *
  * The usage is subject to the following constraints:
  * <ul>
  *   <li> This annotation can be used with following annotations:
- *            {@link XmlID},
- *            {@link XmlIDREF},
- *            {@link XmlList},
- *            {@link XmlSchemaType},
- *            {@link XmlValue},
- *            {@link XmlAttachmentRef},
- *            {@link XmlMimeType},
- *            {@link XmlInlineBinaryData},
- *            {@link XmlElementWrapper},
- *            {@link XmlJavaTypeAdapter}</li>
+ *            {@linkplain XmlID},
+ *            {@linkplain XmlIDREF},
+ *            {@linkplain XmlList},
+ *            {@linkplain XmlSchemaType},
+ *            {@linkplain XmlValue},
+ *            {@linkplain XmlAttachmentRef},
+ *            {@linkplain XmlMimeType},
+ *            {@linkplain XmlInlineBinaryData},
+ *            {@linkplain XmlElementWrapper},
+ *            {@linkplain XmlJavaTypeAdapter}</li>
  *   <li> if the type of JavaBean property is a collection type of
  *        array, an indexed property, or a parameterized list, and
- *        this annotation is used with {@link XmlElements} then,
+ *        this annotation is used with {@linkplain XmlElements} then,
  *        {@code @XmlElement.type()} must be DEFAULT.class since the
  *        collection item type is already known. </li>
  * </ul>
@@ -117,7 +117,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p> <b>Example 4: </b>Map a JavaBean property to an XML element
  * with anonymous type.</p>
  * <p>
- * See Example 6 in @{@link XmlType}.
+ * See Example 6 in {@linkplain XmlType}.
  *
  * @author Sekhar Vajjhala, Sun Microsystems, Inc.
  * @since 1.6, JAXB 2.0
@@ -160,9 +160,9 @@ public @interface XmlElement {
      * as follows:
      * <ol>
      *  <li>
-     *  If the enclosing package has {@link XmlSchema} annotation,
-     *  and its {@link XmlSchema#elementFormDefault() elementFormDefault}
-     *  is {@link XmlNsForm#QUALIFIED QUALIFIED}, then the namespace of
+     *  If the enclosing package has {@linkplain XmlSchema} annotation,
+     *  and its {@linkplain XmlSchema#elementFormDefault() elementFormDefault}
+     *  is {@linkplain XmlNsForm#QUALIFIED QUALIFIED}, then the namespace of
      *  the enclosing class.
      *
      *  <li>
@@ -188,7 +188,7 @@ public @interface XmlElement {
     Class<?> type() default DEFAULT.class;
 
     /**
-     * Used in {@link XmlElement#type()} to
+     * Used in {@linkplain XmlElement#type()} to
      * signal that the type be inferred from the signature
      * of the property.
      */

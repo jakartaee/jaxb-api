@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -16,8 +17,8 @@ package jakarta.xml.bind;
  * <p>
  * If an application needs to implement customized event handling, it must
  * implement this interface and then register it with either the 
- * {@link Unmarshaller#setEventHandler(ValidationEventHandler) Unmarshaller}, or
- * the {@link Marshaller#setEventHandler(ValidationEventHandler) Marshaller}.  
+ * {@linkplain Unmarshaller#setEventHandler(ValidationEventHandler) Unmarshaller}, or
+ * the {@linkplain Marshaller#setEventHandler(ValidationEventHandler) Marshaller}.  
  * The Jakarta XML Binding Provider will then report validation errors and warnings encountered
  * during the unmarshal, marshal, and validate operations to these event 
  * handlers.
@@ -63,7 +64,7 @@ public interface ValidationEventHandler {
      * Receive notification of a validation warning or error.  
      * <p>
      * The ValidationEvent will have a 
-     * {@link ValidationEventLocator ValidationEventLocator} embedded in it that 
+     * {@linkplain ValidationEventLocator ValidationEventLocator} embedded in it that 
      * indicates where the error or warning occurred.
      *
      * <p>

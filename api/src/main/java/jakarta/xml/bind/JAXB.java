@@ -35,7 +35,7 @@ import java.net.URLConnection;
  *
  * <p>
  * Methods defined in this class are convenience methods that combine several basic operations
- * in the {@link JAXBContext}, {@link Unmarshaller}, and {@link Marshaller}.
+ * in the {@linkplain JAXBContext}, {@linkplain Unmarshaller}, and {@linkplain Marshaller}.
  *
  * They are designed
  * to be the preferred methods for developers new to Jakarta XML Binding. They have
@@ -46,8 +46,8 @@ import java.net.URLConnection;
  *      It is expected that people who need to write performance
  *      critical code will use the rest of the Jakarta XML Binding API directly.
  *  <li>Errors that happen during the processing is wrapped into
- *      {@link DataBindingException} (which will have {@link JAXBException}
- *      as its {@link Throwable#getCause() cause}. It is expected that
+ *      {@linkplain DataBindingException} (which will have {@linkplain JAXBException}
+ *      as its {@linkplain Throwable#getCause() cause}. It is expected that
  *      people who prefer the checked exception would use
  *      the rest of the Jakarta XML Binding API directly.
  * </ol>
@@ -59,7 +59,7 @@ import java.net.URLConnection;
  *  <li>Schema validation is not performed on the input XML.
  *      The processing will try to continue even if there
  *      are errors in the XML, as much as possible. Only as
- *      the last resort, this method fails with {@link DataBindingException}.
+ *      the last resort, this method fails with {@linkplain DataBindingException}.
  * </ol>
  *
  * <p>
@@ -67,7 +67,7 @@ import java.net.URLConnection;
  * <ol>
  *  <li>The processing will try to continue even if the Java object tree
  *      does not meet the validity requirement. Only as
- *      the last resort, this method fails with {@link DataBindingException}.
+ *      the last resort, this method fails with {@linkplain DataBindingException}.
  * </ol>
  *
  *
@@ -86,7 +86,7 @@ public final class JAXB {
     private JAXB() {}
 
     /**
-     * To improve the performance, we'll cache the last {@link JAXBContext} used.
+     * To improve the performance, we'll cache the last {@linkplain JAXBContext} used.
      */
     private static final class Cache {
         final Class<?> type;
@@ -99,18 +99,18 @@ public final class JAXB {
     }
 
     /**
-     * Cache. We don't want to prevent the {@link Cache#type} from GC-ed,
-     * hence {@link WeakReference}.
+     * Cache. We don't want to prevent the {@linkplain Cache#type} from GC-ed,
+     * hence {@linkplain WeakReference}.
      */
     private static volatile WeakReference<Cache> cache;
 
     /**
-     * Obtains the {@link JAXBContext} from the given type,
+     * Obtains the {@linkplain JAXBContext} from the given type,
      * by using the cache if possible.
      *
      * <p>
-     * We don't use locks to control access to {@link #cache}, but this code
-     * should be thread-safe thanks to the immutable {@link Cache} and {@code volatile}.
+     * We don't use locks to control access to {@linkplain #cache}, but this code
+     * should be thread-safe thanks to the immutable {@linkplain Cache} and {@code volatile}.
      */
     private static <T> JAXBContext getContext(Class<T> type) throws JAXBException {
         WeakReference<Cache> c = cache;
@@ -161,7 +161,7 @@ public final class JAXB {
      * Reads in a Java object tree from the given XML input.
      *
      * @param xml
-     *      The URI is {@link URI#toURL() turned into URL} and then
+     *      The URI is {@linkplain URI#toURL() turned into URL} and then
      *      follows the handling of {@code URL}.
      */
     public static <T> T unmarshal( URI xml, Class<T> type ) {
@@ -178,7 +178,7 @@ public final class JAXB {
      *
      * @param xml
      *      The string is first interpreted as an absolute {@code URI}.
-     *      If it's not {@link URI#isAbsolute() a valid absolute URI},
+     *      If it's not {@linkplain URI#isAbsolute() a valid absolute URI},
      *      then it's interpreted as a {@code File}
      */
     public static <T> T unmarshal( String xml, Class<T> type ) {
@@ -227,7 +227,7 @@ public final class JAXB {
      * Reads in a Java object tree from the given XML input.
      *
      * @param xml
-     *      The XML infoset that the {@link Source} represents is read.
+     *      The XML infoset that the {@linkplain Source} represents is read.
      */
     public static <T> T unmarshal( Source xml, Class<T> type ) {
         try {
@@ -241,8 +241,8 @@ public final class JAXB {
 
 
     /**
-     * Creates {@link Source} from various XML representation.
-     * See {@link #unmarshal} for the conversion rules.
+     * Creates {@linkplain Source} from various XML representation.
+     * See {@linkplain #unmarshal} for the conversion rules.
      */
     private static Source toSource(Object xml) throws IOException {
         if(xml==null)
@@ -281,12 +281,12 @@ public final class JAXB {
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
@@ -305,19 +305,19 @@ public final class JAXB {
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
-     *      The XML will be {@link URLConnection#getOutputStream() sent} to the
+     *      The XML will be {@linkplain URLConnection#getOutputStream() sent} to the
      *      resource pointed by this URL. Note that not all {@code URL}s support
      *      such operation, and exact semantics depends on the {@code URL}
-     *      implementations. In case of {@link HttpURLConnection HTTP URLs},
+     *      implementations. In case of {@linkplain HttpURLConnection HTTP URLs},
      *      this will perform HTTP POST.
      *
      * @throws DataBindingException
@@ -332,16 +332,16 @@ public final class JAXB {
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
-     *      The URI is {@link URI#toURL() turned into URL} and then
+     *      The URI is {@linkplain URI#toURL() turned into URL} and then
      *      follows the handling of {@code URL}. See above.
      *
      * @throws DataBindingException
@@ -356,17 +356,17 @@ public final class JAXB {
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
      *      The string is first interpreted as an absolute {@code URI}.
-     *      If it's not {@link URI#isAbsolute() a valid absolute URI},
+     *      If it's not {@linkplain URI#isAbsolute() a valid absolute URI},
      *      then it's interpreted as a {@code File}
      *
      * @throws DataBindingException
@@ -381,16 +381,16 @@ public final class JAXB {
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
-     *      The XML will be sent to the given {@link OutputStream}.
+     *      The XML will be sent to the given {@linkplain OutputStream}.
      *      Upon a successful completion, the stream will be closed by this method.
      *
      * @throws DataBindingException
@@ -405,16 +405,16 @@ public final class JAXB {
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
-     *      The XML will be sent as a character stream to the given {@link Writer}.
+     *      The XML will be sent as a character stream to the given {@linkplain Writer}.
      *      Upon a successful completion, the stream will be closed by this method.
      *
      * @throws DataBindingException
@@ -429,16 +429,16 @@ public final class JAXB {
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
-     *      The XML will be sent to the {@link Result} object.
+     *      The XML will be sent to the {@linkplain Result} object.
      *
      * @throws DataBindingException
      *      If the operation fails, such as due to I/O error, unbindable classes.
@@ -452,7 +452,7 @@ public final class JAXB {
      *
      * <p>
      * This method is a convenience method that combines several basic operations
-     * in the {@link JAXBContext} and {@link Marshaller}. This method is designed
+     * in the {@linkplain JAXBContext} and {@linkplain Marshaller}. This method is designed
      * to be the preferred method for developers new to Jakarta XML Binding. This method
      * has the following characteristics:
      *
@@ -461,20 +461,20 @@ public final class JAXB {
      *      It is expected that those people who need to write performance
      *      critical code will use the rest of the Jakarta XML Binding API directly.
      *  <li>Errors that happen during the processing is wrapped into
-     *      {@link DataBindingException} (which will have {@link JAXBException}
-     *      as its {@link Throwable#getCause() cause}. It is expected that
+     *      {@linkplain DataBindingException} (which will have {@linkplain JAXBException}
+     *      as its {@linkplain Throwable#getCause() cause}. It is expected that
      *      those people who prefer the checked exception would use
      *      the rest of the Jakarta XML Binding API directly.
      * </ol>
      *
      * @param jaxbObject
      *      The Java object to be marshalled into XML. If this object is
-     *      a {@link JAXBElement}, it will provide the root tag name and
-     *      the body. If this object has {@link XmlRootElement}
+     *      a {@linkplain JAXBElement}, it will provide the root tag name and
+     *      the body. If this object has {@linkplain XmlRootElement}
      *      on its class definition, that will be used as the root tag name
      *      and the given object will provide the body. Otherwise,
      *      the root tag name is inferred from
-     *      {@link Class#getSimpleName() the short class name}.
+     *      {@linkplain Class#getSimpleName() the short class name}.
      *      This parameter must not be null.
      *
      * @param xml
@@ -486,36 +486,36 @@ public final class JAXB {
      *          <th>Type</th>
      *          <th>Operation</th>
      *      </tr><tr>
-     *          <td>{@link File}</td>
+     *          <td>{@linkplain File}</td>
      *          <td>XML will be written to this file. If it already exists,
      *              it will be overwritten.</td>
      *      </tr><tr>
-     *          <td>{@link URL}</td>
-     *          <td>The XML will be {@link URLConnection#getOutputStream() sent} to the
+     *          <td>{@linkplain URL}</td>
+     *          <td>The XML will be {@linkplain URLConnection#getOutputStream() sent} to the
      *              resource pointed by this URL. Note that not all {@code URL}s support
      *              such operation, and exact semantics depends on the {@code URL}
-     *              implementations. In case of {@link HttpURLConnection HTTP URLs},
+     *              implementations. In case of {@linkplain HttpURLConnection HTTP URLs},
      *              this will perform HTTP POST.</td>
      *      </tr><tr>
-     *          <td>{@link URI}</td>
-     *          <td>The URI is {@link URI#toURL() turned into URL} and then
+     *          <td>{@linkplain URI}</td>
+     *          <td>The URI is {@linkplain URI#toURL() turned into URL} and then
      *              follows the handling of {@code URL}. See above.</td>
      *      </tr><tr>
-     *          <td>{@link String}</td>
+     *          <td>{@linkplain String}</td>
      *          <td>The string is first interpreted as an absolute {@code URI}.
-     *              If it's not {@link URI#isAbsolute() a valid absolute URI},
+     *              If it's not {@linkplain URI#isAbsolute() a valid absolute URI},
      *              then it's interpreted as a {@code File}</td>
      *      </tr><tr>
-     *          <td>{@link OutputStream}</td>
-     *          <td>The XML will be sent to the given {@link OutputStream}.
+     *          <td>{@linkplain OutputStream}</td>
+     *          <td>The XML will be sent to the given {@linkplain OutputStream}.
      *              Upon a successful completion, the stream will be closed by this method.</td>
      *      </tr><tr>
-     *          <td>{@link Writer}</td>
-     *          <td>The XML will be sent as a character stream to the given {@link Writer}.
+     *          <td>{@linkplain Writer}</td>
+     *          <td>The XML will be sent as a character stream to the given {@linkplain Writer}.
      *              Upon a successful completion, the stream will be closed by this method.</td>
      *      </tr><tr>
-     *          <td>{@link Result}</td>
-     *          <td>The XML will be sent to the {@link Result} object.</td>
+     *          <td>{@linkplain Result}</td>
+     *          <td>The XML will be sent to the {@linkplain Result} object.</td>
      *      </tr></table>
      *
      * @throws DataBindingException
@@ -563,8 +563,8 @@ public final class JAXB {
     }
 
     /**
-     * Creates {@link Result} from various XML representation.
-     * See {@link #_marshal(Object,Object)} for the conversion rules.
+     * Creates {@linkplain Result} from various XML representation.
+     * See {@linkplain #_marshal(Object,Object)} for the conversion rules.
      */
     private static Result toResult(Object xml) throws IOException {
         if(xml==null)

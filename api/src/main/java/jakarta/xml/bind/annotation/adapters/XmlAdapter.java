@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -158,7 +159,7 @@ public abstract class XmlAdapter<ValueType,BoundType> {
      *      The value to be converted. Can be null.
      * @throws Exception
      *      if there's an error during the conversion. The caller is responsible for
-     *      reporting the error to the user through {@link jakarta.xml.bind.ValidationEventHandler}.
+     *      reporting the error to the user through {@linkplain jakarta.xml.bind.ValidationEventHandler}.
      */
     public abstract BoundType unmarshal(ValueType v) throws Exception;
 
@@ -169,7 +170,7 @@ public abstract class XmlAdapter<ValueType,BoundType> {
      *      The value to be converted. Can be null.
      * @throws Exception
      *      if there's an error during the conversion. The caller is responsible for
-     *      reporting the error to the user through {@link jakarta.xml.bind.ValidationEventHandler}.
+     *      reporting the error to the user through {@linkplain jakarta.xml.bind.ValidationEventHandler}.
      */
     public abstract ValueType marshal(BoundType v) throws Exception;
 }

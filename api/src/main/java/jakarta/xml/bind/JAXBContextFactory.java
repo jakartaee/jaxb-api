@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2015, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -15,7 +16,7 @@ import java.util.Map;
 /**
  * <p>Factory that creates new <code>JAXBContext</code> instances.
  * <p>
- * JAXBContextFactory can be located using {@link java.util.ServiceLoader#load(Class)}
+ * JAXBContextFactory can be located using {@linkplain java.util.ServiceLoader#load(Class)}
  *
  * @since 9, JAXB 2.3
  */
@@ -26,13 +27,13 @@ public interface JAXBContextFactory {
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * For semantics see {@link jakarta.xml.bind.JAXBContext#newInstance(Class[], java.util.Map)}
+     * For semantics see {@linkplain jakarta.xml.bind.JAXBContext#newInstance(Class[], java.util.Map)}
      *
      * @param classesToBeBound
-     *      List of java classes to be recognized by the new {@link JAXBContext}.
+     *      List of java classes to be recognized by the new {@linkplain JAXBContext}.
      *      Classes in {@code classesToBeBound} that are in named modules must be in a package
      *      that is {@code open} to at least the {@code jakarta.xml.bind} module.
-     *      Can be empty, in which case a {@link JAXBContext} that only knows about
+     *      Can be empty, in which case a {@linkplain JAXBContext} that only knows about
      *      spec-defined classes will be returned.
      * @param properties
      *      provider-specific properties. Can be null, which means the same thing as passing
@@ -67,7 +68,7 @@ public interface JAXBContextFactory {
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * For semantics see {@link jakarta.xml.bind.JAXBContext#newInstance(String, ClassLoader, java.util.Map)}
+     * For semantics see {@linkplain jakarta.xml.bind.JAXBContext#newInstance(String, ClassLoader, java.util.Map)}
      *
      * <p>
      * The interpretation of properties is up to implementations. Implementations must

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -17,9 +18,9 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * Maps an enum type {@link Enum} to XML representation.
+ * Maps an enum type {@linkplain Enum} to XML representation.
  *
- * <p>This annotation, together with {@link XmlEnumValue} provides a
+ * <p>This annotation, together with {@linkplain XmlEnumValue} provides a
  * mapping of enum type to XML representation.
  *
  * <p> <b>Usage</b> </p>
@@ -33,8 +34,8 @@ import java.lang.annotation.Target;
  * <p> The usage is subject to the following constraints:
  * <ul> 
  *   <li> This annotation can be used the following other annotations: 
- *         {@link XmlType},
- *         {@link XmlRootElement} </li>
+ *         {@linkplain XmlType},
+ *         {@linkplain XmlRootElement} </li>
  * </ul>
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
  * additional common information </p>
@@ -45,7 +46,7 @@ import java.lang.annotation.Target;
  * must have a valid lexical representation for the type 
  * {@code @XmlEnum.value()}.
  *
- * <p><b>Examples:</b> See examples in {@link XmlEnumValue}
+ * <p><b>Examples:</b> See examples in {@linkplain XmlEnumValue}
  *
  * @since 1.6, JAXB 2.0
  */

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -55,15 +56,15 @@ import static java.lang.annotation.RetentionPolicy.*;
  * }
  *   </li>
  *   <li> This annotation can be used with the following annotations:
- *            {@link XmlID}, 
- *            {@link XmlIDREF},
- *            {@link XmlList},
- *            {@link XmlSchemaType},
- *            {@link XmlValue},
- *            {@link XmlAttachmentRef},
- *            {@link XmlMimeType},
- *            {@link XmlInlineBinaryData},
- *            {@link jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}.</li>
+ *            {@linkplain XmlID}, 
+ *            {@linkplain XmlIDREF},
+ *            {@linkplain XmlList},
+ *            {@linkplain XmlSchemaType},
+ *            {@linkplain XmlValue},
+ *            {@linkplain XmlAttachmentRef},
+ *            {@linkplain XmlMimeType},
+ *            {@linkplain XmlInlineBinaryData},
+ *            {@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}.</li>
  * </ul>
  *
  * <p> <b>Example 1: </b>Map a JavaBean property to an XML attribute.</p>
@@ -85,7 +86,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * }
  *
  * <p> <b>Example 2: </b>Map a JavaBean property to an XML attribute with anonymous type.</p>
- * See Example 7 in @{@link XmlType}.
+ * See Example 7 in @{@linkplain XmlType}.
  *
  * <p> <b>Example 3: </b>Map a JavaBean collection property to an XML attribute.</p>
  * {@snippet :

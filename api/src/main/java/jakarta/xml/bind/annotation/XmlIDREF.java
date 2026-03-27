@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -53,8 +54,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  *        {@code @XmlID} attribute.
  *        </li>
  *   <li> This annotation can be used with the following annotations:
- *        {@link XmlElement}, {@link XmlAttribute}, {@link XmlList}, 
- *        and {@link XmlElements}.</li>  
+ *        {@linkplain XmlElement}, {@linkplain XmlAttribute}, {@linkplain XmlList}, 
+ *        and {@linkplain XmlElements}.</li>  
  *
  * </ul>
  * <p><b>Example:</b> Map a JavaBean property to {@code xs:IDREF}

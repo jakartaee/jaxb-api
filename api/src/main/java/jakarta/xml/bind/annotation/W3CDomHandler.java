@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -22,7 +23,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 
 /**
- * {@link DomHandler} implementation for W3C DOM (<code>org.w3c.dom</code> package.)
+ * {@linkplain DomHandler} implementation for W3C DOM (<code>org.w3c.dom</code> package.)
  *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0
@@ -46,7 +47,7 @@ public class W3CDomHandler implements DomHandler<Element,DOMResult> {
      * to be used.
      *
      * @param builder
-     *      must not be null. Jakarta XML Binding uses this {@link DocumentBuilder} to create
+     *      must not be null. Jakarta XML Binding uses this {@linkplain DocumentBuilder} to create
      *      a new element.
      */
     public W3CDomHandler(DocumentBuilder builder) {

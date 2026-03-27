@@ -28,7 +28,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * <b>Usage</b>
  * <p>
  * {@code @XmlElementRef} annotation can be used with a
- * JavaBean property or from within {@link XmlElementRefs}
+ * JavaBean property or from within {@linkplain XmlElementRefs}
  * <p>
  * This annotation dynamically associates an XML element name with the JavaBean
  * property. When a JavaBean property is annotated with {@link
@@ -49,7 +49,7 @@ import static java.lang.annotation.ElementType.METHOD;
  *  public JAXBElement<? extends Operator> getTerm();
  * }
  * <p>
- * An element factory method annotated with  {@link XmlElementDecl} is
+ * An element factory method annotated with  {@linkplain XmlElementDecl} is
  * used to create a {@code JAXBElement} instance, containing an XML
  * element name. The presence of {@code @XmlElementRef} annotation on an
  * element property indicates that the element name from {@code JAXBElement}
@@ -61,7 +61,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * <ul>
  *   <li> If the collection item type (for collection property) or
  *        property type (for single valued property) is
- *        {@link jakarta.xml.bind.JAXBElement}, then
+ *        {@linkplain jakarta.xml.bind.JAXBElement}, then
  *        {@code @XmlElementRef.name()} and {@code @XmlElementRef.namespace()} must
  *        point an element factory method  with an @XmlElementDecl
  *        annotation in a class annotated  with @XmlRegistry (usually
@@ -73,10 +73,10 @@ import static java.lang.annotation.ElementType.METHOD;
  *   </li>
  *   <li> If the collection item type (for collection property) or
  *        property type  (for single valued property) is not
- *        {@link jakarta.xml.bind.JAXBElement}, then the type referenced by the
- *        property or field must be annotated  with {@link XmlRootElement}. </li>
+ *        {@linkplain jakarta.xml.bind.JAXBElement}, then the type referenced by the
+ *        property or field must be annotated  with {@linkplain XmlRootElement}. </li>
  *   <li> This annotation can be used with the following annotations:
- *        {@link XmlElementWrapper}, {@link XmlJavaTypeAdapter}.
+ *        {@linkplain XmlElementWrapper}, {@linkplain XmlJavaTypeAdapter}.
  *   </ul>
  *
  * <p>See "Package Specification" in jakarta.xml.bind.package javadoc for
@@ -144,7 +144,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * }
  * <p>
  * It is not an error to have a class that extends {@code Task}
- * that doesn't have {@link XmlRootElement}. But they can't show up in an
+ * that doesn't have {@linkplain XmlRootElement}. But they can't show up in an
  * XML instance (because they don't have XML element names).
  *
  * <p><b>Example 2: XML Schema Substitution group support</b>
@@ -220,23 +220,23 @@ public @interface XmlElementRef {
     Class<?> type() default DEFAULT.class;
 
     /**
-     * This parameter and {@link #name()} are used to determine the
+     * This parameter and {@linkplain #name()} are used to determine the
      * XML element for the JavaBean property.
      *
      * <p> If {@code type()} is {@code JAXBElement.class} , then
      * {@code namespace()} and {@code name()}
-     * point to a factory method with {@link XmlElementDecl}. The XML
+     * point to a factory method with {@linkplain XmlElementDecl}. The XML
      * element name is the element name from the factory method's
-     * {@link XmlElementDecl} annotation or if an element from its
+     * {@linkplain XmlElementDecl} annotation or if an element from its
      * substitution group (of which it is a head element) has been
      * substituted in the XML document, then the element name is from the
-     * {@link XmlElementDecl} on the substituted element.
+     * {@linkplain XmlElementDecl} on the substituted element.
      *
-     * <p> If {@link #type()} is not {@code JAXBElement.class}, then
+     * <p> If {@linkplain #type()} is not {@code JAXBElement.class}, then
      * the XML element name is the XML element name statically
      * associated with the type using the annotation {@link
      * XmlRootElement} on the type. If the type is not annotated with
-     * an {@link XmlElementDecl}, then it is an error.
+     * an {@linkplain XmlElementDecl}, then it is an error.
      *
      * <p> If {@code type()} is not {@code JAXBElement.class}, then
      * this value must be "".
@@ -250,7 +250,7 @@ public @interface XmlElementRef {
     String name() default "##default";
 
     /**
-     * Used in {@link XmlElementRef#type()} to
+     * Used in {@linkplain XmlElementRef#type()} to
      * signal that the type be inferred from the signature
      * of the property.
      */
@@ -274,7 +274,7 @@ public @interface XmlElementRef {
      *
      * <p>
      * For compatibility with Jakarta XML Binding, this property defaults to {@code true},
-     * despite the fact that {@link XmlElement#required()} defaults to false.
+     * despite the fact that {@linkplain XmlElement#required()} defaults to false.
      *
      * @since 1.7, JAXB 2.2
      */

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -29,13 +30,13 @@
  *       <th scope="row" style="vertical-align:top">Package</th>
  *       <td>
  *         <ul style="list-style-type:none">
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAccessorOrder.html">XmlAccessorOrder</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAccessorType.html">XmlAccessorType</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlSchema.html">XmlSchema</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlSchemaType.html">XmlSchemaType</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlSchemaTypes.html">XmlSchemaTypes</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/adapters/XmlJavaTypeAdapter.html">XmlJavaTypeAdapter</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/adapters/XmlJavaTypeAdapters.html">XmlJavaTypeAdapters</a></li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAccessorOrder}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAccessorType}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlSchema}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlSchemaType}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlSchemaTypes}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapters}</li>
  *         </ul>
  *       </td>
  *     </tr>
@@ -43,12 +44,12 @@
  *       <th scope="row" style="vertical-align:top">Class</th>
  *       <td>
  *         <ul style="list-style-type:none">
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAccessorOrder.html">XmlAccessorOrder</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAccessorType.html">XmlAccessorType</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlInlineBinaryData.html">XmlInlineBinaryData</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlRootElement.html">XmlRootElement</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlType.html">XmlType</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/adapters/XmlJavaTypeAdapter.html">XmlJavaTypeAdapter</a></li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAccessorOrder}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAccessorType}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlInlineBinaryData}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlRootElement}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlType}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}</li>
  *         </ul>
  *       </td>
  *     </tr>
@@ -56,11 +57,11 @@
  *       <th scope="row" style="vertical-align:top">Enum type</th>
  *       <td>
  *         <ul style="list-style-type:none">
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlEnum.html">XmlEnum</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlEnumValue.html">XmlEnumValue (enum constant only)</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlRootElement.html">XmlRootElement</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlType.html">XmlType</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/adapters/XmlJavaTypeAdapter.html">XmlJavaTypeAdapter</a></li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlEnum}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlEnumValue} (enum constant only)</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlRootElement}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlType}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}</li>
  *         </ul>
  *       </td>
  *     </tr>
@@ -68,25 +69,25 @@
  *       <th scope="row" style="vertical-align:top">JavaBean Property/field</th>
  *       <td>
  *         <ul style="list-style-type:none">
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlElement.html">XmlElement</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlElements.html">XmlElements</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlElementRef.html">XmlElementRef</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlElementRefs.html">XmlElementRefs</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlElementWrapper.html">XmlElementWrapper</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAnyElement.html">XmlAnyElement</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAttribute.html">XmlAttribute</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAnyAttribute.html">XmlAnyAttribute</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlTransient.html">XmlTransient</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlValue.html">XmlValue</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlID.html">XmlID</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlIDREF.html">XmlIDREF</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlList.html">XmlList</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlMixed.html">XmlMixed</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlMimeType.html">XmlMimeType</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAttachmentRef.html">XmlAttachmentRef</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlInlineBinaryData.html">XmlInlineBinaryData</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlElementDecl.html">XmlElementDecl (only on method)</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/adapters/XmlJavaTypeAdapter.html">XmlJavaTypeAdapter</a></li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlElement}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlElements}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlElementRef}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlElementRefs}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlElementWrapper}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAnyElement}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAttribute}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAnyAttribute}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlTransient}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlValue}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlID}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlIDREF}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlList}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlMixed}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlMimeType}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAttachmentRef}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlInlineBinaryData}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlElementDecl} (only on method)</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}</li>
  *         </ul>
  *       </td>
  *     </tr>
@@ -94,10 +95,10 @@
  *       <th scope="row" style="vertical-align:top">Parameter</th>
  *       <td>
  *         <ul style="list-style-type:none">
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlList.html">XmlList</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlAttachmentRef.html">XmlAttachmentRef</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/XmlMimeType.html">XmlMimeType</a></li>
- *             <li><a HREF="../../../../jakarta/xml/bind/annotation/adapters/XmlJavaTypeAdapter.html">XmlJavaTypeAdapter</a></li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlList}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlAttachmentRef}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.XmlMimeType}</li>
+ *             <li>{@linkplain jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter}</li>
  *         </ul>
  *       </td>
  *     </tr>

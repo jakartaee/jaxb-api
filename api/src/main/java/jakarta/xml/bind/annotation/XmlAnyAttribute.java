@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -45,9 +46,9 @@ import static java.lang.annotation.ElementType.METHOD;
  * <p>
  * While processing attributes to be unmarshalled into a value class,
  * each attribute that is not statically associated with another 
- * JavaBean property, via {@link XmlAttribute}, is entered into the 
+ * JavaBean property, via {@linkplain XmlAttribute}, is entered into the 
  * wildcard attribute map represented by 
- * {@link Map}&lt;{@link QName},{@link Object}&gt;. The attribute QName is the
+ * {@linkplain Map}&lt;{@linkplain QName},{@linkplain Object}&gt;. The attribute QName is the
  * map's key. The key's value is the String value of the attribute.
  *
  * @author Kohsuke Kawaguchi, Sun Microsystems, Inc.

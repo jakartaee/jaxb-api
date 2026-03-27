@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2025 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -13,10 +14,10 @@ package jakarta.xml.bind.annotation.adapters;
 import jakarta.xml.bind.DatatypeConverter;
 
 /**
- * {@link XmlAdapter} for {@code xs:hexBinary}.
+ * {@linkplain XmlAdapter} for {@code xs:hexBinary}.
  *
  * <p>
- * This {@link XmlAdapter} binds {@code byte[]} to the hexBinary representation in XML.
+ * This {@linkplain XmlAdapter} binds {@code byte[]} to the hexBinary representation in XML.
  *
  * @author Kohsuke Kawaguchi
  * @since 1.6, JAXB 2.0

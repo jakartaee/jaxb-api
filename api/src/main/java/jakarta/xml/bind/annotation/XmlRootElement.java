@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -37,8 +38,8 @@ import static java.lang.annotation.ElementType.TYPE;
  * as XML element in an XML document.
  *
  * <p> This annotation can be used with the following annotations:
- * {@link XmlType}, {@link XmlEnum}, {@link XmlAccessorType}, 
- * {@link XmlAccessorOrder}.
+ * {@linkplain XmlType}, {@linkplain XmlEnum}, {@linkplain XmlAccessorType}, 
+ * {@linkplain XmlAccessorOrder}.
  * </p>
 
  * <p>
@@ -153,7 +154,7 @@ public @interface XmlRootElement {
      * namespace name of the XML element.
      * <p>
      * If the value is "##default", then the XML namespace name is derived
-     * from the package of the class ( {@link XmlSchema} ). If the
+     * from the package of the class ( {@linkplain XmlSchema} ). If the
      * package is unnamed, then the XML namespace is the default empty
      * namespace.
      */

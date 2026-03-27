@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link jakarta.xml.bind.ValidationEventHandler ValidationEventHandler}
+ * {@linkplain jakarta.xml.bind.ValidationEventHandler ValidationEventHandler}
  * implementation that collects all events.
  *
  * <p>

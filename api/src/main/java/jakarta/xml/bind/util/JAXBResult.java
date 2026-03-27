@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2003, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -17,7 +18,7 @@ import jakarta.xml.bind.UnmarshallerHandler;
 import javax.xml.transform.sax.SAXResult;
 
 /**
- * JAXP {@link javax.xml.transform.Result} implementation
+ * JAXP {@linkplain javax.xml.transform.Result} implementation
  * that unmarshalls a Jakarta XML Binding object.
  * 
  * <p>

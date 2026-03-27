@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -24,7 +25,7 @@ import javax.xml.transform.Source;
  *
  * <p>
  * This annotation is used in conjunction with datatypes such as
- * {@code java.awt.Image} or {@link Source} that are bound to base64-encoded binary in XML.
+ * {@code java.awt.Image} or {@linkplain Source} that are bound to base64-encoded binary in XML.
  *
  * <p>
  * If a property that has this annotation has a sibling property bound to

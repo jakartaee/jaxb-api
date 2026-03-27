@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -34,10 +35,10 @@ import jakarta.xml.bind.JAXBElement;
  * <ul>
  * <li>XML text information items are added as values of java.lang.String.</li>
  * <li>Children element information items are added as instances of
- * {@link JAXBElement} or instances with a class that is annotated with
+ * {@linkplain JAXBElement} or instances with a class that is annotated with
  * &#64;XmlRootElement.</li>
  * <li>Unknown content that is not be bound to a Jakarta XML Binding mapped class is inserted
- * as {@link Element}. (Assumes property annotated with &#64;XmlAnyElement)</li>
+ * as {@linkplain Element}. (Assumes property annotated with &#64;XmlAnyElement)</li>
  * </ul>
  *
  * Below is an example of binding and creation of mixed content.

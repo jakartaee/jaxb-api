@@ -46,7 +46,7 @@ import java.util.Objects;
  *
  * <p>
  * This class provides a partial default implementation for the
- * {@link jakarta.xml.bind.Unmarshaller} interface.
+ * {@linkplain jakarta.xml.bind.Unmarshaller} interface.
  *
  * <p>
  * A Jakarta XML Binding Provider has to implement five methods getUnmarshallerHandler(),
@@ -92,9 +92,9 @@ public abstract class AbstractUnmarshallerImpl implements Unmarshaller
      * Obtains a configured XMLReader.
      * <p>
      * This method is used when the client-specified
-     * {@link SAXSource} object doesn't have XMLReader.
+     * {@linkplain SAXSource} object doesn't have XMLReader.
      * <p>
-     * {@link Unmarshaller} is not re-entrant, so we will
+     * {@linkplain Unmarshaller} is not re-entrant, so we will
      * only use one instance of XMLReader.
      */
     protected XMLReader getXMLReader() throws JAXBException {

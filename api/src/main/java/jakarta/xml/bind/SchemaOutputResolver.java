@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2005, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -38,7 +39,7 @@ public abstract class SchemaOutputResolver {
 
     /**
      * Decides where the schema file (of the given namespace URI)
-     * will be written, and return it as a {@link Result} object.
+     * will be written, and return it as a {@linkplain Result} object.
      *
      * <p>
      * This method is called only once for any given namespace.
@@ -56,14 +57,14 @@ public abstract class SchemaOutputResolver {
      *      This is just a hint.
      *
      * @return
-     *      a {@link Result} object that encapsulates the actual destination
+     *      a {@linkplain Result} object that encapsulates the actual destination
      *      of the schema.
      * <p>
-     *      If the {@link Result} object has a system ID, it must be an
+     *      If the {@linkplain Result} object has a system ID, it must be an
      *      absolute system ID. Those system IDs are relativized by the caller and used
      *      for {@literal <xs:import>} statements.
      * <p>
-     *      If the {@link Result} object does not have a system ID, a schema
+     *      If the {@linkplain Result} object does not have a system ID, a schema
      *      for the namespace URI is generated but it won't be explicitly
      *      {@literal <xs:import>}ed from other schemas.
      * <p>

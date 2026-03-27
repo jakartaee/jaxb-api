@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -128,7 +129,7 @@ public @interface XmlSchema {
     XmlNsForm attributeFormDefault() default XmlNsForm.UNSET;
 
     /**
-     * Indicates that this namespace (specified by {@link #namespace()})
+     * Indicates that this namespace (specified by {@linkplain #namespace()})
      * has a schema already available externally, available at this location.
      *
      * <p>
@@ -153,9 +154,9 @@ public @interface XmlSchema {
      * to generate components for this namespace (as it did in Jakarta XML Binding.)
      *
      * <p>
-     * Multiple {@link XmlSchema} annotations on multiple packages are allowed
-     * to govern the same {@link #namespace()}. In such case, all of them
-     * must have the same {@link #location()} values.
+     * Multiple {@linkplain XmlSchema} annotations on multiple packages are allowed
+     * to govern the same {@linkplain #namespace()}. In such case, all of them
+     * must have the same {@linkplain #location()} values.
      *
      *
      * <p>
@@ -180,7 +181,7 @@ public @interface XmlSchema {
     String location() default NO_LOCATION;
 
     /**
-     * The default value of the {@link #location()} attribute,
+     * The default value of the {@linkplain #location()} attribute,
      * which indicates that the schema generator will generate
      * components in this namespace.
      */

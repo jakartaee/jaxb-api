@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation. All rights reserved.
  * Copyright (c) 2004, 2024 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -9,7 +10,7 @@
  */
 
 /**
- * {@link jakarta.xml.bind.annotation.adapters.XmlAdapter} and its spec-defined
+ * {@linkplain jakarta.xml.bind.annotation.adapters.XmlAdapter} and its spec-defined
  * subclasses to allow arbitrary Java classes to be used with Jakarta XML Binding.
  * 
  * <p>

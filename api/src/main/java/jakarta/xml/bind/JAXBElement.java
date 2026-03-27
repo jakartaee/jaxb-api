@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Jakarta XML Binding class binding for the xml type definition.
  * </p>
  *
- * <p><b>{@code Scope}</b> is either {@link GlobalScope} or the Java class representing the
+ * <p><b>{@code Scope}</b> is either {@linkplain GlobalScope} or the Java class representing the
  * complex type definition containing the schema element declaration.
  * </p>
  *
@@ -59,7 +59,7 @@ public class JAXBElement<T> implements Serializable {
 
     /** Scope of xml element declaration representing this xml element instance.
      *  Can be one of the following values:
-     *  - {@link GlobalScope} for global xml element declaration.
+     *  - {@linkplain GlobalScope} for global xml element declaration.
      *  - local element declaration has a scope set to the Java class
      *     representation of complex type definition containing
      *     xml element declaration.
@@ -133,7 +133,7 @@ public class JAXBElement<T> implements Serializable {
      * <p>Set the content model and attributes of this xml element.</p>
      *
      * <p>When this property is set to {@code null}, {@code isNil()} must by {@code true}.
-     *    Details of constraint are described at {@link #isNil()}.</p>
+     *    Details of constraint are described at {@linkplain #isNil()}.</p>
      *
      * @see #isTypeSubstituted()
      */
@@ -144,7 +144,7 @@ public class JAXBElement<T> implements Serializable {
     /**
      * <p>Return the content model and attribute values for this element.</p>
      *
-     * <p>See {@link #isNil()} for a description of a property constraint when
+     * <p>See {@linkplain #isNil()} for a description of a property constraint when
      * this value is {@code null}</p>
      */
     public T getValue() {
@@ -165,9 +165,9 @@ public class JAXBElement<T> implements Serializable {
      * <p>Returns {@code true} iff this element instance content model
      * is nil.</p>
      *
-     * <p>This property always returns {@code true} when {@link #getValue()} is null.
+     * <p>This property always returns {@code true} when {@linkplain #getValue()} is null.
      * Note that the converse is not true, when this property is {@code true},
-     * {@link #getValue()} can contain a non-null value for attribute(s). It is
+     * {@linkplain #getValue()} can contain a non-null value for attribute(s). It is
      * valid for a nil xml element to have attribute(s).</p>
      */
     public boolean isNil() {

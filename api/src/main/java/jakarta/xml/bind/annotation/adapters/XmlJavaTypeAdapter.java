@@ -34,7 +34,7 @@ import static java.lang.annotation.ElementType.PACKAGE;
 
 
 /**
- * Use an adapter that implements {@link XmlAdapter} for custom marshaling.
+ * Use an adapter that implements {@linkplain XmlAdapter} for custom marshaling.
  *
  * <p> <b> Usage: </b> </p>
  *
@@ -45,7 +45,7 @@ import static java.lang.annotation.ElementType.PACKAGE;
  *   <li> field </li>
  *   <li> parameter </li>
  *   <li> package </li>
- *   <li> from within {@link XmlJavaTypeAdapters} </li>
+ *   <li> from within {@linkplain XmlJavaTypeAdapters} </li>
  * </ul>
  *
  * <p> When {@code @XmlJavaTypeAdapter} annotation is defined on a
@@ -65,13 +65,13 @@ import static java.lang.annotation.ElementType.PACKAGE;
  * package level for that class.
  *
  * <p>This annotation can be used with the following other annotations:
- * {@link XmlElement}, {@link XmlAttribute}, {@link XmlElementRef},
- * {@link XmlElementRefs}, {@link XmlAnyElement}. This can also be
+ * {@linkplain XmlElement}, {@linkplain XmlAttribute}, {@linkplain XmlElementRef},
+ * {@linkplain XmlElementRefs}, {@linkplain XmlAnyElement}. This can also be
  * used at the package level with the following annotations:
- * {@link XmlAccessorType}, {@link XmlSchema}, {@link XmlSchemaType},
- * {@link XmlSchemaTypes}.
+ * {@linkplain XmlAccessorType}, {@linkplain XmlSchema}, {@linkplain XmlSchemaType},
+ * {@linkplain XmlSchemaTypes}.
  *
- * <p><b> Example: </b> See example in {@link XmlAdapter}
+ * <p><b> Example: </b> See example in {@linkplain XmlAdapter}
  *
  * @author <ul><li>Sekhar Vajjhala, Sun Microsystems Inc.</li> <li> Kohsuke Kawaguchi, Sun Microsystems Inc.</li></ul>
  * @since 1.6, JAXB 2.0
@@ -82,7 +82,7 @@ import static java.lang.annotation.ElementType.PACKAGE;
 public @interface XmlJavaTypeAdapter {
     /**
      * Points to the class that converts a value type to a bound type or vice versa.
-     * See {@link XmlAdapter} for more details.
+     * See {@linkplain XmlAdapter} for more details.
      */
     @SuppressWarnings({"rawtypes"})
     Class<? extends XmlAdapter> value();
@@ -95,7 +95,7 @@ public @interface XmlJavaTypeAdapter {
     Class<?> type() default DEFAULT.class;
 
     /**
-     * Used in {@link XmlJavaTypeAdapter#type()} to
+     * Used in {@linkplain XmlJavaTypeAdapter#type()} to
      * signal that the type be inferred from the signature
      * of the field, property, parameter or the class.
      */
