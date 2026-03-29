@@ -15,25 +15,15 @@ import jaxb.test.usr.A;
 
 import jakarta.xml.bind.JAXBContext;
 import java.io.IOException;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.opentest4j.AssertionFailedError;
 
 /*
@@ -366,7 +356,7 @@ public class JAXBContextTest {
     }
 
     private void log(String msg) {
-        logger.info("[" + scenario + "] " + msg);
+        logger.log(Level.INFO, "[" + scenario + "] " + msg);
     }
 
 }
