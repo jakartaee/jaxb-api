@@ -97,13 +97,10 @@ class ServiceLoaderUtil {
     }
 
     static void checkPackageAccess(String className) {
-        // make sure that the current thread has the access to the package of the given name.
-        SecurityManager s = System.getSecurityManager();
-        if (s != null) {
-            int i = className.lastIndexOf('.');
-            if (i != -1) {
-                s.checkPackageAccess(className.substring(0, i));
-            }
+        int i = className.lastIndexOf('.');
+        if (i != -1) {
+            // make sure that the current thread has the access to the package of the given name.
+            new RuntimePermission("accessClassInPackage." + className.substring(0, i)).checkGuard(null);
         }
     }
 

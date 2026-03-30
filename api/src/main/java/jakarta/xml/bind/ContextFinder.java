@@ -19,10 +19,6 @@ import java.lang.reflect.Method;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.security.PrivilegedActionException;
-import java.security.PrivilegedExceptionAction;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -102,7 +98,7 @@ class ContextFinder {
         return new JAXBException(Messages.format(Messages.ILLEGAL_CAST,
                 // we don't care where the impl class is, we want to know where JAXBContext lives in the impl
                 // class' ClassLoader
-                getClassClassLoader(originalType).getResource("jakarta/xml/bind/JAXBContext.class"),
+                originalType.getClassLoader().getResource("jakarta/xml/bind/JAXBContext.class"),
                 targetTypeURL));
     }
 
@@ -197,16 +193,10 @@ class ContextFinder {
     private static Object instantiateProviderIfNecessary(final Class<?> implClass) throws JAXBException {
         try {
             if (JAXBContextFactory.class.isAssignableFrom(implClass)) {
-                return AccessController.doPrivileged(new PrivilegedExceptionAction<>() {
-                    @Override
-                    public Object run() throws Exception {
-                        return implClass.getConstructor().newInstance();
-                    }
-                });
+                return implClass.getConstructor().newInstance();
             }
             return null;
-        } catch (PrivilegedActionException x) {
-            Throwable e = (x.getCause() == null) ? x : x.getCause();
+        } catch (ReflectiveOperationException e) {
             throw new JAXBException(Messages.format(Messages.COULD_NOT_INSTANTIATE, implClass, e), e);
         }
     }
@@ -215,7 +205,7 @@ class ContextFinder {
      * Create an instance of a class using the thread context ClassLoader
      */
     private static JAXBContext newInstance(Class<?>[] classes, Map<String, ?> properties, String className) throws JAXBException {
-        return newInstance(classes, properties, className, getContextClassLoader());
+        return newInstance(classes, properties, className, Thread.currentThread().getContextClassLoader());
     }
 
     /**
@@ -380,7 +370,7 @@ class ContextFinder {
 
     private static String getSystemProperty(String property) {
         logger.log(Level.DEBUG, "Checking system property {0}", property);
-        String value = AccessController.doPrivileged(new GetPropertyAction(property));
+        String value = System.getProperty(property);
         if (value != null) {
             logger.log(Level.DEBUG, "  found {0}", value);
         } else {
@@ -404,7 +394,7 @@ class ContextFinder {
         String classnameAsResource = clazz.getName().replace('.', '/') + ".class";
 
         if (loader == null) {
-            loader = getSystemClassLoader();
+            loader = ClassLoader.getSystemClassLoader();
         }
 
         return loader.getResource(classnameAsResource);
@@ -422,49 +412,7 @@ class ContextFinder {
      * @return the URL for the class or null if it wasn't found
      */
     static URL which(Class<?> clazz) {
-        return which(clazz, getClassClassLoader(clazz));
-    }
-
-    private static ClassLoader getContextClassLoader() {
-        if (System.getSecurityManager() == null) {
-            return Thread.currentThread().getContextClassLoader();
-        } else {
-            return AccessController.doPrivileged(
-                    new PrivilegedAction<>() {
-                        @Override
-                        public ClassLoader run() {
-                            return Thread.currentThread().getContextClassLoader();
-                        }
-                    });
-        }
-    }
-
-    private static ClassLoader getClassClassLoader(final Class<?> c) {
-        if (System.getSecurityManager() == null) {
-            return c.getClassLoader();
-        } else {
-            return AccessController.doPrivileged(
-                    new PrivilegedAction<>() {
-                        @Override
-                        public ClassLoader run() {
-                            return c.getClassLoader();
-                        }
-                    });
-        }
-    }
-
-    private static ClassLoader getSystemClassLoader() {
-        if (System.getSecurityManager() == null) {
-            return ClassLoader.getSystemClassLoader();
-        } else {
-            return AccessController.doPrivileged(
-                    new PrivilegedAction<>() {
-                        @Override
-                        public ClassLoader run() {
-                            return ClassLoader.getSystemClassLoader();
-                        }
-                    });
-        }
+        return which(clazz, clazz.getClassLoader());
     }
 
 }
