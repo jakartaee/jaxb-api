@@ -61,7 +61,6 @@ import java.security.BasicPermission;
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
- * @see java.lang.SecurityManager
  */
 /* code was borrowed originally from java.lang.RuntimePermission. */
 public final class JAXBPermission extends BasicPermission {

@@ -80,7 +80,6 @@ public class JAXBContextTest {
             String mapEntryKey,
             String mapEntryValue) throws IOException {
         // ensure setup may be done ...
-        System.setSecurityManager(null);
 
         if (systemProperty != null) {
             System.setProperty("jakarta.xml.bind.JAXBContextFactory", systemProperty);
@@ -191,11 +190,10 @@ public class JAXBContextTest {
     }
 
     private void handleResult(JAXBContext ctx) {
-        Assertions.assertTrue(null != ctx, "No ctx found.");
+        Assertions.assertNotNull(ctx, "No ctx found.");
         log("     TEST: context class = [" + ctx.getClass().getName() + "]\n");
         String className = ctx.getClass().getName();
-        Assertions.assertTrue(className.equals(expectedFactory),
-                "Incorrect ctx: [" + className + "], Expected: [" + expectedFactory + "]");
+        Assertions.assertEquals(className, expectedFactory, "Incorrect ctx: [" + className + "], Expected: [" + expectedFactory + "]");
 
         log(" TEST PASSED");
     }
@@ -222,72 +220,6 @@ public class JAXBContextTest {
 
         // unsafe; not running:
         cleanResource(jaxbPropsFile);
-        System.setSecurityManager(null);
-    }
-
-    @JAXBContextOldParameterized
-    public void testPathSM(String scenario,
-            String jaxbPropertiesClass,
-            String spiClass,
-            String expectedFactory,
-            Class<?> expectedException,
-            String systemProperty,
-            String mapEntryKey,
-            String mapEntryValue) throws IOException {
-        enableSM();
-        testPath(scenario,
-                jaxbPropertiesClass,
-                spiClass,
-                expectedFactory,
-                expectedException,
-                systemProperty,
-                mapEntryKey,
-                mapEntryValue);
-    }
-
-    @JAXBContextOldParameterized
-    public void testClassSM(String scenario,
-            String jaxbPropertiesClass,
-            String spiClass,
-            String expectedFactory,
-            Class<?> expectedException,
-            String systemProperty,
-            String mapEntryKey,
-            String mapEntryValue) throws IOException {
-        enableSM();
-        testClass(scenario,
-                jaxbPropertiesClass,
-                spiClass,
-                expectedFactory,
-                expectedException,
-                systemProperty,
-                mapEntryKey,
-                mapEntryValue);
-    }
-
-    @JAXBContextOldParameterized
-    public void testClassesSM(String scenario,
-            String jaxbPropertiesClass,
-            String spiClass,
-            String expectedFactory,
-            Class<?> expectedException,
-            String systemProperty,
-            String mapEntryKey,
-            String mapEntryValue) throws IOException {
-        enableSM();
-        testClasses(scenario,
-                jaxbPropertiesClass,
-                spiClass,
-                expectedFactory,
-                expectedException,
-                systemProperty,
-                mapEntryKey,
-                mapEntryValue);
-    }
-
-    private void enableSM() {
-        System.setSecurityManager(null);
-        System.setProperty("java.security.policy", classesDir + "jakarta/xml/bind/test.policy");
     }
 
     private void cleanResource(Path resource) {

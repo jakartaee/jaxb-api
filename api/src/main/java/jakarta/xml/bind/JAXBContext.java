@@ -250,7 +250,7 @@ public abstract class JAXBContext {
             throws JAXBException {
 
         //return newInstance( contextPath, JAXBContext.class.getClassLoader() );
-        return newInstance(contextPath, getContextClassLoader());
+        return newInstance(contextPath, Thread.currentThread().getContextClassLoader());
     }
 
     /**
@@ -622,16 +622,6 @@ public abstract class JAXBContext {
         // to make JAXB 1.0 implementations work, this method must not be
         // abstract
         throw new UnsupportedOperationException();
-    }
-
-    private static ClassLoader getContextClassLoader() {
-        if (System.getSecurityManager() == null) {
-            return Thread.currentThread().getContextClassLoader();
-        } else {
-            return java.security.AccessController.doPrivileged(
-                    (java.security.PrivilegedAction<ClassLoader>) ()
-                            -> Thread.currentThread().getContextClassLoader());
-        }
     }
 
 }

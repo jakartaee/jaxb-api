@@ -99,8 +99,7 @@ final public class DatatypeConverter {
      *                  must not be null.
      *
      * @throws IllegalArgumentException if the parameter is null
-     * @throws SecurityException        If the {@linkplain SecurityManager} in charge denies the access to set the
-     *                                  datatype converter.
+     * @throws SecurityException        If there is deny in access to set the datatype converter.
      * @see JAXBPermission
      */
     public static void setDatatypeConverter(DatatypeConverterInterface converter) {
@@ -108,10 +107,7 @@ final public class DatatypeConverter {
             throw new IllegalArgumentException(
                     Messages.format(Messages.CONVERTER_MUST_NOT_BE_NULL));
         } else if (theConverter == null) {
-            SecurityManager sm = System.getSecurityManager();
-            if (sm != null) {
-                sm.checkPermission(SET_DATATYPE_CONVERTER_PERMISSION);
-            }
+            SET_DATATYPE_CONVERTER_PERMISSION.checkGuard(null);
             theConverter = converter;
         }
     }
