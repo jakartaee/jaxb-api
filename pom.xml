@@ -87,7 +87,7 @@
         <api.package>jakarta.xml.bind</api.package>
         <extension.name>jakarta.xml.bind</extension.name>
         <spec.version>4.1</spec.version>
-        <activation.version>2.2.0-M1</activation.version>
+        <activation.version>2.2.0-M2</activation.version>
         <junit.version>6.0.3</junit.version>
         <config.dir>${project.basedir}/etc/config</config.dir>
         <vendor.name>Eclipse Foundation</vendor.name>
