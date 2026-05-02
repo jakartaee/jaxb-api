@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020, 2023 Contributors to the Eclipse Foundation
+// Copyright (c) 2020, 2026 Contributors to the Eclipse Foundation
 //
 
 == Java Types To XML
@@ -697,6 +697,7 @@ built-in types.
 ----
 @Retention(RUNTIME)
 @Target({FIELD, METHOD, PACKAGE})
+@Repeatable(XmlSchemaTypes.class)
 public @interface XmlSchemaType {
     String name();
     String namespace() default "http://www.w3.org/2001/XMLSchema";
@@ -1426,7 +1427,8 @@ public class Foo {
 
 [source,java,indent=4]
 ----
-@Retention(RUNTIME) @Target({FIELD, METHOD})
+@Retention(RUNTIME) @Target({FIELD, METHOD, PARAMETER})
+@Repeatable(XmlElements.class)
 public @interface XmlElement {
     String name() default "##default"; // name for XML element
     boolean nillable() default false;
@@ -1688,6 +1690,7 @@ then that single particle. Otherwise mapped as specified in <<a3042>>
 [source,java,indent=4]
 ----
 @Retention(RUNTIME) @Target({FIELD, METHOD})
+@Repeatable(XmlElementRefs.class)
 public @interface XmlElementRef {
     String name() default "##default"; // name for XML element
     String namespace() default "##default";
@@ -2590,6 +2593,7 @@ For detailed information, see the javadocs for
 [source,java,indent=4]
 ----
 @Retention(RUNTIME) @Target({PACKAGE,FIELD,METHOD,TYPE,PARAMETER})
+@Repeatable(XmlJavaTypeAdapters.class)
 public @interface XmlJavaTypeAdapter {
     Class<? extends XmlAdapter> value();
     Class type() default DEFAULT.class;
