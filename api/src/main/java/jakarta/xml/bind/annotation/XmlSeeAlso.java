@@ -53,11 +53,20 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *}
  *
  * <p>
+ * {@linkplain XmlSeeAlso} annotation would also allow you to write:
+ * {@snippet :
+ *  @XmlSeeAlso({}, packages = {"foo.bar", "foo.baz"})
+ *  class FooBarBaz {}
+ *}
+ *
+ * <p>
  * This would allow you to do {@code JAXBContext.newInstance(Animal.class)}. By the help of this annotation, Jakarta XML
  * Binding implementations will be able to correctly bind {@code Dog} and {@code Cat}.
  */
-@Target({ElementType.TYPE})
+@Target({ElementType.TYPE, ElementType.PACKAGE})
 @Retention(RUNTIME)
 public @interface XmlSeeAlso {
     Class<?>[] value();
+
+    String[] packages() default {};
 }
