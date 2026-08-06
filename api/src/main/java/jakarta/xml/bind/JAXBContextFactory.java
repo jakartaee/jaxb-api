@@ -25,7 +25,7 @@ public interface JAXBContextFactory {
      * Create a new instance of a {@code JAXBContext} class.
      *
      * <p>
-     * For semantics see {@linkplain jakarta.xml.bind.JAXBContext#newInstance(Class[], java.util.Map)}
+     * For semantics see {@linkplain jakarta.xml.bind.JAXBContext#newInstance(Class[], ClassLoader, java.util.Map)}
      *
      * @param classesToBeBound List of java classes to be recognized by the new {@linkplain JAXBContext}. Classes in
      *                         {@code classesToBeBound} that are in named modules must be in a package that is
