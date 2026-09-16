@@ -152,7 +152,7 @@ public class JAXBContextTest {
                 mapEntryValue);
         logConfigurations();
         try {
-            JAXBContext ctx = JAXBContext.newInstance(new Class<?>[] { A.class }, properties);
+            JAXBContext ctx = JAXBContext.newInstance(new Class<?>[] { A.class }, Thread.currentThread().getContextClassLoader(), properties);
             handleResult(ctx);
         } catch (Throwable throwable) {
             handleThrowable(throwable);

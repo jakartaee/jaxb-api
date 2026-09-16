@@ -183,7 +183,7 @@ import org.w3c.dom.Node;
  * factory class. This phase of the look up enables per-JVM override of the Jakarta XML Binding implementation.
  *
  * <li>
- * If the property {@linkplain #JAXB_CONTEXT_FACTORY} exists in the {@code Map<String, ?>} passed to {@linkplain #newInstance(Class[], Map)}
+ * If the property {@linkplain #JAXB_CONTEXT_FACTORY} exists in the {@code Map<String, ?>} passed to {@linkplain #newInstance(Class[], ClassLoader, Map)}
  * or to {@linkplain #newInstance(String, ClassLoader, Map)}, then its value is assumed to be the fully qualified provider factory class name.
  * This phase of the look up enables context sensitive selection of the Jakarta XML Binding implementation.
  *
@@ -502,7 +502,63 @@ public abstract class JAXBContext {
     public static JAXBContext newInstance(Class<?>... classesToBeBound)
             throws JAXBException {
 
-        return newInstance(classesToBeBound, Collections.emptyMap());
+        return newInstance(classesToBeBound, Thread.currentThread().getContextClassLoader(), Collections.<String,Object>emptyMap());
+    }
+
+    /**
+     * Create a new instance of a {@code JAXBContext} class.
+     *
+     * <p>
+     * The client application must supply a list of classes that the new context object needs to recognize.
+     * <p>
+     * Not only the new context will recognize all the classes specified, but it will also recognize any classes that
+     * are directly/indirectly referenced statically from the specified classes. Subclasses of referenced classes nor
+     * {@code @XmlTransient} referenced classes are not registered with JAXBContext.
+     * <p>
+     * For example, in the following Java code, if you do {@code newInstance(Foo.class)}, the newly created
+     * {@linkplain JAXBContext} will recognize both {@code Foo} and {@code Bar}, but not {@code Zot} or {@code FooBar}:
+     * {@snippet :
+     *  class Foo {
+     *       @XmlTransient FooBar c;
+     *       Bar b;
+     *  }
+     *  class Bar { int x; }
+     *  class Zot extends Bar { int y; }
+     *  class FooBar {}
+     *}
+     * <p>
+     * Therefore, a typical client application only needs to specify the top-level classes, but it needs to be careful.
+     *
+     * <p>
+     * Note that for each java package registered with JAXBContext, when the optional package annotations exist, they
+     * must be processed. (see JLS, Section 7.4.1 "Named Packages").
+     *
+     * <p>
+     * The steps involved in discovering the Jakarta XML Binding implementation is discussed in the class javadoc.
+     *
+     * @param classesToBeBound List of java classes to be recognized by the new {@linkplain JAXBContext}. Classes in
+     *                         {@code classesToBeBound} that are in named modules must be in a package that is
+     *                         {@code open} to at least the {@code jakarta.xml.bind} module. Can be empty, in which case
+     *                         a {@linkplain JAXBContext} that only knows about spec-defined classes will be returned.
+     * @param classLoader      This class loader will be used to locate the implementation classes.
+     * @return A new instance of a {@code JAXBContext}.
+     * @throws JAXBException            if an error was encountered while creating the {@code JAXBContext}, such as (but
+     *                                  not limited to):
+     *                                  <ol>
+     *                                   <li>No Jakarta XML Binding implementation was discovered
+     *                                   <li>Classes use Jakarta XML Binding annotations incorrectly
+     *                                   <li>Classes have colliding annotations (i.e., two classes with the same type name)
+     *                                   <li>The Jakarta XML Binding implementation was unable to locate
+     *                                       provider-specific out-of-band information (such as additional
+     *                                       files generated at the development time.)
+     *                                   <li>{@code classesToBeBound} are not open to {@code jakarta.xml.bind} module
+     *                                  </ol>
+     * @throws IllegalArgumentException if the parameter contains {@code null} (i.e., {@code newInstance(null);})
+     */
+    public static JAXBContext newInstance(Class<?>[] classesToBeBound, ClassLoader classLoader)
+            throws JAXBException {
+
+        return newInstance(classesToBeBound, classLoader, Collections.<String,Object>emptyMap());
     }
 
     /**
@@ -520,6 +576,7 @@ public abstract class JAXBContext {
      *                         {@code classesToBeBound} that are in named modules must be in a package that is
      *                         {@code open} to at least the {@code jakarta.xml.bind} module. Can be empty, in which case
      *                         a {@linkplain JAXBContext} that only knows about spec-defined classes will be returned.
+     * @param classLoader      This class loader will be used to locate the implementation classes.
      * @param properties       provider-specific or provider selection-specific properties. Can be null, which means the
      *                         same thing as passing in an empty map.
      *
@@ -538,7 +595,7 @@ public abstract class JAXBContext {
      * @throws IllegalArgumentException if the parameter contains {@code null} (i.e.,
      *                                  {@code newInstance(null,someMap);})
      */
-    public static JAXBContext newInstance(Class<?>[] classesToBeBound, Map<String, ?> properties)
+    public static JAXBContext newInstance(Class<?>[] classesToBeBound, ClassLoader classLoader, Map<String, ?> properties)
             throws JAXBException {
 
         if (classesToBeBound == null) {
@@ -552,7 +609,7 @@ public abstract class JAXBContext {
             }
         }
 
-        return ContextFinder.find(classesToBeBound, properties);
+        return ContextFinder.find(classesToBeBound, classLoader, properties);
     }
 
     /**

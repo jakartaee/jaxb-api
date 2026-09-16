@@ -202,13 +202,6 @@ class ContextFinder {
     }
 
     /**
-     * Create an instance of a class using the thread context ClassLoader
-     */
-    private static JAXBContext newInstance(Class<?>[] classes, Map<String, ?> properties, String className) throws JAXBException {
-        return newInstance(classes, properties, className, Thread.currentThread().getContextClassLoader());
-    }
-
-    /**
      * Create an instance of a class using passed in ClassLoader
      */
     private static JAXBContext newInstance(Class<?>[] classes, Map<String, ?> properties, String className, ClassLoader loader) throws JAXBException {
@@ -287,7 +280,7 @@ class ContextFinder {
         }
 
         JAXBContextFactory obj = ServiceLoaderUtil.firstByServiceLoader(
-                JAXBContextFactory.class, logger, EXCEPTION_HANDLER);
+                JAXBContextFactory.class, logger, EXCEPTION_HANDLER, classLoader);
 
         if (obj != null) {
             ModuleUtil.delegateAddOpensToImplModule(contextPathClasses, obj.getClass());
@@ -312,10 +305,10 @@ class ContextFinder {
         return newInstance(contextPath, contextPathClasses, DEFAULT_FACTORY_CLASS, classLoader, properties);
     }
 
-    static JAXBContext find(Class<?>[] classes, Map<String, ?> properties) throws JAXBException {
+    static JAXBContext find(Class<?>[] classes, ClassLoader classLoader, Map<String, ?> properties) throws JAXBException {
         String factoryClassName = classNameFromSystemProperties();
         if (factoryClassName != null) {
-            return newInstance(classes, properties, factoryClassName);
+            return newInstance(classes, properties, factoryClassName, classLoader);
         }
 
         if (properties != null) {
@@ -328,12 +321,12 @@ class ContextFinder {
                 }
             }
             if (factoryClassName != null) {
-                return newInstance(classes, cleanProperties(properties), factoryClassName);
+                return newInstance(classes, cleanProperties(properties), factoryClassName, classLoader);
             }
         }
 
         JAXBContextFactory factory =
-                ServiceLoaderUtil.firstByServiceLoader(JAXBContextFactory.class, logger, EXCEPTION_HANDLER);
+                ServiceLoaderUtil.firstByServiceLoader(JAXBContextFactory.class, logger, EXCEPTION_HANDLER, classLoader);
 
         if (factory != null) {
             ModuleUtil.delegateAddOpensToImplModule(classes, factory.getClass());
@@ -350,7 +343,7 @@ class ContextFinder {
 
         // else no provider found
         logger.log(Level.DEBUG, "Trying to create the platform default provider");
-        return newInstance(classes, properties, DEFAULT_FACTORY_CLASS);
+        return newInstance(classes, properties, DEFAULT_FACTORY_CLASS, classLoader);
     }
 
     private static String classNameFromSystemProperties() throws JAXBException {
