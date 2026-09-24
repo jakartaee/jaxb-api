@@ -136,4 +136,15 @@ public @interface XmlAttribute {
      *
      */
     String namespace() default "##default";
+
+    /**
+     * Default value of this attribute.
+     *
+     * <p>
+     * The <pre>'\u0000'</pre> value specified as a default of this annotation element is used as a poor-man's
+     * substitute for null to allow implementations to recognize the 'no default value' state.
+     *
+     * @since 4.1
+     */
+    String defaultValue() default "\u0000";
 }
