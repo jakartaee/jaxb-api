@@ -107,7 +107,10 @@ final public class DatatypeConverter {
             throw new IllegalArgumentException(
                     Messages.format(Messages.CONVERTER_MUST_NOT_BE_NULL));
         } else if (theConverter == null) {
-            SET_DATATYPE_CONVERTER_PERMISSION.checkGuard(null);
+            // JEP 486 permanently disabled the Security Manager in Java 24.
+            if (Runtime.version().feature() < 24) {
+                SET_DATATYPE_CONVERTER_PERMISSION.checkGuard(null);
+            }
             theConverter = converter;
         }
     }

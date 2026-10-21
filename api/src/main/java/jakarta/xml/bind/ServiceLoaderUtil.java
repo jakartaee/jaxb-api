@@ -98,7 +98,8 @@ class ServiceLoaderUtil {
 
     static void checkPackageAccess(String className) {
         int i = className.lastIndexOf('.');
-        if (i != -1) {
+        // JEP 486 permanently disabled the Security Manager in Java 24.
+        if (i != -1 && Runtime.version().feature() < 24) {
             // make sure that the current thread has the access to the package of the given name.
             new RuntimePermission("accessClassInPackage." + className.substring(0, i)).checkGuard(null);
         }
