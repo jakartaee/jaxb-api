@@ -40,23 +40,18 @@ public class JAXBContextWrapExceptionTest {
 
     @Test
     public void testContextPath() {
-        try {
-            JAXBContext.newInstance("whatever", ClassLoader.getSystemClassLoader());
-        } catch (Throwable t) {
-            Assertions.assertEquals(t.getMessage(), "test");
-            Assertions.assertNull(t.getCause(), "Root cause must be null");
-        }
+        JAXBException e = Assertions.assertThrows(JAXBException.class,
+                () -> JAXBContext.newInstance("whatever", ClassLoader.getSystemClassLoader()));
+        Assertions.assertEquals("test", e.getMessage());
+        Assertions.assertNull(e.getCause(), "Root cause must be null");
     }
 
     @Test
     public void testClasses() {
-        try {
-            JAXBContext.newInstance(new Class<?>[0]);
-            Assertions.assertTrue(false, "This should fail");
-        } catch (Throwable t) {
-            Assertions.assertEquals(t.getMessage(), "test");
-            Assertions.assertNull(t.getCause(), "Root cause must be null");
-        }
+        JAXBException e = Assertions.assertThrows(JAXBException.class,
+                () -> JAXBContext.newInstance(new Class<?>[0]));
+        Assertions.assertEquals("test", e.getMessage());
+        Assertions.assertNull(e.getCause(), "Root cause must be null");
     }
 
     @BeforeEach
